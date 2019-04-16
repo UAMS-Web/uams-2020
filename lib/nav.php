@@ -11,9 +11,9 @@
  *
 */
 
-if ( class_exists( 'UberMenuStandard' ) ) {
-    return;
-}
+//if ( class_exists( 'UberMenuStandard' ) ) {
+//    return;
+//}
 
 // remove primary & secondary nav from default position
 remove_action( 'genesis_after_header', 'genesis_do_nav' );
