@@ -12,9 +12,9 @@
 */
 
 // Custom footer widget area
-add_filter( 'genesis_footer_widget_areas', 'bfg_footer_widget_areas', 10, 2 );
+add_filter( 'genesis_footer_widget_areas', 'uamswp_footer_widget_areas', 10, 2 );
 
-function bfg_footer_widget_areas( $output, $footer_widgets ) {
+function uamswp_footer_widget_areas( $output, $footer_widgets ) {
 
     $footer_widgets = get_theme_support( 'genesis-footer-widgets' );
 

@@ -12,12 +12,12 @@
 */
 
 // Theme Scripts & Stylesheet
-add_action( 'wp_enqueue_scripts', 'bfg_theme_scripts' );
-function bfg_theme_scripts() {
+add_action( 'wp_enqueue_scripts', 'uamswp_theme_scripts' );
+function uamswp_theme_scripts() {
 	$version = wp_get_theme()->Version;
 	if ( !is_admin() ) {
 		// Enqueue Bootstrap CSS
-		wp_enqueue_style( 'app-css', BFG_THEME_CSS . 'app.css' );
+		wp_enqueue_style( 'app-css', UAMSWP_THEME_CSS . 'app.css' );
 
 		// Enqueue Google Fonts
 		wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i', array(), 'CHILD_THEME_VERSION' );
@@ -28,23 +28,23 @@ function bfg_theme_scripts() {
 
 		// Deregister jQuery and use Bootstrap supplied version
 		wp_deregister_script( 'jquery' );
-		wp_register_script( 'jquery', BFG_THEME_JS . 'jquery.slim.min.js', array(), $version, true );
+		wp_register_script( 'jquery', UAMSWP_THEME_JS . 'jquery.slim.min.js', array(), $version, true );
 		wp_enqueue_script( 'jquery' );
 
 		// Register Popper JS and enqueue it
-		wp_register_script( 'app-popper-js', BFG_THEME_JS . 'popper.min.js', array( 'jquery' ), $version, true );
+		wp_register_script( 'app-popper-js', UAMSWP_THEME_JS . 'popper.min.js', array( 'jquery' ), $version, true );
 		wp_enqueue_script( 'app-popper-js' );
 
 		// Register Bootstrap JS and enqueue it
-		wp_register_script( 'app-bootstrap-js', BFG_THEME_JS . 'bootstrap.min.js', array( 'jquery' ), $version, true );
+		wp_register_script( 'app-bootstrap-js', UAMSWP_THEME_JS . 'bootstrap.min.js', array( 'jquery' ), $version, true );
 		wp_enqueue_script( 'app-bootstrap-js' );
 
 		// Register Smart Menu JS and enqueue it
-		wp_register_script( 'app-smartmenu-js', BFG_THEME_JS . 'jquery.smartmenus.min.js', array( 'jquery' ), $version, true );
+		wp_register_script( 'app-smartmenu-js', UAMSWP_THEME_JS . 'jquery.smartmenus.min.js', array( 'jquery' ), $version, true );
 		wp_enqueue_script( 'app-smartmenu-js' );
 
 		// Register Smart Menu Boostrap Addon Js and enqueue it
-		wp_register_script( 'app-smartmenu-bootstrap-js', BFG_THEME_JS . 'jquery.smartmenus.bootstrap-4.min.js', array( 'app-smartmenu-js' ), $version, true );
+		wp_register_script( 'app-smartmenu-bootstrap-js', UAMSWP_THEME_JS . 'jquery.smartmenus.bootstrap-4.min.js', array( 'app-smartmenu-js' ), $version, true );
 		wp_enqueue_script( 'app-smartmenu-bootstrap-js' );
 
 		// Register Font Awesome JS and enqueue it
@@ -56,13 +56,13 @@ function bfg_theme_scripts() {
 		wp_enqueue_script( 'app-fontawesome-shim-js' );
 
 		// Register theme JS and enqueue it
-		wp_register_script( 'app-js', BFG_THEME_JS . 'app.min.js', array( 'jquery' ), $version, true );
+		wp_register_script( 'app-js', UAMSWP_THEME_JS . 'app.min.js', array( 'jquery' ), $version, true );
 		wp_enqueue_script( 'app-js' );
 	}
 }
 
 // Editor Styles
-add_action( 'init', 'bfg_custom_editor_css' );
-function bfg_custom_editor_css() {
+add_action( 'init', 'uamswp_custom_editor_css' );
+function uamswp_custom_editor_css() {
 	add_editor_style( get_stylesheet_uri() );
 }

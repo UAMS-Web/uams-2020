@@ -12,8 +12,8 @@
 */
 
 // TGM Plugin Activation
-add_action( 'tgmpa_register', 'bfg_do_plugins_register' );
-function bfg_do_plugins_register() {
+add_action( 'tgmpa_register', 'uamswp_do_plugins_register' );
+function uamswp_do_plugins_register() {
 
 	$plugins = array(
 		array(

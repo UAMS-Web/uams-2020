@@ -12,8 +12,8 @@
 */
 // Add class to images
 // @link http://stackoverflow.com/a/22078964
-add_filter( 'the_content', 'bfg_image_responsive_class' );
-function bfg_image_responsive_class( $content ) {
+add_filter( 'the_content', 'uamswp_image_responsive_class' );
+function uamswp_image_responsive_class( $content ) {
    global $post;
    
    $pattern ="/<img(.*?)class=\"(.*?)\"(.*?)>/i";
@@ -34,9 +34,9 @@ function page_blog_class( $classes ) {
 
 // Remove Parentheses on Archive/Categories
 // @link http://wordpress.stackexchange.com/questions/88545/how-to-remove-the-parentheses-from-the-category-widget
-add_filter( 'wp_list_categories', 'bfg_categories_postcount_filter', 10, 2 );
-add_filter( 'get_archives_link', 'bfg_categories_postcount_filter', 10, 2 );
-function bfg_categories_postcount_filter( $variable ) {
+add_filter( 'wp_list_categories', 'uamswp_categories_postcount_filter', 10, 2 );
+add_filter( 'get_archives_link', 'uamswp_categories_postcount_filter', 10, 2 );
+function uamswp_categories_postcount_filter( $variable ) {
    $variable = str_replace( '(', '<span class="badge badge-pill badge-primary tag-default post-count">', $variable );
    $variable = str_replace( ')', '</span>', $variable );
    return $variable;
@@ -54,8 +54,8 @@ add_filter( 'the_password_form', function() {
 } );
 
 // Filter viewport meta values for Bootstrap
-add_filter( 'genesis_viewport_value', 'bfg_viewport_value' );
-function bfg_viewport_value() {
+add_filter( 'genesis_viewport_value', 'uamswp_viewport_value' );
+function uamswp_viewport_value() {
     return 'width=device-width, initial-scale=1, shrink-to-fit=no';
 }
 
@@ -109,8 +109,8 @@ add_filter( 'genesis_footer_creds_text', function( $creds ) {
 } );
 
 // Remove P tags wrapping on images
-add_filter( 'the_content', 'bfg_filter_ptags_on_images' );
-function bfg_filter_ptags_on_images( $content ) {
+add_filter( 'the_content', 'uamswp_filter_ptags_on_images' );
+function uamswp_filter_ptags_on_images( $content ) {
 	return preg_replace( '/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(\/a>)?\s*<\/p>/iU', '\1\2\3', $content );
 }
 

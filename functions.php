@@ -11,21 +11,21 @@
  *
 */
 
-add_action( 'genesis_setup', 'bfg_childtheme_setup', 15 );
+add_action( 'genesis_setup', 'uamswp_childtheme_setup', 15 );
 
-function bfg_childtheme_setup() {
+function uamswp_childtheme_setup() {
 	// Start the engine
 	include_once( get_template_directory() . '/lib/init.php' );
 
 	// Child theme (do not remove)
-	define( 'BFG_THEME_NAME', 'Bootstrap for Genesis' );
-	define( 'BFG_THEME_URL', 'http://webdevsuperfast.github.io/' );
-	define( 'BFG_THEME_LIB', CHILD_DIR . '/lib/' );
-	define( 'BFG_THEME_LIB_URL', CHILD_URL . '/lib/' );
-	define( 'BFG_THEME_IMAGES', CHILD_URL . '/images/' );
-	define( 'BFG_THEME_JS', CHILD_URL . '/assets/js/' );
-	define( 'BFG_THEME_CSS', CHILD_URL . '/assets/css/' );
-	define( 'BFG_THEME_MODULES', CHILD_DIR . '/lib/modules/' );
+	define( 'UAMSWP_THEME_NAME', 'Bootstrap for Genesis' );
+	define( 'UAMSWP_THEME_URL', 'http://webdevsuperfast.github.io/' );
+	define( 'UAMSWP_THEME_LIB', CHILD_DIR . '/lib/' );
+	define( 'UAMSWP_THEME_LIB_URL', CHILD_URL . '/lib/' );
+	define( 'UAMSWP_THEME_IMAGES', CHILD_URL . '/images/' );
+	define( 'UAMSWP_THEME_JS', CHILD_URL . '/assets/js/' );
+	define( 'UAMSWP_THEME_CSS', CHILD_URL . '/assets/css/' );
+	define( 'UAMSWP_THEME_MODULES', CHILD_DIR . '/lib/modules/' );
 
 	// Cleanup WP Head
 	remove_action( 'wp_head', 'rsd_link' );
@@ -91,7 +91,7 @@ function bfg_childtheme_setup() {
 	add_theme_support( 'genesis-accessibility', array( '404-page', 'drop-down-menu', 'headings', 'rems', 'search-form', 'skip-links' ) );
 
 	// TGM Plugin Activation
-	require_once( BFG_THEME_MODULES . 'class-tgm-plugin-activation.php' );
+	require_once( UAMSWP_THEME_MODULES . 'class-tgm-plugin-activation.php' );
 
 	// Include php files from lib folder
 	// @link https://gist.github.com/theandystratton/5924570

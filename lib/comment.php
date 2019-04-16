@@ -13,8 +13,8 @@
 
 // Comment Form
 // @link http://www.codecheese.com/2013/11/wordpress-comment-form-with-twitter-bootstrap-3-supports/
-add_filter( 'comment_form_defaults', 'bfg_comment_form_args' );
-function bfg_comment_form_args( $args ) {
+add_filter( 'comment_form_defaults', 'uamswp_comment_form_args' );
+function uamswp_comment_form_args( $args ) {
 	$args['comment_field'] = '<div class="form-group comment-form-comment">
 	        <label for="comment">' . _x( 'Comment', 'noun' ) . '</label> 
 	        <textarea class="form-control" id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
@@ -25,8 +25,8 @@ function bfg_comment_form_args( $args ) {
 }
 
 // @link http://www.codecheese.com/2013/11/wordpress-comment-form-with-twitter-bootstrap-3-supports/
-add_filter( 'comment_form_default_fields', 'bfg_comment_form_fields' );
-function bfg_comment_form_fields( $fields ) {
+add_filter( 'comment_form_default_fields', 'uamswp_comment_form_fields' );
+function uamswp_comment_form_fields( $fields ) {
     $commenter = wp_get_current_commenter();
     
     $req      = get_option( 'require_name_email' );

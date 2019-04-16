@@ -19,12 +19,12 @@ add_action( 'get_header', function() {
     
     foreach( $wraps as $wrap ) {
         $context= "genesis_structural_wrap-$wrap";
-        add_filter( $context, 'bfg_filter_structural_wrap', 10, 2 );
+        add_filter( $context, 'uamswp_filter_structural_wrap', 10, 2 );
     }
 }, 10, 1 );
 
 // Function to add .row div inside .container div
-function bfg_filter_structural_wrap( $output, $original_output ) {
+function uamswp_filter_structural_wrap( $output, $original_output ) {
     if( 'close' == $original_output ) {
         $output = '</div>' . $output;
     }
@@ -36,22 +36,22 @@ function bfg_filter_structural_wrap( $output, $original_output ) {
 
 // Adds Filters Automatically from Array Keys
 // @link https://gist.github.com/bryanwillis/0f22c3ddb0d0b9453ad0
-add_action( 'genesis_meta', 'bfg_add_array_filters_genesis_attr' );
-function bfg_add_array_filters_genesis_attr() {
-    $filters = bfg_merge_genesis_attr_classes();
+add_action( 'genesis_meta', 'uamswp_add_array_filters_genesis_attr' );
+function uamswp_add_array_filters_genesis_attr() {
+    $filters = uamswp_merge_genesis_attr_classes();
     
     foreach( array_keys( $filters ) as $context ) {
         $context = "genesis_attr_$context";
-        add_filter( $context, 'bfg_add_markup_sanitize_classes', 10, 2 );
+        add_filter( $context, 'uamswp_add_markup_sanitize_classes', 10, 2 );
     }
 }
 
 // Clean classes output
-function bfg_add_markup_sanitize_classes( $attr, $context ) {
+function uamswp_add_markup_sanitize_classes( $attr, $context ) {
     $classes = array();
     
-    if ( has_filter( 'bfg_clean_classes_output' ) ) {
-        $classes = apply_filters( 'bfg_clean_classes_output', $classes, $context, $attr );
+    if ( has_filter( 'uamswp_clean_classes_output' ) ) {
+        $classes = apply_filters( 'uamswp_clean_classes_output', $classes, $context, $attr );
     }
     
     $value = isset( $classes[$context] ) ? $classes[$context] : array();
@@ -68,7 +68,7 @@ function bfg_add_markup_sanitize_classes( $attr, $context ) {
 }
 
 // Default array of classes to add
-function bfg_merge_genesis_attr_classes() {
+function uamswp_merge_genesis_attr_classes() {
     global $wp_registered_sidebar;
     $classes = array(
             'content-sidebar-wrap'      => 'row',
@@ -141,26 +141,26 @@ function bfg_merge_genesis_attr_classes() {
 
     $classes['site-footer'] = esc_attr( implode( ' ', $footerclasses ) );
     
-    if ( has_filter( 'bfg_add_classes' ) ) {
-        $classes = apply_filters( 'bfg_add_classes', $classes );
+    if ( has_filter( 'uamswp_add_classes' ) ) {
+        $classes = apply_filters( 'uamswp_add_classes', $classes );
     }
 
     return $classes;
 }
 
-// Adds classes array to bfg_add_markup_class() for cleaning
-add_filter( 'bfg_clean_classes_output', 'bfg_modify_classes_based_on_extras', 10, 3) ;
-function bfg_modify_classes_based_on_extras( $classes, $context, $attr ) {
-    $classes = bfg_merge_genesis_attr_classes( $classes );
+// Adds classes array to uamswp_add_markup_class() for cleaning
+add_filter( 'uamswp_clean_classes_output', 'uamswp_modify_classes_based_on_extras', 10, 3) ;
+function uamswp_modify_classes_based_on_extras( $classes, $context, $attr ) {
+    $classes = uamswp_merge_genesis_attr_classes( $classes );
     return $classes;
 }
 
 // Layout
 // Modify bootstrap classes based on genesis_site_layout
-add_filter('bfg_add_classes', 'bfg_modify_classes_based_on_template', 10, 3);
+add_filter('uamswp_add_classes', 'uamswp_modify_classes_based_on_template', 10, 3);
 
 // Remove unused layouts
-function bfg_layout_options_modify_classes_to_add( $classes_to_add ) {
+function uamswp_layout_options_modify_classes_to_add( $classes_to_add ) {
 
     $layout = genesis_site_layout();
     
@@ -200,8 +200,8 @@ function bfg_layout_options_modify_classes_to_add( $classes_to_add ) {
     return $classes_to_add;
 };
 
-function bfg_modify_classes_based_on_template( $classes_to_add ) {
-    $classes_to_add = bfg_layout_options_modify_classes_to_add( $classes_to_add );
+function uamswp_modify_classes_based_on_template( $classes_to_add ) {
+    $classes_to_add = uamswp_layout_options_modify_classes_to_add( $classes_to_add );
 
     return $classes_to_add;
 }

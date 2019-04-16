@@ -12,8 +12,8 @@
 */
 
 // Register Sidebar Function
-add_action( 'init', 'bfg_register_sidebars' );
-function bfg_register_sidebars() {
+add_action( 'init', 'uamswp_register_sidebars' );
+function uamswp_register_sidebars() {
 	// Register Custom Sidebars
 	genesis_register_sidebar( array(
 		'id' => 'home-featured',

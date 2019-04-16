@@ -12,18 +12,18 @@
 */
 
 // Custom Image Function
-function bfg_post_image() {
+function uamswp_post_image() {
 	global $post;
 	$image = '';
 	$image_id = get_post_thumbnail_id( $post->ID );
 	$image = wp_get_attachment_image_src( $image_id, 'full' );
 	$image = $image[0];
 	if ( $image ) return $image;
-	return bfg_get_first_image();
+	return uamswp_get_first_image();
 }
 
 // Get the First Image Attachment Function
-function bfg_get_first_image() {
+function uamswp_get_first_image() {
 	global $post, $posts;
 	$first_img = '';
 	ob_start();
@@ -36,17 +36,17 @@ function bfg_get_first_image() {
 }
 
 // Custom Meta
-add_action( 'genesis_meta', 'bfg_do_meta' );
-function bfg_do_meta() {
+add_action( 'genesis_meta', 'uamswp_do_meta' );
+function uamswp_do_meta() {
 	// Jumbotron
-	if ( is_front_page() && is_active_sidebar( 'home-featured' ) ) add_action( 'genesis_after_header', 'bfg_do_home_featured' );
+	if ( is_front_page() && is_active_sidebar( 'home-featured' ) ) add_action( 'genesis_after_header', 'uamswp_do_home_featured' );
 
 	// Body Class
-	add_filter( 'body_class', 'bfg_body_class' );
+	add_filter( 'body_class', 'uamswp_body_class' );
 }
 
 // Jumbotron
-function bfg_do_home_featured() {
+function uamswp_do_home_featured() {
 	genesis_markup( array(
 		'open' => '<div %s>',
 		'context' => 'home-featured'
@@ -68,7 +68,7 @@ function bfg_do_home_featured() {
 }
 
 // Body Class
-function bfg_body_class( $args ) {
+function uamswp_body_class( $args ) {
 	if ( is_page_template( 'page_blog.php' ) )
 		$args[] = 'blog';
 
