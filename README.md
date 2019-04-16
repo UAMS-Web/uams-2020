@@ -1,4 +1,4 @@
-# uams-2020
+# UAMS 2020 Theme
 
 ## Installation Instructions
 
