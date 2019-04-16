@@ -1,0 +1,66 @@
+// Bootstrap Core Variable Override
+@import "supporting/variables-bootstrap-core-override";
+
+// Bootstrap Genesis Theme Variables
+@import "supporting/variables-bootstrap-genesis";
+
+// Import Bootstrap Core
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+@import "../../node_modules/smartmenus-bootstrap-4/jquery.smartmenus.bootstrap-4";
+
+// Base Page Styles
+@import "supporting/page";
+
+// Screen Reader Classes
+@import "supporting/screen-reader-text";
+
+// Long nonbreaking path name support
+@import "supporting/long-nonbreaking-path-name-support";
+
+// Skip to Main Content - Accessibility Link
+@import "supporting/skip-to-main-content";
+
+// Comments
+@import "supporting/comments";
+
+// Images
+@import "supporting/wordpress-images";
+
+// Table
+@import "supporting/table";
+
+// Widgets
+@import "supporting/widgets";
+
+// Pagination
+@import "supporting/pagination";
+
+@import "supporting/gallery";
+
+// Navigation
+@import "supporting/nav";
+
+// Header
+@import "supporting/header";
+
+// Jumbotron
+@import "supporting/jumbotron";
+
+// Site Inner
+@import "supporting/site-inner";
+
+// Archive/Blog
+@import "supporting/archive";
+
+// Single Post/Page
+@import "supporting/single";
+
+// Sidebar
+@import "supporting/sidebar";
+
+// Footer Widgets
+@import "supporting/footer-widgets";
+
+// Site Footer
+@import "supporting/footer";
