@@ -11,13 +11,13 @@
  *
 */
 
-if ( class_exists( 'UberMenuStandard' ) ) {
-    return;
-}
+//if ( class_exists( 'UberMenuStandard' ) ) {
+//    return;
+//}
 
 // remove primary & secondary nav from default position
-remove_action( 'genesis_after_header', 'genesis_do_nav' );
-add_action( 'genesis_header', 'genesis_do_nav' );
+//remove_action( 'genesis_after_header', 'genesis_do_nav' );
+//add_action( 'genesis_header', 'genesis_do_nav' );
 
 // filter menu args for bootstrap walker and other settings
 add_filter( 'wp_nav_menu_args', 'uamswp_nav_menu_args_filter' );
@@ -26,7 +26,8 @@ function uamswp_nav_menu_args_filter( $args ) {
     require_once( UAMSWP_THEME_MODULES . 'class-wp-bootstrap-navwalker.php' );
 
     $menu_classes = array(
-        'navbar-nav'
+        'navbar-nav',
+        'align-self-end'
     );
 
     $navextra = get_theme_mod( 'navextra', false );
@@ -60,12 +61,12 @@ function uamswp_nav_menu_markup_filter( $html, $args ) {
 
     // only include blog name and description in the nav
     // if it is the primary nav location
-    if ( 'primary' === $args->theme_location ) {
-        $output .= apply_filters( 'uamswp_navbar_brand', uamswp_navbar_brand_markup() );
-    }
+ //   if ( 'primary' === $args->theme_location ) {
+ //       $output .= apply_filters( 'uamswp_navbar_brand', uamswp_navbar_brand_markup() );
+ //   }
 
-    $output .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#'.$data_target.'" aria-controls="'.$data_target.'" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>';
-    $output .= '<nav class="collapse navbar-collapse" id="'.$data_target.'">';
+//    $output .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#'.$data_target.' #navbarNavDropdown" aria-controls="'.$data_target.' navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>';
+    $output .= '<nav class="navbar navbar-brand align-self-end navbar-expand justify-content-end" id="'.$data_target.'">';
     $output .= $html;
     
     $navextra = get_theme_mod( 'navextra', false );
@@ -79,14 +80,17 @@ function uamswp_nav_menu_markup_filter( $html, $args ) {
     return $output;
 }
 
-function uamswp_navbar_brand_markup() {
-    if ( get_theme_mod( 'custom_logo' ) ) {
-        $output = get_custom_logo();
-    } else {
-        $output = '<a class="navbar-brand" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.get_bloginfo( 'name' ).'</a>';
-    }
-    return $output;
-}
+//function uamswp_navbar_brand_markup() {
+//    if ( get_theme_mod( 'custom_logo' ) ) {
+//        $output = get_custom_logo();
+//    } else {
+//        $output = '<a class="navbar-brand" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.get_bloginfo( 'name' ).'</a>'; 
+//       $output = '<a class="navbar-brand" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.get_bloginfo( 'name' ).'</a>';
+//$output = '<div class="site-image navbar-brand"><a href="http://uams.edu/"><img src="' . get_stylesheet_directory_uri() .'/images/logo.png" width="300" alt="University of Arkansas for Medical Sciences Logo" /></a> <span class="pipe" style="color:white">|</span></div><a class="navbar-brand" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.get_bloginfo( 'name' ).'</a>';
+ 
+//}
+//    return $output;
+//}
 
 //* Navigation Extras
 function uamswp_navbar_content_markup() {
