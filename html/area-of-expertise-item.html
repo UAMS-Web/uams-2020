@@ -1,0 +1,321 @@
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i" rel="stylesheet">
+</head>
+<body>
+    <main class="doctor-item">
+        <section class="container-fluid p-8 p-sm-10 bg-auto">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1 class="page-title">[Area of Expertise Item Name]</h1>
+                    <div class="module-body">
+                        <p class="lead"><strong><a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-visual-presentation.html" target="_blank">WCAG 2.0 SC 1.4.8</a> Visual Presentation:</strong> For the visual presentation of blocks of text, a mechanism is available to achieve the following: (Level AAA)</p>
+                        <ul>
+                            <li>Foreground and background colors can be selected by the user.</li>
+                            <li><strong>Width is no more than 80 characters or glyphs</strong> (40 if <abbr title="CJK is a collective term for the Chinese, Japanese, and Korean languages">CJK</abbr>).</li>
+                            <li>Text is not justified (aligned to both the left and the right margins).</li>
+                            <li>Line spacing (leading) is at least space-and-a-half within paragraphs, and paragraph spacing is at least 1.5 times larger than the line spacing.</li>
+                            <li>Text can be resized without assistive technology up to 200 percent in a way that does not require the user to scroll horizontally to read a line of text on a full-screen window.</li>
+                        </ul>
+                        <p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="module-title">Conditions Treated</h2>
+                    <p class="note">UAMS doctors treat a broad range of conditions some of which may not be listed below.</p>
+                    <div class="list-container list-container-rows">
+                        <ul class="list">
+                            <li><a href="javascript:void(0)">Arthritis of the Hip and Knee</a></li>
+                            <li><a href="javascript:void(0)">Orthopedic Injuries</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="module-title">Treatments and Services</h2>
+                    <div class="list-container list-container-rows">
+                        <ul class="list">
+                        <li><a href="javascript:void(0)">Minimally Invasive Hip Surgery</a></li>
+                        <li><a href="javascript:void(0)">Knee Replacement</a></li>
+                        <li><a href="javascript:void(0)">Hip Replacement</a></li>
+                        <li><a href="javascript:void(0)">Minimally Invasive Knee Surgery</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container-fluid p-8 p-sm-10 bg-auto" id="doctors">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="module-title">Doctors Providing Treatments or Services for [Area of Expertise Item Name]</h2>
+                    <p class="note">Note that every treatment/service listed above may not be provided by each doctor listed below. Review each doctor for availability.</p>
+
+                    <div class="list-legend">
+                        <div class="az-filter">
+                                <!-- All Filters:
+                                    Disable any checkbox input that does not represent any conditions. Add "disabled" to input.
+                                    
+                                    A-Z Filter:
+                                    Start with "All"/"Any" checkbox input checked. Add "checked" attribute to input.
+                                    If user checks any other checkbox input, remove "checked" attribute from "All"/"Any" checkbox input.
+                                    If user checks "All"/"Any" checkbox input, remove "checked" attribute from checkbox input of other characters.
+                                -->
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-any" checked>
+                                    <label class="az-filter-label" for="az-filter-any">All</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-number" disabled>
+                                    <label class="az-filter-label" for="az-filter-number">#</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-A">
+                                    <label class="az-filter-label" for="az-filter-A">A</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-B">
+                                    <label class="az-filter-label" for="az-filter-B">B</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-C">
+                                    <label class="az-filter-label" for="az-filter-C">C</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-D">
+                                    <label class="az-filter-label" for="az-filter-D">D</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-E">
+                                    <label class="az-filter-label" for="az-filter-E">E</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-F">
+                                    <label class="az-filter-label" for="az-filter-F">F</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-G">
+                                    <label class="az-filter-label" for="az-filter-G">G</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-H">
+                                    <label class="az-filter-label" for="az-filter-H">H</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-I">
+                                    <label class="az-filter-label" for="az-filter-I">I</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-J">
+                                    <label class="az-filter-label" for="az-filter-J">J</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-K">
+                                    <label class="az-filter-label" for="az-filter-K">K</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-L">
+                                    <label class="az-filter-label" for="az-filter-L">L</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-M">
+                                    <label class="az-filter-label" for="az-filter-M">M</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-N">
+                                    <label class="az-filter-label" for="az-filter-N">N</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-O">
+                                    <label class="az-filter-label" for="az-filter-O">O</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-P">
+                                    <label class="az-filter-label" for="az-filter-P">P</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-Q">
+                                    <label class="az-filter-label" for="az-filter-Q">Q</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-R">
+                                    <label class="az-filter-label" for="az-filter-R">R</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-S">
+                                    <label class="az-filter-label" for="az-filter-S">S</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-T">
+                                    <label class="az-filter-label" for="az-filter-T">T</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-U">
+                                    <label class="az-filter-label" for="az-filter-U">U</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-V">
+                                    <label class="az-filter-label" for="az-filter-V">V</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-W">
+                                    <label class="az-filter-label" for="az-filter-W">W</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-X">
+                                    <label class="az-filter-label" for="az-filter-X">X</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-Y">
+                                    <label class="az-filter-label" for="az-filter-Y">Y</label>
+                                </div>
+                                <div class="custom-control">
+                                    <input type="checkbox" class="custom-control-input" id="az-filter-Z">
+                                    <label class="az-filter-label" for="az-filter-Z">Z</label>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="card-list-container">
+                        <div class="card-list card-list-doctors">
+                            <div class="card">
+                                <img srcset="https://picsum.photos/255/340?image=669 1x, https://picsum.photos/510/680?image=669 2x" src="https://picsum.photos/255/340?image=669" class="card-img-top" alt="Orthopedic Clinic">
+                                <div class="card-body">
+                                        <h3 class="card-title">
+                                            <span class="name">[Doctor name]</span>
+                                            <span class="subtitle">[Doctor medical department]</span>
+                                        </h3>
+                                    <a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="View profile for [Doctor name]">View Profile</a>
+                                </div>
+                            </div>
+                            <div class="card">
+                                    <img srcset="https://picsum.photos/255/340?image=1011 1x, https://picsum.photos/510/680?image=1011 2x" src="https://picsum.photos/255/340?image=1011" class="card-img-top" alt="University of Arkansas for Medical Sciences">
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        <span class="name">[Doctor name]</span>
+                                        <span class="subtitle">[Doctor medical department]</span>
+                                    </h3>
+                                    <a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="View profile for [Doctor name]">View Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-pagination">
+                        <nav aria-label="Doctor list pagination">
+                            <ul class="pagination">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container-fluid p-8 p-sm-10 bg-auto" id="locations">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="module-title">Locations Providing Treatments or Services for [Area of Expertise Item Name]</h2>
+                    <p class="note">Note that every treatment/service listed above may not be provided by each location listed below. Review each location for availability.</p>
+                    <div class="card-list-container">
+                        <div class="card-list">
+                            <div class="card">
+                                <img srcset="https://picsum.photos/434/244?image=13 1x, https://picsum.photos/868/488?image=13 2x" src="https://picsum.photos/434/244?image=13" class="card-img-top" alt="Orthopedic Clinic">
+                                <div class="card-body">
+                                        <h3 class="card-title">
+                                            <span class="name">Orthopedic Clinic</span>
+                                            <span class="subtitle">Primary Location</span>
+                                        </h3>
+                                    <p class="card-text">2 Shackleford W Blvd<br />
+                                        Little Rock, AR 72211</p>
+                                    <a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Go to location page for Orthopedic Clinic">View Location</a>
+                                </div>
+                            </div>
+                            <div class="card">
+                                    <img srcset="https://picsum.photos/434/244?image=14 1x, https://picsum.photos/868/488?image=14 2x" src="https://picsum.photos/434/244?image=14" class="card-img-top" alt="University of Arkansas for Medical Sciences">
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        <span class="name">University of Arkansas for Medical Sciences</span>
+                                    </h3>
+                                    <p class="card-text">4301 W Markham St<br />
+                                        Little Rock, AR 72205</p>
+                                    <a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Go to location page for University of Arkansas for Medical Sciences">View Location</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container-fluid p-8 p-sm-10 news-list bg-auto">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="module-title">Latest News for [Area of Expertise Item Name]</h2>
+                    <div class="card-list-container">
+                        <div class="card-list">
+                            <div class="card">
+                                <img srcset="https://picsum.photos/434/244?image=1066 1x, https://picsum.photos/868/488?image=1066 2x" src="https://picsum.photos/434/244?image=1066" class="card-img-top" alt="Image description or Story title">
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        <span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
+                                    </h3>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
+                                    <a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img srcset="https://picsum.photos/434/244?image=348 1x, https://picsum.photos/868/488?image=348 2x" src="https://picsum.photos/434/244?image=348" class="card-img-top" alt="Image description or Story title">
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        <span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
+                                    </h3>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
+                                    <a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img srcset="https://picsum.photos/434/244?image=823 1x, https://picsum.photos/868/488?image=823 2x" src="https://picsum.photos/434/244?image=823" class="card-img-top" alt="Image description or Story title">
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        <span class="name">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</span>
+                                    </h3>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque.&nbsp;...</p>
+                                    <a href="javascript:void(0)" class="btn btn-primary stretched-link" aria-label="Story title">Read Full Story</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container-fluid p-8 p-sm-10 cta-bar cta-bar-1 bg-auto">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>Make an Appointment</h2>
+                    <p>Request an appointment directly with <a href="javascript:void(0)">your clinic</a>, <a href="javascript:void(0)">your doctor</a>, <span class="no-break">or call <a href="javascript:void(0)">501-555-5555</a>.</span></p>
+                </div>
+            </div>
+        </section>
+    </main>
+        
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
+</body>
+</html>
