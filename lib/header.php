@@ -12,14 +12,14 @@
 */
 
 // Custom Header
-remove_action( 'wp_head', 'genesis_custom_header_style' );
+// remove_action( 'wp_head', 'genesis_custom_header_style' );
 remove_action( 'genesis_header', 'genesis_do_header' );
 
 // This adds logo to header, adds page title if using special page template, and...
 //
 // Here goes the logo in Header -- need to update this with SVG magic?
 //
-add_action( 'genesis_header', 'ursidae_site_image', 5 );
+ add_action( 'genesis_header', 'ursidae_site_image', 5 );
  
 function ursidae_site_image() {
 	

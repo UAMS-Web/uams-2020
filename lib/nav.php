@@ -16,8 +16,8 @@
 //}
 
 // remove primary & secondary nav from default position
-remove_action( 'genesis_after_header', 'genesis_do_nav' );
-add_action( 'genesis_header', 'genesis_do_nav' );
+// remove_action( 'genesis_after_header', 'genesis_do_nav' );
+// add_action( 'genesis_header', 'genesis_do_nav' );
 
 // filter menu args for bootstrap walker and other settings
 add_filter( 'wp_nav_menu_args', 'uamswp_nav_menu_args_filter' );
@@ -60,21 +60,28 @@ function uamswp_nav_menu_markup_filter( $html, $args ) {
 
     // only include blog name and description in the nav
     // if it is the primary nav location
-    if ( 'primary' === $args->theme_location ) {
-        $output .= apply_filters( 'uamswp_navbar_brand', uamswp_navbar_brand_markup() );
-    }
+    // if ( 'primary' === $args->theme_location ) {
+    //     $output .= apply_filters( 'uamswp_navbar_brand', uamswp_navbar_brand_markup() );
+    // }
 
+    $output .= '<div class="navbar-expand-lg navbar">';
+    $output .= '<div class="wrap container">';
     $output .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#'.$data_target.'" aria-controls="'.$data_target.'" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>';
     $output .= '<nav class="collapse navbar-collapse" id="'.$data_target.'">';
     $output .= $html;
     
-    $navextra = get_theme_mod( 'navextra', false );
+    // $navextra = get_theme_mod( 'navextra', false );
     
-    if ( $navextra == true ) {
-        $output .= apply_filters( 'uamswp_navbar_content', uamswp_navbar_content_markup() );
-    }
+    // if ( $navextra == true ) {
+    //     $output .= apply_filters( 'uamswp_navbar_content', uamswp_navbar_content_markup() );
+    // }
 
     $output .= '</nav>';
+
+    $output .= '</div>'; // wrap
+    $output .= '</div>'; // navbar
+
+    $output .= '<style>.navbar { border-bottom: 1px solid #eee; }</style>';
     
     return $output;
 }
