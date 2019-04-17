@@ -1,0 +1,61 @@
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+p, ul, ol, li, dl, dd, dt {
+    &:first-child {
+        margin-top: 0;
+    }
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-top: 1em;
+    margin-bottom: 1.125rem;
+
+    .name, .subtitle {
+        display: block;
+    }
+                                
+    .subtitle {
+        @include font-size(0.75em);
+        font-weight: $font-weight-normal;
+        color: $gray-600;
+        margin-top: 0.25em;
+    }
+}
+
+ul, ol {
+    padding-left: 2em;
+
+    li {
+        margin-bottom: 0.5em;
+    }
+}
+
+strong, b {
+    font-weight: $font-weight-bold;
+}
+
+.page-title,
+.module-title {
+    text-align: center;
+    @extend .line-length-50;
+    @extend .mb-8;
+    @extend .mb-sm-10;
+
+    + .note {
+      @extend .line-length-80;
+      @extend .mt-n5;
+      @extend .mb-8;
+      @extend .mt-sm-n9;
+      @extend .mb-sm-10;
+      text-align: center;
+      font-style: italic;
+    }
+}
+
+.page-title {
+    font-weight: $font-weight-bolder;
+}

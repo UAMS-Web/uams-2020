@@ -4,10 +4,28 @@
 // Bootstrap Genesis Theme Variables
 @import "supporting/variables-bootstrap-genesis";
 
+// UAMS Bootstrap Variables Override
+@import "uams-supporting/variables";
+
+// UAMS Mixins
+@import "uams-supporting/mixins/breakpoints";
+
 // Import Bootstrap Core
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 @import "../../node_modules/smartmenus-bootstrap-4/jquery.smartmenus.bootstrap-4";
+
+// UAMS Supporting Styles
+@import "uams-supporting/utilities/text";
+@import "uams-supporting/grid";
+@import "uams-supporting/layout";
+@import "uams-supporting/page";
+@import "uams-supporting/pagination";
+@import "uams-supporting/typography";
+@import "uams-supporting/buttons";
+@import "uams-supporting/forms";
+@import "uams-supporting/ratings";
+@import "uams-supporting/links-tel";
 
 // Base Page Styles
 @import "supporting/page";
@@ -43,6 +61,7 @@
 
 // Header
 @import "supporting/header";
+@import "uams-supporting/header";
 
 // Jumbotron
 @import "supporting/jumbotron";
@@ -59,8 +78,23 @@
 // Sidebar
 @import "supporting/sidebar";
 
+// Doctors
+@import "uams-supporting/doctors-list";
+@import "uams-supporting/doctors-item";
+
+// Conditions and/or Treatments
+@import "uams-supporting/conditions-treatments";
+
+// Locations
+@import "uams-supporting/locations-list";
+@import "uams-supporting/locations-item";
+
+// CTA Bars
+@import "uams-supporting/cta-bar";
+
 // Footer Widgets
 @import "supporting/footer-widgets";
 
 // Site Footer
 @import "supporting/footer";
+@import "uams-supporting/footer";

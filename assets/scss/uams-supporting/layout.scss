@@ -1,0 +1,169 @@
+.bg-white {
+    + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto {
+      background-color: $body-bg-banded;
+    }
+    + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto {
+      background-color: $body-bg;
+    }
+  }
+  
+  div:not(.bg-auto):not(.bg-white) { 
+  
+    + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto {
+      background-color: $body-bg;
+    }
+  
+    + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto {
+      background-color: $body-bg-banded;
+    }
+  }
+  
+  .bg-auto { 
+    background-color: $body-bg;
+  
+    + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto {
+      background-color: $body-bg-banded;
+    }
+  
+    + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto,
+    + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto {
+      background-color: $body-bg;
+    }
+  }
+
+  .line-length-50, .line-length-66, .line-length-80 {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+    .embed-responsive {
+      @extend .my-8;
+      @extend .my-sm-10;
+      width: auto;
+  
+      &:last-child {
+        @extend .mb-0;
+      }
+  
+      @include media-breakpoint-up(md) {
+        margin-right: -20%;
+        margin-left: -20%;
+      }
+    }
+  }
+
+  .line-length-50 {
+    width: $line-length-50+em;
+  }
+
+  .line-length-66 {
+    width: $line-length-66+em;
+  }
+
+  .line-length-80 {
+    width: $line-length-80+em;
+  }
+
+  .no-break {
+    white-space: nowrap;
+  }
+
+  .card-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: (-$grid-gutter-width / 2);
+
+    .card {
+      width: 434px;
+        margin: $grid-gutter-width / 2;
+        text-align: center;
+
+        @include media-breakpoint-up(xs) {
+        }
+
+        @include media-breakpoint-up(sm) {
+        }
+
+        .card-title {
+            @extend .h5;
+        }
+        .card-body {
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: center;
+        }
+        .btn {
+            margin-top: auto;
+        }
+    }
+
+    &-doctors {
+      .card {
+        width: 255px;
+
+        .card-title {
+            @extend .h6;
+        }
+      }
+    }
+  }
+
+  .module-body {
+    @extend .line-length-80;
+
+    + .sr-only + .card-list-container,
+    + .card-list-container {
+        @extend .mt-8;
+        @extend .mt-xs-10;
+    }
+  }
+
+  .list-legend {
+      @extend .mt-8;
+      @extend .mt-xs-10;
+      @extend .pb-8;
+      border-bottom: 1px solid $gray-accent;
+      
+      .az-filter {
+          justify-content: center;
+      }
+
+      + .list-container,
+      + .card-list-container {
+          @extend .mt-8;
+      }
+  }
+
+  .list-pagination {
+      @extend .mt-8;
+      @extend .pt-8;
+      border-top: 1px solid $gray-accent;
+
+      .pagination {
+          justify-content: center;
+      }
+  }

@@ -1,0 +1,108 @@
+.site-footer {
+    @extend .py-9;
+    @extend .px-8;
+    @extend .bg-primary;
+    @extend .text-light;
+    @extend .text-center;
+    position: relative;
+
+    &:before {
+        @supports (mix-blend-mode: overlay) and ((-webkit-filter: grayscale(100%)) or (filter: grayscale(100%))) {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 0;
+            mix-blend-mode: overlay;
+            opacity: 0.30;
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+            background-image: url('https://picsum.photos/576/#{ceil(378 / 320 * 576)}?image=1044');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+
+            @include media-breakpoint-up(xs) { // 576-767
+                background-image: url('https://picsum.photos/768/#{ceil(378 / 576 * 768)}?image=1044');
+            }
+    
+            @include media-breakpoint-up(sm) { // 768-991
+                background-image: url('https://picsum.photos/992/#{ceil(230 / 768 * 992)}?image=1044');
+            }
+    
+            @include media-breakpoint-up(md) { // 992-1199
+                background-image: url('https://picsum.photos/1200/#{ceil(230 / 992 * 1200)}?image=1044');
+            }
+    
+            @include media-breakpoint-up(lg) { // 1200-1499
+                background-image: url('https://picsum.photos/1500/#{ceil(230 / 1200 * 1500)}?image=1044');
+            }
+    
+            @include media-breakpoint-up(xl) { // 1500-1920
+                background-image: url('https://picsum.photos/1921/#{ceil(230 / 1500 * 1921)}?image=1044');
+            }
+    
+            @include media-breakpoint-up(xxl) { // 1921+
+                background-image: url('https://picsum.photos/2540/#{ceil(230 / 1921 * 2540)}?image=1044');
+            }
+        }
+        
+
+    }
+
+    .logo, .nav, .copyright {
+        z-index: 1;
+        position: relative;
+    }
+    
+
+    .logo {
+        @extend .d-inline-block;
+        @extend .mb-6;
+    }
+
+    .nav {
+        @extend .justify-content-center;
+        @extend .mb-6;
+        line-height: 1;
+
+        @include media-breakpoint-down(xs) {
+            flex-direction: column;
+        }
+
+        .nav-item {
+            &:not(:last-child) {
+                margin-bottom: $spacer-min;
+
+                @include media-breakpoint-up(sm) {
+                    margin-bottom: 0;
+                    margin-right: $spacer-min / 2;
+                    border-right: 1px solid $red-lightest;
+                }
+            }
+            &:not(:first-child) {
+                @include media-breakpoint-up(sm) {
+                    margin-left: $spacer-min / 2;
+                }
+            }
+
+            .nav-link {
+                @extend .py-1;
+
+                &:hover, &:active, &:focus {
+                    color: mix($primary, $white, 15%);
+                }
+                &:visited {
+                    color: mix($primary, $white, 20%);
+                }
+            }
+        }
+    }
+
+    .copyright {
+        @include font-size($font-size-sm);
+    }
+}
