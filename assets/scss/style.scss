@@ -7,8 +7,8 @@
 // UAMS Bootstrap Variables Override
 @import "uams-supporting/variables";
 
-// UAMS Mixins
-@import "uams-supporting/mixins/breakpoints";
+// UAMS Bootstrap Mixins Override
+@import "uams-supporting/mixins";
 
 // Import Bootstrap Core
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
