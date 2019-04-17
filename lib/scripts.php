@@ -58,6 +58,10 @@ function uamswp_theme_scripts() {
 		// Register theme JS and enqueue it
 		wp_register_script( 'app-js', UAMSWP_THEME_JS . 'app.min.js', array( 'jquery' ), $version, true );
 		wp_enqueue_script( 'app-js' );
+		
+		// Register Overflowing Navbar and enqueue it
+		wp_register_script( 'app-overflowing-navbar-js', UAMSWP_THEME_JS . 'overflowing-navbar.min.js', array( 'jquery' ), $version, true );
+		wp_enqueue_script( 'app-overflowing-navbar-js' );
 	}
 }
 

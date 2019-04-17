@@ -102,3 +102,12 @@ function uamswp_childtheme_setup() {
 	// Load Child theme text domain
 	load_child_theme_textdomain( 'bootstrap-for-genesis', get_stylesheet_directory() . '/languages' );
 }
+
+// Add extra class to content
+// https://www.wpstud.io/add-extra-class-to-html-elements-in-genesis/
+//function wpstudio_add_class( $attributes ) {
+//	$attributes['class'] = $attributes['class']. ' container-fluid';
+//		return $attributes;
+//	}
+//	
+//	add_filter( 'genesis_attr_site-header', 'wpstudio_add_class' );
