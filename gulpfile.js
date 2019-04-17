@@ -38,7 +38,7 @@ var paths = {
     },
     languages: {
         src: '**/*.php',
-        dest: 'languages/bootstrap-for-genesis.pot'
+        dest: 'languages/uams-2020.pot'
     },
     site: {
         url: 'http://uamshealthmu.local'
