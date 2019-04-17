@@ -17,7 +17,7 @@ function uamswp_do_plugins_register() {
 
 	$plugins = array(
 		array(
-			'name'      => __( 'Widget CSS Classes', 'bootstrap-for-genesis' ),
+			'name'      => __( 'Widget CSS Classes', 'uams-2020' ),
 			'slug'      => 'widget-css-classes',
 			'required'  => false
 		),
