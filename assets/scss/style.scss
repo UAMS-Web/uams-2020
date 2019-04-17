@@ -15,20 +15,50 @@
 
 @import "../../node_modules/smartmenus-bootstrap-4/jquery.smartmenus.bootstrap-4";
 
-// UAMS Supporting Styles
-@import "uams-supporting/utilities/text";
+// UAMS Bootstrap Core Override
+//@import "uams-supporting/functions";
+//@import "uams-supporting/variables";
+//@import "uams-supporting/mixins";
+//@import "uams-supporting/root";
+//@import "uams-supporting/reboot";
+@import "uams-supporting/type";
+//@import "uams-supporting/images";
+//@import "uams-supporting/code";
 @import "uams-supporting/grid";
-@import "uams-supporting/layout";
-@import "uams-supporting/page";
-@import "uams-supporting/pagination";
-@import "uams-supporting/typography";
-@import "uams-supporting/buttons";
+//@import "uams-supporting/tables";
 @import "uams-supporting/forms";
-@import "uams-supporting/ratings";
-@import "uams-supporting/links-tel";
+@import "uams-supporting/buttons";
+//@import "uams-supporting/transitions";
+//@import "uams-supporting/dropdown";
+//@import "uams-supporting/button-group";
+//@import "uams-supporting/input-group";
+//@import "uams-supporting/custom-forms";
+@import "uams-supporting/nav";
+@import "uams-supporting/navbar";
+//@import "uams-supporting/card";
+//@import "uams-supporting/breadcrumb";
+@import "uams-supporting/pagination";
+//@import "uams-supporting/badge";
+//@import "uams-supporting/jumbotron";
+//@import "uams-supporting/alert";
+//@import "uams-supporting/progress";
+//@import "uams-supporting/media";
+//@import "uams-supporting/list-group";
+//@import "uams-supporting/close";
+//@import "uams-supporting/toasts";
+//@import "uams-supporting/modal";
+//@import "uams-supporting/tooltip";
+//@import "uams-supporting/popover";
+//@import "uams-supporting/carousel";
+//@import "uams-supporting/spinners";
+@import "uams-supporting/utilities";
+//@import "uams-supporting/print";
 
-// Base Page Styles
+// New UAMS Supporting Styles
 @import "supporting/page";
+@import "uams-supporting/page";
+@import "uams-supporting/layout";
+@import "uams-supporting/links-tel";
 
 // Screen Reader Classes
 @import "supporting/screen-reader-text";
@@ -77,6 +107,9 @@
 
 // Sidebar
 @import "supporting/sidebar";
+
+// Ratings
+@import "uams-supporting/ratings";
 
 // Doctors
 @import "uams-supporting/doctors-list";
