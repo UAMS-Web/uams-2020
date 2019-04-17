@@ -1,0 +1,22 @@
+.padded-grid {
+    padding: $grid-gutter-width;
+
+    .row {
+        margin: (-$grid-gutter-width / 2)
+    }
+
+    .col,
+    [class^=col-] {
+        padding: $grid-gutter-width / 2;
+    }
+
+    &.uams-module {
+        padding-top: ($module-padding - ($grid-gutter-width / 2));
+        padding-bottom: ($module-padding - ($grid-gutter-width / 2));
+    }
+}
+
+.uams-module {
+    padding-top: $module-padding;
+    padding-bottom: $module-padding;
+}

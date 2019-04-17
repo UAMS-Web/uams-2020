@@ -1,0 +1,239 @@
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i" rel="stylesheet">
+</head>
+<body>
+    <main class="container-fluid p-8 p-sm-10 conditions-treatments bg-auto">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="page-title">Conditions Treated / Treatments &amp; Services</h1>
+                <div class="module-body">
+                    <p class="lead"><strong><a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-visual-presentation.html" target="_blank">WCAG 2.0 SC 1.4.8</a> Visual Presentation:</strong> For the visual presentation of blocks of text, a mechanism is available to achieve the following: (Level AAA)</p>
+                    <ul>
+                        <li>Foreground and background colors can be selected by the user.</li>
+                        <li><strong>Width is no more than 80 characters or glyphs</strong> (40 if <abbr title="CJK is a collective term for the Chinese, Japanese, and Korean languages">CJK</abbr>).</li>
+                        <li>Text is not justified (aligned to both the left and the right margins).</li>
+                        <li>Line spacing (leading) is at least space-and-a-half within paragraphs, and paragraph spacing is at least 1.5 times larger than the line spacing.</li>
+                        <li>Text can be resized without assistive technology up to 200 percent in a way that does not require the user to scroll horizontally to read a line of text on a full-screen window.</li>
+                    </ul>
+                </div>
+                <div class="list-legend">
+                    <div class="az-filter">
+                            <!-- All Filters:
+                                Disable any checkbox input that does not represent any conditions. Add "disabled" to input.
+                                
+                                A-Z Filter:
+                                If we can legally do this, default to the "Featured" set of conditions, either defined manually or by analytics.
+                                Start with "Featured" checkbox input checked. Add "checked" attribute to input.
+                                If user checks any other checkbox input, remove "checked" attribute from "Featured" checkbox input.
+
+                                If user checks "All"/"Any" checkbox input, remove "checked" attribute from checkbox input of other characters.
+                                After that, if user checks any other checkbox input, remove "checked" attribute from "Any"/"All" checkbox input.
+                            -->
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-featured" checked>
+                                <label class="az-filter-label" for="az-filter-featured">Featured</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-any">
+                                <label class="az-filter-label" for="az-filter-any">All</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-number" disabled>
+                                <label class="az-filter-label" for="az-filter-number">#</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-A">
+                                <label class="az-filter-label" for="az-filter-A">A</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-B">
+                                <label class="az-filter-label" for="az-filter-B">B</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-C">
+                                <label class="az-filter-label" for="az-filter-C">C</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-D">
+                                <label class="az-filter-label" for="az-filter-D">D</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-E">
+                                <label class="az-filter-label" for="az-filter-E">E</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-F">
+                                <label class="az-filter-label" for="az-filter-F">F</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-G">
+                                <label class="az-filter-label" for="az-filter-G">G</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-H">
+                                <label class="az-filter-label" for="az-filter-H">H</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-I">
+                                <label class="az-filter-label" for="az-filter-I">I</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-J">
+                                <label class="az-filter-label" for="az-filter-J">J</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-K">
+                                <label class="az-filter-label" for="az-filter-K">K</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-L">
+                                <label class="az-filter-label" for="az-filter-L">L</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-M">
+                                <label class="az-filter-label" for="az-filter-M">M</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-N">
+                                <label class="az-filter-label" for="az-filter-N">N</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-O">
+                                <label class="az-filter-label" for="az-filter-O">O</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-P">
+                                <label class="az-filter-label" for="az-filter-P">P</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-Q">
+                                <label class="az-filter-label" for="az-filter-Q">Q</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-R">
+                                <label class="az-filter-label" for="az-filter-R">R</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-S">
+                                <label class="az-filter-label" for="az-filter-S">S</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-T">
+                                <label class="az-filter-label" for="az-filter-T">T</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-U">
+                                <label class="az-filter-label" for="az-filter-U">U</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-V">
+                                <label class="az-filter-label" for="az-filter-V">V</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-W">
+                                <label class="az-filter-label" for="az-filter-W">W</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-X">
+                                <label class="az-filter-label" for="az-filter-X">X</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-Y">
+                                <label class="az-filter-label" for="az-filter-Y">Y</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-Z">
+                                <label class="az-filter-label" for="az-filter-Z">Z</label>
+                            </div>
+                    </div>
+                </div>
+                <div class="list-container list-container-columns">
+                    <ul class="list">
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Shoulder impingement syndrome</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">sit amet consectetuer</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">adipiscing elit</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Aenean commodo ligula</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Lorem ipsum dolor</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">sit amet consectetuer</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">adipiscing elit</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Aenean commodo ligula</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">eget dolor</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">penatibus et magnis</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">dis parturient montes</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">nascetur ridiculus mus</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Lorem ipsum dolor</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">sit amet consectetuer</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">adipiscing elit</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Aenean commodo ligula</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">eget dolor</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Aenean massa</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Cum sociis natoque</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Shoulder impingement syndrome</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">sit amet consectetuer</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">adipiscing elit</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Aenean commodo ligula</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Lorem ipsum dolor</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">sit amet consectetuer</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">adipiscing elit</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Aenean commodo ligula</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">eget dolor</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Shoulder impingement syndrome</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">sit amet consectetuer</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">adipiscing elit</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Aenean commodo ligula</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Lorem ipsum dolor</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">sit amet consectetuer</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">adipiscing elit</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Aenean commodo ligula</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">eget dolor</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">penatibus et magnis</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">dis parturient montes</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">nascetur ridiculus mus</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Lorem ipsum dolor</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">sit amet consectetuer</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">adipiscing elit</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Aenean commodo ligula</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">eget dolor</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Aenean massa</a></li>
+                            <li><a href="https://codepen.io/fedaykin00/full/BbXLrR">Cum sociis natoque</a></li>
+                        </ul>
+                </div>
+                <div class="list-pagination">
+                    <nav aria-label="Doctor list pagination">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script type="text/javascript" src="../assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.smartmenus.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.smartmenus.bootstrap-4.min.js"></script>
+    <script type="text/javascript" src="../assets/js/app.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
+</body>
+</html>

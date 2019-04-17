@@ -1,0 +1,13 @@
+.btn {
+    text-decoration: none;
+}
+
+.btn-container {
+    display: flex;
+    flex-flow: row wrap;
+    margin: (-$spacer-min / 2);
+
+    .btn {
+        margin: ($spacer-min / 2);
+    }
+}

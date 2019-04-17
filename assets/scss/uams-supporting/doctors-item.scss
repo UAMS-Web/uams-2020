@@ -1,0 +1,65 @@
+.doctor-info {
+
+    > .row {
+        justify-content: center;
+    }
+    .text {
+        @include media-breakpoint-up(xs) {
+            flex: 1 1 0;
+        }
+        max-width: 44rem;
+    }
+    .image {
+        background-color: $gray-400;
+        text-align: center;
+
+        @include media-breakpoint-up(xs) {
+            flex: 0 0 0;
+            background-color: transparent;
+            text-align: left;
+        }
+        img {
+            @include media-breakpoint-up(xs) {
+                max-width: none;
+            }
+        }
+    }
+
+    .page-title {
+        width: auto;
+        text-align: left;
+        margin: 0 0 $font-size-base !important;
+        padding-bottom: $font-size-base;
+        border-bottom: 1px solid $gray-accent;
+    }
+}
+
+.ratings-and-reviews {
+    .overall-ratings {
+        margin: 0 auto;
+        @extend .mb-8;
+        @extend .mb-xs-10;
+        text-align: center;
+        width: 33em;
+        max-width: 100%;
+
+        .rating {
+            justify-content: center;
+        }
+
+        .card-footer {
+            padding-top: $card-spacer-x;
+            padding-bottom: $card-spacer-x;
+            p {
+                &:first-child {
+                    @extend .h5;
+                    margin-bottom: 0.5em;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

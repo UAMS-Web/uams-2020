@@ -1,0 +1,29 @@
+.location-list {
+    .card-list-container {
+        .card-list {
+
+            .card {
+                margin: $grid-gutter-width / 2;
+                text-align: center;
+
+                @include media-breakpoint-up(xs) {
+                }
+
+                @include media-breakpoint-up(sm) {
+                }
+
+                .card-title {
+                    @extend .h5;
+                }
+                .card-body {
+                    display: flex;
+                    flex-flow: column nowrap;
+                    align-items: center;
+                }
+                .btn {
+                    margin-top: auto;
+                }
+            }
+        }
+    }
+}
