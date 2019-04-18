@@ -65,7 +65,9 @@ function uamswp_nav_menu_markup_filter( $html, $args ) {
  //       $output .= apply_filters( 'uamswp_navbar_brand', uamswp_navbar_brand_markup() );
  //   }
 
-//    $output .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#'.$data_target.' #navbarNavDropdown" aria-controls="'.$data_target.' navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>';
+    $output .= '<div class="site-header">';
+    $output .= '<div class="wrap container">';
+    $output .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#'.$data_target.' #navbarNavDropdown" aria-controls="'.$data_target.' navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>';
     $output .= '<nav class="navbar navbar-brand align-self-end navbar-expand justify-content-end" id="'.$data_target.'">';
     $output .= $html;
     
@@ -80,22 +82,10 @@ function uamswp_nav_menu_markup_filter( $html, $args ) {
     $output .= '</div>'; // wrap
     $output .= '</div>'; // navbar
 
-    $output .= '<style>.navbar { border-bottom: 1px solid #eee; }</style>';
+    // $output .= '<style>.site-nav { border-bottom: 1px solid #eee; }</style>';
     
     return $output;
 }
-
-//function uamswp_navbar_brand_markup() {
-//    if ( get_theme_mod( 'custom_logo' ) ) {
-//        $output = get_custom_logo();
-//    } else {
-//        $output = '<a class="navbar-brand" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.get_bloginfo( 'name' ).'</a>'; 
-//       $output = '<a class="navbar-brand" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.get_bloginfo( 'name' ).'</a>';
-//$output = '<div class="site-image navbar-brand"><a href="http://uams.edu/"><img src="' . get_stylesheet_directory_uri() .'/images/logo.png" width="300" alt="University of Arkansas for Medical Sciences Logo" /></a> <span class="pipe" style="color:white">|</span></div><a class="navbar-brand" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.get_bloginfo( 'name' ).'</a>';
- 
-//}
-//    return $output;
-//}
 
 //* Navigation Extras
 function uamswp_navbar_content_markup() {
