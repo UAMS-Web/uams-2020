@@ -188,6 +188,10 @@
                 @include media-breakpoint-down(xs) {
                     padding: ($spacer * .5);
                 }
+
+                @include media-breakpoint-up(sm) {
+                    white-space: nowrap;
+                }
             }
         }
     }
