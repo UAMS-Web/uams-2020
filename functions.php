@@ -121,7 +121,7 @@ function uamswp_childtheme_setup() {
 	}
 	
 	// Load Child theme text domain
-	load_child_theme_textdomain( 'bootstrap-for-genesis', get_stylesheet_directory() . '/languages' );
+	load_child_theme_textdomain( 'uams-2020', get_stylesheet_directory() . '/languages' );
 }
 
 // Add extra class to content
