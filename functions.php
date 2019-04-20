@@ -69,6 +69,27 @@ function uamswp_childtheme_setup() {
 	// Remove unneeded widget areas
 	unregister_sidebar( 'header-right' );
 
+	// Remove unneeded widget areas
+	unregister_sidebar( 'header-right' );
+	
+	// Remove unused sidebars
+	unregister_sidebar( 'sidebar' );
+	unregister_sidebar( 'sidebar-alt' );
+
+	// Remove layouts
+	genesis_unregister_layout( 'content-sidebar-sidebar' );
+	genesis_unregister_layout( 'sidebar-content-sidebar' );	
+	genesis_unregister_layout( 'sidebar-sidebar-content' );
+	genesis_unregister_layout( 'sidebar-content' );
+	genesis_unregister_layout( 'content-sidebar' );
+
+	//* Set full-width content as the default layout
+	genesis_set_default_layout( 'full-width-content' );
+
+	// Remove layout metaboxes
+	remove_theme_support( 'genesis-inpost-layouts' );
+	remove_theme_support( 'genesis-archive-layouts' );
+
 	// Move Sidebar Secondary After Content
 	remove_action( 'genesis_after_content_sidebar_wrap', 'genesis_get_sidebar_alt' );
 	add_action( 'genesis_after_content', 'genesis_get_sidebar_alt' );
