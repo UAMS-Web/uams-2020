@@ -13,20 +13,20 @@
 
 add_action( 'customize_register', function( $wp_customize ) {
     // Add Default Settings
-    $wp_customize->add_setting( 'bootstrap-for-genesis', array(
+    $wp_customize->add_setting( 'uams-2020', array(
         'capability' => 'edit_theme_options',
         'type' => 'theme_mod'
     ) );
 
     // Add Bootstrap Panel
     $wp_customize->add_panel( 'bootstrap', array(
-        'title' => __( 'Bootstrap for Genesis', 'bootstrap-for-genesis' ),
+        'title' => __( 'Bootstrap for Genesis', 'uams-2020' ),
         'priority' => 100
     ) );
 
     // Add Navigation Section
     $wp_customize->add_section( 'navigation', array(
-        'title' => __( 'Navigation Settings', 'bootstrap-for-genesis' ),
+        'title' => __( 'Navigation Settings', 'uams-2020' ),
         'priority' => 10,
         'panel' => 'bootstrap'
     ) );
@@ -39,12 +39,12 @@ add_action( 'customize_register', function( $wp_customize ) {
     $wp_customize->add_control( 'navposition', array(
         'type' => 'select',
         'priority' => 10,
-        'label' => __( 'Navigation Position', 'bootstrap-for-genesis' ),
+        'label' => __( 'Navigation Position', 'uams-2020' ),
         'section' => 'navigation',
         'choices' => array(
-            'sticky-top' => __( 'Sticky Top', 'bootstrap-for-genesis' ),
-            'fixed-top' => __( 'Fixed Top', 'bootstrap-for-genesis' ),
-            'fixed-bottom' => __( 'Fixed Bottom', 'bootstrap-for-genesis' ),
+            'sticky-top' => __( 'Sticky Top', 'uams-2020' ),
+            'fixed-top' => __( 'Fixed Top', 'uams-2020' ),
+            'fixed-bottom' => __( 'Fixed Bottom', 'uams-2020' ),
         )
     ) );
 
@@ -56,13 +56,13 @@ add_action( 'customize_register', function( $wp_customize ) {
     $wp_customize->add_control( 'navcontainer', array(
         'type' => 'select',
         'priority' => 20,
-        'label' => __( 'Navigation Container', 'bootstrap-for-genesis' ),
+        'label' => __( 'Navigation Container', 'uams-2020' ),
         'section' => 'navigation',
         'choices' => array(
-            'sm' => __( 'Small', 'bootstrap-for-genesis' ),
-            'md' => __( 'Medium', 'bootstrap-for-genesis' ),
-            'lg' => __( 'Large', 'bootstrap-for-genesis' ),
-            'xl' => __( 'Extra Large', 'bootstrap-for-genesis' )
+            'sm' => __( 'Small', 'uams-2020' ),
+            'md' => __( 'Medium', 'uams-2020' ),
+            'lg' => __( 'Large', 'uams-2020' ),
+            'xl' => __( 'Extra Large', 'uams-2020' )
         )
     ) );
 
@@ -74,12 +74,12 @@ add_action( 'customize_register', function( $wp_customize ) {
     $wp_customize->add_control( 'navcolor', array(
         'type' => 'select',
         'priority' => 30,
-        'label' => __( 'Navigation Background', 'bootstrap-for-genesis' ),
+        'label' => __( 'Navigation Background', 'uams-2020' ),
         'section' => 'navigation',
         'choices' => array(
-            'light' => __( 'Light', 'bootstrap-for-genesis' ),
-            'dark' => __( 'Dark', 'bootstrap-for-genesis' ),
-            'primary' => __( 'Primary', 'bootstrap-for-genesis' )
+            'light' => __( 'Light', 'uams-2020' ),
+            'dark' => __( 'Dark', 'uams-2020' ),
+            'primary' => __( 'Primary', 'uams-2020' )
         )
     ) );
     
@@ -91,18 +91,18 @@ add_action( 'customize_register', function( $wp_customize ) {
     $wp_customize->add_control( 'navextra', array(
         'type' => 'select',
         'priority' => 40,
-        'label' => __( 'Navigation Extras', 'bootstrap-for-genesis' ),
+        'label' => __( 'Navigation Extras', 'uams-2020' ),
         'section' => 'navigation',
         'choices' => array(
-            '' => __( 'None', 'bootstrap-for-genesis' ),
-            'date' => __( 'Date', 'bootstrap-for-genesis' ),
-            'search' => __( 'Search Form', 'bootstrap-for-genesis' )
+            '' => __( 'None', 'uams-2020' ),
+            'date' => __( 'Date', 'uams-2020' ),
+            'search' => __( 'Search Form', 'uams-2020' )
         )
     ) );
 
     // Footer Section
     $wp_customize->add_section( 'footer', array(
-        'title' => __( 'Footer Section', 'bootstrap-for-genesis' ),
+        'title' => __( 'Footer Section', 'uams-2020' ),
         'priority' => 40,
         'panel' => 'bootstrap'
     ) );
@@ -114,12 +114,12 @@ add_action( 'customize_register', function( $wp_customize ) {
     $wp_customize->add_control( 'footerwidgetbg', array(
         'type' => 'select',
         'priority' => 30,
-        'label' => __( 'Footer Widget Background', 'bootstrap-for-genesis' ),
+        'label' => __( 'Footer Widget Background', 'uams-2020' ),
         'section' => 'footer',
         'choices' => array(
-            'light' => __( 'Light', 'bootstrap-for-genesis' ),
-            'dark' => __( 'Dark', 'bootstrap-for-genesis' ),
-            'primary' => __( 'Primary', 'bootstrap-for-genesis' )
+            'light' => __( 'Light', 'uams-2020' ),
+            'dark' => __( 'Dark', 'uams-2020' ),
+            'primary' => __( 'Primary', 'uams-2020' )
         )
     ) );
 
@@ -130,12 +130,12 @@ add_action( 'customize_register', function( $wp_customize ) {
     $wp_customize->add_control( 'footerbg', array(
         'type' => 'select',
         'priority' => 30,
-        'label' => __( 'Footer Background', 'bootstrap-for-genesis' ),
+        'label' => __( 'Footer Background', 'uams-2020' ),
         'section' => 'footer',
         'choices' => array(
-            'light' => __( 'Light', 'bootstrap-for-genesis' ),
-            'dark' => __( 'Dark', 'bootstrap-for-genesis' ),
-            'primary' => __( 'Primary', 'bootstrap-for-genesis' )
+            'light' => __( 'Light', 'uams-2020' ),
+            'dark' => __( 'Dark', 'uams-2020' ),
+            'primary' => __( 'Primary', 'uams-2020' )
         )
     ) );
 } );

@@ -65,10 +65,9 @@ function uamswp_nav_menu_markup_filter( $html, $args ) {
  //       $output .= apply_filters( 'uamswp_navbar_brand', uamswp_navbar_brand_markup() );
  //   }
 
-    $output .= '<div class="site-header">';
-    $output .= '<div class="wrap container">';
-    $output .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#'.$data_target.' #navbarNavDropdown" aria-controls="'.$data_target.' navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>';
-    $output .= '<nav class="navbar navbar-brand align-self-end navbar-expand justify-content-end" id="'.$data_target.'">';
+    $output .= '<nav class="site-nav navbar navbar-expand-sm">';
+    $output .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#'.$data_target.'" aria-controls="'.$data_target.'" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon">Test</span></button>';
+    $output .= '<div class="collapse navbar-collapse inner-container" id="'.$data_target.'">';
     $output .= $html;
     
     // $navextra = get_theme_mod( 'navextra', false );
@@ -77,10 +76,8 @@ function uamswp_nav_menu_markup_filter( $html, $args ) {
     //     $output .= apply_filters( 'uamswp_navbar_content', uamswp_navbar_content_markup() );
     // }
 
-    $output .= '</nav>';
-
     $output .= '</div>'; // wrap
-    $output .= '</div>'; // navbar
+    $output .= '</nav>'; // navbar
 
     // $output .= '<style>.site-nav { border-bottom: 1px solid #eee; }</style>';
     

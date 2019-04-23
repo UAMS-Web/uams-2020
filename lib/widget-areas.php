@@ -17,7 +17,7 @@ function uamswp_register_sidebars() {
 	// Register Custom Sidebars
 	genesis_register_sidebar( array(
 		'id' => 'home-featured',
-		'name' => __( 'Home Featured', 'bootstrap-for-genesis' ),
-		'description' => __( 'This is the home featured area. It uses the jumbotron bootstrap section.', 'bootstrap-for-genesis' )
+		'name' => __( 'Home Featured', 'uams-2020' ),
+		'description' => __( 'This is the home featured area. It uses the jumbotron bootstrap section.', 'uams-2020' )
 	) );
 }
