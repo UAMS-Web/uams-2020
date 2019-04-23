@@ -26,6 +26,7 @@ function uamswp_nav_menu_args_filter( $args ) {
     require_once( UAMSWP_THEME_MODULES . 'class-wp-bootstrap-navwalker.php' );
 
     $menu_classes = array(
+        'nav',
         'navbar-nav',
         'align-self-end'
     );
