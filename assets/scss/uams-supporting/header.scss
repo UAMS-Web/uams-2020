@@ -160,6 +160,7 @@
         @extend .w-100;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         @include media-breakpoint-down(xs) {
             box-shadow: $box-shadow-sm;
         }
@@ -348,6 +349,78 @@
 =======
             .nav-item { // L2 li
 >>>>>>> dev
+=======
+        @include media-breakpoint-down(xs) {
+            box-shadow: $box-shadow-sm;
+        }
+
+        > .navbar-nav {
+            > .nav-item {
+                > .nav-link {
+                    @include media-breakpoint-up(sm) {
+                        white-space: nowrap;
+                        padding: 1.25rem 0.75rem;
+                    }
+                }
+
+                > .dropdown-menu { // L2 nested ul
+    
+                    @include media-breakpoint-down(xs) {
+                        background-color: gray("50");
+                    }
+
+                    @include media-breakpoint-up(sm) {
+                        border-top-right-radius: 0;
+                        border-top-left-radius: 0;
+                    }
+
+                    > .nav-item { // L2 nested ul li
+                        > .dropdown-menu { // L3 nested ul
+                            @include media-breakpoint-down(xs) {
+                                background-color: gray("200");
+                            }
+                        }
+
+                        > .nav-item { // L3 nested ul li
+                            > .dropdown-menu { // L4+ nested ul
+                                @include media-breakpoint-down(xs) {
+                                    background-color: gray("300");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    .navbar-nav {
+        line-height: 1;
+        @extend .font-weight-medium;
+        @extend .bg-white;
+
+        .nav-item { // li
+            margin-bottom: 0;
+
+            &:not(:first-child) {
+                @include media-breakpoint-down(xs) {
+                    border-top: 1px solid rgba(0,0,0,0.1);
+                }
+            }
+
+            .nav-link,
+            .dropdown-item {
+                @include media-breakpoint-down(xs) {
+                    padding: 0.75rem 2rem;
+                }
+
+                &.has-submenu {
+                    padding-right: 0.5em + 2em + 1em;
+                }
+            }
+
+            .nav-item { // L2 li
+>>>>>>> dev
                 .nav-link, .dropdown-item {
                     @include media-breakpoint-down(xs) {
                         padding-left: 2.5rem;
@@ -355,7 +428,11 @@
                 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .nav-item {
+=======
+                .nav-item { // L3 li
+>>>>>>> dev
 =======
                 .nav-item { // L3 li
 >>>>>>> dev
@@ -366,7 +443,10 @@
                     }
         
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> dev
 
                     .nav-item { // L4+ li
                         .nav-link, .dropdown-item {
@@ -409,6 +489,9 @@
             .dropdown-menu {
                 @include media-breakpoint-down(xs) {
                     margin: 0;
+<<<<<<< HEAD
+>>>>>>> dev
+=======
 >>>>>>> dev
                 }
             }
