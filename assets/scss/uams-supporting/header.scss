@@ -139,6 +139,27 @@
 
     .navbar-toggler {
         margin-left: $spacer-min;
+        color: inherit;
+        border: 0;
+        @extend .p-1;
+
+        &:focus {
+            outline: none;
+        }
+
+        &.quick-links-toggler {
+            display: none;
+
+            @include media-breakpoint-down(xs) {
+                display: none;
+            }
+        }
+
+        &.mobile-menu-toggler {
+            @include media-breakpoint-up(sm) {
+                display: none;
+            }
+        }
     }
 
     #nav-secondary {
@@ -209,7 +230,7 @@
         @extend .bg-white;
 
         .nav-item { // li
-            margin-bottom: 0;
+            //margin-bottom: 0;
 
             &:not(:first-child) {
                 @include media-breakpoint-down(xs) {
