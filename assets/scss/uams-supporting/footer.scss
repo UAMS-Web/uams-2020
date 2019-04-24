@@ -53,7 +53,7 @@
 
     }
 
-    .logo, .nav, .copyright {
+    .logo, .nav, .schema .copyright {
         z-index: 1;
         position: relative;
     }
@@ -100,6 +100,11 @@
                 }
             }
         }
+    }
+
+    .schema {
+        @extend .mb-6;
+        font-size: 1rem;
     }
 
     .copyright {
