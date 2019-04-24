@@ -14,12 +14,11 @@
 //* Customize the credits
 add_filter( 'genesis_footer_creds_text', 'sp_footer_creds_text' );
 function sp_footer_creds_text() {
-	echo '<a href="/" class="logo">';
-	echo '<img src="/wp-content/themes/uams-2020/assets/svg/UAMS-Logo_Qualifier_Horizontal_White.svg" alt="University of Arkansas for Medical Sciences logo">';
-    echo '<span class="sr-only">University of Arkansas for Medical Sciences</span>';
-    echo '</a>';
+    $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/UAMS-Logo_Qualifier_Horizontal_White.svg" alt="University of Arkansas for Medical Sciences Logo" />';
     
-	echo '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
+    printf( '<a href="https://uamshealth.com/" class="logo">%s<span class="sr-only">University of Arkansas for Medical Sciences</span></a>', $footer_image );
+    
+    echo '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
 	echo '<span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span>';
 	echo '<div itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">';
 	echo '<span itemprop="streetAddress">4301 West Markham Street</span>, ';
