@@ -59,7 +59,7 @@ function uamswp_childtheme_setup() {
 		'header',
 		'site-inner',
 		'footer-widgets',
-		'footer',
+		//'footer',
 		'home-featured'
 	) );
 
