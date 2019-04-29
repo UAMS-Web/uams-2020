@@ -56,10 +56,10 @@ function uamswp_childtheme_setup() {
 
 	// Structural Wraps
 	add_theme_support( 'genesis-structural-wraps', array(
-		'header',
+		//'header',
 		'site-inner',
 		'footer-widgets',
-		'footer',
+		//'footer',
 		'home-featured'
 	) );
 
