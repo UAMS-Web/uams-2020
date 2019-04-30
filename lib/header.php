@@ -27,12 +27,14 @@ function ursidae_site_image() {
 	printf( '<a href="https://www.uamshealth.com/" class="navbar-brand">%s<span class="sr-only">University of Arkansas for Medical Sciences</span></a>', $header_image );
 	echo '<div class="navbar-subbrand">';
 
+	// If it's a subsection
+	if (uamswp_nav_subsection()){
+	echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.get_bloginfo( 'name' ).'<span class="sr-only">:</span></a>';
+	echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
+	} else {
 	// If it's a regular old homepage
 	echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.get_bloginfo( 'name' ).'</a>';
-	
-	// If it's a subsection
-	//echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.get_bloginfo( 'name' ).'<span class="sr-only">:</span></a>';
-	//echo '<a class="title" href="javascript:void(0)">Subsection Title</a>';
+	}
 
 	echo '</div>';
 	echo '</div>';
