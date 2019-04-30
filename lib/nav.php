@@ -30,11 +30,13 @@ function uamswp_nav_subsection(){
         $parentsection = '';
         foreach($parents as $parent) {
             $parentsection = get_post_meta( $parent, 'page_subsection', true);
-            if (! empty($parentsection) )
+            if (! empty($parentsection) ) {
+                $id = $parent;
+                $subsection = true;
                 break;
+            }
         }
-        $id = $parent;
-        $subsection = true;
+        
     }
     if ($subsection) {
         return $id;

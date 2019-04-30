@@ -19,11 +19,105 @@ function uamswp_do_plugins_register() {
 		array(
 			'name'      => __( 'Widget CSS Classes', 'uams-2020' ),
 			'slug'      => 'widget-css-classes',
-			'required'  => false
+			'required'  => false,
 		),
+		array(
+			'name'      => __( 'Meta Box', 'uamswp-uamshealth-2020' ),
+			'slug'      => 'meta-box',
+			'required'  => true,
+		),
+
+		array(
+			'name'      => __( 'MB Relationsships', 'uamswp-uamshealth-2020' ),
+			'slug'      => 'mb-relationships',
+			'required'  => false,
+		),
+
+		// array(
+		// 	'name'      => __( 'Meta Box - FacetWP Integrator', 'uamswp-uamshealth-2020' ),
+		// 	'slug'      => 'meta-box-facetwp-integrator',
+		// 	'required'  => true,
+		// ),
+
+		array(
+			'name'      => __( 'Meta Box Text Limiter', 'uamswp-uamshealth-2020' ),
+			'slug'      => 'meta-box-text-limiter',
+			'required'  => false,
+		),
+		// Begin Meta Box extensions.
+		array(
+			'name'               => __( 'Meta Box Tabs', 'uamswp-uamshealth-2020' ), // The plugin name.
+			'slug'               => 'meta-box-tabs', // The plugin slug (typically the folder name).
+			'source'             => dirname( __FILE__ ) . '/plugins/meta-box-tabs.zip', // The plugin source.
+			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		),
+
+		array(
+			'name'               => __( 'MB Admin Columns', 'uamswp-uamshealth-2020' ), // The plugin name.
+			'slug'               => 'mb-admin-columns', // The plugin slug (typically the folder name).
+			'source'             => dirname( __FILE__ ) . '/plugins/mb-admin-columns.zip', // The plugin source.
+			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		),
+
+		array(
+			'name'               => __( 'MB Term Meta', 'uamswp-uamshealth-2020' ), // The plugin name.
+			'slug'               => 'mb-term-meta', // The plugin slug (typically the folder name).
+			'source'             => dirname( __FILE__ ) . '/plugins/mb-term-meta.zip', // The plugin source.
+			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		),
+
+		array(
+			'name'               => __( 'MB Custom Table', 'uamswp-uamshealth-2020' ), // The plugin name.
+			'slug'               => 'mb-custom-table', // The plugin slug (typically the folder name).
+			'source'             => dirname( __FILE__ ) . '/plugins/mb-custom-table.zip', // The plugin source.
+			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		),
+
+		array(
+			'name'               => __( 'Meta Box Group', 'uamswp-uamshealth-2020' ), // The plugin name.
+			'slug'               => 'meta-box-group', // The plugin slug (typically the folder name).
+			'source'             => dirname( __FILE__ ) . '/plugins/meta-box-group.zip', // The plugin source.
+			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		),
+
+		array(
+			'name'               => __( 'Meta Box Columns', 'uamswp-uamshealth-2020' ), // The plugin name.
+			'slug'               => 'meta-box-columns', // The plugin slug (typically the folder name).
+			'source'             => dirname( __FILE__ ) . '/plugins/meta-box-columns.zip', // The plugin source.
+			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		),
+
+		array(
+			'name'               => __( 'Meta Box Updater', 'uamswp-uamshealth-2020' ), // The plugin name.
+			'slug'               => 'meta-box-updater', // The plugin slug (typically the folder name).
+			'source'             => dirname( __FILE__ ) . '/plugins/meta-box-updater.zip', // The plugin source.
+			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		),
+
+		// array(
+		// 	'name'               => __( 'MB Revision', 'uamswp-uamshealth-2020' ), // The plugin name.
+		// 	'slug'               => 'mb-revision', // The plugin slug (typically the folder name).
+		// 	'source'             => dirname( __FILE__ ) . '/plugins/mb-revision.zip', // The plugin source.
+		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'Meta Box Conditional Logic', 'uamswp-uamshealth-2020' ), // The plugin name.
+		// 	'slug'               => 'meta-box-conditional-logic', // The plugin slug (typically the folder name).
+		// 	'source'             => dirname( __FILE__ ) . '/plugins/meta-box-conditional-logic.zip', // The plugin source.
+		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'Meta Box Include Exclude', 'uamswp-uamshealth-2020' ), // The plugin name.
+		// 	'slug'               => 'meta-box-include-exclude', // The plugin slug (typically the folder name).
+		// 	'source'             => dirname( __FILE__ ) . '/plugins/meta-box-includeexclude.zip', // The plugin source.
+		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		// ),
 	);
 
 	$config = array(
+		'id'           => 'uamswp', 			   // Unique ID for hashing notices for multiple instances of TGMPA.
 		'default_path' => '',                      // Default absolute path to pre-packaged plugins.
 		'menu'         => 'tgmpa-install-plugins', // Menu slug.
 		'has_notices'  => true,                    // Show admin notices or not.
