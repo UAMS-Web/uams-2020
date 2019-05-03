@@ -108,6 +108,25 @@ function uamswp_options_meta_boxes( $meta_boxes ) {
             ),
 
             array(
+                'id'             => 'uamswp_subsite',
+                'name'           => 'Organization',
+                'type'            => 'select',
+                'placeholder'     => 'Select an organization',
+                // Array of 'value' => 'Label' pairs
+                'options'         => array(
+                    'chp'         => 'College of Health Professions',
+                    'com'         => 'College of Medicine',
+                    'com-sub'     => 'College of Medicine - Subsite',
+                    'con'         => 'College of Nursing',
+                    'cop'         => 'College of Pharmacy',
+                    'coph'        => 'College of Publice Health',
+                    'grad'        => 'Graduate school',
+                    'none'        => 'None of the above',
+                ),
+                'visible' => array( 'uamswp_location', '=', 'uams' ),
+            ),
+
+            array(
                 'type' => 'heading',
                 'name' => 'Custom Address',
                 'desc' => 'Custom address(s), if needed',
@@ -222,6 +241,30 @@ function uamswp_options_meta_boxes( $meta_boxes ) {
                     array('uamswp_template', '!=', 'institute'),
                     array('uamswp_location', '=', 'uams'),
                 ),
+            ),
+        ),
+    );
+
+    $meta_boxes[] = array(
+        'id'             => 'uamswp_phone',
+        'title'          => 'Phone Number',
+        'settings_pages' => 'uamswp_options',
+        //'tab'            => 'faq',
+        'fields'         => array(
+            array(
+                'type' => 'custom_html',
+                'std'  => 'These will override the default social media',
+            ),
+            array(
+                'id' => 'uamswp_primary_phone',
+          	    'type' => 'tel',
+          	    'name' => 'Primary Phone #',
+            ),
+            array(
+                'id' => 'uamswp_add_phones',
+          	    'type' => 'url',
+                'name' => 'Additional Phone Number(s) [URL]',
+                'desc' => 'include http:// or https://'
             ),
         ),
     );
