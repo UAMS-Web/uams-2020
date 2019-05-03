@@ -37,6 +37,10 @@ function ursidae_site_image() {
 	// If it's a regular old homepage
 	echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.get_bloginfo( 'name' ).'</a>';
 	}
+  
+	// If it's an institute or other split title entity, separate the title descriptor (often the donor) and the functional title (often the center/institute of X) into two separate spans as below.
+	// Use three spaces in site title to indicate desire to split the title. Find/replace those three spaces 
+	//echo '<a class="title-split" href="javascript:void(0)"><span class="title-descriptor">Jackson T. Stephens</span> <span class="title-function">Spine and Neurosciences Institute</span></a>';
 	?>
 
 		</div>

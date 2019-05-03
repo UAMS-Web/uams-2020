@@ -13,8 +13,10 @@
                 <span class="sr-only">University of Arkansas for Medical Sciences</span>
             </a>
             <div class="navbar-subbrand">
-                <a class="parent" href="javascript:void(0)">Parent Site Name</span><span class="sr-only">:</a>
-                <a class="title" href="javascript:void(0)">Site Name</a>
+                <!-- <a class="parent" href="javascript:void(0)">Money Name</span><span class="sr-only">:</a>
+                <a class="title" href="javascript:void(0)">Center of Stuff</a> -->
+
+                <a class="title-split" href="javascript:void(0)"><span class="title-descriptor">Jackson T. Stephens</span> <span class="title-function">Spine and Neurosciences Institute</span></a>
             </div>
         </div>
         <nav class="header-nav" aria-label="Resource Navigation">
@@ -121,29 +123,161 @@
     <main>
         Main Stuff
     </main>
-    <footer class="site-footer">
-        <a href="javascript:void(0)" class="logo">
-            <img src="../assets/svg/UAMS-Logo_Qualifier_Horizontal_White.svg" alt="University of Arkansas for Medical Sciences logo">
+    <footer class="site-footer" itemscope="" itemtype="https://schema.org/WPFooter">
+        <a href="https://uamshealth.com/" class="logo">
+            <img src="../assets/svg/UAMS-Logo_Qualifier_Horizontal_White.svg" alt="University of Arkansas for Medical Sciences Logo">
             <span class="sr-only">University of Arkansas for Medical Sciences</span>
         </a>
-        <ul class="nav" role="navigation">
+        <div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">
+            <span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span>
+            <div class="schema-address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+                <strong class="sr-only">Mailing Address:</strong>
+                <span itemprop="streetAddress">4301 West Markham Street</span>,
+                <span itemprop="addressLocality">Little Rock</span>,
+                <span itemprop="addressRegion">Arkansas</span>,
+                <span itemprop="postalCode">72205</span>
+            </div>
+            <div class="schema-phone">
+                <span id="footer-phone-label">Phone:</strong>
+                <span itemprop="telephone"><a href="tel:+1-501-686-7000" aria-labelledby="footer-phone-label">501-686-7000</a></span>
+            </div>
+        </div>
+        <ul class="nav social" role="navigation" aria-label="Social media">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.facebook.com/UAMShealth/" target="_blank">
+                        <span class="fab fa-facebook"></span>
+                        <span class="sr-only">Facebook</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://twitter.com/uamshealth" target="_blank">
+                        <span class="fab fa-twitter"></span>
+                        <span class="sr-only">Twitter</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.instagram.com/uamshealth/" target="_blank">
+                        <span class="fab fa-instagram"></span>
+                        <span class="sr-only">Instagram</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.youtube.com/user/UAMSHealth" target="_blank">
+                        <span class="fab fa-youtube"></span>
+                        <span class="sr-only">YouTube</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.linkedin.com/company/uams/" target="_blank">
+                        <span class="fab fa-linkedin"></span>
+                        <span class="sr-only">LinkedIn</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.pinterest.com/uamshealth/" target="_blank">
+                        <span class="fab fa-pinterest"></span>
+                        <span class="sr-only">Pinterest</span>
+                    </a>
+                </li>
+        </ul>
+        <ul class="nav legal" role="navigation" aria-label="Legal links">
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">Disclaimer</a>
+                <a class="nav-link" href="/disclaimer">Disclaimer</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">Jobs</a>
+                <a class="nav-link" href="/termsofuse">Terms of Use</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">Copyright Statement</a>
+                <a class="nav-link" href="/privacy">Privacy</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">Privacy</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">Terms</a>
+                <a class="nav-link" href="/sitemap">Site Map</a>
             </li>
         </ul>
-        <p class="copyright">© 2019 University of Arkansas for Medical Sciences | Little Rock, Arkansas</p>
+        <p class="copyright">© 2019 University of Arkansas for Medical Sciences</p>
+    </footer>
+
+    <!-- Footer with all the custom options/overrides -->
+    <footer class="site-footer" itemscope="" itemtype="https://schema.org/WPFooter">
+        <a href="https://uamshealth.com/" class="logo">
+            <img src="../assets/svg/UAMS-Logo_Qualifier_Horizontal_White.svg" alt="University of Arkansas for Medical Sciences Logo">
+            <span class="sr-only">University of Arkansas for Medical Sciences</span>
+        </a>
+        <div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">
+            <span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span>
+            <div class="schema-address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+                <strong>Mailing Address:</strong>
+                <span itemprop="streetAddress">4301 West Markham Street</span>,
+                <span itemprop="addressLocality">Little Rock</span>,
+                <span itemprop="addressRegion">Arkansas</span>,
+                <span itemprop="postalCode">72205</span>
+            </div>
+            <div class="schema-address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+                <strong>Parking Address:</strong>
+                <span itemprop="streetAddress">4301 West Markham Street</span>,
+                <span itemprop="addressLocality">Little Rock</span>,
+                <span itemprop="addressRegion">Arkansas</span>,
+                <span itemprop="postalCode">72205</span>
+            </div>
+            <div class="schema-phone">
+                <strong id="footer-phone-label">Appointments:</strong>
+                <span itemprop="telephone"><a href="tel:+15016867000" aria-labelledby="footer-phone-label">501-686-7000</a></span>
+                <br /><a class="more-phone" href="javascript:void(0)">Custom Text for Link</a>
+            </div>
+        </div>
+        <ul class="nav social" role="navigation" aria-label="Social media">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.facebook.com/UAMShealth/" target="_blank">
+                        <span class="fab fa-facebook"></span>
+                        <span class="sr-only">Facebook</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://twitter.com/uamshealth" target="_blank">
+                        <span class="fab fa-twitter"></span>
+                        <span class="sr-only">Twitter</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.instagram.com/uamshealth/" target="_blank">
+                        <span class="fab fa-instagram"></span>
+                        <span class="sr-only">Instagram</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.youtube.com/user/UAMSHealth" target="_blank">
+                        <span class="fab fa-youtube"></span>
+                        <span class="sr-only">YouTube</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.linkedin.com/company/uams/" target="_blank">
+                        <span class="fab fa-linkedin"></span>
+                        <span class="sr-only">LinkedIn</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.pinterest.com/uamshealth/" target="_blank">
+                        <span class="fab fa-pinterest"></span>
+                        <span class="sr-only">Pinterest</span>
+                    </a>
+                </li>
+        </ul>
+        <ul class="nav legal" role="navigation" aria-label="Legal links">
+            <li class="nav-item">
+                <a class="nav-link" href="/disclaimer">Disclaimer</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/termsofuse">Terms of Use</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/privacy">Privacy</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/sitemap">Site Map</a>
+            </li>
+        </ul>
+        <p class="copyright">© 2019 University of Arkansas for Medical Sciences</p>
     </footer>
     
     <script type="text/javascript" src="../assets/js/jquery.slim.min.js"></script>
