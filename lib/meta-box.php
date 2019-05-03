@@ -151,12 +151,14 @@ function uamswp_options_meta_boxes( $meta_boxes ) {
                         'name' => 'Address Name',
                         'id'   => 'address_title',
                         'type' => 'text',
-                        'description'   => 'Leave blank for a single address'
+                        'description'   => 'Leave blank for a single address',
+                        'placeholder' => 'Mailing Address',
                     ),
                     array(
                         'name' => 'Address',
                         'id'   => 'address_street_1',
                         'type' => 'text',
+                        'placeholder' => '4301 West Markham St #123',
                     ),
                     array(
                         'name' => 'Address (2)',
@@ -167,6 +169,7 @@ function uamswp_options_meta_boxes( $meta_boxes ) {
                         'name' => 'City',
                         'id'   => 'address_city',
                         'type' => 'text',
+                        'placeholder' => 'Little Rock',
                     ),
                     array(
                         'name' => 'State',
@@ -235,6 +238,7 @@ function uamswp_options_meta_boxes( $meta_boxes ) {
                         'id'   => 'teaddress_zipxt',
                         'type' => 'text',
                         'size' => '10',
+                        'placeholder' => '72205',
                     ),
                 ),
                 'hidden' => array( 
@@ -258,7 +262,8 @@ function uamswp_options_meta_boxes( $meta_boxes ) {
             array(
                 'id' => 'uamswp_primary_phone',
           	    'type' => 'tel',
-          	    'name' => 'Primary Phone #',
+                'name' => 'Primary Phone #',
+                'placeholder' => '(501) 686-7000',
             ),
             array(
                 'id' => 'uamswp_add_phones',
