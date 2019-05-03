@@ -51,13 +51,20 @@
                 margin: 0 0 0 -2px;
             }
 
-    
             .parent,
-            .title {
-                @extend .d-block;
+            .title,
+            .title-split {
                 @extend .text-reset;
             }
-            .parent {
+
+            .parent,
+            .title,
+            .title-descriptor,
+            .title-function {
+                @extend .d-block;
+            }
+            .parent,
+            .title-descriptor {
                 font-size: 16px;
                 line-height: 1.2;
                 margin: 0;
@@ -75,11 +82,13 @@
                     padding: 0;
                 }
 
-                ~ .title {
+                ~ .title,
+                ~ .title-function {
                     padding: 0;
                 }
             }
-            .title {
+            .title,
+            .title-function {
                 font-size: 24px;
                 line-height: 1.2;
 
