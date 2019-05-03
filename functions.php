@@ -111,3 +111,13 @@ function uamswp_childtheme_setup() {
 //	}
 //	
 //	add_filter( 'genesis_attr_site-header', 'wpstudio_add_class' );
+
+add_filter ( 'genesis_home_crumb', 'uams_breadcrumb_home_icon' ); 
+function uams_breadcrumb_home_icon( $crumb ) {
+	if (is_front_page()) {
+		$crumb = '<a href="http://www.uams.edu" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item">'.get_bloginfo('name').'';
+	} else {
+	 	$crumb = '<a href="http://www.uams.edu" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '" title="' . get_bloginfo('name') . '">'.get_bloginfo('name').'</a>';
+	}
+     return $crumb;
+}
