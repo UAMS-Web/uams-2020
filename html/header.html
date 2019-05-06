@@ -6,45 +6,71 @@
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i" rel="stylesheet">
 </head>
 <body>
-    <header class="site-header navbar">
-        <div class="global-title">
-            <a class="navbar-brand" href="javascript:void(0)">
-                <img src="../assets/svg/uams-logo_main_white.svg" alt="University of Arkansas for Medical Sciences logo">
-                <span class="sr-only">University of Arkansas for Medical Sciences</span>
-            </a>
-            <div class="navbar-subbrand">
-                <!-- <a class="parent" href="javascript:void(0)">Money Name</span><span class="sr-only">:</a>
-                <a class="title" href="javascript:void(0)">Center of Stuff</a> -->
+    <header class="site-header">
+        <div class="navbar">
+                <div class="global-title">
+                    <a class="navbar-brand" href="javascript:void(0)">
+                        <img src="../assets/svg/uams-logo_main_white.svg" alt="University of Arkansas for Medical Sciences logo">
+                        <span class="sr-only">University of Arkansas for Medical Sciences</span>
+                    </a>
+                    <div class="navbar-subbrand">
+                        <!-- <a class="parent" href="javascript:void(0)">Money Name</span><span class="sr-only">:</a>
+                        <a class="title" href="javascript:void(0)">Center of Stuff</a> -->
+        
+                        <a class="title-split" href="javascript:void(0)"><span class="title-descriptor">Jackson T. Stephens</span> <span class="title-function">Spine and Neurosciences Institute</span></a>
+                    </div>
+                </div>
+                <nav class="header-nav" aria-label="Resource Navigation">
+                    <div class="collapse navbar-collapse" id="nav-secondary">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript:void(0)">Link 1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript:void(0)">Link 2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript:void(0)">Link 3</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul class="nav resource-nav" id="nav-resource">
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)"><span class="fas fa-ambulance fa-lg"></span><span class="sr-only">Emergency Room</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="search-toggler" href="javascript:void(0)"><span class="fas fa-search fa-lg"></span><span class="sr-only">Open Search</span></a>
+                        </li>
+                    </ul>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#genesis-nav-primary" aria-controls="genesis-nav-primary" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </nav>
 
-                <a class="title-split" href="javascript:void(0)"><span class="title-descriptor">Jackson T. Stephens</span> <span class="title-function">Spine and Neurosciences Institute</span></a>
+        </div>
+        <div id="header-search" class="sr-only">
+            <div class="inner-container">
+                <form class="uams-search" action="http://uams.edu/">
+                    <div class="input-group">
+                        <input type="search" class="form-control" id="uams-search-bar" placeholder="Search" name="s" value="" autocomplete="off" aria-label="Enter search text">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="button-addon2"><i class="fas fa-search"></i><span class="sr-only">Search</span></button>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="search-scope-1" name="search-scope" class="custom-control-input" checked>
+                            <label class="custom-control-label" for="search-scope-1">All of UAMS</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="search-scope-2" name="search-scope" class="custom-control-input">
+                            <label class="custom-control-label" for="search-scope-2">Current site</label>
+                        </div>
+                    </div>
+                    
+                </form>
             </div>
         </div>
-        <nav class="header-nav" aria-label="Resource Navigation">
-            <div class="collapse navbar-collapse" id="nav-secondary">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Link 1</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Link 2</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Link 3</a>
-                    </li>
-                </ul>
-            </div>
-            <ul class="nav resource-nav" id="nav-resource">
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)"><span class="fas fa-ambulance fa-lg"></span><span class="sr-only">Emergency Room</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)"><span class="fas fa-search fa-lg"></span><span class="sr-only">Open Search</span></a>
-                </li>
-            </ul>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#genesis-nav-primary" aria-controls="genesis-nav-primary" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </nav>
     </header>
     <nav class="site-nav navbar navbar-expand-sm" aria-label="Site Navigation">
         <div class="collapse navbar-collapse inner-container" id="genesis-nav-primary">
@@ -280,7 +306,7 @@
         <p class="copyright">© 2019 University of Arkansas for Medical Sciences</p>
     </footer>
     
-    <script type="text/javascript" src="../assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="../assets/js/popper.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/jquery.smartmenus.min.js"></script>
@@ -288,5 +314,24 @@
     <script type="text/javascript" src="../assets/js/app.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../assets/js/overflowing-navbar.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            searchvisible = false;
+
+            $("#search-toggler").click(function() {
+                if (searchvisible) {
+                    $("#header-search").slideUp("fast",function() {
+                        $("#header-search").addClass("sr-only").slideDown(0);
+                    });
+                } else {
+                    $("#header-search").slideUp(0,function() {
+                        $("#header-search").removeClass("sr-only").slideDown("fast");
+                    });
+                }
+                searchvisible = !searchvisible;
+            });
+        });
+    </script>
 </body>
 </html>
