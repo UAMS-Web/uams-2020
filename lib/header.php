@@ -21,7 +21,7 @@ add_action( 'genesis_header', 'ursidae_site_image', 5 );
 
  
 function ursidae_site_image() {
-	$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/UAMS-Logo_White.svg" alt="University of Arkansas for Medical Sciences Logo" />';
+	$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_main_white.svg" alt="University of Arkansas for Medical Sciences Logo" />';
 	?>
 	<!-- /* Begin Title / Logo */  -->
 	<div class="global-title">
