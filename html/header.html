@@ -315,10 +315,14 @@
 
     <script>
         $(document).ready(function(){
+            searchvisible = false;
+
             $("#toggle-search").click(function() {
                 $("#header-search").toggleClass("closed");
-                // Toggle the icon in #toggle-search between fa-search and fa-times-circle
-                $("#uams-search-bar").focus();
+                if (!searchvisible) {
+                    $("#uams-search-bar").focus();
+                }
+                searchvisible = !searchvisible;
             });
         });
     </script>
