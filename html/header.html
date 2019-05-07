@@ -61,7 +61,7 @@
                     <a class="nav-link" href="javascript:void(0)"><span class="fas fa-ambulance fa-lg"></span><span class="sr-only">Emergency Room</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="search-toggler" href="javascript:void(0)"><span class="fas fa-search fa-lg"></span><span class="sr-only">Open Search</span></a>
+                    <a class="nav-link" id="toggle-search" href="javascript:void(0)"><span class="fas fa-search fa-lg"></span><span class="sr-only">Open Search</span></a>
                 </li>
             </ul>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#genesis-nav-primary" aria-controls="genesis-nav-primary" aria-expanded="false" aria-label="Toggle navigation">
@@ -316,7 +316,7 @@
         $(document).ready(function(){
             searchvisible = false;
 
-            $("#search-toggler").click(function() {
+            $("#toggle-search").click(function() {
                 if (searchvisible) {
                     $("#header-search").slideUp("fast",function() {
                         $("#header-search").addClass("sr-only").slideDown(0);
