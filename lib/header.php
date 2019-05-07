@@ -71,7 +71,7 @@ function ursidae_site_image() {
 			</li>
 			<!-- uamshealth only -->
 			<li class="nav-item">
-				<a class="nav-link" href="javascript:void(0)"><span class="fas fa-search fa-lg"></span><span class="sr-only">Open Search</span></a>
+				<a class="nav-link" id="toggle-search" href="javascript:void(0)"><span class="fas fa-search fa-lg"></span><span class="sr-only">Open Search</span></a>
 			</li>
 		</ul>
 
