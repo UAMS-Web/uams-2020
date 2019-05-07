@@ -312,20 +312,7 @@
     <script type="text/javascript" src="../assets/js/app.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../assets/js/overflowing-navbar.min.js"></script>
-
-    <script>
-        $(document).ready(function(){
-            searchvisible = false;
-
-            $("#toggle-search").click(function() {
-                $("#header-search").toggleClass("closed");
-                if (!searchvisible) {
-                    $("#uams-search-bar").focus();
-                }
-                searchvisible = !searchvisible;
-            });
-        });
-    </script>
+    <script type="text/javascript" src="../assets/js/searchtray.js"></script>
 
 </body>
 </html>
