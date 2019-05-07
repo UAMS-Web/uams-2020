@@ -13,9 +13,23 @@
 
 add_filter( 'get_search_form', 'uamswp_search_form' );
 function uamswp_search_form( $form ) {
-    $form = '<form class="form-inline" role="search" method="get" id="searchform" action="' . home_url('/') . '" >
-	<input class="form-control mr-2" type="text" value="' . get_search_query() . '" placeholder="' . esc_attr__('Search', 'uams-2020') . '..." name="s" id="s" />
-	<button type="submit" id="searchsubmit" value="'. esc_attr__('Search', 'uams-2020') .'" class="btn btn-primary"><i class="fa fa-search"></i></button>
+    $form = '<form class="uams-search" role="search" method="get" id="searchform" action="' . home_url('/') . '" >
+    <div class="input-group">
+        <input type="search" class="form-control" id="uams-search-bar" value="' . get_search_query() . '" placeholder="' . esc_attr__('Search', 'uams-2020') . '..." name="s" autocomplete="off" aria-label="Enter search text">
+        <div class="input-group-append">
+            <button type="submit" id="searchsubmit" value="'. esc_attr__('Search', 'uams-2020') .'" class="btn btn-primary"><span class="fas fa-search"></span><span class="sr-only">Search</span></button>
+        </div>
+    </div>
+    <div class="form-group text-center">
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="search-scope-1" name="search-scope" class="custom-control-input" checked>
+            <label class="custom-control-label" for="search-scope-1">Current site</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="search-scope-2" name="search-scope" class="custom-control-input">
+            <label class="custom-control-label" for="search-scope-2">All of UAMS</label>
+        </div>
+    </div>
     </form>';
     return $form;
 }
