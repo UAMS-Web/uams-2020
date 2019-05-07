@@ -321,10 +321,12 @@
                     $("#header-search").slideUp("fast",function() {
                         $("#header-search").addClass("sr-only").slideDown(0);
                     });
+                    // Toggle the icon in #toggle-search between fa-search and fa-times-circle
                 } else {
                     $("#header-search").slideUp(0,function() {
                         $("#header-search").removeClass("sr-only").slideDown("fast");
                     });
+                    // Toggle the icon in #toggle-search between fa-search and fa-times-circle
                     $("#header-search input[type=search]").focus();
                 }
                 searchvisible = !searchvisible;
