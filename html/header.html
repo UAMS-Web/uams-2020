@@ -325,6 +325,7 @@
                     $("#header-search").slideUp(0,function() {
                         $("#header-search").removeClass("sr-only").slideDown("fast");
                     });
+                    $("#header-search input[type=search]").focus();
                 }
                 searchvisible = !searchvisible;
             });
