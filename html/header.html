@@ -6,12 +6,13 @@
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i" rel="stylesheet">
 </head>
 <body>
-    <div id="header-search" class="sr-only">
+    <div id="header-search" class="closed">
         <div class="inner-container">
             <form class="uams-search" action="http://uams.edu/">
                 <div class="input-group">
                     <input type="search" class="form-control" id="uams-search-bar" placeholder="Search" name="s" value="" autocomplete="off" aria-label="Enter search text">
                     <div class="input-group-append">
+                        <!-- When the user clicks this button, switch the icon from .fa-search to .fa-times-circle -->
                         <button class="btn btn-primary" type="button" id="button-addon2"><span class="fas fa-search"></span><span class="sr-only">Search</span></button>
                     </div>
                 </div>
@@ -303,7 +304,7 @@
         <p class="copyright">© 2019 University of Arkansas for Medical Sciences</p>
     </footer>
     
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="../assets/js/popper.min.js"></script>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/jquery.smartmenus.min.js"></script>
@@ -314,22 +315,10 @@
 
     <script>
         $(document).ready(function(){
-            searchvisible = false;
-
             $("#toggle-search").click(function() {
-                if (searchvisible) {
-                    $("#header-search").slideUp("fast",function() {
-                        $("#header-search").addClass("sr-only").slideDown(0);
-                    });
-                    // Toggle the icon in #toggle-search between fa-search and fa-times-circle
-                } else {
-                    $("#header-search").slideUp(0,function() {
-                        $("#header-search").removeClass("sr-only").slideDown("fast");
-                    });
-                    // Toggle the icon in #toggle-search between fa-search and fa-times-circle
-                    $("#header-search input[type=search]").focus();
-                }
-                searchvisible = !searchvisible;
+                $("#header-search").toggleClass("closed");
+                // Toggle the icon in #toggle-search between fa-search and fa-times-circle
+                $("#uams-search-bar").focus();
             });
         });
     </script>
