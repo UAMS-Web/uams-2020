@@ -20,7 +20,7 @@ function sp_footer_creds_text() {
     // If an SVG asset is uploaded/defined in the custom field, replace the href value with the home URL of the current site.
     // If an SVG asset is uploaded/defined in the custom field, replace the image path with the uploaded SVG asset.
     // The height of the image is controlled by CSS.
-    $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/UAMS-Logo_Qualifier_Horizontal_White.svg" alt="University of Arkansas for Medical Sciences Logo" />';
+    $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_main-qualifier_horizontal_white.svg" alt="University of Arkansas for Medical Sciences Logo" />';
     printf( '<a href="https://www.uamshealth.com" class="logo">%s<span class="sr-only">University of Arkansas for Medical Sciences</span></a>', $footer_image );
     
     // Render this by default.

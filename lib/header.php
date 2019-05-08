@@ -21,7 +21,7 @@ add_action( 'genesis_header', 'ursidae_site_image', 5 );
 
  
 function ursidae_site_image() {
-	$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/UAMS-Logo_White.svg" alt="University of Arkansas for Medical Sciences Logo" />';
+	$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_main_white.svg" alt="University of Arkansas for Medical Sciences Logo" />';
 	?>
 	<!-- /* Begin Title / Logo */  -->
 	<div class="global-title">
@@ -71,7 +71,7 @@ function ursidae_site_image() {
 			</li>
 			<!-- uamshealth only -->
 			<li class="nav-item">
-				<a class="nav-link" href="javascript:void(0)"><span class="fas fa-search fa-lg"></span><span class="sr-only">Open Search</span></a>
+				<a class="nav-link" id="toggle-search" href="javascript:void(0)"><span class="fas fa-search fa-lg"></span><span class="sr-only">Open Search</span></a>
 			</li>
 		</ul>
 
