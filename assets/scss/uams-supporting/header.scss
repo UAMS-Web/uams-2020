@@ -51,13 +51,20 @@
                 margin: 0 0 0 -2px;
             }
 
-    
             .parent,
-            .title {
-                @extend .d-block;
+            .title,
+            .title-split {
                 @extend .text-reset;
             }
-            .parent {
+
+            .parent,
+            .title,
+            .title-descriptor,
+            .title-function {
+                @extend .d-block;
+            }
+            .parent,
+            .title-descriptor {
                 font-size: 16px;
                 line-height: 1.2;
                 margin: 0;
@@ -75,11 +82,13 @@
                     padding: 0;
                 }
 
-                ~ .title {
+                ~ .title,
+                ~ .title-function {
                     padding: 0;
                 }
             }
-            .title {
+            .title,
+            .title-function {
                 font-size: 24px;
                 line-height: 1.2;
 
@@ -139,12 +148,75 @@
 
     .navbar-toggler {
         margin-left: $spacer-min;
+        color: inherit;
+        border: 0;
+        @extend .p-1;
+
+        &:focus {
+            outline: none;
+        }
+
+        &.quick-links-toggler {
+            display: none;
+
+            @include media-breakpoint-down(xs) {
+                display: none;
+            }
+        }
+
+        &.mobile-menu-toggler {
+            @include media-breakpoint-up(sm) {
+                display: none;
+            }
+        }
     }
 
     #nav-secondary {
         flex-grow: 0;
     }
+
+    #header-search {
+        background-color: $white;
+        width: 100%;
+    }
 }
+#header-search {
+    background-color: $white;
+    width: 100%;
+    padding: 1.25rem 2rem;
+
+    max-height: 200px;
+    overflow-y: hidden;
+
+    transition-property: all;
+	transition-duration: 0.5s;
+	transition-timing-function: ease;
+
+    &.closed {
+        max-height: 0;
+        padding: 0;
+    }
+
+    .inner-container {
+        width: 35em;
+        max-width: 100%;
+        margin: 0 auto;
+
+        .uams-search {
+            margin-bottom: 0;
+
+            .input-group,
+            .form-group {
+                margin-bottom: map-get($spacers, 4);
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
 .site-nav {
     padding: 0;
 
@@ -209,7 +281,7 @@
         @extend .bg-white;
 
         .nav-item { // li
-            margin-bottom: 0;
+            //margin-bottom: 0;
 
             &:not(:first-child) {
                 @include media-breakpoint-down(xs) {

@@ -73,3 +73,7 @@ exclude.txt
 temp
 .rev
 yarn.lock
+
+#include plugin folder
+!plugins/*
+plugins/*.DS_Store

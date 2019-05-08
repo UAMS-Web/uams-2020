@@ -1,3 +1,6 @@
+//////////////////
+// Replace placeholder photos in .site-footer:before once the server-side image resizing has been solved.
+//////////////////
 .site-footer {
     @extend .py-9;
     @extend .px-8;
@@ -20,40 +23,41 @@
             opacity: 0.30;
             -webkit-filter: grayscale(100%);
             filter: grayscale(100%);
-            background-image: url('https://picsum.photos/576/#{ceil(378 / 320 * 576)}?image=1044');
+            background-image: url('https://picsum.photos/576/#{ceil(378 / 320 * 576)}?image=1044'); // Placeholder photo
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
 
             @include media-breakpoint-up(xs) { // 576-767
-                background-image: url('https://picsum.photos/768/#{ceil(378 / 576 * 768)}?image=1044');
+                background-image: url('https://picsum.photos/768/#{ceil(378 / 576 * 768)}?image=1044'); // Placeholder photo
             }
     
             @include media-breakpoint-up(sm) { // 768-991
-                background-image: url('https://picsum.photos/992/#{ceil(230 / 768 * 992)}?image=1044');
+                background-image: url('https://picsum.photos/992/#{ceil(230 / 768 * 992)}?image=1044'); // Placeholder photo
             }
     
             @include media-breakpoint-up(md) { // 992-1199
-                background-image: url('https://picsum.photos/1200/#{ceil(230 / 992 * 1200)}?image=1044');
+                background-image: url('https://picsum.photos/1200/#{ceil(230 / 992 * 1200)}?image=1044'); // Placeholder photo
             }
     
             @include media-breakpoint-up(lg) { // 1200-1499
-                background-image: url('https://picsum.photos/1500/#{ceil(230 / 1200 * 1500)}?image=1044');
+                background-image: url('https://picsum.photos/1500/#{ceil(230 / 1200 * 1500)}?image=1044'); // Placeholder photo
             }
     
             @include media-breakpoint-up(xl) { // 1500-1920
-                background-image: url('https://picsum.photos/1921/#{ceil(230 / 1500 * 1921)}?image=1044');
+                background-image: url('https://picsum.photos/1921/#{ceil(230 / 1500 * 1921)}?image=1044'); // Placeholder photo
             }
     
             @include media-breakpoint-up(xxl) { // 1921+
-                background-image: url('https://picsum.photos/2540/#{ceil(230 / 1921 * 2540)}?image=1044');
+                background-image: url('https://picsum.photos/2540/#{ceil(230 / 1921 * 2540)}?image=1044'); // Placeholder photo
             }
         }
-        
-
     }
 
-    .logo, .nav, .copyright {
+    .logo,
+    .nav,
+    .schema,
+    .copyright {
         z-index: 1;
         position: relative;
     }
@@ -62,6 +66,10 @@
     .logo {
         @extend .d-inline-block;
         @extend .mb-6;
+
+        img {
+            height: 2.5rem;
+        }
     }
 
     .nav {
@@ -69,36 +77,82 @@
         @extend .mb-6;
         line-height: 1;
 
-        @include media-breakpoint-down(xs) {
-            flex-direction: column;
-        }
-
         .nav-item {
             &:not(:last-child) {
                 margin-bottom: $spacer-min;
 
                 @include media-breakpoint-up(sm) {
                     margin-bottom: 0;
-                    margin-right: $spacer-min / 2;
-                    border-right: 1px solid $red-lightest;
+                    padding-right: $spacer-min / 2;
                 }
             }
             &:not(:first-child) {
                 @include media-breakpoint-up(sm) {
-                    margin-left: $spacer-min / 2;
+                    padding-left: $spacer-min / 2;
                 }
             }
 
             .nav-link {
                 @extend .py-1;
+                color: $white;
 
-                &:hover, &:active, &:focus {
+                &:hover,
+                &:active,
+                &:focus {
                     color: mix($primary, $white, 15%);
                 }
-                &:visited {
-                    color: mix($primary, $white, 20%);
+                // &:visited {
+                //     color: mix($primary, $white, 20%);
+                // }
+            }
+        }
+
+        &.social {
+            @include font-size(2rem);
+            .nav-item {
+                .nav-link {
+                    @extend .px-1;
                 }
             }
+        }
+
+        &.legal {
+
+            @include media-breakpoint-down(xs) {
+                flex-direction: column;
+            }
+            .nav-item {
+                &:not(:last-child) {
+                    @include media-breakpoint-up(sm) {
+                        border-right: 1px solid rgba(255,255,255,0.5);
+                    }
+                }
+            }
+        }
+    }
+
+    .schema {
+        @extend .mb-6;
+        font-size: 1rem;
+
+        .schema-address,
+        .schema-phone {
+            strong {
+                @include media-breakpoint-down(xs) {
+                    display:block;
+                }
+            }
+
+            + .schema-address,
+            + .schema-phone {
+                @extend .mt-2;
+            }
+        }
+
+        .more-phone {
+            display: inline-block;
+            font-size: .84375rem;
+            @extend .mt-1;
         }
     }
 
