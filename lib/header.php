@@ -101,10 +101,10 @@ function ursidae_site_image() {
 		</ul>
 
 		<!-- // Hiding this button until Quick Links is created. -->
-		<!-- <button class="navbar-toggler quick-links-toggler" type="button" data-toggle="collapse" data-target="#nav-quick-links" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Quick Links navigation">
-		<span class="sr-only">Expand Quick Links</span>
-		<span class="fas fa-bars fa-lg"></span>
-		</button> -->
+		<button class="quick-links-toggler" type="button" data-toggle="collapse" data-target="#nav-quick-links" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Quick Links navigation">
+			<span class="sr-only">Expand Quick Links</span>
+			<span class="fas fa-bars fa-lg"></span>
+		</button>
 
 		<!-- // The data-target and aria-controls may need to be dynamically defined. -->
 		<button class="navbar-toggler mobile-menu-toggler" type="button" data-toggle="collapse" data-target="#nav-primary" aria-controls="nav-primary" aria-expanded="false" aria-label="Toggle Primary navigation">
