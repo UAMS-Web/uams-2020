@@ -28,7 +28,7 @@ function uamswp_theme_scripts() {
 
 		// Deregister jQuery and use Bootstrap supplied version
 		wp_deregister_script( 'jquery' );
-		wp_register_script( 'jquery', UAMSWP_THEME_JS . 'jquery.slim.min.js', array(), $version, true );
+		wp_register_script( 'jquery', UAMSWP_THEME_JS . 'jquery.min.js', array(), $version, true );
 		wp_enqueue_script( 'jquery' );
 
 		// Register Popper JS and enqueue it

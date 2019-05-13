@@ -115,9 +115,170 @@ function uamswp_childtheme_setup() {
 add_filter ( 'genesis_home_crumb', 'uams_breadcrumb_home_icon' ); 
 function uams_breadcrumb_home_icon( $crumb ) {
 	if (is_front_page()) {
-		$crumb = '<a href="http://www.uams.edu" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item">'.get_bloginfo('name').'';
+		$crumb = '<a href="'.$homelink.'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item">'.uams_site_title().'';
 	} else {
-	 	$crumb = '<a href="http://www.uams.edu" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '" title="' . get_bloginfo('name') . '">'.get_bloginfo('name').'</a>';
+	 	$crumb = '<a href="'.$homelink.'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
 	}
      return $crumb;
 }
+
+/** Returns site & subsite info **/
+if ( !function_exists('uams_get_site_info')):
+
+    function uams_get_site_info()
+    {
+		$option_name = 'uamswp_options'; // Settings page
+		$siteinfo = array();
+		$themestyle = rwmb_meta( 'uamswp_template', array( 'object_type' => 'setting' ), $option_name ); // uams, inside, health
+		$themelocation = rwmb_meta( 'uamswp_location', array( 'object_type' => 'setting' ), $option_name ); // campus, regional
+		$themeinstitute = rwmb_meta( 'uamswp_institute', array( 'object_type' => 'setting' ), $option_name ); // institute name
+		$uamsorganization = rwmb_meta( 'uamswp_uams_subsite', array( 'object_type' => 'setting' ), $option_name ); // college 
+		$healthorganization = rwmb_meta( 'uamswp_uamshealth_subsite', array( 'object_type' => 'setting' ), $option_name ); // college 
+		$insideorganization = rwmb_meta( 'uamswp_inside_subsite', array( 'object_type' => 'setting' ), $option_name ); // college 
+		if ('health' == $themestyle) {
+			$site = "uamshealth";
+			if ('' != $healthorganization) {
+				$subsite = $healthorganization;
+			} else {
+				$subsite = "uams";
+			}
+		} elseif ('inside' == $themestyle) {
+			$site = "inside";
+			if ('' != $insideorganization) {
+				$subsite = $insideorganization;
+			} else {
+				$subsite = "uams";
+			}
+		} elseif ('institute' == $themestyle) {
+			$site = "institute";
+			if ('' != $themeinstitute) {
+				$subsite = $themeinstitute;
+			} else {
+				$subsite = "uams";
+			}
+		} elseif ('uams' == $themestyle) {
+			$site = "uams";
+			if ('' != $themelocation){
+				if ('uams' != $themelocation) {
+					$subsite = $themelocation;
+				} else {
+					if ('' != $uamsorganization) {
+						$subsite = $uamsorganization;
+					} else {
+						$subsite = "uams";
+					}
+				}
+			} else {
+				$subsite = "uams";
+			}
+		}
+		$siteinfo = array('site' => $site, 'subsite' => $subsite);
+        return $siteinfo;
+    }
+
+endif;
+
+if ( !function_exists('uams_get_permalink')):
+
+	function uams_get_permalink( $post = null )
+	{
+		if (empty($post)){
+		  $postID = get_the_ID();
+		} else {
+		  $post = get_post( $post );
+		  $postID = $post->ID;
+		}
+		$external_url = get_post_meta( $postID, 'post_custom_link', true);
+		$post_format = get_post_format( $postID );
+		if (!empty($external_url) && ($post_format == 'link')){
+			$link = $external_url;
+		} else {
+			$link = get_permalink( $postID );
+		}
+		return $link;
+	}
+  
+endif;
+
+/* Retrieve site site */
+if ( !function_exists('uams_site_title')):
+
+    function uams_site_title()
+    {
+		if ('uamshealth' == uams_get_site_info()['site']) {
+			return 'UAMS Health';
+		} else {
+			return get_bloginfo( 'name' );
+		}
+    }
+
+endif;
+
+/* returns home link for breadcrumbs, logo & anywhere else */
+if ( !function_exists('uams_get_home_link')):
+
+    function uams_get_home_link()
+    {
+		if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site'])) {
+			$homelink = 'http://www.uams.edu';
+		} elseif ('uamshealth' == uams_get_site_info()['site']) {
+			$homelink = 'https://uamshealth.com';
+		} elseif ('inside' == uams_get_site_info()['site']) {
+			$homelink = 'http://inside.uams.edu';
+		}
+		return $homelink;
+    }
+
+endif;
+
+//* Adding search form
+add_action('genesis_before_header', 'bears_toggle_search');
+function bears_toggle_search(){
+  echo '<div class="search-wrap hide" id="toggle-search">' . "\n";
+
+  echo get_search_form();
+  
+  echo '</div>' . "\n";
+}
+
+/* Helper Functions */
+function startsWith($haystack, $needle)
+{
+     $length = strlen($needle);
+     return (substr($haystack, 0, $length) === $needle);
+}
+
+function format_phone($country, $phone) {
+  $function = 'format_phone_' . $country;
+  if(function_exists($function)) {
+    return $function($phone);
+  }
+  return $phone;
+}
+
+// usage
+// $phone = format_phone('us', $phone);
+// echo $phone;
+
+function format_phone_us($phone) {
+  // note: making sure we have something
+  if(!isset($phone{3})) { return ''; }
+  // note: strip out everything but numbers 
+  $phone = preg_replace("/[^0-9]/", "", $phone);
+  $length = strlen($phone);
+  switch($length) {
+  case 7:
+    return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
+  break;
+  case 10:
+   return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $phone);
+  break;
+  case 11:
+  return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "$1($2) $3-$4", $phone);
+  break;
+  default:
+    return $phone;
+  break;
+  }
+}
+ 

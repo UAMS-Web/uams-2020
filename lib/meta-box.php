@@ -74,16 +74,16 @@ function uamswp_options_meta_boxes( $meta_boxes ) {
                 // 'placeholder'     => 'Select a location',
                 // Array of 'value' => 'Label' pairs
                 'options'         => array(
-                    'uams'           => 'Main Campus',
-                    'nw'             => 'Northwest',
-                    'regional-e'     => 'Regional Campus - East',
-                    'regional-ne'    => 'Regional Campus - Northeast',
-                    'regional-nw'    => 'Regional Campus - Northwest',
-                    'regional-nc'    => 'Regional Campus - North Central',
-                    'regional-s'     => 'Regional Campus - South',
-                    'regional-sw'    => 'Regional Campus - Southwest',
-                    'regional-sc'    => 'Regional Campus - South Central',
-                    'regional-w'     => 'Regional Campus - West',
+                    'uams'                  => 'Main Campus',
+                    'nw-campus'             => 'Northwest Campus',
+                    'regional-campus-e'     => 'Regional Campus - East',
+                    'regional-campus-ne'    => 'Regional Campus - Northeast',
+                    'regional-campus-nw'    => 'Regional Campus - Northwest',
+                    'regional-campus-nc'    => 'Regional Campus - North Central',
+                    'regional-campus-s'     => 'Regional Campus - South',
+                    'regional-campus-sw'    => 'Regional Campus - Southwest',
+                    'regional-campus-sc'    => 'Regional Campus - South Central',
+                    'regional-campus-w'     => 'Regional Campus - West',
                 ),
                 'std'       => 'uams',
                 'hidden' => array( 'uamswp_template', '!=', 'uams' ),
@@ -96,34 +96,77 @@ function uamswp_options_meta_boxes( $meta_boxes ) {
                 'placeholder'     => 'Select an Institute',
                 // Array of 'value' => 'Label' pairs
                 'options'         => array(
-                    'aging'       => 'Donald W. Reynolds Institute on Aging',
-                    'eye'         => 'Harvey & Bernice Jones Eye Institute',
-                    'spine'       => 'Jackson T. Stephens Spine & Neurosciences Institute',
-                    'digital'     => 'Institute for Digital Health & Innovation',
-                    'pri'         => 'Psychiatric Research Institute',
-                    'tri'         => 'Translational Research Institute',
-                    'cancer'      => 'Winthrop P. Rockefeller Cancer Institute',
+                    'institute_aging'       => 'Donald W. Reynolds Institute on Aging',
+                    'institute_eye'         => 'Harvey & Bernice Jones Eye Institute',
+                    'institute_spine'       => 'Jackson T. Stephens Spine & Neurosciences Institute',
+                    'institute_digi-health' => 'Institute for Digital Health & Innovation',
+                    'institute_pri'         => 'Psychiatric Research Institute',
+                    'institute_tri'         => 'Translational Research Institute',
+                    'institute_cancer'      => 'Winthrop P. Rockefeller Cancer Institute',
                 ),
                 'hidden' => array( 'uamswp_template', '!=', 'institute' ),
             ),
 
             array(
-                'id'             => 'uamswp_subsite',
+                'id'             => 'uamswp_uams_subsite',
                 'name'           => 'Organization',
-                'type'            => 'select',
+                'type'           => 'select_advanced',
                 'placeholder'     => 'Select an organization',
                 // Array of 'value' => 'Label' pairs
                 'options'         => array(
-                    'chp'         => 'College of Health Professions',
-                    'com'         => 'College of Medicine',
-                    'com-sub'     => 'College of Medicine - Subsite',
-                    'con'         => 'College of Nursing',
-                    'cop'         => 'College of Pharmacy',
-                    'coph'        => 'College of Publice Health',
-                    'grad'        => 'Graduate school',
-                    'none'        => 'None of the above',
+                    'health-prof'           => 'College of Health Professions',
+                    'medicine'              => 'College of Medicine',
+                    'medicine_emergency-medicine'   => 'College of Medicine -  Emergency Medicine',
+                    'medicine_pediatrics'           => 'College of Medicine - Pediatrics',
+                    'medicine_otolaryngology'       => 'College of Medicine - ENT',
+                    'medicine_family-medicine'      => 'College of Medicine - Family Medicine',
+                    'medicine_orthopaedic-surgery'  => 'College of Medicine - Orthopaedics',
+                    'medicine_pathology'            => 'College of Medicine - Pathology',
+                    'medicine_urology'              => 'College of Medicine - Urology',
+                    'nursing'               => 'College of Nursing',
+                    'pharmacy'              => 'College of Pharmacy',
+                    'pharmacy_arpoison'     => 'College of Pharmacy - Arkansas Poison and Drug Information Center',
+                    'public-health'         => 'College of Publice Health',
+                    'grad-school'           => 'Graduate school',
+                    '12th-st'               => '12th St. Health & Wellness Center',
+                    'cda'                   => 'Center for Diversity Affairs',
+                    'health-literacy'       => 'Center for Health Literacy',
+                    'continuing-ed'         => 'Continuing Education',
+                    'get-healthy'           => 'Get Healthy UAMS',
+                    'gsa'                   => 'Graduate Student Association',
+                    'employee_nurses'       => 'Nurses (Employee)',
+                    'none'                  => 'None of the above',
+                ),
+                'js_options'      => array(
+                    'width' => '90%',
                 ),
                 'visible' => array( 'uamswp_location', '=', 'uams' ),
+            ),
+
+            array(
+                'id'             => 'uamswp_uamshealth_subsite',
+                'name'           => 'Organization',
+                'type'            => 'select_advanced',
+                'placeholder'     => 'Select an organization',
+                // Array of 'value' => 'Label' pairs
+                'options'         => array(
+                    'uams-aux'           => 'UAMS Auxiliary',
+                    'none'               => 'None of the above',
+                ),
+                'visible' => array( 'uamswp_template', '=', 'health' ),
+            ),
+
+            array(
+                'id'             => 'uamswp_inside_subsite',
+                'name'           => 'Organization',
+                'type'            => 'select_advanced',
+                'placeholder'     => 'Select an organization',
+                // Array of 'value' => 'Label' pairs
+                'options'         => array(
+                    'fitness-center'     => 'Fitness Center',
+                    'none'               => 'None of the above',
+                ),
+                'visible' => array( 'uamswp_template', '=', 'inside' ),
             ),
 
             array(
@@ -235,7 +278,7 @@ function uamswp_options_meta_boxes( $meta_boxes ) {
                     ),
                     array(
                         'name' => 'Zip',
-                        'id'   => 'teaddress_zipxt',
+                        'id'   => 'address_zip',
                         'type' => 'text',
                         'size' => '10',
                         'placeholder' => '72205',
@@ -272,50 +315,58 @@ function uamswp_options_meta_boxes( $meta_boxes ) {
                 'desc' => 'include http:// or https://'
             ),
         ),
-    );
-
-    $meta_boxes[] = array(
-        'id'             => 'uamswp_social',
-        'title'          => 'Social Media',
-        'settings_pages' => 'uamswp_options',
-        //'tab'            => 'faq',
-        'fields'         => array(
-            array(
-                'type' => 'custom_html',
-                'std'  => 'These will override the default social media',
-            ),
-            array(
-                'id' => 'uamswp_facebook',
-          	    'type' => 'url',
-          	    'name' => 'Facebook URL',
-            ),
-            array(
-                'id' => 'uamswp_twitter',
-          	    'type' => 'url',
-          	    'name' => 'Twitter URL',
-            ),
-            array(
-                'id' => 'uamswp_instagram',
-          	    'type' => 'url',
-          	    'name' => 'Instagram URL',
-            ),
-            array(
-                'id' => 'uamswp_youtube',
-          	    'type' => 'url',
-          	    'name' => 'YouTube URL',
-            ),
-            array(
-                'id' => 'uamswp_linkedin',
-          	    'type' => 'url',
-          	    'name' => 'LinkedIn URL',
-            ),
-            array(
-                'id' => 'uamswp_pinterest',
-          	    'type' => 'url',
-          	    'name' => 'Pinterest URL',
+        'validation' => array(
+		    'rules'  => array(
+		        'uamswp_primary_phone' => array(
+		            'required'  => false,
+		            'phoneUS' => true,
+		        ),
             ),
         ),
     );
+
+    // $meta_boxes[] = array(
+    //     'id'             => 'uamswp_social',
+    //     'title'          => 'Social Media',
+    //     'settings_pages' => 'uamswp_options',
+    //     //'tab'            => 'faq',
+    //     'fields'         => array(
+    //         array(
+    //             'type' => 'custom_html',
+    //             'std'  => 'These will override the default social media',
+    //         ),
+    //         array(
+    //             'id' => 'uamswp_facebook',
+    //       	    'type' => 'url',
+    //       	    'name' => 'Facebook URL',
+    //         ),
+    //         array(
+    //             'id' => 'uamswp_twitter',
+    //       	    'type' => 'url',
+    //       	    'name' => 'Twitter URL',
+    //         ),
+    //         array(
+    //             'id' => 'uamswp_instagram',
+    //       	    'type' => 'url',
+    //       	    'name' => 'Instagram URL',
+    //         ),
+    //         array(
+    //             'id' => 'uamswp_youtube',
+    //       	    'type' => 'url',
+    //       	    'name' => 'YouTube URL',
+    //         ),
+    //         array(
+    //             'id' => 'uamswp_linkedin',
+    //       	    'type' => 'url',
+    //       	    'name' => 'LinkedIn URL',
+    //         ),
+    //         array(
+    //             'id' => 'uamswp_pinterest',
+    //       	    'type' => 'url',
+    //       	    'name' => 'Pinterest URL',
+    //         ),
+    //     ),
+    // );
 
     $meta_boxes[] = array(
         'id'             => 'info',

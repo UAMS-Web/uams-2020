@@ -18,24 +18,23 @@ remove_action( 'genesis_header', 'genesis_do_header' );
 //Does this need to move to nav.php and tie into function uamswp_navbar_brand_markup?
 // Here goes the logo in Header -- need to update this with SVG magic?
 add_action( 'genesis_header', 'ursidae_site_image', 5 );
-
  
 function ursidae_site_image() {
 	$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/UAMS-Logo_White.svg" alt="University of Arkansas for Medical Sciences Logo" />';
 	?>
 	<!-- /* Begin Title / Logo */  -->
 	<div class="global-title">
-	<?php printf( '<a href="https://www.uamshealth.com/" class="navbar-brand">%s<span class="sr-only">University of Arkansas for Medical Sciences</span></a>', $header_image ); ?>
+	<?php printf( '<a href="%s" class="navbar-brand">%s<span class="sr-only">%s</span></a>', uams_get_home_link(), $header_image, 'University of Arkansas for Medical Sciences' ); ?>
 	<div class="navbar-subbrand">
 
 	<?php
 	// If it's a subsection
 	if (uamswp_nav_subsection()){
-	echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.get_bloginfo( 'name' ).'<span class="sr-only">:</span></a>';
+	echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'<span class="sr-only">:</span></a>';
 	echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
 	} else {
 	// If it's a regular old homepage
-	echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.get_bloginfo( 'name' ).'</a>';
+	echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a>';
 	}
   
 	// If it's an institute or other split title entity, separate the title descriptor (often the donor) and the functional title (often the center/institute of X) into two separate spans as below.
@@ -51,7 +50,8 @@ function ursidae_site_image() {
 	<nav class="header-nav" aria-label="Resource Navigation">
 		<div class="collapse navbar-collapse" id="nav-secondary">
 			<ul class="nav">
-				<!-- Options -->
+				<?php if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site'])) { ?>
+				<!-- Options - uams -->
 				<li class="nav-item">
 					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
 				</li>
@@ -62,6 +62,31 @@ function ursidae_site_image() {
 					<a class="nav-link" href="http://giving.uams.edu/">Giving</a>
 				</li>
 				<!-- End right nav -->
+				<?php } elseif ('uamshealth' == uams_get_site_info()['site']) { ?>
+				<!-- Options - uamshealth -->
+				<li class="nav-item">
+					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://mychart.uamshealth.com/">MyChart</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="http://giving.uams.edu/">Giving</a>
+				</li>
+				<!-- End right nav -->
+				<?php } elseif ('inside' == uams_get_site_info()['site']) { ?>
+				<!-- Options - inside -->
+				<li class="nav-item">
+					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://mychart.uamshealth.com/">MyChart</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="http://giving.uams.edu/">Giving</a>
+				</li>
+				<!-- End right nav -->
+				<?php } ?>
 			</ul>
 		</div>
 		<ul class="nav resource-nav" id="nav-resource">
@@ -71,7 +96,7 @@ function ursidae_site_image() {
 			</li>
 			<!-- uamshealth only -->
 			<li class="nav-item">
-				<a class="nav-link" href="javascript:void(0)"><span class="fas fa-search fa-lg"></span><span class="sr-only">Open Search</span></a>
+				<a class="nav-link toggle-search" href="#"><span class="fas fa-search fa-lg"></span><span class="sr-only">Open Search</span></a>
 			</li>
 		</ul>
 
