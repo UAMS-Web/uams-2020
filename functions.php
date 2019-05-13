@@ -231,16 +231,6 @@ if ( !function_exists('uams_get_home_link')):
 
 endif;
 
-//* Adding search form
-add_action('genesis_before_header', 'bears_toggle_search');
-function bears_toggle_search(){
-  echo '<div class="search-wrap hide" id="toggle-search">' . "\n";
-
-  echo get_search_form();
-  
-  echo '</div>' . "\n";
-}
-
 /* Helper Functions */
 function startsWith($haystack, $needle)
 {
@@ -282,3 +272,24 @@ function format_phone_us($phone) {
   }
 }
  
+function format_phone_dash($phone) {
+  // note: making sure we have something
+  if(!isset($phone{3})) { return ''; }
+  // note: strip out everything but numbers 
+  $phone = preg_replace("/[^0-9]/", "", $phone);
+  $length = strlen($phone);
+  switch($length) {
+  case 7:
+    return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
+  break;
+  case 10:
+   return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "$1-$2-$3", $phone);
+  break;
+  case 11:
+  return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "$1-$2-$3-$4", $phone);
+  break;
+  default:
+    return $phone;
+  break;
+  }
+}

@@ -166,7 +166,7 @@ function sp_footer_creds_text() {
     // Replace both telephone values (text and href) if the custom telephone field has a value.
     // Format user input as "+1-XXX-XXX-XXXX" format in href="tel:" value
     // Format user input as "XXX-XXX-XXXX" format in text value.
-    echo '<span itemprop="telephone"><a href="tel:'.format_phone('us', $phone).'" aria-labelledby="footer-phone-label">'. format_phone('us', $phone) .'</a></span>';
+    echo '<span itemprop="telephone"><a href="tel:'.format_phone('dash', $phone).'" aria-labelledby="footer-phone-label">'. format_phone('us', $phone) .'</a></span>';
 
     // Render this if the relevant custom fields have values.
     echo !empty($other_phone) ? '<br /><a class="more-phone" href="'. $other_phone .'">Additional Phone Numbers</a>' : '';
