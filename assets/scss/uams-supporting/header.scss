@@ -174,7 +174,49 @@
     #nav-secondary {
         flex-grow: 0;
     }
+
+    #header-search {
+        background-color: $white;
+        width: 100%;
+    }
 }
+#header-search {
+    background-color: $white;
+    width: 100%;
+    padding: 1.25rem 2rem;
+
+    max-height: 200px;
+    overflow-y: hidden;
+
+    transition-property: all;
+	transition-duration: 0.5s;
+	transition-timing-function: ease;
+
+    &.closed {
+        max-height: 0;
+        padding: 0;
+    }
+
+    .inner-container {
+        width: 35em;
+        max-width: 100%;
+        margin: 0 auto;
+
+        .uams-search {
+            margin-bottom: 0;
+
+            .input-group,
+            .form-group {
+                margin-bottom: map-get($spacers, 4);
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
 .site-nav {
     padding: 0;
 

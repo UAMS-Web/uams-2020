@@ -6,10 +6,34 @@
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i" rel="stylesheet">
 </head>
 <body>
+    <div id="header-search" class="closed">
+        <div class="inner-container">
+            <form class="uams-search" action="http://uams.edu/">
+                <div class="input-group">
+                    <input type="search" class="form-control" id="uams-search-bar" placeholder="Search" name="s" value="" autocomplete="off" aria-label="Enter search text">
+                    <div class="input-group-append">
+                        <!-- When the user clicks this button, switch the icon from .fa-search to .fa-times-circle -->
+                        <button class="btn btn-primary" type="button" id="button-addon2"><span class="fas fa-search"></span><span class="sr-only">Search</span></button>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="search-scope-1" name="search-scope" class="custom-control-input" checked>
+                        <label class="custom-control-label" for="search-scope-1">All of UAMS</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="search-scope-2" name="search-scope" class="custom-control-input">
+                        <label class="custom-control-label" for="search-scope-2">Current site</label>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
     <header class="site-header navbar">
         <div class="global-title">
             <a class="navbar-brand" href="javascript:void(0)">
-                <img src="../assets/svg/UAMS-Logo_White.svg" alt="University of Arkansas for Medical Sciences logo">
+                <img src="../assets/svg/uams-logo_main_white.svg" alt="University of Arkansas for Medical Sciences logo">
                 <span class="sr-only">University of Arkansas for Medical Sciences</span>
             </a>
             <div class="navbar-subbrand">
@@ -38,7 +62,7 @@
                     <a class="nav-link" href="javascript:void(0)"><span class="fas fa-ambulance fa-lg"></span><span class="sr-only">Emergency Room</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)"><span class="fas fa-search fa-lg"></span><span class="sr-only">Open Search</span></a>
+                    <a class="nav-link" id="toggle-search" href="javascript:void(0)"><span class="fas fa-search fa-lg"></span><span class="sr-only">Open Search</span></a>
                 </li>
             </ul>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#genesis-nav-primary" aria-controls="genesis-nav-primary" aria-expanded="false" aria-label="Toggle navigation">
@@ -125,7 +149,7 @@
     </main>
     <footer class="site-footer" itemscope="" itemtype="https://schema.org/WPFooter">
         <a href="https://uamshealth.com/" class="logo">
-            <img src="../assets/svg/UAMS-Logo_Qualifier_Horizontal_White.svg" alt="University of Arkansas for Medical Sciences Logo">
+            <img src="../assets/svg/uams-logo_main-qualifier_horizontal_white.svg" alt="University of Arkansas for Medical Sciences Logo">
             <span class="sr-only">University of Arkansas for Medical Sciences</span>
         </a>
         <div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">
@@ -200,7 +224,7 @@
     <!-- Footer with all the custom options/overrides -->
     <footer class="site-footer" itemscope="" itemtype="https://schema.org/WPFooter">
         <a href="https://uamshealth.com/" class="logo">
-            <img src="../assets/svg/UAMS-Logo_Qualifier_Horizontal_White.svg" alt="University of Arkansas for Medical Sciences Logo">
+            <img src="../assets/svg/uams-logo_main-qualifier_horizontal_white.svg" alt="University of Arkansas for Medical Sciences Logo">
             <span class="sr-only">University of Arkansas for Medical Sciences</span>
         </a>
         <div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">
@@ -288,5 +312,7 @@
     <script type="text/javascript" src="../assets/js/app.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../assets/js/overflowing-navbar.min.js"></script>
+    <script type="text/javascript" src="../assets/js/searchtray.js"></script>
+
 </body>
 </html>

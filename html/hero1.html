@@ -1,0 +1,261 @@
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <!-- HERO OPTIONS
+
+            COLOR OPTIONS
+            Apply this class to div.slide
+
+                Blue (.blue)
+                Dark Blue (.dark-blue)
+                Teal Blue (.teal-blue)
+                Green (.green)
+                Eggplant (.eggplant)
+                Maroon (.maroon)
+                Orange (.orange)
+
+            TEXT
+
+                Headline (max 57 characters)
+                Description (max 177 characters)
+                Link Text (max 33 characters)
+                Link URL
+                Link Target
+                Link aria-label
+                Image alt text override (optional)
+
+            IMAGES
+            
+                If we are able to resize AND crop server-side, present two options:
+
+                    Option #1:
+                    Upload three separate images.
+                    These three images will fit perfectly in the image area.
+                    They will be resized to show the ideal size for each breakpoint, including versions for retina and non-retina displays.
+                    - Image Size 1: 2870x1536
+                    - Image Size 2: 1156x818
+                    - Image Size 3: 1535x1024
+
+                    Option #2:
+                    Upload a single image, then the system crops and resizes that image to fit the desired aspect ratios.
+                    The tops will be cut off in MD, LG, XL and XXL breakpoints (vert. middle 80% shown).
+                    The sides will be cut off in SM breakpoint (horiz. middle 94% shown).
+                    They will be resized to show the ideal size for each breakpoint, including versions for retina and non-retina displays.
+                    - Image Size: 2870x1914
+
+                If we are only able to resize server-side, present one option:
+                
+                    Upload three images.
+                    These three images will fit perfectly in the image area.
+                    They will be resized to show the ideal size for each breakpoint, including versions for retina and non-retina displays.
+                    - Image Size 1: 2870x1536
+                    - Image Size 2: 1156x818
+                    - Image Size 3: 1535x1024
+        -->
+        <section class="hero carousel slide" id="carousel-00">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-00" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-00" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item blue active" id="carousel-item-00">
+                    <div class="image-container">
+                        <style>
+                            /* SM Breakpoint */
+                            @media (min-width: 768px) {
+                                #carousel-item-00 .image-container {
+                                    background-image: url("https://picsum.photos/578/409/?image=1025");
+                                }
+                            }
+                            /* SM Breakpoint, retina */
+                            @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 768px) and (min-resolution: 192dpi) {
+                                #carousel-item-00 .image-container {
+                                    background-image: url("https://picsum.photos/1156/818/?image=1025");
+                                }
+                            }
+                            /* MD Breakpoint */
+                            @media (min-width: 992px) {
+                                #carousel-item-00 .image-container {
+                                    background-image: url("https://picsum.photos/673/360/?image=1025");
+                                }
+                            }
+                            /* MD Breakpoint, retina */
+                            @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 992px) and (min-resolution: 192dpi) {
+                                #carousel-item-00 .image-container {
+                                    background-image: url("https://picsum.photos/1346/720/?image=1025");
+                                }
+                            }
+                            /* LG Breakpoint */
+                            @media (min-width: 1200px) {
+                                #carousel-item-00 .image-container {
+                                    background-image: url("https://picsum.photos/841/450/?image=1025");
+                                }
+                            }
+                            /* LG Breakpoint, retina */
+                            @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1200px) and (min-resolution: 192dpi) {
+                                #carousel-item-00 .image-container {
+                                    background-image: url("https://picsum.photos/1682/900/?image=1025");
+                                }
+                            }
+                            /* XL Breakpoint */
+                            @media (min-width: 1500px) {
+                                #carousel-item-00 .image-container {
+                                    background-image: url("https://picsum.photos/1076/576/?image=1025");
+                                }
+                            }
+                            /* XL Breakpoint, retina */
+                            @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1500px) and (min-resolution: 192dpi) {
+                                #carousel-item-00 .image-container {
+                                    background-image: url("https://picsum.photos/2152/1152/?image=1025");
+                                }
+                            }
+                            /* XXL Breakpoint */
+                            @media (min-width: 1500px) {
+                                #carousel-item-00 .image-container {
+                                    background-image: url("https://picsum.photos/1435/768/?image=1025");
+                                }
+                            }
+                            /* XXL Breakpoint, retina */
+                            @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1500px) and (min-resolution: 192dpi) {
+                                #carousel-item-00 .image-container {
+                                    background-image: url("https://picsum.photos/2870/1536/?image=1025");
+                                }
+                            }
+                        </style>
+                        <picture>
+                            <!-- Mobile, Aspect ratio 1.5:1 -->
+                            <source srcset="https://picsum.photos/1536/1024/?image=1025"
+                                    media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1px) and (min-resolution: 192dpi)">
+                            <source srcset="https://picsum.photos/768/512/?image=1025"
+                                    media="(min-width: 1px)">
+                            <!-- Fallback, use Tablet, Aspect ratio 1.4132:1 -->
+                            <img src="https://picsum.photos/768/512/?image=1025" alt="Blanket dog on a hike" />
+                        </picture>
+                    </div>
+                    <div class="text-container">
+                        <div class="inner-container">
+                            <h2>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</h2>
+                            <p>Lorem ipsum dolor sit amet, 
+                            consectetuer adipiscing elit. Aenean 
+                            commodo ligula eget dolor. Aenean 
+                            massa. Cum sociis natoque penatibus et 
+                            magnis dis parturient montes, nascetur.</p>
+                            <a class="btn" href="#" aria-label="Learn more about this thing">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item eggplant" id="carousel-item-01">
+                    <div class="image-container">
+                        <style>
+                            /* SM Breakpoint, Image 2 */
+                            @media (min-width: 768px) {
+                                #carousel-item-01 .image-container {
+                                    background-image: url("https://picsum.photos/578/409/?image=1062");
+                                }
+                            }
+                            /* SM Breakpoint, retina, Image 2 */
+                            @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 768px) and (min-resolution: 192dpi) {
+                                #carousel-item-01 .image-container {
+                                    background-image: url("https://picsum.photos/1156/818/?image=1062");
+                                }
+                            }
+                            /* MD Breakpoint, Image 1 */
+                            @media (min-width: 992px) {
+                                #carousel-item-01 .image-container {
+                                    background-image: url("https://picsum.photos/673/360/?image=1062");
+                                }
+                            }
+                            /* MD Breakpoint, retina, Image 1 */
+                            @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 992px) and (min-resolution: 192dpi) {
+                                #carousel-item-01 .image-container {
+                                    background-image: url("https://picsum.photos/1346/720/?image=1062");
+                                }
+                            }
+                            /* LG Breakpoint, Image 1 */
+                            @media (min-width: 1200px) {
+                                #carousel-item-01 .image-container {
+                                    background-image: url("https://picsum.photos/841/450/?image=1062");
+                                }
+                            }
+                            /* LG Breakpoint, retina, Image 1 */
+                            @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1200px) and (min-resolution: 192dpi) {
+                                #carousel-item-01 .image-container {
+                                    background-image: url("https://picsum.photos/1682/900/?image=1062");
+                                }
+                            }
+                            /* XL Breakpoint, Image 1 */
+                            @media (min-width: 1500px) {
+                                #carousel-item-01 .image-container {
+                                    background-image: url("https://picsum.photos/1076/576/?image=1062");
+                                }
+                            }
+                            /* XL Breakpoint, retina, Image 1 */
+                            @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1500px) and (min-resolution: 192dpi) {
+                                #carousel-item-01 .image-container {
+                                    background-image: url("https://picsum.photos/2152/1152/?image=1062");
+                                }
+                            }
+                            /* XXL Breakpoint, Image 1 */
+                            @media (min-width: 1500px) {
+                                #carousel-item-01 .image-container {
+                                    background-image: url("https://picsum.photos/1435/768/?image=1062");
+                                }
+                            }
+                            /* XXL Breakpoint, retina, Image 1 */
+                            @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1500px) and (min-resolution: 192dpi) {
+                                #carousel-item-01 .image-container {
+                                    background-image: url("https://picsum.photos/2870/1536/?image=1062");
+                                }
+                            }
+                        </style>
+                        <picture>
+                            <!-- XXS-XS Breakpoint, Image 3 -->
+                            <source srcset="https://picsum.photos/1536/1024/?image=1062"
+                                    media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1px) and (min-resolution: 192dpi)">
+                            <source srcset="https://picsum.photos/768/512/?image=1062"
+                                    media="(min-width: 1px)">
+                            <img src="https://picsum.photos/768/512/?image=1062" alt="Blanket takes a sick day" />
+                        </picture>
+                    </div>
+                    <div class="text-container">
+                        <div class="inner-container">
+                            <h2>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</h2>
+                            <p>Lorem ipsum dolor sit amet, 
+                            consectetuer adipiscing elit. Aenean 
+                            commodo ligula eget dolor. Aenean 
+                            massa. Cum sociis natoque penatibus et 
+                            magnis dis parturient montes, nascetur.</p>
+                            <a class="btn" href="#" target="_blank" aria-label="Learn more about the other thing">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carousel-00" role="button" data-slide="prev">
+              <span class="fas fa-angle-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel-00" role="button" data-slide="next">
+              <span class="fas fa-angle-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+        </section>
+    </main>
+    
+    <script type="text/javascript" src="../assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="../assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.smartmenus.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.smartmenus.bootstrap-4.min.js"></script>
+    <script type="text/javascript" src="../assets/js/app.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../assets/js/overflowing-navbar.min.js"></script>
+    <script type="text/javascript" src="../assets/js/searchtray.js"></script>
+
+</body>
+</html>
