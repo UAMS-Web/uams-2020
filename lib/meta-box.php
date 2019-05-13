@@ -134,6 +134,8 @@ function uamswp_options_meta_boxes( $meta_boxes ) {
                     'continuing-ed'         => 'Continuing Education',
                     'get-healthy'           => 'Get Healthy UAMS',
                     'gsa'                   => 'Graduate Student Association',
+                    'ipe'                   => 'Office of Interprofessional Education',
+                    'library'               => 'Library',
                     'employee_nurses'       => 'Nurses (Employee)',
                     'none'                  => 'None of the above',
                 ),
