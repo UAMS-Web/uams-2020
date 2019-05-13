@@ -93,7 +93,7 @@ function sp_footer_creds_text() {
           // $footer_image_site = 'UAMS-Logo_' . uams_get_site_info()['subsite'];
         //}
     }
-    $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/UAMS-Logo_'.$footer_image_site.'_horizontal_white.svg" alt="'. $footer_image_title .' Logo" />';
+    $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_'.$footer_image_site.'_horizontal_white.svg" alt="'. $footer_image_title .' Logo" />';
     
     printf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', uams_get_home_link(), $footer_image, $footer_image_title );
     
