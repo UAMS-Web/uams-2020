@@ -231,16 +231,6 @@ if ( !function_exists('uams_get_home_link')):
 
 endif;
 
-//* Adding search form
-add_action('genesis_before_header', 'bears_toggle_search');
-function bears_toggle_search(){
-  echo '<div class="search-wrap hide" id="toggle-search">' . "\n";
-
-  echo get_search_form();
-  
-  echo '</div>' . "\n";
-}
-
 /* Helper Functions */
 function startsWith($haystack, $needle)
 {
