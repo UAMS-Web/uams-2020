@@ -36,7 +36,7 @@ function sp_footer_creds_text() {
      */
     
     $footer_image_title = 'University of Arkansas for Medical Sciences';
-    $footer_image_site = 'Qualifier_Horizontal_White';
+    $footer_image_site = 'main-qualifier';
 
     /* Start the ifs */
     /* Institutes */
