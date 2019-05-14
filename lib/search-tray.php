@@ -1,7 +1,7 @@
 
 <?php
 //* Adding search form
-add_action('genesis_before_header', 'uams_toggle_search');
+add_action('genesis_before', 'uams_toggle_search', 4);
 function uams_toggle_search(){
  echo '<div id="header-search" class="closed">' . "\n";
  echo '<div class="inner-container">' . "\n";
