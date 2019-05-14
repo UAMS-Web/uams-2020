@@ -16,6 +16,13 @@
 			
 		});
 
+		$('#sidebarCollapse').on('click', function () {
+			$('#sidebar').toggleClass('active');
+			$('.site-container').toggleClass('active');
+			$('.collapse.in').toggleClass('in');
+			$('#sidebarCollapse[aria-expanded=true]').attr('aria-expanded', 'false');
+		});
+
 	});
 
 })(jQuery);

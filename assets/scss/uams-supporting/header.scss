@@ -157,7 +157,7 @@
         }
 
         &.quick-links-toggler {
-            display: none;
+            // display: none;
 
             @include media-breakpoint-down(xs) {
                 display: none;
