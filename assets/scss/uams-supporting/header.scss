@@ -163,8 +163,17 @@
         }
     }
 
-    .quick-links-toggler {
+    .quick-links-toggler,
+    .search-toggler {
         @extend .navbar-toggler;
+    }
+
+    .search-toggler {
+        font-size: 1.125rem;
+        margin-left: 0;
+    }
+
+    .quick-links-toggler {
         display: none;
 
         @include media-breakpoint-up(sm) {
