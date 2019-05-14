@@ -90,20 +90,21 @@ function ursidae_site_image() {
 			</ul>
 		</div>
 		<ul class="nav resource-nav" id="nav-resource">
+			<?php if ('uamshealth' == uams_get_site_info()['site']) { ?>
 			<!-- uamshealth only -->
 			<li class="nav-item">
 				<a class="nav-link" href="javascript:void(0)"><span class="fas fa-ambulance fa-lg"></span><span class="sr-only">Emergency Room</span></a>
 			</li>
-			<!-- uamshealth only -->
+			<? } // endif ?>
 			<li class="nav-item">
-				<a class="nav-link" id="toggle-search" href="javascript:void(0)"><span class="fas fa-search fa-lg"></span><span class="sr-only">Open Search</span></a>
+				<a class="nav-link toggle-search" id="toggle-search" href="#"><span class="fas fa-search fa-lg"></span><span class="sr-only">Open Search</span></a>
 			</li>
 		</ul>
 
 		<!-- // Hiding this button until Quick Links is created. -->
-		<button class="quick-links-toggler" type="button" data-toggle="collapse" data-target="#nav-quick-links" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Quick Links navigation">
-			<span class="sr-only">Expand Quick Links</span>
-			<span class="fas fa-bars fa-lg"></span>
+		<button class="quick-links-toggler" type="button" id="sidebarCollapse" data-toggle="collapse" data-target="#nav-quick-links" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Quick Links navigation">
+		<span class="sr-only">Expand Quick Links</span>
+		<span class="fas fa-bars fa-lg"></span>
 		</button>
 
 		<!-- // The data-target and aria-controls may need to be dynamically defined. -->
