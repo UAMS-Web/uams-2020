@@ -1,10 +1,19 @@
-#site-wrapper {
+#site-container-outer {
     display: flex;
     width: 100%;
     align-items: stretch;
 
-    #site-wrapper-inner {
-        width: 100%;
+    .site-container {
         min-height: 100vh;
+
+        transition-property: margin-left;
+        transition-duration: 0.5s;
+        transition-timing-function: ease;
+    }
+
+    &.quick-links-active {
+        .site-container {
+            margin-left: -20rem;
+        }
     }
 }
