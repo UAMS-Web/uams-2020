@@ -146,7 +146,7 @@
         }
     }
 
-    .navbar-toggler {
+    .navbar-toggler, .quick-links-toggler {
         margin-left: $spacer-min;
         color: inherit;
         border: 0;
@@ -156,18 +156,19 @@
             outline: none;
         }
 
-        &.quick-links-toggler {
-            // display: none;
-
-            @include media-breakpoint-down(xs) {
-                display: none;
-            }
-        }
-
         &.mobile-menu-toggler {
             @include media-breakpoint-up(sm) {
                 display: none;
             }
+        }
+    }
+
+    .quick-links-toggler {
+        @extend .navbar-toggler;
+        display: none;
+
+        @include media-breakpoint-up(sm) {
+            display: block;
         }
     }
 
