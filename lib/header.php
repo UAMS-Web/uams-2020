@@ -104,7 +104,8 @@ function ursidae_site_image() {
 		<!-- // Hiding this button until Quick Links is created. -->
 		<button class="quick-links-toggler" type="button" id="sidebarCollapse" data-toggle="collapse" data-target="#nav-quick-links" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Quick Links navigation">
 		<span class="sr-only">Expand Quick Links</span>
-		<span class="fas fa-bars fa-lg"></span>
+		<span class="fas fa-bars fa-lg active"></span>
+		<span class="fas fa-times fa-lg"></span>
 		</button>
 
 		<!-- // The data-target and aria-controls may need to be dynamically defined. -->

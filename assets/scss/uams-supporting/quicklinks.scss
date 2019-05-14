@@ -43,6 +43,24 @@
 #sidebar.active {
     margin-right: 0;
 }
+#sidebarCollapse .fa-bars {
+    position:absolute;
+    opacity: 0;
+}
+#sidebarCollapse .fa-bars.active {
+    position: static;
+    opacity: 1;
+    transition: opacity 1s linear;
+}
+#sidebarCollapse .fa-times {
+    position:absolute;
+    opacity: 0;
+}
+#sidebarCollapse .fa-times.active {
+    position: static;
+    opacity: 1;
+    transition: opacity 1s linear;
+}
 
 #sidebar .sidebar-header {
     padding: 20px;
