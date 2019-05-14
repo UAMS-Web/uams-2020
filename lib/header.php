@@ -109,8 +109,8 @@ function ursidae_site_image() {
 
 		<!-- // The data-target and aria-controls may need to be dynamically defined. -->
 		<button class="navbar-toggler mobile-menu-toggler" type="button" data-toggle="collapse" data-target="#nav-primary" aria-controls="nav-primary" aria-expanded="false" aria-label="Toggle Primary navigation">
-			<span class="fas fa-bars fa-lg"></span>
 			<span class="sr-only label">Expand Primary Nav</span>
+			<span class="fas fa-bars fa-lg fa-fw"></span>
 		</button>
 	
 	</nav>
