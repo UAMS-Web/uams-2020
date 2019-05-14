@@ -7,10 +7,22 @@
     color: $white;
     position: relative;
     overflow: hidden;
+    position: relative;
 
     transition-property: all;
 	transition-duration: 0.5s;
-	transition-timing-function: ease;
+    transition-timing-function: ease;
+
+    @include media-breakpoint-down(xs) {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0,0,0,0);
+        white-space: nowrap;
+        border: 0;
+    }
 
     &:before {
         content: '';
@@ -30,8 +42,26 @@
         padding-right: 0;
     }
 
+    #toggle-quick-links-inside {
+        border: 0;
+        color: $gray-500;
+        background-color: transparent;
+        line-height: 1;
+        padding: 2.6px 0;
+        outline: none;
+        position: absolute;
+        top: 0.625rem;
+        left: (20rem - 0.625);
+        transform: translateX(-100%);
+        font-size: .975rem;
+    }
+
     h2 {
         margin-top: 0;
+
+        + h3 {
+            padding-right: 0.875rem; // if this is the first visible thing, add some space to allow for the close button
+        }
     }
 
     h3, .links {
@@ -59,6 +89,10 @@
 
         &.links-large {
             font-size: 1.375rem;
+
+            li:first-child {
+                padding-right: 0.875rem; // if this is the first visible thing, add some space to allow for the close button
+            }
         }
     }
 }
