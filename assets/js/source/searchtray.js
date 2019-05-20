@@ -16,5 +16,6 @@ jQuery( document ).ready( function( $ ) {
             $("#uams-search-bar").focus();
         }
         searchvisible = !searchvisible;
+        $(this).toggleClass("active");
     });
 } );

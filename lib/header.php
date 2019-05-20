@@ -97,17 +97,23 @@ function ursidae_site_image() {
 			</li>
 			<? } // endif ?>
 			<li class="nav-item">
-				<button class="search-toggler" type="button" id="toggle-search" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Search">
-					<span class="sr-only label">Expand Search</span>
-					<span class="fas fa-search fa-lg fa-fw"></span>
-				</button>
+
+				<a class="nav-link toggle-search" id="toggle-search" href="#">
+					<span class="fa-stack fa-lg" style="vertical-align: top; width:1em;">
+						<span class="fas fa-search-minus fa-stack-1x"></span>
+						<span class="fas fa-search fa-stack-1x"></span>
+					</span>
+					<span class="sr-only">Open Search</span></a>
 			</li>
 		</ul>
 
 		<!-- // Hiding this button until Quick Links is created. -->
-		<button class="quick-links-toggler" type="button" id="toggle-quick-links" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Quick Links navigation">
-			<span class="sr-only label">Expand Quick Links</span>
-			<span class="fas fa-bars fa-lg fa-fw"></span>
+		<button class="quick-links-toggler" type="button" id="sidebarCollapse" data-toggle="collapse" data-target="#nav-quick-links" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Quick Links navigation">
+		<span class="sr-only">Expand Quick Links</span>
+		<span class="fa-stack fa-lg" style="vertical-align: top; width:1em;">
+			<span class="fas fa-bars fa-stack-1x active"></span>
+			<span class="fas fa-times fa-stack-1x"></span>
+		</span>
 		</button>
 
 		<!-- // The data-target and aria-controls may need to be dynamically defined. -->

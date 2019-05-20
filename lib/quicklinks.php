@@ -37,3 +37,23 @@ function uamswp_quicklinks() {
         </nav>
         <?php 
 }
+
+function uamswp_request_quicklinks() {
+    $request = wp_remote_get( 'http://acf.local/wp-json/menus/v2/quicklinks/' );
+    if( is_wp_error( $request ) ) {
+        return false; // Bail early
+    }
+    $body = wp_remote_retrieve_body( $request );
+    $data = json_decode( $body );
+    if( ! empty( $data ) ) {
+        
+        echo '<ul class="list-unstyled">';
+        foreach( $data as $key => $menu_item ) {
+            echo '<li>';
+                echo '<a href="' . esc_url( $menu_item->url ) . '">' . $menu_item->title . '</a>';
+            echo '</li>';
+        }
+        echo '</ul>';
+    }
+
+}
