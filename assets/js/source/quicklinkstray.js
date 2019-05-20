@@ -14,5 +14,6 @@ jQuery( document ).ready( function( $ ) {
         }
 
         quicklinksvisible = !quicklinksvisible;
+        $("#toggle-quick-links").toggleClass("active");
     });
 } );
