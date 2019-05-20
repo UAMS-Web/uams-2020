@@ -20,13 +20,14 @@ function uamswp_quicklinks() {
                 <span class="sr-only label">Expand Quick Links</span>
                 <span class="fas fa-times fa-lg fa-fw"></span>
             </button>
-            <h2 class="sr-only">Quick Links</h2>
-            <ul class="list-unstyled links links-large">
+            <h2 class="">Quick Links</h2>
+            <?php uamswp_request_quicklinks() ?>
+            <!-- <ul class="list-unstyled links links-large">
                 <li><a href="javascript:void(0)"><span class="fas fa-fw fa-graduation-cap"></span>GUS</a></li>
                 <li><a href="javascript:void(0)"><span class="fas fa-fw fa-users"></span>Profiles</a></li>
                 <li><a href="javascript:void(0)"><span class="fas fa-fw fa-book"></span>Library</a></li>
                 <li><a href="javascript:void(0)"><span class="fas fa-fw fa-shopping-cart"></span>UAMS Bookstore</a></li>
-            </ul>
+            </ul> -->
             <h3 class="h5">Helpful Links</h3>
             <ul class="list-unstyled links">
                 <li><a href="javascript:void(0)"><span class="far fa-fw fa-envelope"></span>Webmail</a></li>
@@ -39,7 +40,7 @@ function uamswp_quicklinks() {
 }
 
 function uamswp_request_quicklinks() {
-    $request = wp_remote_get( 'http://acf.local/wp-json/menus/v2/quicklinks/' );
+    $request = wp_remote_get( 'http://acf.local/wp-json/menus/v2/quicklinks/' );  // Dev URL
     if( is_wp_error( $request ) ) {
         return false; // Bail early
     }
@@ -47,10 +48,10 @@ function uamswp_request_quicklinks() {
     $data = json_decode( $body );
     if( ! empty( $data ) ) {
         
-        echo '<ul class="list-unstyled">';
+        echo '<ul class="list-unstyled links links-large">';
         foreach( $data as $key => $menu_item ) {
             echo '<li>';
-                echo '<a href="' . esc_url( $menu_item->url ) . '">' . $menu_item->title . '</a>';
+                echo '<a href="' . esc_url( $menu_item->url ) . '"><span class="'. implode( $menu_item->class, " " ) .'"></span>' . $menu_item->title . '</a>';
             echo '</li>';
         }
         echo '</ul>';
