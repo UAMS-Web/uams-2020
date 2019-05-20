@@ -18,57 +18,39 @@ function uamswp_quicklinks() {
         <nav id="sidebar">
 
             <div class="sidebar-header">
-                <h3>Bootstrap Sidebar</h3>
+                <h3>Helpful Links</h3>
             </div>
-
-            <ul class="list-unstyled components">
-                <p>Dummy Heading</p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
+            <?php uamswp_request_quicklinks() ?>
+            <h5>Campus Links</h5>
+            <ul class="list-unstyled">
+                <li>
+                    <a href="https://webmail.uams.edu" class="">Webmail</a>
                 </li>
                 <li>
-                    <a href="#">About</a>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                </li>
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+                    <a href="http://www.uams.edu/IT" class="">Helpdesk / IT</a>
                 </li>
             </ul>
         </nav>
 
         <?php 
+}
+
+function uamswp_request_quicklinks() {
+    $request = wp_remote_get( 'http://acf.local/wp-json/menus/v2/quicklinks/' );
+    if( is_wp_error( $request ) ) {
+        return false; // Bail early
+    }
+    $body = wp_remote_retrieve_body( $request );
+    $data = json_decode( $body );
+    if( ! empty( $data ) ) {
+        
+        echo '<ul class="list-unstyled">';
+        foreach( $data as $key => $menu_item ) {
+            echo '<li>';
+                echo '<a href="' . esc_url( $menu_item->url ) . '">' . $menu_item->title . '</a>';
+            echo '</li>';
+        }
+        echo '</ul>';
+    }
+
 }

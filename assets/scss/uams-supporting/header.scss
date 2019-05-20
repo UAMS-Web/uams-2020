@@ -144,6 +144,15 @@
                 @extend .align-items-center;
             }
         }
+        .toggle-search {
+            .fa-search-minus {
+                opacity: 0;
+            }
+            &.active .fa-search-minus {
+                opacity: 1;
+                transition: opacity .3s linear;
+            }
+        }
     }
 
     .navbar-toggler, .quick-links-toggler {

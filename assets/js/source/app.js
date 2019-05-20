@@ -3,18 +3,21 @@
 		$('.gallery').find('br').detach();
 	});
 
+	$(document).ready(function(){
+		searchvisible = false;
+		$("#toggle-search").click(function() {
+			$("#header-search").toggleClass("closed");
+			if (!searchvisible) {
+				$("#uams-search-bar").focus();
+			}
+			searchvisible = !searchvisible;
+			$(this).toggleClass("active");
+		});
+
+	});
+
 
 	$(document).ready(function($) { 
-	// Show/hide Search Box
-		
-		$(".toggle-search").click(function() {
-				$(".search-wrap").slideToggle('fast', function(){
-					$(".toggle-search").toggleClass('active');
-					$("#toggle-search .google-search input[type=text]").focus();
-				});
-				return false;
-			
-		});
 
 		$('#sidebarCollapse').on('click', function () {
 			$('#sidebar').toggleClass('active');
