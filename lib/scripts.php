@@ -60,8 +60,8 @@ function uamswp_theme_scripts() {
 		wp_enqueue_script( 'app-fontawesome-shim-js' );
 
 		// Register Search Tray JS and enqueue it
-		// wp_register_script( 'app-searchtray-js', UAMSWP_THEME_JS . 'searchtray.min.js', array( 'jquery' ), $version, true );
-		// wp_enqueue_script( 'app-searchtray-js' );
+		wp_register_script( 'app-searchtray-js', UAMSWP_THEME_JS . 'searchtray.min.js', array( 'jquery' ), $version, true );
+		wp_enqueue_script( 'app-searchtray-js' );
 
 		// Register Search Tray JS and enqueue it
 		wp_register_script( 'app-quicklinkstray-js', UAMSWP_THEME_JS . 'quicklinkstray.min.js', array( 'jquery' ), $version, true );
