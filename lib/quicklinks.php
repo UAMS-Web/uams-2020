@@ -1,6 +1,6 @@
 <?php
 /**
- * Quicklinks
+ * Quick Links
  *
  * @package      Bootstrap for Genesis
  * @since        1.0
@@ -11,64 +11,29 @@
  *
 */
 
-add_action( 'genesis_before', 'uamswp_quicklinks', 5 );
+add_action( 'genesis_after', 'uamswp_quicklinks', 4 );
 
 function uamswp_quicklinks() { 
     ?>
-        <nav id="sidebar">
-
-            <div class="sidebar-header">
-                <h3>Bootstrap Sidebar</h3>
-            </div>
-
-            <ul class="list-unstyled components">
-                <p>Dummy Heading</p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
+        <nav id="quick-links" class="closed" aria-label="Quick Links">
+            <button type="button" id="toggle-quick-links-inside" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Quick Links navigation">
+                <span class="sr-only label">Expand Quick Links</span>
+                <span class="fas fa-times fa-lg fa-fw"></span>
+            </button>
+            <h2 class="sr-only">Quick Links</h2>
+            <ul class="list-unstyled links links-large">
+                <li><a href="javascript:void(0)"><span class="fas fa-fw fa-graduation-cap"></span>GUS</a></li>
+                <li><a href="javascript:void(0)"><span class="fas fa-fw fa-users"></span>Profiles</a></li>
+                <li><a href="javascript:void(0)"><span class="fas fa-fw fa-book"></span>Library</a></li>
+                <li><a href="javascript:void(0)"><span class="fas fa-fw fa-shopping-cart"></span>UAMS Bookstore</a></li>
             </ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                </li>
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                </li>
+            <h3 class="h5">Helpful Links</h3>
+            <ul class="list-unstyled links">
+                <li><a href="javascript:void(0)"><span class="far fa-fw fa-envelope"></span>Webmail</a></li>
+                <li><a href="javascript:void(0)"><span class="far fa-fw fa-id-card"></span>Employee Self Service</a></li>
+                <li><a href="javascript:void(0)"><span class="fas fa-fw fa-desktop"></span>Computing / IT</a></li>
+                <li><a href="javascript:void(0)"><span class="fas fa-fw fa-network-wired"></span>Intranet</a></li>
             </ul>
         </nav>
-
         <?php 
 }

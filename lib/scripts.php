@@ -63,6 +63,10 @@ function uamswp_theme_scripts() {
 		wp_register_script( 'app-searchtray-js', UAMSWP_THEME_JS . 'searchtray.min.js', array( 'jquery' ), $version, true );
 		wp_enqueue_script( 'app-searchtray-js' );
 
+		// Register Search Tray JS and enqueue it
+		wp_register_script( 'app-quicklinkstray-js', UAMSWP_THEME_JS . 'quicklinkstray.min.js', array( 'jquery' ), $version, true );
+		wp_enqueue_script( 'app-quicklinkstray-js' );
+
 		// Register theme JS and enqueue it
 		wp_register_script( 'app-js', UAMSWP_THEME_JS . 'app.min.js', array( 'jquery' ), $version, true );
 		wp_enqueue_script( 'app-js' );

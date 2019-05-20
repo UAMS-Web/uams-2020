@@ -85,12 +85,21 @@
 
 @import "supporting/gallery";
 
+// Global Search
+@import "uams-supporting/search-tray";
+
+// Site Wrapper
+@import "uams-supporting/site-wrapper";
+
 // Navigation
 @import "supporting/nav";
 
 // Header
 @import "supporting/header";
 @import "uams-supporting/header";
+
+// Quick Links
+@import "uams-supporting/quick-links";
 
 // Jumbotron
 @import "supporting/jumbotron";
@@ -133,5 +142,3 @@
 // Site Footer
 @import "supporting/footer";
 @import "uams-supporting/footer";
-
-@import "uams-supporting/quicklinks.scss";
