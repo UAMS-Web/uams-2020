@@ -59,13 +59,9 @@ function uamswp_theme_scripts() {
 		wp_register_script( 'app-fontawesome-shim-js', 'https://use.fontawesome.com/releases/v5.6.3/js/v4-shims.js', array( 'app-fontawesome-js', $version, true ) );
 		wp_enqueue_script( 'app-fontawesome-shim-js' );
 
-		// Register Search Tray JS and enqueue it
-		wp_register_script( 'app-searchtray-js', UAMSWP_THEME_JS . 'searchtray.min.js', array( 'jquery' ), $version, true );
-		wp_enqueue_script( 'app-searchtray-js' );
-
-		// Register Search Tray JS and enqueue it
-		wp_register_script( 'app-quicklinkstray-js', UAMSWP_THEME_JS . 'quicklinkstray.min.js', array( 'jquery' ), $version, true );
-		wp_enqueue_script( 'app-quicklinkstray-js' );
+		// Register Search and Quick Links Trays JS and enqueue it
+		wp_register_script( 'app-headertrays-js', UAMSWP_THEME_JS . 'headertrays.min.js', array( 'jquery' ), $version, true );
+		wp_enqueue_script( 'app-headertrays-js' );
 
 		// Register theme JS and enqueue it
 		wp_register_script( 'app-js', UAMSWP_THEME_JS . 'app.min.js', array( 'jquery' ), $version, true );

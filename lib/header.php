@@ -100,6 +100,7 @@ function ursidae_site_image() {
 				<button class="search-toggler" type="button" id="toggle-search" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Search">
 					<span class="sr-only label">Expand Search</span>
 					<span class="fas fa-search fa-lg fa-fw"></span>
+					<span class="fas fa-times fa-lg fa-fw"></span>
 				</button>
 			</li>
 		</ul>
@@ -108,6 +109,7 @@ function ursidae_site_image() {
 		<button class="quick-links-toggler" type="button" id="toggle-quick-links" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Quick Links navigation">
 			<span class="sr-only label">Expand Quick Links</span>
 			<span class="fas fa-bars fa-lg fa-fw"></span>
+			<span class="fas fa-times fa-lg fa-fw"></span>
 		</button>
 
 		<!-- // The data-target and aria-controls may need to be dynamically defined. -->
