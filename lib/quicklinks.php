@@ -52,7 +52,7 @@ function uamswp_request_quicklinks() {
         echo '<ul class="list-unstyled links links-large">';
         foreach( $data as $key => $menu_item ) {
             echo '<li>';
-                echo '<a href="' . esc_url( $menu_item->url ) . '"><span class="'. implode( $menu_item->class, " " ) .'"></span>' . $menu_item->title . '</a>';
+                echo '<a href="' . esc_url( $menu_item->url ) . '"><span class="'. implode( " ", $menu_item->classes ) .'"></span>' . $menu_item->title . '</a>';
             echo '</li>';
         }
         echo '</ul>';
