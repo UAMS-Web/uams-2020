@@ -80,12 +80,12 @@ function sp_footer_creds_text() {
         } elseif ( startsWith($subsite, 'grad-school') ) {
             $footer_image_title = 'UAMS Graduate School';
             $footer_image_site = $subsite;
-        } elseif ( 'nw-campus' == $subsite ) {
-            $footer_image_title = 'UAMS Northwest Regional Campus';
-            $footer_image_site = $subsite;
-        } elseif ( startsWith($subsite, 'regional-') ) {
-            $footer_image_title = 'UAMS Regional Campuses';
-            $footer_image_site = $subsite;
+        // } elseif ( 'nw-campus' == $subsite ) {
+        //     $footer_image_title = 'UAMS Northwest Regional Campus';
+        //     $footer_image_site = $subsite;
+        // } elseif ( startsWith($subsite, 'regional-') ) {
+        //     $footer_image_title = 'UAMS Regional Campuses';
+        //     $footer_image_site = $subsite;
         }
         
         // elseif ( 'cda' == uams_get_site_info()['subsite'] ) { // Example
@@ -104,12 +104,10 @@ function sp_footer_creds_text() {
     /**
      * Start Address
      */
-
-    // Defaults 
-
+    /* Institutes, NW Campus, & Regional Campus get new address option */
     $custom_addresses = rwmb_meta( 'uamswp_address', array( 'object_type' => 'setting' ), 'uamswp_options' );
     // Overrides, if available
-    if( ! empty( $custom_addresses ) ) {
+    if( ! empty( $custom_addresses ) && ( ('institute' == $site) || ('nw-campus' == $subsite) || ( startsWith($subsite, 'regional-') ) ) ) {
         $address = '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
         foreach ( $custom_addresses as $custom_address ) {
             $address .= '<span itemprop="name" class="sr-only">'.$footer_image_title .'</span>';
