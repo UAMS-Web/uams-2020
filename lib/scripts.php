@@ -28,44 +28,48 @@ function uamswp_theme_scripts() {
 
 		// Deregister jQuery and use Bootstrap supplied version
 		wp_deregister_script( 'jquery' );
-		wp_register_script( 'jquery', UAMSWP_THEME_JS . 'jquery.min.js', array(), $version, true );
-		wp_enqueue_script( 'jquery' );
-
-		// Register Popper JS and enqueue it
-		wp_register_script( 'app-popper-js', UAMSWP_THEME_JS . 'popper.min.js', array( 'jquery' ), $version, true );
-		wp_enqueue_script( 'app-popper-js' );
-
-		// Register Bootstrap JS and enqueue it
-		wp_register_script( 'app-bootstrap-js', UAMSWP_THEME_JS . 'bootstrap.min.js', array( 'jquery' ), $version, true );
-		wp_enqueue_script( 'app-bootstrap-js' );
-
-		// Register Smart Menu JS and enqueue it
-		wp_register_script( 'app-smartmenu-js', UAMSWP_THEME_JS . 'jquery.smartmenus.min.js', array( 'jquery' ), $version, true );
-		wp_enqueue_script( 'app-smartmenu-js' );
-
-		// Register Smart Menu Boostrap Addon Js and enqueue it
-		wp_register_script( 'app-smartmenu-bootstrap-js', UAMSWP_THEME_JS . 'jquery.smartmenus.bootstrap-4.min.js', array( 'app-smartmenu-js' ), $version, true );
-		wp_enqueue_script( 'app-smartmenu-bootstrap-js' );
-
-		// Register Overflowing Navbar and enqueue it
-		wp_register_script( 'app-overflowing-navbar-js', UAMSWP_THEME_JS . 'overflowing-navbar.min.js', array( 'jquery' ), $version, true );
-		wp_enqueue_script( 'app-overflowing-navbar-js' );
-
-		// Register Font Awesome JS and enqueue it
-		wp_register_script( 'app-fontawesome-js', 'https://use.fontawesome.com/releases/v5.6.3/js/all.js', array(), $version, true );
-		wp_enqueue_script( 'app-fontawesome-js' );
-
-		// Register Font Awesome 4 Shim and enqueue it
-		wp_register_script( 'app-fontawesome-shim-js', 'https://use.fontawesome.com/releases/v5.6.3/js/v4-shims.js', array( 'app-fontawesome-js', $version, true ) );
-		wp_enqueue_script( 'app-fontawesome-shim-js' );
-
-		// Register Search and Quick Links Trays JS and enqueue it
-		wp_register_script( 'app-headertrays-js', UAMSWP_THEME_JS . 'headertrays.min.js', array( 'jquery' ), $version, true );
-		wp_enqueue_script( 'app-headertrays-js' );
+		// wp_register_script( 'jquery', UAMSWP_THEME_JS . 'jquery.slim.min.js', array(), $version, true );
+		// wp_enqueue_script( 'jquery' );
 
 		// Register theme JS and enqueue it
-		wp_register_script( 'app-js', UAMSWP_THEME_JS . 'app.min.js', array( 'jquery' ), $version, true );
-		wp_enqueue_script( 'app-js' );
+		wp_register_script( 'all-js', UAMSWP_THEME_JS . 'all.min.js', array( ), $version, true );
+		wp_enqueue_script( 'all-js' );
+
+		// // Register Popper JS and enqueue it
+		// wp_register_script( 'app-popper-js', UAMSWP_THEME_JS . 'popper.min.js', array( 'jquery' ), $version, true );
+		// wp_enqueue_script( 'app-popper-js' );
+
+		// // Register Bootstrap JS and enqueue it
+		// wp_register_script( 'app-bootstrap-js', UAMSWP_THEME_JS . 'bootstrap.min.js', array( 'jquery' ), $version, true );
+		// wp_enqueue_script( 'app-bootstrap-js' );
+
+		// // Register Smart Menu JS and enqueue it
+		// wp_register_script( 'app-smartmenu-js', UAMSWP_THEME_JS . 'jquery.smartmenus.min.js', array( 'jquery' ), $version, true );
+		// wp_enqueue_script( 'app-smartmenu-js' );
+
+		// // Register Smart Menu Boostrap Addon Js and enqueue it
+		// wp_register_script( 'app-smartmenu-bootstrap-js', UAMSWP_THEME_JS . 'jquery.smartmenus.bootstrap-4.min.js', array( 'app-smartmenu-js' ), $version, true );
+		// wp_enqueue_script( 'app-smartmenu-bootstrap-js' );
+
+		// // Register Overflowing Navbar and enqueue it
+		// wp_register_script( 'app-overflowing-navbar-js', UAMSWP_THEME_JS . 'overflowing-navbar.min.js', array( 'jquery' ), $version, true );
+		// wp_enqueue_script( 'app-overflowing-navbar-js' );
+
+		// Register Font Awesome JS and enqueue it
+		// wp_register_script( 'app-fontawesome-js', 'https://use.fontawesome.com/releases/v5.6.3/js/all.js', array(), $version, true );
+		// wp_enqueue_script( 'app-fontawesome-js' );
+
+		// // Register Font Awesome 4 Shim and enqueue it
+		// wp_register_script( 'app-fontawesome-shim-js', 'https://use.fontawesome.com/releases/v5.6.3/js/v4-shims.js', array( 'app-fontawesome-js', $version, true ) );
+		// wp_enqueue_script( 'app-fontawesome-shim-js' );
+
+		// // Register Search and Quick Links Trays JS and enqueue it
+		// wp_register_script( 'app-headertrays-js', UAMSWP_THEME_JS . 'headertrays.min.js', array( 'jquery' ), $version, true );
+		// wp_enqueue_script( 'app-headertrays-js' );
+
+		// // Register theme JS and enqueue it
+		// wp_register_script( 'app-js', UAMSWP_THEME_JS . 'app.min.js', array( 'jquery' ), $version, true );
+		// wp_enqueue_script( 'app-js' );
 		
 	}
 }
