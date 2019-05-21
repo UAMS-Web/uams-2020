@@ -178,8 +178,19 @@
     }
 
     .search-toggler {
-        font-size: 1.125rem;
         margin-left: 0;
+
+        &:not(.active) {
+            .fa-times {
+                display: none;
+            }
+        }
+
+        &.active {
+            .fa-search {
+                display: none;
+            }
+        }
     }
 
     .quick-links-toggler {
@@ -187,6 +198,18 @@
 
         @include media-breakpoint-up(sm) {
             display: block;
+        }
+
+        &:not(.active) {
+            .fa-times {
+                display: none;
+            }
+        }
+
+        &.active {
+            .fa-bars {
+                display: none;
+            }
         }
     }
 

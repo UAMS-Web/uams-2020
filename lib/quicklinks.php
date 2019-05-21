@@ -23,12 +23,13 @@ function uamswp_quicklinks() {
             <h2 class="">Quick Links</h2>
             <?php uamswp_request_quicklinks() ?>
             <!-- <ul class="list-unstyled links links-large">
-                <li><a href="javascript:void(0)"><span class="fas fa-fw fa-graduation-cap"></span>GUS</a></li>
+]                <li><a href="javascript:void(0)"><span class="fas fa-fw fa-graduation-cap"></span>GUS</a></li>
                 <li><a href="javascript:void(0)"><span class="fas fa-fw fa-users"></span>Profiles</a></li>
                 <li><a href="javascript:void(0)"><span class="fas fa-fw fa-book"></span>Library</a></li>
                 <li><a href="javascript:void(0)"><span class="fas fa-fw fa-shopping-cart"></span>UAMS Bookstore</a></li>
             </ul> -->
-            <h3 class="h5">Helpful Links</h3>
+            </ul>
+            <h3 class="h5">Campus Links</h3>
             <ul class="list-unstyled links">
                 <li><a href="javascript:void(0)"><span class="far fa-fw fa-envelope"></span>Webmail</a></li>
                 <li><a href="javascript:void(0)"><span class="far fa-fw fa-id-card"></span>Employee Self Service</a></li>
