@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-    sass = require('gulp-sass'),
+    sass = require('gulp-dart-sass'),
     postcss = require('gulp-postcss'),
     jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
@@ -12,17 +12,12 @@ var gulp = require('gulp'),
     wpPot = require('gulp-wp-pot'),
     cssnano = require('cssnano'),
     cmq = require('css-mqpacker'),
-    autoprefixer = require('autoprefixer'),
-    comments = require('postcss-discard-comments'),
-    Fiber = require('fibers');
+    autoprefixer = require('autoprefixer');
 
 var plugins = [
     autoprefixer,
     cssnano,
-    cmq,
-    comments({
-        removeAllButFirst: true
-    })
+    cmq
 ]
 
 var paths = {
@@ -32,16 +27,13 @@ var paths = {
     },
     scripts: {
         src: [
-            'node_modules/jquery/dist/jquery.slim.js',
-            'node_modules/popper.js/dist/umd/popper.js',
-            'node_modules/bootstrap/dist/js/bootstrap.js',
-            'node_modules/smartmenus/dist/jquery.smartmenus.js',
-            'node_modules/smartmenus-bootstrap-4/jquery.smartmenus.bootstrap-4.js',
-            'assets/js/source/overflowing-navbar.min.js',
-            'assets/js/source/headertrays.js',
             'assets/js/source/app.js',
-            'assets/js/source/all.js', // FontAwesome 
-            'assets/js/source/v4-shims.js', // FontAwesome v4 Shims
+            'assets/js/overflowing-navbar.min.js',
+            'node_modules/jquery/dist/jquery.js',
+            'node_modules/bootstrap/dist/js/bootstrap.js',
+            'node_modules/popper.js/dist/umd/popper.js',
+            'node_modules/smartmenus/dist/jquery.smartmenus.js',
+            'node_modules/smartmenus-bootstrap-4/jquery.smartmenus.bootstrap-4.js'
         ],
         dest: 'assets/js'
     },
@@ -81,12 +73,11 @@ function style() {
 function js() {
     return gulp.src(paths.scripts.src)
         .pipe(changed(paths.scripts.dest))
-        .pipe(concat('all.js'))
-        // .pipe(foreach(function(stream, file){
-        //     return stream
+        .pipe(foreach(function(stream, file){
+            return stream
                 .pipe(uglify())
                 .pipe(rename({suffix: '.min'}))
-        // }))
+        }))
         .pipe(gulp.dest(paths.scripts.dest))
         .pipe(browserSync.stream({match: '**/*.js'}))
         .pipe(notify({ message: 'Scripts task complete' }));
