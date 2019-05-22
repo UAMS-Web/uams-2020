@@ -127,6 +127,8 @@ if ( !function_exists('uams_get_site_info')):
 
     function uams_get_site_info()
     {
+		$site = '';
+		$subsite = '';
 		$option_name = 'uamswp_options'; // Settings page
 		$siteinfo = array();
 		$themestyle = rwmb_meta( 'uamswp_template', array( 'object_type' => 'setting' ), $option_name ); // uams, inside, health
@@ -292,79 +294,4 @@ function format_phone_dash($phone) {
     return $phone;
   break;
   }
-}
-
-//--- Quicklinks  ---//
-
-function register_quicklinks_menu() {
-  
-	register_nav_menu( 'quick-links' ,__( 'Quick Links Menu' ));
-		 
-}
-add_action( 'init', 'register_quicklinks_menu' );
-
-/* Register function to run at rest_api_init hook */
-add_action( 'rest_api_init', function () {
-	/* Setup siteurl/wp-json/menus/v2/header */
-	register_rest_route( 'menus/v2', '/quicklinks', array(
-		'methods' => 'GET',
-		'callback' => 'quicklinks_menu',
-		'args' => array(
-			'id' => array(
-				'validate_callback' => function($param, $request, $key) {
-					return is_numeric( $param );
-				}
-			),
-		)
-	));
-});
-
-function quicklinks_menu( $data ) {
-/* Verify that menu locations are available in your WordPress site */
-if (($locations = get_nav_menu_locations()) && isset($locations[ 'quick-links' ])) {
-
-		/* Retrieve the menu in location quick-links */
-		$menu = wp_get_nav_menu_object($locations['quick-links']);
-
-		/* Create an empty array to store our JSON */
-		$menuItems = array();
-
-		/* If the menu isn't empty, start process of building an array, otherwise return a 404 error */
-		if (!empty($menu)) {
-
-				/* Assign array of navigation items to $menu_items variable */
-				$menu_items = wp_get_nav_menu_items($menu->term_id);
-
-						/* if $menu_items isn't empty */
-						if ($menu_items) {
-
-								/* for each menu item, verify the menu item has no parent and then push the menu item to the $menuItems array */
-								foreach ($menu_items as $key => $menu_item) {
-										if ($menu_item->menu_item_parent == 0) {
-												array_push(
-														$menuItems, array(
-																'id' => $menu_item->ID,
-																'title' => $menu_item->title,
-																'url' => $menu_item->url,
-																'classes' => $menu_item->classes,
-																'target' => $menu_item->target,
-																'link_title' => $menu_item->attr_title,
-														)
-												);
-										}
-								}
-						}
-				}
-		} else {
-				return new WP_Error(
-						'no_menus',
-						'Could not find any menus' . $locations[ 'primary' ],
-						array(
-								'status' => 404
-						)
-				);
-		}
-
-		/* Return array of list items with title and url properties */
-		return $menuItems;
 }
