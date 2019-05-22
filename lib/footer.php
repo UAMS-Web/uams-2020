@@ -23,7 +23,7 @@ add_filter( 'genesis_footer_creds_text', 'sp_footer_creds_text' );
 function sp_footer_creds_text() {
 
     // Render this by default, in whatever structure is best.
-    // If the site is an EDU site, replace the href value with "https://www.uams.edu".
+    // If the site is an EDU site, replace the href value with "http://www.uams.edu".
     // If an SVG asset is uploaded/defined in the custom field, replace the href value with the home URL of the current site.
     // If an SVG asset is uploaded/defined in the custom field, replace the image path with the uploaded SVG asset.
     // The height of the image is controlled by CSS.
@@ -101,16 +101,18 @@ function sp_footer_creds_text() {
         //     $footer_image_url = 'https://regionalprograms.uams.edu/'; 
         //     $footer_image_title = 'UAMS Regional Campuses';
         //     $footer_image_site = $subsite;
-        }
-        
+        // }    
         // elseif ( 'cda' == uams_get_site_info()['subsite'] ) { // Example
         //     $footer_image_url = 'https://cda.uams.edu/'; 
         //     $footer_image_title = 'Center for Diversity Affairs';
         //     $footer_image_site = 'UAMS-Logo_' . uams_get_site_info()['subsite'];
-        //}
+        }
     }
-    if ('uamshealth' == $site ){
+    /* UAMS Health */
+    if ( 'uamshealth' == $site ){
         $footer_image_url = 'https://uamshealth.com/';
+    } elseif ( 'inside' == $site ) {
+        $footer_image_url = 'https://inside.uams.edu/';
     }
     $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_'.$footer_image_site.'_horizontal_white.svg" alt="'. $footer_image_title .' Logo" />';
     
