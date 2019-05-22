@@ -34,7 +34,7 @@ function sp_footer_creds_text() {
     /**
      * Start Image
      */
-    
+    $footer_image_url = 'http://www.uams.edu';
     $footer_image_title = 'University of Arkansas for Medical Sciences';
     $footer_image_site = 'main-qualifier';
 
@@ -44,18 +44,25 @@ function sp_footer_creds_text() {
         if (('' != $subsite) && ('uams' !== $subsite)) {
             $footer_image_site = $subsite;
             if ( 'institute_aging' == $subsite ) {
+                $footer_image_url = 'https://aging.uams.edu/';
                 $footer_image_title = 'Donald W. Reynolds Institute on Aging';
             } elseif ( 'institute_eye' == $subsite ) {
+                $footer_image_url = 'https://eye.uams.edu/';
                 $footer_image_title = 'Harvey & Bernice Jones Eye Institute';
             } elseif ( 'institute_spine' == $subsite ) {
+                $footer_image_url = 'https://spine.uams.edu/';
                 $footer_image_title = 'Jackson T. Stephens Spine & Neurosciences Institute';
             } elseif ( 'institute_digi-health' == $subsite ) {
+                $footer_image_url = 'https://idhi.uams.edu/';
                 $footer_image_title = 'Institute for Digital Health & Innovation';
             } elseif ( 'institute_pri'  == $subsite ) {
+                $footer_image_url = 'https://psychiatry.uams.edu/';
                 $footer_image_title = 'Psychiatric Research Institute';
             } elseif ( 'institute_tri' == $subsite ) {
+                $footer_image_url = 'https://tri.uams.edu/';
                 $footer_image_title = 'Translational Research Institute';
             } elseif ( 'institute_cancer' == $subsite ) {
+                $footer_image_url = 'https://cancer.uams.edu/';
                 $footer_image_title = 'Winthrop P. Rockefeller Cancer Institute';
             }
         }
@@ -63,39 +70,51 @@ function sp_footer_creds_text() {
     /* UAMS Colleges, Regional Campuses & exceptions */
     if ('uams' == $site) {
         if ( startsWith($subsite, 'health-prof') ) {
+            $footer_image_url = 'https://healthprofessions.uams.edu/';
             $footer_image_title = 'UAMS College of Health Professions';
             $footer_image_site = $subsite;
         } elseif ( startsWith($subsite, 'medicine') ) {
+            $footer_image_url = 'https://medicine.uams.edu/';
             $footer_image_title = 'UAMS College of Medicine';
             $footer_image_site = $subsite;
         } elseif ( startsWith($subsite, 'nursing') ) {
+            $footer_image_url = 'https://nursing.uams.edu/';
             $footer_image_title = 'UAMS College of Nursing';
             $footer_image_site = $subsite;
         } elseif ( startsWith($subsite, 'pharmacy') ) {
+            $footer_image_url = 'https://pharmacy.uams.edu/';
             $footer_image_title = 'UAMS College of Pharmacy';
             $footer_image_site = $subsite;
         } elseif ( startsWith($subsite, 'public-health') ) {
+            $footer_image_url = 'https://publichealth.uams.edu/';
             $footer_image_title = 'UAMS College of Publice Health';
             $footer_image_site = $subsite;
         } elseif ( startsWith($subsite, 'grad-school') ) {
+            $footer_image_url = 'https://gradschool.uams.edu/';
             $footer_image_title = 'UAMS Graduate School';
             $footer_image_site = $subsite;
         // } elseif ( 'nw-campus' == $subsite ) {
+        //     $footer_image_url = 'https://northwestcampus.uams.edu/';    
         //     $footer_image_title = 'UAMS Northwest Regional Campus';
         //     $footer_image_site = $subsite;
         // } elseif ( startsWith($subsite, 'regional-') ) {
+        //     $footer_image_url = 'https://regionalprograms.uams.edu/'; 
         //     $footer_image_title = 'UAMS Regional Campuses';
         //     $footer_image_site = $subsite;
         }
         
         // elseif ( 'cda' == uams_get_site_info()['subsite'] ) { // Example
-          //  $footer_image_title = 'Center for Diversity Affairs';
-          // $footer_image_site = 'UAMS-Logo_' . uams_get_site_info()['subsite'];
+        //     $footer_image_url = 'https://cda.uams.edu/'; 
+        //     $footer_image_title = 'Center for Diversity Affairs';
+        //     $footer_image_site = 'UAMS-Logo_' . uams_get_site_info()['subsite'];
         //}
+    }
+    if ('uamshealth' == $site ){
+        $footer_image_url = 'https://uamshealth.com/';
     }
     $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_'.$footer_image_site.'_horizontal_white.svg" alt="'. $footer_image_title .' Logo" />';
     
-    printf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', uams_get_home_link(), $footer_image, $footer_image_title );
+    printf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
     
     /**
      * End Image
