@@ -50,7 +50,7 @@ function ursidae_site_image() {
 	<nav class="header-nav" aria-label="Resource Navigation">
 		<div class="collapse navbar-collapse" id="nav-secondary">
 			<ul class="nav">
-				<?php if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site'])) { ?>
+				<?php if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site']) || empty(uams_get_site_info()['site'])) { ?>
 				<!-- Options - uams -->
 				<li class="nav-item">
 					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>

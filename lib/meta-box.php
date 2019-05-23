@@ -137,6 +137,7 @@ function uamswp_options_meta_boxes( $meta_boxes ) {
                     'ipe'                   => 'Office of Interprofessional Education',
                     'library'               => 'Library',
                     'employee_nurses'       => 'Nurses (Employee)',
+                    'main'                  => 'Main UAMS site',
                     'none'                  => 'None of the above',
                 ),
                 'js_options'      => array(
