@@ -2,7 +2,7 @@ h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6,
 p, ul, ol, li, dl, dd, dt {
     &:first-child {
-        //margin-top: 0;
+        margin-top: 0;
     }
     &:last-child {
         //margin-bottom: 0;
@@ -14,14 +14,21 @@ h1, h2, h3, h4, h5, h6,
     margin-top: 1em;
     margin-bottom: 1.125rem;
 
-    .name, .subtitle {
+    .name, .supertitle, .subtitle {
         display: block;
     }
                                 
-    .subtitle {
-        @include font-size(0.75em);
+    .supertitle, .subtitle {
+        font-size: 0.75em;
         font-weight: $font-weight-normal;
         color: $gray-600;
+    }
+                                
+    .supertitle {
+        margin-bottom: 0.25em;
+    }
+                                
+    .subtitle {
         margin-top: 0.25em;
     }
 }
@@ -41,9 +48,13 @@ strong, b {
 .page-title,
 .module-title {
     text-align: center;
+    margin-top: 0 !important;
     @extend .line-length-50;
-    @extend .mb-8;
-    @extend .mb-sm-10;
+    margin-bottom: $spacer * 2;
+
+    @include media-breakpoint-up(sm) {
+        margin-bottom: $spacer * 4;
+    }
 
     + .note {
       @extend .line-length-80;
@@ -53,6 +64,23 @@ strong, b {
       @extend .mb-sm-10;
       text-align: center;
       font-style: italic;
+    }
+
+    .title {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 0.618em;
+
+        &:after {
+            content: "";
+            display: block;
+            height: 2px;
+            background-color: $primary;
+            position: absolute;
+            bottom: 0;
+            left: 19.1%;
+            right: 19.1%;
+        }
     }
 }
 

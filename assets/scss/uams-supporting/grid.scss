@@ -11,12 +11,32 @@
     }
 
     &.uams-module {
-        padding-top: ($module-padding - ($grid-gutter-width / 2));
-        padding-bottom: ($module-padding - ($grid-gutter-width / 2));
+        //padding-top: ($module-padding - ($grid-gutter-width / 2));
+        //padding-bottom: ($module-padding - ($grid-gutter-width / 2));
     }
 }
 
 .uams-module {
-    padding-top: $module-padding;
-    padding-bottom: $module-padding;
+    //padding-top: $module-padding;
+    //padding-bottom: $module-padding;
+    padding: $spacer * 2;
+
+    @include media-breakpoint-up(sm) {
+        padding: $spacer * 3;
+    }
+
+    .cta-container {
+        margin: -0.25em;
+        .btn {
+            margin: 0.25em;
+        }
+    }
+}
+
+.container, .container-fluid {
+    .container, .container-fluid {
+        width: auto;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
 }
