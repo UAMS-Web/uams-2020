@@ -11,13 +11,6 @@
  *
 */
 
-add_filter( 'genesis_attr_site-footer', 'uamswp_footer_add_css_attr' );
-function uamswp_footer_add_css_attr( $attributes ) {
-    // Add the site & subsite to  class ex. uams medicine, institute cancer
-    $attributes['class'] = $attributes['class'] . ' '. uams_get_site_info()['site'] . ' '. uams_get_site_info()['subsite'];
-    return $attributes;
-}
-
 //* Customize the credits
 add_filter( 'genesis_footer_creds_text', 'sp_footer_creds_text' );
 function sp_footer_creds_text() {
