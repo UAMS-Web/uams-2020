@@ -31,6 +31,20 @@
             margin: 0.25em;
         }
     }
+
+    .more {
+        margin-top: ($spacer * 2);
+        border-top: 1px solid $body-bg-border;
+        padding-top: ($spacer * 2);
+        text-align: center;
+        font-style: italic;
+
+        @include media-breakpoint-up(sm) {
+            margin-top: ($spacer * 3);
+            padding-top: ($spacer * 3);
+
+        }
+    }
 }
 
 .container, .container-fluid {
