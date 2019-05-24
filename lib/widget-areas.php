@@ -21,3 +21,8 @@ function uamswp_register_sidebars() {
 		'description' => __( 'This is the home featured area. It uses the jumbotron bootstrap section.', 'uams-2020' )
 	) );
 }
+
+//* Unregister primary sidebar
+// unregister_sidebar( 'sidebar' );
+//* Unregister secondary sidebar
+unregister_sidebar( 'sidebar-alt' );

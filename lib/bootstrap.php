@@ -78,7 +78,7 @@ function uamswp_merge_genesis_attr_classes() {
             'archive-pagination'        => 'clearfix',
             'entry-content'             => 'clearfix',
             'entry-pagination'          => 'clearfix',
-            'structural-wrap'           => 'container',
+            // 'structural-wrap'           => 'container',
             'comment-list'              => 'list-unstyled',
             'home-featured'             => 'jumbotron',
             'entry-image'               => 'img-fluid'
