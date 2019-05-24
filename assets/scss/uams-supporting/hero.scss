@@ -1,4 +1,4 @@
-$triangles: url("/public/wp-content/themes/uams-2020/assets/svg/triangles_seamless_white.svg");
+$triangles: url("../svg/triangles_seamless_white.svg");
 
 @mixin hero-text-container-bg($red-val: 157, $green-val: 34, $blue-val: 53) {
     background-color: rgb($red-val, $green-val, $blue-val);
