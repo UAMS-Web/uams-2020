@@ -74,3 +74,37 @@ function uamswp_body_class( $args ) {
 
 	return $args;
 }
+
+/* Add site & subsite to body class - used for site customizations (ex. different background image in footer) */
+add_filter( 'genesis_attr_body', 'uamswp_site_add_css_attr' );
+function uamswp_site_add_css_attr( $attributes ) {
+    // Add the site & subsite to  class ex. uams medicine, institute cancer
+    $attributes['class'] = $attributes['class'] . ' '. uams_get_site_info()['site'] . ' '. uams_get_site_info()['subsite'];
+    return $attributes;
+}
+
+// Remove site-inner markup
+add_filter( 'genesis_markup_site-inner', '__return_null' );
+
+// Remove content/sidebar layout.
+// genesis_unregister_layout( 'content-sidebar' );
+ 
+// Remove sidebar/content layout.
+genesis_unregister_layout( 'sidebar-content' );
+ 
+// Remove content/sidebar/sidebar layout.
+genesis_unregister_layout( 'content-sidebar-sidebar' );
+ 
+// Remove sidebar/sidebar/content layout.
+genesis_unregister_layout( 'sidebar-sidebar-content' );
+ 
+// Remove sidebar/content/sidebar layout.
+genesis_unregister_layout( 'sidebar-content-sidebar' );
+
+// Set full-width content as the default layout.
+genesis_set_default_layout( 'full-width-content' );
+
+//* Force full-width-content layout setting
+add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
+//* Remove Genesis Layout Settings
+remove_theme_support( 'genesis-inpost-layouts' );
