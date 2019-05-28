@@ -230,6 +230,8 @@
         padding: 0 1.5rem;
         box-shadow: $box-shadow-sm;
         @include font-size(1.3125rem);
+        position: relative;
+        z-index: 1;
     }
 
     .inner-container {
