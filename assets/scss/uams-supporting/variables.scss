@@ -264,6 +264,7 @@ $sizes: (
 
 $body-bg: $white;
 $body-bg-banded: $gray-50;
+$body-bg-border: $gray-200;
 $body-color: $gray-900;
 
 
@@ -336,6 +337,7 @@ $container-max-widths: (
 
 $grid-columns: 12;
 $grid-gutter-width: 30px;
+$grid-gutter-width-rem: 1.875rem;
 
 
 // Components

@@ -13,6 +13,10 @@
     + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto + .bg-auto {
       background-color: $body-bg;
     }
+
+    + .bg-white {
+      border-top: 2px solid $body-bg-border;
+    }
   }
   
   div:not(.bg-auto):not(.bg-white) { 
