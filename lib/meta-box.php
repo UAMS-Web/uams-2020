@@ -961,8 +961,8 @@ acf_add_local_field_group(array(
 		array(
 			'key' => 'field_uamswp_phone',
 			'label' => 'Phone Number',
-			'name' => 'uamswp_phone',
-			'type' => 'intl_tel_input',
+            'name' => 'uamswp_phone',
+            'type' => (class_exists('jony_acf_plugin_intl_tel_input') ? 'intl_tel_input' : 'text'), // Telephone input
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
