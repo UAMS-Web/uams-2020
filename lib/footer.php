@@ -119,7 +119,7 @@ function sp_footer_creds_text() {
      * Start Address
      */
     /* Institutes, NW Campus, & Regional Campus get new address option */
-    $custom_addresses = rwmb_meta( 'uamswp_address', array( 'object_type' => 'setting' ), 'uamswp_options' );
+    $custom_addresses = get_field( 'uamswp_address', 'option' );    
     // Overrides, if available
     if( ! empty( $custom_addresses ) && ( ('institute' == $site) || ('nw-campus' == $subsite) || ( startsWith($subsite, 'regional-') ) ) ) {
         $address = '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
@@ -156,8 +156,8 @@ function sp_footer_creds_text() {
      * Start Phone
      */
 
-    $custom_phone = rwmb_meta( 'uamswp_primary_phone', array( 'object_type' => 'setting' ), 'uamswp_options' );
-    $other_phone = rwmb_meta( 'uamswp_add_phones', array( 'object_type' => 'setting' ), 'uamswp_options' );
+    $custom_phone = get_field( 'uamswp_primary_phone', 'option' );
+    $other_phone = get_field( 'uamswp_add_phones', 'option' );
     $phone = !empty($custom_phone)? $custom_phone : '501-686-7000';
     // Render this by default
     echo '<div class="schema-phone">';

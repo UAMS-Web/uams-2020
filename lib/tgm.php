@@ -22,101 +22,101 @@ function uamswp_do_plugins_register() {
 			'required'  => false,
 		),
 		array(
-			'name'      => __( 'Meta Box', 'uamswp-uamshealth-2020' ),
-			'slug'      => 'meta-box',
+			'name'      => __( 'ACF Blocks', 'uamswp-uams-2020' ),
+			'slug'      => 'acf-blocks',
 			'required'  => true,
 		),
 
-		array(
-			'name'      => __( 'MB Relationsships', 'uamswp-uamshealth-2020' ),
-			'slug'      => 'mb-relationships',
-			'required'  => false,
-		),
+		// array(
+		// 	'name'      => __( 'MB Relationsships', 'uamswp-uams-2020' ),
+		// 	'slug'      => 'mb-relationships',
+		// 	'required'  => false,
+		// ),
 
 		// array(
-		// 	'name'      => __( 'Meta Box - FacetWP Integrator', 'uamswp-uamshealth-2020' ),
+		// 	'name'      => __( 'Meta Box - FacetWP Integrator', 'uamswp-uams-2020' ),
 		// 	'slug'      => 'meta-box-facetwp-integrator',
 		// 	'required'  => true,
 		// ),
 
-		array(
-			'name'      => __( 'Meta Box Text Limiter', 'uamswp-uamshealth-2020' ),
-			'slug'      => 'meta-box-text-limiter',
-			'required'  => false,
-		),
+		// array(
+		// 	'name'      => __( 'Meta Box Text Limiter', 'uamswp-uams-2020' ),
+		// 	'slug'      => 'meta-box-text-limiter',
+		// 	'required'  => false,
+		// ),
 		// Begin Meta Box extensions.
 		array(
-			'name'               => __( 'Meta Box Tabs', 'uamswp-uamshealth-2020' ), // The plugin name.
-			'slug'               => 'meta-box-tabs', // The plugin slug (typically the folder name).
-			'source'             => get_stylesheet_directory() . '/plugins/meta-box-tabs.zip', // The plugin source.
-			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
-		),
-
-		array(
-			'name'               => __( 'MB Admin Columns', 'uamswp-uamshealth-2020' ), // The plugin name.
-			'slug'               => 'mb-admin-columns', // The plugin slug (typically the folder name).
-			'source'             => get_stylesheet_directory() . '/plugins/mb-admin-columns.zip', // The plugin source.
-			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
-		),
-
-		array(
-			'name'               => __( 'MB Term Meta', 'uamswp-uamshealth-2020' ), // The plugin name.
-			'slug'               => 'mb-term-meta', // The plugin slug (typically the folder name).
-			'source'             => get_stylesheet_directory() . '/plugins/mb-term-meta.zip', // The plugin source.
-			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
-		),
-
-		array(
-			'name'               => __( 'MB Custom Table', 'uamswp-uamshealth-2020' ), // The plugin name.
-			'slug'               => 'mb-custom-table', // The plugin slug (typically the folder name).
-			'source'             => get_stylesheet_directory() . '/plugins/mb-custom-table.zip', // The plugin source.
-			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
-		),
-
-		array(
-			'name'               => __( 'Meta Box Group', 'uamswp-uamshealth-2020' ), // The plugin name.
-			'slug'               => 'meta-box-group', // The plugin slug (typically the folder name).
-			'source'             => get_stylesheet_directory() . '/plugins/meta-box-group.zip', // The plugin source.
-			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		),
-
-		array(
-			'name'               => __( 'Meta Box Columns', 'uamswp-uamshealth-2020' ), // The plugin name.
-			'slug'               => 'meta-box-columns', // The plugin slug (typically the folder name).
-			'source'             => get_stylesheet_directory() . '/plugins/meta-box-columns.zip', // The plugin source.
-			'required'           => false, // If false, the plugin is only 'recommended' instead of required.
-		),
-
-		array(
-			'name'               => __( 'Meta Box Updater', 'uamswp-uamshealth-2020' ), // The plugin name.
-			'slug'               => 'meta-box-updater', // The plugin slug (typically the folder name).
-			'source'             => get_stylesheet_directory() . '/plugins/meta-box-updater.zip', // The plugin source.
-			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		),
-
-		array(
-			'name'               => __( 'MB Settings Page', 'uamswp-uamshealth-2020' ), // The plugin name.
-			'slug'               => 'mb-settings-page', // The plugin slug (typically the folder name).
-			'source'             => get_stylesheet_directory() . '/plugins/mb-settings-page.zip', // The plugin source.
+			'name'               => __( 'Advanced Custom Fields: International Telephone Input', 'uamswp-uams-2020' ), // The plugin name.
+			'slug'               => 'acf-intl-tel-input', // The plugin slug (typically the folder name).
+			'source'             => get_stylesheet_directory() . '/plugins/acf-intl-tel-input.zip', // The plugin source.
 			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
 		),
 
 		// array(
-		// 	'name'               => __( 'MB Revision', 'uamswp-uamshealth-2020' ), // The plugin name.
+		// 	'name'               => __( 'MB Admin Columns', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'mb-admin-columns', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/mb-admin-columns.zip', // The plugin source.
+		// 	'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'MB Term Meta', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'mb-term-meta', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/mb-term-meta.zip', // The plugin source.
+		// 	'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'MB Custom Table', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'mb-custom-table', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/mb-custom-table.zip', // The plugin source.
+		// 	'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'Meta Box Group', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'meta-box-group', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/meta-box-group.zip', // The plugin source.
+		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'Meta Box Columns', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'meta-box-columns', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/meta-box-columns.zip', // The plugin source.
+		// 	'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'Meta Box Updater', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'meta-box-updater', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/meta-box-updater.zip', // The plugin source.
+		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'MB Settings Page', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'mb-settings-page', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/mb-settings-page.zip', // The plugin source.
+		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'MB Revision', 'uamswp-uams-2020' ), // The plugin name.
 		// 	'slug'               => 'mb-revision', // The plugin slug (typically the folder name).
 		// 	'source'             => get_stylesheet_directory() . '/plugins/mb-revision.zip', // The plugin source.
 		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
 		// ),
 
-		array(
-			'name'               => __( 'Meta Box Conditional Logic', 'uamswp-uamshealth-2020' ), // The plugin name.
-			'slug'               => 'meta-box-conditional-logic', // The plugin slug (typically the folder name).
-			'source'             => get_stylesheet_directory() . '/plugins/meta-box-conditional-logic.zip', // The plugin source.
-			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		),
+		// array(
+		// 	'name'               => __( 'Meta Box Conditional Logic', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'meta-box-conditional-logic', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/meta-box-conditional-logic.zip', // The plugin source.
+		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		// ),
 
 		// array(
-		// 	'name'               => __( 'Meta Box Include Exclude', 'uamswp-uamshealth-2020' ), // The plugin name.
+		// 	'name'               => __( 'Meta Box Include Exclude', 'uamswp-uams-2020' ), // The plugin name.
 		// 	'slug'               => 'meta-box-include-exclude', // The plugin slug (typically the folder name).
 		// 	'source'             => get_stylesheet_directory() . '/plugins/meta-box-includeexclude.zip', // The plugin source.
 		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
