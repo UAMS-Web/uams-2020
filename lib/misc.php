@@ -107,4 +107,67 @@ genesis_set_default_layout( 'full-width-content' );
 //* Force full-width-content layout setting
 add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
 //* Remove Genesis Layout Settings
-remove_theme_support( 'genesis-inpost-layouts' );
+// remove_theme_support( 'genesis-inpost-layouts' );
+
+// Remove gutenberg blocks
+add_filter( 'allowed_block_types', 'uamswp_allowed_block_types' );
+ 
+function uamswp_allowed_block_types( $allowed_blocks ) {
+
+	// get widget blocks and registered by plugins blocks
+	$registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
+ 
+	// in case we do not need widgets
+	unset( $registered_blocks[ 'core/latest-comments' ] );
+	unset( $registered_blocks[ 'core/archives' ] );
+	unset( $registered_blocks[ 'core/tag-cloud' ] );
+	unset( $registered_blocks[ 'core/search' ] );
+	unset( $registered_blocks[ 'core/rss' ] );
+	unset( $registered_blocks[ 'core/calendar' ] );
+	unset( $registered_blocks[ 'core/latest-posts' ] );
+	unset( $registered_blocks[ 'acf/acfb-starrating' ] );
+	unset( $registered_blocks[ 'acf/acfb-pricelist' ] );
+	unset( $registered_blocks[ 'acf/acfb-pricingbox' ] );
+	unset( $registered_blocks[ 'acf/acfb-multibuttons' ] );
+	unset( $registered_blocks[ 'acf/acfb-progressbar' ] );
+	// unset( $registered_blocks[ 'acf/acfb-pricingbox' ] );
+ 
+	// now $registered_blocks contains only blocks registered by plugins, but we need keys only
+	$registered_blocks = array_keys( $registered_blocks );
+ 
+	// merge the whitelist with plugins blocks
+	return array_merge( array(
+		// Common
+		'core/image',
+		'core/paragraph',
+		'core/heading',
+		'core/list',
+		'core/quote',
+		'core/file',
+		// 'core/video', // Use embeds??
+		// Formatting
+		'core/table',
+		'core/code',
+		'core/freeform', // Classic
+		'core/html', // Custom HTML
+		'core/preformatted',
+		'core/pullquote',
+		// Layout
+		'core/media-text',
+		'core/spacer',
+		// Embeds
+		'core/embed',
+		'core-embed/twitter',
+		'core-embed/youtube',
+		'core-embed/facebook',
+		'core-embed/instagram',
+		'core-embed/flickr',
+		'core-embed/vimeo',
+		'core-embed/issuu',
+		'core-embed/screencast',
+		'core-embed/scribd',
+		'core-embed/slideshare',
+		'core-embed/ted',
+	), $registered_blocks );
+ 
+}
