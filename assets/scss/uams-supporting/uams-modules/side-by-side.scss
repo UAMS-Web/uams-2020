@@ -1,0 +1,166 @@
+.side-by-side {
+    // When hovering over the section, the image increases in size.
+    // When hover ends, the image decreases in size.
+    // In order to achieve desired sizing no matter the size of the text content,
+    // an img element is used at SM breakpoint and down, while a background image
+    // is used for MD breakpoint and up.
+    // The transform and transition properties are applied to different elements
+    // based on the two image methods.
+
+    padding: 0;
+    background-color: #eee;
+
+    &:hover,
+    &:active {
+        .image-container {
+            .image-inner-container {
+                @include media-breakpoint-up(md) {
+                    -webkit-transform: scale(1.08);
+                    transform: scale(1.08);
+                }
+
+                img {
+                    @include media-breakpoint-down(sm) {
+                        -webkit-transform: scale(1.08);
+                        transform: scale(1.08);
+                    }
+                }
+            }
+        }
+    }
+
+    .image-container, .text-container {
+        @include media-breakpoint-up(md) {
+            min-height: $breakpoint-md / 2;
+            height: 100vw / 16 * 9;
+            max-height: 100vh;
+        }
+    }
+
+    .image-container {
+        padding: 0;
+        display: flex;
+
+        @include media-breakpoint-up(md) {
+            overflow: hidden;
+        }
+
+        .image-inner-container {
+            @include media-breakpoint-down(sm) {
+                overflow: hidden;
+            }
+            @include media-breakpoint-up(md) {
+                flex-grow: 1;
+                -webkit-transition: transform 1s ease;
+                transition: transform 1s ease;
+                cursor: pointer;
+                background-size: cover;
+                background-position: center center;
+            }
+
+            img {
+                -webkit-transition: 1s ease;
+                transition: 1s ease;
+                cursor: pointer;
+
+                @include media-breakpoint-up(md) {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .text-container {
+        padding: $uams-module-padding-mobile;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 100%;
+
+        @include media-breakpoint-up(sm) {
+            padding: $uams-module-padding;
+        }
+
+        .text-inner-container {
+            max-width: 35em;
+
+            > :first-child {
+                margin-top: 0;
+            }
+
+            .category {
+                display: block;
+                font-size: 0.5em;
+                text-transform: uppercase;
+                color: $red;
+            }
+
+            .title {
+                cursor: pointer;
+                display: block;
+            }
+
+            ul {
+                list-style: none;
+                padding: 0 1em;
+                margin: 0 0 1em;
+                column-count: 2;
+                column-gap: 1em;
+
+                li {
+                    margin: 0 0 0.5em;
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+    /////////////////////
+    // Widget settings
+    /////////////////////
+
+    // Image on left, text on right
+    // (Affects MD breakpoint and up)
+
+    &.image-on-left .row {
+        @include media-breakpoint-up(md) {
+            flex-direction: row;
+        }
+    }
+
+    // Image on right, text on left
+    // (Affects MD breakpoint and up)
+
+    &.image-on-right .row {
+        @include media-breakpoint-up(md) {
+            flex-direction: row-reverse;
+        }
+    }
+
+    // Background image is anchored to left edge of container
+    // (Affects MD breakpoint and up)
+
+    &.image-background-left .image-container .image-inner-container {
+        @include media-breakpoint-up(md) {
+            background-position: left center;
+        }
+    }
+
+    // Background image is anchored to horizontal center of container
+    // (Affects MD breakpoint and up)
+
+    &.image-background-center .image-container .image-inner-container {
+        @include media-breakpoint-up(md) {
+            background-position: center center;
+        }
+    }
+
+    // Background image is anchored to right edge of container
+    // (Affects MD breakpoint and up)
+
+    &.image-background-right .image-container .image-inner-container {
+        @include media-breakpoint-up(md) {
+            background-position: right center;
+        }
+    }
+}
