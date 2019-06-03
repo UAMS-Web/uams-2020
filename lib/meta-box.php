@@ -7,381 +7,1061 @@
  */
 
 // Subsection Attribute
-add_filter( 'rwmb_meta_boxes', 'uamswp_register_meta_boxes' );
-function uamswp_register_meta_boxes( $meta_boxes ) {
-	$meta_boxes[] = array (
-		'title' => 'Page Settings',
-		'id' => 'page-settings',
-		'post_types' => array(
-			'page',
-		),
-		'context' => 'side',
-		'priority' => 'high',
-		'status' => 'publish',
-		'fields' => array(
+// add_filter( 'rwmb_meta_boxes', 'uamswp_register_meta_boxes' );
+// function uamswp_register_meta_boxes( $meta_boxes ) {
+// 	$meta_boxes[] = array (
+// 		'title' => 'Page Settings',
+// 		'id' => 'page-settings',
+// 		'post_types' => array(
+// 			'page',
+// 		),
+// 		'context' => 'side',
+// 		'priority' => 'high',
+// 		'status' => 'publish',
+// 		'fields' => array(
 			
-			array (
-				'id' => 'page_subsection',
-				'name' => 'Subsection',
-				'type' => 'checkbox',
-				'desc' => 'Page is a subsection',
+// 			array (
+// 				'id' => 'page_subsection',
+// 				'name' => 'Subsection',
+// 				'type' => 'checkbox',
+// 				'desc' => 'Page is a subsection',
+// 			),
+// 		),
+// 	);
+// 	return $meta_boxes;
+// }
+
+// // Register settings page. In this case, it's a theme options page
+// add_filter( 'mb_settings_pages', 'uamswp_options_page' );
+// function uamswp_options_page( $settings_pages ) {
+//     $settings_pages[] = array(
+//         'id'          => 'uamswp_options',
+//         'option_name' => 'uamswp_options',
+//         'menu_title'  => 'UAMS Settings',
+//         'icon_url'    => 'dashicons-admin-generic',
+//     );
+//     return $settings_pages;
+// }
+
+// // Register meta boxes and fields for settings page
+// add_filter( 'rwmb_meta_boxes', 'uamswp_options_meta_boxes' );
+// function uamswp_options_meta_boxes( $meta_boxes ) {
+//     $meta_boxes[] = array(
+//         'id'             => 'uamswp_settings',
+//         'title'          => 'Settings',
+//         'settings_pages' => 'uamswp_options',
+//         // 'tab'            => 'faq',
+//         'fields'         => array( 
+//             array(
+//                 'id'             => 'uamswp_template',
+//                 'name'          => 'Theme Style',
+//                 'type'            => 'select',
+//                 'placeholder'     => 'Select a site',
+//                 // Array of 'value' => 'Label' pairs
+//                 'options'         => array(
+//                     'uams'       => 'UAMS.edu',
+//                     'health'     => 'UAMSHealth',
+//                     'inside'     => 'Inside',
+//                     'institute'  => 'Institute',
+//                     //'other'      => 'Other',
+//                 ),
+//             ),
+
+//             array(
+//                 'id'             => 'uamswp_location',
+//                 'name'           => 'Site Location',
+//                 'type'            => 'select',
+//                 // 'placeholder'     => 'Select a location',
+//                 // Array of 'value' => 'Label' pairs
+//                 'options'         => array(
+//                     'uams'                  => 'Main Campus',
+//                     'nw-campus'             => 'Northwest Campus',
+//                     'regional-campus-e'     => 'Regional Campus - East',
+//                     'regional-campus-ne'    => 'Regional Campus - Northeast',
+//                     'regional-campus-nw'    => 'Regional Campus - Northwest',
+//                     'regional-campus-nc'    => 'Regional Campus - North Central',
+//                     'regional-campus-s'     => 'Regional Campus - South',
+//                     'regional-campus-sw'    => 'Regional Campus - Southwest',
+//                     'regional-campus-sc'    => 'Regional Campus - South Central',
+//                     'regional-campus-w'     => 'Regional Campus - West',
+//                 ),
+//                 'std'       => 'uams',
+//                 'hidden' => array( 'uamswp_template', '!=', 'uams' ),
+//             ),
+
+//             array(
+//                 'id'             => 'uamswp_institute',
+//                 'name'           => 'UAMS Institute',
+//                 'type'            => 'select',
+//                 'placeholder'     => 'Select an Institute',
+//                 // Array of 'value' => 'Label' pairs
+//                 'options'         => array(
+//                     'institute_aging'       => 'Donald W. Reynolds Institute on Aging',
+//                     'institute_eye'         => 'Harvey & Bernice Jones Eye Institute',
+//                     'institute_spine'       => 'Jackson T. Stephens Spine & Neurosciences Institute',
+//                     'institute_digi-health' => 'Institute for Digital Health & Innovation',
+//                     'institute_pri'         => 'Psychiatric Research Institute',
+//                     'institute_tri'         => 'Translational Research Institute',
+//                     'institute_cancer'      => 'Winthrop P. Rockefeller Cancer Institute',
+//                 ),
+//                 'hidden' => array( 'uamswp_template', '!=', 'institute' ),
+//             ),
+
+//             array(
+//                 'id'             => 'uamswp_uams_subsite',
+//                 'name'           => 'Organization',
+//                 'type'           => 'select_advanced',
+//                 'placeholder'     => 'Select an organization',
+//                 // Array of 'value' => 'Label' pairs
+//                 'options'         => array(
+//                     'health-prof'           => 'College of Health Professions',
+//                     'medicine'              => 'College of Medicine',
+//                     'medicine_emergency-medicine'   => 'College of Medicine -  Emergency Medicine',
+//                     'medicine_pediatrics'           => 'College of Medicine - Pediatrics',
+//                     'medicine_otolaryngology'       => 'College of Medicine - ENT',
+//                     'medicine_family-medicine'      => 'College of Medicine - Family Medicine',
+//                     'medicine_orthopaedic-surgery'  => 'College of Medicine - Orthopaedics',
+//                     'medicine_pathology'            => 'College of Medicine - Pathology',
+//                     'medicine_urology'              => 'College of Medicine - Urology',
+//                     'nursing'               => 'College of Nursing',
+//                     'pharmacy'              => 'College of Pharmacy',
+//                     'pharmacy_arpoison'     => 'College of Pharmacy - Arkansas Poison and Drug Information Center',
+//                     'public-health'         => 'College of Publice Health',
+//                     'grad-school'           => 'Graduate school',
+//                     '12th-st'               => '12th St. Health & Wellness Center',
+//                     'cda'                   => 'Center for Diversity Affairs',
+//                     'health-literacy'       => 'Center for Health Literacy',
+//                     'continuing-ed'         => 'Continuing Education',
+//                     'get-healthy'           => 'Get Healthy UAMS',
+//                     'gsa'                   => 'Graduate Student Association',
+//                     'ipe'                   => 'Office of Interprofessional Education',
+//                     'library'               => 'Library',
+//                     'employee_nurses'       => 'Nurses (Employee)',
+//                     'main'                  => 'Main UAMS site',
+//                     'none'                  => 'None of the above',
+//                 ),
+//                 'js_options'      => array(
+//                     'width' => '90%',
+//                 ),
+//                 'visible' => array( 'uamswp_location', '=', 'uams' ),
+//             ),
+
+//             array(
+//                 'id'             => 'uamswp_uamshealth_subsite',
+//                 'name'           => 'Organization',
+//                 'type'            => 'select_advanced',
+//                 'placeholder'     => 'Select an organization',
+//                 // Array of 'value' => 'Label' pairs
+//                 'options'         => array(
+//                     'uams-aux'           => 'UAMS Auxiliary',
+//                     'none'               => 'None of the above',
+//                 ),
+//                 'visible' => array( 'uamswp_template', '=', 'health' ),
+//             ),
+
+//             array(
+//                 'id'             => 'uamswp_inside_subsite',
+//                 'name'           => 'Organization',
+//                 'type'            => 'select_advanced',
+//                 'placeholder'     => 'Select an organization',
+//                 // Array of 'value' => 'Label' pairs
+//                 'options'         => array(
+//                     'fitness-center'     => 'Fitness Center',
+//                     'none'               => 'None of the above',
+//                 ),
+//                 'visible' => array( 'uamswp_template', '=', 'inside' ),
+//             ),
+
+//             array(
+//                 'type' => 'heading',
+//                 'name' => 'Custom Address',
+//                 'desc' => 'Custom address(s), if needed',
+//                 'hidden' => array( 
+//                     array('uamswp_template', '!=', 'institute'),
+//                     array('uamswp_location', '=', 'uams'),
+//                 ),
+//             ),
+
+//             array(
+//                 'id'           => 'uamswp_address',
+//                 'title'        => 'Custom Address',
+//                 // 'tab'       => 'faq',
+//                 'type'         => 'group',
+//                 'clone'        => true,
+//                 'collapsible'  => true,
+//                 'sort_clone'   => true,
+//                 'group_title'  => array( 'field' => 'address_title' ),
+//                 'max_clone'    => '2',
+//                 'fields' => array(
+//                     array(
+//                         'name' => 'Address Name',
+//                         'id'   => 'address_title',
+//                         'type' => 'text',
+//                         'description'   => 'Leave blank for a single address',
+//                         'placeholder' => 'Mailing Address',
+//                     ),
+//                     array(
+//                         'name' => 'Address',
+//                         'id'   => 'address_street_1',
+//                         'type' => 'text',
+//                         'placeholder' => '4301 West Markham St #123',
+//                     ),
+//                     array(
+//                         'name' => 'Address (2)',
+//                         'id'   => 'address_street_2',
+//                         'type' => 'text',
+//                     ),
+//                     array(
+//                         'name' => 'City',
+//                         'id'   => 'address_city',
+//                         'type' => 'text',
+//                         'placeholder' => 'Little Rock',
+//                     ),
+//                     array(
+//                         'name' => 'State',
+//                         'id'   => 'address_state',
+//                         'type' => 'select',
+//                         'options' =>       array (
+//                             'AL' => 'Alabama',
+//                             'AK' => 'Alaska',
+//                             'AZ' => 'Arizona',
+//                             'AR' => 'Arkansas',
+//                             'CA' => 'California',
+//                             'CO' => 'Colorado',
+//                             'CT' => 'Connecticut',
+//                             'DE' => 'Delaware',
+//                             'DC' => 'District Of Columbia',
+//                             'FL' => 'Florida',
+//                             'GA' => 'Georgia',
+//                             'HI' => 'Hawaii',
+//                             'ID' => 'Idaho',
+//                             'IL' => 'Illinois',
+//                             'IN' => 'Indiana',
+//                             'IA' => 'Iowa',
+//                             'KS' => 'Kansas',
+//                             'KY' => 'Kentucky',
+//                             'LA' => 'Louisiana',
+//                             'ME' => 'Maine',
+//                             'MD' => 'Maryland',
+//                             'MA' => 'Massachusetts',
+//                             'MI' => 'Michigan',
+//                             'MN' => 'Minnesota',
+//                             'MS' => 'Mississippi',
+//                             'MO' => 'Missouri',
+//                             'MT' => 'Montana',
+//                             'NE' => 'Nebraska',
+//                             'NV' => 'Nevada',
+//                             'NH' => 'New Hampshire',
+//                             'NJ' => 'New Jersey',
+//                             'NM' => 'New Mexico',
+//                             'NY' => 'New York',
+//                             'NC' => 'North Carolina',
+//                             'ND' => 'North Dakota',
+//                             'OH' => 'Ohio',
+//                             'OK' => 'Oklahoma',
+//                             'OR' => 'Oregon',
+//                             'PA' => 'Pennsylvania',
+//                             'RI' => 'Rhode Island',
+//                             'SC' => 'South Carolina',
+//                             'SD' => 'South Dakota',
+//                             'TN' => 'Tennessee',
+//                             'TX' => 'Texas',
+//                             'UT' => 'Utah',
+//                             'VT' => 'Vermont',
+//                             'VA' => 'Virginia',
+//                             'WA' => 'Washington',
+//                             'WV' => 'West Virginia',
+//                             'WI' => 'Wisconsin',
+//                             'WY' => 'Wyoming',
+//                           ),
+//                           'std' =>       array (
+//                              'AR',
+//                           ),
+
+//                     ),
+//                     array(
+//                         'name' => 'Zip',
+//                         'id'   => 'address_zip',
+//                         'type' => 'text',
+//                         'size' => '10',
+//                         'placeholder' => '72205',
+//                     ),
+//                 ),
+//                 'hidden' => array( 
+//                     array('uamswp_template', '!=', 'institute'),
+//                     array('uamswp_location', '=', 'uams'),
+//                 ),
+//             ),
+//         ),
+//     );
+
+//     $meta_boxes[] = array(
+//         'id'             => 'uamswp_phone',
+//         'title'          => 'Phone Number',
+//         'settings_pages' => 'uamswp_options',
+//         //'tab'            => 'faq',
+//         'fields'         => array(
+//             array(
+//                 'type' => 'custom_html',
+//                 'std'  => 'These will override the default social media',
+//             ),
+//             array(
+//                 'id' => 'uamswp_primary_phone',
+//           	    'type' => 'tel',
+//                 'name' => 'Primary Phone #',
+//                 'placeholder' => '(501) 686-7000',
+//             ),
+//             array(
+//                 'id' => 'uamswp_add_phones',
+//           	    'type' => 'url',
+//                 'name' => 'Additional Phone Number(s) [URL]',
+//                 'desc' => 'include http:// or https://'
+//             ),
+//         ),
+//         'validation' => array(
+// 		    'rules'  => array(
+// 		        'uamswp_primary_phone' => array(
+// 		            'required'  => false,
+// 		            'phoneUS' => true,
+// 		        ),
+//             ),
+//         ),
+//     );
+
+//     // $meta_boxes[] = array(
+//     //     'id'             => 'uamswp_social',
+//     //     'title'          => 'Social Media',
+//     //     'settings_pages' => 'uamswp_options',
+//     //     //'tab'            => 'faq',
+//     //     'fields'         => array(
+//     //         array(
+//     //             'type' => 'custom_html',
+//     //             'std'  => 'These will override the default social media',
+//     //         ),
+//     //         array(
+//     //             'id' => 'uamswp_facebook',
+//     //       	    'type' => 'url',
+//     //       	    'name' => 'Facebook URL',
+//     //         ),
+//     //         array(
+//     //             'id' => 'uamswp_twitter',
+//     //       	    'type' => 'url',
+//     //       	    'name' => 'Twitter URL',
+//     //         ),
+//     //         array(
+//     //             'id' => 'uamswp_instagram',
+//     //       	    'type' => 'url',
+//     //       	    'name' => 'Instagram URL',
+//     //         ),
+//     //         array(
+//     //             'id' => 'uamswp_youtube',
+//     //       	    'type' => 'url',
+//     //       	    'name' => 'YouTube URL',
+//     //         ),
+//     //         array(
+//     //             'id' => 'uamswp_linkedin',
+//     //       	    'type' => 'url',
+//     //       	    'name' => 'LinkedIn URL',
+//     //         ),
+//     //         array(
+//     //             'id' => 'uamswp_pinterest',
+//     //       	    'type' => 'url',
+//     //       	    'name' => 'Pinterest URL',
+//     //         ),
+//     //     ),
+//     // );
+
+//     $meta_boxes[] = array(
+//         'id'             => 'info',
+//         'title'          => 'Theme Info',
+//         'settings_pages' => 'uamswp_options',
+//         'context'        => 'side',
+//         'fields'         => array(
+//             array(
+//                 'type' => 'custom_html',
+//                 'std'  => 'Having questions? Check out our documentation',
+//             ),
+//         ),
+//     );
+//     return $meta_boxes;
+// }
+
+add_filter('acf/settings/show_admin', 'my_acf_show_admin');
+
+function my_acf_show_admin( $show ) {
+    
+    return current_user_can('manage_options');
+    
+}
+
+if( function_exists('acf_add_options_page') ) {
+	
+	acf_add_options_page(array(
+		'page_title' 	=> 'UAMS Settings',
+		'menu_title'	=> 'UAMS Settings',
+		'menu_slug' 	=> 'uamswp-settings',
+		'capability'	=> 'edit_posts',
+        'redirect'		=> false,
+        'autoload'      => true,
+        'update_button'		=> __('Save Settings', 'acf'),
+        'updated_message'	=> __("Settings Updated", 'acf'),
+    ));
+
+}
+
+if( function_exists('acf_add_local_field_group') ):
+
+acf_add_local_field_group(array(
+	'key' => 'group_uams_theme_settings',
+	'title' => 'Theme Settings',
+	'fields' => array(
+		array(
+			'key' => 'field_template',
+			'label' => 'Theme Style',
+			'name' => 'uamswp_template',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 1,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_validate' => '',
+			'acfe_update' => '',
+			'acfe_permissions' => '',
+			'choices' => array(
+				'uams' => 'UAMS.edu',
+				'health' => 'UAMSHealth',
+				'inside' => 'Inside',
+				'institute' => 'Institute',
+			),
+			'default_value' => array(
+				0 => 'uams',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 0,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		array(
+			'key' => 'field_location',
+			'label' => 'Site Location',
+			'name' => 'uamswp_location',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_template',
+						'operator' => '==',
+						'value' => 'uams',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_validate' => '',
+			'acfe_update' => '',
+			'acfe_permissions' => '',
+			'choices' => array(
+				'uams' => 'Main Campus',
+				'nw-campus' => 'Northwest Campus',
+				'regional-campus-e' => 'Regional Campus - East',
+				'regional-campus-ne' => 'Regional Campus - Northeast',
+				'regional-campus-nw' => 'Regional Campus - Northwest',
+				'regional-campus-nc' => 'Regional Campus - North Central',
+				'regional-campus-s' => 'Regional Campus - South',
+				'regional-campus-sw' => 'Regional Campus - Southwest',
+				'regional-campus-sc' => 'Regional Campus - South Central',
+				'regional-campus-w' => 'Regional Campus - West',
+			),
+			'default_value' => array(
+				0 => 'uams',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 0,
+			'return_format' => 'value',
+			'ajax' => 0,
+			'placeholder' => '',
+		),
+		array(
+			'key' => 'field_institute',
+			'label' => 'UAMS Institute',
+			'name' => 'uamswp_institute',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_template',
+						'operator' => '==',
+						'value' => 'institute',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_validate' => '',
+			'acfe_update' => '',
+			'acfe_permissions' => '',
+			'choices' => array(
+				'institute_aging' => 'Donald W. Reynolds Institute on Aging',
+				'institute_eye' => 'Harvey & Bernice Jones Eye Institute',
+				'institute_spine' => 'Jackson T. Stephens Spine & Neurosciences Institute',
+				'institute_digi-health' => 'Institute for Digital Health & Innovation',
+				'institute_pri' => 'Psychiatric Research Institute',
+				'institute_tri' => 'Translational Research Institute',
+				'institute_cancer' => 'Winthrop P. Rockefeller Cancer Institute',
+			),
+			'default_value' => array(
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 0,
+			'return_format' => 'value',
+			'ajax' => 0,
+			'placeholder' => '',
+		),
+		array(
+			'key' => 'field_uams_subsite',
+			'label' => 'Organization',
+			'name' => 'uamswp_uams_subsite',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_location',
+						'operator' => '==',
+						'value' => 'uams',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_validate' => '',
+			'acfe_update' => '',
+			'acfe_permissions' => '',
+			'choices' => array(
+				'health-prof' => 'College of Health Professions',
+				'medicine' => 'College of Medicine',
+				'medicine_emergency-medicine' => 'College of Medicine -	Emergency Medicine',
+				'medicine_pediatrics' => 'College of Medicine - Pediatrics',
+				'medicine_otolaryngology' => 'College of Medicine - ENT',
+				'medicine_family-medicine' => 'College of Medicine - Family Medicine',
+				'medicine_orthopaedic-surgery' => 'College of Medicine - Orthopaedics',
+				'medicine_pathology' => 'College of Medicine - Pathology',
+				'medicine_urology' => 'College of Medicine - Urology',
+				'nursing' => 'College of Nursing',
+				'pharmacy' => 'College of Pharmacy',
+				'pharmacy_arpoison' => 'College of Pharmacy - Arkansas Poison and Drug Information Center',
+				'public-health' => 'College of Publice Health',
+				'grad-school' => 'Graduate school',
+				'12th-st' => '12th St. Health & Wellness Center',
+				'cda' => 'Center for Diversity Affairs',
+				'health-literacy' => 'Center for Health Literacy',
+				'continuing-ed' => 'Continuing Education',
+				'get-healthy' => 'Get Healthy UAMS',
+				'gsa' => 'Graduate Student Association',
+				'ipe' => 'Office of Interprofessional Education',
+				'library' => 'Library',
+				'employee_nurses' => 'Nurses (Employee)',
+				'main' => 'Main UAMS site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		array(
+			'key' => 'field_uamshealth_subsite',
+			'label' => 'Organization',
+			'name' => 'uamswp_uamshealth_subsite',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_template',
+						'operator' => '==',
+						'value' => 'health',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_validate' => '',
+			'acfe_update' => '',
+			'acfe_permissions' => '',
+			'choices' => array(
+				'uams-aux' => 'UAMS Auxiliary',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 0,
+			'return_format' => 'value',
+			'ajax' => 0,
+			'placeholder' => '',
+		),
+		array(
+			'key' => 'field_inside_subsite',
+			'label' => 'Organization',
+			'name' => 'uamswp_inside_subsite',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_template',
+						'operator' => '==',
+						'value' => 'inside',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_validate' => '',
+			'acfe_update' => '',
+			'acfe_permissions' => '',
+			'choices' => array(
+				'fitness-center' => 'Fitness Center',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 0,
+			'return_format' => 'value',
+			'ajax' => 0,
+			'placeholder' => '',
+		),
+		array(
+			'key' => 'field_address_accordion',
+			'label' => 'Custom Addresses',
+			'name' => '',
+			'type' => 'accordion',
+			'instructions' => 'Custom address(s), if needed',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_template',
+						'operator' => '==',
+						'value' => 'institute',
+					),
+				),
+				array(
+					array(
+						'field' => 'field_template',
+						'operator' => '==',
+						'value' => 'uams',
+					),
+					array(
+						'field' => 'field_location',
+						'operator' => '!=',
+						'value' => 'uams',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_permissions' => '',
+			'open' => 1,
+			'multi_expand' => 1,
+			'endpoint' => 0,
+		),
+		array(
+			'key' => 'field_address',
+			'label' => 'Custom Address',
+			'name' => 'uamswp_address',
+			'type' => 'repeater',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_template',
+						'operator' => '==',
+						'value' => 'institute',
+					),
+				),
+				array(
+					array(
+						'field' => 'field_template',
+						'operator' => '==',
+						'value' => 'uams',
+					),
+					array(
+						'field' => 'field_location',
+						'operator' => '!=',
+						'value' => 'uams',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_permissions' => '',
+			'collapsed' => 'field_5ced844860649',
+			'min' => 1,
+			'max' => 2,
+			'layout' => 'block',
+			'button_label' => '',
+			'sub_fields' => array(
+				array(
+					'key' => 'field_address_title',
+					'label' => 'Address Name',
+					'name' => 'address_title',
+					'type' => 'text',
+					'instructions' => 'Leave blank for a single address',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'default_value' => '',
+					'placeholder' => 'Mailing Address',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+				array(
+					'key' => 'field_address_street_1',
+					'label' => 'Address',
+					'name' => 'address_street_1',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'default_value' => '',
+					'placeholder' => '4301 West Markham St #123',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+				array(
+					'key' => 'field_address_street_2',
+					'label' => 'Address (2)',
+					'name' => 'address_street_2',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+				array(
+					'key' => 'field_address_city',
+					'label' => 'City',
+					'name' => 'address_city',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '50',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+				array(
+					'key' => 'field_address_state',
+					'label' => 'State',
+					'name' => 'address_state',
+					'type' => 'select',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '30',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'choices' => array(
+						'AL' => 'Alabama',
+						'AK' => 'Alaska',
+						'AZ' => 'Arizona',
+						'AR' => 'Arkansas',
+						'CA' => 'California',
+						'CO' => 'Colorado',
+						'CT' => 'Connecticut',
+						'DE' => 'Delaware',
+						'DC' => 'District of Columbia',
+						'FL' => 'Florida',
+						'GA' => 'Georgia',
+						'HI' => 'Hawaii',
+						'ID' => 'Idaho',
+						'IL' => 'Illinois',
+						'IN' => 'Indiana',
+						'IA' => 'Iowa',
+						'KS' => 'Kansas',
+						'KY' => 'Kentucky',
+						'LA' => 'Louisiana',
+						'ME' => 'Maine',
+						'MD' => 'Maryland',
+						'MA' => 'Massachusetts',
+						'MI' => 'Michigan',
+						'MN' => 'Minnesota',
+						'MS' => 'Mississippi',
+						'MO' => 'Missouri',
+						'MT' => 'Montana',
+						'NE' => 'Nebraska',
+						'NV' => 'Nevada',
+						'NH' => 'New Hampshire',
+						'NJ' => 'New Jersey',
+						'NM' => 'New Mexico',
+						'NY' => 'New York',
+						'NC' => 'North Carolina',
+						'ND' => 'North Dakota',
+						'OH' => 'Ohio',
+						'OK' => 'Oklahoma',
+						'OR' => 'Oregon',
+						'PA' => 'Pennsylvania',
+						'RI' => 'Rhode Island',
+						'SC' => 'South Carolina',
+						'SD' => 'South Dakota',
+						'TN' => 'Tennessee',
+						'TX' => 'Texas',
+						'UT' => 'Utah',
+						'VT' => 'Vermont',
+						'VA' => 'Virginia',
+						'WA' => 'Washington',
+						'WV' => 'West Virginia',
+						'WI' => 'Wisconsin',
+						'WY' => 'Wyoming',
+					),
+					'default_value' => array(
+						0 => 'AR',
+					),
+					'allow_null' => 0,
+					'multiple' => 0,
+					'ui' => 0,
+					'return_format' => 'value',
+					'ajax' => 0,
+					'placeholder' => '',
+				),
+				array(
+					'key' => 'field_address_zip',
+					'label' => 'Zip',
+					'name' => 'address_zip',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '20',
+						'class' => '',
+						'id' => '',
+					),
+					'acfe_validate' => '',
+					'acfe_update' => '',
+					'acfe_permissions' => '',
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+			),
+        ),
+        array(
+			'key' => 'field_phone_accordion',
+			'label' => 'Phone Number',
+			'name' => '',
+			'type' => 'accordion',
+			'instructions' => 'This will override the default phone number',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_permissions' => '',
+			'open' => 1,
+			'multi_expand' => 1,
+			'endpoint' => 0,
+		),
+		array(
+			'key' => 'field_uamswp_phone',
+			'label' => 'Phone Number',
+            'name' => 'uamswp_phone',
+            'type' => (class_exists('jony_acf_plugin_intl_tel_input') ? 'intl_tel_input' : 'text'), // Telephone input
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_validate' => '',
+			'acfe_update' => '',
+			'acfe_permissions' => '',
+			'separateDialCode' => 0,
+			'allowDropdown' => 0,
+			'initialCountry' => 'us',
+			'excludeCountries' => '',
+			'onlyCountries' => '',
+			'preferredCountries' => '',
+		),
+		array(
+			'key' => 'field_uamswp_add_phones',
+			'label' => 'Additional Phone Number(s) [Link]',
+			'name' => 'uamswp_add_phones',
+			'type' => 'url',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_validate' => '',
+			'acfe_update' => '',
+			'acfe_permissions' => '',
+			'default_value' => '',
+			'placeholder' => '',
+        ),
+        array(
+			'key' => 'field_phone_accordion_end',
+			'label' => 'Phone End',
+			'name' => '',
+			'type' => 'accordion',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_validate' => '',
+			'acfe_update' => '',
+			'acfe_permissions' => '',
+			'open' => 0,
+			'multi_expand' => 0,
+			'endpoint' => 1,
+		),
+		array(
+			'key' => 'field_submit_button',
+			'label' => '',
+			'name' => '',
+			'type' => 'button',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_validate' => '',
+			'acfe_update' => '',
+			'acfe_permissions' => '',
+			'button_value' => 'Save',
+			'button_attributes' => array(
+				'button_type' => 'submit',
+				'button_class' => 'button button-primary button-large',
+				'button_id' => '',
+			),
+			'button_wrapper' => array(
+				'button_before' => '',
+				'button_after' => '',
 			),
 		),
-	);
-	return $meta_boxes;
-}
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'options_page',
+				'operator' => '==',
+				'value' => 'uamswp-settings',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'normal',
+	'style' => 'seamless',
+	'label_placement' => 'left',
+	'instruction_placement' => 'label',
+	'active' => true,
+));
 
-// Register settings page. In this case, it's a theme options page
-add_filter( 'mb_settings_pages', 'uamswp_options_page' );
-function uamswp_options_page( $settings_pages ) {
-    $settings_pages[] = array(
-        'id'          => 'uamswp_options',
-        'option_name' => 'uamswp_options',
-        'menu_title'  => 'UAMS Settings',
-        'icon_url'    => 'dashicons-admin-generic',
-    );
-    return $settings_pages;
-}
-
-// Register meta boxes and fields for settings page
-add_filter( 'rwmb_meta_boxes', 'uamswp_options_meta_boxes' );
-function uamswp_options_meta_boxes( $meta_boxes ) {
-    $meta_boxes[] = array(
-        'id'             => 'uamswp_settings',
-        'title'          => 'Settings',
-        'settings_pages' => 'uamswp_options',
-        // 'tab'            => 'faq',
-        'fields'         => array( 
-            array(
-                'id'             => 'uamswp_template',
-                'name'          => 'Theme Style',
-                'type'            => 'select',
-                'placeholder'     => 'Select a site',
-                // Array of 'value' => 'Label' pairs
-                'options'         => array(
-                    'uams'       => 'UAMS.edu',
-                    'health'     => 'UAMSHealth',
-                    'inside'     => 'Inside',
-                    'institute'  => 'Institute',
-                    //'other'      => 'Other',
-                ),
-            ),
-
-            array(
-                'id'             => 'uamswp_location',
-                'name'           => 'Site Location',
-                'type'            => 'select',
-                // 'placeholder'     => 'Select a location',
-                // Array of 'value' => 'Label' pairs
-                'options'         => array(
-                    'uams'                  => 'Main Campus',
-                    'nw-campus'             => 'Northwest Campus',
-                    'regional-campus-e'     => 'Regional Campus - East',
-                    'regional-campus-ne'    => 'Regional Campus - Northeast',
-                    'regional-campus-nw'    => 'Regional Campus - Northwest',
-                    'regional-campus-nc'    => 'Regional Campus - North Central',
-                    'regional-campus-s'     => 'Regional Campus - South',
-                    'regional-campus-sw'    => 'Regional Campus - Southwest',
-                    'regional-campus-sc'    => 'Regional Campus - South Central',
-                    'regional-campus-w'     => 'Regional Campus - West',
-                ),
-                'std'       => 'uams',
-                'hidden' => array( 'uamswp_template', '!=', 'uams' ),
-            ),
-
-            array(
-                'id'             => 'uamswp_institute',
-                'name'           => 'UAMS Institute',
-                'type'            => 'select',
-                'placeholder'     => 'Select an Institute',
-                // Array of 'value' => 'Label' pairs
-                'options'         => array(
-                    'institute_aging'       => 'Donald W. Reynolds Institute on Aging',
-                    'institute_eye'         => 'Harvey & Bernice Jones Eye Institute',
-                    'institute_spine'       => 'Jackson T. Stephens Spine & Neurosciences Institute',
-                    'institute_digi-health' => 'Institute for Digital Health & Innovation',
-                    'institute_pri'         => 'Psychiatric Research Institute',
-                    'institute_tri'         => 'Translational Research Institute',
-                    'institute_cancer'      => 'Winthrop P. Rockefeller Cancer Institute',
-                ),
-                'hidden' => array( 'uamswp_template', '!=', 'institute' ),
-            ),
-
-            array(
-                'id'             => 'uamswp_uams_subsite',
-                'name'           => 'Organization',
-                'type'           => 'select_advanced',
-                'placeholder'     => 'Select an organization',
-                // Array of 'value' => 'Label' pairs
-                'options'         => array(
-                    'health-prof'           => 'College of Health Professions',
-                    'medicine'              => 'College of Medicine',
-                    'medicine_emergency-medicine'   => 'College of Medicine -  Emergency Medicine',
-                    'medicine_pediatrics'           => 'College of Medicine - Pediatrics',
-                    'medicine_otolaryngology'       => 'College of Medicine - ENT',
-                    'medicine_family-medicine'      => 'College of Medicine - Family Medicine',
-                    'medicine_orthopaedic-surgery'  => 'College of Medicine - Orthopaedics',
-                    'medicine_pathology'            => 'College of Medicine - Pathology',
-                    'medicine_urology'              => 'College of Medicine - Urology',
-                    'nursing'               => 'College of Nursing',
-                    'pharmacy'              => 'College of Pharmacy',
-                    'pharmacy_arpoison'     => 'College of Pharmacy - Arkansas Poison and Drug Information Center',
-                    'public-health'         => 'College of Publice Health',
-                    'grad-school'           => 'Graduate school',
-                    '12th-st'               => '12th St. Health & Wellness Center',
-                    'cda'                   => 'Center for Diversity Affairs',
-                    'health-literacy'       => 'Center for Health Literacy',
-                    'continuing-ed'         => 'Continuing Education',
-                    'get-healthy'           => 'Get Healthy UAMS',
-                    'gsa'                   => 'Graduate Student Association',
-                    'ipe'                   => 'Office of Interprofessional Education',
-                    'library'               => 'Library',
-                    'employee_nurses'       => 'Nurses (Employee)',
-                    'main'                  => 'Main UAMS site',
-                    'none'                  => 'None of the above',
-                ),
-                'js_options'      => array(
-                    'width' => '90%',
-                ),
-                'visible' => array( 'uamswp_location', '=', 'uams' ),
-            ),
-
-            array(
-                'id'             => 'uamswp_uamshealth_subsite',
-                'name'           => 'Organization',
-                'type'            => 'select_advanced',
-                'placeholder'     => 'Select an organization',
-                // Array of 'value' => 'Label' pairs
-                'options'         => array(
-                    'uams-aux'           => 'UAMS Auxiliary',
-                    'none'               => 'None of the above',
-                ),
-                'visible' => array( 'uamswp_template', '=', 'health' ),
-            ),
-
-            array(
-                'id'             => 'uamswp_inside_subsite',
-                'name'           => 'Organization',
-                'type'            => 'select_advanced',
-                'placeholder'     => 'Select an organization',
-                // Array of 'value' => 'Label' pairs
-                'options'         => array(
-                    'fitness-center'     => 'Fitness Center',
-                    'none'               => 'None of the above',
-                ),
-                'visible' => array( 'uamswp_template', '=', 'inside' ),
-            ),
-
-            array(
-                'type' => 'heading',
-                'name' => 'Custom Address',
-                'desc' => 'Custom address(s), if needed',
-                'hidden' => array( 
-                    array('uamswp_template', '!=', 'institute'),
-                    array('uamswp_location', '=', 'uams'),
-                ),
-            ),
-
-            array(
-                'id'           => 'uamswp_address',
-                'title'        => 'Custom Address',
-                // 'tab'       => 'faq',
-                'type'         => 'group',
-                'clone'        => true,
-                'collapsible'  => true,
-                'sort_clone'   => true,
-                'group_title'  => array( 'field' => 'address_title' ),
-                'max_clone'    => '2',
-                'fields' => array(
-                    array(
-                        'name' => 'Address Name',
-                        'id'   => 'address_title',
-                        'type' => 'text',
-                        'description'   => 'Leave blank for a single address',
-                        'placeholder' => 'Mailing Address',
-                    ),
-                    array(
-                        'name' => 'Address',
-                        'id'   => 'address_street_1',
-                        'type' => 'text',
-                        'placeholder' => '4301 West Markham St #123',
-                    ),
-                    array(
-                        'name' => 'Address (2)',
-                        'id'   => 'address_street_2',
-                        'type' => 'text',
-                    ),
-                    array(
-                        'name' => 'City',
-                        'id'   => 'address_city',
-                        'type' => 'text',
-                        'placeholder' => 'Little Rock',
-                    ),
-                    array(
-                        'name' => 'State',
-                        'id'   => 'address_state',
-                        'type' => 'select',
-                        'options' =>       array (
-                            'AL' => 'Alabama',
-                            'AK' => 'Alaska',
-                            'AZ' => 'Arizona',
-                            'AR' => 'Arkansas',
-                            'CA' => 'California',
-                            'CO' => 'Colorado',
-                            'CT' => 'Connecticut',
-                            'DE' => 'Delaware',
-                            'DC' => 'District Of Columbia',
-                            'FL' => 'Florida',
-                            'GA' => 'Georgia',
-                            'HI' => 'Hawaii',
-                            'ID' => 'Idaho',
-                            'IL' => 'Illinois',
-                            'IN' => 'Indiana',
-                            'IA' => 'Iowa',
-                            'KS' => 'Kansas',
-                            'KY' => 'Kentucky',
-                            'LA' => 'Louisiana',
-                            'ME' => 'Maine',
-                            'MD' => 'Maryland',
-                            'MA' => 'Massachusetts',
-                            'MI' => 'Michigan',
-                            'MN' => 'Minnesota',
-                            'MS' => 'Mississippi',
-                            'MO' => 'Missouri',
-                            'MT' => 'Montana',
-                            'NE' => 'Nebraska',
-                            'NV' => 'Nevada',
-                            'NH' => 'New Hampshire',
-                            'NJ' => 'New Jersey',
-                            'NM' => 'New Mexico',
-                            'NY' => 'New York',
-                            'NC' => 'North Carolina',
-                            'ND' => 'North Dakota',
-                            'OH' => 'Ohio',
-                            'OK' => 'Oklahoma',
-                            'OR' => 'Oregon',
-                            'PA' => 'Pennsylvania',
-                            'RI' => 'Rhode Island',
-                            'SC' => 'South Carolina',
-                            'SD' => 'South Dakota',
-                            'TN' => 'Tennessee',
-                            'TX' => 'Texas',
-                            'UT' => 'Utah',
-                            'VT' => 'Vermont',
-                            'VA' => 'Virginia',
-                            'WA' => 'Washington',
-                            'WV' => 'West Virginia',
-                            'WI' => 'Wisconsin',
-                            'WY' => 'Wyoming',
-                          ),
-                          'std' =>       array (
-                             'AR',
-                          ),
-
-                    ),
-                    array(
-                        'name' => 'Zip',
-                        'id'   => 'address_zip',
-                        'type' => 'text',
-                        'size' => '10',
-                        'placeholder' => '72205',
-                    ),
-                ),
-                'hidden' => array( 
-                    array('uamswp_template', '!=', 'institute'),
-                    array('uamswp_location', '=', 'uams'),
-                ),
-            ),
-        ),
-    );
-
-    $meta_boxes[] = array(
-        'id'             => 'uamswp_phone',
-        'title'          => 'Phone Number',
-        'settings_pages' => 'uamswp_options',
-        //'tab'            => 'faq',
-        'fields'         => array(
-            array(
-                'type' => 'custom_html',
-                'std'  => 'These will override the default social media',
-            ),
-            array(
-                'id' => 'uamswp_primary_phone',
-          	    'type' => 'tel',
-                'name' => 'Primary Phone #',
-                'placeholder' => '(501) 686-7000',
-            ),
-            array(
-                'id' => 'uamswp_add_phones',
-          	    'type' => 'url',
-                'name' => 'Additional Phone Number(s) [URL]',
-                'desc' => 'include http:// or https://'
-            ),
-        ),
-        'validation' => array(
-		    'rules'  => array(
-		        'uamswp_primary_phone' => array(
-		            'required'  => false,
-		            'phoneUS' => true,
-		        ),
-            ),
-        ),
-    );
-
-    // $meta_boxes[] = array(
-    //     'id'             => 'uamswp_social',
-    //     'title'          => 'Social Media',
-    //     'settings_pages' => 'uamswp_options',
-    //     //'tab'            => 'faq',
-    //     'fields'         => array(
-    //         array(
-    //             'type' => 'custom_html',
-    //             'std'  => 'These will override the default social media',
-    //         ),
-    //         array(
-    //             'id' => 'uamswp_facebook',
-    //       	    'type' => 'url',
-    //       	    'name' => 'Facebook URL',
-    //         ),
-    //         array(
-    //             'id' => 'uamswp_twitter',
-    //       	    'type' => 'url',
-    //       	    'name' => 'Twitter URL',
-    //         ),
-    //         array(
-    //             'id' => 'uamswp_instagram',
-    //       	    'type' => 'url',
-    //       	    'name' => 'Instagram URL',
-    //         ),
-    //         array(
-    //             'id' => 'uamswp_youtube',
-    //       	    'type' => 'url',
-    //       	    'name' => 'YouTube URL',
-    //         ),
-    //         array(
-    //             'id' => 'uamswp_linkedin',
-    //       	    'type' => 'url',
-    //       	    'name' => 'LinkedIn URL',
-    //         ),
-    //         array(
-    //             'id' => 'uamswp_pinterest',
-    //       	    'type' => 'url',
-    //       	    'name' => 'Pinterest URL',
-    //         ),
-    //     ),
-    // );
-
-    $meta_boxes[] = array(
-        'id'             => 'info',
-        'title'          => 'Theme Info',
-        'settings_pages' => 'uamswp_options',
-        'context'        => 'side',
-        'fields'         => array(
-            array(
-                'type' => 'custom_html',
-                'std'  => 'Having questions? Check out our documentation',
-            ),
-        ),
-    );
-    return $meta_boxes;
-}
+endif;

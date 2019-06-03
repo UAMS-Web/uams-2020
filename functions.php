@@ -131,12 +131,12 @@ if ( !function_exists('uams_get_site_info')):
 		$subsite = '';
 		$option_name = 'uamswp_options'; // Settings page
 		$siteinfo = array();
-		$themestyle = rwmb_meta( 'uamswp_template', array( 'object_type' => 'setting' ), $option_name ); // uams, inside, health
-		$themelocation = rwmb_meta( 'uamswp_location', array( 'object_type' => 'setting' ), $option_name ); // campus, regional
-		$themeinstitute = rwmb_meta( 'uamswp_institute', array( 'object_type' => 'setting' ), $option_name ); // institute name
-		$uamsorganization = rwmb_meta( 'uamswp_uams_subsite', array( 'object_type' => 'setting' ), $option_name ); // college 
-		$healthorganization = rwmb_meta( 'uamswp_uamshealth_subsite', array( 'object_type' => 'setting' ), $option_name ); // college 
-		$insideorganization = rwmb_meta( 'uamswp_inside_subsite', array( 'object_type' => 'setting' ), $option_name ); // college 
+		$themestyle = get_field( 'uamswp_template', 'option' ); // uams, inside, health
+		$themelocation = get_field( 'uamswp_location', 'option' ); // campus, regional
+		$themeinstitute = get_field( 'uamswp_institute', 'option' ); // institute name
+		$uamsorganization = get_field( 'uamswp_uams_subsite', 'option' ); // college 
+		$healthorganization = get_field( 'uamswp_uamshealth_subsite', 'option' ); // health 
+		$insideorganization = get_field( 'uamswp_inside_subsite', 'option' ); // inside 
 		if ('health' == $themestyle) {
 			$site = "uamshealth";
 			if ('' != $healthorganization) {

@@ -74,3 +74,100 @@ function uamswp_body_class( $args ) {
 
 	return $args;
 }
+
+/* Add site & subsite to body class - used for site customizations (ex. different background image in footer) */
+add_filter( 'genesis_attr_body', 'uamswp_site_add_css_attr' );
+function uamswp_site_add_css_attr( $attributes ) {
+    // Add the site & subsite to  class ex. uams medicine, institute cancer
+    $attributes['class'] = $attributes['class'] . ' '. uams_get_site_info()['site'] . ' '. uams_get_site_info()['subsite'];
+    return $attributes;
+}
+
+// Remove site-inner markup
+add_filter( 'genesis_markup_site-inner', '__return_null' );
+
+// Remove content/sidebar layout.
+// genesis_unregister_layout( 'content-sidebar' );
+ 
+// Remove sidebar/content layout.
+genesis_unregister_layout( 'sidebar-content' );
+ 
+// Remove content/sidebar/sidebar layout.
+genesis_unregister_layout( 'content-sidebar-sidebar' );
+ 
+// Remove sidebar/sidebar/content layout.
+genesis_unregister_layout( 'sidebar-sidebar-content' );
+ 
+// Remove sidebar/content/sidebar layout.
+genesis_unregister_layout( 'sidebar-content-sidebar' );
+
+// Set full-width content as the default layout.
+genesis_set_default_layout( 'full-width-content' );
+
+//* Force full-width-content layout setting
+add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
+//* Remove Genesis Layout Settings
+// remove_theme_support( 'genesis-inpost-layouts' );
+
+// Remove gutenberg blocks
+add_filter( 'allowed_block_types', 'uamswp_allowed_block_types' );
+ 
+function uamswp_allowed_block_types( $allowed_blocks ) {
+
+	// get widget blocks and registered by plugins blocks
+	$registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
+ 
+	// in case we do not need widgets
+	unset( $registered_blocks[ 'core/latest-comments' ] );
+	unset( $registered_blocks[ 'core/archives' ] );
+	unset( $registered_blocks[ 'core/tag-cloud' ] );
+	unset( $registered_blocks[ 'core/search' ] );
+	unset( $registered_blocks[ 'core/rss' ] );
+	unset( $registered_blocks[ 'core/calendar' ] );
+	unset( $registered_blocks[ 'core/latest-posts' ] );
+	unset( $registered_blocks[ 'acf/acfb-starrating' ] );
+	unset( $registered_blocks[ 'acf/acfb-pricelist' ] );
+	unset( $registered_blocks[ 'acf/acfb-pricingbox' ] );
+	unset( $registered_blocks[ 'acf/acfb-multibuttons' ] );
+	unset( $registered_blocks[ 'acf/acfb-progressbar' ] );
+	// unset( $registered_blocks[ 'acf/acfb-pricingbox' ] );
+ 
+	// now $registered_blocks contains only blocks registered by plugins, but we need keys only
+	$registered_blocks = array_keys( $registered_blocks );
+ 
+	// merge the whitelist with plugins blocks
+	return array_merge( array(
+		// Common
+		'core/image',
+		'core/paragraph',
+		'core/heading',
+		'core/list',
+		'core/quote',
+		'core/file',
+		// 'core/video', // Use embeds??
+		// Formatting
+		'core/table',
+		'core/code',
+		'core/freeform', // Classic
+		'core/html', // Custom HTML
+		'core/preformatted',
+		'core/pullquote',
+		// Layout
+		'core/media-text',
+		'core/spacer',
+		// Embeds
+		'core/embed',
+		'core-embed/twitter',
+		'core-embed/youtube',
+		'core-embed/facebook',
+		'core-embed/instagram',
+		'core-embed/flickr',
+		'core-embed/vimeo',
+		'core-embed/issuu',
+		'core-embed/screencast',
+		'core-embed/scribd',
+		'core-embed/slideshare',
+		'core-embed/ted',
+	), $registered_blocks );
+ 
+}
