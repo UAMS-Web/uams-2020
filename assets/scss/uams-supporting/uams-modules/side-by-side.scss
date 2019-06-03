@@ -7,9 +7,6 @@
     // The transform and transition properties are applied to different elements
     // based on the two image methods.
 
-    padding: 0;
-    background-color: #eee;
-
     &:hover,
     &:active {
         .image-container {
