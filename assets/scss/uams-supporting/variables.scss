@@ -248,6 +248,9 @@ $spacers: (
     10: ($spacer * 4)      // 64px
 );
 
+$uams-module-padding: $spacer * 3;
+$uams-module-padding-mobile: $spacer * 2;
+
 // This variable affects the `.h-*` and `.w-*` classes.
 $sizes: (
     25: 25%,
