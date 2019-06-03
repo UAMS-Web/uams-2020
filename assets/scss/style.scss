@@ -108,6 +108,9 @@
 @import "supporting/site-inner";
 @import "uams-supporting/site-inner";
 
+// Template, Basic
+@import "uams-supporting/template-basic";
+
 // Archive/Blog
 @import "supporting/archive";
 
@@ -116,6 +119,9 @@
 
 // Sidebar
 @import "supporting/sidebar";
+
+// UAMS Modules
+@import "uams-supporting/uams-modules";
 
 // Hero
 @import "uams-supporting/hero";
@@ -146,3 +152,6 @@
 
 // Intranet
 @import "uams-supporting/intranet";
+
+// Awesome Weather
+@import "uams-supporting/awesome-weather";
