@@ -12,14 +12,14 @@
         .image-container {
             .image-inner-container {
                 @include media-breakpoint-up(md) {
-                    -webkit-transform: scale(1.08);
-                    transform: scale(1.08);
+                    -webkit-transform: scale($image-hover-size);
+                    transform: scale($image-hover-size);
                 }
 
                 img {
                     @include media-breakpoint-down(sm) {
-                        -webkit-transform: scale(1.08);
-                        transform: scale(1.08);
+                        -webkit-transform: scale($image-hover-size);
+                        transform: scale($image-hover-size);
                     }
                 }
             }
@@ -48,16 +48,16 @@
             }
             @include media-breakpoint-up(md) {
                 flex-grow: 1;
-                -webkit-transition: transform 1s ease;
-                transition: transform 1s ease;
+                -webkit-transition: $image-hover-size-transition;
+                transition: $image-hover-size-transition;
                 cursor: pointer;
                 background-size: cover;
                 background-position: center center;
             }
 
             img {
-                -webkit-transition: 1s ease;
-                transition: 1s ease;
+                -webkit-transition: $image-hover-size-transition;
+                transition: $image-hover-size-transition;
                 cursor: pointer;
 
                 @include media-breakpoint-up(md) {

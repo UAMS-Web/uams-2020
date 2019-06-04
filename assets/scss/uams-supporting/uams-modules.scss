@@ -9,6 +9,10 @@
         @include media-breakpoint-up(sm) {
             padding: $uams-module-padding;
         }
+
+        > .container-fluid {
+            padding: 0;
+        }
     }
 
     .cta-container {
@@ -31,7 +35,14 @@
 
         }
     }
+
+    &.bg-gray {
+        .more {
+            border-top-color: $body-bg-border-dark;
+        }
+    }
 }
 
 @import "uams-modules/side-by-side";
 @import "uams-modules/text-image-overlay";
+@import "uams-modules/news-tiles";

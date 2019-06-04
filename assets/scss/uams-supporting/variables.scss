@@ -248,9 +248,6 @@ $spacers: (
     10: ($spacer * 4)      // 64px
 );
 
-$uams-module-padding: $spacer * 3;
-$uams-module-padding-mobile: $spacer * 2;
-
 // This variable affects the `.h-*` and `.w-*` classes.
 $sizes: (
     25: 25%,
@@ -260,6 +257,13 @@ $sizes: (
     auto: auto
 );
 
+// UAMS Modules
+
+$uams-module-padding: $spacer * 3;
+$uams-module-padding-mobile: $spacer * 2;
+$image-hover-size: 1.08;
+$image-hover-size-transition: transform 1s ease;
+
 
 // Body
 //
@@ -268,6 +272,7 @@ $sizes: (
 $body-bg: $white;
 $body-bg-banded: $gray-50;
 $body-bg-border: $gray-200;
+$body-bg-border-dark: $gray-300;
 $body-color: $gray-900;
 
 
@@ -1255,11 +1260,6 @@ $print-body-min-width: map-get($grid-breakpoints, "lg");
 
 // Line Lengths
 
-$line-length-80: 35;
-$line-length-66: 28.875;
-$line-length-50: 21.875;
-
-
-// UAMS Modules
-
-$module-padding: $grid-gutter-width * 2;
+$line-length-max: 35; // 80 characters
+$line-length-ideal: 28.4375; // 65 characters
+$line-length-min: 19.6875; // 45 characters
