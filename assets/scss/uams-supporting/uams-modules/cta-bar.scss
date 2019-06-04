@@ -1,0 +1,240 @@
+.cta-bar {
+    &.cta-bar-centered {
+        .inner-container {
+            text-align: center;
+
+            h2,
+            .text-container,
+            .btn-container {
+                max-width: 100%;
+                margin-right: auto;
+                margin-left: auto;
+            }
+
+            h2 {
+                width: $line-length-min + em;
+            }
+
+            .text-container,
+            .btn-container {
+                width: $line-length-ideal + em;
+            }
+            .btn-container {
+                justify-content: center;
+            }
+        }
+    }
+    &.cta-bar-weighted {
+        .col-12 {
+            @include media-breakpoint-up(sm) {
+                display: flex;
+                flex: 0 1 auto;
+                justify-content: center;
+            }
+        }
+        .inner-container {
+            @include media-breakpoint-down(xs) {
+                text-align: center;
+            }
+            .cta-heading {
+                h2 {
+                    @include media-breakpoint-up(sm) {
+                        max-width: $line-length-min + em;
+                    }
+                }
+            }
+            .cta-body {
+                @include media-breakpoint-up(sm) {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: center;
+                    align-items: flex-start;
+                }
+
+                .text-container {
+                    @include media-breakpoint-up(sm) {
+                        min-width: $line-length-min + em;
+                        max-width: $line-length-max + em;
+                        //max-width: 100%;
+                        padding-right: $uams-module-padding-mobile;
+                    }
+                }
+                .btn {
+                }
+            }
+        }
+    }
+
+    &.bg-image {
+        position: relative;
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.3;
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+            background-size: cover;
+            background-position: 50%;
+            background-repeat: no-repeat;
+        }
+    }
+
+    &.white,
+    &.gray {
+        color: $body-color;
+        &.bg-image {
+            &:before {
+                opacity: 0.15;
+            }
+        }
+        .btn {
+            @extend .btn-primary;
+        }
+    }
+
+    &.black,
+    &.red,
+    &.blue,
+    &.green,
+    &.teal,
+    &.eggplant,
+    &.orange {
+        color: $white;
+        &.bg-image {
+            &:before {
+                mix-blend-mode: overlay;
+            }
+        }
+        .btn {
+            @extend .btn-light;
+        }
+    }
+
+    &.white {
+        background-color: $white;
+    }
+
+    &.gray {
+        background-color: $body-bg-banded;
+    }
+
+    &.black {
+        background-color: $gray-900;
+
+        &:before {
+            //opacity: 0.3; // 1.19 contrast ratio between blacks and whites
+            //opacity: 0.5; // 1.33 contrast ratio between blacks and whites
+            opacity: 0.6; // 1.42 contrast ratio between blacks and whites
+            //opacity: 0.7; // 1.52 contrast ratio between blacks and whites
+        }
+
+        .text-container {
+            .btn {
+                color: $gray-900;
+            }
+        }
+    }
+
+    &.red {
+        background-color: $red-dark;
+
+        &:before,
+        &:after {
+            opacity: 0.2; // 1.48 contrast ratio between blacks and whites
+            //opacity: 0.3; // 1.79 contrast ratio between blacks and whites
+        }
+
+        .text-container {
+            .btn {
+                color: $red-dark;
+            }
+        }
+    }
+
+    &.blue {
+        background-color: $blue-darker;
+
+        &:before,
+        &:after {
+            //opacity: 0.1; // 1.28 contrast ratio between blacks and whites
+            opacity: 0.15; // 1.47 contrast ratio between blacks and whites
+            //opacity: 0.2; // 1.65 contrast ratio between blacks and whites
+        }
+
+        .text-container {
+            .btn {
+                color: $blue-darker;
+            }
+        }
+    }
+
+    &.green {
+        background-color: $green-darkest;
+
+        &:before {
+            //opacity: 0.1; // 1.34 contrast ratio between blacks and whites (green-darkest)
+            opacity: 0.15; // 1.52 contrast ratio between blacks and whites (green-darkest)
+            //opacity: 0.2; // 1.79 contrast ratio between blacks and whites (green-darkest)
+        }
+
+        .text-container {
+            .btn {
+                color: $green-darkest;
+            }
+        }
+    }
+
+    &.teal {
+        background-color: $teal-darkest;
+
+        &:before {
+            //opacity: 0.1; // 1.27 contrast ratio between blacks and whites (teal-darkest)
+            //opacity: 0.15; // 1.43 contrast ratio between blacks and whites (teal-darkest)
+            opacity: 0.175; // 1.5 contrast ratio between blacks and whites (teal-darkest)
+            //opacity: 0.2; // 1.62 contrast ratio between blacks and whites (teal-darkest)
+            //opacity: 0.3; // 2.03 contrast ratio between blacks and whites (teal-darkest)
+        }
+
+        .text-container {
+            .btn {
+                color: $teal-darkest;
+            }
+        }
+    }
+
+    &.eggplant {
+        background-color: $eggplant;
+
+        &:before {
+            opacity: 0.2; // 1.43 contrast ratio between blacks and whites
+            //opacity: 0.3; // 1.7 contrast ratio between blacks and whites
+        }
+
+        .text-container {
+            .btn {
+                color: $eggplant;
+            }
+        }
+    }
+
+    &.orange {
+        background-color: $orange-darkest;
+
+        &:before {
+            opacity: 0.2; // 1.51 contrast ratio between blacks and whites
+            //opacity: 0.3; // 1.86 contrast ratio between blacks and whites
+        }
+
+        .text-container {
+            .btn {
+                color: $orange-darkest;
+            }
+        }
+    }
+}
