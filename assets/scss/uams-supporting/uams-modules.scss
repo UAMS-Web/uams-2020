@@ -44,9 +44,98 @@
         }
     }
 
+    &.bg-white,
     &.bg-gray {
+        color: $body-color;
+        &.bg-image {
+            &:before {
+                opacity: 0.15;
+            }
+        }
+    }
+
+    &.bg-white {
+        background-color: $white;
+    }
+
+    &.bg-gray {
+        background-color: $body-bg-banded;
+
         .more {
             border-top-color: $body-bg-border-dark;
+        }
+    }
+
+    &.bg-black,
+    &.bg-red,
+    &.bg-blue,
+    &.bg-green,
+    &.bg-teal,
+    &.bg-eggplant,
+    &.bg-orange {
+        color: $white;
+        &.bg-image {
+            &:before {
+                mix-blend-mode: overlay;
+            }
+        }
+    }
+
+    &.bg-black {
+        background-color: $gray-900;
+
+        &:before {
+            opacity: 0.6; // 1.42 contrast ratio between blacks and whites
+        }
+    }
+
+    &.bg-red {
+        background-color: $red-dark;
+
+        &:before,
+        &:after {
+            opacity: 0.2; // 1.48 contrast ratio between blacks and whites
+        }
+    }
+
+    &.bg-blue {
+        background-color: $blue-darker;
+
+        &:before,
+        &:after {
+            opacity: 0.15; // 1.47 contrast ratio between blacks and whites
+        }
+    }
+
+    &.bg-green {
+        background-color: $green-darkest;
+
+        &:before {
+            opacity: 0.15; // 1.52 contrast ratio between blacks and whites (green-darkest)
+        }
+    }
+
+    &.bg-teal {
+        background-color: $teal-darkest;
+
+        &:before {
+            opacity: 0.175; // 1.5 contrast ratio between blacks and whites (teal-darkest)
+        }
+    }
+
+    &.bg-eggplant {
+        background-color: $eggplant;
+
+        &:before {
+            opacity: 0.2; // 1.43 contrast ratio between blacks and whites
+        }
+    }
+
+    &.bg-orange {
+        background-color: $orange-darkest;
+
+        &:before {
+            opacity: 0.2; // 1.51 contrast ratio between blacks and whites
         }
     }
 }
@@ -55,4 +144,5 @@
 @import "uams-modules/text-image-overlay";
 @import "uams-modules/news-tiles";
 @import "uams-modules/cta-bar";
+@import "uams-modules/action-bar";
 @import "uams-modules/call-out";
