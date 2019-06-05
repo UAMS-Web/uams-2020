@@ -26,40 +26,46 @@
     }
     &.cta-bar-weighted {
         .col-12 {
-            @include media-breakpoint-up(sm) {
+            @include media-breakpoint-up(md) {
                 display: flex;
                 flex: 0 1 auto;
                 justify-content: center;
             }
         }
         .inner-container {
-            @include media-breakpoint-down(xs) {
+            @include media-breakpoint-down(sm) {
                 text-align: center;
             }
             .cta-heading {
                 h2 {
-                    @include media-breakpoint-up(sm) {
+                    @include media-breakpoint-up(md) {
                         max-width: $line-length-min + em;
                     }
                 }
             }
             .cta-body {
-                @include media-breakpoint-up(sm) {
-                    display: flex;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+
+                @include media-breakpoint-up(md) {
                     flex-flow: row nowrap;
-                    justify-content: center;
                     align-items: flex-start;
                 }
 
                 .text-container {
-                    @include media-breakpoint-up(sm) {
-                        min-width: $line-length-min + em;
-                        max-width: $line-length-max + em;
+                    max-width: $line-length-max + em;
+
+                    @include media-breakpoint-up(md) {
+                        flex: 1 0 ($line-length-min+em);
+                        //min-width: $line-length-min + em;
+                        
                         //max-width: 100%;
                         padding-right: $uams-module-padding-mobile;
                     }
                 }
-                .btn {
+                .btn-container {
+                    justify-content: center;
                 }
             }
         }
