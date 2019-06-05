@@ -64,4 +64,8 @@
             }
         }
     }
+
+    .text-container {
+        @include font-size($lead-font-size);
+    }
 }
