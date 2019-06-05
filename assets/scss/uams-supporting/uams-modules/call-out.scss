@@ -44,14 +44,4 @@
             background-repeat: no-repeat;
         }
     }
-
-    &.bg-white,
-    &.bg-gray {
-        color: $body-color;
-        &.bg-image {
-            &:before {
-                opacity: 0.15;
-            }
-        }
-    }
 }
