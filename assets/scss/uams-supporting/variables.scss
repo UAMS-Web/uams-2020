@@ -323,6 +323,13 @@ $breakpoint-lg: map-get($grid-breakpoints, lg);
 $breakpoint-xl: map-get($grid-breakpoints, xl);
 $breakpoint-xxl: map-get($grid-breakpoints, xxl);
 
+$breakpoint-xxs-max: $breakpoint-xs - 0.02;
+$breakpoint-xs-max: $breakpoint-sm - 0.02;
+$breakpoint-sm-max: $breakpoint-md - 0.02;
+$breakpoint-md-max: $breakpoint-lg - 0.02;
+$breakpoint-lg-max: $breakpoint-xl - 0.02;
+$breakpoint-xl-max: $breakpoint-xxl - 0.02;
+
 // Grid containers
 //
 // Define the maximum width of `.container` for different screen sizes.
