@@ -89,11 +89,17 @@
                 display: block;
                 font-size: 0.5em;
                 text-transform: uppercase;
-                color: $red;
+                color: $gray-600;
+
+                a {
+                    text-decoration: none;
+                    @include hover-focus {
+                        text-decoration: underline;
+                    }
+                }
             }
 
             .title {
-                cursor: pointer;
                 display: block;
             }
 
