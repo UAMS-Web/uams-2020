@@ -85,8 +85,8 @@
         }
     }
 
-    &.white,
-    &.gray {
+    &.bg-white,
+    &.bg-gray {
         color: $body-color;
         &.bg-image {
             &:before {
@@ -98,13 +98,13 @@
         }
     }
 
-    &.black,
-    &.red,
-    &.blue,
-    &.green,
-    &.teal,
-    &.eggplant,
-    &.orange {
+    &.bg-black,
+    &.bg-red,
+    &.bg-blue,
+    &.bg-green,
+    &.bg-teal,
+    &.bg-eggplant,
+    &.bg-orange {
         color: $white;
         &.bg-image {
             &:before {
@@ -116,15 +116,15 @@
         }
     }
 
-    &.white {
+    &.bg-white {
         background-color: $white;
     }
 
-    &.gray {
+    &.bg-gray {
         background-color: $body-bg-banded;
     }
 
-    &.black {
+    &.bg-black {
         background-color: $gray-900;
 
         &:before {
@@ -141,7 +141,7 @@
         }
     }
 
-    &.red {
+    &.bg-red {
         background-color: $red-dark;
 
         &:before,
@@ -157,7 +157,7 @@
         }
     }
 
-    &.blue {
+    &.bg-blue {
         background-color: $blue-darker;
 
         &:before,
@@ -174,7 +174,7 @@
         }
     }
 
-    &.green {
+    &.bg-green {
         background-color: $green-darkest;
 
         &:before {
@@ -190,7 +190,7 @@
         }
     }
 
-    &.teal {
+    &.bg-teal {
         background-color: $teal-darkest;
 
         &:before {
@@ -208,7 +208,7 @@
         }
     }
 
-    &.eggplant {
+    &.bg-eggplant {
         background-color: $eggplant;
 
         &:before {
@@ -223,7 +223,7 @@
         }
     }
 
-    &.orange {
+    &.bg-orange {
         background-color: $orange-darkest;
 
         &:before {
