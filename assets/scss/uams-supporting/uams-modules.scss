@@ -78,6 +78,11 @@
         .btn {
             @extend .btn-primary;
         }
+
+        .more .btn {
+            background-color: transparent;
+            @extend .btn-outline-primary;
+        }
     }
 
     &.bg-white,
@@ -117,6 +122,11 @@
 
         .btn {
             @extend .btn-light;
+        }
+
+        .more .btn {
+            background-color: transparent;
+            @extend .btn-outline-light;
         }
     }
 
