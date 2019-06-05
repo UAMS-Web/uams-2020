@@ -15,6 +15,14 @@
         }
     }
 
+    &.extra-padding {
+        padding: ($uams-module-padding-mobile * 3) $uams-module-padding-mobile;
+    
+        @include media-breakpoint-up(sm) {
+            padding: ($uams-module-padding * 3) $uams-module-padding;
+        }
+    }
+
     .cta-container {
         margin: -0.25em;
         .btn {
@@ -47,3 +55,4 @@
 @import "uams-modules/text-image-overlay";
 @import "uams-modules/news-tiles";
 @import "uams-modules/cta-bar";
+@import "uams-modules/call-out";

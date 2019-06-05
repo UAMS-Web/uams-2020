@@ -1,0 +1,152 @@
+.call-out {
+    .col-12 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .text-container {
+        text-align: center;
+        max-width: 100%;
+
+        h2,
+        .call-out-body {
+            max-width: 100%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        h2 {
+            width: $line-length-min + em;
+        }
+
+        .call-out-body {
+            @include font-size($lead-font-size);
+            width: $line-length-ideal + em;
+        }
+    }
+
+    &.bg-image {
+        position: relative;
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.3;
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+            background-size: cover;
+            background-position: 50%;
+            background-repeat: no-repeat;
+        }
+    }
+
+    &.bg-white,
+    &.bg-gray {
+        color: $body-color;
+        &.bg-image {
+            &:before {
+                opacity: 0.15;
+            }
+        }
+    }
+
+    &.bg-black,
+    &.bg-red,
+    &.bg-blue,
+    &.bg-green,
+    &.bg-teal,
+    &.bg-eggplant,
+    &.bg-orange {
+        color: $white;
+        &.bg-image {
+            &:before {
+                mix-blend-mode: overlay;
+            }
+        }
+    }
+
+    &.bg-white {
+        background-color: $white;
+    }
+
+    &.bg-gray {
+        background-color: $body-bg-banded;
+    }
+
+    &.bg-black {
+        background-color: $gray-900;
+
+        &:before {
+            //opacity: 0.3; // 1.19 contrast ratio between blacks and whites
+            //opacity: 0.5; // 1.33 contrast ratio between blacks and whites
+            opacity: 0.6; // 1.42 contrast ratio between blacks and whites
+            //opacity: 0.7; // 1.52 contrast ratio between blacks and whites
+        }
+    }
+
+    &.bg-red {
+        background-color: $red-dark;
+
+        &:before,
+        &:after {
+            opacity: 0.2; // 1.48 contrast ratio between blacks and whites
+            //opacity: 0.3; // 1.79 contrast ratio between blacks and whites
+        }
+    }
+
+    &.bg-blue {
+        background-color: $blue-darker;
+
+        &:before,
+        &:after {
+            //opacity: 0.1; // 1.28 contrast ratio between blacks and whites
+            opacity: 0.15; // 1.47 contrast ratio between blacks and whites
+            //opacity: 0.2; // 1.65 contrast ratio between blacks and whites
+        }
+    }
+
+    &.bg-green {
+        background-color: $green-darkest;
+
+        &:before {
+            //opacity: 0.1; // 1.34 contrast ratio between blacks and whites (green-darkest)
+            opacity: 0.15; // 1.52 contrast ratio between blacks and whites (green-darkest)
+            //opacity: 0.2; // 1.79 contrast ratio between blacks and whites (green-darkest)
+        }
+    }
+
+    &.bg-teal {
+        background-color: $teal-darkest;
+
+        &:before {
+            //opacity: 0.1; // 1.27 contrast ratio between blacks and whites (teal-darkest)
+            //opacity: 0.15; // 1.43 contrast ratio between blacks and whites (teal-darkest)
+            opacity: 0.175; // 1.5 contrast ratio between blacks and whites (teal-darkest)
+            //opacity: 0.2; // 1.62 contrast ratio between blacks and whites (teal-darkest)
+            //opacity: 0.3; // 2.03 contrast ratio between blacks and whites (teal-darkest)
+        }
+    }
+
+    &.bg-eggplant {
+        background-color: $eggplant;
+
+        &:before {
+            opacity: 0.2; // 1.43 contrast ratio between blacks and whites
+            //opacity: 0.3; // 1.7 contrast ratio between blacks and whites
+        }
+    }
+
+    &.bg-orange {
+        background-color: $orange-darkest;
+
+        &:before {
+            opacity: 0.2; // 1.51 contrast ratio between blacks and whites
+            //opacity: 0.3; // 1.86 contrast ratio between blacks and whites
+        }
+    }
+}
