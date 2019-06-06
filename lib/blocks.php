@@ -68,6 +68,17 @@ function uams_register_blocks() {
             'align'             => 'full',
             'render_template'   => 'blocks/cta.php',
         ));
+        acf_register_block_type(array(
+            'name'              => 'call-out',
+            'title'             => __('UAMS Call-Out'),
+            'description'       => __('Call-Out.'),
+            'category'          => 'common',
+            'icon'              => 'megaphone',
+            'keywords'          => array('uams', 'callout', 'call-out', 'text'),
+            'mode'              => 'auto',
+            'align'             => 'full',
+            'render_template'   => 'blocks/call-out.php',
+        ));
         // acf_register_block_type(array(
         //     'name'              => 'block',
         //     'title'             => __('UAMS Block'),
@@ -1219,7 +1230,8 @@ if( function_exists('acf_add_local_field_group') ):
     //     'active' => true,
     //     'description' => '',
     // ));
-    
+
+    // Add local field group for UAMS Hero Block
     acf_add_local_field_group(array(
         'key' => 'group_5ceef46c9fe82',
         'title' => 'Block: UAMS Slideshow',
@@ -1596,6 +1608,7 @@ if( function_exists('acf_add_local_field_group') ):
         'description' => '',
     ));
 
+    // Add local field group for UAMS CTA Bar Block
     acf_add_local_field_group(array(
         'key' => 'group_5cf938222421c',
         'title' => 'UAMS CTA Bar',
@@ -1854,6 +1867,154 @@ if( function_exists('acf_add_local_field_group') ):
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/cta',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+    ));
+
+    // Add local field group for UAMS Call-Out Block
+    acf_add_local_field_group(array(
+        'key' => 'group_5cf980995ac56',
+        'title' => 'UAMS Call-Out',
+        'fields' => array(
+            array(
+                'key' => 'field_5cf980995d30b',
+                'label' => 'Heading',
+                'name' => 'call-out_heading',
+                'type' => 'text',
+                'instructions' => '',
+                'required' => 1,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'default_value' => '',
+                'placeholder' => '',
+                'prepend' => '',
+                'append' => '',
+                'maxlength' => '',
+            ),
+            array(
+                'key' => 'field_5cf980995d342',
+                'label' => 'Body',
+                'name' => 'call-out_body',
+                'type' => 'textarea',
+                'instructions' => '',
+                'required' => 1,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'default_value' => '',
+                'placeholder' => '',
+                'maxlength' => '',
+                'rows' => '',
+                'new_lines' => '',
+            ),
+            array(
+                'key' => 'field_5cf980995d50b',
+                'label' => 'Background Color',
+                'name' => 'call-out_background-color',
+                'type' => 'select',
+                'instructions' => '',
+                'required' => 1,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'choices' => array(
+                    'bg-white' => 'White',
+                    'bg-gray' => 'Gray',
+                    'bg-red' => 'Red',
+                    'bg-black' => 'Black',
+                    'bg-blue' => 'Blue',
+                    'bg-green' => 'Green',
+                    'bg-teal' => 'Teal',
+                    'bg-eggplant' => 'Eggplant',
+                    'bg-orange' => 'Orange',
+                ),
+                'default_value' => array(
+                    0 => 'bg-white',
+                ),
+                'allow_null' => 0,
+                'multiple' => 0,
+                'ui' => 0,
+                'return_format' => 'value',
+                'ajax' => 0,
+                'placeholder' => '',
+            ),
+            array(
+                'key' => 'field_5cf980995d56e',
+                'label' => 'Use Background Image?',
+                'name' => 'call-out_use-image',
+                'type' => 'true_false',
+                'instructions' => '',
+                'required' => 1,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'message' => '',
+                'default_value' => 0,
+                'ui' => 1,
+                'ui_on_text' => '',
+                'ui_off_text' => '',
+            ),
+            array(
+                'key' => 'field_5cf980995d5d1',
+                'label' => 'Image',
+                'name' => 'call-out_image',
+                'type' => 'image',
+                'instructions' => '',
+                'required' => 1,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_5cf980995d56e',
+                            'operator' => '==',
+                            'value' => '1',
+                        ),
+                    ),
+                ),
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'return_format' => 'id',
+                'preview_size' => 'thumbnail',
+                'library' => 'all',
+                'min_width' => '',
+                'min_height' => '',
+                'min_size' => '',
+                'max_width' => '',
+                'max_height' => '',
+                'max_size' => '',
+                'mime_types' => '',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'block',
+                    'operator' => '==',
+                    'value' => 'acf/call-out',
                 ),
             ),
         ),
