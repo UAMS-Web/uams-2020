@@ -120,6 +120,14 @@
             }
         }
 
+        a:not(.btn) {
+            color: $white;
+
+            @include hover-focus {
+                color: $white;
+            }
+        }
+
         .btn {
             @extend .btn-light;
         }
