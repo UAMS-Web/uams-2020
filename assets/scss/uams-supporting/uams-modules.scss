@@ -1,13 +1,24 @@
-
 .uams-module {
     //padding-top: $module-padding;
     //padding-bottom: $module-padding;
 
     &:not(.no-padding) {
         padding: $uams-module-padding-mobile;
-    
+
         @include media-breakpoint-up(sm) {
             padding: $uams-module-padding;
+        }
+
+        > .container-fluid {
+            padding: 0;
+        }
+    }
+
+    &.extra-padding {
+        padding: ($uams-module-padding-mobile * 3) $uams-module-padding-mobile;
+
+        @include media-breakpoint-up(sm) {
+            padding: ($uams-module-padding * 3) $uams-module-padding;
         }
     }
 
@@ -28,9 +39,202 @@
         @include media-breakpoint-up(sm) {
             margin-top: ($spacer * 3);
             padding-top: ($spacer * 3);
+        }
+    }
 
+    &.bg-image,
+    .item.bg-image {
+        position: relative;
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.3;
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+            background-size: cover;
+            background-position: 50%;
+            background-repeat: no-repeat;
+        }
+    }
+
+    &.bg-white,
+    &.bg-gray,
+    .item.bg-white,
+    .item.bg-gray {
+        color: $body-color;
+        &.bg-image {
+            &:before {
+                opacity: 0.15;
+            }
+        }
+
+        .btn {
+            @extend .btn-primary;
+        }
+
+        .more .btn {
+            background-color: transparent;
+            @extend .btn-outline-primary;
+        }
+    }
+
+    &.bg-white,
+    .item.bg-white {
+        background-color: $white;
+    }
+
+    &.bg-gray,
+    .item.bg-gray {
+        background-color: $body-bg-banded;
+
+        .more {
+            border-top-color: $body-bg-border-dark;
+        }
+    }
+
+    &.bg-black,
+    &.bg-red,
+    &.bg-blue,
+    &.bg-green,
+    &.bg-teal,
+    &.bg-eggplant,
+    &.bg-orange,
+    .item.bg-black,
+    .item.bg-red,
+    .item.bg-blue,
+    .item.bg-green,
+    .item.bg-teal,
+    .item.bg-eggplant,
+    .item.bg-orange {
+        color: $white;
+        &.bg-image {
+            &:before {
+                mix-blend-mode: overlay;
+            }
+        }
+
+        a:not(.btn) {
+            color: $white;
+
+            @include hover-focus {
+                color: $white;
+            }
+        }
+
+        .btn {
+            @extend .btn-light;
+        }
+
+        .more .btn {
+            background-color: transparent;
+            @extend .btn-outline-light;
+        }
+    }
+
+    &.bg-black,
+    .item.bg-black {
+        background-color: $gray-900;
+
+        &:before {
+            opacity: 0.6; // 1.42 contrast ratio between blacks and whites
+        }
+
+        .btn {
+            color: $gray-900;
+        }
+    }
+
+    &.bg-red,
+    .item.bg-red {
+        background-color: $red-dark;
+
+        &:before,
+        &:after {
+            opacity: 0.2; // 1.48 contrast ratio between blacks and whites
+        }
+
+        .btn {
+            color: $red-dark;
+        }
+    }
+
+    &.bg-blue,
+    .item.bg-blue {
+        background-color: $blue-darker;
+
+        &:before,
+        &:after {
+            opacity: 0.15; // 1.47 contrast ratio between blacks and whites
+        }
+
+        .btn {
+            color: $blue-darker;
+        }
+    }
+
+    &.bg-green,
+    .item.bg-green {
+        background-color: $green-darkest;
+
+        &:before {
+            opacity: 0.15; // 1.52 contrast ratio between blacks and whites (green-darkest)
+        }
+
+        .btn {
+            color: $green-darkest;
+        }
+    }
+
+    &.bg-teal,
+    .item.bg-teal {
+        background-color: $teal-darkest;
+
+        &:before {
+            opacity: 0.175; // 1.5 contrast ratio between blacks and whites (teal-darkest)
+        }
+
+        .btn {
+            color: $teal-darkest;
+        }
+    }
+
+    &.bg-eggplant,
+    .item.bg-eggplant {
+        background-color: $eggplant;
+
+        &:before {
+            opacity: 0.2; // 1.43 contrast ratio between blacks and whites
+        }
+
+        .btn {
+            color: $eggplant;
+        }
+    }
+
+    &.bg-orange,
+    .item.bg-orange {
+        background-color: $orange-darkest;
+
+        &:before {
+            opacity: 0.2; // 1.51 contrast ratio between blacks and whites
+        }
+
+        .btn {
+            color: $orange-darkest;
         }
     }
 }
 
 @import "uams-modules/side-by-side";
+@import "uams-modules/text-image-overlay";
+@import "uams-modules/news-tiles";
+@import "uams-modules/cta-bar";
+@import "uams-modules/action-bar";
+@import "uams-modules/call-out";

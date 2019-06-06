@@ -142,11 +142,11 @@
     }
 }
 .intranet-col-secondary {
-    background-color: $gray-200;
+    //background-color: $gray-200;
+    border-left: 2px solid $body-bg-border;
 
     .uams-module {
-        border-bottom: 2px solid #fff;
-        background-color: #F5F3F4;
+        border-bottom: 2px solid $body-bg-border;
 
         .inner-container {
             width: 35em;
@@ -157,7 +157,7 @@
                 @extend .h4;
                 width: auto;
                 text-align: center;
-                margin-bottom: $spacer * 2;
+                margin-bottom: $uams-module-padding-mobile;
                 color: inherit;
     
                 @include media-breakpoint-up(md) {

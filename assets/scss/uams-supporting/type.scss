@@ -49,15 +49,15 @@ strong, b {
 .module-title {
     text-align: center;
     margin-top: 0 !important;
-    @extend .line-length-50;
-    margin-bottom: $spacer * 2;
+    @extend .line-length-min;
+    margin-bottom: $uams-module-padding-mobile;
 
     @include media-breakpoint-up(sm) {
-        margin-bottom: $spacer * 4;
+        margin-bottom: $uams-module-padding;
     }
 
     + .note {
-      @extend .line-length-80;
+      @extend .line-length-max;
       @extend .mt-n5;
       @extend .mb-8;
       @extend .mt-sm-n9;

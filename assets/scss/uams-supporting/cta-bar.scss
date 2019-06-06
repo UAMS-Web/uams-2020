@@ -8,10 +8,10 @@
     }
 
     h2 {
-        @extend .line-length-50;
+        @extend .line-length-min;
     }
     p {
         @extend .lead;
-        @extend .line-length-80;
+        @extend .line-length-max;
     }
 }

@@ -108,8 +108,11 @@
 @import "supporting/site-inner";
 @import "uams-supporting/site-inner";
 
-// Template, Basic
-@import "uams-supporting/template-basic";
+// Template, Default
+@import "uams-supporting/template-default";
+
+// Template, Landing Page
+@import "uams-supporting/template-landing-page";
 
 // Archive/Blog
 @import "supporting/archive";
