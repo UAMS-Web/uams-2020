@@ -1238,7 +1238,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'label' => 'Button Description',
                 'name' => 'cta-bar_button-description',
                 'type' => 'text',
-                'instructions' => '',
+                'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
                 'required' => 1,
                 'conditional_logic' => array(
                     array(
@@ -1747,7 +1747,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'label' => 'Button Description',
                         'name' => 'action-bar_section_button-description',
                         'type' => 'text',
-                        'instructions' => '',
+                        'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -1922,7 +1922,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'label' => 'Button Description',
                         'name' => 'overlay_section_button-description',
                         'type' => 'text',
-                        'instructions' => 'This is a description of the link for accessibility.',
+                        'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array(
