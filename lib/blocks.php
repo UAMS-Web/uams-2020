@@ -1379,11 +1379,6 @@ if( function_exists('acf_add_local_field_group') ):
                     'operator' => '==',
                     'value' => 'acf/cta',
                 ),
-                array(
-                    'param' => 'page_template',
-                    'operator' => '==',
-                    'value' => 'templates/page_landing.php',
-                ),
             ),
         ),
         'menu_order' => 0,
@@ -1548,11 +1543,6 @@ if( function_exists('acf_add_local_field_group') ):
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/call-out',
-                ),
-                array(
-                    'param' => 'page_template',
-                    'operator' => '==',
-                    'value' => 'templates/page_landing.php',
                 ),
             ),
         ),
@@ -1781,11 +1771,6 @@ if( function_exists('acf_add_local_field_group') ):
                     'operator' => '==',
                     'value' => 'acf/action-bar',
                 ),
-                array(
-                    'param' => 'page_template',
-                    'operator' => '==',
-                    'value' => 'templates/page_landing.php',
-                ),
             ),
         ),
         'menu_order' => 0,
@@ -1797,6 +1782,7 @@ if( function_exists('acf_add_local_field_group') ):
         'active' => true,
         'description' => '',
     ));
+    
 
     // Add local field group for UAMS Text & Image Overlay Block
     acf_add_local_field_group(array(
@@ -2015,11 +2001,6 @@ if( function_exists('acf_add_local_field_group') ):
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/text-overlay',
-                ),
-                array(
-                    'param' => 'page_template',
-                    'operator' => '==',
-                    'value' => 'templates/page_landing.php',
                 ),
             ),
         ),
