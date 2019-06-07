@@ -29,8 +29,8 @@ if( have_rows('stacked_section') ) {
                 while ( have_rows('stacked_section') ) : the_row(); 
                 // Load values.
                 $image = get_sub_field('stacked_section_image');
-                $image_alt = get_post_meta($image, '_wp_attachment_image_alt', TRUE);
-                $alt_override = get_sub_field('stacked_section_alt-text');
+                $image_alt_native = get_post_meta($image, '_wp_attachment_image_alt', TRUE);
+                $image_alt_override = get_sub_field('stacked_section_alt-override');
                 $item_heading = get_sub_field('stacked_section_heading');
                 $body = get_sub_field('stacked_section_body');
                 $button_text = get_sub_field('stacked_section_button-text');
@@ -47,7 +47,7 @@ if( have_rows('stacked_section') ) {
                                 (min-width: 1px) and (min-resolution: 192dpi)">
                             <source srcset="<?php echo wp_get_attachment_image_url( $image, 'full' ); ?>" media="(min-width: 1px)">
                             <!-- Fallback -->
-                            <img src="<?php echo wp_get_attachment_image_url( $image, 'full' ); ?>" alt="<?php echo $alt_override ? $alt_override : $image_alt; ?>" />
+                            <img src="<?php echo wp_get_attachment_image_url( $image, 'full' ); ?>" alt="<?php echo $image_alt_override ? $image_alt_override : $image_alt_native; ?>" />
                         </picture>
                     </div>
                     <div class="card-body">
