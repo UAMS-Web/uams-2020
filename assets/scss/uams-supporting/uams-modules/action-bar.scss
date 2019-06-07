@@ -114,6 +114,15 @@
                 @include action-bar-inner-container;
             }
         }
+
+        .btn {
+            @include media-breakpoint-down(xs) {
+                display:block;
+                width: $line-length-ideal + em;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+        }
     }
 
     &.count-4 {
@@ -123,6 +132,7 @@
                 justify-content: center;
             }
         }
+
         [class^="col-"] {
             @include media-breakpoint-up(md) {
                 padding: 0;
@@ -173,6 +183,15 @@
         .inner-container {
             @include media-breakpoint-up(md) {
                 @include action-bar-inner-container;
+            }
+        }
+
+        .btn {
+            @include media-breakpoint-down(sm) {
+                display:block;
+                width: $line-length-ideal + em;
+                max-width: 100%;
+                margin: 0 auto;
             }
         }
     }
