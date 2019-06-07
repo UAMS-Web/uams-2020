@@ -46,17 +46,17 @@ function uams_register_blocks() {
         //     'align'             => 'full',
         //     'render_template'   => 'blocks/stack.php',
         // ));
-        // acf_register_block_type(array(
-        //     'name'              => 'image-overlay',
-        //     'title'             => __('UAMS Overlay'),
-        //     'description'       => __('Overlaid Image & Text.'),
-        //     'category'          => 'common',
-        //     'icon'              => 'format-image',
-        //     'keywords'          => array('uams', 'text', 'image', 'overlay'),
-        //     'mode'              => 'auto',
-        //     'align'             => 'full',
-        //     'render_template'   => 'blocks/overlay.php',
-        // ));
+        acf_register_block_type(array(
+            'name'              => 'text-overlay',
+            'title'             => __('UAMS Text Overlay'),
+            'description'       => __('Text on top of an image.'),
+            'category'          => 'common',
+            'icon'              => 'format-image',
+            'keywords'          => array('uams', 'text', 'image', 'overlay'),
+            'mode'              => 'auto',
+            'align'             => 'full',
+            'render_template'   => 'blocks/overlay.php',
+        ));
         acf_register_block_type(array(
             'name'              => 'cta',
             'title'             => __('UAMS CTA Bar'),
