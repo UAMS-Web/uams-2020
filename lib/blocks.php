@@ -1798,7 +1798,7 @@ if( function_exists('acf_add_local_field_group') ):
         'description' => '',
     ));
 
-    // Add local field group for UAMS Text-Image Overlay Block
+    // Add local field group for UAMS Text & Image Overlay Block
     acf_add_local_field_group(array(
         'key' => 'group_5cfa9e13cb394',
         'title' => 'Block: UAMS Text-Image Overlay',
