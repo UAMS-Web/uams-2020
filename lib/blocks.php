@@ -1525,7 +1525,7 @@ if( function_exists('acf_add_local_field_group') ):
     // Add local field group for UAMS Action Bar Block
     acf_add_local_field_group(array(
         'key' => 'group_5cf9847426451',
-        'title' => 'UAMS Action Bar',
+        'title' => 'Block: UAMS Action Bar',
         'fields' => array(
             array(
                 'key' => 'field_5cf9847428e09',
