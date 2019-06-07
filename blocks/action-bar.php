@@ -8,7 +8,7 @@
 // Create id attribute allowing for custom "anchor" value.
 $id = 'action-bar-' . $block['id'];
 
-// Load values and assing defaults.
+// Load values.
 $heading = get_field('action-bar_heading');
 $background_color = get_field('action-bar_background-color');
 
@@ -24,7 +24,7 @@ if( have_rows('action-bar_section') ) {
         <div class="row">
 <?php 
     while ( have_rows('action-bar_section') ) : the_row(); 
-// Load values and assing defaults.
+    // Load values.
     $section_heading = get_sub_field('action-bar_section_heading');
     $body = get_sub_field('action-bar_section_body');
     $button_text = get_sub_field('action-bar_section_button-text');

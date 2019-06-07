@@ -8,7 +8,7 @@
 // Create id attribute allowing for custom "anchor" value.
 $id = 'call-out-' . $block['id'];
 
-// Load values and assing defaults.
+// Load values.
 $heading = get_field('call-out_heading');
 $body = get_field('call-out_body');
 $use_image = get_field('call-out_use-image');
