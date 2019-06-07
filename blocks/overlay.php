@@ -1,7 +1,7 @@
 <?php
 /*
  *
- * UAMS Text Overlay Block
+ * UAMS Text & Image Overlay Block
  * 
  */
 
