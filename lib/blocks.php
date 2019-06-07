@@ -1105,7 +1105,7 @@ if( function_exists('acf_add_local_field_group') ):
     // Add local field group for UAMS CTA Bar Block
     acf_add_local_field_group(array(
         'key' => 'group_5cf938222421c',
-        'title' => 'UAMS CTA Bar',
+        'title' => 'Block: UAMS CTA Bar',
         'fields' => array(
             array(
                 'key' => 'field_5cf9382be9df5',
