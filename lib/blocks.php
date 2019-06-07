@@ -48,7 +48,7 @@ function uams_register_blocks() {
         ));
         acf_register_block_type(array(
             'name'              => 'text-overlay',
-            'title'             => __('UAMS Text-Image Overlay'),
+            'title'             => __('UAMS Text & Image Overlay'),
             'description'       => __('Text and a button on top of an image.'),
             'category'          => 'common',
             'icon'              => 'format-image',
