@@ -18,7 +18,7 @@ if( have_rows('action-bar_section') ) {
 } 
 
 ?>
-<section class="uams-module action-bar count-<?php echo $row_count; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>">
+<section class="uams-module action-bar count-<?php echo $row_count < 4 ? "3" : "4"; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>">
     <h2 class="sr-only"><?php echo $heading; ?></h2>
     <div class="container-fluid">
         <div class="row">
@@ -33,7 +33,7 @@ if( have_rows('action-bar_section') ) {
     $button_desc = get_sub_field('action-bar_section_button-description');
 
 ?>
-            <div class="col-12 <?php echo $row_count <= 3 ? 'col-sm-4' : 'col-md-3'; ?>">
+            <div class="col-12 <?php echo $row_count < 4 ? 'col-sm-4' : 'col-md-3'; ?>">
                 <div class="inner-container">
                     <div class="text-container">
                         <h3 class="h5"><?php echo $section_heading; ?></h3>
