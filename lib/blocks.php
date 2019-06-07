@@ -2064,6 +2064,40 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
+                'key' => 'field_5cf9847428f6d',
+                'label' => 'Background Color',
+                'name' => 'action-bar_background-color',
+                'type' => 'select',
+                'instructions' => '',
+                'required' => 1,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'choices' => array(
+                    'bg-white' => 'White',
+                    'bg-gray' => 'Gray',
+                    'bg-red' => 'Red',
+                    'bg-black' => 'Black',
+                    'bg-blue' => 'Blue',
+                    'bg-green' => 'Green',
+                    'bg-teal' => 'Teal',
+                    'bg-eggplant' => 'Eggplant',
+                    'bg-orange' => 'Orange',
+                ),
+                'default_value' => array(
+                    0 => 'bg-white',
+                ),
+                'allow_null' => 0,
+                'multiple' => 0,
+                'ui' => 0,
+                'return_format' => 'value',
+                'ajax' => 0,
+                'placeholder' => '',
+            ),
+            array(
                 'key' => 'field_5cf984dc7a5c9',
                 'label' => 'Sections',
                 'name' => 'action-bar_section',
@@ -2146,14 +2180,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'type' => 'url',
                         'instructions' => 'Include http:// or https://.',
                         'required' => 1,
-                        'conditional_logic' => array(
-                            array(
-                                array(
-                                    'field' => 'field_5cf9854d7a5cc',
-                                    'operator' => '!=empty',
-                                ),
-                            ),
-                        ),
+                        'conditional_logic' => 0,
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -2169,14 +2196,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'type' => 'true_false',
                         'instructions' => '',
                         'required' => 1,
-                        'conditional_logic' => array(
-                            array(
-                                array(
-                                    'field' => 'field_5cf9854d7a5cc',
-                                    'operator' => '!=empty',
-                                ),
-                            ),
-                        ),
+                        'conditional_logic' => 0,
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -2195,14 +2215,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'type' => 'text',
                         'instructions' => '',
                         'required' => 1,
-                        'conditional_logic' => array(
-                            array(
-                                array(
-                                    'field' => 'field_5cf9854d7a5cc',
-                                    'operator' => '!=empty',
-                                ),
-                            ),
-                        ),
+                        'conditional_logic' => 0,
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -2215,40 +2228,6 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => '',
                     ),
                 ),
-            ),
-            array(
-                'key' => 'field_5cf9847428f6d',
-                'label' => 'Background Color',
-                'name' => 'action-bar_background-color',
-                'type' => 'select',
-                'instructions' => '',
-                'required' => 1,
-                'conditional_logic' => 0,
-                'wrapper' => array(
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ),
-                'choices' => array(
-                    'bg-white' => 'White',
-                    'bg-gray' => 'Gray',
-                    'bg-red' => 'Red',
-                    'bg-black' => 'Black',
-                    'bg-blue' => 'Blue',
-                    'bg-green' => 'Green',
-                    'bg-teal' => 'Teal',
-                    'bg-eggplant' => 'Eggplant',
-                    'bg-orange' => 'Orange',
-                ),
-                'default_value' => array(
-                    0 => 'bg-white',
-                ),
-                'allow_null' => 0,
-                'multiple' => 0,
-                'ui' => 0,
-                'return_format' => 'value',
-                'ajax' => 0,
-                'placeholder' => '',
             ),
         ),
         'location' => array(
