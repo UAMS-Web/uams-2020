@@ -3,14 +3,13 @@
     $action-bar-horizontal-padding: 1em;
 
     @mixin action-bar-border-left() {
-        content: "";
         position: absolute;
         background-color: $white;
         opacity: 0.25;
-        width: 1px;
-        left: -0.5px;
+        width: 1.25px; // 1.25 instead of 1 to overcome jitter
         top: $action-bar-vertical-padding;
         bottom: $action-bar-vertical-padding;
+        left: 0px;
     }
 
     @mixin action-bar-inner-container() {
@@ -26,16 +25,16 @@
         justify-content: center;
     }
 
-    &.count-3 {
+    &.count-3,
+    &.count-4 {
         &.bg-white {
             [class^="col-"] {
-                &:nth-child(n + 2) {
-                    .inner-container {
-                        &:before {
-                            @include media-breakpoint-up(sm) {
-                                background-color: $body-bg-border;
-                                opacity: 1;
-                            }
+                .inner-container {
+                    &:before,
+                    &:after {
+                        @include media-breakpoint-up(md) {
+                            background-color: $body-bg-border;
+                            opacity: 1;
                         }
                     }
                 }
@@ -44,18 +43,19 @@
 
         &.bg-gray {
             [class^="col-"] {
-                &:nth-child(n + 2) {
-                    .inner-container {
-                        &:before {
-                            @include media-breakpoint-up(sm) {
-                                background-color: black;
-                            }
+                .inner-container {
+                    &:before {
+                        @include media-breakpoint-up(md) {
+                            background-color: black;
+                            opacity: 0.1;
                         }
                     }
                 }
             }
         }
+    }
 
+    &.count-3 {
         .row {
             @include media-breakpoint-up(sm) {
                 margin: (-$action-bar-vertical-padding) (-$action-bar-horizontal-padding);
@@ -71,6 +71,13 @@
                 flex: 0 1 auto;
                 width: auto;
             }
+            .inner-container {
+                &:before {
+                    @include media-breakpoint-up(sm) {
+                        @include action-bar-border-left();
+                    }
+                }
+            }
 
             &:nth-child(n + 2) {
                 @include media-breakpoint-down(xs) {
@@ -79,7 +86,17 @@
                 .inner-container {
                     &:before {
                         @include media-breakpoint-up(sm) {
-                            @include action-bar-border-left();
+                            content: "";
+                        }
+                    }
+                }
+            }
+
+            &:nth-child(-n + 2) {
+                .inner-container {
+                    &:after {
+                        @include media-breakpoint-up(sm) {
+                            content: "";
                         }
                     }
                 }
@@ -100,35 +117,6 @@
     }
 
     &.count-4 {
-        &.bg-white {
-            [class^="col-"] {
-                &:nth-child(n + 2) {
-                    .inner-container {
-                        &:before {
-                            @include media-breakpoint-up(md) {
-                                background-color: $body-bg-border;
-                                opacity: 1;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        &.bg-gray {
-            [class^="col-"] {
-                &:nth-child(n + 2) {
-                    .inner-container {
-                        &:before {
-                            @include media-breakpoint-up(md) {
-                                background-color: black;
-                                opacity: 0.1;
-                            }
-                        }
-                    }
-                }
-            }
-        }
         .row {
             @include media-breakpoint-up(md) {
                 margin: (-$action-bar-vertical-padding) (-$action-bar-horizontal-padding);
@@ -144,6 +132,14 @@
                 width: auto;
             }
 
+            .inner-container {
+                &:before {
+                    @include media-breakpoint-up(md) {
+                        @include action-bar-border-left();
+                    }
+                }
+            }
+
             &:nth-child(n + 2) {
                 @include media-breakpoint-down(sm) {
                     padding-top: $action-bar-vertical-padding;
@@ -151,7 +147,17 @@
                 .inner-container {
                     &:before {
                         @include media-breakpoint-up(md) {
-                            @include action-bar-border-left();
+                            content: "";
+                        }
+                    }
+                }
+            }
+
+            &:nth-child(-n + 3) {
+                .inner-container {
+                    &:after {
+                        @include media-breakpoint-up(md) {
+                            content: "";
                         }
                     }
                 }
