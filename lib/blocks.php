@@ -59,11 +59,11 @@ function uams_register_blocks() {
         // ));
         acf_register_block_type(array(
             'name'              => 'cta',
-            'title'             => __('UAMS CTA'),
+            'title'             => __('UAMS CTA Bar'),
             'description'       => __('Call-to-Action (CTA) Bar.'),
             'category'          => 'common',
             'icon'              => 'format-status',
-            'keywords'          => array('uams', 'cta', 'button'),
+            'keywords'          => array('uams', 'cta', 'call-to-action', 'call to action', 'button'),
             'mode'              => 'auto',
             'align'             => 'full',
             'render_template'   => 'blocks/cta.php',
