@@ -1950,6 +1950,11 @@ if( function_exists('acf_add_local_field_group') ):
                     'operator' => '==',
                     'value' => 'acf/text-overlay',
                 ),
+                array(
+                    'param' => 'page_template',
+                    'operator' => '==',
+                    'value' => 'templates/page_landing.php',
+                ),
             ),
         ),
         'menu_order' => 0,
