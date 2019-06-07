@@ -2171,7 +2171,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => '',
                         'prepend' => '',
                         'append' => '',
-                        'maxlength' => '',
+                        'maxlength' => 31,
                     ),
                     array(
                         'key' => 'field_5cf985757a5cd',
