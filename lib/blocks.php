@@ -35,17 +35,17 @@ function uams_register_blocks() {
         //     'align'             => 'full',
         //     'render_template'   => 'blocks/side.php',
         // ));
-        // acf_register_block_type(array(
-        //     'name'              => 'image-stack',
-        //     'title'             => __('UAMS Image Stack'),
-        //     'description'       => __('Stacked Image & Text'),
-        //     'category'          => 'common',
-        //     'icon'              => 'screenoptions',
-        //     'keywords'          => array('uams', 'text', 'image', 'stack'),
-        //     'mode'              => 'auto',
-        //     'align'             => 'full',
-        //     'render_template'   => 'blocks/stack.php',
-        // ));
+        acf_register_block_type(array(
+            'name'              => 'text-stacked',
+            'title'             => __('UAMS Stacked Image & Text'),
+            'description'       => __('Stacked Image & Text'),
+            'category'          => 'common',
+            'icon'              => 'screenoptions',
+            'keywords'          => array('uams', 'text', 'image', 'stack', 'stacked'),
+            'mode'              => 'auto',
+            'align'             => 'full',
+            'render_template'   => 'blocks/stacked.php',
+        ));
         acf_register_block_type(array(
             'name'              => 'text-overlay',
             'title'             => __('UAMS Text-Image Overlay'),
