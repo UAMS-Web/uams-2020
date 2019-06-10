@@ -405,7 +405,8 @@ $font-family-uni: "Uni sans", sans-serif;
 $font-family-base: $font-family-sans-serif;
 // stylelint-enable value-keyword-case
 
-$font-size-base: 1.125rem; // 19px
+$font-size-base: 1.125rem; // 18px
+$font-size-base-px: 1.125 * 16px; // 18px
 $font-size-lg: $font-size-base * 1.25;
 $font-size-sm: $font-size-base * .75;
 

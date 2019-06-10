@@ -181,6 +181,7 @@ $triangles: url("../svg/triangles_seamless_white.svg");
             //box-sizing: content-box;
             //flex: 0 1 auto;
             width: $carousel-indicator-width;
+            flex: 0 0 $carousel-indicator-width;
             height: $carousel-indicator-width;
             //text-indent: -999px;
             //cursor: pointer;
@@ -280,6 +281,8 @@ $triangles: url("../svg/triangles_seamless_white.svg");
             overflow: hidden;
             min-height: 100vw * $hero-slide-padding-ratio-xs / 2;
             position: relative;
+            padding-top: $uams-module-padding-mobile;
+            padding-bottom: $uams-module-padding-mobile;
 
             @include media-breakpoint-up(sm) {
                 min-height: 0;
@@ -289,7 +292,7 @@ $triangles: url("../svg/triangles_seamless_white.svg");
                 right: 50%;
                 bottom: -0.5px;
                 left: -100vw * $hero-slide-padding-ratio-sm * $hero-triangle-base-ratio * 0.501;
-                padding-left: 100vw * $hero-slide-padding-ratio-sm * $hero-triangle-base-ratio * 0.501;
+                padding-left: (100vw * $hero-slide-padding-ratio-sm * $hero-triangle-base-ratio * 0.501);
             }
 
             @include media-breakpoint-up(md) {
@@ -330,7 +333,7 @@ $triangles: url("../svg/triangles_seamless_white.svg");
 
             .inner-container {
                 width: 28.875em;
-                padding: 30px 0 (26px + 10 + 10 + 9) 0;
+                padding: 0;
                 max-width: 100%;
                 margin: 0 30px;
                 font-size: 19px;
@@ -339,7 +342,7 @@ $triangles: url("../svg/triangles_seamless_white.svg");
                 text-align: center;
 
                 @include media-breakpoint-up(sm) {
-                    padding: (26px + 10 + 10) 0;
+                    padding: 0;
                     position: static;
                     z-index: auto;
                     transform: skew(-21.9deg);
@@ -499,5 +502,22 @@ $triangles: url("../svg/triangles_seamless_white.svg");
                 }
             }
         }
+    }
+
+    &.multiple-slides {
+      .carousel-item {
+        .text-container {
+          padding-bottom: ($carousel-indicator-width + $spacer-min + $spacer-min + ($font-size-base-px));
+
+          @include media-breakpoint-up(sm) {
+            padding-top: ($carousel-indicator-width + $spacer-min + $spacer-min);
+            padding-bottom: ($carousel-indicator-width + $spacer-min + $spacer-min);
+          }
+
+          .inner-container {
+
+          }
+        }
+      }
     }
 }
