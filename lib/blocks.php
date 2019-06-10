@@ -830,7 +830,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'label' => 'Button Text',
                         'name' => 'hero_button_text',
                         'type' => 'text',
-                        'instructions' => '33 character limit.',
+                        'instructions' => '29 character limit.',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -842,7 +842,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => 'Learn More',
                         'prepend' => '',
                         'append' => '',
-                        'maxlength' => '33',
+                        'maxlength' => '29',
                     ),
                     array(
                         'key' => 'field_5ceef58bfcbc4',
