@@ -194,6 +194,7 @@ $triangles: url("../svg/triangles_seamless_white.svg");
   
       @include media-breakpoint-up(sm) {
         padding-top: 100vw * $hero-slide-padding-ratio-sm;
+        overflow: hidden;
       }
   
       @include media-breakpoint-up(md) {
@@ -222,23 +223,23 @@ $triangles: url("../svg/triangles_seamless_white.svg");
           top: 0;
           right: 0;
           bottom: 0;
-          left: 50% - 100% * $hero-slide-padding-ratio-sm * $hero-triangle-base-ratio * 0.501;
+          left: 50% - 100% * $hero-slide-padding-ratio-sm * $hero-triangle-base-ratio * 0.505;
         }
   
         @include media-breakpoint-up(md) {
-          left: 50% - 100% * $hero-slide-padding-ratio-md * $hero-triangle-base-ratio * 0.501;
+          left: 50% - 100% * $hero-slide-padding-ratio-md * $hero-triangle-base-ratio * 0.505;
         }
   
         @include media-breakpoint-up(lg) {
-          left: 50% - 100% * $hero-slide-padding-ratio-lg * $hero-triangle-base-ratio * 0.501;
+          left: 50% - 100% * $hero-slide-padding-ratio-lg * $hero-triangle-base-ratio * 0.505;
         }
   
         @include media-breakpoint-up(xl) {
-          left: 50% - 100% * $hero-slide-padding-ratio-xl * $hero-triangle-base-ratio * 0.501;
+          left: 50% - 100% * $hero-slide-padding-ratio-xl * $hero-triangle-base-ratio * 0.505;
         }
   
         @include media-breakpoint-up(xxl) {
-          left: 50% - 100% * $hero-slide-padding-ratio-xxl * $hero-triangle-base-ratio * 0.501;
+          left: 50% - 100% * $hero-slide-padding-ratio-xxl * $hero-triangle-base-ratio * 0.505;
         }
         img {
           width: 100%;
@@ -264,9 +265,9 @@ $triangles: url("../svg/triangles_seamless_white.svg");
           min-height: 0;
           transform: skew(21.9deg);
           position: absolute;
-          top: 0;
+          top: -0.5px;
           right: 50%;
-          bottom: 0;
+          bottom: -0.5px;
           left: -100vw * $hero-slide-padding-ratio-sm * $hero-triangle-base-ratio * 0.501;
           padding-left: 100vw * $hero-slide-padding-ratio-sm * $hero-triangle-base-ratio * 0.501;
         }
