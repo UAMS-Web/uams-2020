@@ -1676,7 +1676,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'label' => 'Heading',
                         'name' => 'action-bar_section_heading',
                         'type' => 'text',
-                        'instructions' => '',
+                        'instructions' => '46 character limit.',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -1688,14 +1688,14 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => '',
                         'prepend' => '',
                         'append' => '',
-                        'maxlength' => '',
+                        'maxlength' => 46,
                     ),
                     array(
                         'key' => 'field_5cf985457a5cb',
                         'label' => 'Body',
                         'name' => 'action-bar_section_body',
                         'type' => 'text',
-                        'instructions' => '',
+                        'instructions' => '67 character limit',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -1707,7 +1707,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => '',
                         'prepend' => '',
                         'append' => '',
-                        'maxlength' => '',
+                        'maxlength' => 67,
                     ),
                     array(
                         'key' => 'field_5cf9854d7a5cc',
