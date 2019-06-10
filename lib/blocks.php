@@ -792,7 +792,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'label' => 'Heading',
                         'name' => 'hero_heading',
                         'type' => 'text',
-                        'instructions' => '',
+                        'instructions' => '49 character limit.',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -804,15 +804,15 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => '',
                         'prepend' => '',
                         'append' => '',
-                        'maxlength' => 60,
+                        'maxlength' => 49,
                     ),
                     array(
                         'key' => 'field_5ceef54efcbc2',
                         'label' => 'Body',
                         'name' => 'hero_body',
                         'type' => 'textarea',
-                        'instructions' => '',
-                        'required' => 0,
+                        'instructions' => '177 character limit.',
+                        'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array(
                             'width' => '',
@@ -821,7 +821,7 @@ if( function_exists('acf_add_local_field_group') ):
                         ),
                         'default_value' => '',
                         'placeholder' => '',
-                        'maxlength' => 300,
+                        'maxlength' => 177,
                         'rows' => 4,
                         'new_lines' => '',
                     ),
@@ -830,7 +830,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'label' => 'Button Text',
                         'name' => 'hero_button_text',
                         'type' => 'text',
-                        'instructions' => '',
+                        'instructions' => '33 character limit.',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -842,16 +842,23 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => 'Learn More',
                         'prepend' => '',
                         'append' => '',
-                        'maxlength' => '',
+                        'maxlength' => '33',
                     ),
                     array(
                         'key' => 'field_5ceef58bfcbc4',
                         'label' => 'Button Link',
                         'name' => 'hero_button_url',
                         'type' => 'url',
-                        'instructions' => 'include http:// or https://',
+                        'instructions' => 'Include http:// or https://',
                         'required' => 1,
-                        'conditional_logic' => 0,
+                        'conditional_logic' => array(
+                            array(
+                                array(
+                                    'field' => 'field_5ceef56ffcbc3',
+                                    'operator' => '!=empty',
+                                ),
+                            ),
+                        ),
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -869,8 +876,15 @@ if( function_exists('acf_add_local_field_group') ):
                         'name' => 'hero_button_target',
                         'type' => 'true_false',
                         'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
+                        'required' => 1,
+                        'conditional_logic' => array(
+                            array(
+                                array(
+                                    'field' => 'field_5ceef56ffcbc3',
+                                    'operator' => '!=empty',
+                                ),
+                            ),
+                        ),
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -890,9 +904,16 @@ if( function_exists('acf_add_local_field_group') ):
                         'label' => 'Button Description',
                         'name' => 'hero_button_description',
                         'type' => 'text',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
+                        'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
+                        'required' => 1,
+                        'conditional_logic' => array(
+                            array(
+                                array(
+                                    'field' => 'field_5ceef56ffcbc3',
+                                    'operator' => '!=empty',
+                                ),
+                            ),
+                        ),
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -932,7 +953,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'label' => 'Image Desktop',
                         'name' => 'image_desktop',
                         'type' => 'image',
-                        'instructions' => '',
+                        'instructions' => 'If you do not provide images for Tablet and Mobile image, the image you provide for Desktop will be automatically cropped for the other two views. This could yield undesirable results.',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -1013,10 +1034,10 @@ if( function_exists('acf_add_local_field_group') ):
                     ),
                     array(
                         'key' => 'field_5ceef674fcbca',
-                        'label' => 'Image Alt Text',
+                        'label' => 'Image Alt Text Override',
                         'name' => 'image_alt_text',
                         'type' => 'text',
-                        'instructions' => 'Description of image for accessibility',
+                        'instructions' => 'Alt text (alternative text) refers to invisible description of images which are read aloud to blind users on a screen reader. If you want to define alt text that is different from the alt text defined for this image in the media library, you can do so here.',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
