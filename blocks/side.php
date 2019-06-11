@@ -34,6 +34,7 @@ $side_image = $image['side_image_image'] ?: '';
 $image_alt = $image['image_alt_text'] ?: '';
 $image_postion = get_field('side_image_position') ?: 'left';
 $image_anchor = get_field('side_image_anchor') ?: 'middle';
+$background_color = get_field('side_image_background-color') ?: 'bg-white';
 
 $image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachment_image_alt', true);
 $cta_target = $cta_target ? ' target="blank"' : '';
@@ -48,7 +49,7 @@ if ('templates/page_landing.php' != $page_template) {
     return;
 }
 ?>
-<section class="uams-module no-padding side-by-side image-on-<?php echo $image_postion; ?> image-background-<?php echo $image_anchor; ?>" id="side-by-side-<?php echo esc_attr($id); ?>">
+<section class="uams-module no-padding side-by-side image-on-<?php echo $image_postion; ?> image-background-<?php echo $image_anchor; ?> <?php echo $background_color; ?>" id="side-by-side-<?php echo esc_attr($id); ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 image-container">
