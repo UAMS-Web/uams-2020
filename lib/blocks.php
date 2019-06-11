@@ -897,7 +897,7 @@ if( function_exists('acf_add_local_field_group') ):
         'position' => 'normal',
         'style' => 'default',
         'label_placement' => 'left',
-        'instruction_placement' => 'field',
+        'instruction_placement' => 'label',
         'hide_on_screen' => '',
         'active' => true,
         'description' => '',
