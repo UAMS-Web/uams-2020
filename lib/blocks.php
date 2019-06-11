@@ -187,7 +187,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'sub_fields' => array(
                     array(
                         'key' => 'field_side_image_link_list_text',
-                        'label' => 'Text',
+                        'label' => 'Link Text',
                         'name' => 'side_image_link_list_text',
                         'type' => 'text',
                         'instructions' => '31 character limit.',
@@ -206,7 +206,7 @@ if( function_exists('acf_add_local_field_group') ):
                     ),
                     array(
                         'key' => 'field_side_image_link_list_url',
-                        'label' => 'URL',
+                        'label' => 'Link URL',
                         'name' => 'side_image_link_list_url',
                         'type' => 'url',
                         'instructions' => '',
