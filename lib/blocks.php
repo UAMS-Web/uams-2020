@@ -124,7 +124,7 @@ if( function_exists('acf_add_local_field_group') ):
                     'class' => '',
                     'id' => '',
                 ),
-                'message' => '<h3>Side-by-Side Image & Text</h3>',
+                'message' => '<h2>Side-by-Side Image & Text</h2>',
                 'new_lines' => 'wpautop',
                 'esc_html' => 0,
             ),
