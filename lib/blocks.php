@@ -1847,7 +1847,7 @@ if( function_exists('acf_add_local_field_group') ):
         'title' => 'Block: UAMS Stacked Image & Text',
         'fields' => array(
             array(
-                'key' => 'field_5cfab4f34531a',
+                'key' => 'field_stacked_intro-message',
                 'label' => '',
                 'name' => '',
                 'type' => 'message',
@@ -1864,7 +1864,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'esc_html' => 0,
             ),
             array(
-                'key' => 'field_5cfab4f34537d',
+                'key' => 'field_stacked_heading',
                 'label' => 'Module Heading',
                 'name' => 'stacked_heading',
                 'type' => 'text',
@@ -1883,7 +1883,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_5cfab681fd3b7',
+                'key' => 'field_stacked_hide-heading',
                 'label' => 'Hide the Module Heading?',
                 'name' => 'stacked_hide-heading',
                 'type' => 'true_false',
@@ -1902,7 +1902,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'ui_off_text' => '',
             ),
             array(
-                'key' => 'field_5cfab4f34543d',
+                'key' => 'field_stacked_background-color',
                 'label' => 'Background Color',
                 'name' => 'stacked_background-color',
                 'type' => 'select',
@@ -1929,7 +1929,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'placeholder' => '',
             ),
             array(
-                'key' => 'field_5cfabbb8fd3db',
+                'key' => 'field_stacked_section',
                 'label' => 'Items',
                 'name' => 'stacked_section',
                 'type' => 'repeater',
