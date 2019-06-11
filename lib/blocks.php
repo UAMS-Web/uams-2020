@@ -256,7 +256,8 @@ if( function_exists('acf_add_local_field_group') ):
                             'value' => '6',
                         ),
                     ),
-                ),'wrapper' => array(
+                ),
+                'wrapper' => array(
                     'width' => '',
                     'class' => '',
                     'id' => '',
