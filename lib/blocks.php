@@ -26,8 +26,8 @@ function uams_register_blocks() {
         ));
         acf_register_block_type(array(
             'name'              => 'image-side',
-            'title'             => __('UAMS Image-Text'),
-            'description'       => __('Side-by-Side Image & Text.'),
+            'title'             => __('UAMS Side-by-Side Image & Text'),
+            'description'       => __('Image on one side, text on the other side.'),
             'category'          => 'common',
             'icon'              => 'id',
             'keywords'          => array('uams', 'text', 'image', 'side'),
