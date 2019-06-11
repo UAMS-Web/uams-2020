@@ -243,10 +243,10 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array(
                 'key' => 'field_link_list_include_more',
-                'label' => 'Link List (include more)',
+                'label' => 'Include "and more" at the end of the Link List?',
                 'name' => 'link_list_include_more',
                 'type' => 'true_false',
-                'instructions' => '',
+                'instructions' => 'This option is only available if you have 1-5 items in the link list.',
                 'required' => 0,
                 'conditional_logic' => array(
                     array(
