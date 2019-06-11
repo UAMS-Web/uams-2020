@@ -936,7 +936,7 @@ if( function_exists('acf_add_local_field_group') ):
         'title' => 'Block: UAMS CTA Bar',
         'fields' => array(
             array(
-                'key' => 'field_5cfab19504055',
+                'key' => 'field_cta-bar_intro-message',
                 'label' => '',
                 'name' => '',
                 'type' => 'message',
@@ -953,7 +953,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'esc_html' => 0,
             ),
             array(
-                'key' => 'field_5cf9382be9df5',
+                'key' => 'field_cta-bar_heading',
                 'label' => 'Heading',
                 'name' => 'cta-bar_heading',
                 'type' => 'text',
@@ -972,7 +972,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_5cf9385fe9df6',
+                'key' => 'field_cta-bar_body',
                 'label' => 'Body',
                 'name' => 'cta-bar_body',
                 'type' => 'wysiwyg',
@@ -991,7 +991,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'delay' => 0,
             ),
             array(
-                'key' => 'field_5cf93896e9df7',
+                'key' => 'field_cta-bar_button-text',
                 'label' => 'Button Text',
                 'name' => 'cta-bar_button-text',
                 'type' => 'text',
@@ -1019,7 +1019,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_5cf93896e9df7',
+                            'field' => 'field_cta-bar_button-text',
                             'operator' => '!=empty',
                         ),
                     ),
@@ -1036,7 +1036,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_5cf938cde9df9',
+                'key' => 'field_cta-bar_button-target',
                 'label' => 'Open in New Window?',
                 'name' => 'cta-bar_button-target',
                 'type' => 'true_false',
@@ -1045,7 +1045,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_5cf93896e9df7',
+                            'field' => 'field_cta-bar_button-text',
                             'operator' => '!=empty',
                         ),
                     ),
@@ -1062,7 +1062,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'ui_off_text' => '',
             ),
             array(
-                'key' => 'field_5cf938fee9dfa',
+                'key' => 'field_cta-bar_button-description',
                 'label' => 'Button Link Description',
                 'name' => 'cta-bar_button-description',
                 'type' => 'text',
@@ -1071,7 +1071,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_5cf93896e9df7',
+                            'field' => 'field_cta-bar_button-text',
                             'operator' => '!=empty',
                         ),
                     ),
@@ -1088,7 +1088,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_5cf93919e9dfb',
+                'key' => 'field_cta-bar_layout',
                 'label' => 'Layout',
                 'name' => 'cta-bar_layout',
                 'type' => 'select',
@@ -1115,7 +1115,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'placeholder' => '',
             ),
             array(
-                'key' => 'field_5cf93a28e9dfd',
+                'key' => 'field_cta-bar_background-color',
                 'label' => 'Background Color',
                 'name' => 'cta-bar_background-color',
                 'type' => 'select',
@@ -1149,7 +1149,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'placeholder' => '',
             ),
             array(
-                'key' => 'field_5cf940a64efcc',
+                'key' => 'field_cta-bar_use-image',
                 'label' => 'Use Background Image?',
                 'name' => 'cta-bar_use-image',
                 'type' => 'true_false',
@@ -1168,7 +1168,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'ui_off_text' => '',
             ),
             array(
-                'key' => 'field_5cf940c24efcd',
+                'key' => 'field_cta-bar_image',
                 'label' => 'Image',
                 'name' => 'cta-bar_image',
                 'type' => 'image',
@@ -1177,7 +1177,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_5cf940a64efcc',
+                            'field' => 'field_cta-bar_use-image',
                             'operator' => '==',
                             'value' => '1',
                         ),
