@@ -1646,7 +1646,7 @@ if( function_exists('acf_add_local_field_group') ):
                     'class' => '',
                     'id' => '',
                 ),
-                'collapsed' => 'field_5cf985327a5ca',
+                'collapsed' => 'field_overlay_section_heading',
                 'min' => 1,
                 'max' => 2,
                 'layout' => 'block',
