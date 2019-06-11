@@ -133,7 +133,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'label' => 'Heading',
                 'name' => 'side_image_heading',
                 'type' => 'text',
-                'instructions' => '',
+                'instructions' => '50 character limit.',
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(
@@ -145,7 +145,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
-                'maxlength' => '',
+                'maxlength' => '50',
             ),
             array(
                 'key' => 'field_side_image_body',
@@ -190,7 +190,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'label' => 'Text',
                         'name' => 'side_image_link_list_text',
                         'type' => 'text',
-                        'instructions' => '',
+                        'instructions' => '31 character limit.',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -202,7 +202,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => '',
                         'prepend' => '',
                         'append' => '',
-                        'maxlength' => '',
+                        'maxlength' => '31',
                     ),
                     array(
                         'key' => 'field_side_image_link_list_url',
