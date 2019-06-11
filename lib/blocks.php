@@ -308,8 +308,15 @@ if( function_exists('acf_add_local_field_group') ):
                         'name' => 'side_image_cta_url',
                         'type' => 'url',
                         'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
+                        'required' => 1,
+                        'conditional_logic' => array(
+                            array(
+                                array(
+                                    'field' => 'field_side_image_cta_text',
+                                    'operator' => '!=empty',
+                                ),
+                            ),
+                        ),
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -324,8 +331,15 @@ if( function_exists('acf_add_local_field_group') ):
                         'name' => 'side_image_cta_target',
                         'type' => 'true_false',
                         'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
+                        'required' => 1,
+                        'conditional_logic' => array(
+                            array(
+                                array(
+                                    'field' => 'field_side_image_cta_text',
+                                    'operator' => '!=empty',
+                                ),
+                            ),
+                        ),
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
@@ -343,8 +357,15 @@ if( function_exists('acf_add_local_field_group') ):
                         'name' => 'side_image_cta_description',
                         'type' => 'text',
                         'instructions' => 'Used for accessibility',
-                        'required' => 0,
-                        'conditional_logic' => 0,
+                        'required' => 1,
+                        'conditional_logic' => array(
+                            array(
+                                array(
+                                    'field' => 'field_side_image_cta_text',
+                                    'operator' => '!=empty',
+                                ),
+                            ),
+                        ),
                         'wrapper' => array(
                             'width' => '',
                             'class' => '',
