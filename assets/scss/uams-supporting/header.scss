@@ -286,7 +286,8 @@
     .navbar-nav {
         line-height: 1;
         @extend .font-weight-medium;
-        @extend .bg-white;
+        //@extend .bg-white;
+        background-color: $white;
 
         .nav-item { // li
             //margin-bottom: 0;

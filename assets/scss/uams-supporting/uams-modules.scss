@@ -62,6 +62,10 @@
             background-position: 50%;
             background-repeat: no-repeat;
         }
+
+        [class^=col-] {
+            z-index: 1;
+        }
     }
 
     &.bg-white,
@@ -69,6 +73,7 @@
     .item.bg-white,
     .item.bg-gray {
         color: $body-color;
+
         &.bg-image {
             &:before {
                 opacity: 0.15;
@@ -85,14 +90,34 @@
         }
     }
 
+    &.bg-white {
+        &:not(.bg-image) {
+            + .bg-white:not(.bg-image) {
+                border-top: 2px solid $body-bg-border;
+            }
+        }
+    }
+
     &.bg-white,
     .item.bg-white {
         background-color: $white;
+
+        &.bg-image {
+            &:before {
+                opacity: 0.155; // 1.5 contrast ratio between blacks and whites
+            }
+        }
     }
 
     &.bg-gray,
     .item.bg-gray {
         background-color: $body-bg-banded;
+
+        &.bg-image {
+            &:before {
+                opacity: 0.153; // 1.51 contrast ratio between blacks and whites
+            }
+        }
 
         .more {
             border-top-color: $body-bg-border-dark;
@@ -140,10 +165,14 @@
 
     &.bg-black,
     .item.bg-black {
-        background-color: $gray-900;
+        background-color: $black;
 
-        &:before {
-            opacity: 0.6; // 1.42 contrast ratio between blacks and whites
+        &.bg-image {
+            background-color: $gray-900;
+
+            &:before {
+                opacity: 0.72; // 1.5 contrast ratio between blacks and whites
+            }
         }
 
         .btn {
@@ -153,55 +182,69 @@
 
     &.bg-red,
     .item.bg-red {
-        background-color: $red-dark;
+        background-color: $red;
 
-        &:before,
-        &:after {
-            opacity: 0.2; // 1.48 contrast ratio between blacks and whites
+        &.bg-image {
+            background-color: $red;
+
+            &:before {
+                opacity: 0.2223; // 1.5 contrast ratio between blacks and whites
+            }
         }
 
         .btn {
-            color: $red-dark;
+            color: $red;
         }
     }
 
     &.bg-blue,
     .item.bg-blue {
-        background-color: $blue-darker;
+        background-color: $blue;
 
-        &:before,
-        &:after {
-            opacity: 0.15; // 1.47 contrast ratio between blacks and whites
+        &.bg-image {
+            background-color: $blue;
+
+            &:before {
+                opacity: 0.13; // 1.49 contrast ratio between blacks and whites
+            }
         }
 
         .btn {
-            color: $blue-darker;
+            color: $blue;
         }
     }
 
     &.bg-green,
     .item.bg-green {
-        background-color: $green-darkest;
+        background-color: $green-dark;
 
-        &:before {
-            opacity: 0.15; // 1.52 contrast ratio between blacks and whites (green-darkest)
+        &.bg-image {
+            background-color: $green-darker;
+
+            &:before {
+                opacity: 0.13; // 1.52 contrast ratio between blacks and whites (green-darkest)
+            }
         }
 
         .btn {
-            color: $green-darkest;
+            color: $green;
         }
     }
 
     &.bg-teal,
     .item.bg-teal {
-        background-color: $teal-darkest;
+        background-color: $teal;
 
-        &:before {
-            opacity: 0.175; // 1.5 contrast ratio between blacks and whites (teal-darkest)
+        &.bg-image {
+            background-color: $teal-dark;
+
+            &:before {
+                opacity: 0.13; // 1.52 contrast ratio between blacks and whites (teal-darkest)
+            }
         }
 
         .btn {
-            color: $teal-darkest;
+            color: $teal;
         }
     }
 
@@ -209,8 +252,10 @@
     .item.bg-eggplant {
         background-color: $eggplant;
 
-        &:before {
-            opacity: 0.2; // 1.43 contrast ratio between blacks and whites
+        &.bg-image {
+            &:before {
+                opacity: 0.23; // 1.5 contrast ratio between blacks and whites
+            }
         }
 
         .btn {
@@ -220,21 +265,28 @@
 
     &.bg-orange,
     .item.bg-orange {
-        background-color: $orange-darkest;
+        background-color: $orange;
 
-        &:before {
-            opacity: 0.2; // 1.51 contrast ratio between blacks and whites
+        &.bg-image {
+            background-color: $orange-dark;
+
+            &:before {
+                opacity: 0.237; // 1.5 contrast ratio between dark and light
+            }
         }
 
         .btn {
-            color: $orange-darkest;
+            color: $orange;
         }
     }
 }
 
+.uams-module.bg-white + .uams-module.bg-white {
+}
+
 @import "uams-modules/side-by-side";
 @import "uams-modules/text-image-overlay";
-@import "uams-modules/news-tiles";
+@import "uams-modules/stacked-image-text";
 @import "uams-modules/cta-bar";
 @import "uams-modules/action-bar";
 @import "uams-modules/call-out";

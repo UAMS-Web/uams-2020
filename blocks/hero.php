@@ -23,7 +23,7 @@ if( have_rows('hero') ):
     $rows = get_field('hero');
     $row_count = count($rows);
 ?>
-    <section class="hero carousel slide" id="carousel-<?php echo esc_attr($id); ?>">
+    <section class="hero carousel slide<?php echo $row_count > 1 ? " multiple-slides" : ""; ?>" id="carousel-<?php echo esc_attr($id); ?>">
 <?php
         if($row_count > 1) { ?>
             <ol class="carousel-indicators">
