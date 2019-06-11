@@ -1617,7 +1617,7 @@ if( function_exists('acf_add_local_field_group') ):
         'title' => 'Block: UAMS Text & Image Overlay',
         'fields' => array(
             array(
-                'key' => 'field_5cfaaf314ab70',
+                'key' => 'field_overlay_intro-message',
                 'label' => '',
                 'name' => '',
                 'type' => 'message',
@@ -1634,7 +1634,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'esc_html' => 0,
             ),
             array(
-                'key' => 'field_5cfa9e13ce38c',
+                'key' => 'field_overlay_section',
                 'label' => 'Sections',
                 'name' => 'overlay_section',
                 'type' => 'repeater',
@@ -1653,7 +1653,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'button_label' => 'Add Section',
                 'sub_fields' => array(
                     array(
-                        'key' => 'field_5cfa9e13d0c22',
+                        'key' => 'field_overlay_section_heading',
                         'label' => 'Heading',
                         'name' => 'overlay_section_heading',
                         'type' => 'text',
@@ -1672,7 +1672,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => 32,
                     ),
                     array(
-                        'key' => 'field_5cfa9e13d0c6c',
+                        'key' => 'field_overlay_section_body',
                         'label' => 'Body',
                         'name' => 'overlay_section_body',
                         'type' => 'text',
@@ -1691,7 +1691,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => 280,
                     ),
                     array(
-                        'key' => 'field_5cfa9e13d0ca1',
+                        'key' => 'field_overlay_section_button-text',
                         'label' => 'Button Text',
                         'name' => 'overlay_section_button-text',
                         'type' => 'text',
@@ -1710,7 +1710,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => 26,
                     ),
                     array(
-                        'key' => 'field_5cfa9e13d0d0b',
+                        'key' => 'field_overlay_section_button-url',
                         'label' => 'Button URL',
                         'name' => 'overlay_section_button-url',
                         'type' => 'url',
@@ -1726,7 +1726,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => '',
                     ),
                     array(
-                        'key' => 'field_5cfa9e13d0d71',
+                        'key' => 'field_overlay_section_button-target',
                         'label' => 'Open in New Window?',
                         'name' => 'overlay_section_button-target',
                         'type' => 'true_false',
@@ -1745,7 +1745,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'ui_off_text' => '',
                     ),
                     array(
-                        'key' => 'field_5cfa9e13d0daf',
+                        'key' => 'field_overlay_section_button-description',
                         'label' => 'Button Link Description',
                         'name' => 'overlay_section_button-description',
                         'type' => 'text',
@@ -1764,7 +1764,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => '',
                     ),
                     array(
-                        'key' => 'field_5cfa9e53ee92b',
+                        'key' => 'field_overlay_section_background-color',
                         'label' => 'Background Color',
                         'name' => 'overlay_section_background-color',
                         'type' => 'select',
@@ -1796,7 +1796,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => '',
                     ),
                     array(
-                        'key' => 'field_5cfa9f1dee92d',
+                        'key' => 'field_overlay_section_image',
                         'label' => 'Image',
                         'name' => 'overlay_section_image',
                         'type' => 'image',
