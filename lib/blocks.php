@@ -285,7 +285,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'sub_fields' => array(
                     array(
                         'key' => 'field_side_image_cta_text',
-                        'label' => 'Text',
+                        'label' => 'Button Text',
                         'name' => 'side_image_cta_text',
                         'type' => 'text',
                         'instructions' => '',
@@ -304,7 +304,7 @@ if( function_exists('acf_add_local_field_group') ):
                     ),
                     array(
                         'key' => 'field_side_image_cta_url',
-                        'label' => 'URL',
+                        'label' => 'Button URL',
                         'name' => 'side_image_cta_url',
                         'type' => 'url',
                         'instructions' => '',
@@ -320,7 +320,7 @@ if( function_exists('acf_add_local_field_group') ):
                     ),
                     array(
                         'key' => 'field_side_image_cta_target',
-                        'label' => 'New Window?',
+                        'label' => 'Open in New Window?',
                         'name' => 'side_image_cta_target',
                         'type' => 'true_false',
                         'instructions' => '',
@@ -339,7 +339,7 @@ if( function_exists('acf_add_local_field_group') ):
                     ),
                     array(
                         'key' => 'field_side_image_cta_description',
-                        'label' => 'Description',
+                        'label' => 'Link Description',
                         'name' => 'side_image_cta_description',
                         'type' => 'text',
                         'instructions' => 'Used for accessibility',
@@ -660,7 +660,7 @@ if( function_exists('acf_add_local_field_group') ):
                     ),
                     array(
                         'key' => 'field_5ceef5f6fcbc6',
-                        'label' => 'Button Description',
+                        'label' => 'Button Link Description',
                         'name' => 'hero_button_description',
                         'type' => 'text',
                         'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
@@ -1015,7 +1015,7 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array(
                 'key' => 'field_5cf938fee9dfa',
-                'label' => 'Button Description',
+                'label' => 'Button Link Description',
                 'name' => 'cta-bar_button-description',
                 'type' => 'text',
                 'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
@@ -1524,7 +1524,7 @@ if( function_exists('acf_add_local_field_group') ):
                     ),
                     array(
                         'key' => 'field_5cf985d47a5cf',
-                        'label' => 'Button Description',
+                        'label' => 'Button Link Description',
                         'name' => 'action-bar_section_button-description',
                         'type' => 'text',
                         'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
@@ -1698,7 +1698,7 @@ if( function_exists('acf_add_local_field_group') ):
                     ),
                     array(
                         'key' => 'field_5cfa9e13d0daf',
-                        'label' => 'Button Description',
+                        'label' => 'Button Link Description',
                         'name' => 'overlay_section_button-description',
                         'type' => 'text',
                         'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
@@ -2036,7 +2036,7 @@ if( function_exists('acf_add_local_field_group') ):
                     ),
                     array(
                         'key' => 'field_5cfabc11fd3e1',
-                        'label' => 'Button Description',
+                        'label' => 'Button Link Description',
                         'name' => 'stacked_section_button-description',
                         'type' => 'text',
                         'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
