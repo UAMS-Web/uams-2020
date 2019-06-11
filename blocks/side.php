@@ -133,7 +133,7 @@ if ('templates/page_landing.php' != $page_template) {
             <div class="col-12 col-md-6 text-container">
                 <div class="text-inner-container">
                     <h2 class="h3"><?php echo $heading; ?></h2>
-                    <?php echo !empty($body) ? $body : ''; ?>
+                    <?php echo !empty($body) ? '<p>' . $body . '</p>' : ''; ?>
                     <?php if ($link_list): ?>
                     <ul>
                         <?php foreach( $link_list as $link ) {
