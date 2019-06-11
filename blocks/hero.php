@@ -25,6 +25,13 @@ if( have_rows('hero') ):
 ?>
     <section class="hero carousel slide" id="carousel-<?php echo esc_attr($id); ?>">
 <?php
+        $page_template = get_page_template_slug( $post_id );
+        // echo $page_template;
+        if ('templates/page_landing.php' != $page_template) {
+            echo '<h4>This template is not supported. Please select "Landing"</h4>';
+            return;
+        }
+        
         if($row_count > 1) { ?>
             <ol class="carousel-indicators">
                 <?php for ($i = 0; $i < $row_count; $i++) { ?>
@@ -42,37 +49,50 @@ if( have_rows('hero') ):
     $button_url = get_sub_field('hero_button_url') ?: '';
     $button_target = get_sub_field('hero_button_target') ?: '';
     $button_desc = get_sub_field('hero_button_description') ?: '';
-    $image_desktop = get_sub_field('image_desktop') ?: '';
+    $image_desktop = get_sub_field('image_desktop') ?: ''; // Required
     $image_tablet = get_sub_field('image_tablet') ?: '';
     $image_mobile = get_sub_field('image_mobile') ?: '';
     $image_alt = get_sub_field('image_alt_text') ?: '';
     $background_color = get_sub_field('background_color')?: 'auto';
 
+    // Get the image(s)
+    $image_desktop_url = wp_get_attachment_image_url( $image_desktop, 'full' );
+    $image_alt = $image_alt ? $image_alt : get_post_meta($image_desktop, '_wp_attachment_image_alt', true);
+    if ($image_tablet) {
+        $image_tablet_url = wp_get_attachment_image_url( $image_tablet, 'full' );
+    } else {
+        $image_tablet_url = wp_get_attachment_image_url( $image_desktop, 'large' );
+    }
+    if ($image_mobile) {
+        $image_mobile_url = wp_get_attachment_image_url( $image_mobile, 'full' );
+    } else {
+        $image_mobile_url = wp_get_attachment_image_url( $image_desktop, 'large' );
+    }
 ?>
                 <div class="carousel-item <?php echo $background_color; ?><?php echo (0 == (get_row_index() - 1) ? ' active' : ''); ?>" id="carousel-item-<?php echo (get_row_index() - 1); ?>">
                         <div class="image-container">
                                 <style>
                                         /* SM Breakpoint, retina */
                                         @media (min-width: 768px) {
-                                                #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                                                        background-image: url("<?php echo wp_get_attachment_image_url( $image_tablet, 'full' ); ?>");
+                                                #carousel-<?php echo esc_attr($id); ?>  #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
+                                                        background-image: url("<?php echo $image_tablet_url; ?>");
                                                 }
                                         }
                                         /* MD Breakpoint, retina */
                                         @media (min-width: 992px) {
-                                                #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                                                        background-image: url("<?php echo wp_get_attachment_image_url( $image_desktop, 'full' ); ?>");
+                                                #carousel-<?php echo esc_attr($id); ?> #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
+                                                        background-image: url("<?php echo $image_desktop_url; ?>");
                                                 }
                                         }
                                 </style>
                                 <picture>
                                         <!-- Mobile, Aspect ratio 1.5:1 -->
-                                        <source srcset="<?php echo wp_get_attachment_image_url( $image_mobile, 'full' ); ?>"
+                                        <source srcset="<?php echo $image_mobile_url; ?>"
                                                         media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1px) and (min-resolution: 192dpi)">
-                                        <source srcset="<?php echo wp_get_attachment_image_url( $image_mobile, 'full' ); ?>"
+                                        <source srcset="<?php echo $image_mobile_url; ?>"
                                                         media="(min-width: 1px)">
                                         <!-- Fallback, use Tablet, Aspect ratio 1.4132:1 -->
-                                        <img src="<?php echo wp_get_attachment_image_url( $image_tablet, 'full' ); ?>" alt="<?php echo $image_alt; ?>" />
+                                        <img src="<?php echo $image_tablet_url; ?>" alt="<?php echo $image_alt; ?>" />
                                 </picture>
                         </div>
                         <div class="text-container">
