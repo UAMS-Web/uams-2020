@@ -442,10 +442,10 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array(
                 'key' => 'field_side_image_position',
-                'label' => 'Position',
+                'label' => 'Image Position',
                 'name' => 'side_image_position',
                 'type' => 'button_group',
-                'instructions' => '',
+                'instructions' => 'Which side is the image on?',
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(
@@ -467,7 +467,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'label' => 'Image Anchor Position',
                 'name' => 'side_image_anchor',
                 'type' => 'button_group',
-                'instructions' => '',
+                'instructions' => 'When your image is larger than the container, should it be anchored to the left, middle or right? This selection can ensure the important part of your image is visible.',
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(
