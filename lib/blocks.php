@@ -248,8 +248,15 @@ if( function_exists('acf_add_local_field_group') ):
                 'type' => 'true_false',
                 'instructions' => '',
                 'required' => 0,
-                'conditional_logic' => 0,
-                'wrapper' => array(
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_side_image_link_list',
+                            'operator' => '<',
+                            'value' => '6',
+                        ),
+                    ),
+                ),'wrapper' => array(
                     'width' => '',
                     'class' => '',
                     'id' => '',
