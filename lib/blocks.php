@@ -1948,7 +1948,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'button_label' => '',
                 'sub_fields' => array(
                     array(
-                        'key' => 'field_5cfabbf1fd3dc',
+                        'key' => 'field_stacked_section_heading',
                         'label' => 'Heading',
                         'name' => 'stacked_section_heading',
                         'type' => 'text',
@@ -1967,7 +1967,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => 78,
                     ),
                     array(
-                        'key' => 'field_5cfabbf8fd3dd',
+                        'key' => 'field_stacked_section_body',
                         'label' => 'Body',
                         'name' => 'stacked_section_body',
                         'type' => 'textarea',
@@ -1986,7 +1986,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'new_lines' => '',
                     ),
                     array(
-                        'key' => 'field_5cfac1924f098',
+                        'key' => 'field_stacked_section_image',
                         'label' => 'Image',
                         'name' => 'stacked_section_image',
                         'type' => 'image',
@@ -2010,7 +2010,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'mime_types' => '',
                     ),
                     array(
-                        'key' => 'field_5cfac23df6f3d',
+                        'key' => 'field_stacked_section_alt-override',
                         'label' => 'Image Alt Text Override',
                         'name' => 'stacked_section_alt-override',
                         'type' => 'text',
@@ -2029,7 +2029,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => 125,
                     ),
                     array(
-                        'key' => 'field_5cfabbfbfd3de',
+                        'key' => 'field_stacked_section_button-text',
                         'label' => 'Button Text',
                         'name' => 'stacked_section_button-text',
                         'type' => 'text',
@@ -2048,7 +2048,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => '',
                     ),
                     array(
-                        'key' => 'field_5cfabc01fd3df',
+                        'key' => 'field_stacked_section_button-url',
                         'label' => 'Button URL',
                         'name' => 'stacked_section_button-url',
                         'type' => 'url',
@@ -2064,7 +2064,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => '',
                     ),
                     array(
-                        'key' => 'field_5cfabc09fd3e0',
+                        'key' => 'field_stacked_section_button-target',
                         'label' => 'Open in New Window?',
                         'name' => 'stacked_section_button-target',
                         'type' => 'true_false',
@@ -2083,7 +2083,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'ui_off_text' => '',
                     ),
                     array(
-                        'key' => 'field_5cfabc11fd3e1',
+                        'key' => 'field_stacked_section_button-description',
                         'label' => 'Button Link Description',
                         'name' => 'stacked_section_button-description',
                         'type' => 'text',
