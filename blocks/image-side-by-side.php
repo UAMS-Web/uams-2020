@@ -129,6 +129,15 @@ if ('templates/page_landing.php' != $page_template) {
                             }
                         }
                     </style>
+                    <?php else: ?>
+                    <style>
+                        /* Fallback */
+                        @media (min-width: 992px) {
+                            #side-by-side-<?php echo esc_attr($id); ?> .image-inner-container {
+                                background-image: url("<?php echo wp_get_attachment_url( $side_image, 'full' ); ?>");
+                            }
+                        }
+                    </style>
                     <?php endif; ?>
                     <picture>
                         <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
