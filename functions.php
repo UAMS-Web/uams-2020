@@ -131,6 +131,12 @@ if ( !function_exists('uams_get_site_info')):
 		$subsite = '';
 		$option_name = 'uamswp_options'; // Settings page
 		$siteinfo = array();
+		if ( ! class_exists( 'acf' ) ) {
+			// Set base defaults if no ACF
+			$siteinfo = array('site' => 'uams', 'subsite' => 'uams');
+			return $siteinfo;
+			return;
+		}
 		$themestyle = get_field( 'uamswp_template', 'option' ); // uams, inside, health
 		$themelocation = get_field( 'uamswp_location', 'option' ); // campus, regional
 		$themeinstitute = get_field( 'uamswp_institute', 'option' ); // institute name
@@ -294,4 +300,29 @@ function format_phone_dash($phone) {
     return $phone;
   break;
   }
+}
+
+/**
+ * Return sized image.
+ *
+ * @param integer  $id 			// id of image
+ * @param integer  $minwidth	// Minimum width required
+ * @param integer  $prefwidth	// Output width, if large enough
+ * @param string   $prefheight	// Output height, if large enough
+ * @param string   $hcrop		// horizontal crop position (left, center, right)
+ * @param string   $vcrop		// vertical crop position (top, center, bottom)
+ * @return string				// image url
+ */
+function image_sizer( $id, $minwidth, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center' ) {
+
+	if ( ! function_exists( 'fly_add_image_size' ) ) {
+		return;
+	}
+	$image_width = wp_get_attachment_image_src($id, 'full')[1];
+	if( $image_width <= $minwidth ) {
+		$image_url = wp_get_attachment_url( $side_image, 'full' );
+	} else {
+		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
+	}
+	return $image_url;
 }
