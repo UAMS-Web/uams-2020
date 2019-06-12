@@ -319,10 +319,10 @@ function image_sizer( $id, $minwidth, $prefwidth, $prefheight, $hcrop = 'center'
 		return;
 	}
 	$image_width = wp_get_attachment_image_src($id, 'full')[1];
-	if( $image_width <= $minwidth ) {
-		$image_url = wp_get_attachment_url( $side_image, 'full' );
-	} else {
+	if( $image_width >= $minwidth ) {
 		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
+	} else {
+		$image_url = wp_get_attachment_url( $id, 'full' );
 	}
 	return $image_url;
 }
