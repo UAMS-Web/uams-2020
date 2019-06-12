@@ -20,18 +20,25 @@ if( !empty($block['align']) ) {
 }
 
 // Load values and setting defaults.
-$heading = get_field('side_image_heading') ?: 'Heading goes here...';
-$body = get_field('side_image_body') ?: 'This is where the description goes';
-$link_list = get_field('side_image_link_list') ?: '';
-$list_more = get_field('link_list_include_more') ?: '';
-$cta = get_field('side_image_call_to_action') ?: '';
-$cta_text = $cta['side_image_cta_text'] ?: '';
-$cta_link = $cta['side_image_cta_url'] ?: '';
-$cta_target = $cta['side_image_cta_target'] ?: '';
-$cta_desc = $cta['side_image_cta_description'] ?: '';
-$image = get_field('side_image_image_group')?: '';
-$side_image = $image['side_image_image'] ?: '';
-$image_alt = $image['image_alt_text'] ?: '';
+$layout = get_field('side_text-layout') ?: 'link-list';
+$heading = get_field('side_heading') ?: 'Heading goes here...';
+
+if ( $layout == 'body-only' ) {
+    $body = get_field('side_layout-body-only_body') ?: 'This is where the body-only description goes';
+} else {
+    $body = get_field('side_layout-link-list_body') ?: 'This is where the body + link list description goes';
+}
+
+$link_list = get_field('side_link-list') ?: '';
+$list_more = get_field('side_link-list_include-more') ?: '';
+$cta = get_field('side_cta') ?: '';
+$cta_text = $cta['side_cta_text'] ?: '';
+$cta_link = $cta['side_cta_url'] ?: '';
+$cta_target = $cta['side_cta_target'] ?: '';
+$cta_desc = $cta['side_cta_description'] ?: '';
+$image_group = get_field('side_image')?: '';
+$side_image = $image_group['side_image_image'] ?: '';
+$image_alt = $image_group['side_image_alt-text'] ?: '';
 $image_postion = get_field('side_image_position') ?: 'left';
 $image_anchor = get_field('side_image_anchor') ?: 'middle';
 $background_color = get_field('side_image_background-color') ?: 'bg-white';
@@ -138,13 +145,13 @@ if ('templates/page_landing.php' != $page_template) {
                     <?php if ($link_list): ?>
                     <ul>
                         <?php foreach( $link_list as $link ) {
-                            $list_text = $link['side_image_link_list_text'];
-                            $list_url = $link['side_image_link_list_url'];
-                            // $list_desc = get_sub_field('side_image_link_list_description');
+                            $list_text = $link['side_link-list_text'];
+                            $list_url = $link['side_link-list_url'];
+                            $list_desc = $link['side_link-list_description'];
                         ?>
                         <li>
                             <?php if( $list_url ): ?>
-                            <a href="<?php echo $list_url; ?>">
+                            <a href="<?php echo $list_url; ?>"<?php echo $list_desc ? ' aria-label="' . $list_desc . '"' : ''; ?>>
                             <?php endif; ?>
                             <?php if( $list_text ): ?>
                                 <?php echo $list_text; ?>
