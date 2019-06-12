@@ -33,7 +33,7 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'text', 'image', 'side'),
             'mode'              => 'auto',
             'align'             => 'full',
-            'render_template'   => 'blocks/side.php',
+            'render_template'   => 'blocks/image-side-by-side.php',
         ));
         acf_register_block_type(array(
             'name'              => 'text-stacked',

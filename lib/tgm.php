@@ -27,11 +27,11 @@ function uamswp_do_plugins_register() {
 			'required'  => true,
 		),
 
-		// array(
-		// 	'name'      => __( 'MB Relationsships', 'uamswp-uams-2020' ),
-		// 	'slug'      => 'mb-relationships',
-		// 	'required'  => false,
-		// ),
+		array(
+			'name'      => __( 'Fly Dynamic Image Resizer', 'uamswp-uams-2020' ),
+			'slug'      => 'fly-dynamic-image-resizer',
+			'required'  => true,
+		),
 
 		// array(
 		// 	'name'      => __( 'Meta Box - FacetWP Integrator', 'uamswp-uams-2020' ),
