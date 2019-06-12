@@ -26,8 +26,8 @@ function uams_register_blocks() {
         ));
         acf_register_block_type(array(
             'name'              => 'image-side',
-            'title'             => __('UAMS Image-Text'),
-            'description'       => __('Side-by-Side Image & Text.'),
+            'title'             => __('UAMS Side-by-Side Image & Text'),
+            'description'       => __('Image on one side, text on the other side.'),
             'category'          => 'common',
             'icon'              => 'id',
             'keywords'          => array('uams', 'text', 'image', 'side'),
@@ -105,13 +105,14 @@ function uams_register_blocks() {
 }
 
 if( function_exists('acf_add_local_field_group') ):
-    
+
+    // Add local field group for UAMS Side-by-Side Image & Text Block
     acf_add_local_field_group(array(
         'key' => 'group_5cefe13df1b97',
         'title' => 'Block: Side-by-Side Image & Text',
         'fields' => array(
             array(
-                'key' => 'field_side_image_title',
+                'key' => 'field_side_image_intro-message',
                 'label' => '',
                 'name' => '',
                 'type' => 'message',
@@ -123,17 +124,44 @@ if( function_exists('acf_add_local_field_group') ):
                     'class' => '',
                     'id' => '',
                 ),
-                'message' => '<h3>Side-by-Side Image & Text</h3>',
+                'message' => '<h2>Side-by-Side Image & Text</h2>',
                 'new_lines' => 'wpautop',
                 'esc_html' => 0,
             ),
             array(
-                'key' => 'field_side_image_heading',
-                'label' => 'Heading',
-                'name' => 'side_image_heading',
-                'type' => 'text',
+                'key' => 'field_side_text-layout',
+                'label' => 'Choose Text Layout',
+                'name' => 'side_text-layout',
+                'type' => 'select',
                 'instructions' => '',
-                'required' => 0,
+                'required' => 1,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'choices' => array(
+                    'body-only' => 'Body only',
+                    'link-list' => 'Body and Link List',
+                ),
+                'default_value' => array(
+                    0 => 'body-only',
+                ),
+                'allow_null' => 0,
+                'multiple' => 0,
+                'ui' => 0,
+                'return_format' => 'value',
+                'ajax' => 0,
+                'placeholder' => '',
+            ),
+            array(
+                'key' => 'field_side_heading',
+                'label' => 'Heading',
+                'name' => 'side_heading',
+                'type' => 'text',
+                'instructions' => '50 character limit.',
+                'required' => 1,
                 'conditional_logic' => 0,
                 'wrapper' => array(
                     'width' => '',
@@ -144,53 +172,131 @@ if( function_exists('acf_add_local_field_group') ):
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
-                'maxlength' => '',
+                'maxlength' => 50,
             ),
             array(
-                'key' => 'field_side_image_body',
+                'key' => 'field_side_layout-body-only_body',
                 'label' => 'Body',
-                'name' => 'side_image_body',
-                'type' => 'wysiwyg',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 0,
+                'name' => 'side_layout-body-only_body',
+                'type' => 'textarea',
+                'instructions' => '449 character limit.',
+                'required' => 1,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_side_text-layout',
+                            'operator' => '==',
+                            'value' => 'body-only',
+                        ),
+                    ),
+                ),
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',
                     'id' => '',
                 ),
                 'default_value' => '',
-                'tabs' => 'all',
-                'toolbar' => 'basic',
-                'media_upload' => 1,
-                'delay' => 0,
+                'placeholder' => '',
+                'maxlength' => 449,
+                'rows' => 6,
+                'new_lines' => '',
             ),
             array(
-                'key' => 'field_side_image_link_list',
-                'label' => 'Link List',
-                'name' => 'side_image_link_list',
-                'type' => 'repeater',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 0,
+                'key' => 'field_side_layout-link-list_body',
+                'label' => 'Body',
+                'name' => 'side_layout-link-list_body',
+                'type' => 'textarea',
+                'instructions' => '173 character limit.',
+                'required' => 1,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_side_text-layout',
+                            'operator' => '==',
+                            'value' => 'link-list',
+                        ),
+                    ),
+                ),
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',
                     'id' => '',
                 ),
-                'collapsed' => 'field_side_image_link_list_text',
-                'min' => 0,
-                'max' => 0,
+                'default_value' => '',
+                'placeholder' => '',
+                'maxlength' => 173,
+                'rows' => 3,
+                'new_lines' => '',
+            ),
+            array(
+                'key' => 'field_side_link-list',
+                'label' => 'Link List',
+                'name' => 'side_link-list',
+                'type' => 'repeater',
+                'instructions' => 'You may add up to six links. However, if you add a sixth link, the option for adding "and more" in the sixth position will be disabled.',
+                'required' => 1,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_side_text-layout',
+                            'operator' => '==',
+                            'value' => 'link-list',
+                        ),
+                    ),
+                ),
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'collapsed' => 'field_side_link-list_text',
+                'min' => 1,
+                'max' => 6,
                 'layout' => 'block',
-                'button_label' => '',
+                'button_label' => 'Add Link',
                 'sub_fields' => array(
                     array(
-                        'key' => 'field_side_image_link_list_text',
-                        'label' => 'Text',
-                        'name' => 'side_image_link_list_text',
+                        'key' => 'field_side_link-list_text',
+                        'label' => 'Link Text',
+                        'name' => 'side_link-list_text',
                         'type' => 'text',
+                        'instructions' => '40 character limit.',
+                        'required' => 1,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'default_value' => '',
+                        'placeholder' => '',
+                        'prepend' => '',
+                        'append' => '',
+                        'maxlength' => 40,
+                    ),
+                    array(
+                        'key' => 'field_side_link-list_url',
+                        'label' => 'Link URL',
+                        'name' => 'side_link-list_url',
+                        'type' => 'url',
                         'instructions' => '',
-                        'required' => 0,
+                        'required' => 1,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'default_value' => '',
+                        'placeholder' => '',
+                    ),
+                    array(
+                        'key' => 'field_side_link-list_description',
+                        'label' => 'Link Description',
+                        'name' => 'side_link-list_description',
+                        'type' => 'text',
+                        'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
+                        'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array(
                             'width' => '',
@@ -203,51 +309,24 @@ if( function_exists('acf_add_local_field_group') ):
                         'append' => '',
                         'maxlength' => '',
                     ),
-                    array(
-                        'key' => 'field_side_image_link_list_url',
-                        'label' => 'URL',
-                        'name' => 'side_image_link_list_url',
-                        'type' => 'url',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
-                        ),
-                        'default_value' => '',
-                        'placeholder' => '',
-                    ),
-                    // array(
-                    //     'key' => 'field_side_image_link_list_description',
-                    //     'label' => 'Description',
-                    //     'name' => 'side_image_link_list_description',
-                    //     'type' => 'text',
-                    //     'instructions' => 'Used for accessibility',
-                    //     'required' => 0,
-                    //     'conditional_logic' => 0,
-                    //     'wrapper' => array(
-                    //         'width' => '',
-                    //         'class' => '',
-                    //         'id' => '',
-                    //     ),
-                    //     'default_value' => '',
-                    //     'placeholder' => '',
-                    //     'prepend' => '',
-                    //     'append' => '',
-                    //     'maxlength' => '',
-                    // ),
                 ),
             ),
             array(
-                'key' => 'field_link_list_include_more',
-                'label' => 'Link List (include more)',
-                'name' => 'link_list_include_more',
+                'key' => 'field_side_link-list_include-more',
+                'label' => 'Include "and more" at the end of the Link List?',
+                'name' => 'side_link-list_include-more',
                 'type' => 'true_false',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 0,
+                'instructions' => 'This option is only available if you have 1-5 items in the link list.',
+                'required' => 1,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_side_link-list',
+                            'operator' => '<',
+                            'value' => '6',
+                        ),
+                    ),
+                ),
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',
@@ -260,9 +339,9 @@ if( function_exists('acf_add_local_field_group') ):
                 'ui_off_text' => '',
             ),
             array(
-                'key' => 'field_side_image_call_to_action',
-                'label' => 'Call to Action',
-                'name' => 'side_image_call_to_action',
+                'key' => 'field_side_cta',
+                'label' => 'Call to Action Button',
+                'name' => 'side_cta',
                 'type' => 'group',
                 'instructions' => '',
                 'required' => 0,
@@ -275,9 +354,9 @@ if( function_exists('acf_add_local_field_group') ):
                 'layout' => 'block',
                 'sub_fields' => array(
                     array(
-                        'key' => 'field_side_image_cta_text',
-                        'label' => 'Text',
-                        'name' => 'side_image_cta_text',
+                        'key' => 'field_side_cta_text',
+                        'label' => 'Button Text',
+                        'name' => 'side_cta_text',
                         'type' => 'text',
                         'instructions' => '',
                         'required' => 0,
@@ -294,12 +373,12 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => '',
                     ),
                     array(
-                        'key' => 'field_side_image_cta_url',
-                        'label' => 'URL',
-                        'name' => 'side_image_cta_url',
+                        'key' => 'field_side_cta_url',
+                        'label' => 'Button URL',
+                        'name' => 'side_cta_url',
                         'type' => 'url',
                         'instructions' => '',
-                        'required' => 0,
+                        'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array(
                             'width' => '',
@@ -310,12 +389,12 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => '',
                     ),
                     array(
-                        'key' => 'field_side_image_cta_target',
-                        'label' => 'New Window?',
-                        'name' => 'side_image_cta_target',
+                        'key' => 'field_side_cta_target',
+                        'label' => 'Open in New Window?',
+                        'name' => 'side_cta_target',
                         'type' => 'true_false',
                         'instructions' => '',
-                        'required' => 0,
+                        'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array(
                             'width' => '',
@@ -329,12 +408,12 @@ if( function_exists('acf_add_local_field_group') ):
                         'ui_off_text' => '',
                     ),
                     array(
-                        'key' => 'field_side_image_cta_description',
-                        'label' => 'Description',
-                        'name' => 'side_image_cta_description',
+                        'key' => 'field_side_cta_description',
+                        'label' => 'Link Description',
+                        'name' => 'side_cta_description',
                         'type' => 'text',
-                        'instructions' => 'Used for accessibility',
-                        'required' => 0,
+                        'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
+                        'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array(
                             'width' => '',
@@ -350,9 +429,9 @@ if( function_exists('acf_add_local_field_group') ):
                 ),
             ),
             array(
-                'key' => 'field_side_image_image_group',
+                'key' => 'field_side_image',
                 'label' => 'Image',
-                'name' => 'side_image_image_group',
+                'name' => 'side_image',
                 'type' => 'group',
                 'instructions' => '',
                 'required' => 0,
@@ -370,7 +449,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'name' => 'side_image_image',
                         'type' => 'image',
                         'instructions' => '',
-                        'required' => 0,
+                        'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array(
                             'width' => '',
@@ -387,14 +466,13 @@ if( function_exists('acf_add_local_field_group') ):
                         'max_height' => '',
                         'max_size' => '',
                         'mime_types' => '',
-                        'acfe_thumbnail' => 0,
                     ),
                     array(
-                        'key' => 'field_side_image_alt_text',
-                        'label' => 'Alt Text',
-                        'name' => 'side_image_alt_text',
+                        'key' => 'field_side_image_alt-text',
+                        'label' => 'Image Alt Text Override',
+                        'name' => 'side_image_alt-text',
                         'type' => 'text',
-                        'instructions' => 'Overrides image alt text',
+                        'instructions' => 'Alt text (alternative text) refers to invisible description of images which are read aloud to blind users on a screen reader. If you want to define alt text that is different from the alt text defined for this image in the media library, you can do so here.',
                         'required' => 0,
                         'conditional_logic' => 0,
                         'wrapper' => array(
@@ -406,17 +484,45 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => '',
                         'prepend' => '',
                         'append' => '',
-                        'maxlength' => '',
+                        'maxlength' => 125,
+                    ),
+                    array(
+                        'key' => 'field_side_image_crop',
+                        'label' => 'Vertical Crop',
+                        'name' => 'side_image_crop',
+                        'type' => 'select',
+                        'instructions' => 'Your image will be cropped if necessary. Tell us if we should crop it from the top, middle, or bottom.',
+                        'required' => 1,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'choices' => array(
+                            'top' => 'Crop from Top',
+                            'center' => 'Crop from Center',
+                            'bottom' => 'Crop from Bottom',
+                        ),
+                        'default_value' => array(
+                            0 => 'center',
+                        ),
+                        'allow_null' => 0,
+                        'multiple' => 0,
+                        'ui' => 0,
+                        'return_format' => 'value',
+                        'ajax' => 0,
+                        'placeholder' => '',
                     ),
                 ),
             ),
             array(
                 'key' => 'field_side_image_position',
-                'label' => 'Position',
+                'label' => 'Image & Text Position',
                 'name' => 'side_image_position',
-                'type' => 'button_group',
+                'type' => 'select',
                 'instructions' => '',
-                'required' => 0,
+                'required' => 1,
                 'conditional_logic' => 0,
                 'wrapper' => array(
                     'width' => '',
@@ -424,21 +530,26 @@ if( function_exists('acf_add_local_field_group') ):
                     'id' => '',
                 ),
                 'choices' => array(
-                    'left' => 'Left',
-                    'right' => 'Right',
+                    'left' => 'Image on Left, Text on Right',
+                    'right' => 'Image on Right, Text on Left',
+                ),
+                'default_value' => array(
+                    0 => 'left',
                 ),
                 'allow_null' => 0,
-                'default_value' => '',
-                'layout' => 'horizontal',
+                'multiple' => 0,
+                'ui' => 0,
                 'return_format' => 'value',
+                'ajax' => 0,
+                'placeholder' => '',
             ),
             array(
                 'key' => 'field_side_image_anchor',
                 'label' => 'Image Anchor Position',
                 'name' => 'side_image_anchor',
                 'type' => 'button_group',
-                'instructions' => '',
-                'required' => 0,
+                'instructions' => 'Where is the focus of your image content?',
+                'required' => 1,
                 'conditional_logic' => 0,
                 'wrapper' => array(
                     'width' => '',
@@ -447,13 +558,40 @@ if( function_exists('acf_add_local_field_group') ):
                 ),
                 'choices' => array(
                     'left' => 'Left',
-                    'middle' => 'Middle',
+                    'center' => 'Center',
                     'right' => 'Right',
                 ),
                 'allow_null' => 0,
-                'default_value' => 'middle',
+                'default_value' => 'center',
                 'layout' => 'horizontal',
                 'return_format' => 'value',
+            ),
+            array(
+                'key' => 'field_side_image_background-color',
+                'label' => 'Background Color',
+                'name' => 'side_image_background-color',
+                'type' => 'select',
+                'instructions' => 'This defines the background color of the text container.',
+                'required' => 1,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'choices' => array(
+                    'bg-white' => 'White',
+                    'bg-gray' => 'Gray',
+                ),
+                'default_value' => array(
+                    0 => 'bg-white',
+                ),
+                'allow_null' => 0,
+                'multiple' => 0,
+                'ui' => 0,
+                'return_format' => 'value',
+                'ajax' => 0,
+                'placeholder' => '',
             ),
         ),
         'location' => array(
@@ -651,7 +789,7 @@ if( function_exists('acf_add_local_field_group') ):
                     ),
                     array(
                         'key' => 'field_5ceef5f6fcbc6',
-                        'label' => 'Button Description',
+                        'label' => 'Button Link Description',
                         'name' => 'hero_button_description',
                         'type' => 'text',
                         'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
@@ -867,7 +1005,7 @@ if( function_exists('acf_add_local_field_group') ):
         'position' => 'normal',
         'style' => 'default',
         'label_placement' => 'left',
-        'instruction_placement' => 'field',
+        'instruction_placement' => 'label',
         'hide_on_screen' => '',
         'active' => true,
         'description' => '',
@@ -879,7 +1017,7 @@ if( function_exists('acf_add_local_field_group') ):
         'title' => 'Block: UAMS CTA Bar',
         'fields' => array(
             array(
-                'key' => 'field_5cfab19504055',
+                'key' => 'field_cta-bar_intro-message',
                 'label' => '',
                 'name' => '',
                 'type' => 'message',
@@ -896,7 +1034,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'esc_html' => 0,
             ),
             array(
-                'key' => 'field_5cf9382be9df5',
+                'key' => 'field_cta-bar_heading',
                 'label' => 'Heading',
                 'name' => 'cta-bar_heading',
                 'type' => 'text',
@@ -915,7 +1053,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_5cf9385fe9df6',
+                'key' => 'field_cta-bar_body',
                 'label' => 'Body',
                 'name' => 'cta-bar_body',
                 'type' => 'wysiwyg',
@@ -934,7 +1072,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'delay' => 0,
             ),
             array(
-                'key' => 'field_5cf93896e9df7',
+                'key' => 'field_cta-bar_button-text',
                 'label' => 'Button Text',
                 'name' => 'cta-bar_button-text',
                 'type' => 'text',
@@ -962,7 +1100,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_5cf93896e9df7',
+                            'field' => 'field_cta-bar_button-text',
                             'operator' => '!=empty',
                         ),
                     ),
@@ -979,7 +1117,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_5cf938cde9df9',
+                'key' => 'field_cta-bar_button-target',
                 'label' => 'Open in New Window?',
                 'name' => 'cta-bar_button-target',
                 'type' => 'true_false',
@@ -988,7 +1126,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_5cf93896e9df7',
+                            'field' => 'field_cta-bar_button-text',
                             'operator' => '!=empty',
                         ),
                     ),
@@ -1005,8 +1143,8 @@ if( function_exists('acf_add_local_field_group') ):
                 'ui_off_text' => '',
             ),
             array(
-                'key' => 'field_5cf938fee9dfa',
-                'label' => 'Button Description',
+                'key' => 'field_cta-bar_button-description',
+                'label' => 'Button Link Description',
                 'name' => 'cta-bar_button-description',
                 'type' => 'text',
                 'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
@@ -1014,7 +1152,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_5cf93896e9df7',
+                            'field' => 'field_cta-bar_button-text',
                             'operator' => '!=empty',
                         ),
                     ),
@@ -1031,7 +1169,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_5cf93919e9dfb',
+                'key' => 'field_cta-bar_layout',
                 'label' => 'Layout',
                 'name' => 'cta-bar_layout',
                 'type' => 'select',
@@ -1058,7 +1196,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'placeholder' => '',
             ),
             array(
-                'key' => 'field_5cf93a28e9dfd',
+                'key' => 'field_cta-bar_background-color',
                 'label' => 'Background Color',
                 'name' => 'cta-bar_background-color',
                 'type' => 'select',
@@ -1092,7 +1230,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'placeholder' => '',
             ),
             array(
-                'key' => 'field_5cf940a64efcc',
+                'key' => 'field_cta-bar_use-image',
                 'label' => 'Use Background Image?',
                 'name' => 'cta-bar_use-image',
                 'type' => 'true_false',
@@ -1111,7 +1249,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'ui_off_text' => '',
             ),
             array(
-                'key' => 'field_5cf940c24efcd',
+                'key' => 'field_cta-bar_image',
                 'label' => 'Image',
                 'name' => 'cta-bar_image',
                 'type' => 'image',
@@ -1120,7 +1258,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_5cf940a64efcc',
+                            'field' => 'field_cta-bar_use-image',
                             'operator' => '==',
                             'value' => '1',
                         ),
@@ -1168,7 +1306,7 @@ if( function_exists('acf_add_local_field_group') ):
         'title' => 'Block: UAMS Call-Out',
         'fields' => array(
             array(
-                'key' => 'field_5cfab12d6f7bb',
+                'key' => 'field_call-out_intro-message',
                 'label' => '',
                 'name' => '',
                 'type' => 'message',
@@ -1185,7 +1323,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'esc_html' => 0,
             ),
             array(
-                'key' => 'field_5cf980995d30b',
+                'key' => 'field_call-out_heading',
                 'label' => 'Heading',
                 'name' => 'call-out_heading',
                 'type' => 'text',
@@ -1204,7 +1342,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_5cf980995d342',
+                'key' => 'field_call-out_body',
                 'label' => 'Body',
                 'name' => 'call-out_body',
                 'type' => 'textarea',
@@ -1223,7 +1361,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'new_lines' => '',
             ),
             array(
-                'key' => 'field_5cf980995d50b',
+                'key' => 'field_out_background',
                 'label' => 'Background Color',
                 'name' => 'call-out_background-color',
                 'type' => 'select',
@@ -1257,7 +1395,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'placeholder' => '',
             ),
             array(
-                'key' => 'field_5cf980995d56e',
+                'key' => 'field_call-out_use-image',
                 'label' => 'Use Background Image?',
                 'name' => 'call-out_use-image',
                 'type' => 'true_false',
@@ -1276,7 +1414,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'ui_off_text' => '',
             ),
             array(
-                'key' => 'field_5cf980995d5d1',
+                'key' => 'field_call-out_image',
                 'label' => 'Image',
                 'name' => 'call-out_image',
                 'type' => 'image',
@@ -1285,7 +1423,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'conditional_logic' => array(
                     array(
                         array(
-                            'field' => 'field_5cf980995d56e',
+                            'field' => 'field_call-out_use-image',
                             'operator' => '==',
                             'value' => '1',
                         ),
@@ -1333,7 +1471,7 @@ if( function_exists('acf_add_local_field_group') ):
         'title' => 'Block: UAMS Action Bar',
         'fields' => array(
             array(
-                'key' => 'field_5cfab0aae253e',
+                'key' => 'field_action-bar_intro-message',
                 'label' => '',
                 'name' => '',
                 'type' => 'message',
@@ -1350,7 +1488,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'esc_html' => 0,
             ),
             array(
-                'key' => 'field_5cf9847428e09',
+                'key' => 'field_action-bar_heading',
                 'label' => 'Heading',
                 'name' => 'action-bar_heading',
                 'type' => 'text',
@@ -1369,7 +1507,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_5cf9847428f6d',
+                'key' => 'field_action-bar_background-color',
                 'label' => 'Background Color',
                 'name' => 'action-bar_background-color',
                 'type' => 'select',
@@ -1403,7 +1541,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'placeholder' => '',
             ),
             array(
-                'key' => 'field_5cf984dc7a5c9',
+                'key' => 'field_action-bar_section',
                 'label' => 'Sections',
                 'name' => 'action-bar_section',
                 'type' => 'repeater',
@@ -1415,14 +1553,14 @@ if( function_exists('acf_add_local_field_group') ):
                     'class' => '',
                     'id' => '',
                 ),
-                'collapsed' => 'field_5cf985327a5ca',
+                'collapsed' => 'field_section_heading',
                 'min' => 3,
                 'max' => 4,
                 'layout' => 'block',
                 'button_label' => 'Add Section',
                 'sub_fields' => array(
                     array(
-                        'key' => 'field_5cf985327a5ca',
+                        'key' => 'field_action-bar_section_heading',
                         'label' => 'Heading',
                         'name' => 'action-bar_section_heading',
                         'type' => 'text',
@@ -1441,7 +1579,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => 46,
                     ),
                     array(
-                        'key' => 'field_5cf985457a5cb',
+                        'key' => 'field_action-bar_section_body',
                         'label' => 'Body',
                         'name' => 'action-bar_section_body',
                         'type' => 'text',
@@ -1460,7 +1598,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => 67,
                     ),
                     array(
-                        'key' => 'field_5cf9854d7a5cc',
+                        'key' => 'field_action-bar_section_button-text',
                         'label' => 'Button Text',
                         'name' => 'action-bar_section_button-text',
                         'type' => 'text',
@@ -1479,7 +1617,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => 31,
                     ),
                     array(
-                        'key' => 'field_5cf985757a5cd',
+                        'key' => 'field_action-bar_section_button-url',
                         'label' => 'Button URL',
                         'name' => 'action-bar_section_button-url',
                         'type' => 'url',
@@ -1495,7 +1633,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => '',
                     ),
                     array(
-                        'key' => 'field_5cf9859a7a5ce',
+                        'key' => 'field_action-bar_section_button-target',
                         'label' => 'Open in New Window?',
                         'name' => 'action-bar_section_button-target',
                         'type' => 'true_false',
@@ -1514,8 +1652,8 @@ if( function_exists('acf_add_local_field_group') ):
                         'ui_off_text' => '',
                     ),
                     array(
-                        'key' => 'field_5cf985d47a5cf',
-                        'label' => 'Button Description',
+                        'key' => 'field_action-bar_section_button-description',
+                        'label' => 'Button Link Description',
                         'name' => 'action-bar_section_button-description',
                         'type' => 'text',
                         'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
@@ -1560,7 +1698,7 @@ if( function_exists('acf_add_local_field_group') ):
         'title' => 'Block: UAMS Text & Image Overlay',
         'fields' => array(
             array(
-                'key' => 'field_5cfaaf314ab70',
+                'key' => 'field_overlay_intro-message',
                 'label' => '',
                 'name' => '',
                 'type' => 'message',
@@ -1577,7 +1715,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'esc_html' => 0,
             ),
             array(
-                'key' => 'field_5cfa9e13ce38c',
+                'key' => 'field_overlay_section',
                 'label' => 'Sections',
                 'name' => 'overlay_section',
                 'type' => 'repeater',
@@ -1589,14 +1727,14 @@ if( function_exists('acf_add_local_field_group') ):
                     'class' => '',
                     'id' => '',
                 ),
-                'collapsed' => 'field_5cf985327a5ca',
+                'collapsed' => 'field_overlay_section_heading',
                 'min' => 1,
                 'max' => 2,
                 'layout' => 'block',
                 'button_label' => 'Add Section',
                 'sub_fields' => array(
                     array(
-                        'key' => 'field_5cfa9e13d0c22',
+                        'key' => 'field_overlay_section_heading',
                         'label' => 'Heading',
                         'name' => 'overlay_section_heading',
                         'type' => 'text',
@@ -1615,7 +1753,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => 32,
                     ),
                     array(
-                        'key' => 'field_5cfa9e13d0c6c',
+                        'key' => 'field_overlay_section_body',
                         'label' => 'Body',
                         'name' => 'overlay_section_body',
                         'type' => 'text',
@@ -1634,7 +1772,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => 280,
                     ),
                     array(
-                        'key' => 'field_5cfa9e13d0ca1',
+                        'key' => 'field_overlay_section_button-text',
                         'label' => 'Button Text',
                         'name' => 'overlay_section_button-text',
                         'type' => 'text',
@@ -1653,7 +1791,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => 26,
                     ),
                     array(
-                        'key' => 'field_5cfa9e13d0d0b',
+                        'key' => 'field_overlay_section_button-url',
                         'label' => 'Button URL',
                         'name' => 'overlay_section_button-url',
                         'type' => 'url',
@@ -1669,7 +1807,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => '',
                     ),
                     array(
-                        'key' => 'field_5cfa9e13d0d71',
+                        'key' => 'field_overlay_section_button-target',
                         'label' => 'Open in New Window?',
                         'name' => 'overlay_section_button-target',
                         'type' => 'true_false',
@@ -1688,8 +1826,8 @@ if( function_exists('acf_add_local_field_group') ):
                         'ui_off_text' => '',
                     ),
                     array(
-                        'key' => 'field_5cfa9e13d0daf',
-                        'label' => 'Button Description',
+                        'key' => 'field_overlay_section_button-description',
+                        'label' => 'Button Link Description',
                         'name' => 'overlay_section_button-description',
                         'type' => 'text',
                         'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
@@ -1707,7 +1845,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => '',
                     ),
                     array(
-                        'key' => 'field_5cfa9e53ee92b',
+                        'key' => 'field_overlay_section_background-color',
                         'label' => 'Background Color',
                         'name' => 'overlay_section_background-color',
                         'type' => 'select',
@@ -1739,7 +1877,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => '',
                     ),
                     array(
-                        'key' => 'field_5cfa9f1dee92d',
+                        'key' => 'field_overlay_section_image',
                         'label' => 'Image',
                         'name' => 'overlay_section_image',
                         'type' => 'image',
@@ -1790,7 +1928,7 @@ if( function_exists('acf_add_local_field_group') ):
         'title' => 'Block: UAMS Stacked Image & Text',
         'fields' => array(
             array(
-                'key' => 'field_5cfab4f34531a',
+                'key' => 'field_stacked_intro-message',
                 'label' => '',
                 'name' => '',
                 'type' => 'message',
@@ -1807,7 +1945,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'esc_html' => 0,
             ),
             array(
-                'key' => 'field_5cfab4f34537d',
+                'key' => 'field_stacked_heading',
                 'label' => 'Module Heading',
                 'name' => 'stacked_heading',
                 'type' => 'text',
@@ -1826,7 +1964,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_5cfab681fd3b7',
+                'key' => 'field_stacked_hide-heading',
                 'label' => 'Hide the Module Heading?',
                 'name' => 'stacked_hide-heading',
                 'type' => 'true_false',
@@ -1845,7 +1983,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'ui_off_text' => '',
             ),
             array(
-                'key' => 'field_5cfab4f34543d',
+                'key' => 'field_stacked_background-color',
                 'label' => 'Background Color',
                 'name' => 'stacked_background-color',
                 'type' => 'select',
@@ -1872,7 +2010,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'placeholder' => '',
             ),
             array(
-                'key' => 'field_5cfabbb8fd3db',
+                'key' => 'field_stacked_section',
                 'label' => 'Items',
                 'name' => 'stacked_section',
                 'type' => 'repeater',
@@ -1891,7 +2029,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'button_label' => '',
                 'sub_fields' => array(
                     array(
-                        'key' => 'field_5cfabbf1fd3dc',
+                        'key' => 'field_stacked_section_heading',
                         'label' => 'Heading',
                         'name' => 'stacked_section_heading',
                         'type' => 'text',
@@ -1910,7 +2048,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => 78,
                     ),
                     array(
-                        'key' => 'field_5cfabbf8fd3dd',
+                        'key' => 'field_stacked_section_body',
                         'label' => 'Body',
                         'name' => 'stacked_section_body',
                         'type' => 'textarea',
@@ -1929,7 +2067,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'new_lines' => '',
                     ),
                     array(
-                        'key' => 'field_5cfac1924f098',
+                        'key' => 'field_stacked_section_image',
                         'label' => 'Image',
                         'name' => 'stacked_section_image',
                         'type' => 'image',
@@ -1953,7 +2091,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'mime_types' => '',
                     ),
                     array(
-                        'key' => 'field_5cfac23df6f3d',
+                        'key' => 'field_stacked_section_alt-override',
                         'label' => 'Image Alt Text Override',
                         'name' => 'stacked_section_alt-override',
                         'type' => 'text',
@@ -1972,7 +2110,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => 125,
                     ),
                     array(
-                        'key' => 'field_5cfabbfbfd3de',
+                        'key' => 'field_stacked_section_button-text',
                         'label' => 'Button Text',
                         'name' => 'stacked_section_button-text',
                         'type' => 'text',
@@ -1991,7 +2129,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'maxlength' => '',
                     ),
                     array(
-                        'key' => 'field_5cfabc01fd3df',
+                        'key' => 'field_stacked_section_button-url',
                         'label' => 'Button URL',
                         'name' => 'stacked_section_button-url',
                         'type' => 'url',
@@ -2007,7 +2145,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'placeholder' => '',
                     ),
                     array(
-                        'key' => 'field_5cfabc09fd3e0',
+                        'key' => 'field_stacked_section_button-target',
                         'label' => 'Open in New Window?',
                         'name' => 'stacked_section_button-target',
                         'type' => 'true_false',
@@ -2026,8 +2164,8 @@ if( function_exists('acf_add_local_field_group') ):
                         'ui_off_text' => '',
                     ),
                     array(
-                        'key' => 'field_5cfabc11fd3e1',
-                        'label' => 'Button Description',
+                        'key' => 'field_stacked_section_button-description',
+                        'label' => 'Button Link Description',
                         'name' => 'stacked_section_button-description',
                         'type' => 'text',
                         'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
