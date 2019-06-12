@@ -39,6 +39,8 @@ $image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachmen
 $cta_target = $cta_target ? ' target="blank"' : '';
 $cta_desc = $cta_desc ? ' aria-label="'.$cta_desc.'"' : '';
 $cta_link = $cta_link ? '<a class="btn btn-primary" href="'. $cta_link .'"' . $cta_desc . $cta_target . '>' : '';
+$side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
+$side_image_height = wp_get_attachment_image_src($side_image, 'full')[2];
 
 // Break it if it isn't "Landing" template
 $page_template = get_page_template_slug( $post_id );
@@ -57,10 +59,12 @@ if ('templates/page_landing.php' != $page_template) {
                 <div class="image-inner-container">
                     <?php if ( function_exists( 'fly_add_image_size' ) ) : ?>
                     <style>
+                        <?php //echo $side_image_width . 'x' . $side_image_height; ?>
+                        
                         /* MD Breakpoint */
                         @media (min-width: 992px) {
                             #side-by-side-<?php echo esc_attr($id); ?> .image-inner-container {
-                                background-image: url("<?php echo fly_get_attachment_image_src( $side_image, array( 1200, 675 ), true )['src']; ?>");
+                                background-image: url("<?php echo ($side_image_width > '1200' ? fly_get_attachment_image_src( $side_image, array( 1200, 675 ), true )['src'] : wp_get_attachment_url( $side_image, 'full' )); ?>");
                             }
                         }
 
@@ -68,14 +72,14 @@ if ('templates/page_landing.php' != $page_template) {
                         @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
                         (min-width: 992px) and (min-resolution: 192dpi) {
                             #side-by-side-<?php echo esc_attr($id); ?> .image-inner-container {
-                                background-image: url("<?php echo fly_get_attachment_image_src( $side_image, array( 2400, 1350 ), true )['src']; ?>");
+                                background-image: url("<?php echo ($side_image_width > '2400' ? fly_get_attachment_image_src( $side_image, array( 2400, 1350 ), true )['src']: wp_get_attachment_url( $side_image, 'full' )); ?>");
                             }
                         }
 
                         /* LG Breakpoint */
                         @media (min-width: 1200px) {
                             #side-by-side-<?php echo esc_attr($id); ?> .image-inner-container {
-                                background-image: url("<?php echo fly_get_attachment_image_src( $side_image, array( 1500, 844 ), true )['src']; ?>");
+                                background-image: url("<?php echo ($side_image_width > '1500' ? fly_get_attachment_image_src( $side_image, array( 1500, 844 ), true )['src']: wp_get_attachment_url( $side_image, 'full' )); ?>");
                             }
                         }
 
@@ -83,14 +87,14 @@ if ('templates/page_landing.php' != $page_template) {
                         @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
                         (min-width: 1200px) and (min-resolution: 192dpi) {
                             #side-by-side-<?php echo esc_attr($id); ?> .image-inner-container {
-                                background-image: url("<?php echo fly_get_attachment_image_src( $side_image, array( 3000, 1688 ), true )['src']; ?>");
+                                background-image: url("<?php echo ($side_image_width > '3000' ? fly_get_attachment_image_src( $side_image, array( 3000, 1688 ), true )['src']: wp_get_attachment_url( $side_image, 'full' )); ?>");
                             }
                         }
 
                         /* XL Breakpoint */
                         @media (min-width: 1500px) {
                             #side-by-side-<?php echo esc_attr($id); ?> .image-inner-container {
-                                background-image: url("<?php echo fly_get_attachment_image_src( $side_image, array( 1921, 1081 ), true )['src']; ?>");
+                                background-image: url("<?php echo ($side_image_width > '1921' ? fly_get_attachment_image_src( $side_image, array( 1921, 1081 ), true )['src']: wp_get_attachment_url( $side_image, 'full' )); ?>");
                             }
                         }
 
@@ -98,14 +102,14 @@ if ('templates/page_landing.php' != $page_template) {
                         @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
                         (min-width: 1500px) and (min-resolution: 192dpi) {
                             #side-by-side-<?php echo esc_attr($id); ?> .image-inner-container {
-                                background-image: url("<?php echo fly_get_attachment_image_src( $side_image, array( 3842, 2161 ), true )['src']; ?>");
+                                background-image: url("<?php echo ($side_image_width > '3842' ? fly_get_attachment_image_src( $side_image, array( 3842, 2161 ), true )['src']: wp_get_attachment_url( $side_image, 'full' )); ?>");
                             }
                         }
 
                         /* XXL Breakpoint */
                         @media (min-width: 1500px) {
                             #side-by-side-<?php echo esc_attr($id); ?> .image-inner-container {
-                                background-image: url("<?php echo fly_get_attachment_image_src( $side_image, array( 2560, 1440 ), true )['src']; ?>");
+                                background-image: url("<?php echo ($side_image_width > '2560' ? fly_get_attachment_image_src( $side_image, array( 2560, 1440 ), true )['src']: wp_get_attachment_url( $side_image, 'full' )); ?>");
                             }
                         }
 
@@ -113,7 +117,7 @@ if ('templates/page_landing.php' != $page_template) {
                         @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
                         (min-width: 1500px) and (min-resolution: 192dpi) {
                             #side-by-side-<?php echo esc_attr($id); ?> .image-inner-container {
-                                background-image: url("<?php echo fly_get_attachment_image_src( $side_image, array( 5120, 2880 ), true )['src']; ?>");
+                                background-image: url("<?php echo ($side_image_width > '5120' ? fly_get_attachment_image_src( $side_image, array( 5120, 2880 ), true )['src']: wp_get_attachment_url( $side_image, 'full' )); ?>");
                             }
                         }
                     </style>
@@ -121,18 +125,18 @@ if ('templates/page_landing.php' != $page_template) {
                     <picture>
                         <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
                         <!-- Mobile and Tablet -->
-                        <source srcset="<?php echo fly_get_attachment_image_src( $side_image, array( 1984, 1116 ), true )['src']; ?>"
+                        <source srcset="<?php echo ($side_image_width > '1984' ? fly_get_attachment_image_src( $side_image, array( 1984, 1116 ), true )['src']: wp_get_attachment_url( $side_image, 'full' )); ?>"
                             media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 768px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo fly_get_attachment_image_src( $side_image, array( 992, 558 ), true )['src']; ?>" media="(min-width: 768px)">
-                        <source srcset="<?php echo fly_get_attachment_image_src( $side_image, array( 1536, 864 ), true )['src']; ?>"
+                        <source srcset="<?php echo ($side_image_width > '992' ? fly_get_attachment_image_src( $side_image, array( 992, 558 ), true )['src']: wp_get_attachment_url( $side_image, 'full' )); ?>" media="(min-width: 768px)">
+                        <source srcset="<?php echo ($side_image_width > '1536' ? fly_get_attachment_image_src( $side_image, array( 1536, 864 ), true )['src']: wp_get_attachment_url( $side_image, 'full' )); ?>"
                             media="(min-width: 576px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 576px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo fly_get_attachment_image_src( $side_image, array( 768, 432 ), true )['src']; ?>" media="(min-width: 576px)">
-                        <source srcset="<?php echo fly_get_attachment_image_src( $side_image, array( 1152, 648 ), true )['src']; ?>"
+                        <source srcset="<?php echo ($side_image_width > '768' ? fly_get_attachment_image_src( $side_image, array( 768, 432 ), true )['src']: wp_get_attachment_url( $side_image, 'full' )); ?>" media="(min-width: 576px)">
+                        <source srcset="<?php echo ($side_image_width > '1152' ? fly_get_attachment_image_src( $side_image, array( 1152, 648 ), true )['src']: wp_get_attachment_url( $side_image, 'full' )); ?>"
                             media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo fly_get_attachment_image_src( $side_image, array( 576, 324 ), true )['src']; ?>" media="(min-width: 1px)">
+                        <source srcset="<?php echo ($side_image_width > '576' ? fly_get_attachment_image_src( $side_image, array( 576, 324 ), true )['src']: wp_get_attachment_url( $side_image, 'full' )); ?>" media="(min-width: 1px)">
                         <?php } //endif ?>
                         <!-- Fallback -->
-                        <img src="<?php echo wp_get_attachment_url( $side_image ); ?>" alt="<?php echo $image_alt ?>" />
+                        <img src="<?php echo wp_get_attachment_url( $side_image, 'full' ); ?>" alt="<?php echo $image_alt ?>" />
                     </picture>
                 </div>
             </div>
