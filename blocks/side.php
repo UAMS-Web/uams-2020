@@ -40,7 +40,7 @@ $image_group = get_field('side_image')?: '';
 $side_image = $image_group['side_image_image'] ?: '';
 $image_alt = $image_group['side_image_alt-text'] ?: '';
 $image_postion = get_field('side_image_position') ?: 'left';
-$image_anchor = get_field('side_image_anchor') ?: 'middle';
+$image_anchor = get_field('side_image_anchor') ?: 'center';
 $background_color = get_field('side_image_background-color') ?: 'bg-white';
 
 $image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachment_image_alt', true);

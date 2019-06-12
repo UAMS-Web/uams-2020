@@ -501,11 +501,11 @@ if( function_exists('acf_add_local_field_group') ):
                         ),
                         'choices' => array(
                             'top' => 'Crop from Top',
-                            'middle' => 'Crop from Middle',
+                            'center' => 'Crop from Center',
                             'bottom' => 'Crop from Bottom',
                         ),
                         'default_value' => array(
-                            0 => 'middle',
+                            0 => 'center',
                         ),
                         'allow_null' => 0,
                         'multiple' => 0,
@@ -558,11 +558,11 @@ if( function_exists('acf_add_local_field_group') ):
                 ),
                 'choices' => array(
                     'left' => 'Left',
-                    'middle' => 'Middle',
+                    'center' => 'Center',
                     'right' => 'Right',
                 ),
                 'allow_null' => 0,
-                'default_value' => 'middle',
+                'default_value' => 'center',
                 'layout' => 'horizontal',
                 'return_format' => 'value',
             ),
