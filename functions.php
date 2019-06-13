@@ -327,9 +327,9 @@ function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 
 	} elseif ( $image_ratio > $pref_ratio ) { // wide image => figure out max crop
 		$prefwidth = $image_width;
 		$prefheight = $image_width / $pref_ratio;
-		if( $prefheight > $image_width ) {
-			$prefheight = $image_width;
-			$prefwidth = $prefwidth * $pref_ratio;
+		if( $prefheight > $image_height ) {
+			$prefheight = $image_height;
+			$prefwidth = $prefheight * $pref_ratio;
 		}
 		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
 	} elseif ( $image_ratio < $pref_ratio ) { // tall image => figure out max crop
@@ -337,7 +337,7 @@ function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 
 		$prefheight = $image_height;
 		if( $prefwidth > $image_width ) {
 			$prefwidth = $image_width;
-			$prefheight = $prefheight / $pref_ratio;
+			$prefheight = $prefwidth / $pref_ratio;
 		}
 		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
 	} else { // Perfect ratio => no crop, return orig
