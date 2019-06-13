@@ -68,7 +68,8 @@ if( have_rows('hero') ):
 ?>
         <div class="carousel-item <?php echo $background_color; ?><?php echo (0 == (get_row_index() - 1) ? ' active' : ''); ?>" id="carousel-item-<?php echo (get_row_index() - 1); ?>">
             <div class="image-container">
-                <style>
+                <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+                <style>                 
                     /* Tablet Image, Aspect ratio 1.4132:1 */
                     /* SM Breakpoint */
                     @media (min-width: 768px) {
@@ -132,6 +133,16 @@ if( have_rows('hero') ):
                         }
                     }
                 </style>
+                <?php } else { ?>
+                <style>
+                    /* SM Breakpoint */
+                    @media (min-width: 768px) {
+                        #carousel-<?php echo esc_attr($id); ?> #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
+                            background-image: url("<?php echo wp_get_attachment_url( $image_tablet, 'full' ); ?>");
+                        }
+                    }
+                </style>
+                <?php } //endif ?>
                 <picture>
                     <!-- Mobile Image, Aspect ratio 16:9 -->
                     <source srcset="<?php echo image_sizer($image_mobile, 1536, 864, 'center', 'center'); ?>"
