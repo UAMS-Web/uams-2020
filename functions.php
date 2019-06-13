@@ -306,23 +306,42 @@ function format_phone_dash($phone) {
  * Return sized image.
  *
  * @param integer  $id 			// id of image
- * @param integer  $minwidth	// Minimum width required
- * @param integer  $prefwidth	// Output width, if large enough
- * @param string   $prefheight	// Output height, if large enough
+ * @param integer  $prefwidth	// Preferred Output width
+ * @param string   $prefheight	// Preferred Output height
  * @param string   $hcrop		// horizontal crop position (left, center, right)
  * @param string   $vcrop		// vertical crop position (top, center, bottom)
  * @return string				// image url
  */
-function image_sizer( $id, $minwidth, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center' ) {
+function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center' ) {
 
 	if ( ! function_exists( 'fly_add_image_size' ) ) {
 		return;
 	}
 	$image_width = wp_get_attachment_image_src($id, 'full')[1];
-	if( $image_width <= $minwidth ) {
-		$image_url = wp_get_attachment_url( $side_image, 'full' );
-	} else {
+	$image_height = wp_get_attachment_image_src($id, 'full')[2];
+	// Do the maths
+	$image_ratio = $image_width / $image_height;
+	$pref_ratio = $prefwidth / $prefheight;
+	if( $image_width >= $prefwidth && $image_height >= $prefheight ) { // Bigger image => Crop
 		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
+	} elseif ( $image_ratio > $pref_ratio ) { // wide image => figure out max crop
+		$prefwidth = $image_width;
+		$prefheight = $image_width / $pref_ratio;
+		if( $prefheight > $image_width ) {
+			$prefheight = $image_width;
+			$prefwidth = $prefwidth * $pref_ratio;
+		}
+		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
+	} elseif ( $image_ratio < $pref_ratio ) { // tall image => figure out max crop
+		$prefwidth = $image_height * $pref_ratio;
+		$prefheight = $image_height;
+		if( $prefwidth > $image_width ) {
+			$prefwidth = $image_width;
+			$prefheight = $prefheight / $pref_ratio;
+		}
+		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
+	} else { // Perfect ratio => no crop, return orig
+		$image_url = wp_get_attachment_url( $id, 'full' );
 	}
 	return $image_url;
 }
