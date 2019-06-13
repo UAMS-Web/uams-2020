@@ -317,6 +317,9 @@ function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 
 	if ( ! function_exists( 'fly_add_image_size' ) ) {
 		return;
 	}
+	if ( ! $id ) {
+		return; // Make sure we have value
+	}
 	$image_width = wp_get_attachment_image_src($id, 'full')[1];
 	$image_height = wp_get_attachment_image_src($id, 'full')[2];
 	// Do the maths

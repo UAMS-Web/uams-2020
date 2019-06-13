@@ -67,33 +67,33 @@ if ('templates/page_landing.php' != $page_template) {
                 <div class="image-inner-container">
                     <picture>
                         <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-                        <source srcset="<?php echo image_sizer($side_image, 5120, 2880, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer($side_image, 5120, 2880, $image_postion, $image_anchor ); ?>"
                             media="(min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1921px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer($side_image, 2560, 1440, 'center', 'center'); ?>" 
+                        <source srcset="<?php echo image_sizer($side_image, 2560, 1440, $image_postion, $image_anchor); ?>" 
                             media="(min-width: 1921px)">
-                        <source srcset="<?php echo image_sizer($side_image, 3842, 2161, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer($side_image, 3842, 2161, $image_postion, $image_anchor); ?>"
                             media="(min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1500px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer($side_image, 1921, 1081, 'center', 'center'); ?>" 
+                        <source srcset="<?php echo image_sizer($side_image, 1921, 1081, $image_postion, $image_anchor); ?>" 
                             media="(min-width: 1500px)">
-                        <source srcset="<?php echo image_sizer($side_image, 3000, 1688, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer($side_image, 3000, 1688, $image_postion, $image_anchor); ?>"
                             media="(min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1200px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer($side_image, 1500, 844, 'center', 'center'); ?>" 
+                        <source srcset="<?php echo image_sizer($side_image, 1500, 844, $image_postion, $image_anchor); ?>" 
                             media="(min-width: 1200px)">
-                        <source srcset="<?php echo image_sizer($side_image, 2400, 1350, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer($side_image, 2400, 1350, $image_postion, $image_anchor); ?>"
                             media="(min-width: 992px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 992px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer($side_image, 1200, 675, 'center', 'center'); ?>" 
+                        <source srcset="<?php echo image_sizer($side_image, 1200, 675, $image_postion, $image_anchor); ?>" 
                             media="(min-width: 992px)">
-                        <source srcset="<?php echo image_sizer($side_image, 1984, 1116, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer($side_image, 1984, 1116, $image_postion, $image_anchor); ?>"
                             media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 768px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer($side_image, 992, 558, 'center', 'center'); ?>" 
+                        <source srcset="<?php echo image_sizer($side_image, 992, 558, $image_postion, $image_anchor); ?>" 
                             media="(min-width: 768px)">
-                        <source srcset="<?php echo image_sizer($side_image, 1536, 864, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer($side_image, 1536, 864, $image_postion, $image_anchor); ?>"
                             media="(min-width: 576px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 576px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer($side_image, 768, 432, 'center', 'center'); ?>" 
+                        <source srcset="<?php echo image_sizer($side_image, 768, 432, $image_postion, $image_anchor); ?>" 
                             media="(min-width: 576px)">
-                        <source srcset="<?php echo image_sizer($side_image, 1152, 648, 'center', 'center'); ?>"
+                        <source srcset="<?php echo image_sizer($side_image, 1152, 648, $image_postion, $image_anchor); ?>"
                             media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer($side_image, 576, 324, 'center', 'center'); ?>" 
+                        <source srcset="<?php echo image_sizer($side_image, 576, 324, $image_postion, $image_anchor); ?>" 
                             media="(min-width: 1px)">
                         <?php } //endif ?>
                         <!-- Fallback -->
