@@ -43,9 +43,33 @@ if( have_rows('stacked_section') ) {
                 <div class="card">
                     <div class="card-img-top">
                         <picture>
-                            <source srcset="<?php echo wp_get_attachment_image_url( $image, 'full' ); ?>" media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
+                            <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
+                            <source srcset="<?php echo image_sizer($image, 910, 512, 'center', 'center'); ?>" 
+                                media="(min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2), 
+                                (min-width: 1921px) and (min-resolution: 192dpi)">
+                            <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center'); ?>" 
+                                media="(min-width: 1921px)">
+                            <source srcset="<?php echo image_sizer($image, 866, 487, 'center', 'center'); ?>" 
+                                media="(min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2), 
+                                (min-width: 1500px) and (min-resolution: 192dpi)">
+                            <source srcset="<?php echo image_sizer($image, 433, 244, 'center', 'center'); ?>" 
+                                media="(min-width: 1500px)">
+                            <source srcset="<?php echo image_sizer($image, 910, 512, 'center', 'center'); ?>" 
+                                media="(min-width: 992px) and (-webkit-min-device-pixel-ratio: 2), 
+                                (min-width: 992px) and (min-resolution: 192dpi)">
+                            <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center'); ?>" 
+                                media="(min-width: 992px)">
+                            <source srcset="<?php echo image_sizer($image, 866, 487, 'center', 'center'); ?>" 
+                                media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), 
+                                (min-width: 768px) and (min-resolution: 192dpi)">
+                            <source srcset="<?php echo image_sizer($image, 433, 244, 'center', 'center'); ?>" 
+                                media="(min-width: 768px)">
+                            <source srcset="<?php echo image_sizer($image, 910, 512, 'center', 'center'); ?>" 
+                                media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
                                 (min-width: 1px) and (min-resolution: 192dpi)">
-                            <source srcset="<?php echo wp_get_attachment_image_url( $image, 'full' ); ?>" media="(min-width: 1px)">
+                            <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center'); ?>" 
+                                media="(min-width: 1px)">
+                            <?php } //endif ?>
                             <!-- Fallback -->
                             <img src="<?php echo wp_get_attachment_image_url( $image, 'full' ); ?>" alt="<?php echo $image_alt_override ? $image_alt_override : $image_alt_native; ?>" />
                         </picture>

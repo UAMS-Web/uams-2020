@@ -55,54 +55,72 @@ if( have_rows('hero') ):
     $image_alt = get_sub_field('image_alt_text') ?: '';
     $background_color = get_sub_field('background_color')?: 'auto';
 
-    // Get the image(s)
-    $image_desktop_url = wp_get_attachment_image_url( $image_desktop, 'full' );
+    // If the image alt text override field is empty, assign the normal alt value to the variable
     $image_alt = $image_alt ? $image_alt : get_post_meta($image_desktop, '_wp_attachment_image_alt', true);
-    if ($image_tablet) {
-        $image_tablet_url = wp_get_attachment_image_url( $image_tablet, 'full' );
-    } else {
-        $image_tablet_url = wp_get_attachment_image_url( $image_desktop, 'large' );
+    
+    // If image for tablet or mobile is empty, assign desktop's id to those variables
+    if ( empty($image_tablet) ) {
+        $image_tablet = $image_desktop;
     }
-    if ($image_mobile) {
-        $image_mobile_url = wp_get_attachment_image_url( $image_mobile, 'full' );
-    } else {
-        $image_mobile_url = wp_get_attachment_image_url( $image_desktop, 'large' );
+    if ( empty($image_mobile) ) {
+        $image_mobile = $image_desktop;
     }
 ?>
-                <div class="carousel-item <?php echo $background_color; ?><?php echo (0 == (get_row_index() - 1) ? ' active' : ''); ?>" id="carousel-item-<?php echo (get_row_index() - 1); ?>">
-                        <div class="image-container">
-                                <style>
-                                        /* SM Breakpoint, retina */
-                                        @media (min-width: 768px) {
-                                                #carousel-<?php echo esc_attr($id); ?>  #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                                                        background-image: url("<?php echo $image_tablet_url; ?>");
-                                                }
-                                        }
-                                        /* MD Breakpoint, retina */
-                                        @media (min-width: 992px) {
-                                                #carousel-<?php echo esc_attr($id); ?> #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                                                        background-image: url("<?php echo $image_desktop_url; ?>");
-                                                }
-                                        }
-                                </style>
-                                <picture>
-                                        <!-- Mobile, Aspect ratio 1.5:1 -->
-                                        <source srcset="<?php echo $image_mobile_url; ?>"
-                                                        media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1px) and (min-resolution: 192dpi)">
-                                        <source srcset="<?php echo $image_mobile_url; ?>"
-                                                        media="(min-width: 1px)">
-                                        <!-- Fallback, use Tablet, Aspect ratio 1.4132:1 -->
-                                        <img src="<?php echo $image_tablet_url; ?>" alt="<?php echo $image_alt; ?>" />
-                                </picture>
-                        </div>
-                        <div class="text-container">
-                                <div class="inner-container">
-                                        <h2><?php echo $heading; ?></h2>
-                                        <p><?php echo $body; ?></p>
-                                        <a class="btn" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="_blank"' : ''; ?>><?php echo $button_text; ?></a>
-                                </div>
-                        </div>
+        <div class="carousel-item <?php echo $background_color; ?><?php echo (0 == (get_row_index() - 1) ? ' active' : ''); ?>" id="carousel-item-<?php echo (get_row_index() - 1); ?>">
+            <div class="image-container">
+                <picture>
+                    <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+                    <!-- Desktop Image, Aspect ratio 1.8685:1 -->
+                    <source srcset="<?php echo image_sizer($image_desktop, 2870, 1536, 'center', 'center'); ?>"
+                        media="(min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2), 
+                        (min-width: 1921px) and (min-resolution: 192dpi)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 1435, 768, 'center', 'center'); ?>"
+                        media="(min-width: 1921px)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 2152, 1152, 'center', 'center'); ?>"
+                        media="(min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2), 
+                        (min-width: 1500px) and (min-resolution: 192dpi)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 1076, 576, 'center', 'center'); ?>"
+                        media="(min-width: 1500px)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 1682, 900, 'center', 'center'); ?>"
+                        media="(min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), 
+                        (min-width: 1200px) and (min-resolution: 192dpi)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 841, 450, 'center', 'center'); ?>"
+                        media="(min-width: 1200px)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 1346, 720, 'center', 'center'); ?>"
+                        media="(min-width: 992px) and (-webkit-min-device-pixel-ratio: 2), 
+                        (min-width: 992px) and (min-resolution: 192dpi)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 673, 360, 'center', 'center'); ?>"
+                        media="(min-width: 992px)">
+                    <!-- Tablet Image, Aspect ratio 1.4132:1 -->
+                    <source srcset="<?php echo image_sizer($image_tablet, 1156, 818, 'center', 'center'); ?>"
+                        media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), 
+                        (min-width: 768px) and (min-resolution: 192dpi)">
+                    <source srcset="<?php echo image_sizer($image_tablet, 578, 409, 'center', 'center'); ?>"
+                        media="(min-width: 768px)">
+                    <!-- Mobile Image, Aspect ratio 16:9 -->
+                    <source srcset="<?php echo image_sizer($image_mobile, 1536, 864, 'center', 'center'); ?>"
+                        media="(min-width: 576px) and (-webkit-min-device-pixel-ratio: 2), 
+                        (min-width: 576px) and (min-resolution: 192dpi)">
+                    <source srcset="<?php echo image_sizer($image_mobile, 768, 432, 'center', 'center'); ?>"
+                        media="(min-width: 576px)">
+                    <source srcset="<?php echo image_sizer($image_mobile, 1152, 648, 'center', 'center'); ?>"
+                        media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
+                        (min-width: 1px) and (min-resolution: 192dpi)">
+                    <source srcset="<?php echo image_sizer($image_mobile, 576, 324, 'center', 'center'); ?>"
+                        media="(min-width: 1px)">
+                    <?php } //endif ?>
+                    <!-- Fallback, use Tablet Image, Aspect ratio 1.4132:1 -->
+                    <img src="<?php echo wp_get_attachment_url( $image_tablet, 'full' ); ?>" alt="<?php echo $image_alt; ?>" />
+                </picture>
+            </div>
+            <div class="text-container">
+                <div class="inner-container">
+                    <h2><?php echo $heading; ?></h2>
+                    <p><?php echo $body; ?></p>
+                    <a class="btn" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="_blank"' : ''; ?>><?php echo $button_text; ?></a>
                 </div>
+            </div>
+        </div>
 <?php
         endwhile;
 ?>
