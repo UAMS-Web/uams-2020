@@ -68,93 +68,47 @@ if( have_rows('hero') ):
 ?>
         <div class="carousel-item <?php echo $background_color; ?><?php echo (0 == (get_row_index() - 1) ? ' active' : ''); ?>" id="carousel-item-<?php echo (get_row_index() - 1); ?>">
             <div class="image-container">
-                <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-                <style>                 
-                    /* Tablet Image, Aspect ratio 1.4132:1 */
-                    /* SM Breakpoint */
-                    @media (min-width: 768px) {
-                        #carousel-<?php echo esc_attr($id); ?> #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($image_tablet, 578, 409, 'center', 'center'); ?>");
-                        }
-                    }
-                    /* SM Breakpoint, retina */
-                    @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 768px) and (min-resolution: 192dpi) {
-                        #carousel-<?php echo esc_attr($id); ?> #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($image_tablet, 1156, 818, 'center', 'center'); ?>");
-                        }
-                    }
-                    /* Desktop Image, Aspect ratio 1.8685:1 */
-                    /* MD Breakpoint */
-                    @media (min-width: 992px) {
-                        #carousel-<?php echo esc_attr($id); ?> #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($image_desktop, 673, 360, 'center', 'center'); ?>");
-                        }
-                    }
-                    /* MD Breakpoint, retina */
-                    @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 992px) and (min-resolution: 192dpi) {
-                        #carousel-<?php echo esc_attr($id); ?> #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($image_desktop, 1346, 720, 'center', 'center'); ?>");
-                        }
-                    }
-                    /* LG Breakpoint */
-                    @media (min-width: 1200px) {
-                        #carousel-<?php echo esc_attr($id); ?> #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($image_desktop, 841, 450, 'center', 'center'); ?>");
-                        }
-                    }
-                    /* LG Breakpoint, retina */
-                    @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1200px) and (min-resolution: 192dpi) {
-                        #carousel-<?php echo esc_attr($id); ?> #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($image_desktop, 1682, 900, 'center', 'center'); ?>");
-                        }
-                    }
-                    /* XL Breakpoint */
-                    @media (min-width: 1500px) {
-                        #carousel-<?php echo esc_attr($id); ?> #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($image_desktop, 1076, 576, 'center', 'center'); ?>");
-                        }
-                    }
-                    /* XL Breakpoint, retina */
-                    @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1500px) and (min-resolution: 192dpi) {
-                        #carousel-<?php echo esc_attr($id); ?> #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($image_desktop, 2152, 1152, 'center', 'center'); ?>");
-                        }
-                    }
-                    /* XXL Breakpoint */
-                    @media (min-width: 1500px) {
-                        #carousel-<?php echo esc_attr($id); ?> #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($image_desktop, 1435, 768, 'center', 'center'); ?>");
-                        }
-                    }
-                    /* XXL Breakpoint, retina */
-                    @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1500px) and (min-resolution: 192dpi) {
-                        #carousel-<?php echo esc_attr($id); ?> #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($image_desktop, 2870, 1536, 'center', 'center'); ?>");
-                        }
-                    }
-                </style>
-                <?php } else { ?>
-                <style>
-                    /* SM Breakpoint */
-                    @media (min-width: 768px) {
-                        #carousel-<?php echo esc_attr($id); ?> #carousel-item-<?php echo (get_row_index() - 1); ?> .image-container {
-                            background-image: url("<?php echo wp_get_attachment_url( $image_tablet, 'full' ); ?>");
-                        }
-                    }
-                </style>
-                <?php } //endif ?>
                 <picture>
+                    <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+                    <!-- Desktop Image, Aspect ratio 1.8685:1 -->
+                    <source srcset="<?php echo image_sizer($image_desktop, 2870, 1536, 'center', 'center'); ?>"
+                        media="(min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2), 
+                        (min-width: 1921px) and (min-resolution: 192dpi)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 1435, 768, 'center', 'center'); ?>"
+                        media="(min-width: 1921px)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 2152, 1152, 'center', 'center'); ?>"
+                        media="(min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2), 
+                        (min-width: 1500px) and (min-resolution: 192dpi)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 1076, 576, 'center', 'center'); ?>"
+                        media="(min-width: 1500px)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 1682, 900, 'center', 'center'); ?>"
+                        media="(min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), 
+                        (min-width: 1200px) and (min-resolution: 192dpi)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 841, 450, 'center', 'center'); ?>"
+                        media="(min-width: 1200px)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 1346, 720, 'center', 'center'); ?>"
+                        media="(min-width: 992px) and (-webkit-min-device-pixel-ratio: 2), 
+                        (min-width: 992px) and (min-resolution: 192dpi)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 673, 360, 'center', 'center'); ?>"
+                        media="(min-width: 992px)">
+                    <!-- Tablet Image, Aspect ratio 1.4132:1 -->
+                    <source srcset="<?php echo image_sizer($image_tablet, 1156, 818, 'center', 'center'); ?>"
+                        media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), 
+                        (min-width: 768px) and (min-resolution: 192dpi)">
+                    <source srcset="<?php echo image_sizer($image_tablet, 578, 409, 'center', 'center'); ?>"
+                        media="(min-width: 768px)">
                     <!-- Mobile Image, Aspect ratio 16:9 -->
                     <source srcset="<?php echo image_sizer($image_mobile, 1536, 864, 'center', 'center'); ?>"
-                        media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
-                        (min-width: 1px) and (min-resolution: 192dpi)">
+                        media="(min-width: 576px) and (-webkit-min-device-pixel-ratio: 2), 
+                        (min-width: 576px) and (min-resolution: 192dpi)">
                     <source srcset="<?php echo image_sizer($image_mobile, 768, 432, 'center', 'center'); ?>"
-                        media="(min-width: 1px)">
+                        media="(min-width: 576px)">
                     <source srcset="<?php echo image_sizer($image_mobile, 1152, 648, 'center', 'center'); ?>"
                         media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
                         (min-width: 1px) and (min-resolution: 192dpi)">
                     <source srcset="<?php echo image_sizer($image_mobile, 576, 324, 'center', 'center'); ?>"
                         media="(min-width: 1px)">
+                    <?php } //endif ?>
                     <!-- Fallback, use Tablet Image, Aspect ratio 1.4132:1 -->
                     <img src="<?php echo wp_get_attachment_url( $image_tablet, 'full' ); ?>" alt="<?php echo $image_alt; ?>" />
                 </picture>
