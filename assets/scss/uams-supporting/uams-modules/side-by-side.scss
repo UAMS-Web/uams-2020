@@ -12,14 +12,14 @@
         .image-container {
             .image-inner-container {
                 @include media-breakpoint-up(md) {
-                    -webkit-transform: scale($image-hover-size);
-                    transform: scale($image-hover-size);
+                    //-webkit-transform: scale($image-hover-size);
+                    //transform: scale($image-hover-size);
                 }
 
                 img {
                     @include media-breakpoint-down(sm) {
-                        -webkit-transform: scale($image-hover-size);
-                        transform: scale($image-hover-size);
+                        //-webkit-transform: scale($image-hover-size);
+                        //transform: scale($image-hover-size);
                     }
                 }
             }
@@ -43,23 +43,34 @@
         }
 
         .image-inner-container {
+            position:relative;
+
             @include media-breakpoint-down(sm) {
                 overflow: hidden;
             }
             @include media-breakpoint-up(md) {
                 flex-grow: 1;
-                -webkit-transition: $image-hover-size-transition;
-                transition: $image-hover-size-transition;
-                background-size: cover;
-                background-position: center center;
+                //-webkit-transition: $image-hover-size-transition;
+                //transition: $image-hover-size-transition;
+                //background-size: cover;
+                //background-position: center center;
             }
 
             img {
-                -webkit-transition: $image-hover-size-transition;
-                transition: $image-hover-size-transition;
+                //-webkit-transition: $image-hover-size-transition;
+                //transition: $image-hover-size-transition;
 
                 @include media-breakpoint-up(md) {
-                    display: none;
+                    //display: none;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: auto;
+                    max-width: none;
+                    min-width: 100%;
+                    height: 100%;
                 }
             }
         }
@@ -145,27 +156,29 @@
     // Background image is anchored to left edge of container
     // (Affects MD breakpoint and up)
 
-    &.image-background-left .image-container .image-inner-container {
+    &.image-background-left .image-container .image-inner-container img {
         @include media-breakpoint-up(md) {
-            background-position: left center;
+            left: 0;
+            transform: translateX(0);
         }
     }
 
     // Background image is anchored to horizontal center of container
     // (Affects MD breakpoint and up)
 
-    &.image-background-center .image-container .image-inner-container {
+    &.image-background-center .image-container .image-inner-container img {
         @include media-breakpoint-up(md) {
-            background-position: center center;
         }
     }
 
     // Background image is anchored to right edge of container
     // (Affects MD breakpoint and up)
 
-    &.image-background-right .image-container .image-inner-container {
+    &.image-background-right .image-container .image-inner-container img {
         @include media-breakpoint-up(md) {
-            background-position: right center;
+            right: 0;
+            left: auto;
+            transform: translateX(0);
         }
     }
 }
