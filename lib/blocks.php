@@ -1287,7 +1287,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'label' => 'Image',
                 'name' => 'cta-bar_image',
                 'type' => 'image',
-                'instructions' => '',
+                'instructions' => 'Recommended image dimensions: 5120x2560. Minimum image dimensions: 1920x960. The image will be automatically cropped to a 2:1 aspect ratio.',
                 'required' => 1,
                 'conditional_logic' => array(
                     array(
