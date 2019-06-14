@@ -90,6 +90,17 @@ function uams_register_blocks() {
             'align'             => 'full',
             'render_template'   => 'blocks/action-bar.php',
         ));
+        acf_register_block_type(array(
+            'name'              => 'post-category-tiles',
+            'title'             => __('UAMS Post Category Tiles'),
+            'description'       => __('Two tiles displaying posts from individual post categories.'),
+            'category'          => 'common',
+            'icon'              => 'screenoptions',
+            'keywords'          => array('uams', 'news', 'posts', 'post', 'articles', 'article', 'link', 'links', 'intranet', 'inside', 'tile', 'tiles', 'sidebar', 'side bar'),
+            'mode'              => 'auto',
+            'align'             => 'full',
+            'render_template'   => 'blocks/post-category-tiles.php',
+        ));
         // acf_register_block_type(array(
         //     'name'              => 'block',
         //     'title'             => __('UAMS Block'),
