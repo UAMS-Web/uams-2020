@@ -1452,7 +1452,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'label' => 'Image',
                 'name' => 'call-out_image',
                 'type' => 'image',
-                'instructions' => '',
+                'instructions' => 'Recommended image dimensions: 5120x1920. Minimum image dimensions: 1920x720. The image will be automatically cropped to a 8:3 aspect ratio.',
                 'required' => 1,
                 'conditional_logic' => array(
                     array(
