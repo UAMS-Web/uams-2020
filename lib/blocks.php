@@ -2063,6 +2063,23 @@ if( function_exists('acf_add_local_field_group') ):
                 'button_label' => '',
                 'sub_fields' => array(
                     array(
+                        'key' => 'stacked_section_intro-message',
+                        'label' => '',
+                        'name' => '',
+                        'type' => 'message',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'message' => '<h3>Item Options</h3>',
+                        'new_lines' => 'wpautop',
+                        'esc_html' => 0,
+                    ),
+                    array(
                         'key' => 'field_stacked_section_heading',
                         'label' => 'Heading',
                         'name' => 'stacked_section_heading',
