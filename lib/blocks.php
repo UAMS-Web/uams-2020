@@ -430,7 +430,7 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array(
                 'key' => 'field_side_image',
-                'label' => 'Image',
+                'label' => 'Image Options',
                 'name' => 'side_image',
                 'type' => 'group',
                 'instructions' => '',
@@ -448,7 +448,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'label' => 'Image',
                         'name' => 'side_image_image',
                         'type' => 'image',
-                        'instructions' => '',
+                        'instructions' => 'Recommended image dimensions: 5120x2880. Minimum image dimensions: 1920x1080. The image will be automatically cropped to a 16:9 aspect ratio.',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array(
