@@ -1915,7 +1915,7 @@ if( function_exists('acf_add_local_field_group') ):
                         'label' => 'Image',
                         'name' => 'overlay_section_image',
                         'type' => 'image',
-                        'instructions' => '',
+                        'instructions' => 'Recommended image dimensions for single section: 5120x2560. Recommended image dimensions for two sections: 2560x1920. Minimum image dimensions: 1920x720. If there are two sections, the image will be automatically cropped to a 4:3 aspect ratio. If there is one section, the image will be automatically cropped to a 8:3 aspect ratio.',
                         'required' => 1,
                         'conditional_logic' => 0,
                         'wrapper' => array(
