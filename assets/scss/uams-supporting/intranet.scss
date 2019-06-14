@@ -92,53 +92,6 @@
                 }
             }
         }
-
-        &.intranet-features {
-
-            .inner-container .row {
-                @include media-breakpoint-down(xs) {
-                    margin: 0;
-                }
-            }
-            .module-body {
-                width: auto;
-            }
-            .item {
-                    
-                @include media-breakpoint-down(xs) {
-                    padding-left: 0;
-                    padding-right: 0;
-                }
-                &:first-child {
-                    padding-bottom: 32px;
-
-                    @include media-breakpoint-up(sm) {
-                        padding-right: 24px;
-                        padding-bottom: 0;
-                    }
-                }
-                &:last-child {
-                    padding-top: 32px;
-                    border-top: 1px solid $body-bg-border;
-
-                    @include media-breakpoint-up(sm) {
-                        padding-top: 0;
-                        padding-left: 24px;
-                        border-top: 0;
-                    }
-                }
-                .image-container {
-                    padding-bottom: 16px;
-    
-                    @include media-breakpoint-up(sm) {
-                        padding-bottom: 24px;
-                    }
-                    img {
-                        width: 100%;
-                    }
-                }
-            }
-        }
     }
 }
 .intranet-col-secondary {
