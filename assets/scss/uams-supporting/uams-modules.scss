@@ -80,11 +80,11 @@
             }
         }
 
-        .btn {
+        .btn:not([class*=btn-]) {
             @extend .btn-primary;
         }
 
-        .more .btn {
+        .more .btn:not([class*=btn-]) {
             background-color: transparent;
             @extend .btn-outline-primary;
         }
@@ -153,11 +153,11 @@
             }
         }
 
-        .btn {
+        .btn:not([class*=btn-]) {
             @extend .btn-light;
         }
 
-        .more .btn {
+        .more .btn:not([class*=btn-]) {
             background-color: transparent;
             @extend .btn-outline-light;
         }
@@ -279,9 +279,6 @@
             color: $orange;
         }
     }
-}
-
-.uams-module.bg-white + .uams-module.bg-white {
 }
 
 @import "uams-modules/side-by-side";

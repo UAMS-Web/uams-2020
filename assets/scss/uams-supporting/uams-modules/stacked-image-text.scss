@@ -62,8 +62,8 @@
         &:hover,
         &:active {
             img {
-                -webkit-transform: scale($image-hover-size);
-                transform: scale($image-hover-size);
+                //-webkit-transform: scale($image-hover-size);
+                //transform: scale($image-hover-size);
             }
         }
     }
@@ -72,8 +72,8 @@
         overflow: hidden;
 
         img {
-            -webkit-transition: $image-hover-size-transition;
-            transition: $image-hover-size-transition;
+            //-webkit-transition: $image-hover-size-transition;
+            //transition: $image-hover-size-transition;
         }
     }
     .card-body {
