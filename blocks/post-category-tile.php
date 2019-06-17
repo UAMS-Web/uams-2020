@@ -19,10 +19,7 @@ $category = get_field('post-cat-tile_category');
 $args = array(
     'post_type' => 'post',
     'post_status' => 'publish',
-    'category_name' => 'markup',
-    // I used "$category->slug" for the "category_name" value on the other module,
-    // but I don't have the know-how to figure out why it won't work here.
-    // So it's hardcoded to a category for now.
+    'category_name' => $category->slug,
     'posts_per_page' => 1,
 );
 
@@ -32,6 +29,7 @@ if ( $arr_posts->have_posts() ) : while ( $arr_posts->have_posts() ) : $arr_post
 
 // Load values.
 $image = get_post_thumbnail_id( $post->ID );
+$alt_text = get_post_meta( $image, '_wp_attachment_image_alt', true );
 $post_button_text = get_field('post-cat-tile_post-button-text') ?: 'Read the Story';
 $cat_button_text = get_field('post-cat-tile_category-button-text') ?: 'View ' . $category->name . ' Archive';
 
@@ -43,8 +41,9 @@ $cat_button_text = get_field('post-cat-tile_category-button-text') ?: 'View ' . 
             <div class="col-12<?php echo $hide_heading ? " sr-only" : ""; ?>">
                 <h2 class="module-title"><span class="title"><?php echo $heading ?></span></h2>
             </div>
-            <div class="col-12">
+            <div class="col-12">                
                 <div class="inner-container">
+                <?php if ($image) { ?>
                     <div class="image-container">
                         <picture>
                         <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>      
@@ -99,9 +98,10 @@ $cat_button_text = get_field('post-cat-tile_category-button-text') ?: 'View ' . 
                                 media="(min-width: 1px)" 
                                 srcset="<?php echo image_sizer($image, 497, 497, 'center', 'center'); ?>">
                             <?php } //endif ?>
-                            <img src="<?php echo wp_get_attachment_image_url( $image, 'full' ); ?>" alt="Random image">
+                            <img src="<?php echo wp_get_attachment_image_url( $image, 'full' ); ?>" alt="<?php echo $alt_text ? $alt_text : ''; ?>">
                         </picture>
                     </div>
+                    <?php } //endif $image ?>
                     <div class="text-container">
                         <h3><?php the_title(); ?></h3>
                         <p><?php $content = wp_strip_all_tags(get_the_content()); echo mb_strimwidth($content, 0, 176, '...');?></p>
