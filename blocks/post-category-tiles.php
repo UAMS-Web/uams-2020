@@ -1,7 +1,7 @@
 <?php 
 /*
  *
- * UAMS Post Category Tiles
+ * UAMS Post Category Tiles (Double)
  * 
  */
 

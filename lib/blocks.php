@@ -92,7 +92,7 @@ function uams_register_blocks() {
         ));
         acf_register_block_type(array(
             'name'              => 'post-category-tiles',
-            'title'             => __('UAMS Post Category Tiles'),
+            'title'             => __('UAMS Post Category Tile (Double)'),
             'description'       => __('Two tiles displaying posts from individual post categories.'),
             'category'          => 'common',
             'icon'              => 'screenoptions',
