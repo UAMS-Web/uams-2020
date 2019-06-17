@@ -168,6 +168,7 @@ function uamswp_allowed_block_types( $allowed_blocks ) {
 		'core-embed/scribd',
 		'core-embed/slideshare',
 		'core-embed/ted',
+		'uamswp/uams-news', // If available
 	), $registered_blocks );
  
 }
