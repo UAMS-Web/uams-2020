@@ -46,11 +46,13 @@ if( have_rows('post-cat-tiles_section') ) {
 
                 // Load values.
                 $image = get_post_thumbnail_id( $post->ID );
+                $alt_text = get_post_meta( $image, '_wp_attachment_image_alt', true );
                 $post_button_text = get_sub_field('post-cat-tiles_section_post-button-text') ?: 'Read the Story';
                 $cat_button_text = get_sub_field('post-cat-tiles_section_category-button-text') ?: 'View ' . $category->name . ' Archive';
             ?>
             <div class="col-12 col-sm-6 item">
                 <div class="card">
+                    <?php if ($image) { ?>
                     <div class="card-img-top">
                         <picture>
                             <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
@@ -96,10 +98,11 @@ if( have_rows('post-cat-tiles_section') ) {
                             <img src="<?php echo wp_get_attachment_image_url( $image, 'full' ); ?>" alt="Random image">
                         </picture>
                     </div>
+                    <?php } //endif $image ?>
                     <div class="card-body">
                         
                         <h3 class="card-title h5">
-                            <span class="supertitle"><?php echo $category->name; ?>:</span>
+                            <span class="supertitle"><a href="<?php echo get_category_link( $category->term_id ); ?>"><?php echo $category->name; ?></a>:</span>
                             <?php the_title(); ?>
                         </h3>
                         <p class="card-text"><?php $content = wp_strip_all_tags(get_the_content()); echo mb_strimwidth($content, 0, 176, '...');?></p>

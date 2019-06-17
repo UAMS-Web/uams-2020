@@ -2546,7 +2546,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'add_term' => 0,
                 'save_terms' => 0,
                 'load_terms' => 0,
-                'return_format' => 'id',
+                'return_format' => 'object',
                 'multiple' => 0,
             ),
             array(
