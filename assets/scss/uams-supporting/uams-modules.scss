@@ -80,11 +80,11 @@
             }
         }
 
-        .btn {
+        .btn:not([class*=btn-]) {
             @extend .btn-primary;
         }
 
-        .more .btn {
+        .more .btn:not([class*=btn-]) {
             background-color: transparent;
             @extend .btn-outline-primary;
         }
@@ -153,11 +153,11 @@
             }
         }
 
-        .btn {
+        .btn:not([class*=btn-]) {
             @extend .btn-light;
         }
 
-        .more .btn {
+        .more .btn:not([class*=btn-]) {
             background-color: transparent;
             @extend .btn-outline-light;
         }
@@ -281,12 +281,10 @@
     }
 }
 
-.uams-module.bg-white + .uams-module.bg-white {
-}
-
 @import "uams-modules/side-by-side";
 @import "uams-modules/text-image-overlay";
 @import "uams-modules/stacked-image-text";
 @import "uams-modules/cta-bar";
 @import "uams-modules/action-bar";
 @import "uams-modules/call-out";
+@import "uams-modules/post-category-tile";

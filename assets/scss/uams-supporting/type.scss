@@ -26,6 +26,14 @@ h1, h2, h3, h4, h5, h6,
                                 
     .supertitle {
         margin-bottom: 0.25em;
+
+        a {
+            text-decoration: none;
+
+            @include hover-focus() {
+                text-decoration: underline;
+            }
+        }
     }
                                 
     .subtitle {
