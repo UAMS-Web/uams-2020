@@ -102,7 +102,7 @@ if( have_rows('post-cat-tiles_section') ) {
                             <span class="supertitle"><?php echo $category->name; ?>:</span>
                             <?php the_title(); ?>
                         </h3>
-                        <p class="card-text"><strong><?php echo $postid; ?></strong> <?php $content = wp_strip_all_tags(get_the_content()); echo mb_strimwidth($content, 0, 176, '...');?></p>
+                        <p class="card-text"><?php $content = wp_strip_all_tags(get_the_content()); echo mb_strimwidth($content, 0, 176, '...');?></p>
                         <div class="cta-container">
                             <a class="btn btn-primary" href="<?php the_permalink(); ?>" aria-label="Read <?php the_title(); ?>"><?php echo $post_button_text; ?></a>
                             <a class="btn btn-outline-primary" href="<?php echo get_category_link( $category->term_id ); ?>" aria-label="Full list of <?php echo $category->name; ?> stories"><?php echo $cat_button_text; ?></a>
