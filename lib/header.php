@@ -53,10 +53,10 @@ function ursidae_site_image() {
 				<?php if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site']) || empty(uams_get_site_info()['site'])) { ?>
 				<!-- Options - uams -->
 				<li class="nav-item">
-					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
+					<a class="nav-link" href="https://www.uamshealth.com/">UAMSHealth</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="https://mychart.uamshealth.com/">MyChart</a>
+					<a class="nav-link" href="https://jobs.uams.edu/">Jobs</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="http://giving.uams.edu/">Giving</a>
