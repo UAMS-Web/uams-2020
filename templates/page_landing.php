@@ -44,4 +44,12 @@
 
 // add_filter( 'wp_nav_menu', '__return_false' );
 
+// Add extra class to content
+function uamswp_add_class( $attributes ) {
+    $attributes['class'] = $attributes['class']. ' sr-only';
+      return $attributes;
+}
+
+add_filter( 'genesis_attr_entry-title', 'uamswp_add_class' );
+
 genesis();
