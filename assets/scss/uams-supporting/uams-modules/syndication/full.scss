@@ -78,6 +78,7 @@
     .news-item-title {
         h2 {
             width: 21.875em;
+            max-width: 100%;
             margin: 0 auto $page-title-margin-bottom-mobile;
             padding-bottom: $page-title-margin-bottom-mobile;
             position: relative;

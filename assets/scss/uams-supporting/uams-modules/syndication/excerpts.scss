@@ -1,0 +1,102 @@
+.uams-module .uamswp-news-syndication-excerpts {
+    //width: 35em;
+    //max-width: 100%;
+    //margin: 0 auto;
+
+    small {
+        font-weight: inherit;
+    }
+
+    span {
+    }
+
+    p {
+        padding: 0;
+        position: static;
+        margin: 0 0 1em;
+
+        &:after {
+            content: none;
+        }
+    }
+
+    img {
+        border-radius: 0;
+        background-clip: border-box;
+        overflow: visible;
+        display: inline-block;
+        min-width: 0;
+        max-width: 100%;
+        min-height: 0;
+        max-height: none;
+        width: auto;
+        height: auto;
+        margin: 0;
+        float: none;
+    }
+
+    .item-container {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+
+        width: 53.334em;
+        width: ($font-size-base * 35 + $grid-gutter-width-rem) * ((4 + 8) / 8) - $grid-gutter-width-rem;
+        max-width: 100%;
+        margin: 0 auto;
+
+        .item {
+            padding-top: $grid-gutter-width;
+            padding-bottom: $grid-gutter-width;
+
+
+            .image-container {
+                //padding-right: $grid-gutter-width;
+                img {
+                    width: 100%;
+                }
+            }
+            .text-container {
+                //flex: 0 0 35em;
+                position: static;
+
+                &.text-container-full {
+                    //margin-left: (150px + $grid-gutter-width);
+                }
+            }
+    
+            &:first-child {
+                padding-top: 0;
+            }
+    
+            &:last-child {
+                padding-bottom: 0;
+            }
+    
+            &:nth-child(n+2) {
+                border-top: 1px solid $body-bg-border;
+            }
+        }
+    }
+
+    .uamswp-news-syndication-item {
+        position: relative;
+
+        .news-item-title {
+            margin-bottom: 0.25em;
+        }
+
+        .news-item-byline {
+            color: $secondary;
+            font-size: 1rem;
+            margin-bottom: 1.125rem;
+            font-weight: inherit;
+
+            .more, small, span {
+                font-weight: inherit;
+            }
+        }
+
+        //.news-item-excerpt {}
+    }
+}
