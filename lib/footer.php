@@ -12,8 +12,8 @@
 */
 
 //* Customize the credits
-add_filter( 'genesis_footer_creds_text', 'sp_footer_creds_text' );
-function sp_footer_creds_text() {
+add_filter( 'genesis_footer_creds_text', 'uamswp_footer_creds_text' );
+function uamswp_footer_creds_text() {
 
     // Render this by default, in whatever structure is best.
     // If the site is an EDU site, replace the href value with "http://www.uams.edu".
