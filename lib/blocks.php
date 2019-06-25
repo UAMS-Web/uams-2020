@@ -1291,7 +1291,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'name' => 'cta-bar_use-image',
                 'type' => 'true_false',
                 'instructions' => '',
-                'required' => 1,
+                'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(
                     'width' => '',
@@ -1343,6 +1343,13 @@ if( function_exists('acf_add_local_field_group') ):
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/cta',
+                ),
+            ),
+            array(
+                array(
+                    'param' => 'widget',
+                    'operator' => '==',
+                    'value' => 'uamswp_cta_widget',
                 ),
             ),
         ),
@@ -1456,7 +1463,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'name' => 'call-out_use-image',
                 'type' => 'true_false',
                 'instructions' => '',
-                'required' => 1,
+                'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(
                     'width' => '',
@@ -1508,6 +1515,13 @@ if( function_exists('acf_add_local_field_group') ):
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/call-out',
+                ),
+            ),
+            array(
+                array(
+                    'param' => 'widget',
+                    'operator' => '==',
+                    'value' => 'uamswp_callout_widget',
                 ),
             ),
         ),
