@@ -9,10 +9,15 @@
 $id = 'call-out-' . $block['id'];
 
 // Load values.
+if ( empty($heading) ) 
 $heading = get_field('call-out_heading');
+if ( empty($body) ) 
 $body = get_field('call-out_body');
+if ( empty($use_image) ) 
 $use_image = get_field('call-out_use-image');
+if ( empty($image) ) 
 $image = get_field('call-out_image');
+if ( empty($background_color) ) 
 $background_color = get_field('call-out_background-color');
 
 ?>
