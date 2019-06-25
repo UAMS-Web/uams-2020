@@ -1,3 +1,9 @@
+$logo-clear-space-multiplier: 12.072 / 50 * 2.5; // Multiply the height of the logo by this variable.
+$header-logo-height-mobile: 40px;
+$header-logo-height: 50px;
+$header-logo-clear-space-mobile: $header-logo-height-mobile * $logo-clear-space-multiplier;
+$header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
+
 .site-header {
     @extend .align-items-start;
     @extend .flex-nowrap;
@@ -5,7 +11,8 @@
     //@extend .navbar-expand-sm;
     @extend .bg-primary;
     @extend .text-light;
-    @extend .py-5;
+    padding-top: $header-logo-clear-space-mobile;
+    padding-bottom: $header-logo-clear-space-mobile;
     @extend .px-8;
 
     @include media-breakpoint-down(xs) {
@@ -13,6 +20,8 @@
     }
     @include media-breakpoint-up(sm) {
         z-index: 1;
+        padding-top: $header-logo-clear-space;
+        padding-bottom: $header-logo-clear-space;
     }
 
     .global-title {
@@ -24,20 +33,20 @@
 
         .navbar-brand {
             padding: 0;
-            margin: 0 0 $spacer-min 0;
+            margin: 0 0 $header-logo-clear-space-mobile 0;
             flex-shrink: 0;
                 
             @include media-breakpoint-up(lg) {
-                padding: 0 15px 0 0;
+                padding: 0 $header-logo-clear-space 0 0;
                 margin: 0;
                 border-right: 2px solid;
             }
 
             img {
-                height: 40px;
+                height: $header-logo-height-mobile;
 
                 @include media-breakpoint-up(sm) {
-                    height: 50px;
+                    height: $header-logo-height;
                 }
             }
         }
@@ -45,7 +54,7 @@
             margin: 0;
                 
             @include media-breakpoint-up(lg) {
-                padding: 0 0 0 15px;
+                padding: 0 0 0 $header-logo-clear-space;
 
                 border-left: 2px solid;
                 margin: 0 0 0 -2px;
@@ -67,12 +76,13 @@
             .title-descriptor {
                 font-size: 16px;
                 line-height: 1.2;
-                margin: 0;
+                margin: -3.5px 0 0;
                 padding: 3.5px 0;
 
                 @include media-breakpoint-up(sm) {
                     font-size: 19px;
                     padding: 2px 0;
+                    margin: -2px 0 0;
                 }
 
                 @include media-breakpoint-up(lg) {
