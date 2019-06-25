@@ -30,7 +30,7 @@ if( have_rows('overlay_section') ) {
     $image = get_sub_field('overlay_section_image');
 
 ?>
-            <div class="col-12<?php echo $row_count > 1 ? " col-sm-6" : ""; ?> item bg-image item-1 <?php echo $background_color; ?>">
+            <div class="col-12<?php echo $row_count > 1 ? " col-sm-6" : ""; ?> item bg-image item-<?php echo get_row_index(); ?> <?php echo $background_color; ?>">
                 <?php if ( $row_count > 1 && function_exists( 'fly_add_image_size' ) ) { // Background styles for two tiles in one row with Fly plugin ?>
                 <style>
                     #<?php echo $id; ?> .item-<?php echo get_row_index(); ?>:before {

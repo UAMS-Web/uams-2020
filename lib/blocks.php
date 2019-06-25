@@ -228,7 +228,7 @@ if( function_exists('acf_add_local_field_group') ):
                 'label' => 'Body',
                 'name' => 'side_layout-link-list_body',
                 'type' => 'textarea',
-                'instructions' => '173 character limit.',
+                'instructions' => '172 character limit.',
                 'required' => 1,
                 'conditional_logic' => array(
                     array(
@@ -246,7 +246,7 @@ if( function_exists('acf_add_local_field_group') ):
                 ),
                 'default_value' => '',
                 'placeholder' => '',
-                'maxlength' => 173,
+                'maxlength' => 172,
                 'rows' => 3,
                 'new_lines' => '',
             ),

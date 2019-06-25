@@ -63,42 +63,120 @@ if ('templates/page_landing.php' != $page_template) {
 <section class="uams-module no-padding side-by-side image-on-<?php echo $image_postion; ?> image-background-<?php echo $image_anchor; ?> <?php echo $background_color; ?>" id="side-by-side-<?php echo esc_attr($id); ?>">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 image-container">
+            <div class="col-12 col-md-6 image-container" aria-label="<?php echo $image_alt ?>" role="img">
+
+                <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+                <style>
+                    #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                        background-image: url("<?php echo image_sizer($side_image, 576, 324, $image_postion, $image_anchor); ?>");
+                    }
+
+                    /* XXS Breakpoint, retina */
+                    @media (-webkit-min-device-pixel-ratio: 2),
+                    (min-resolution: 192dpi) {
+                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                            background-image: url("<?php echo image_sizer($side_image, 1152, 648, $image_postion, $image_anchor); ?>");
+                        }
+                    }
+
+                    /* XS Breakpoint */
+                    @media (min-width: 576px) {
+                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                            background-image: url("<?php echo image_sizer($side_image, 768, 432, $image_postion, $image_anchor); ?>");
+                        }
+                    }
+
+                    /* XS Breakpoint, retina */
+                    @media (min-width: 576px) and (-webkit-min-device-pixel-ratio: 2),
+                    (min-width: 576px) and (min-resolution: 192dpi) {
+                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                            background-image: url("<?php echo image_sizer($side_image, 1536, 864, $image_postion, $image_anchor); ?>");
+                        }
+                    }
+
+                    /* SM Breakpoint */
+                    @media (min-width: 768px) {
+                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                            background-image: url("<?php echo image_sizer($side_image, 992, 558, $image_postion, $image_anchor); ?>");
+                        }
+                    }
+
+                    /* SM Breakpoint, retina */
+                    @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
+                    (min-width: 768px) and (min-resolution: 192dpi) {
+                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                            background-image: url("<?php echo image_sizer($side_image, 1984, 1116, $image_postion, $image_anchor); ?>");
+                        }
+                    }
+
+                    /* MD Breakpoint */
+                    @media (min-width: 992px) {
+                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                            background-image: url("<?php echo image_sizer($side_image, 1200, 675, $image_postion, $image_anchor); ?>");
+                        }
+                    }
+
+                    /* MD Breakpoint, retina */
+                    @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
+                    (min-width: 992px) and (min-resolution: 192dpi) {
+                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                            background-image: url("<?php echo image_sizer($side_image, 2400, 1350, $image_postion, $image_anchor); ?>");
+                        }
+                    }
+
+                    /* LG Breakpoint */
+                    @media (min-width: 1200px) {
+                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                            background-image: url("<?php echo image_sizer($side_image, 1500, 844, $image_postion, $image_anchor); ?>");
+                        }
+                    }
+
+                    /* LG Breakpoint, retina */
+                    @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
+                    (min-width: 1200px) and (min-resolution: 192dpi) {
+                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                            background-image: url("<?php echo image_sizer($side_image, 3000, 1688, $image_postion, $image_anchor); ?>");
+                        }
+                    }
+
+                    /* XL Breakpoint */
+                    @media (min-width: 1500px) {
+                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                            background-image: url("<?php echo image_sizer($side_image, 1921, 1081, $image_postion, $image_anchor); ?>");
+                        }
+                    }
+
+                    /* XL Breakpoint, retina */
+                    @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
+                    (min-width: 1500px) and (min-resolution: 192dpi) {
+                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                            background-image: url("<?php echo image_sizer($side_image, 3842, 2161, $image_postion, $image_anchor); ?>");
+                        }
+                    }
+
+                    /* XXL Breakpoint */
+                    @media (min-width: 1921px) {
+                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                            background-image: url("<?php echo image_sizer($side_image, 2560, 1440, $image_postion, $image_anchor); ?>");
+                        }
+                    }
+
+                    /* XXL Breakpoint, retina */
+                    @media (min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2),
+                    (min-width: 1921px) and (min-resolution: 192dpi) {
+                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                            background-image: url("<?php echo image_sizer($side_image, 5120, 2880, $image_postion, $image_anchor ); ?>");
+                        }
+                    }
+                </style>
+                <?php } else { ?>
+                <style>
+                    #side-by-side-<?php echo esc_attr($id); ?> .image-container {
+                        background-image: url("<?php echo wp_get_attachment_url( $side_image, 'full' ); ?>");
+                    }
+                </style>
+                <?php } //endif ?>
                 <div class="image-inner-container">
-                    <picture>
-                        <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-                        <source srcset="<?php echo image_sizer($side_image, 5120, 2880, $image_postion, $image_anchor ); ?>"
-                            media="(min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1921px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer($side_image, 2560, 1440, $image_postion, $image_anchor); ?>" 
-                            media="(min-width: 1921px)">
-                        <source srcset="<?php echo image_sizer($side_image, 3842, 2161, $image_postion, $image_anchor); ?>"
-                            media="(min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1500px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer($side_image, 1921, 1081, $image_postion, $image_anchor); ?>" 
-                            media="(min-width: 1500px)">
-                        <source srcset="<?php echo image_sizer($side_image, 3000, 1688, $image_postion, $image_anchor); ?>"
-                            media="(min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1200px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer($side_image, 1500, 844, $image_postion, $image_anchor); ?>" 
-                            media="(min-width: 1200px)">
-                        <source srcset="<?php echo image_sizer($side_image, 2400, 1350, $image_postion, $image_anchor); ?>"
-                            media="(min-width: 992px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 992px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer($side_image, 1200, 675, $image_postion, $image_anchor); ?>" 
-                            media="(min-width: 992px)">
-                        <source srcset="<?php echo image_sizer($side_image, 1984, 1116, $image_postion, $image_anchor); ?>"
-                            media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 768px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer($side_image, 992, 558, $image_postion, $image_anchor); ?>" 
-                            media="(min-width: 768px)">
-                        <source srcset="<?php echo image_sizer($side_image, 1536, 864, $image_postion, $image_anchor); ?>"
-                            media="(min-width: 576px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 576px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer($side_image, 768, 432, $image_postion, $image_anchor); ?>" 
-                            media="(min-width: 576px)">
-                        <source srcset="<?php echo image_sizer($side_image, 1152, 648, $image_postion, $image_anchor); ?>"
-                            media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), (min-width: 1px) and (min-resolution: 192dpi)">
-                        <source srcset="<?php echo image_sizer($side_image, 576, 324, $image_postion, $image_anchor); ?>" 
-                            media="(min-width: 1px)">
-                        <?php } //endif ?>
-                        <!-- Fallback -->
-                        <img src="<?php echo wp_get_attachment_url( $side_image, 'full' ); ?>" alt="<?php echo $image_alt ?>" />
-                    </picture>
                 </div>
             </div>
             <div class="col-12 col-md-6 text-container">

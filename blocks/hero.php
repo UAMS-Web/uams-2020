@@ -55,6 +55,12 @@ if( have_rows('hero') ):
     $image_alt = get_sub_field('image_alt_text') ?: '';
     $background_color = get_sub_field('background_color')?: 'auto';
 
+    // Load values for if bg auto
+    $background_color_1 = 'blue';
+    $background_color_2 = 'green';
+    $background_color_3 = 'eggplant';
+    $background_color_4 = 'maroon';
+
     // If the image alt text override field is empty, assign the normal alt value to the variable
     $image_alt = $image_alt ? $image_alt : get_post_meta($image_desktop, '_wp_attachment_image_alt', true);
     
@@ -66,7 +72,21 @@ if( have_rows('hero') ):
         $image_mobile = $image_desktop;
     }
 ?>
-        <div class="carousel-item <?php echo $background_color; ?><?php echo (0 == (get_row_index() - 1) ? ' active' : ''); ?>" id="carousel-item-<?php echo (get_row_index() - 1); ?>">
+        <div class="carousel-item <?php 
+        if ($background_color == 'auto') {
+            if (get_row_index() == 1) {
+                echo $background_color_1;
+            } elseif (get_row_index() == 2) {
+                echo $background_color_2;
+            } elseif (get_row_index() == 3) {
+                echo $background_color_3;
+            } else {
+                echo $background_color_4;
+            }
+        } else {
+            echo $background_color;
+        }
+        ?><?php echo (0 == (get_row_index() - 1) ? ' active' : ''); ?>" id="carousel-item-<?php echo (get_row_index() - 1); ?>">
             <div class="image-container">
                 <picture>
                     <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>

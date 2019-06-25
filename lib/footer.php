@@ -123,16 +123,16 @@ function uamswp_footer_creds_text() {
     // Overrides, if available
     if( ! empty( $custom_addresses ) && ( ('institute' == $site) || ('nw-campus' == $subsite) || ( startsWith($subsite, 'regional-') ) ) ) {
         $address = '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
+        $address .= '<span itemprop="name" class="sr-only">'.$footer_image_title .'</span>';
         foreach ( $custom_addresses as $custom_address ) {
-            $address .= '<span itemprop="name" class="sr-only">'.$footer_image_title .'</span>';
             $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">';
             $address .= '<strong'. (! empty($custom_address['address_title']) ? '>'. $custom_address['address_title'] : ' class="sr-only">Mailing Address' ).':</strong> ';
             $address .= '<span itemprop="streetAddress">'. (! empty($custom_address['address_street_1']) ? $custom_address['address_street_1'] : '4301 West Markham Street' ) . (! empty($custom_address['address_street_2']) ? ' ' . $custom_address['address_street_2'] : '' ).'</span>, ';
             $address .= '<span itemprop="addressLocality">'. (! empty($custom_address['address_city']) ? $custom_address['address_city'] : 'Little Rock' ).'</span>, ';
             $address .= '<span itemprop="addressRegion">'. (! empty($custom_address['address_state']) ? $custom_address['address_state'] : 'Arkansas' ).'</span>, ';
             $address .= '<span itemprop="postalCode">'. (! empty($custom_address['address_zip']) ? $custom_address['address_zip'] : '72205' ).'</span>'; 
+            $address .= '</div>';
         }
-        $address .= '</div>';
         echo $address;
     } else { //write default
         $address = '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
