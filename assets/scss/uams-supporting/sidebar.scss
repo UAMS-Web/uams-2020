@@ -37,7 +37,7 @@
         .widget-title,
         .widgettitle,
         .widget-wrap {
-            width: 35em;
+            width: $font-size-base * $line-length-max;
             max-width: 100%;
             margin: 0 auto;
         }
@@ -45,7 +45,7 @@
         .widget-title,
         .widgettitle {
             padding: 0 0 ($uams-module-padding-mobile / 2);
-            margin: 0 0 ($uams-module-padding-mobile / 2);
+            margin-bottom: ($uams-module-padding-mobile / 2);
             background-color: transparent;
             border-bottom: 1px solid $red;
         }
