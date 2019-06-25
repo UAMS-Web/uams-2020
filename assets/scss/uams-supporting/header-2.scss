@@ -1,52 +1,92 @@
-$logo-clear-space-multiplier: 12.072 / 50 * 2.5; // Multiply the height of the logo by this variable.
-$header-logo-height-mobile: 40px;
-$header-logo-height: 50px;
-$header-logo-clear-space-mobile: $header-logo-height-mobile * $logo-clear-space-multiplier;
-$header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
+// WIP for Logo-centric header style
 
-.site-header {
+.site-header-2 {
     @extend .align-items-start;
     @extend .flex-nowrap;
     @extend .navbar-dark;
     //@extend .navbar-expand-sm;
-    @extend .bg-primary;
-    @extend .text-light;
-    padding-top: $header-logo-clear-space-mobile;
-    padding-bottom: $header-logo-clear-space-mobile;
+    @extend .bg-white;
+    @extend .text-dark;
+    @extend .py-5;
     @extend .px-8;
+
+    position: relative;
+    z-index: 3;
 
     @include media-breakpoint-down(xs) {
         box-shadow: $box-shadow-sm;
     }
     @include media-breakpoint-up(sm) {
-        z-index: 1;
-        padding-top: $header-logo-clear-space;
-        padding-bottom: $header-logo-clear-space;
+        //z-index: 3;
     }
 
     .global-title {
-        @extend .d-flex;
-        @extend .flex-column;
-        @extend .flex-lg-row;
-        @extend .align-items-start;
-        @extend .mr-auto;
+        display: flex;
+        margin-right: auto;
+        flex-direction: column;
+
+        @include media-breakpoint-up(md) {
+            flex-flow: row nowrap;
+        }
+
+        .title-master {
+            display: block;
+
+            img {
+                height: 50px;
+
+                @include media-breakpoint-up(md) {
+                    height: 50px;
+                }
+            }
+        }
+
+        .title-qualifier-container {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+
+            .title-divider {
+                img {
+                    height: 50px;
+                    width: 22.11px;
+
+                    @include media-breakpoint-up(md) {
+                        height: 50px;
+                        width: 2px;
+                        margin: 0 10px;
+                    }
+                }
+            }
+            .title-qualifier {
+                display: block;
+
+                img {
+                    height: 39px;
+
+                    @include media-breakpoint-up(md) {
+                        height: 39px;
+                    }
+                }
+            }
+        }
 
         .navbar-brand {
             padding: 0;
-            margin: 0 0 $header-logo-clear-space-mobile 0;
+            margin: 0 0 $spacer-min 0;
             flex-shrink: 0;
                 
             @include media-breakpoint-up(lg) {
-                padding: 0 $header-logo-clear-space 0 0;
+                padding: 0 15px 0 0;
                 margin: 0;
                 border-right: 2px solid;
             }
 
             img {
-                height: $header-logo-height-mobile;
+                height: 40px;
 
                 @include media-breakpoint-up(sm) {
-                    height: $header-logo-height;
+                    height: 50px;
                 }
             }
         }
@@ -54,7 +94,7 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
             margin: 0;
                 
             @include media-breakpoint-up(lg) {
-                padding: 0 0 0 $header-logo-clear-space;
+                padding: 0 0 0 15px;
 
                 border-left: 2px solid;
                 margin: 0 0 0 -2px;
@@ -76,13 +116,12 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
             .title-descriptor {
                 font-size: 16px;
                 line-height: 1.2;
-                margin: -3.5px 0 0;
+                margin: 0;
                 padding: 3.5px 0;
 
                 @include media-breakpoint-up(sm) {
                     font-size: 19px;
                     padding: 2px 0;
-                    margin: -2px 0 0;
                 }
 
                 @include media-breakpoint-up(lg) {
@@ -233,7 +272,7 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
     }
 }
 
-.site-nav {
+.site-nav-2 {
     padding: 0;
 
     @include media-breakpoint-up(sm) {
@@ -241,19 +280,83 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
         box-shadow: $box-shadow-sm;
         @include font-size(1.3125rem);
         position: relative;
-        z-index: 1;
+        z-index: 2;
+    }
+
+    &.major-entity {
+        background-color: $white;
+        color: $red;
+        border-top: 1px solid $body-bg-border;
+    }
+
+    &.sub-entity,
+    &.sub-section {
+        background-color: $red;
+        color: $white;
+        border-top: 1px solid $red;
+
+        .inner-container {
+            flex-wrap: wrap;
+
+            @include media-breakpoint-up(md) {
+                flex-wrap: nowrap;
+            }
+
+            > .navbar-nav {
+                margin-right: auto;
+                align-self: flex-start;
+                flex: 0 1 auto;
+    
+                > .nav-item {
+                    > .nav-link {
+                        @include media-breakpoint-only(sm) {
+                            padding: 7px 0.75rem;
+                            margin: 0 0 13px 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .sub-entity-title {
+            font-size: 1.125em;
+            font-weight: $font-weight-medium;
+            padding: 0;
+            margin: 13px 0 10px;
+
+            @include media-breakpoint-up(md) {
+                flex-wrap: nowrap;
+                padding: 0 1rem 0;
+                border-right: 1px solid;
+                margin: 13px 0.25rem 13px 0;
+                flex: 0 1 auto;
+                max-width: 38.2%;
+            }
+
+            a {
+                color: inherit;
+            }
+        }
+
+        .navbar-nav {
+            font-weight: $font-weight-normal;
+        }
     }
 
     .inner-container {
         //@extend .px-sm-6;
         //@extend .py-sm-5;
-        @extend .w-100;
+        //@extend .w-100;
+        width: 100%;
 
         @include media-breakpoint-down(xs) {
             box-shadow: $box-shadow-sm;
         }
 
         > .navbar-nav {
+            margin-right: auto;
+            align-self: flex-start;
+
             > .nav-item {
                 > .nav-link {
                     @include media-breakpoint-up(sm) {
@@ -295,9 +398,9 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
     
     .navbar-nav {
         line-height: 1;
-        @extend .font-weight-medium;
+        font-weight: $font-weight-medium;
         //@extend .bg-white;
-        background-color: $white;
+        //background-color: $white;
 
         .nav-item { // li
             //margin-bottom: 0;
@@ -310,6 +413,8 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
 
             .nav-link,
             .dropdown-item {
+                color: inherit;
+
                 @include media-breakpoint-down(xs) {
                     padding: 0.75rem 2rem;
                 }
