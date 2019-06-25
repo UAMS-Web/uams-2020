@@ -53,8 +53,12 @@
         //.widget-wrap {}
 
         &#search-2 {
-            .form-group {
-                margin-bottom: 0;
+            .uams-search {
+                @extend .line-length-max;
+
+                .form-group {
+                    margin-bottom: 0;
+                }
             }
         }
 
