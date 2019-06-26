@@ -1,7 +1,8 @@
 body.page-template-default,
 body.post-template-default,
 body.archive,
-body.error404 {
+body.error404,
+body.search {
 
     .entry,
     .entry-comments,
@@ -237,7 +238,8 @@ body.error404 {
     }
 }
 
-body.archive {
+body.archive,
+body.search {
     .archive-description {
         + .entry {
             padding-top: 0;
