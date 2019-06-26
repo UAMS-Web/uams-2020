@@ -1,6 +1,7 @@
 body.page-template-default,
 body.post-template-default,
-body.archive {
+body.archive,
+body.error404 {
 
     .entry,
     .entry-comments,
@@ -283,7 +284,7 @@ body.archive {
 
     .archive-pagination {
         background-color: $body-bg-banded;
-        
+
         ul {
             margin: 0 auto;
         }
