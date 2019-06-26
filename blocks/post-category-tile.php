@@ -107,7 +107,7 @@ $cat_button_text = get_field('post-cat-tile_category-button-text') ?: 'View ' . 
                         <p><?php $content = wp_strip_all_tags(get_the_content()); echo mb_strimwidth($content, 0, 176, '...');?></p>
                         <div class="cta-container">
                             <a href="<?php the_permalink(); ?>" class="btn btn-primary"><?php echo $post_button_text; ?></a>
-                            <a href="#CATEGORY-URL" class="btn btn-outline-primary"><?php echo $cat_button_text; ?></a>
+                            <a href="<?php echo get_category_link( $category->term_id ); ?>" class="btn btn-outline-primary" aria-label="Full list of <?php echo $category->name; ?> stories"><?php echo $cat_button_text; ?></a>
                         </div>
                     </div>
                 </div>

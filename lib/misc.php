@@ -46,26 +46,26 @@ function uamswp_do_meta() {
 }
 
 // Jumbotron
-function uamswp_do_home_featured() {
-	genesis_markup( array(
-		'open' => '<div %s>',
-		'context' => 'home-featured'
-	) );
+// function uamswp_do_home_featured() {
+// 	genesis_markup( array(
+// 		'open' => '<div %s>',
+// 		'context' => 'home-featured'
+// 	) );
 
-	genesis_structural_wrap( 'home-featured' );
+// 	genesis_structural_wrap( 'home-featured' );
 
-	genesis_widget_area( 'home-featured', array(
-		'before' => '',
-		'after' => ''
-	) );
+// 	genesis_widget_area( 'home-featured', array(
+// 		'before' => '',
+// 		'after' => ''
+// 	) );
 
-	genesis_structural_wrap( 'home-featured', 'close' );
+// 	genesis_structural_wrap( 'home-featured', 'close' );
 
-	genesis_markup( array(
-		'close' => '</div>',
-		'context' => 'home-featured'
-	) );
-}
+// 	genesis_markup( array(
+// 		'close' => '</div>',
+// 		'context' => 'home-featured'
+// 	) );
+// }
 
 // Body Class
 function uamswp_body_class( $args ) {
