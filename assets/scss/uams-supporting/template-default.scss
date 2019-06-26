@@ -1,11 +1,12 @@
-.page-template-default,
-.post-template-default,
-.archive {
+body.page-template-default,
+body.post-template-default,
+body.archive {
 
-    article.post,
-    article.page,
+    .entry,
     .entry-comments,
-    #respond {
+    #respond,
+    .archive-description,
+    .archive-pagination {
         padding: $uams-module-padding-mobile;
         margin-bottom: 0;
     
@@ -14,20 +15,14 @@
         }
     }
 
-    article.post,
-    article.page {
-
+    .archive-description,
+    .entry {
         .entry-title,
-        .entry-meta,
-        .entry-content,
-        .entry-footer {
+        .archive-title {
             max-width: 100%;
             margin-left: auto;
             margin-right: auto;
-        }
-    
-        .entry-title {
-            width: 21.875em;
+            width: $font-size-base * $line-length-max * 1.618;
             margin-bottom: $page-title-margin-bottom-mobile;
             padding-bottom: $page-title-margin-bottom-mobile;
             position: relative;
@@ -48,7 +43,7 @@
                 display: block;
                 width: 100%;
                 height: 0.0625em;
-                background-color: $body-bg-border;
+                background-color: $page-title-border-color;
                 max-width: $font-size-base * 35;
                 position: absolute;
                 margin: 0 auto;
@@ -56,6 +51,16 @@
                 left: 0;
                 right: 0;
             }
+        }
+    }
+
+    .entry {
+        .entry-meta,
+        .entry-content,
+        .entry-footer {
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .entry-meta {
@@ -72,11 +77,76 @@
         .entry-content,
         .entry-footer {
             width: $font-size-base * 35;
-        }
-    
-        .entry-content,
-        .entry-footer {
             text-align: left;
+        }
+
+        .entry-content {
+            .aligncenter {
+                margin: $page-title-margin-bottom-mobile 0;
+
+                @include media-breakpoint-up(md) {
+                    margin-left: (-(139% - 100) / 2);
+                    margin-right: (-(139% - 100) / 2);
+                    max-width: none;
+                    width: 139%;
+                }
+                @include media-breakpoint-up(lg) {
+                    margin-left: (-(161.8% - 100) / 2);
+                    margin-right: (-(161.746% - 100) / 2);
+                    width: 161.746%;
+                }
+            }
+            .alignleft,
+            .alignright {
+                display: block;
+                width: 100%;
+                margin: $page-title-margin-bottom-mobile 0;
+                float: none;
+
+                @include media-breakpoint-up(xs) {
+                    margin: 0 0 1em 0;
+                    width: 47.1428%;
+                }
+
+                @include media-breakpoint-up(md) {
+                    max-width: none;
+                    width: 66.642%;
+                }
+
+                @include media-breakpoint-up(lg) {
+                    width: 78.042%;
+                }
+            }
+
+            .alignleft {
+                @include media-breakpoint-up(xs) {
+                    margin-right: 5.7142%;
+                    float: left;
+                }
+
+                @include media-breakpoint-up(md) {
+                    margin-left: (-(139% - 100) / 2);
+                    margin-right: $uams-module-padding-mobile;
+                }
+                @include media-breakpoint-up(lg) {
+                    margin-left: (-(161.8% - 100) / 2);
+                }
+            }
+
+            .alignright {
+                @include media-breakpoint-up(xs) {
+                    margin-left: 5.7142%;
+                    float: right;
+                }
+
+                @include media-breakpoint-up(md) {
+                    margin-right: (-(139% - 100) / 2);
+                    margin-left: $uams-module-padding-mobile;
+                }
+                @include media-breakpoint-up(lg) {
+                    margin-right: (-(161.8% - 100) / 2);
+                }
+            }
         }
         
         .entry-footer {
@@ -162,6 +232,60 @@
             #submit {
                 @extend .btn-primary;
             }
+        }
+    }
+}
+
+body.archive {
+    .archive-description {
+        + .entry {
+            padding-top: 0;
+        }
+    }
+
+    .entry {
+        margin-bottom: 0;
+
+        &:last-of-type {
+            border-bottom: 0;
+        }
+
+        .entry-title {
+            @include font-size($h2-font-size);
+
+            &:after {
+                background-color: $body-bg-border;
+            }
+        }
+
+        .entry-content {
+            h1 {
+                @extend .h2;
+            }
+
+            h2 {
+                @extend .h3;
+            }
+
+            h3 {
+                @extend .h4;
+            }
+
+            h4 {
+                @extend .h5;
+            }
+
+            h5 {
+                @extend .h6;
+            }
+        }
+    }
+
+    .archive-pagination {
+        background-color: $body-bg-banded;
+        
+        ul {
+            margin: 0 auto;
         }
     }
 }
