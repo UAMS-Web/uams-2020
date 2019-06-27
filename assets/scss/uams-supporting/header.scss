@@ -5,15 +5,14 @@ $header-logo-clear-space-mobile: $header-logo-height-mobile * $logo-clear-space-
 $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
 
 .site-header {
-    @extend .align-items-start;
-    @extend .flex-nowrap;
-    @extend .navbar-dark;
     //@extend .navbar-expand-sm;
-    @extend .bg-primary;
-    @extend .text-light;
     padding-top: $header-logo-clear-space-mobile;
     padding-bottom: $header-logo-clear-space-mobile;
     @extend .px-8;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    background-color: $white;
+    color: $black;
 
     @include media-breakpoint-down(xs) {
         box-shadow: $box-shadow-sm;
@@ -22,6 +21,10 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
         z-index: 1;
         padding-top: $header-logo-clear-space;
         padding-bottom: $header-logo-clear-space;
+    }
+
+    a {
+        color: $body-color;
     }
 
     .global-title {
@@ -39,7 +42,7 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
             @include media-breakpoint-up(lg) {
                 padding: 0 $header-logo-clear-space 0 0;
                 margin: 0;
-                border-right: 2px solid;
+                border-right: 2px solid $primary;
             }
 
             img {
@@ -56,7 +59,7 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
             @include media-breakpoint-up(lg) {
                 padding: 0 0 0 $header-logo-clear-space;
 
-                border-left: 2px solid;
+                border-left: 2px solid $primary;
                 margin: 0 0 0 -2px;
             }
 
@@ -228,7 +231,7 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
     }
 
     #header-search {
-        background-color: $white;
+        background-color: $body-bg-banded;
         width: 100%;
     }
 }
@@ -239,9 +242,10 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
     @include media-breakpoint-up(sm) {
         padding: 0 1.5rem;
         box-shadow: $box-shadow-sm;
-        @include font-size(1.3125rem);
+        @include font-size(1.25rem);
         position: relative;
         z-index: $zindex-dropdown;
+        border-top: 2px solid $body-bg-border;
     }
 
     .inner-container {
@@ -258,7 +262,11 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
                 > .nav-link {
                     @include media-breakpoint-up(sm) {
                         white-space: nowrap;
-                        padding: 1.25rem 0.75rem;
+                        padding: 1.125rem 0.75rem;
+                    }
+
+                    > .sub-arrow {
+                        color: $gray-700;
                     }
                 }
 
