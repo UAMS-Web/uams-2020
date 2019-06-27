@@ -17,10 +17,10 @@
     }
 
     &.extra-padding {
-        padding: ($uams-module-padding-mobile * 3) $uams-module-padding-mobile;
+        padding: ($uams-module-padding-mobile * 2) $uams-module-padding-mobile;
 
         @include media-breakpoint-up(sm) {
-            padding: ($uams-module-padding * 3) $uams-module-padding;
+            padding: ($uams-module-padding * 2) $uams-module-padding;
         }
     }
 
