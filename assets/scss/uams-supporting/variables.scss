@@ -442,7 +442,8 @@ $page-title-margin-bottom-mobile: $uams-module-padding-mobile;
 $page-title-font-family: $headings-font-family;
 $page-title-font-weight: $font-weight-bolder;
 $page-title-line-height: $headings-line-height;
-$page-title-color: $red;
+$page-title-color: $body-color;
+$page-title-border-color: $primary;
 
 $display1-size: 6rem;
 $display2-size: 5.5rem;
@@ -1184,7 +1185,7 @@ $breadcrumb-item-padding: .5rem;
 
 $breadcrumb-margin-bottom: 0;
 
-$breadcrumb-bg: $gray-200;
+$breadcrumb-bg: $gray-100;
 $breadcrumb-divider-color: $gray-600;
 $breadcrumb-active-color: $gray-600;
 $breadcrumb-divider: quote("/");
@@ -1271,3 +1272,9 @@ $print-body-min-width: map-get($grid-breakpoints, "lg");
 $line-length-max: 35; // 80 characters
 $line-length-ideal: 28.4375; // 65 characters
 $line-length-min: 19.6875; // 45 characters
+
+
+// SVG Graphics
+
+$triangles: url("../../assets/svg/triangles_seamless_white.svg");
+$triangles-black: url("../../assets/svg/triangles_seamless_black.svg");

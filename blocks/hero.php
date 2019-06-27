@@ -56,10 +56,10 @@ if( have_rows('hero') ):
     $background_color = get_sub_field('background_color')?: 'auto';
 
     // Load values for if bg auto
-    $background_color_1 = 'blue';
-    $background_color_2 = 'green';
-    $background_color_3 = 'eggplant';
-    $background_color_4 = 'maroon';
+    $background_color_1 = 'red';
+    $background_color_2 = 'blue';
+    $background_color_3 = 'green';
+    $background_color_4 = 'eggplant';
 
     // If the image alt text override field is empty, assign the normal alt value to the variable
     $image_alt = $image_alt ? $image_alt : get_post_meta($image_desktop, '_wp_attachment_image_alt', true);

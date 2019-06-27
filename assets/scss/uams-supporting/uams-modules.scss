@@ -1,6 +1,8 @@
-.uams-module {
+.uams-module,
+.sidebar .widget {
     //padding-top: $module-padding;
     //padding-bottom: $module-padding;
+    position: relative;
 
     &:not(.no-padding) {
         padding: $uams-module-padding-mobile;
@@ -15,10 +17,10 @@
     }
 
     &.extra-padding {
-        padding: ($uams-module-padding-mobile * 3) $uams-module-padding-mobile;
+        padding: ($uams-module-padding-mobile * 2) $uams-module-padding-mobile;
 
         @include media-breakpoint-up(sm) {
-            padding: ($uams-module-padding * 3) $uams-module-padding;
+            padding: ($uams-module-padding * 2) $uams-module-padding;
         }
     }
 
@@ -289,3 +291,4 @@
 @import "uams-modules/call-out";
 @import "uams-modules/post-category-tile";
 @import "uams-modules/syndication";
+@import "uams-modules/graphic-title";

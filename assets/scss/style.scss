@@ -109,20 +109,21 @@
 @import "supporting/site-inner";
 @import "uams-supporting/site-inner";
 
-// Template, Default
-@import "uams-supporting/template-default";
-
-// Template, Landing Page
-@import "uams-supporting/template-landing-page";
-
 // Archive/Blog
 @import "supporting/archive";
 
 // Single Post/Page
 @import "supporting/single";
 
+// Template, Default
+@import "uams-supporting/template-default";
+
+// Template, Landing Page
+@import "uams-supporting/template-landing-page";
+
 // Sidebar
 @import "supporting/sidebar";
+@import "uams-supporting/sidebar";
 
 // UAMS Modules
 @import "uams-supporting/uams-modules";
