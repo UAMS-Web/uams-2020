@@ -83,40 +83,58 @@ body.search {
         }
 
         .entry-content {
+            .aligncenter,
+            .alignleft,
+            .alignright {
+                .wp-caption-text {
+                    margin-top: 0.5em;
+                    text-align: left;
+                }
+            }
+
             .aligncenter {
                 margin: $page-title-margin-bottom-mobile 0;
+                width: 100% !important;
 
                 @include media-breakpoint-up(md) {
                     margin-left: (-(139% - 100) / 2);
                     margin-right: (-(139% - 100) / 2);
                     max-width: none;
-                    width: 139%;
+                    width: 139% !important;
                 }
                 @include media-breakpoint-up(lg) {
                     margin-left: (-(161.8% - 100) / 2);
                     margin-right: (-(161.746% - 100) / 2);
-                    width: 161.746%;
+                    width: 161.746% !important;
+                }
+
+                img {
+                    width: 100% !important;
                 }
             }
             .alignleft,
             .alignright {
                 display: block;
-                width: 100%;
+                width: 100% !important;
                 margin: $page-title-margin-bottom-mobile 0;
                 float: none;
 
                 @include media-breakpoint-up(xs) {
                     margin: 0 0 1em 0;
-                    width: 47.1428%;
+                    width: 47.1428% !important;
                 }
 
                 @include media-breakpoint-up(md) {
                     max-width: none;
-                    width: 66.642%;
+                    width: 66.642% !important;
                 }
 
                 @include media-breakpoint-up(lg) {
-                    width: 78.042%;
+                    width: 78.042% !important;
+                }
+
+                img {
+                    width: 100% !important;
                 }
             }
 
