@@ -1272,3 +1272,9 @@ $print-body-min-width: map-get($grid-breakpoints, "lg");
 $line-length-max: 35; // 80 characters
 $line-length-ideal: 28.4375; // 65 characters
 $line-length-min: 19.6875; // 45 characters
+
+
+// SVG Graphics
+
+$triangles: url("../../assets/svg/triangles_seamless_white.svg");
+$triangles-black: url("../../assets/svg/triangles_seamless_black.svg");
