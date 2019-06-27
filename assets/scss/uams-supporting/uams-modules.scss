@@ -2,6 +2,7 @@
 .sidebar .widget {
     //padding-top: $module-padding;
     //padding-bottom: $module-padding;
+    position: relative;
 
     &:not(.no-padding) {
         padding: $uams-module-padding-mobile;
