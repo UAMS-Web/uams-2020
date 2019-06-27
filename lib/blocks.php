@@ -638,7 +638,7 @@ if( function_exists('acf_add_local_field_group') ):
     // Add local field group for UAMS Hero Block
     acf_add_local_field_group(array(
         'key' => 'group_5ceef46c9fe82',
-        'title' => 'Block: UAMS Slideshow',
+        'title' => 'Block: UAMS Hero',
         'fields' => array(
             array(
                 'key' => 'field_hero_title',
