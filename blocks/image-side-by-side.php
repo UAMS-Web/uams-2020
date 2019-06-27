@@ -1,7 +1,7 @@
 <?php 
 /*
  *
- * UAMS Hero Block
+ * UAMS Image Side-by-side Block
  * 
  */
 // Create id attribute allowing for custom "anchor" value.
@@ -20,43 +20,66 @@ if( !empty($block['align']) ) {
 }
 
 // Load values and setting defaults.
-$layout = get_field('side_text-layout') ?: 'link-list';
-$heading = get_field('side_heading') ?: 'Heading goes here...';
+// If values are empty => used for modules & widgets
+if ( empty($layout) ) 
+    $layout = get_field('side_text-layout') ?: 'link-list';
+if ( empty($heading) ) 
+    $heading = get_field('side_heading') ?: 'Heading goes here...';
 
-if ( $layout == 'body-only' ) {
-    $body = get_field('side_layout-body-only_body') ?: 'This is where the body-only description goes';
-} else {
-    $body = get_field('side_layout-link-list_body') ?: 'This is where the body + link list description goes';
+if ( empty($body) ){
+    if ( $layout == 'body-only' ) {
+        $body = get_field('side_layout-body-only_body') ?: 'This is where the body-only description goes';
+    } else {
+        $body = get_field('side_layout-link-list_body') ?: 'This is where the body + link list description goes';
+    }
 }
 
-$link_list = get_field('side_link-list') ?: '';
-$list_more = get_field('side_link-list_include-more') ?: '';
-$cta = get_field('side_cta') ?: '';
-$cta_text = $cta['side_cta_text'] ?: '';
-$cta_link = $cta['side_cta_url'] ?: '';
-$cta_target = $cta['side_cta_target'] ?: '';
-$cta_desc = $cta['side_cta_description'] ?: '';
-$image_group = get_field('side_image')?: '';
-$side_image = $image_group['side_image_image'] ?: '';
-$image_alt = $image_group['side_image_alt-text'] ?: '';
-$image_postion = get_field('side_image_position') ?: 'left';
-$image_anchor = get_field('side_image_anchor') ?: 'center';
-$background_color = get_field('side_image_background-color') ?: 'bg-white';
+if ( empty($link_list) ) 
+    $link_list = get_field('side_link-list') ?: '';
+if ( empty($list_more) ) 
+    $list_more = get_field('side_link-list_include-more') ?: '';
+if ( empty($cta) ) 
+    $cta = get_field('side_cta') ?: '';
+if ( empty($cta_text) ) 
+    $cta_text = $cta['side_cta_text'] ?: '';
+if ( empty($cta_link) ) 
+    $cta_link = $cta['side_cta_url'] ?: '';
+if ( empty($cta_target) ) 
+    $cta_target = $cta['side_cta_target'] ?: '';
+if ( empty($cta_desc) ) 
+    $cta_desc = $cta['side_cta_description'] ?: '';
+if ( empty($headimage_grouping) ) 
+    $image_group = get_field('side_image')?: '';
+if ( empty($side_image) ) 
+    $side_image = $image_group['side_image_image'] ?: '';
+if ( empty($image_alt) ) 
+    $image_alt = $image_group['side_image_alt-text'] ?: '';
+if ( empty($image_postion) ) 
+    $image_postion = get_field('side_image_position') ?: 'left';
+if ( empty($image_anchor) ) 
+    $image_anchor = get_field('side_image_anchor') ?: 'center';
+if ( empty($background_color) ) 
+    $background_color = get_field('side_image_background-color') ?: 'bg-white';
 
-$image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachment_image_alt', true);
-$cta_target = $cta_target ? ' target="blank"' : '';
-$cta_desc = $cta_desc ? ' aria-label="'.$cta_desc.'"' : '';
-$cta_link = $cta_link ? '<a class="btn btn-primary" href="'. $cta_link .'"' . $cta_desc . $cta_target . '>' : '';
-$side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
+if ( empty($image_alt) ) 
+    $image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachment_image_alt', true);
+if ( empty($cta_target) ) 
+    $cta_target = $cta_target ? ' target="blank"' : '';
+if ( empty($cta_desc) ) 
+    $cta_desc = $cta_desc ? ' aria-label="'.$cta_desc.'"' : '';
+if ( empty($cta_link) ) 
+    $cta_link = $cta_link ? '<a class="btn btn-primary" href="'. $cta_link .'"' . $cta_desc . $cta_target . '>' : '';
+if ( empty($side_image_width) ) 
+    $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
 // $side_image_height = wp_get_attachment_image_src($side_image, 'full')[2];
 
 // Break it if it isn't "Landing" template
-$page_template = get_page_template_slug( $post_id );
-// echo $page_template;
-if ('templates/page_landing.php' != $page_template) {
-    echo '<h4>This template is not supported. Please select "Landing"'. $page_template .'</h4>';
-    return;
-}
+// $page_template = get_page_template_slug( $post_id );
+// // echo $page_template;
+// if ('templates/page_landing.php' != $page_template) {
+//     echo '<h4>This template is not supported. Please select "Landing"'. $page_template .'</h4>';
+//     return;
+// }
 
 
 ?>
@@ -207,7 +230,7 @@ if ('templates/page_landing.php' != $page_template) {
                     <?php endif;
                         if( $cta_link ){
                             echo $cta_link;
-                            echo !empty($cta_text) ? $cta_text : 'Learn More'; 
+                            echo $cta_text ? $cta_text : 'Learn More'; 
                             echo '</a>';
                         } ?>
                 </div>
