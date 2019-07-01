@@ -8,7 +8,7 @@
  * @license      GPL-2.0+
 **/
 // Remove 'site-inner' from structural wrap
-add_theme_support( 'genesis-structural-wraps', array( 'header', 'footer-widgets', 'footer' ) );
+add_theme_support( 'genesis-structural-wraps', array( 'footer-widgets' ) );
 /**
  * Add the attributes from 'entry', since this replaces the main entry
  *
