@@ -66,6 +66,9 @@ function uamswp_childtheme_setup() {
 	// WooCommerce Support
 	add_theme_support( 'genesis-connect-woocommerce' );
 
+	// Responsive Embeds
+	add_theme_support( 'responsive-embeds' );
+
 	// Remove unneeded widget areas
 	unregister_sidebar( 'header-right' );
 
