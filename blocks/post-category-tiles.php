@@ -6,17 +6,23 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = 'stacked-image-text-' . $block['id'];
+if ( empty( $id ) )
+    $id = $block['id'];    
+$id = 'stacked-image-text-' . $id; 
 
 // Load values.
-$heading = get_field('post-cat-tiles_heading');
-$hide_heading = get_field('post-cat-tiles_hide-heading');
-$background_color = get_field('post-cat-tiles_background-color');
+if ( empty( $heading ) )
+    $heading = get_field('post_tiles_heading');
+if ( empty( $hide_heading ) )
+    $hide_heading = get_field('post_tiles_hide_heading');
+if ( empty( $background_color ) )
+    $background_color = get_field('post_tiles_background_color');
 
-if( have_rows('post-cat-tiles_section') ) {
-    $rows = get_field('post-cat-tiles_section');
-    $row_count = count($rows);
-} 
+if ( empty( $post_tiles_rows ) )
+    $post_tiles_rows = get_field('post_tiles_section');
+
+if( $post_tiles_rows ) :
+    $row_count = count($post_tiles_rows); 
 
 ?>
 <section class="uams-module stacked-image-text <?php echo $background_color; ?>" id="<?php echo $id; ?>">
@@ -26,10 +32,14 @@ if( have_rows('post-cat-tiles_section') ) {
                 <h2 class="module-title"><span class="title"><?php echo $heading; ?></span></h2>
             </div>
             <?php 
-                while ( have_rows('post-cat-tiles_section') ) : the_row(); 
+                $index = 1;
+                foreach ($post_tiles_rows as $post_tiles_row) {
 
                 // The item's selected category.
-                $category = get_sub_field('post-cat-tiles_section_category');
+                $category = $post_tiles_row['post_tiles_section_category'];
+
+                $post_button_text = $post_tiles_row['post_tiles_section_post_button_text'] ?: 'Read the Story';
+                $cat_button_text = $post_tiles_row['post_tiles_section_category_button_text'] ?: 'View ' . $category->name . ' Archive';
 
                 $args = array(
                     'post_type' => 'post',
@@ -47,8 +57,6 @@ if( have_rows('post-cat-tiles_section') ) {
                 // Load values.
                 $image = get_post_thumbnail_id( $post->ID );
                 $alt_text = get_post_meta( $image, '_wp_attachment_image_alt', true );
-                $post_button_text = get_sub_field('post-cat-tiles_section_post-button-text') ?: 'Read the Story';
-                $cat_button_text = get_sub_field('post-cat-tiles_section_category-button-text') ?: 'View ' . $category->name . ' Archive';
             ?>
             <div class="col-12 col-sm-6 item">
                 <div class="card">
@@ -116,8 +124,10 @@ if( have_rows('post-cat-tiles_section') ) {
             </div>
             <?php endwhile; endif; ?>
             <?php
-                endwhile;
+                    $index++;
+                }
             ?>
         </div>
     </div>
 </section>
+<?php endif;

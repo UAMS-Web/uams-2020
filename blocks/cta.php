@@ -6,30 +6,31 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = 'cta-bar-' . $block['id'];
+if ( empty( $id ) )
+    $id = 'cta-bar-' . $block['id'];
 
 // Load values and assing defaults.
 // if empty - allow values to be set for widgets
 if ( empty($heading) ) 
-    $heading = get_field('cta-bar_heading');
+    $heading = get_field('cta_bar_heading');
 if ( empty($body) ) 
-    $body = get_field('cta-bar_body');
+    $body = get_field('cta_bar_body');
 if ( empty($button_text) ) 
-    $button_text = get_field('cta-bar_button-text');
+    $button_text = get_field('cta_bar_button-text');
 if ( empty($button_url) ) 
-    $button_url = get_field('cta-bar_button-url');
+    $button_url = get_field('cta_bar_button-url');
 if ( empty($button_target) ) 
-    $button_target = get_field('cta-bar_button-target');
+    $button_target = get_field('cta_bar_button-target');
 if ( empty($button_desc) ) 
-    $button_desc = get_field('cta-bar_button-description');
+    $button_desc = get_field('cta_bar_button-description');
 if ( empty($layout) ) 
-    $layout = get_field('cta-bar_layout');
+    $layout = get_field('cta_bar_layout');
 if ( empty($use_image) ) 
-    $use_image = get_field('cta-bar_use-image');
+    $use_image = get_field('cta_bar_use-image');
 if ( empty($image) ) 
-    $image = get_field('cta-bar_image');
+    $image = get_field('cta_bar_image');
 if ( empty($background_color) ) 
-    $background_color = get_field('cta-bar_background-color');
+    $background_color = get_field('cta_bar_background-color');
 
 ?>
 <section class="uams-module cta-bar <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>">

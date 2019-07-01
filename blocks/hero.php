@@ -5,7 +5,9 @@
  * 
  */
 // Create id attribute allowing for custom "anchor" value.
-$id = 'hero-' . $block['id'];
+if ( empty( $id ) ) {
+    $id = 'hero-' . $block['id'];
+}
 if( !empty($block['anchor']) ) {
     $id = $block['anchor'];
 }
@@ -19,15 +21,18 @@ if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
 }
 
-if( have_rows('hero') ): 
-    $rows = get_field('hero');
-    $row_count = count($rows);
+if ( empty($hero_rows) )
+    $hero_rows = get_field('hero');
+
+if( $hero_rows ) :
+    $row_count = count($hero_rows);
+
 ?>
     <section class="hero carousel slide<?php echo $row_count > 1 ? " multiple-slides" : ""; ?>" id="carousel-<?php echo esc_attr($id); ?>">
 <?php
         $page_template = get_page_template_slug( $post_id );
         // echo $page_template;
-        if ('templates/page_landing.php' != $page_template) {
+        if ('templates/page_landing.php' != $page_template && 'templates/modules.php' != $page_template) {
             echo '<h4>This template is not supported. Please select "Landing"</h4>';
             return;
         }
@@ -41,19 +46,31 @@ if( have_rows('hero') ):
 <?php   }  ?>
     <div class="carousel-inner" class="<?php echo esc_attr($className); ?>">
 <?php 
-    while ( have_rows('hero') ) : the_row(); 
-// Load values and assing defaults.
-    $heading = get_sub_field('hero_heading') ?: 'Heading goes here...';
-    $body = get_sub_field('hero_body') ?: 'This is where the description goes';
-    $button_text = get_sub_field('hero_button_text') ?: 'Learn More';
-    $button_url = get_sub_field('hero_button_url') ?: '';
-    $button_target = get_sub_field('hero_button_target') ?: '';
-    $button_desc = get_sub_field('hero_button_description') ?: '';
-    $image_desktop = get_sub_field('image_desktop') ?: ''; // Required
-    $image_tablet = get_sub_field('image_tablet') ?: '';
-    $image_mobile = get_sub_field('image_mobile') ?: '';
-    $image_alt = get_sub_field('image_alt_text') ?: '';
-    $background_color = get_sub_field('background_color')?: 'auto';
+    $index = 1;
+    foreach($hero_rows as $hero_row) {
+// Load values and adding defaults.
+    // if ( empty($heading) )
+        $heading = $hero_row['hero_heading'] ?: 'Heading goes here...';
+    // if ( empty($body) )
+        $body = $hero_row['hero_body'] ?: 'This is where the description goes';
+    // if ( empty($button_text) )
+        $button_text = $hero_row['hero_button_text'] ?: 'Learn More';
+    // if ( empty($button_url) )
+        $button_url = $hero_row['hero_button_url'] ?: '';
+    // if ( empty($button_target) )
+        $button_target = $hero_row['hero_button_target'] ?: '';
+    // if ( empty($button_desc) )
+        $button_desc = $hero_row['hero_button_description'] ?: '';
+    // if ( empty($image_desktop) )
+        $image_desktop = $hero_row['hero_image_desktop'] ?: ''; // Required
+    // if ( empty($image_tablet) )
+        $image_tablet = $hero_row['hero_image_tablet'] ?: '';
+    // if ( empty($image_mobile) )
+        $image_mobile = $hero_row['hero_image_mobile'] ?: '';
+    // if ( empty($image_alt) )
+        $image_alt = $hero_row['hero_image_alt_text'] ?: '';
+    // if ( empty($background_color) )
+        $background_color = $hero_row['hero_background_color'] ?: 'auto';
 
     // Load values for if bg auto
     $background_color_1 = 'red';
@@ -74,11 +91,11 @@ if( have_rows('hero') ):
 ?>
         <div class="carousel-item <?php 
         if ($background_color == 'auto') {
-            if (get_row_index() == 1) {
+            if ($index == 1) {
                 echo $background_color_1;
-            } elseif (get_row_index() == 2) {
+            } elseif ($index == 2) {
                 echo $background_color_2;
-            } elseif (get_row_index() == 3) {
+            } elseif ($index == 3) {
                 echo $background_color_3;
             } else {
                 echo $background_color_4;
@@ -86,7 +103,7 @@ if( have_rows('hero') ):
         } else {
             echo $background_color;
         }
-        ?><?php echo (0 == (get_row_index() - 1) ? ' active' : ''); ?>" id="carousel-item-<?php echo (get_row_index() - 1); ?>">
+        ?><?php echo (0 == ($index - 1) ? ' active' : ''); ?>" id="carousel-item-<?php echo ($index - 1); ?>">
             <div class="image-container">
                 <picture>
                     <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
@@ -142,7 +159,8 @@ if( have_rows('hero') ):
             </div>
         </div>
 <?php
-        endwhile;
+            $index++;
+        } // end foreach
 ?>
             </div><!-- .carousel-inner -->
 <?php

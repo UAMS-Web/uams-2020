@@ -6,15 +6,21 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = 'post-category-tile-' . $block['id'];
+if ( empty( $id ) )
+    $id = $block['id'];
+$id = 'post-category-tile-' . $id;
 
 // Load values.
-$heading = get_field('post-cat-tile_heading');
-$hide_heading = get_field('post-cat-tile_hide-heading');
-$background_color = get_field('post-cat-tile_background-color');
+if ( empty( $heading ) )
+    $heading = get_field('post_tile_heading');
+if ( empty( $hide_heading ) )
+    $hide_heading = get_field('post_tile_hide_heading');
+if ( empty( $background_color ) )
+    $background_color = get_field('post_tile_background_color');
 
 // The item's selected category.
-$category = get_field('post-cat-tile_category');
+if ( empty( $category ) )
+    $category = get_field('post_tile_category');
 
 $args = array(
     'post_type' => 'post',
@@ -30,8 +36,10 @@ if ( $arr_posts->have_posts() ) : while ( $arr_posts->have_posts() ) : $arr_post
 // Load values.
 $image = get_post_thumbnail_id( $post->ID );
 $alt_text = get_post_meta( $image, '_wp_attachment_image_alt', true );
-$post_button_text = get_field('post-cat-tile_post-button-text') ?: 'Read the Story';
-$cat_button_text = get_field('post-cat-tile_category-button-text') ?: 'View ' . $category->name . ' Archive';
+if ( empty( $post_button_text ) )
+    $post_button_text = get_field('post_tile_post_button_text') ?: 'Read the Story';
+if ( empty( $cat_button_text ) )
+    $cat_button_text = get_field('post_tile_category_button_text') ?: 'View ' . $category->name . ' Archive';
 
 ?>
 
