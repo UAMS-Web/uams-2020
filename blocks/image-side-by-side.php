@@ -42,21 +42,14 @@ if ( empty($list_more) )
     $list_more = get_field('side_link_include_more') ?: '';
 if ( empty($cta) ) 
     $cta = get_field('side_cta') ?: '';
-if ( empty($cta_text) ) 
     $cta_text = $cta['side_cta_text'] ?: '';
-if ( empty($cta_link) ) 
     $cta_link = $cta['side_cta_url'] ?: '';
-if ( empty($cta_target) ) 
     $cta_target = $cta['side_cta_target'] ?: '';
-if ( empty($cta_desc) ) 
     $cta_desc = $cta['side_cta_description'] ?: '';
-if ( empty($headimage_grouping) ) 
+if ( empty($image_group) ) 
     $image_group = get_field('side_image')?: '';
-if ( empty($side_image) ) 
     $side_image = $image_group['side_image_image'] ?: '';
-if ( empty($image_alt) ) 
     $image_alt = $image_group['side_image_alt_text'] ?: '';
-if ( empty($image_crop) ) 
     $image_crop = $image_group['side_image_crop'] ?: '';
 if ( empty($image_postion) ) 
     $image_postion = get_field('side_image_position') ?: 'left';
@@ -67,13 +60,9 @@ if ( empty($background_color) )
 
 if ( empty($image_alt) ) 
     $image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachment_image_alt', true);
-if ( empty($cta_target) ) 
     $cta_target = $cta_target ? ' target="blank"' : '';
-if ( empty($cta_desc) ) 
     $cta_desc = $cta_desc ? ' aria-label="'.$cta_desc.'"' : '';
-if ( empty($cta_link) ) 
     $cta_link = $cta_link ? '<a class="btn btn-primary" href="'. $cta_link .'"' . $cta_desc . $cta_target . '>' : '';
-if ( empty($side_image_width) ) 
     $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
 // $side_image_height = wp_get_attachment_image_src($side_image, 'full')[2];
 
