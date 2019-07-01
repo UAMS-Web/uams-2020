@@ -6,31 +6,36 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = 'action-bar-' . $block['id'];
+if ( empty( $id ) )
+    $id = 'action-bar-' . $block['id'];   
 
 // Load values.
-$heading = get_field('action-bar_heading');
-$background_color = get_field('action-bar_background-color');
+if ( empty($heading) )
+    $heading = get_field('action_bar_heading');
+if ( empty($background_color) )
+    $background_color = get_field('action_bar_background_color');
+if ( empty($action_bar_rows) )
+    $action_bar_rows = get_field('action_bar_section');
 
-if( have_rows('action-bar_section') ) {
-    $rows = get_field('action-bar_section');
-    $row_count = count($rows);
+if( $action_bar_rows ) {
+    // $rows = get_field('action_bar_section');
+    $row_count = count($action_bar_rows);
 } 
 
 ?>
-<section class="uams-module action-bar count-<?php echo $row_count < 4 ? "3" : "4"; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>">
+<section class="uams-module action-bar count-<?php echo $row_count < 4 ? "3" : "4"; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>">
     <h2 class="sr-only"><?php echo $heading; ?></h2>
     <div class="container-fluid">
         <div class="row">
 <?php 
-    while ( have_rows('action-bar_section') ) : the_row(); 
+    foreach($action_bar_rows as $action_bar_row) {
     // Load values.
-    $section_heading = get_sub_field('action-bar_section_heading');
-    $body = get_sub_field('action-bar_section_body');
-    $button_text = get_sub_field('action-bar_section_button-text');
-    $button_url = get_sub_field('action-bar_section_button-url');
-    $button_target = get_sub_field('action-bar_section_button-target');
-    $button_desc = get_sub_field('action-bar_section_button-description');
+    $section_heading = $action_bar_row['action_bar_section_heading'];
+    $body = $action_bar_row['action_bar_section_body'];
+    $button_text = $action_bar_row['action_bar_section_button_text'];
+    $button_url = $action_bar_row['action_bar_section_button_url'];
+    $button_target = $action_bar_row['action_bar_section_button_target'];
+    $button_desc = $action_bar_row['action_bar_section_button_description'];
 
 ?>
             <div class="col-12 <?php echo $row_count < 4 ? 'col-sm-4' : 'col-md-3'; ?>">
@@ -42,9 +47,9 @@ if( have_rows('action-bar_section') ) {
                     <a class="btn" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="_blank"' : ''; ?>><?php echo $button_text; ?></a>
                 </div>
             </div>
-<?php
-    endwhile;
-?>
+    <?php
+    }
+    ?>
         </div>
     </div>
 </section>

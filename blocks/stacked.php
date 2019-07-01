@@ -6,17 +6,21 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = 'stacked-image-text-' . $block['id'];
+if ( empty( $id ) )
+    $id = 'stacked-image-text-' . $block['id'];
 
 // Load values.
-$heading = get_field('stacked_heading');
-$hide_heading = get_field('stacked_hide-heading');
-$background_color = get_field('stacked_background-color');
+if ( empty($heading) )
+    $heading = get_field('stacked_heading');
+if ( empty($hide_heading) )
+    $hide_heading = get_field('stacked_hide_heading');
+if ( empty($background_color) )
+    $background_color = get_field('stacked_background_color');
+if ( empty($stacked_rows) )
+    $stacked_rows = get_field('stacked_section');
 
-if( have_rows('stacked_section') ) {
-    $rows = get_field('stacked_section');
-    $row_count = count($rows);
-} 
+if( $stacked_rows ) :
+    $row_count = count($stacked_rows); // Not user, but just in case
 
 ?>
 <section class="uams-module stacked-image-text <?php echo $background_color; ?>" id="<?php echo $id; ?>">
@@ -26,17 +30,17 @@ if( have_rows('stacked_section') ) {
                 <h2 class="module-title"><span class="title"><?php echo $heading; ?></span></h2>
             </div>
             <?php 
-                while ( have_rows('stacked_section') ) : the_row(); 
+                foreach($stacked_rows as $stacked_row) {
                 // Load values.
-                $image = get_sub_field('stacked_section_image');
+                $image = $stacked_row['stacked_section_image'];
                 $image_alt_native = get_post_meta($image, '_wp_attachment_image_alt', TRUE);
-                $image_alt_override = get_sub_field('stacked_section_alt-override');
-                $item_heading = get_sub_field('stacked_section_heading');
-                $body = get_sub_field('stacked_section_body');
-                $button_text = get_sub_field('stacked_section_button-text');
-                $button_url = get_sub_field('stacked_section_button-url');
-                $button_target = get_sub_field('stacked_section_button-target');
-                $button_desc = get_sub_field('stacked_section_button-description');
+                $image_alt_override = $stacked_row['stacked_section_alt_override'];
+                $item_heading = $stacked_row['stacked_section_heading'];
+                $body = $stacked_row['stacked_section_body'];
+                $button_text = $stacked_row['stacked_section_button_text'];
+                $button_url = $stacked_row['stacked_section_button_url'];
+                $button_target = $stacked_row['stacked_section_button_target'];
+                $button_desc = $stacked_row['stacked_section_button_description'];
 
             ?>
             <div class="col-12 col-sm-6 col-xl-3 item">
@@ -82,8 +86,9 @@ if( have_rows('stacked_section') ) {
                 </div>
             </div>
             <?php
-                endwhile;
+                }
             ?>
         </div>
     </div>
 </section>
+<?php endif;

@@ -44,11 +44,11 @@ class UAMSWP_Call_Out_Widget extends WP_Widget {
 		// widget ID with prefix for use in ACF API functions
         $widget_id = 'widget_' . $args['widget_id'];
 
-        $heading = get_field('call-out_heading', $widget_id);
-        $body = get_field('call-out_body', $widget_id);
-        $use_image = get_field('call-out_use-image', $widget_id);
-        $image = get_field('call-out_image', $widget_id);
-        $background_color = get_field('call-out_background-color', $widget_id);
+        $heading = get_field('call_out_heading', $widget_id);
+        $body = get_field('call_out_body', $widget_id);
+        $use_image = get_field('call_out_use_image', $widget_id);
+        $image = get_field('call_out_image', $widget_id);
+        $background_color = get_field('call_out_background_color', $widget_id);
         
         include( get_stylesheet_directory() .'/blocks/call-out.php' );
 
@@ -123,16 +123,16 @@ class UAMSWP_CTA_Widget extends WP_Widget {
 		// widget ID with prefix for use in ACF API functions
         $widget_id = 'widget_' . $args['widget_id'];
 
-        $heading = get_field('cta-bar_heading', $widget_id);
-        $body = get_field('cta-bar_body', $widget_id);
-        $button_text = get_field('cta-bar_button-text', $widget_id);
-        $button_url = get_field('cta-bar_button-url', $widget_id);
-        $button_target = get_field('cta-bar_button-target', $widget_id);
-        $button_desc = get_field('cta-bar_button-description', $widget_id);
-        $layout = get_field('cta-bar_layout', $widget_id);
-        $use_image = get_field('cta-bar_use-image', $widget_id);
-        $image = get_field('cta-bar_image', $widget_id);
-        $background_color = get_field('cta-bar_background-color', $widget_id);
+        $heading = get_field('cta_bar_heading', $widget_id);
+        $body = get_field('cta_bar_body', $widget_id);
+        $button_text = get_field('cta_bar_button_text', $widget_id);
+        $button_url = get_field('cta_bar_button_url', $widget_id);
+        $button_target = get_field('cta_bar_button_target', $widget_id);
+        $button_desc = get_field('cta_bar_button_description', $widget_id);
+        $layout = get_field('cta_bar_layout', $widget_id);
+        $use_image = get_field('cta_bar_use_image', $widget_id);
+        $image = get_field('cta_bar_image', $widget_id);
+        $background_color = get_field('cta_bar_background_color', $widget_id);
         
         include( get_stylesheet_directory() .'/blocks/cta.php' );
 

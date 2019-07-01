@@ -5,7 +5,9 @@
  * 
  */
 // Create id attribute allowing for custom "anchor" value.
-$id = 'hero-' . $block['id'];
+if ( empty( $id ) ) {
+    $id = 'hero-' . $block['id'];
+}
 if( !empty($block['anchor']) ) {
     $id = $block['anchor'];
 }
@@ -22,22 +24,22 @@ if( !empty($block['align']) ) {
 // Load values and setting defaults.
 // If values are empty => used for modules & widgets
 if ( empty($layout) ) 
-    $layout = get_field('side_text-layout') ?: 'link-list';
+    $layout = get_field('side_text_layout') ?: 'link-list';
 if ( empty($heading) ) 
     $heading = get_field('side_heading') ?: 'Heading goes here...';
 
 if ( empty($body) ){
     if ( $layout == 'body-only' ) {
-        $body = get_field('side_layout-body-only_body') ?: 'This is where the body-only description goes';
+        $body = get_field('side_layout_body_text') ?: 'This is where the body-only description goes';
     } else {
-        $body = get_field('side_layout-link-list_body') ?: 'This is where the body + link list description goes';
+        $body = get_field('side_layout_link_text') ?: 'This is where the body + link list description goes';
     }
 }
 
 if ( empty($link_list) ) 
-    $link_list = get_field('side_link-list') ?: '';
+    $link_list = get_field('side_link_list') ?: '';
 if ( empty($list_more) ) 
-    $list_more = get_field('side_link-list_include-more') ?: '';
+    $list_more = get_field('side_link_include_more') ?: '';
 if ( empty($cta) ) 
     $cta = get_field('side_cta') ?: '';
 if ( empty($cta_text) ) 
@@ -53,13 +55,15 @@ if ( empty($headimage_grouping) )
 if ( empty($side_image) ) 
     $side_image = $image_group['side_image_image'] ?: '';
 if ( empty($image_alt) ) 
-    $image_alt = $image_group['side_image_alt-text'] ?: '';
+    $image_alt = $image_group['side_image_alt_text'] ?: '';
+if ( empty($image_crop) ) 
+    $image_crop = $image_group['side_image_crop'] ?: '';
 if ( empty($image_postion) ) 
     $image_postion = get_field('side_image_position') ?: 'left';
 if ( empty($image_anchor) ) 
     $image_anchor = get_field('side_image_anchor') ?: 'center';
 if ( empty($background_color) ) 
-    $background_color = get_field('side_image_background-color') ?: 'bg-white';
+    $background_color = get_field('side_image_background_color') ?: 'bg-white';
 
 if ( empty($image_alt) ) 
     $image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachment_image_alt', true);
