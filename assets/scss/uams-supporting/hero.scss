@@ -10,7 +10,7 @@ $triangles: url("../svg/triangles_seamless_white.svg");
                 rgba($red-val, $green-val, $blue-val, 1) 75%,
                 rgba($red-val, $green-val, $blue-val, 1) 100%
             ),
-            rgb($red-val, $green-val, $blue-val) $triangles left center / 90vw;
+            rgb($red-val, $green-val, $blue-val) $triangles center center;
         background: -webkit-linear-gradient(
                 68deg,
                 rgba($red-val, $green-val, $blue-val, 0) 0%,
@@ -18,7 +18,7 @@ $triangles: url("../svg/triangles_seamless_white.svg");
                 rgba($red-val, $green-val, $blue-val, 1) 75%,
                 rgba($red-val, $green-val, $blue-val, 1) 100%
             ),
-            rgb($red-val, $green-val, $blue-val) $triangles left center / 90vw;
+            rgb($red-val, $green-val, $blue-val) $triangles center center;
         background: linear-gradient(
                 68deg,
                 rgba($red-val, $green-val, $blue-val, 0) 0%,
@@ -26,7 +26,7 @@ $triangles: url("../svg/triangles_seamless_white.svg");
                 rgba($red-val, $green-val, $blue-val, 1) 77%,
                 rgba($red-val, $green-val, $blue-val, 1) 100%
             ),
-            rgb($red-val, $green-val, $blue-val) $triangles left center / 90vw;
+            rgb($red-val, $green-val, $blue-val) $triangles center center;
         opacity: 0.15;
     }
 }
