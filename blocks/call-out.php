@@ -7,19 +7,21 @@
 
 // Create id attribute allowing for custom "anchor" value.
 if ( empty( $id ) )
-    $id = 'call-out-' . $block['id'];
+    $id = $block['id'];
+
+$id = 'call-out-' . $id;
 
 // Load values.
 if ( empty($heading) ) 
-$heading = get_field('call_out_heading');
+    $heading = get_field('call_out_heading');
 if ( empty($body) ) 
-$body = get_field('call_out_body');
+    $body = get_field('call_out_body');
 if ( empty($use_image) ) 
-$use_image = get_field('call_out_use-image');
+    $use_image = get_field('call_out_use-image');
 if ( empty($image) ) 
-$image = get_field('call_out_image');
+    $image = get_field('call_out_image');
 if ( empty($background_color) ) 
-$background_color = get_field('call_out_background-color');
+    $background_color = get_field('call_out_background-color');
 
 ?>
 <section class="uams-module extra-padding call-out <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>">
