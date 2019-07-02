@@ -213,9 +213,9 @@ if ( empty($side_image_width) )
                     <?php if ($link_list): ?>
                     <ul>
                         <?php foreach( $link_list as $link ) {
-                            $list_text = $link['side_link-list_text'];
-                            $list_url = $link['side_link-list_url'];
-                            $list_desc = $link['side_link-list_description'];
+                            $list_text = $link['side_link_list_text'];
+                            $list_url = $link['side_link_list_url'];
+                            $list_desc = $link['side_link_list_description'];
                         ?>
                         <li>
                             <?php if( $list_url ): ?>
