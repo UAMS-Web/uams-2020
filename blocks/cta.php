@@ -7,7 +7,9 @@
 
 // Create id attribute allowing for custom "anchor" value.
 if ( empty( $id ) )
-    $id = 'cta-bar-' . $block['id'];
+    $id = $block['id'];
+    
+$id = 'cta-bar-' . $id;
 
 // Load values and assing defaults.
 // if empty - allow values to be set for widgets

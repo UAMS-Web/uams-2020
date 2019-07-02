@@ -660,6 +660,7 @@ acf_add_local_field_group(array(
 			'acfe_permissions' => '',
 			'choices' => array(
 				'fitness-center' => 'Fitness Center',
+				'main' => 'Main Site',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
