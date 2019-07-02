@@ -48,10 +48,10 @@ function uamswp_quicklinks() {
                         // Write Default
                         ?>
                         <ul class="list-unstyled links links-large">
-                            <li><a href="javascript:void(0)"><span class="fas fa-graduation-cap fa-fw "></span>GUS</a></li>
-                            <li><a href="javascript:void(0)"><span class="fas fa-users fa-fw "></span>Profiles</a></li>
-                            <li><a href="javascript:void(0)"><span class="fas fa-book fa-fw "></span>Library</a></li>
-                            <li><a href="javascript:void(0)"><span class="fas fa-shopping-cart fa-fw "></span>UAMS Bookstore</a></li>
+                            <li><a href="https://gus.uams.edu/"><span class="fas fa-graduation-cap fa-fw "></span>GUS</a></li>
+                            <li><a href="https://uams-triprofiles.uams.edu/profiles/search/"><span class="fas fa-users fa-fw "></span>Profiles</a></li>
+                            <li><a href="https://library.uams.edu/"><span class="fas fa-book fa-fw "></span>Library</a></li>
+                            <li><a href="http://libguides.uams.edu/onlinebookstore"><span class="fas fa-shopping-cart fa-fw "></span>UAMS Bookstore</a></li>
                         </ul>
                     <?php
                     }
@@ -62,10 +62,10 @@ function uamswp_quicklinks() {
             </ul>
             <h3 class="h5">Campus Links</h3>
             <ul class="list-unstyled links">
-                <li><a href="javascript:void(0)"><span class="far fa-envelope fa-fw "></span>Webmail</a></li>
-                <li><a href="javascript:void(0)"><span class="far fa-id-card fa-fw "></span>Employee Self Service</a></li>
-                <li><a href="javascript:void(0)"><span class="fas fa-desktop fa-fw "></span>Computing / IT</a></li>
-                <li><a href="javascript:void(0)"><span class="fas fa-network-wired fa-fw "></span>Intranet</a></li>
+                <li><a href="http://webmail.uams.edu/"><span class="far fa-envelope fa-fw "></span>Webmail</a></li>
+                <li><a href="https://enterprise.uams.edu/irj/portal"><span class="far fa-id-card fa-fw "></span>Employee Self Service</a></li>
+                <li><a href="http://www.uams.edu/IT/"><span class="fas fa-desktop fa-fw "></span>Computing / IT</a></li>
+                <li><a href="http://inside.uams.edu/"><span class="fas fa-network-wired fa-fw "></span>Intranet</a></li>
             </ul>
         </nav>
         <?php 
