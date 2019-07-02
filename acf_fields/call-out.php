@@ -123,7 +123,7 @@ return array(
         'conditional_logic' => array(
             array(
                 array(
-                    'field' => 'field_call_out_use-image'. $suffix,
+                    'field' => 'field_call_out_use_image'. $suffix,
                     'operator' => '==',
                     'value' => '1',
                 ),
