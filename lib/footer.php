@@ -239,7 +239,7 @@ function uamswp_footer_creds_text() {
         } elseif ( startsWith($subsite, 'grad-school') ) {
             $social_fb = 'https://www.facebook.com/pages/UAMS-Graduate-School/';
         } elseif ( 'nw-campus' == $subsite ) {
-            $social_fb = 'UAMS Northwest Regional Campus';
+            $social_fb = 'https://www.facebook.com/UAMSNW/';
         // } elseif ( startsWith($subsite, 'regional-') ) {
         //     $social_fb = '';
         } elseif ( 'pharmacy_arpoison' == $subsite ) {
