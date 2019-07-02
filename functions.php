@@ -40,7 +40,7 @@ function uamswp_childtheme_setup() {
 	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list' ) );
 
 	//* Unregister secondary navigation menu
-	add_theme_support( 'genesis-menus', array( 'primary' => __( 'Primary Navigation Menu', 'genesis' ) ) );
+	add_theme_support( 'genesis-menus', array( 'primary' => __( 'Primary Navigation Menu', 'genesis' ), 'quicklinks' => __( 'Quicklinks Menu', 'genesis' ) ) );
 
 	// Add viewport meta tag for mobile browsers
 	add_theme_support( 'genesis-responsive-viewport' );
