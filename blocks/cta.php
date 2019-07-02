@@ -16,21 +16,21 @@ if ( empty($heading) )
 if ( empty($body) ) 
     $body = get_field('cta_bar_body');
 if ( empty($button_text) ) 
-    $button_text = get_field('cta_bar_button-text');
+    $button_text = get_field('cta_bar_button_text');
 if ( empty($button_url) ) 
-    $button_url = get_field('cta_bar_button-url');
+    $button_url = get_field('cta_bar_button_url');
 if ( empty($button_target) ) 
-    $button_target = get_field('cta_bar_button-target');
+    $button_target = get_field('cta_bar_button_target');
 if ( empty($button_desc) ) 
-    $button_desc = get_field('cta_bar_button-description');
+    $button_desc = get_field('cta_bar_button_description');
 if ( empty($layout) ) 
     $layout = get_field('cta_bar_layout');
 if ( empty($use_image) ) 
-    $use_image = get_field('cta_bar_use-image');
+    $use_image = get_field('cta_bar_use_image');
 if ( empty($image) ) 
     $image = get_field('cta_bar_image');
 if ( empty($background_color) ) 
-    $background_color = get_field('cta_bar_background-color');
+    $background_color = get_field('cta_bar_background_color');
 
 ?>
 <section class="uams-module cta-bar <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>">
