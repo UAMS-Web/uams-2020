@@ -133,7 +133,7 @@ function uamswp_footer_creds_text() {
             $address .= '<strong'. (! empty($custom_address['address_title']) ? '>'. $custom_address['address_title'] : $address_sr .'>Mailing Address' ).':</strong> ';
             $address .= '<span itemprop="streetAddress">'. (! empty($custom_address['address_street_1']) ? $custom_address['address_street_1'] : '4301 West Markham Street' ) . (! empty($custom_address['address_street_2']) ? ' ' . $custom_address['address_street_2'] : '' ).'</span>, ';
             $address .= '<span itemprop="addressLocality">'. (! empty($custom_address['address_city']) ? $custom_address['address_city'] : 'Little Rock' ).'</span>, ';
-            $address .= '<span itemprop="addressRegion">'. (! empty($custom_address['address_state']) ? $custom_address['address_state'] : 'Arkansas' ).'</span>, ';
+            $address .= '<span itemprop="addressRegion">'. (! empty($custom_address['address_state']) ? $custom_address['address_state'] : 'Arkansas' ).'</span> ';
             $address .= '<span itemprop="postalCode">'. (! empty($custom_address['address_zip']) ? $custom_address['address_zip'] : '72205' ).'</span>'; 
             $address .= '</div>';
         }
@@ -145,7 +145,7 @@ function uamswp_footer_creds_text() {
         $address .= '<strong class="sr-only">Mailing Address:</strong> ';
         $address .= '<span itemprop="streetAddress">4301 West Markham Street</span>, ';
         $address .= '<span itemprop="addressLocality">Little Rock</span>, ';
-        $address .= '<span itemprop="addressRegion">Arkansas</span>, ';
+        $address .= '<span itemprop="addressRegion">Arkansas</span> ';
         $address .= '<span itemprop="postalCode">72205</span>';
         $address .= '</div>';
         echo $address;
