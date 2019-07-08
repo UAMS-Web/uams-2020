@@ -119,14 +119,18 @@ function uamswp_footer_creds_text() {
      * Start Address
      */
     /* Institutes, NW Campus, & Regional Campus get new address option */
-    $custom_addresses = get_field( 'uamswp_address', 'option' );    
+    $custom_addresses = get_field( 'uamswp_address', 'option' ); 
+    $custom_count = count($custom_addresses);  
+    if ($custom_count < 2) {
+        $address_sr = ' class="sr-only"';
+    } 
     // Overrides, if available
     if( ! empty( $custom_addresses ) && ( ('institute' == $site) || ('nw-campus' == $subsite) || ( startsWith($subsite, 'regional-') ) ) ) {
         $address = '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
         $address .= '<span itemprop="name" class="sr-only">'.$footer_image_title .'</span>';
         foreach ( $custom_addresses as $custom_address ) {
             $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">';
-            $address .= '<strong'. (! empty($custom_address['address_title']) ? '>'. $custom_address['address_title'] : ' class="sr-only">Mailing Address' ).':</strong> ';
+            $address .= '<strong'. (! empty($custom_address['address_title']) ? '>'. $custom_address['address_title'] : $address_sr .'>Mailing Address' ).':</strong> ';
             $address .= '<span itemprop="streetAddress">'. (! empty($custom_address['address_street_1']) ? $custom_address['address_street_1'] : '4301 West Markham Street' ) . (! empty($custom_address['address_street_2']) ? ' ' . $custom_address['address_street_2'] : '' ).'</span>, ';
             $address .= '<span itemprop="addressLocality">'. (! empty($custom_address['address_city']) ? $custom_address['address_city'] : 'Little Rock' ).'</span>, ';
             $address .= '<span itemprop="addressRegion">'. (! empty($custom_address['address_state']) ? $custom_address['address_state'] : 'Arkansas' ).'</span>, ';
@@ -155,33 +159,44 @@ function uamswp_footer_creds_text() {
      /**
      * Start Phone
      */
+    $primary_phone_text = get_field( 'uamswp_primary_phone_text', 'option' ) ?: 'Phone';
+    $primary_phone_number = get_field( 'uamswp_primary_phone_number', 'option' ) ?: '501-686-7000';
+    $secondary_type = get_field( 'uamswp_secondary_number_type', 'option' );
+    $secondary_link_text = get_field( 'uamswp_secondary_link_text', 'option' ) ?: 'Additional Phone Numbers';
+    $secondary_link_url = get_field( 'uamswp_secondary_link_url', 'option' );
+    $secondary_phone_text = get_field( 'uamswp_secondary_phone_text', 'option' ) ?: 'Additional Phone';
+    $secondary_phone_number = get_field( 'uamswp_secondary_phone_number', 'option' );
 
-    $custom_phone = get_field( 'uamswp_primary_phone', 'option' );
-    $other_phone = get_field( 'uamswp_add_phones', 'option' );
-    $phone = !empty($custom_phone)? $custom_phone : '501-686-7000';
     // Render this by default
     echo '<div class="schema-phone">';
 
     // Render this by default
     // Replace "span" with "strong" if any of the custom Parking Address fields DO have values.
-    echo '<span id="footer-phone-label">';
+    echo '<'. ($custom_count < 2 ? 'span' : 'strong') . ' id="footer-phone-label">';
 
     // Render this by default
     // Replace "Phone" with "Appoinments" if the relevant custom field ("Is Appointment Number" or something) is checked.
-    echo 'Phone';
+    echo $primary_phone_text;
 
     // Render this by default
     // Replace "span" with "strong" if any of the custom Parking Address fields DO have values.
-    echo ':</span> ';
+    echo ':</'. ($custom_count < 2 ? 'span' : 'strong') .'> ';
 
     // Render this by default.
     // Replace both telephone values (text and href) if the custom telephone field has a value.
     // Format user input as "+1-XXX-XXX-XXXX" format in href="tel:" value
     // Format user input as "XXX-XXX-XXXX" format in text value.
-    echo '<span itemprop="telephone"><a href="tel:'.format_phone('dash', $phone).'" aria-labelledby="footer-phone-label">'. format_phone('us', $phone) .'</a></span>';
+    echo '<span itemprop="telephone"><a href="tel:'.format_phone('dash', $primary_phone_number).'" aria-labelledby="footer-phone-label">'. format_phone('us', $primary_phone_number) .'</a></span>';
 
-    // Render this if the relevant custom fields have values.
-    echo !empty($other_phone) ? '<br /><a class="more-phone" href="'. $other_phone .'">Additional Phone Numbers</a>' : '';
+    if ( 'link' == $secondary_type ) {
+        // Render link.
+        echo $secondary_link_url ? '<br /><a class="more-phone" href="'. $secondary_link_url .'">'. $secondary_link_text .'</a>' : '';
+    } elseif ( 'phone' == $secondary_type ) { 
+        // Render phone.
+        echo $secondary_phone_number ? '<br /><'. ($custom_count < 2 ? 'span' : 'strong') .'>'. $secondary_phone_text .':</'.($custom_count < 2 ? 'span' : 'strong') .'> <span itemprop="telephone"><a href="tel:'.format_phone('dash', $secondary_phone_number).'" aria-labelledby="footer-phone-label">'. format_phone('us', $secondary_phone_number) .'</a></span>' : '';
+    } else { // None
+        // Do nothing
+    }
 
     // Render this by default
     echo '</div>';
