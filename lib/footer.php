@@ -193,7 +193,7 @@ function uamswp_footer_creds_text() {
         echo $secondary_link_url ? '<br /><a class="more-phone" href="'. $secondary_link_url .'">'. $secondary_link_text .'</a>' : '';
     } elseif ( 'phone' == $secondary_type ) { 
         // Render phone.
-        echo $secondary_phone_number ? '<br /><'. ($custom_count < 2 ? 'span' : 'strong') .'>'. $secondary_phone_text .':</'.($custom_count < 2 ? 'span' : 'strong') .'> <span itemprop="telephone"><a href="tel:'.format_phone('dash', $secondary_phone_number).'" aria-labelledby="footer-phone-label">'. format_phone('us', $secondary_phone_number) .'</a></span>' : '';
+        echo $secondary_phone_number ? '</div><div class="schema-phone"><'. ($custom_count < 2 ? 'span' : 'strong') .'>'. $secondary_phone_text .':</'.($custom_count < 2 ? 'span' : 'strong') .'> <span itemprop="telephone"><a href="tel:'.format_phone('dash', $secondary_phone_number).'" aria-labelledby="footer-phone-label">'. format_phone('us', $secondary_phone_number) .'</a></span>' : '';
     } else { // None
         // Do nothing
     }
