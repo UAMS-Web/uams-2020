@@ -190,7 +190,7 @@ function uamswp_footer_creds_text() {
 
     if ( 'link' == $secondary_type ) {
         // Render link.
-        echo $secondary_link_url ? '<br /><a class="more-phone" href="'. $secondary_link_url .'">'. $secondary_link_text .'</a>' : '';
+        echo $secondary_link_url ? '<br /><a class="more-phone" href="'. $secondary_link_url['url'] .'">'. $secondary_link_text .'</a>' : '';
     } elseif ( 'phone' == $secondary_type ) { 
         // Render phone.
         echo $secondary_phone_number ? '</div><div class="schema-phone"><'. ($custom_count < 2 ? 'span' : 'strong') .' id="footer-phone-label-2">'. $secondary_phone_text .':</'.($custom_count < 2 ? 'span' : 'strong') .'> <span itemprop="telephone"><a href="tel:'.format_phone('dash', $secondary_phone_number).'" aria-labelledby="footer-phone-label-2">'. format_phone('us', $secondary_phone_number) .'</a></span>' : '';
