@@ -80,7 +80,7 @@ function uamswp_merge_genesis_attr_classes() {
             'entry-pagination'          => 'clearfix',
             // 'structural-wrap'           => 'container',
             'comment-list'              => 'list-unstyled',
-            'home-featured'             => 'jumbotron',
+            // 'home-featured'             => 'jumbotron',
             'entry-image'               => 'img-fluid'
     );
 
