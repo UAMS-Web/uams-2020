@@ -29,74 +29,67 @@
             background-repeat: no-repeat;
     
             /* XXS Breakpoint, retina */
-            @media (-webkit-min-device-pixel-ratio: 2),
-            (min-resolution: 192dpi) {
+            @include media-breakpoint-up-retina(xxs) {
                 background-image: url("../jpg/fountain_1340x1340.jpg");
             }
     
             /* XS Breakpoint */
-            @media (min-width: 576px) {
+            @include media-breakpoint-up(xs) {
                 background-image: url("../jpg/fountain_767x650.jpg");
             }
     
             /* XS Breakpoint, retina */
-            @media (min-width: 576px) and (-webkit-min-device-pixel-ratio: 2),
-            (min-width: 576px) and (min-resolution: 192dpi) {
+            @include media-breakpoint-up-retina(xs) {
                 background-image: url("../jpg/fountain_1534x1300.jpg");
             }
     
             /* SM Breakpoint */
-            @media (min-width: 768px) {
+            @include media-breakpoint-up(sm) {
                 background-image: url("../jpg/fountain_992x372.jpg");
             }
     
             /* SM Breakpoint, retina */
-            @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
-            (min-width: 768px) and (min-resolution: 192dpi) {
+            @include media-breakpoint-up-retina(sm) {
                 background-image: url("../jpg/fountain_1984x744.jpg");
             }
     
             /* MD Breakpoint */
-            @media (min-width: 992px) {
-                    background-image: url("../jpg/fountain_1200x450.jpg");
+            @include media-breakpoint-up(md) {
+                background-image: url("../jpg/fountain_1200x450.jpg");
             }
     
             /* MD Breakpoint, retina */
-            @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
-            (min-width: 992px) and (min-resolution: 192dpi) {
+            @include media-breakpoint-up-retina(md) {
                 background-image: url("../jpg/fountain_2400x900.jpg");
             }
     
             /* LG Breakpoint */
-            @media (min-width: 1200px) {
+            @include media-breakpoint-up(lg) {
                 background-image: url("../jpg/fountain_1500x563.jpg");
             }
     
             /* LG Breakpoint, retina */
-            @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
-            (min-width: 1200px) and (min-resolution: 192dpi) {
+            @include media-breakpoint-up-retina(lg) {
                 background-image: url("../jpg/fountain_3000x1125.jpg");
             }
     
             /* XL Breakpoint */
-            @media (min-width: 1500px) {
+            @include media-breakpoint-up(xl) {
                 background-image: url("../jpg/fountain_1921x720.jpg");
             }
     
             /* XL Breakpoint, retina */
-            @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
-            (min-width: 1500px) and (min-resolution: 192dpi) {
+            @include media-breakpoint-up-retina(xl) {
                 background-image: url("../jpg/fountain_3842x1441.jpg");
             }
     
             /* XXL Breakpoint */
-            @media (min-width: 1921px) {
+            @include media-breakpoint-up(xxl) {
                 background-image: url("../jpg/fountain_2560x960.jpg");
             }
     
             /* XXL Breakpoint, retina */
-            @media (min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2),
-            (min-width: 1921px) and (min-resolution: 192dpi) {
+            @include media-breakpoint-up-retina(xxl) {
                 background-image: url("../jpg/fountain_5120x1920.jpg");
             }
         }
