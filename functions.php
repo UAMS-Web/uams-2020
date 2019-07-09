@@ -372,3 +372,11 @@ function footer_widgets($params) {
  
       return $params;
 }
+
+add_action( 'admin_enqueue_scripts', 'enqueue_admin_style_sheet' );
+function enqueue_admin_style_sheet() {
+
+	wp_register_style( 'admin-css', get_stylesheet_directory_uri() . '/assets/css/admin.css', false, '1.0.0' );
+	wp_enqueue_style( 'admin-css' );
+
+}
