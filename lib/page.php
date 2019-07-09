@@ -5,6 +5,7 @@
  * 
  */
 
+add_action( 'genesis_after_header', 'page_options', 5 );
 function page_options() {
     $id = get_the_id();
     if ( get_field('page_title_options', $id) ) {
@@ -50,7 +51,9 @@ function uamswp_attributes_entry_header($attributes)
 }
 
 function uamswp_page_hero() {
+    $id = 'header';
     $hero_rows = get_field('page_hero')['hero'];
-
+    echo '<div class="col-12">';
     include( get_stylesheet_directory() .'/blocks/hero.php' );
+    echo '</div>';
 }
