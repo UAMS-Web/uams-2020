@@ -32,10 +32,10 @@ if( $hero_rows ) :
 <?php
         $page_template = get_page_template_slug( $post_id );
         // echo $page_template;
-        if ('templates/page_landing.php' != $page_template && 'templates/modules.php' != $page_template) {
-            echo '<h4>This template is not supported. Please select "Landing"</h4>';
-            return;
-        }
+        // if ('templates/page_landing.php' != $page_template && 'templates/modules.php' != $page_template) {
+        //     echo '<h4>This template is not supported. Please select "Landing"</h4>';
+        //     return;
+        // }
         
         if($row_count > 1) { ?>
             <ol class="carousel-indicators">
