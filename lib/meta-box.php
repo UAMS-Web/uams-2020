@@ -825,6 +825,193 @@ acf_add_local_field_group(array(
 	'description' => '',
 ));
 
+/*
+ *
+ * Add Header Options
+ * 
+ */
+acf_add_local_field_group(array(
+	'key' => 'group_header_options',
+	'title' => 'Header Options',
+	'fields' => array(
+		array(
+			'key' => 'field_graphic_title',
+			'label' => 'Graphic Title',
+			'name' => 'add_graphic_title',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => 'Use Graphic Title / Cover Image',
+			'default_value' => 0,
+			'ui' => 1,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
+		array(
+			'key' => 'field_cover_image',
+			'label' => 'Cover Image',
+			'name' => 'cover_image',
+			'type' => 'image',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_graphic_title',
+						'operator' => '==',
+						'value' => '1',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'id',
+			'preview_size' => 'medium',
+			'library' => 'all',
+			'min_width' => 1600,
+			'min_height' => '',
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+		),
+		array(
+			'key' => 'field_page_description',
+			'label' => 'Lead Paragraph',
+			'name' => 'page_description',
+			'type' => 'textarea',
+			'instructions' => 'Appears below the page title. Basic description of the page.',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_graphic_title',
+						'operator' => '==',
+						'value' => '1',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'maxlength' => '',
+			'rows' => '',
+			'new_lines' => '',
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'page',
+			),
+		),
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'post',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'acf_after_title',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+));
+
+/*
+ *
+ * Add UAMS Page Attributes
+ * 
+ */
+
+acf_add_local_field_group(array(
+	'key' => 'group_5d239aa57b2ee',
+	'title' => 'UAMS Page Attributes',
+	'fields' => array(
+		array(
+			'key' => 'field_page_subsection',
+			'label' => 'Page is a subsection',
+			'name' => 'page_subsection',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => 'hide-label',
+				'id' => '',
+			),
+			'message' => 'Page is a subsection',
+			'default_value' => 0,
+			'ui' => 0,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
+		array(
+			'key' => 'field_page_hide_breadcrumbs',
+			'label' => 'Hide Breadcrumbs',
+			'name' => 'page_hide_breadcrumbs',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => 'hide-label',
+				'id' => '',
+			),
+			'message' => 'Hide Breadcrumbs',
+			'default_value' => 0,
+			'ui' => 0,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'page',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'side',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+));
+
+/*
+ *
+ * Add ACF Modules
+ * 
+ */
 $suffix = "_m";
 $action_bar = include( get_stylesheet_directory() .'/acf_fields/action-bar.php' );
 $call_out = include( get_stylesheet_directory() .'/acf_fields/call-out.php' );
@@ -869,44 +1056,3 @@ acf_add_local_field_group(array(
 
 endif;
 
-// array(
-// 	'key' => 'field_uamswp_phone',
-// 	'label' => 'Phone Number',
-// 	'name' => 'uamswp_phone',
-// 	'type' => (class_exists('jony_acf_plugin_intl_tel_input') ? 'intl_tel_input' : 'text'), // Telephone input
-// 	'required' => 0,
-// 	'conditional_logic' => 0,
-// 	'wrapper' => array(
-// 		'width' => '',
-// 		'class' => '',
-// 		'id' => '',
-// 	),
-// 	'acfe_validate' => '',
-// 	'acfe_update' => '',
-// 	'acfe_permissions' => '',
-// 	'separateDialCode' => 0,
-// 	'allowDropdown' => 0,
-// 	'initialCountry' => 'us',
-// 	'excludeCountries' => '',
-// 	'onlyCountries' => '',
-// 	'preferredCountries' => '',
-// ),
-// array(
-// 	'key' => 'field_uamswp_add_phones',
-// 	'label' => 'Additional Phone Number(s) [Link]',
-// 	'name' => 'uamswp_add_phones',
-// 	'type' => 'url',
-// 	'instructions' => '',
-// 	'required' => 0,
-// 	'conditional_logic' => 0,
-// 	'wrapper' => array(
-// 		'width' => '',
-// 		'class' => '',
-// 		'id' => '',
-// 	),
-// 	'acfe_validate' => '',
-// 	'acfe_update' => '',
-// 	'acfe_permissions' => '',
-// 	'default_value' => '',
-// 	'placeholder' => '',
-// ),
