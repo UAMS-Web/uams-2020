@@ -110,6 +110,10 @@
 
         img {
             height: 2.5rem;
+
+            @at-root .uamshealth #{&} {
+                height: 4rem;
+            }
         }
     }
 
