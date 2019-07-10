@@ -104,6 +104,7 @@ function uamswp_footer_creds_text() {
     /* UAMS Health */
     if ( 'uamshealth' == $site ){
         $footer_image_url = 'https://uamshealth.com/';
+        $footer_image_site = $site;
     } elseif ( 'inside' == $site ) {
         $footer_image_url = 'https://inside.uams.edu/';
     }
