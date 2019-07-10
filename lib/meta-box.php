@@ -866,7 +866,7 @@ acf_add_local_field_group(array(
 			'label' => 'Cover Image',
 			'name' => 'page_cover_image',
 			'type' => 'image',
-			'instructions' => '',
+			'instructions' => 'Recommended dimensions: 5120x1920 or larger. Minimum dimensions: 1920x720. The image will be automatically cropped to a 8:3 aspect ratio.',
 			'required' => 0,
 			'conditional_logic' => array(
 				array(
@@ -898,7 +898,7 @@ acf_add_local_field_group(array(
 			'label' => 'Lead Paragraph',
 			'name' => 'page_description',
 			'type' => 'textarea',
-			'instructions' => 'Appears below the page title. Basic description of the page.',
+			'instructions' => 'Appears below the page title. Basic description of the page. 500 character limit.',
 			'required' => 0,
 			'conditional_logic' => array(
 				array(
