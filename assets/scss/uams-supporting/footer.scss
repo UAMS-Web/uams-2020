@@ -111,8 +111,11 @@
         img {
             height: 2.5rem;
 
-            @at-root .uamshealth #{&} {
-                height: 4rem;
+            @at-root 
+            .uamshealth #{&},
+            .inside #{&} {
+                height: auto;
+                width: 11rem;
             }
         }
     }
