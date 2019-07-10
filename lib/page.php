@@ -57,3 +57,38 @@ function uamswp_page_hero() {
     include( get_stylesheet_directory() .'/blocks/hero.php' );
     echo '</div>';
 }
+
+/**
+ * Check if page settings say breadcrumbs should be hidden.
+ *
+ * @return string $id or false
+ *
+ * @since 1.0
+ * @author Josh Daugherty
+ */
+function uamswp_hide_breadcrumbs(){
+    $hidebreadcrumbs = false;
+    if (get_post_meta( get_the_id(), 'page_hide_breadcrumbs', true)) {
+        $id = get_the_id();
+        $hidebreadcrumbs = true;
+    }
+    if ($hidebreadcrumbs) {
+        return $id;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * 
+ * Remove Breadcrumbs if page settings say breadcrumbs should be hidden.
+ * 
+ * @since 1.0
+ * @author Josh Daugherty
+ */
+add_action( 'template_redirect', 'remove_breadcrumbs' );
+function remove_breadcrumbs() {
+	if ( uamswp_hide_breadcrumbs() ) {
+		remove_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
+	}
+}
