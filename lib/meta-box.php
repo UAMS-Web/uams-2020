@@ -916,7 +916,7 @@ acf_add_local_field_group(array(
 			),
 			'default_value' => '',
 			'placeholder' => '',
-			'maxlength' => '',
+			'maxlength' => 500,
 			'rows' => '',
 			'new_lines' => '',
 		),
