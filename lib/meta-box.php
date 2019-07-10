@@ -825,6 +825,9 @@ acf_add_local_field_group(array(
 	'description' => '',
 ));
 
+
+$suffix = '_o'; // Page Options
+$hero = include( get_stylesheet_directory() .'/acf_fields/hero.php' );
 /*
  *
  * Add Header Options
@@ -835,10 +838,10 @@ acf_add_local_field_group(array(
 	'title' => 'Header Options',
 	'fields' => array(
 		array(
-			'key' => 'field_graphic_title',
-			'label' => 'Graphic Title',
-			'name' => 'add_graphic_title',
-			'type' => 'true_false',
+			'key' => 'field_page_title_options',
+			'label' => 'Title Options',
+			'name' => 'page_title_options',
+			'type' => 'button_group',
 			'instructions' => '',
 			'required' => 0,
 			'conditional_logic' => 0,
@@ -847,25 +850,30 @@ acf_add_local_field_group(array(
 				'class' => '',
 				'id' => '',
 			),
-			'message' => 'Use Graphic Title / Cover Image',
-			'default_value' => 0,
-			'ui' => 1,
-			'ui_on_text' => '',
-			'ui_off_text' => '',
+			'choices' => array(
+				'none' => '<i class="dashicons dashicons-yes"></i> Normal',
+				'hidden' => '<i class="dashicons dashicons-no"></i> Hidden',
+				'graphic' => '<i class="dashicons dashicons-format-image"></i> Graphic',
+				'hero' => '<i class="dashicons dashicons-slides"></i> Hero',
+			),
+			'allow_null' => 0,
+			'default_value' => 'none',
+			'layout' => 'horizontal',
+			'return_format' => 'value',
 		),
 		array(
-			'key' => 'field_cover_image',
+			'key' => 'field_page_cover_image',
 			'label' => 'Cover Image',
-			'name' => 'cover_image',
+			'name' => 'page_cover_image',
 			'type' => 'image',
 			'instructions' => '',
 			'required' => 0,
 			'conditional_logic' => array(
 				array(
 					array(
-						'field' => 'field_graphic_title',
+						'field' => 'field_page_title_options',
 						'operator' => '==',
-						'value' => '1',
+						'value' => 'graphic',
 					),
 				),
 			),
@@ -895,9 +903,9 @@ acf_add_local_field_group(array(
 			'conditional_logic' => array(
 				array(
 					array(
-						'field' => 'field_graphic_title',
+						'field' => 'field_page_title_options',
 						'operator' => '==',
-						'value' => '1',
+						'value' => 'graphic',
 					),
 				),
 			),
@@ -911,6 +919,30 @@ acf_add_local_field_group(array(
 			'maxlength' => '',
 			'rows' => '',
 			'new_lines' => '',
+		),
+		array(
+			'key' => 'field_page_hero',
+			'label' => 'Hero',
+			'name' => 'page_hero',
+			'type' => 'group',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options',
+						'operator' => '==',
+						'value' => 'hero',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'layout' => 'block',
+			'sub_fields' => $hero,
 		),
 	),
 	'location' => array(
@@ -946,7 +978,7 @@ acf_add_local_field_group(array(
  */
 
 acf_add_local_field_group(array(
-	'key' => 'group_5d239aa57b2ee',
+	'key' => 'group_page_attributes',
 	'title' => 'UAMS Page Attributes',
 	'fields' => array(
 		array(
