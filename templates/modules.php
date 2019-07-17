@@ -8,7 +8,9 @@
  * @license      GPL-2.0+
 **/
 // Remove 'site-inner' from structural wrap
-add_theme_support( 'genesis-structural-wraps', array( 'footer-widgets' ) );
+// add_theme_support( 'genesis-structural-wraps', array( 'footer-widgets' ) );
+add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
+remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
 /**
  * Add the attributes from 'entry', since this replaces the main entry
  *
@@ -29,8 +31,10 @@ function be_site_inner_attr( $attributes ) {
 }
 add_filter( 'genesis_attr_site-inner', 'be_site_inner_attr' );
 
-$side_fields = require( get_stylesheet_directory() .'/acf_fields/image-side-by-side.php' );
+// $side_fields = require( get_stylesheet_directory() .'/acf_fields/image-side-by-side.php' );
 // Build the page
 get_header();
+echo '<div class="content-sidebar-wrap row"><main class="content col-sm-12" id="genesis-content">';
 uamswp_modules();
+echo '</main></div>';
 get_footer();
