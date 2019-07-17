@@ -153,6 +153,16 @@ function uamswp_module( $module = array(), $i = false ) {
             include( get_stylesheet_directory() .'/blocks/stacked.php' );
 
             break; 
+
+        case 'modules_news_grid':
+            if (class_exists('UAMS_Syndicate_News_Base')) {
+                $id = $i;
+                $category = $module['news_category'];
+                $offset = $module['news_offset'];
+                uamswp_module_header( $module );
+                echo '<div class="entry-content">' . do_shortcode('[uamswp_news output="grid" category="'.$category.'" count="3" offset="'.$offset.'"]' ) . '</div>';
+            }
+            break;
  
 		// More modules go here
 	}
