@@ -8,7 +8,7 @@
  * @license      GPL-2.0+
 **/
 // Remove 'site-inner' from structural wrap
-// add_theme_support( 'genesis-structural-wraps', array( 'footer-widgets' ) );
+add_theme_support( 'genesis-structural-wraps', array( 'footer-widgets' ) );
 add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
 remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
 /**
