@@ -55,9 +55,9 @@ function uamswp_module( $module = array(), $i = false ) {
             $id = $i;
             $heading = $module['call_out_heading'];
             $body = $module['call_out_body'];
-            $use_image = $module['call_out_use-image'];
+            $use_image = $module['call_out_use_image'];
             $image = $module['call_out_image'];
-            $background_color = $module['call_out_background-color'];
+            $background_color = $module['call_out_background_color'];
 
             include( get_stylesheet_directory() .'/blocks/call-out.php' );
 
