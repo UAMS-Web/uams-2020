@@ -104,8 +104,10 @@ function uamswp_footer_creds_text() {
     /* UAMS Health */
     if ( 'uamshealth' == $site ){
         $footer_image_url = 'https://uamshealth.com/';
+        $footer_image_site = 'main-tagline';
     } elseif ( 'inside' == $site ) {
         $footer_image_url = 'https://inside.uams.edu/';
+        $footer_image_site = 'main';
     }
     $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_'.$footer_image_site.'_horizontal_white.svg" alt="'. $footer_image_title .' Logo" />';
     

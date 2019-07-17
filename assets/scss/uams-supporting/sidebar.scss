@@ -45,12 +45,15 @@
         .widget-title,
         .widgettitle {
             padding: 0 0 ($uams-module-padding-mobile / 2);
-            margin-bottom: ($uams-module-padding-mobile / 2);
+            margin-bottom: $uams-module-padding-mobile;
             background-color: transparent;
-            border-bottom: 1px solid $red;
+            border-bottom: 1px solid $primary;
         }
 
-        //.widget-wrap {}
+        .widget-wrap {
+            flex: 0 1 auto;
+            padding: 0;
+        }
 
         &#search-2 {
             .uams-search {

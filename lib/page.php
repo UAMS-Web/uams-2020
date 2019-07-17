@@ -15,14 +15,23 @@ function page_options() {
             add_filter('genesis_attr_entry-header', 'uamswp_attributes_entry_header');
         } elseif ('graphic' == $pageTitle) {
             // Graphic Header
-            // Romve original
+            // Remove original
             remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
             remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
             remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
             // Add new location
+            add_action( 'genesis_before_content', 'uamswp_graphic_title_wrap_open', 5 );
             add_action( 'genesis_before_content', 'genesis_entry_header_markup_open', 5 );
+            add_action( 'genesis_before_content', 'uamswp_graphic_title_inner_1', 5 );
             add_action( 'genesis_before_content', 'genesis_do_post_title' );
+            add_action( 'genesis_before_content', 'uamswp_graphic_title_inner_2', 15 );
+            add_action( 'genesis_before_content', 'uamswp_graphic_title_lead_paragraph', 15 );
+            add_action( 'genesis_before_content', 'uamswp_graphic_title_inner_3', 15 );
             add_action( 'genesis_before_content', 'genesis_entry_header_markup_close', 15 );
+            add_action( 'genesis_before_content', 'uamswp_graphic_title_wrap_close', 15 );
+
+            // Add relevant classes
+            add_filter('genesis_attr_entry-header', 'uamswp_attributes_entry_header_graphic_title');
 
         } elseif ('hero' == $pageTitle) {
             // Hero
@@ -50,10 +59,214 @@ function uamswp_attributes_entry_header($attributes)
 	return $attributes;
 }
 
+function uamswp_attributes_entry_header_graphic_title($attributes)
+{
+    if ( empty($page_cover_image) ) 
+    $page_cover_image = get_field('page_cover_image');
+
+    if ($page_cover_image) {
+        $attributes['class'] .= ' uams-module extra-padding graphic-title bg-image bg-red';
+    }
+    else {
+        $attributes['class'] .= ' uams-module extra-padding graphic-title bg-red';
+    }
+	
+	return $attributes;
+}
+
+function uamswp_graphic_title_wrap_open()
+{
+    echo '<div class="col-12">';
+}
+
+function uamswp_graphic_title_inner_1()
+{
+    if ( empty($page_cover_image) ) 
+    $page_cover_image = get_field('page_cover_image');
+    
+    if ($page_cover_image && function_exists( 'fly_add_image_size' ) ) {
+        echo '<style>
+        .entry-header:before {
+            background-image: url("' . image_sizer($page_cover_image, 566, 216, 'center', 'center') . '");
+        }
+
+        /* XXS Breakpoint, retina */
+        @media (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_cover_image, 1152, 432, 'center', 'center') . '");
+            }
+        }
+
+        /* XS Breakpoint */
+        @media (min-width: 576px) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_cover_image, 768, 288, 'center', 'center') . '");
+            }
+        }
+
+        /* XS Breakpoint, retina */
+        @media (min-width: 576px) and (-webkit-min-device-pixel-ratio: 2),
+        (min-width: 576px) and (min-resolution: 192dpi) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_cover_image, 1536, 576, 'center', 'center') . '");
+            }
+        }
+
+        /* SM Breakpoint */
+        @media (min-width: 768px) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_cover_image, 992, 372, 'center', 'center') . '");
+            }
+        }
+
+        /* SM Breakpoint, retina */
+        @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
+        (min-width: 768px) and (min-resolution: 192dpi) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_cover_image, 1984, 744, 'center', 'center') . '");
+            }
+        }
+
+        /* MD Breakpoint */
+        @media (min-width: 992px) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_cover_image, 1200, 450, 'center', 'center') . '");
+            }
+        }
+
+        /* MD Breakpoint, retina */
+        @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
+        (min-width: 992px) and (min-resolution: 192dpi) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_cover_image, 2400, 900, 'center', 'center') . '");
+            }
+        }
+
+        /* LG Breakpoint */
+        @media (min-width: 1200px) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_cover_image, 1500, 563, 'center', 'center') . '");
+            }
+        }
+
+        /* LG Breakpoint, retina */
+        @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
+        (min-width: 1200px) and (min-resolution: 192dpi) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_cover_image, 3000, 1125, 'center', 'center') . '");
+            }
+        }
+
+        /* XL Breakpoint */
+        @media (min-width: 1500px) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_cover_image, 1921, 720, 'center', 'center') . '");
+            }
+        }
+
+        /* XL Breakpoint, retina */
+        @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
+        (min-width: 1500px) and (min-resolution: 192dpi) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_cover_image, 3842, 1441, 'center', 'center') . '");
+            }
+        }
+
+        /* XXL Breakpoint */
+        @media (min-width: 1921px) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_cover_image, 2560, 960, 'center', 'center') . '");
+            }
+        }
+
+        /* XXL Breakpoint, retina */
+        @media (min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2),
+        (min-width: 1921px) and (min-resolution: 192dpi) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_cover_image, 5120, 1920, 'center', 'center') . '");
+            }
+        }
+    </style>';
+    }
+    elseif ($page_cover_image) {
+        echo '<style>
+            .entry-header:before {
+                background-image: url("' . wp_get_attachment_url( $page_cover_image, 'full' ) . '");
+            }
+        </style>';
+    }
+
+    echo '<div class="text-container">
+    <div class="graphic-title-heading">';
+}
+
+function uamswp_graphic_title_inner_2()
+{
+    echo '</div>';
+}
+
+function uamswp_graphic_title_lead_paragraph()
+{
+    if ( empty($page_description) ) 
+    $page_description = get_field('page_description');
+
+    if ($page_description) {
+        echo '<div class="graphic-title-body"><p>';
+        echo $page_description;
+        echo '</p></div>';
+    }
+}
+
+function uamswp_graphic_title_inner_3()
+{
+    echo '</div>';
+}
+
+function uamswp_graphic_title_wrap_close()
+{
+    echo '</div>';
+}
+
 function uamswp_page_hero() {
     $id = 'header';
     $hero_rows = get_field('page_hero')['hero'];
     echo '<div class="col-12">';
     include( get_stylesheet_directory() .'/blocks/hero.php' );
     echo '</div>';
+}
+
+/**
+ * Check if page settings say breadcrumbs should be hidden.
+ *
+ * @return string $id or false
+ *
+ * @since 1.0
+ * @author Josh Daugherty
+ */
+function uamswp_hide_breadcrumbs(){
+    $hidebreadcrumbs = false;
+    if (get_post_meta( get_the_id(), 'page_hide_breadcrumbs', true)) {
+        $id = get_the_id();
+        $hidebreadcrumbs = true;
+    }
+    if ($hidebreadcrumbs) {
+        return $id;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * 
+ * Remove Breadcrumbs if page settings say breadcrumbs should be hidden.
+ * 
+ * @since 1.0
+ * @author Josh Daugherty
+ */
+add_action( 'template_redirect', 'remove_breadcrumbs' );
+function remove_breadcrumbs() {
+	if ( uamswp_hide_breadcrumbs() ) {
+		remove_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
+	}
 }
