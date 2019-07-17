@@ -1,6 +1,22 @@
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6,
-p, ul, ol, li, dl, dd, dt {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+p,
+ul,
+ol,
+li,
+dl,
+dd,
+dt {
     &:first-child {
         margin-top: 0;
     }
@@ -9,21 +25,34 @@ p, ul, ol, li, dl, dd, dt {
     }
 }
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
     margin-top: 1em;
     margin-bottom: 1.125rem;
 
-    .name, .supertitle, .subtitle {
+    .name,
+    .supertitle,
+    .subtitle {
         display: block;
     }
-                                
-    .supertitle, .subtitle {
+
+    .supertitle,
+    .subtitle {
         font-size: 0.75em;
         font-weight: $font-weight-normal;
         color: $gray-600;
     }
-                                
+
     .supertitle {
         margin-bottom: 0.25em;
 
@@ -35,13 +64,21 @@ h1, h2, h3, h4, h5, h6,
             }
         }
     }
-                                
+
     .subtitle {
         margin-top: 0.25em;
     }
 }
 
-ul, ol {
+address,
+dl,
+ol,
+ul {
+    margin-bottom: $paragraph-margin-bottom;
+}
+
+ul,
+ol {
     padding-left: 2em;
 
     li {
@@ -49,7 +86,8 @@ ul, ol {
     }
 }
 
-strong, b {
+strong,
+b {
     font-weight: $font-weight-bold;
 }
 
@@ -65,13 +103,13 @@ strong, b {
     }
 
     + .note {
-      @extend .line-length-max;
-      @extend .mt-n5;
-      @extend .mb-8;
-      @extend .mt-sm-n9;
-      @extend .mb-sm-10;
-      text-align: center;
-      font-style: italic;
+        @extend .line-length-max;
+        @extend .mt-n5;
+        @extend .mb-8;
+        @extend .mt-sm-n9;
+        @extend .mb-sm-10;
+        text-align: center;
+        font-style: italic;
     }
 
     .title {
@@ -97,21 +135,120 @@ strong, b {
 }
 
 // Blockquotes
+blockquote,
 .blockquote,
 .wp-block-quote {
-    margin-bottom: $font-size-base;
-    padding-left: 1em;
-    border-left: 0.2em solid $body-color;
+    margin: 1em 0;
+    padding: 0 0 0 1em;
+    border-left: $blockquote-border-width solid $body-color;
     @include font-size($blockquote-font-size);
-  }
-  
-  cite,
-  .blockquote-footer {
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &.is-style-large,
+    &.is-large {
+        margin: 1em 0;
+        padding: 0 0 0 1em;
+        @include font-size($blockquote-large-font-size);
+
+        p {
+            font-size: inherit;
+            font-style: inherit;
+            line-height: inherit;
+        }
+
+        cite,
+        .blockquote-footer {
+            @include font-size($blockquote-small-font-size);
+            text-align: inherit;
+        }
+    }
+}
+
+cite,
+.blockquote-footer {
     display: block;
     @include font-size($blockquote-small-font-size);
     color: $blockquote-small-color;
-  
+    font-style: italic;
+
     &::before {
-      content: "\2014\00A0"; // em dash, nbsp
+        content: "\2014\00A0"; // em dash, nbsp
     }
-  }
+}
+
+.wp-block-pullquote {
+    margin: 3em 0;
+    text-align: center;
+
+    &.is-style-default,
+    &.is-style-solid-color {
+        text-align: center;
+
+        blockquote,
+        .blockquote,
+        .wp-block-quote {
+            text-align: inherit;
+            max-width: none;
+
+            p {
+                font-size: inherit;
+                margin: 0 0 $paragraph-margin-bottom 0;
+            }
+
+            cite,
+            .blockquote-footer {
+                @include font-size($blockquote-small-font-size);
+                font-style: italic;
+            }
+        }
+    }
+
+    &.is-style-default {
+        padding: 3em 0;
+        border-bottom: $blockquote-border-width solid $body-color;
+        border-top: $blockquote-border-width solid $body-color;
+
+        blockquote,
+        .blockquote,
+        .wp-block-quote {
+            cite,
+            .blockquote-footer {
+                color: $blockquote-small-color;
+            }
+        }
+    }
+
+    &.is-style-solid-color {
+        padding: 3em;
+
+        blockquote,
+        .blockquote,
+        .wp-block-quote {
+            cite,
+            .blockquote-footer {
+                color: inherit;
+            }
+        }
+    }
+
+    blockquote,
+    .blockquote,
+    .wp-block-quote {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        @include font-size($blockquote-large-font-size);
+        text-align: inherit;
+
+        p {
+            font-size: inherit;
+        }
+    }
+}
