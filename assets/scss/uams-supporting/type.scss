@@ -185,10 +185,17 @@ cite,
 
 .wp-block-pullquote {
     margin: 3em 0;
+    padding: 3em 0;
+    border-bottom: $blockquote-border-width solid $body-color;
+    border-top: $blockquote-border-width solid $body-color;
     text-align: center;
 
-    &.is-style-default,
+    // &.is-style-default {}
+
     &.is-style-solid-color {
+        padding: 3em;
+        border-bottom: none;
+        border-top: none;
         text-align: center;
 
         blockquote,
@@ -204,36 +211,9 @@ cite,
 
             cite,
             .blockquote-footer {
+                color: inherit;
                 @include font-size($blockquote-small-font-size);
                 font-style: italic;
-            }
-        }
-    }
-
-    &.is-style-default {
-        padding: 3em 0;
-        border-bottom: $blockquote-border-width solid $body-color;
-        border-top: $blockquote-border-width solid $body-color;
-
-        blockquote,
-        .blockquote,
-        .wp-block-quote {
-            cite,
-            .blockquote-footer {
-                color: $blockquote-small-color;
-            }
-        }
-    }
-
-    &.is-style-solid-color {
-        padding: 3em;
-
-        blockquote,
-        .blockquote,
-        .wp-block-quote {
-            cite,
-            .blockquote-footer {
-                color: inherit;
             }
         }
     }
@@ -246,9 +226,17 @@ cite,
         border: 0;
         @include font-size($blockquote-large-font-size);
         text-align: inherit;
+        max-width: none;
 
         p {
             font-size: inherit;
+        }
+
+        cite,
+        .blockquote-footer {
+            color: $blockquote-small-color;
+            @include font-size($blockquote-small-font-size);
+            font-style: italic;
         }
     }
 }
