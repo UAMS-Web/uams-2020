@@ -23,33 +23,81 @@
             opacity: 0.30;
             -webkit-filter: grayscale(100%);
             filter: grayscale(100%);
-            background-image: url('https://picsum.photos/576/#{ceil(378 / 320 * 576)}?image=1044'); // Placeholder photo
+            background-image: url('../jpg/fountain_670x670.jpg');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-
-            @include media-breakpoint-up(xs) { // 576-767
-                background-image: url('https://picsum.photos/768/#{ceil(378 / 576 * 768)}?image=1044'); // Placeholder photo
+    
+            /* XXS Breakpoint, retina */
+            @media (-webkit-min-device-pixel-ratio: 2),
+            (min-resolution: 192dpi) {
+                background-image: url("../jpg/fountain_1340x1340.jpg");
             }
     
-            @include media-breakpoint-up(sm) { // 768-991
-                background-image: url('https://picsum.photos/992/#{ceil(230 / 768 * 992)}?image=1044'); // Placeholder photo
+            /* XS Breakpoint */
+            @media (min-width: 576px) {
+                background-image: url("../jpg/fountain_767x650.jpg");
             }
     
-            @include media-breakpoint-up(md) { // 992-1199
-                background-image: url('https://picsum.photos/1200/#{ceil(230 / 992 * 1200)}?image=1044'); // Placeholder photo
+            /* XS Breakpoint, retina */
+            @media (min-width: 576px) and (-webkit-min-device-pixel-ratio: 2),
+            (min-width: 576px) and (min-resolution: 192dpi) {
+                background-image: url("../jpg/fountain_1534x1300.jpg");
             }
     
-            @include media-breakpoint-up(lg) { // 1200-1499
-                background-image: url('https://picsum.photos/1500/#{ceil(230 / 1200 * 1500)}?image=1044'); // Placeholder photo
+            /* SM Breakpoint */
+            @media (min-width: 768px) {
+                background-image: url("../jpg/fountain_992x372.jpg");
             }
     
-            @include media-breakpoint-up(xl) { // 1500-1920
-                background-image: url('https://picsum.photos/1921/#{ceil(230 / 1500 * 1921)}?image=1044'); // Placeholder photo
+            /* SM Breakpoint, retina */
+            @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
+            (min-width: 768px) and (min-resolution: 192dpi) {
+                background-image: url("../jpg/fountain_1984x744.jpg");
             }
     
-            @include media-breakpoint-up(xxl) { // 1921+
-                background-image: url('https://picsum.photos/2540/#{ceil(230 / 1921 * 2540)}?image=1044'); // Placeholder photo
+            /* MD Breakpoint */
+            @media (min-width: 992px) {
+                    background-image: url("../jpg/fountain_1200x450.jpg");
+            }
+    
+            /* MD Breakpoint, retina */
+            @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
+            (min-width: 992px) and (min-resolution: 192dpi) {
+                background-image: url("../jpg/fountain_2400x900.jpg");
+            }
+    
+            /* LG Breakpoint */
+            @media (min-width: 1200px) {
+                background-image: url("../jpg/fountain_1500x563.jpg");
+            }
+    
+            /* LG Breakpoint, retina */
+            @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
+            (min-width: 1200px) and (min-resolution: 192dpi) {
+                background-image: url("../jpg/fountain_3000x1125.jpg");
+            }
+    
+            /* XL Breakpoint */
+            @media (min-width: 1500px) {
+                background-image: url("../jpg/fountain_1921x720.jpg");
+            }
+    
+            /* XL Breakpoint, retina */
+            @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
+            (min-width: 1500px) and (min-resolution: 192dpi) {
+                background-image: url("../jpg/fountain_3842x1441.jpg");
+            }
+    
+            /* XXL Breakpoint */
+            @media (min-width: 1921px) {
+                background-image: url("../jpg/fountain_2560x960.jpg");
+            }
+    
+            /* XXL Breakpoint, retina */
+            @media (min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2),
+            (min-width: 1921px) and (min-resolution: 192dpi) {
+                background-image: url("../jpg/fountain_5120x1920.jpg");
             }
         }
     }
