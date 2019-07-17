@@ -55,9 +55,9 @@ function uamswp_module( $module = array(), $i = false ) {
             $id = $i;
             $heading = $module['call_out_heading'];
             $body = $module['call_out_body'];
-            $use_image = $module['call_out_use-image'];
+            $use_image = $module['call_out_use_image'];
             $image = $module['call_out_image'];
-            $background_color = $module['call_out_background-color'];
+            $background_color = $module['call_out_background_color'];
 
             include( get_stylesheet_directory() .'/blocks/call-out.php' );
 
@@ -153,6 +153,16 @@ function uamswp_module( $module = array(), $i = false ) {
             include( get_stylesheet_directory() .'/blocks/stacked.php' );
 
             break; 
+
+        case 'modules_news_grid':
+            if (class_exists('UAMS_Syndicate_News_Base')) {
+                $id = $i;
+                $category = $module['news_category'];
+                $offset = $module['news_offset'];
+                uamswp_module_header( $module );
+                echo '<div class="entry-content">' . do_shortcode('[uamswp_news output="grid" category="'.$category.'" count="3" offset="'.$offset.'"]' ) . '</div>';
+            }
+            break;
  
 		// More modules go here
 	}
