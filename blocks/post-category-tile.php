@@ -41,6 +41,14 @@ if ( empty( $post_button_text ) )
 if ( empty( $cat_button_text ) )
     $cat_button_text = get_field('post_tile_category_button_text') ?: 'View ' . $category->name . ' Archive';
 
+if ( ! has_excerpt() ) { 
+    $content = wp_trim_words(wp_strip_all_tags( get_the_content(), 40 )) ; 
+    $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
+    echo preg_replace($regex, ' ', $content);
+} else { 
+    the_excerpt(); 
+} 
+
 ?>
 
 <section class="uams-module post-category-tile <?php echo $background_color; ?>" id="<?php echo $id; ?>">
@@ -112,7 +120,16 @@ if ( empty( $cat_button_text ) )
                     <?php } //endif $image ?>
                     <div class="text-container">
                         <h3><?php the_title(); ?></h3>
-                        <p><?php $content = wp_strip_all_tags(get_the_content()); echo mb_strimwidth($content, 0, 176, '...');?></p>
+                        <p><?php 
+                         if ( ! has_excerpt() ) { 
+                            $content = wp_trim_words(wp_strip_all_tags( get_the_content(), 50 )) ; 
+                            $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
+                            echo mb_strimwidth(preg_replace($regex, ' ', $content), 0, 176, ' ...');
+                            // echo wp_trim_words((preg_replace($regex, ' ', $content)), 25, ' ...'); // Option for words, instead of characters
+                        } else { 
+                            echo mb_strimwidth(get_the_excerpt(), 0, 176, ' ...'); 
+                            // echo wp_trim_words(get_the_excerpt(), 25, ' ...');  // Words instead of character
+                        }?></p>
                         <div class="cta-container">
                             <a href="<?php the_permalink(); ?>" class="btn btn-primary"><?php echo $post_button_text; ?></a>
                             <a href="<?php echo get_category_link( $category->term_id ); ?>" class="btn btn-outline-primary" aria-label="Full list of <?php echo $category->name; ?> stories"><?php echo $cat_button_text; ?></a>
