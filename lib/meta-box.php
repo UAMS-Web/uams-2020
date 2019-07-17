@@ -1054,6 +1054,7 @@ $post_tile = include( get_stylesheet_directory() .'/acf_fields/post-category-til
 $post_tiles = include( get_stylesheet_directory() .'/acf_fields/post-category-tiles.php' );
 $side_by_side = include( get_stylesheet_directory() .'/acf_fields/image-side-by-side.php' );
 $stacked = include( get_stylesheet_directory() .'/acf_fields/stacked.php' );
+$newsgrid = include( get_stylesheet_directory() .'/acf_fields/newsgrid.php' );
 
 $modules = require( get_stylesheet_directory() .'/acf_fields/modules.php' );
 acf_add_local_field_group(array(
