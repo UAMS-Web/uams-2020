@@ -113,7 +113,17 @@ if( $post_tiles_rows ) :
                             <span class="supertitle"><a href="<?php echo get_category_link( $category->term_id ); ?>"><?php echo $category->name; ?></a>:</span>
                             <?php the_title(); ?>
                         </h3>
-                        <p class="card-text"><?php $content = wp_strip_all_tags(get_the_content()); echo mb_strimwidth($content, 0, 176, '...');?></p>
+                        <p class="card-text"><?php 
+                        if ( ! has_excerpt() ) { 
+                            $content = wp_trim_words(wp_strip_all_tags( get_the_content(), 50 )) ; 
+                            $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
+                            echo mb_strimwidth(preg_replace($regex, ' ', $content), 0, 176, ' ...');
+                            // echo wp_trim_words((preg_replace($regex, ' ', $content)), 25, ' ...'); // Option for words, instead of characters
+                        } else { 
+                            echo mb_strimwidth(get_the_excerpt(), 0, 176, ' ...'); 
+                            // echo wp_trim_words(get_the_excerpt(), 25, ' ...');  // Words instead of character
+                        }
+                        ?></p>
                         <div class="cta-container">
                             <a class="btn btn-primary" href="<?php the_permalink(); ?>" aria-label="Read <?php the_title(); ?>"><?php echo $post_button_text; ?></a>
                             <a class="btn btn-outline-primary" href="<?php echo get_category_link( $category->term_id ); ?>" aria-label="Full list of <?php echo $category->name; ?> stories"><?php echo $cat_button_text; ?></a>
