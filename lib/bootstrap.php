@@ -72,9 +72,9 @@ function uamswp_merge_genesis_attr_classes() {
     global $wp_registered_sidebar;
     $classes = array(
             'content-sidebar-wrap'      => 'row',
-            'content'                   => 'col-sm-8',
-            'sidebar-primary'           => 'col-sm-4',
-            'sidebar-secondary'         => 'col-sm-2',
+            'content'                   => 'col-12 col-md-8',
+            'sidebar-primary'           => 'col-12 col-md-4',
+            'sidebar-secondary'         => 'col-12 col-sm-2',
             'archive-pagination'        => 'clearfix',
             'entry-content'             => 'clearfix',
             'entry-pagination'          => 'clearfix',
