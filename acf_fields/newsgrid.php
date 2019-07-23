@@ -62,7 +62,7 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 				'class' => '',
 				'id' => '',
 			),
-			'message' => 'This module is not available, please activate New Syndication plugin.',
+			'message' => 'This module is not available, please activate News Syndication plugin.',
 			'new_lines' => 'wpautop',
 			'esc_html' => 0,
         ),
