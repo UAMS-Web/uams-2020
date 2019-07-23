@@ -304,7 +304,7 @@ if( function_exists('acf_add_local_field_group') ):
     acf_add_local_field_group(array(
         'key' => 'group_5cfab4f342f6d',
         'title' => 'Block: UAMS Stacked Image & Text',
-        'fields' => $side_by_side,
+        'fields' => $stacked,
         'location' => array(
             array(
                 array(
