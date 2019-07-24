@@ -380,3 +380,6 @@ function enqueue_admin_style_sheet() {
 	wp_enqueue_style( 'admin-css' );
 
 }
+
+// Remove the edit link
+add_filter ( 'genesis_edit_post_link' , '__return_false' );

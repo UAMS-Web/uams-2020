@@ -866,7 +866,7 @@ acf_add_local_field_group(array(
 			'label' => 'Cover Image',
 			'name' => 'page_cover_image',
 			'type' => 'image',
-			'instructions' => '',
+			'instructions' => 'Recommended dimensions: 5120x1920 or larger. Minimum dimensions: 1920x720. The image will be automatically cropped to a 8:3 aspect ratio.',
 			'required' => 0,
 			'conditional_logic' => array(
 				array(
@@ -885,8 +885,8 @@ acf_add_local_field_group(array(
 			'return_format' => 'id',
 			'preview_size' => 'medium',
 			'library' => 'all',
-			'min_width' => 1600,
-			'min_height' => '',
+			'min_width' => 1920,
+			'min_height' => 720,
 			'min_size' => '',
 			'max_width' => '',
 			'max_height' => '',
@@ -898,7 +898,7 @@ acf_add_local_field_group(array(
 			'label' => 'Lead Paragraph',
 			'name' => 'page_description',
 			'type' => 'textarea',
-			'instructions' => 'Appears below the page title. Basic description of the page.',
+			'instructions' => 'Appears below the page title. Basic description of the page. 500 character limit.',
 			'required' => 0,
 			'conditional_logic' => array(
 				array(
@@ -916,7 +916,7 @@ acf_add_local_field_group(array(
 			),
 			'default_value' => '',
 			'placeholder' => '',
-			'maxlength' => '',
+			'maxlength' => 500,
 			'rows' => '',
 			'new_lines' => '',
 		),
