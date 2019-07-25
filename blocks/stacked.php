@@ -73,9 +73,12 @@ if( $stacked_rows ) :
                                 (min-width: 1px) and (min-resolution: 192dpi)">
                             <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center'); ?>" 
                                 media="(min-width: 1px)">
-                            <?php } //endif ?>
                             <!-- Fallback -->
-                            <img src="<?php echo wp_get_attachment_image_url( $image, 'full' ); ?>" alt="<?php echo $image_alt_override ? $image_alt_override : $image_alt_native; ?>" />
+                            <img src="<?php echo image_sizer($image, 455, 256, 'center', 'center'); ?>" alt="<?php echo $image_alt_override ? $image_alt_override : $image_alt_native; ?>" />
+                            <?php } else { ?>
+                            <!-- Fallback -->
+                            <img src="<?php echo wp_get_attachment_image_url( $image, 'aspect-16-9' ); ?>" alt="<?php echo $image_alt_override ? $image_alt_override : $image_alt_native; ?>" />
+                            <?php } //endif ?>
                         </picture>
                     </div>
                     <div class="card-body">
