@@ -91,3 +91,12 @@
         }
     }
 }
+
+.content-sidebar-wrap.row {
+    margin: 0;
+
+    > [class^="col-"],
+    > [class*=" col-"] {
+        padding: 0;
+    }
+}
