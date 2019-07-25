@@ -157,14 +157,14 @@ function uamswp_module( $module = array(), $i = false ) {
         case 'modules_news_grid':
             if (class_exists('UAMS_Syndicate_News_Base')) {
                 $id = $i;
-                $output = get_field('news_format');
-                $category = get_field('news_category');
-                $count = get_field('news_count');
-                $offset = get_field('news_offset');
-                $advancedCat = get_field('news_advanced_cat');
-                $background_color = get_field('news_bgcolor');
-                $cache = get_field('news_cache');
-                $local = get_field('news_local');
+                $output = $module['news_format'];
+                $category = $module['news_category'];
+                $count = $module['news_count'];
+                $offset = $module['news_offset'];
+                $advancedCat = $module['news_advanced_cat'];
+                $background_color = $module['news_bgcolor'];
+                $cache = $module['news_cache'];
+                $local = $module['news_local'];
                 uamswp_module_header( $module );
                 echo '<div class="entry-content">' . do_shortcode('[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" cache_bust="'. $cache .'"]' ) . '</div>';
             }
