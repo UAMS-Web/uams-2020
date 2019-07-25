@@ -114,7 +114,7 @@ return array (
                 'name' => 'modules_news_grid',
                 'label' => 'News Grid',
                 'display' => 'block',
-                'sub_fields' => $newsgrid,
+                'sub_fields' => $news,
                 'min' => '',
                 'max' => '',
             ),

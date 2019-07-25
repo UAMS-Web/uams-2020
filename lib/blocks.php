@@ -112,6 +112,19 @@ function uams_register_blocks() {
             'align'             => 'full',
             'render_template'   => 'blocks/post-category-tile.php',
         ));
+        if (class_exists('UAMS_Syndicate_News_Base')) { // Add block if news syndication plugin is active
+            acf_register_block_type(array(
+                'name'              => 'uams-news',
+                'title'             => __('UAMS News'),
+                'description'       => __('UAMS News Syndication'),
+                'category'          => 'common',
+                'icon'              => 'rss',
+                'keywords'          => array('uams', 'news', 'syndication'),
+                'mode'              => 'auto',
+                'align'             => 'full',
+                'render_template'   => 'blocks/news.php',
+            ));
+        }
         // acf_register_block_type(array(
         //     'name'              => 'block',
         //     'title'             => __('UAMS Block'),
@@ -139,6 +152,7 @@ if( function_exists('acf_add_local_field_group') ):
     $post_tiles = require( get_stylesheet_directory() .'/acf_fields/post-category-tiles.php' );
     $side_by_side = require( get_stylesheet_directory() .'/acf_fields/image-side-by-side.php' );
     $stacked = require( get_stylesheet_directory() .'/acf_fields/stacked.php' );
+    $news = require( get_stylesheet_directory() .'/acf_fields/news.php' );
 
     
 
@@ -359,6 +373,30 @@ if( function_exists('acf_add_local_field_group') ):
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/post-category-tile',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+    ));
+
+    // Add local field group for UAMS News Block
+    acf_add_local_field_group(array(
+        'key' => 'group_uams_news',
+        'title' => 'Block: UAMS News',
+        'fields' => $news,
+        'location' => array(
+            array(
+                array(
+                    'param' => 'block',
+                    'operator' => '==',
+                    'value' => 'acf/uams-news',
                 ),
             ),
         ),
