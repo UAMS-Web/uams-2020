@@ -227,6 +227,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'uams-aux' => 'UAMS Auxiliary',
+				'main' => 'Main UAMSHealth site',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
