@@ -26,6 +26,10 @@ if ( empty($cache) )
     $cache = get_field('news_cache');
 if ( empty($local) )
     $local = get_field('news_local');
+if ( empty($link) )
+    $link = get_field('news_include_link');
+if ( empty($position) )
+    $position = get_field('news_position');
 
 if ( 'grid' == $output ) {
     $count = '3';
@@ -33,8 +37,10 @@ if ( 'grid' == $output ) {
     $count = '4';
 } elseif ( 'full' == $output ) {
     $count = '1';
+} elseif ( 'side' == $output ) {
+    $count = '1';
 }
 
-echo '<!--[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" cache_bust="'. $cache .'"]-->';
-echo do_shortcode('[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" cache_bust="'. $cache .'"]' );
+echo '<!--[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" cache_bust="'. $cache .'" include_link="'. $link .'" news_position="'. $position .'"]-->';
+echo do_shortcode('[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" cache_bust="'. $cache .'" include_link="'. $link .'" news_position="'. $position .'"]' );
 ?>

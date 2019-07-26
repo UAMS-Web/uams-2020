@@ -42,6 +42,8 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 				'cards' => 'Cards (4)',
 				'full' => 'Full (1)',
 				'grid' => 'Grid (3)',
+				'side' => 'Side-by-Side Image & Text (1)',
+				// 'json' => 'JSON',
 			),
 			'default_value' => array(
 				0 => 'grid',
@@ -148,6 +150,80 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			),
 			'allow_null' => 0,
 			'default_value' => '',
+			'layout' => 'horizontal',
+			'return_format' => 'value',
+		),
+		array(
+			'key' => 'field_news_include_link'. $suffix,
+			'label' => 'Include link to category',
+			'name' => 'news_include_link',
+			'type' => 'button_group',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '==',
+						'value' => 'grid',
+					),
+				),
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '==',
+						'value' => 'cards',
+					),
+				),
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '==',
+						'value' => 'side',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'1' => 'Yes',
+				'0' => 'No',
+			),
+			'allow_null' => 0,
+			'default_value' => '1',
+			'layout' => 'horizontal',
+			'return_format' => 'value',
+		),
+		array(
+			'key' => 'field_news_position'. $suffix,
+			'label' => 'Image & Text Position',
+			'name' => 'news_position',
+			'type' => 'button_group',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '==',
+						'value' => 'side',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'left' => 'Image on Left, Text on Right',
+            	'right' => 'Image on Right, Text on Left',
+			),
+			'allow_null' => 0,
+			'default_value' => 'left',
 			'layout' => 'horizontal',
 			'return_format' => 'value',
 		),
