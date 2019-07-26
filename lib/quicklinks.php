@@ -101,7 +101,7 @@ function uamswp_request_quicklinks() {
 // Site gets custom quicklinks
 function site_custom_quicklinks() {
     if ( ('institute' == uams_get_site_info()['site']) ||
-       ( 'uamshealth' == uams_get_site_info()['site'] && 'uams' == uams_get_site_info()['subsite'] ) ||
+       ( 'uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] ) ||
        ( 'inside' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] ) ||
        ( 'uams' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] ) ) {
         return true;
