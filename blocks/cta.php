@@ -143,7 +143,7 @@ if ( empty($background_color) )
     <?php } elseif ( $use_image ) { ?>
     <style>
         #<?php echo $id; ?>:before {
-            background-image: url("<?php echo wp_get_attachment_url( $image, 'full' ); ?>");
+            background-image: url("<?php echo wp_get_attachment_url( $image, 'aspect-2-1' ); ?>");
         }
     </style>
     <?php } //endif ?>

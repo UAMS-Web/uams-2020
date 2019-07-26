@@ -248,7 +248,7 @@ if( $overlay_rows ) :
                 <?php } else { // Background styles for no Fly plugin ?>
                 <style>
                     #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo wp_get_attachment_image_url( $image, 'full' ); ?>");
+                            background-image: url("<?php echo wp_get_attachment_image_url( $image, 'aspect-4-3' ); ?>");
                     }
                 </style>
                 <?php } //endif ?>
