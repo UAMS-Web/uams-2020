@@ -38,8 +38,8 @@ if( $stacked_rows ) :
                 $item_heading = $stacked_row['stacked_section_heading'];
                 $body = $stacked_row['stacked_section_body'];
                 $button_text = $stacked_row['stacked_section_button_text'];
-                $button_url = $stacked_row['stacked_section_button_url'];
-                $button_target = $stacked_row['stacked_section_button_target'];
+                $button_url = $stacked_row['stacked_section_button_url']['url'];
+                $button_target = $stacked_row['stacked_section_button_url']['target'];
                 $button_desc = $stacked_row['stacked_section_button_description'];
 
             ?>
@@ -84,7 +84,7 @@ if( $stacked_rows ) :
                     <div class="card-body">
                         <h3 class="card-title h5"><?php echo $item_heading; ?></h3>
                         <p class="card-text"><?php echo $body; ?></p>
-                        <a href="<?php echo $button_url; ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="_blank"' : ''; ?>><?php echo $button_text; ?></a>
+                        <a href="<?php echo $button_url; ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?>><?php echo $button_text; ?></a>
                     </div>
                 </div>
             </div>

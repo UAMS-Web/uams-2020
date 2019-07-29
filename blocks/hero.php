@@ -56,9 +56,9 @@ if( $hero_rows ) :
     // if ( empty($button_text) )
         $button_text = $hero_row['hero_button_text'] ?: 'Learn More';
     // if ( empty($button_url) )
-        $button_url = $hero_row['hero_button_url'] ?: '';
+        $button_url = $hero_row['hero_button_url']['url'] ?: '';
     // if ( empty($button_target) )
-        $button_target = $hero_row['hero_button_target'] ?: '';
+        $button_target = $hero_row['hero_button_url']['target'] ?: '';
     // if ( empty($button_desc) )
         $button_desc = $hero_row['hero_button_description'] ?: '';
     // if ( empty($image_desktop) )
@@ -157,7 +157,7 @@ if( $hero_rows ) :
                 <div class="inner-container">
                     <h2><?php echo $heading; ?></h2>
                     <p><?php echo $body; ?></p>
-                    <a class="btn" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="_blank"' : ''; ?>><?php echo $button_text; ?></a>
+                    <a class="btn" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?>><?php echo $button_text; ?></a>
                 </div>
             </div>
         </div>

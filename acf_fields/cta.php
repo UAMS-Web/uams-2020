@@ -83,8 +83,8 @@ return array(
         'key' => 'field_cta_bar_button_url'. $suffix,
         'label' => 'Button URL',
         'name' => 'cta_bar_button_url',
-        'type' => 'text',
-        'instructions' => 'Include http:// or https://',
+        'type' => 'link',
+        'instructions' => '',
         'required' => 1,
         'conditional_logic' => array(
             array(
@@ -99,38 +99,34 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'default_value' => '',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
+        'return_format' => 'array',
     ),
-    array(
-        'key' => 'field_cta_bar_button_target'. $suffix,
-        'label' => 'Open in New Window?',
-        'name' => 'cta_bar_button_target',
-        'type' => 'true_false',
-        'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => array(
-            array(
-                array(
-                    'field' => 'field_cta_bar_button_text'. $suffix,
-                    'operator' => '!=empty',
-                ),
-            ),
-        ),
-        'wrapper' => array(
-            'width' => '',
-            'class' => '',
-            'id' => '',
-        ),
-        'message' => '',
-        'default_value' => 0,
-        'ui' => 1,
-        'ui_on_text' => '',
-        'ui_off_text' => '',
-    ),
+    // array(
+    //     'key' => 'field_cta_bar_button_target'. $suffix,
+    //     'label' => 'Open in New Window?',
+    //     'name' => 'cta_bar_button_target',
+    //     'type' => 'true_false',
+    //     'instructions' => '',
+    //     'required' => 0,
+    //     'conditional_logic' => array(
+    //         array(
+    //             array(
+    //                 'field' => 'field_cta_bar_button_text'. $suffix,
+    //                 'operator' => '!=empty',
+    //             ),
+    //         ),
+    //     ),
+    //     'wrapper' => array(
+    //         'width' => '',
+    //         'class' => '',
+    //         'id' => '',
+    //     ),
+    //     'message' => '',
+    //     'default_value' => 0,
+    //     'ui' => 1,
+    //     'ui_on_text' => '',
+    //     'ui_off_text' => '',
+    // ),
     array(
         'key' => 'field_cta_bar_button_description'. $suffix,
         'label' => 'Button Link Description',

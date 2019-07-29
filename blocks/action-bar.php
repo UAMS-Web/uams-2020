@@ -33,8 +33,8 @@ if( $action_bar_rows ) {
     $section_heading = $action_bar_row['action_bar_section_heading'];
     $body = $action_bar_row['action_bar_section_body'];
     $button_text = $action_bar_row['action_bar_section_button_text'];
-    $button_url = $action_bar_row['action_bar_section_button_url'];
-    $button_target = $action_bar_row['action_bar_section_button_target'];
+    $button_url = $action_bar_row['action_bar_section_button_url']['url'];
+    $button_target = $action_bar_row['action_bar_section_button_url']['target'];
     $button_desc = $action_bar_row['action_bar_section_button_description'];
 
 ?>
@@ -44,7 +44,7 @@ if( $action_bar_rows ) {
                         <h3 class="h5"><?php echo $section_heading; ?></h3>
                         <p><?php echo $body; ?></p>
                     </div>
-                    <a class="btn" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="_blank"' : ''; ?>><?php echo $button_text; ?></a>
+                    <a class="btn" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target . '"' : ''; ?>><?php echo $button_text; ?></a>
                 </div>
             </div>
     <?php

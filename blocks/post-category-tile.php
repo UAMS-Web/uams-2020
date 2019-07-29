@@ -41,13 +41,13 @@ if ( empty( $post_button_text ) )
 if ( empty( $cat_button_text ) )
     $cat_button_text = get_field('post_tile_category_button_text') ?: 'View ' . $category->name . ' Archive';
 
-if ( ! has_excerpt() ) { 
-    $content = wp_trim_words(wp_strip_all_tags( get_the_content(), 40 )) ; 
-    $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
-    echo preg_replace($regex, ' ', $content);
-} else { 
-    the_excerpt(); 
-} 
+// if ( ! has_excerpt() ) { 
+//     $content = wp_trim_words(wp_strip_all_tags( get_the_content(), 40 )) ; 
+//     $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
+//     echo preg_replace($regex, ' ', $content);
+// } else { 
+//     $content = get_the_excerpt(); 
+// } 
 
 ?>
 
