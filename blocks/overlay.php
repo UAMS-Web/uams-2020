@@ -29,8 +29,8 @@ if( $overlay_rows ) :
         $heading = $overlay_row['overlay_section_heading'];
         $body = $overlay_row['overlay_section_body'];
         $button_text = $overlay_row['overlay_section_button_text'];
-        $button_url = $overlay_row['overlay_section_button_url'];
-        $button_target = $overlay_row['overlay_section_button_target'];
+        $button_url = $overlay_row['overlay_section_button_url']['url'];
+        $button_target = $overlay_row['overlay_section_button_url']['target'];
         $button_desc = $overlay_row['overlay_section_button_description'];
         $background_color = $overlay_row['overlay_section_background_color'];
         $image = $overlay_row['overlay_section_image'];
@@ -255,7 +255,7 @@ if( $overlay_rows ) :
                 <div class="text-container">
                     <h2><?php echo $heading; ?></h2>
                     <p><?php echo $body; ?></p>
-                    <a href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>" class="btn"<?php echo $button_target ? ' target="_blank"' : ''; ?>><?php echo $button_text; ?></a>
+                    <a href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>" class="btn"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?>><?php echo $button_text; ?></a>
                 </div>
             </div>
 <?php

@@ -44,8 +44,8 @@ if ( empty($list_more) )
 if ( empty($cta) ) 
     $cta = get_field('side_cta') ?: '';
     $cta_text = $cta['side_cta_text'] ?: '';
-    $cta_link = $cta['side_cta_url'] ?: '';
-    $cta_target = $cta['side_cta_target'] ?: '';
+    $cta_link = $cta['side_cta_url']['url'] ?: '';
+    $cta_target = $cta['side_cta_url']['target'] ?: '';
     $cta_desc = $cta['side_cta_description'] ?: '';
 if ( empty($image_group) ) 
     $image_group = get_field('side_image')?: '';
@@ -61,7 +61,7 @@ if ( empty($background_color) )
 
 if ( empty($image_alt) ) 
     $image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachment_image_alt', true);
-    $cta_target = $cta_target ? ' target="blank"' : '';
+    $cta_target = $cta_target ? ' target="'. $cta_target .'"' : '';
     $cta_desc = $cta_desc ? ' aria-label="'.$cta_desc.'"' : '';
     $cta_link = $cta_link ? '<a class="btn btn-primary" href="'. $cta_link .'"' . $cta_desc . $cta_target . '>' : '';
     $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
@@ -204,7 +204,7 @@ if ( empty($image_alt) )
                     <ul>
                         <?php foreach( $link_list as $link ) {
                             $list_text = $link['side_link_list_text'];
-                            $list_url = $link['side_link_list_url'];
+                            $list_url = $link['side_link_list_url']['url'];
                             $list_desc = $link['side_link_list_description'];
                         ?>
                         <li>

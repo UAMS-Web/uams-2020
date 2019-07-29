@@ -22,7 +22,7 @@ if ( empty($button_text) )
 if ( empty($button_url) ) 
     $button_url = get_field('cta_bar_button_url');
 if ( empty($button_target) ) 
-    $button_target = get_field('cta_bar_button_target');
+    $button_target = get_field('cta_bar_button_target')['target'];
 if ( empty($button_desc) ) 
     $button_desc = get_field('cta_bar_button_description');
 if ( empty($layout) ) 
@@ -160,7 +160,7 @@ if ( empty($background_color) )
                         </div>
                         <?php echo $button_text ?
                         '<div class="btn-container">
-                            <a href="' . $button_url . '" aria-label="' . $button_desc . '" class="btn"' . ( $button_target ? ' target="_blank"' : '' ) . '>' . $button_text . '</a>
+                            <a href="' . $button_url['url'] . '" aria-label="' . $button_desc . '" class="btn"' . ( $button_target ? ' target="'. $button_target . '"' : '' ) . '>' . $button_text . '</a>
                         </div>'
                         : ''; ?>
                     </div>
