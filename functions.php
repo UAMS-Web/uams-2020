@@ -118,9 +118,9 @@ function uamswp_childtheme_setup() {
 add_filter ( 'genesis_home_crumb', 'uams_breadcrumb_home_icon' ); 
 function uams_breadcrumb_home_icon( $crumb ) {
 	if (is_front_page()) {
-		$crumb = '<a href="'.$homelink.'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item">'.uams_site_title().'';
+		$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item">'.uams_site_title().'';
 	} else {
-	 	$crumb = '<a href="'.$homelink.'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
+	 	$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
 	}
      return $crumb;
 }
