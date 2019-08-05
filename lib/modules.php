@@ -157,16 +157,16 @@ function uamswp_module( $module = array(), $i = false ) {
         case 'modules_news_grid':
             if (class_exists('UAMS_Syndicate_News_Base')) {
                 $id = $i;
-                $output = module('news_format');
-                $category = module('news_category');
-                $count = module('news_count');
-                $offset = module('news_offset');
-                $advancedCat = module('news_advanced_cat');
-                $background_color = module('news_bgcolor');
-                $cache = module('news_cache');
-                $local = module('news_local');
-                $link = module('news_include_link');
-                $position = module('news_position');
+                $output = $module['news_format'];
+                $category = $module['news_category'];
+                $count = $module['news_count'];
+                $offset = $module['news_offset'];
+                $advancedCat = $module['news_advanced_cat'];
+                $background_color = $module['news_bgcolor'];
+                $cache = $module['news_cache'];
+                $local = $module['news_local'];
+                $link = $module['news_include_link'];
+                $position = $module['news_position'];
 
                 if ( 'grid' == $output ) {
                     $count = '3';
