@@ -459,7 +459,7 @@ $display-line-height: $headings-line-height;
 $lead-font-size: $font-size-base * 1.25;
 $lead-font-weight: 300;
 
-$small-font-size: 80%;
+$small-font-size: 75%;
 
 $text-muted: $gray-600;
 
@@ -1175,7 +1175,7 @@ $thumbnail-box-shadow: 0 1px 2px rgba($black, .075);
 
 // Figures
 
-$figure-caption-font-size: 90%;
+$figure-caption-font-size: $font-size-base * 0.75;
 $figure-caption-color: $gray-600;
 
 
@@ -1274,6 +1274,8 @@ $print-body-min-width: map-get($grid-breakpoints, "lg");
 $line-length-max: 35; // 80 characters
 $line-length-ideal: 28.4375; // 65 characters
 $line-length-min: 19.6875; // 45 characters
+
+$content-width: $font-size-base * $line-length-max;
 
 
 // SVG Graphics
