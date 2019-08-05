@@ -145,9 +145,12 @@ if( $hero_rows ) :
                         (min-width: 1px) and (min-resolution: 192dpi)">
                     <source srcset="<?php echo image_sizer($image_mobile, 576, 324, 'center', 'center'); ?>"
                         media="(min-width: 1px)">
+                    <!-- Fallback -->
+                    <img src="<?php echo image_sizer($image, 455, 256, 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
+                    <?php } else { ?>
+                    <!-- Fallback -->
+                    <img src="<?php echo wp_get_attachment_image_url( $image, 'hero-tablet' ); ?>" alt="<?php echo $image_alt; ?>" />
                     <?php } //endif ?>
-                    <!-- Fallback, use Tablet Image, Aspect ratio 1.4132:1 -->
-                    <img src="<?php echo wp_get_attachment_url( $image_tablet, 'full' ); ?>" alt="<?php echo $image_alt; ?>" />
                 </picture>
             </div>
             <div class="text-container">

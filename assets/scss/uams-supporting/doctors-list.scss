@@ -188,6 +188,12 @@
                 overflow: hidden;
                 @include font-size(1rem);
 
+                @media 
+                (min-width: 1396px) and (max-width: (1784px - 1)),
+                (min-width: (1784px + 466)) {
+                    flex: 1 0 0;
+                }
+
                 .row {
                     margin: -$card-spacer-x;
                     
@@ -260,6 +266,13 @@
 
                         .row {
                             margin: 0 (-$card-spacer-x / 2);
+                        
+                            @media
+                            (min-width: 1396px) and (max-width: (1784px - 1)),
+                            (min-width: (1784px + 466)) {
+                                flex: 1 0 0;
+                                flex-wrap: nowrap;
+                            }
                         }
 
                         .primary, .secondary {

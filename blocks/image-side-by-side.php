@@ -189,7 +189,7 @@ if ( empty($image_alt) )
                 <?php } else { ?>
                 <style>
                     #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                        background-image: url("<?php echo wp_get_attachment_url( $side_image, 'full' ); ?>");
+                        background-image: url("<?php echo wp_get_attachment_url( $side_image, 'aspect-16-9' ); ?>");
                     }
                 </style>
                 <?php } //endif ?>

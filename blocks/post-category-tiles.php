@@ -101,9 +101,12 @@ if( $post_tiles_rows ) :
                             <source 
                                 media="(min-width: 1px)" 
                                 srcset="<?php echo image_sizer($image, 512, 288, 'center', 'center'); ?>">
-                            <?php } //endif ?>
                             <!-- Fallback -->
-                            <img src="<?php echo wp_get_attachment_image_url( $image, 'full' ); ?>" alt="Random image">
+                            <img src="<?php echo image_sizer($image, 556, 313, 'center', 'center'); ?>" alt="" />
+                            <?php } else { ?>
+                            <!-- Fallback -->
+                            <img src="<?php echo wp_get_attachment_image_url( $image, 'aspect-16-9' ); ?>" alt="" />
+                            <?php } //endif ?>
                         </picture>
                     </div>
                     <?php } //endif $image ?>
