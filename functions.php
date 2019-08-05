@@ -69,6 +69,9 @@ function uamswp_childtheme_setup() {
 	// Responsive Embeds
 	add_theme_support( 'responsive-embeds' );
 
+	// Gutenberg Support for block editor
+	add_theme_support( 'align-wide' );
+
 	// Remove unneeded widget areas
 	unregister_sidebar( 'header-right' );
 
