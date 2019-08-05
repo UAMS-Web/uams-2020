@@ -112,7 +112,7 @@ return array (
             'layout_modules_news_grid' => array(
                 'key' => 'layout_modules_news_grid',
                 'name' => 'modules_news_grid',
-                'label' => 'News Grid',
+                'label' => 'UAMS News',
                 'display' => 'block',
                 'sub_fields' => $news,
                 'min' => '',
