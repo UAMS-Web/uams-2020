@@ -32,7 +32,7 @@ var paths = {
     },
     scripts: {
         src: [
-            'node_modules/jquery/dist/jquery.slim.js',
+            'node_modules/jquery/dist/jquery.js', // Changed from jquery.slim.js for AJAX
             'node_modules/popper.js/dist/umd/popper.js',
             'node_modules/bootstrap/dist/js/bootstrap.js',
             'node_modules/smartmenus/dist/jquery.smartmenus.js',
