@@ -41,6 +41,6 @@ if ( 'grid' == $output ) {
     $count = '1';
 }
 
-echo '<!--[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" cache_bust="'. $cache .'" include_link="'. $link .'" news_position="'. $position .'"]-->';
-echo do_shortcode('[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" cache_bust="'. $cache .'" include_link="'. $link .'" news_position="'. $position .'"]' );
+// echo '<!--[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" include_link="'. $link .'" news_position="'. $position .'"]-->';
+echo do_shortcode('[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" include_link="'. $link .'" news_position="'. $position .'"]' );
 ?>

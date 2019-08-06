@@ -282,25 +282,6 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			'append' => '',
 			'maxlength' => '',
 		),
-		array(
-			'key' => 'field_news_cache'. $suffix,
-			'label' => 'Clear Cache',
-			'name' => 'news_cache',
-			'type' => 'true_false',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array(
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'message' => '',
-			'default_value' => 0,
-			'ui' => 1,
-			'ui_on_text' => '',
-			'ui_off_text' => '',
-		),
     );
 } else {
     return array(
