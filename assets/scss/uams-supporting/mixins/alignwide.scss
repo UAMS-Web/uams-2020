@@ -1,0 +1,6 @@
+@mixin alignwide($ratio) {
+    margin-left: -((($content-width * $ratio) - $content-width) / 2);
+    margin-right: -((($content-width * $ratio) - $content-width) / 2);
+    max-width: $content-width * $ratio;
+    width: $content-width * $ratio !important;
+}
