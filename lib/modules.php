@@ -166,6 +166,7 @@ function uamswp_module( $module = array(), $i = false ) {
                 $local = $module['news_local'];
                 $link = $module['news_include_link'];
                 $position = $module['news_position'];
+                $articleID = $module['news_article_id'];
 
                 if ( 'grid' == $output ) {
                     $count = '3';
@@ -177,9 +178,9 @@ function uamswp_module( $module = array(), $i = false ) {
                     $count = '1';
                 }
                 uamswp_module_header( $module );
-                //echo '<!--[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" include_link="'. $link .'" news_position="'. $position .'"]-->';
+                //echo '<!--[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
                 echo '<div class="entry-content">';
-                echo do_shortcode('[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" include_link="'. $link .'" news_position="'. $position .'"]' );
+                echo do_shortcode('[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
                 echo '</div>';
             }
             break;

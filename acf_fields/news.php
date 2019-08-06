@@ -62,7 +62,15 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			'type' => 'text',
 			'instructions' => 'Please enter the filter / category slug',
 			'required' => 0,
-			'conditional_logic' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'full',
+					),
+				),
+			),
 			'wrapper' => array(
 				'width' => '',
 				'class' => '',
@@ -117,7 +125,15 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			'type' => 'number',
 			'instructions' => '',
 			'required' => 0,
-			'conditional_logic' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'full',
+					),
+				),
+			),
 			'wrapper' => array(
 				'width' => '',
 				'class' => '',
@@ -226,6 +242,33 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			'default_value' => 'left',
 			'layout' => 'horizontal',
 			'return_format' => 'value',
+		),
+		array(
+			'key' => 'field_news_article_id'. $suffix,
+			'label' => 'Article ID',
+			'name' => 'news_article_id',
+			'type' => 'text',
+			'instructions' => 'Enter the Article ID from news.uams.edu',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '==',
+						'value' => 'full',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
 		),
 		array(
 			'key' => 'field_news_advanced'. $suffix,
