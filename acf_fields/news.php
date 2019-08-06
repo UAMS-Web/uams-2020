@@ -62,7 +62,15 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			'type' => 'text',
 			'instructions' => 'Please enter the filter / category slug',
 			'required' => 0,
-			'conditional_logic' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'full',
+					),
+				),
+			),
 			'wrapper' => array(
 				'width' => '',
 				'class' => '',
@@ -117,7 +125,15 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			'type' => 'number',
 			'instructions' => '',
 			'required' => 0,
-			'conditional_logic' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'full',
+					),
+				),
+			),
 			'wrapper' => array(
 				'width' => '',
 				'class' => '',
@@ -228,6 +244,33 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			'return_format' => 'value',
 		),
 		array(
+			'key' => 'field_news_article_id'. $suffix,
+			'label' => 'Article ID',
+			'name' => 'news_article_id',
+			'type' => 'text',
+			'instructions' => 'Enter the Article ID from news.uams.edu',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '==',
+						'value' => 'full',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		),
+		array(
 			'key' => 'field_news_advanced'. $suffix,
 			'label' => '<i class="dashicons dashicons-admin-settings"></i> Advanced',
 			'name' => '',
@@ -281,25 +324,6 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			'prepend' => '',
 			'append' => '',
 			'maxlength' => '',
-		),
-		array(
-			'key' => 'field_news_cache'. $suffix,
-			'label' => 'Clear Cache',
-			'name' => 'news_cache',
-			'type' => 'true_false',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array(
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'message' => '',
-			'default_value' => 0,
-			'ui' => 1,
-			'ui_on_text' => '',
-			'ui_off_text' => '',
 		),
     );
 } else {

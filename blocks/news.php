@@ -22,8 +22,8 @@ if ( empty($advancedCat) )
     $advancedCat = get_field('news_advanced_cat');
 if ( empty($background_color) )
     $background_color = get_field('news_bgcolor');
-if ( empty($cache) )
-    $cache = get_field('news_cache');
+if ( empty($articleID) )
+    $articleID = get_field('news_article_id');
 if ( empty($local) )
     $local = get_field('news_local');
 if ( empty($link) )
@@ -41,6 +41,6 @@ if ( 'grid' == $output ) {
     $count = '1';
 }
 
-echo '<!--[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" cache_bust="'. $cache .'" include_link="'. $link .'" news_position="'. $position .'"]-->';
-echo do_shortcode('[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" cache_bust="'. $cache .'" include_link="'. $link .'" news_position="'. $position .'"]' );
+// echo '<!--[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
+echo do_shortcode('[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
 ?>
