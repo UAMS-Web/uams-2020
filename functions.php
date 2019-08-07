@@ -93,6 +93,7 @@ function uamswp_childtheme_setup() {
 	// Custom Image Size
 	add_image_size( 'bootstrap-featured', 730, 0, true );
 	add_image_size( 'aspect-16-9', 1024, 576, true );
+	add_image_size( 'aspect-16-9-small', 512, 288, true );
 	add_image_size( 'aspect-8-3', 1024, 384, true );
 	add_image_size( 'aspect-4-3', 1024, 768, true );
 	add_image_size( 'aspect-2-1', 1024, 512, true );

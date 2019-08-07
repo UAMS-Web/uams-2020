@@ -7,7 +7,11 @@
 
 // Create id attribute allowing for custom "anchor" value.
 if ( empty( $id ) )
-    $id = 'uams-news-' . $block['id'];   
+    $id = 'uams-news-' . $block['id'];  
+    
+if( !empty($block['align']) ) {
+    $className .= ' align' . $block['align'];
+}
 
 // Load values.
 if ( empty($output) )
@@ -42,5 +46,5 @@ if ( 'grid' == $output ) {
 }
 
 // echo '<!--[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
-echo do_shortcode('[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
+echo do_shortcode('[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
 ?>
