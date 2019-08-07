@@ -95,9 +95,13 @@ function uamswp_childtheme_setup() {
 	add_image_size( 'aspect-16-9', 1024, 576, true );
 	add_image_size( 'aspect-16-9-small', 512, 288, true );
 	add_image_size( 'aspect-8-3', 1024, 384, true );
+	//add_image_size( 'aspect-8-3-small', 512, 192, true ); // hidden until needed
 	add_image_size( 'aspect-4-3', 1024, 768, true );
+	//add_image_size( 'aspect-4-3-small', 512, 384, true ); // hidden until needed
 	add_image_size( 'aspect-2-1', 1024, 512, true );
+	//add_image_size( 'aspect-2-1-small', 512, 256, true ); // hidden until needed
 	add_image_size( 'aspect-1-1', 1024, 1024, true );
+	//add_image_size( 'aspect-1-1-small', 512, 512, true ); // hidden until needed
 	add_image_size( 'hero-tablet', 455, 256, true );
 
 	// Add Accessibility support
