@@ -103,6 +103,23 @@ function uamswp_childtheme_setup() {
 	add_image_size( 'aspect-1-1', 1024, 1024, true );
 	//add_image_size( 'aspect-1-1-small', 512, 512, true ); // hidden until needed
 	add_image_size( 'hero-tablet', 455, 256, true );
+	add_image_size( 'content-image-side', 336, 9999 );
+	add_image_size( 'content-image-center', 630, 9999 );
+	add_image_size( 'content-image-wide', 1020, 9999 );
+	add_image_size( 'content-image-full', 1920, 9999 );
+
+	// Add custom image sizes to post editor
+
+	add_filter( 'image_size_names_choose', 'uams_custom_add_image_size_names' );
+	function uams_custom_add_image_size_names( $sizes ) {
+	return array_merge( $sizes, array(
+		'content-image-side' => __( 'Content image aligned left/right' ),
+		'content-image-center' => __( 'Content image aligned center' ),
+		'content-image-wide' => __( 'Content image aligned wide' ),
+		'content-image-full' => __( 'Content image aligned full' ),
+	) );
+	}
+
 
 	// Add Accessibility support
 	add_theme_support( 'genesis-accessibility', array( '404-page', 'drop-down-menu', 'headings', 'rems', 'search-form', 'skip-links' ) );
