@@ -14,6 +14,10 @@ if( !empty($block['align']) ) {
 }
 
 // Load values.
+if ( empty($title) )
+    $output = get_field('news_title');
+if ( empty($hide_title) )
+    $output = get_field('news_hide_title');
 if ( empty($output) )
     $output = get_field('news_format');
 if ( empty($category) )
@@ -45,6 +49,6 @@ if ( 'grid' == $output ) {
     $count = '1';
 }
 
-// echo '<!--[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
-echo do_shortcode('[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
+// echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
+echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
 ?>

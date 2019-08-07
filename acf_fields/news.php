@@ -56,6 +56,74 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			'placeholder' => '',
 		),
 		array(
+			'key' => 'field_news_title'. $suffix,
+			'label' => 'Section Title',
+			'name' => 'news_title',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'side',
+					),
+				),
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'full',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => 'News & Announcements',
+			'placeholder' => 'News & Announcements',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		),
+		array(
+			'key' => 'field_news_hide_title'. $suffix,
+			'label' => 'Hide Section Title',
+			'name' => 'news_hide_title',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'side',
+					),
+				),
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'full',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => '',
+			'default_value' => 0,
+			'ui' => 1,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
+		array(
 			'key' => 'field_news_category'. $suffix,
 			'label' => 'Category',
 			'name' => 'news_category',

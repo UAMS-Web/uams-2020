@@ -157,6 +157,8 @@ function uamswp_module( $module = array(), $i = false ) {
         case 'modules_news_grid':
             if (class_exists('UAMS_Syndicate_News_Base')) {
                 $id = $i;
+                $title = $module['news_title'];
+                $hide_title = $module['news_hide_title'];
                 $output = $module['news_format'];
                 $category = $module['news_category'];
                 $count = $module['news_count'];
@@ -178,9 +180,9 @@ function uamswp_module( $module = array(), $i = false ) {
                     $count = '1';
                 }
                 uamswp_module_header( $module );
-                //echo '<!--[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
+                echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
                 echo '<div class="entry-content">';
-                echo do_shortcode('[uamswp_news output="'. $output .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
+                echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
                 echo '</div>';
             }
             break;
