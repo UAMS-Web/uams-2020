@@ -167,7 +167,7 @@ body.search {
                 }
 
                 @include media-breakpoint-up(sm) {
-                    max-width: 299px !important;
+                    max-width: 336px !important;
                     max-width: calc((#{$breakpoint-sm} - #{$uams-module-padding-mobile} * 3) / 2) !important;
                 }
 
