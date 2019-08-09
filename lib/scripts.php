@@ -32,8 +32,8 @@ function uamswp_theme_scripts() {
 		// wp_enqueue_script( 'jquery' );
 
 		// Register theme JS and enqueue it
-		wp_register_script( 'all-js', UAMSWP_THEME_JS . 'all.min.js', array( ), $version, true );
-		wp_enqueue_script( 'all-js' );
+		wp_register_script( 'jquery', UAMSWP_THEME_JS . 'all.min.js', array( ), $version, true ); // Renamed for dependencies
+		wp_enqueue_script( 'jquery' );
 
 		// // Register Popper JS and enqueue it
 		// wp_register_script( 'app-popper-js', UAMSWP_THEME_JS . 'popper.min.js', array( 'jquery' ), $version, true );
