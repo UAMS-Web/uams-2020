@@ -91,4 +91,21 @@
         border-radius: $input-border-radius;
         color: $input-color;
     }
+
+    // Checkboxes and radio buttons
+    .gfield_checkbox {
+        li {
+            input,
+            input[type=checkbox] {
+                margin-top: 0;
+            }
+        }
+    }
+    .gfield_radio {
+        li {
+            input[type=radio] {
+                margin-top: 0;
+            }
+        }
+    }
 }
