@@ -14,7 +14,8 @@ function uamswp_modules_display()
 {	
 	uamswp_modules();
 }
-add_action( 'genesis_entry_content', 'uamswp_modules_display', 5 );
+remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
+add_action( 'genesis_entry_content', 'uamswp_modules_display' );
 
 
 // Build the page // Original BE Code
