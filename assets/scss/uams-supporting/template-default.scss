@@ -4,20 +4,6 @@ body.post-template-default,
 body.archive,
 body.error404,
 body.search {
-
-    .entry,
-    .entry-comments,
-    #respond,
-    .archive-description,
-    .archive-pagination {
-        padding: $uams-module-padding-mobile;
-        margin-bottom: 0;
-    
-        @include media-breakpoint-up(sm) {
-            padding: $uams-module-padding;
-        }
-    }
-
     .archive-description,
     .entry {
         .entry-title,
@@ -54,6 +40,40 @@ body.search {
                 left: 0;
                 right: 0;
             }
+        }
+    }
+}
+
+body.page-template-modules {
+    .archive-description,
+    .entry {
+        .entry-title,
+        .archive-title {
+            padding-top: $uams-module-padding-mobile;
+        
+            @include media-breakpoint-up(sm) {
+                padding-top: $uams-module-padding;
+            }
+        }
+    }
+}
+
+body.page-template-default,
+body.post-template-default,
+body.archive,
+body.error404,
+body.search {
+
+    .entry,
+    .entry-comments,
+    #respond,
+    .archive-description,
+    .archive-pagination {
+        padding: $uams-module-padding-mobile;
+        margin-bottom: 0;
+    
+        @include media-breakpoint-up(sm) {
+            padding: $uams-module-padding;
         }
     }
 
