@@ -11,3 +11,11 @@
         margin: ($spacer-min / 2);
     }
 }
+
+.wp-block-file {
+    .wp-block-file__button {
+        @extend .btn;
+        @extend .btn-sm;
+        @extend .btn-primary;
+    }
+}
