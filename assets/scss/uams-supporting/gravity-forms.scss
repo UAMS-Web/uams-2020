@@ -93,7 +93,16 @@
     }
 
     // Checkboxes and radio buttons
-    .gfield_checkbox {
+    ul.gfield_checkbox,
+    ul.gfield_radio {
+        li {
+            label {
+                margin-left: 10px;
+            }
+        }
+    }
+
+    ul.gfield_checkbox {
         li {
             input,
             input[type=checkbox] {
@@ -101,7 +110,7 @@
             }
         }
     }
-    .gfield_radio {
+    ul.gfield_radio {
         li {
             input[type=radio] {
                 margin-top: 0;
