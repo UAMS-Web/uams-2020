@@ -82,3 +82,19 @@
         padding: 1.25rem 0 0 0;
     }
 }
+
+body.page-template-default {
+    .stacked-image-text,
+    .uamswp-news-syndication-cards {
+        &:not(.alignfull) {
+            .item {
+                @extend .col-sm-12;
+                @extend .col-xl-12;
+
+                &:nth-child(-n+4) {
+                    padding-bottom: $grid-gutter-width;
+                }
+            }
+        }
+    }
+}
