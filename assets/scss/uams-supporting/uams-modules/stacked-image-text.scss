@@ -84,16 +84,14 @@
 }
 
 body.page-template-default {
-    .stacked-image-text,
-    .uamswp-news-syndication-cards {
-        &:not(.alignfull) {
-            .item {
-                @extend .col-sm-12;
-                @extend .col-xl-12;
+    .stacked-image-text:not(.alignfull),
+    .uamswp-news-syndication-wrapper:not(.alignfull) .uamswp-news-syndication-cards {
+        .item {
+            @extend .col-sm-12;
+            @extend .col-xl-12;
 
-                &:nth-child(-n+4) {
-                    padding-bottom: $grid-gutter-width;
-                }
+            &:nth-child(-n+4) {
+                padding-bottom: $grid-gutter-width;
             }
         }
     }
