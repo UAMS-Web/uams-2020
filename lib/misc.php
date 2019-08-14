@@ -155,6 +155,7 @@ function uamswp_allowed_block_types( $allowed_blocks ) {
 		// Layout
 		'core/media-text',
 		'core/spacer',
+		'core/separator', // HR
 		// Embeds
 		'core/embed',
 		'core-embed/twitter',
