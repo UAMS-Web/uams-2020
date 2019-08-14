@@ -165,6 +165,7 @@ function uamswp_module( $module = array(), $i = false ) {
                 $offset = $module['news_offset'];
                 $advancedCat = $module['news_advanced_cat'];
                 $background_color = $module['news_bgcolor'];
+                $hide_img = $module['news_hide_img'];
                 $local = $module['news_local'];
                 $link = $module['news_include_link'];
                 $position = $module['news_position'];
@@ -180,9 +181,9 @@ function uamswp_module( $module = array(), $i = false ) {
                     $count = '1';
                 }
                 uamswp_module_header( $module );
-                echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
+                echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
                 echo '<div class="entry-content">';
-                echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
+                echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
                 echo '</div>';
             }
             break;
