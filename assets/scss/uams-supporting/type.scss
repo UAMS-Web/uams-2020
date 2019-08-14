@@ -240,3 +240,22 @@ cite,
         }
     }
 }
+
+hr {
+    margin-top: $uams-module-padding-mobile;
+    margin-bottom: $uams-module-padding-mobile;
+
+    @include media-breakpoint-up(sm) {
+        margin-top: $uams-module-padding;
+        margin-bottom: $uams-module-padding;
+    }
+
+    &.wp-block-separator.is-style-wide {
+        @include media-breakpoint-up(md) {
+            @include alignwide(1.309);
+        }
+        @include media-breakpoint-up(lg) {
+            @include alignwide(1.618);
+        }
+    }
+}
