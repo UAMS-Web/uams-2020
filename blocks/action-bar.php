@@ -7,7 +7,16 @@
 
 // Create id attribute allowing for custom "anchor" value.
 if ( empty( $id ) )
-    $id = 'action-bar-' . $block['id'];   
+    $id = 'action-bar-' . $block['id'];  
+    
+$className = '';
+if( !empty($block['className']) ) {
+    $className .= ' ' . $block['className'];
+}
+if( !empty($block['align']) ) {
+    $className .= ' align' . $block['align'];
+}
+    
 
 // Load values.
 if ( empty($heading) )
@@ -23,7 +32,7 @@ if( $action_bar_rows ) {
 } 
 
 ?>
-<section class="uams-module action-bar count-<?php echo $row_count < 4 ? "3" : "4"; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>">
+<section class="uams-module action-bar<?php echo $className; ?> count-<?php echo $row_count < 4 ? "3" : "4"; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>">
     <h2 class="sr-only"><?php echo $heading; ?></h2>
     <div class="container-fluid">
         <div class="row">

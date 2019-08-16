@@ -10,6 +10,14 @@ if ( empty( $id ) )
     $id = $block['id'];    
 $id = 'stacked-image-text-' . $id; 
 
+$className = '';
+if( !empty($block['className']) ) {
+    $className .= ' ' . $block['className'];
+}
+if( !empty($block['align']) ) {
+    $className .= ' align' . $block['align'];
+}
+
 // Load values.
 if ( empty( $heading ) )
     $heading = get_field('post_tiles_heading');
@@ -25,7 +33,7 @@ if( $post_tiles_rows ) :
     $row_count = count($post_tiles_rows); 
 
 ?>
-<section class="uams-module stacked-image-text <?php echo $background_color; ?>" id="<?php echo $id; ?>">
+<section class="uams-module stacked-image-text<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12<?php echo $hide_heading ? " sr-only" : ""; ?>">

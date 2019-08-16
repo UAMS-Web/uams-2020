@@ -11,6 +11,15 @@ if ( empty( $id ) ) {
 }
 $id = 'text-image-overlay-' . $id;
 
+$className = '';
+if( !empty($block['className']) ) {
+    $className .= ' ' . $block['className'];
+}
+if( !empty($block['align']) ) {
+    $className .= ' align' . $block['align'];
+}
+
+
 if( empty($overlay_rows) )
     $overlay_rows = get_field('overlay_section');
 
@@ -36,7 +45,7 @@ if( $overlay_rows ) :
         $image = $overlay_row['overlay_section_image'];
 
 ?>
-            <div class="col-12<?php echo $row_count > 1 ? " col-sm-6" : ""; ?> item bg-image item-<?php echo $index; ?> <?php echo $background_color; ?>">
+            <div class="col-12<?php echo $row_count > 1 ? " col-sm-6" : ""; ?> item bg-image<?php echo $className; ?> item-<?php echo $index; ?> <?php echo $background_color; ?>">
                 <?php if ( $row_count > 1 && function_exists( 'fly_add_image_size' ) ) { // Background styles for two tiles in one row with Fly plugin ?>
                 <style>
                     #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
