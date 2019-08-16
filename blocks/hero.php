@@ -44,7 +44,7 @@ if( $hero_rows ) :
                 <?php } ?>
             </ol>
 <?php   }  ?>
-    <div class="carousel-inner" class="<?php echo esc_attr($className); ?>">
+    <div class="carousel-inner <?php echo esc_attr($className); ?>">
 <?php 
     $index = 1;
     foreach($hero_rows as $hero_row) {

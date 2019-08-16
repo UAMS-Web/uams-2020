@@ -11,6 +11,14 @@ if ( empty( $id ) )
 
 $id = 'call-out-' . $id;
 
+$className = '';
+if( !empty($block['className']) ) {
+    $className .= ' ' . $block['className'];
+}
+if( !empty($block['align']) ) {
+    $className .= ' align' . $block['align'];
+}
+
 // Load values.
 if ( empty($heading) ) 
     $heading = get_field('call_out_heading');
@@ -24,7 +32,7 @@ if ( empty($background_color) )
     $background_color = get_field('call_out_background_color');
 
 ?>
-<section class="uams-module extra-padding call-out <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>">
+<section class="uams-module extra-padding call-out<?php echo $className; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>">
     <?php if ( $use_image && function_exists( 'fly_add_image_size' ) ) { ?>
     <style>
         #<?php echo $id; ?>:before {

@@ -11,6 +11,14 @@ if ( empty( $id ) )
     
 $id = 'cta-bar-' . $id;
 
+$className = '';
+if( !empty($block['className']) ) {
+    $className .= ' ' . $block['className'];
+}
+if( !empty($block['align']) ) {
+    $className .= ' align' . $block['align'];
+}
+
 // Load values and assing defaults.
 // if empty - allow values to be set for widgets
 if ( empty($heading) ) 
@@ -35,7 +43,7 @@ if ( empty($background_color) )
     $background_color = get_field('cta_bar_background_color');
 
 ?>
-<section class="uams-module cta-bar <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>">
+<section class="uams-module cta-bar <?php echo $className; ?> <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>">
 <?php if ( $use_image && function_exists( 'fly_add_image_size' ) ) { ?>
     <style>
         #<?php echo $id; ?>:before {

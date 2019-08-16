@@ -4,7 +4,7 @@
  * UAMS News Block
  * 
  */
-
+$className = '';
 // Create id attribute allowing for custom "anchor" value.
 if ( empty( $id ) )
     $id = 'uams-news-' . $block['id'];  
@@ -15,9 +15,9 @@ if( !empty($block['align']) ) {
 
 // Load values.
 if ( empty($title) )
-    $output = get_field('news_title');
+    $title = get_field('news_title');
 if ( empty($hide_title) )
-    $output = get_field('news_hide_title');
+    $hide_title = get_field('news_hide_title');
 if ( empty($output) )
     $output = get_field('news_format');
 if ( empty($category) )
