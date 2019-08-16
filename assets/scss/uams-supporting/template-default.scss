@@ -188,14 +188,30 @@ body.search {
                 }
 
                 @include media-breakpoint-up(sm) {
-                    max-width: 336px !important;
-                    max-width: calc((#{$breakpoint-sm} - #{$uams-module-padding-mobile} * 3) / 2) !important;
+                    max-width: 299px !important;
+                    max-width: calc((#{$content-width} - #{$page-title-margin-bottom-mobile}) / 2) !important;
                 }
 
                 &.small {
                     @include media-breakpoint-up(md) {
                         max-width: 299px * 0.75 !important;
-                        max-width: calc((#{$breakpoint-md} - #{$uams-module-padding-mobile} * 4) / 3) !important;
+                        max-width: calc((#{$content-width} - #{$page-title-margin-bottom-mobile}) / 2 * 0.75) !important;
+                    }
+                }
+
+                img,
+                .wp-caption-text,
+                figcaption {
+                    @include media-breakpoint-only(xxs) {
+                        margin-right: auto;
+                        margin-left: auto;
+                    }
+                }
+
+                .wp-caption-text,
+                figcaption {
+                    @include media-breakpoint-only(xxs) {
+                        text-align: center;
                     }
                 }
             }
