@@ -103,7 +103,7 @@ function uamswp_childtheme_setup() {
 	add_image_size( 'aspect-1-1', 1024, 1024, true );
 	//add_image_size( 'aspect-1-1-small', 512, 512, true ); // hidden until needed
 	add_image_size( 'hero-tablet', 455, 256, true );
-	add_image_size( 'content-image-side', 336, 9999 );
+	add_image_size( 'content-image-side', 299, 9999 );
 	add_image_size( 'content-image-center', 630, 9999 );
 	add_image_size( 'content-image-wide', 1020, 9999 );
 	add_image_size( 'content-image-full', 1920, 9999 );
