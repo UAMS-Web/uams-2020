@@ -122,7 +122,10 @@ function uamswp_footer_creds_text() {
      */
     /* Institutes, NW Campus, & Regional Campus get new address option */
     $custom_addresses = get_field( 'uamswp_address', 'option' ); 
-    $custom_count = count($custom_addresses);  
+    $custom_count = 0;
+    if ($custom_addresses) {
+        $custom_count = count($custom_addresses);  
+    }
     if ($custom_count < 2) {
         $address_sr = ' class="sr-only"';
     } 
