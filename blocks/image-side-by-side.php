@@ -44,8 +44,10 @@ if ( empty($list_more) )
 if ( empty($cta) ) 
     $cta = get_field('side_cta') ?: '';
     $cta_text = $cta['side_cta_text'] ?: '';
-    $cta_link = $cta['side_cta_url']['url'] ?: '';
-    $cta_target = $cta['side_cta_url']['target'] ?: '';
+    if ( get_field('side_cta_url') ) {
+        $cta_link = $cta['side_cta_url']['url'] ?: '';
+        $cta_target = $cta['side_cta_url']['target'] ?: '';
+    }
     $cta_desc = $cta['side_cta_description'] ?: '';
 if ( empty($image_group) ) 
     $image_group = get_field('side_image')?: '';
