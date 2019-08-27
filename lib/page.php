@@ -270,3 +270,14 @@ function remove_breadcrumbs() {
 		remove_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
 	}
 }
+
+/**
+ * Use h1 for homepage entry title
+ */
+function uamswp_homepage_entry_title_h1( $title ) {
+    if ( is_front_page() ) {
+        $title = sprintf( '<h1 class="entry-title">%s</h1>', apply_filters( 'genesis_post_title_text', get_the_title() ) );
+        return $title;
+    }
+}
+add_filter( 'genesis_post_title_output', 'uamswp_homepage_entry_title_h1' );
