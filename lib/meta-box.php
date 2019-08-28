@@ -622,7 +622,7 @@ acf_add_local_field_group(array(
 			'key' => 'field_primary_phone_number',
 			'label' => 'Phone Number',
 			'name' => 'uamswp_primary_phone_number',
-			'type' => (class_exists('jony_acf_plugin_intl_tel_input') ? 'intl_tel_input' : 'text'), // Telephone input
+			'type' => (class_exists('po_acf_plugin_maskfield') ? 'maskfield' : 'text'), // Telephone input
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
@@ -630,12 +630,7 @@ acf_add_local_field_group(array(
 				'class' => '',
 				'id' => '',
 			),
-			'separateDialCode' => 0,
-			'allowDropdown' => 0,
-			'initialCountry' => 'us',
-			'excludeCountries' => '',
-			'onlyCountries' => '',
-			'preferredCountries' => '',
+			'input_mask' => '(999) 999-9999',
 		),
 		array(
 			'key' => 'field_secondary_type',
@@ -741,7 +736,7 @@ acf_add_local_field_group(array(
 			'key' => 'field_secondary_phone_number',
 			'label' => 'Secondary Phone Number',
 			'name' => 'uamswp_secondary_phone_number',
-			'type' => (class_exists('jony_acf_plugin_intl_tel_input') ? 'intl_tel_input' : 'text'), // Telephone input
+			'type' => (class_exists('po_acf_plugin_maskfield') ? 'maskfield' : 'text'), // Telephone input
 			'instructions' => '',
 			'required' => 0,
 			'conditional_logic' => array(
@@ -758,12 +753,7 @@ acf_add_local_field_group(array(
 				'class' => '',
 				'id' => '',
 			),
-			'separateDialCode' => 0,
-			'allowDropdown' => 0,
-			'initialCountry' => 'us',
-			'excludeCountries' => '',
-			'onlyCountries' => '',
-			'preferredCountries' => '',
+			'input_mask' => '(999) 999-9999',
 		),
 		array(
 			'key' => 'field_phone_accordion_end',
