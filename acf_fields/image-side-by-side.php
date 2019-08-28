@@ -272,7 +272,14 @@ return array(
                 'type' => 'link',
                 'instructions' => '',
                 'required' => 1,
-                'conditional_logic' => 0,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_side_cta_text'. $suffix,
+                            'operator' => '!=empty',
+                        ),
+                    ),
+                ),
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',
@@ -307,7 +314,14 @@ return array(
                 'type' => 'text',
                 'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
                 'required' => 1,
-                'conditional_logic' => 0,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_side_cta_text'. $suffix,
+                            'operator' => '!=empty',
+                        ),
+                    ),
+                ),
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',

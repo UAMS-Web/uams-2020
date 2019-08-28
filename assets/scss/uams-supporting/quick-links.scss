@@ -75,8 +75,11 @@
     .links {
 
         a {
+            display: inline-block;
+            padding-left: 1.625em;
             color: inherit;
             text-decoration: none;
+            text-indent: -1.625em;
           
             @include hover-focus {
               text-decoration: underline;
@@ -91,7 +94,7 @@
             font-size: 1.375rem;
 
             li:first-child {
-                padding-right: 0.875rem; // if this is the first visible thing, add some space to allow for the close button
+                //padding-right: 0.875rem; // if this is the first visible thing, add some space to allow for the close button
             }
         }
     }

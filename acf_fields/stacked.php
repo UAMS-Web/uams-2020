@@ -102,7 +102,7 @@ return array(
         ),
         'collapsed' => '',
         'min' => 4,
-        'max' => 4,
+        'max' => '',
         'layout' => 'block',
         'button_label' => '',
         'sub_fields' => array(
@@ -210,7 +210,7 @@ return array(
                 'name' => 'stacked_section_button_text',
                 'type' => 'text',
                 'instructions' => '',
-                'required' => 1,
+                'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(
                     'width' => '',
@@ -230,7 +230,14 @@ return array(
                 'type' => 'link',
                 'instructions' => 'Include http:// or https://.',
                 'required' => 1,
-                'conditional_logic' => 0,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_stacked_section_button_text'. $suffix,
+                            'operator' => '!=empty',
+                        ),
+                    ),
+                ),
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',
@@ -264,7 +271,14 @@ return array(
                 'type' => 'text',
                 'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
                 'required' => 1,
-                'conditional_logic' => 0,
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field' => 'field_stacked_section_button_text'. $suffix,
+                            'operator' => '!=empty',
+                        ),
+                    ),
+                ),
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',
