@@ -272,12 +272,10 @@ function remove_breadcrumbs() {
 }
 
 /**
- * Use h1 for homepage entry title
+ * Use h1 for all entry titles
  */
-function uamswp_homepage_entry_title_h1( $title ) {
-    if ( is_front_page() ) {
-        $title = sprintf( '<h1 class="entry-title">%s</h1>', apply_filters( 'genesis_post_title_text', get_the_title() ) );
-        return $title;
-    }
+function uamswp_entry_title_h1( $title ) {
+    $title = sprintf( '<h1 class="entry-title">%s</h1>', apply_filters( 'genesis_post_title_text', get_the_title() ) );
+    return $title;
 }
-add_filter( 'genesis_post_title_output', 'uamswp_homepage_entry_title_h1' );
+add_filter( 'genesis_post_title_output', 'uamswp_entry_title_h1' );
