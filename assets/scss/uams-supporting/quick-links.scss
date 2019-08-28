@@ -73,6 +73,10 @@
     }
 
     .links {
+        li {
+            text-indent: -1.625em;
+            padding-left: 1.625em;
+        }
 
         a {
             color: inherit;
@@ -91,7 +95,7 @@
             font-size: 1.375rem;
 
             li:first-child {
-                padding-right: 0.875rem; // if this is the first visible thing, add some space to allow for the close button
+                //padding-right: 0.875rem; // if this is the first visible thing, add some space to allow for the close button
             }
         }
     }
