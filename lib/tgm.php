@@ -44,11 +44,17 @@ function uamswp_do_plugins_register() {
 		// 	'slug'      => 'meta-box-text-limiter',
 		// 	'required'  => false,
 		// ),
-		// Begin Meta Box extensions.
+		// Begin ACF extensions.
 		array(
-			'name'               => __( 'Advanced Custom Fields: International Telephone Input', 'uamswp-uams-2020' ), // The plugin name.
-			'slug'               => 'acf-intl-tel-input', // The plugin slug (typically the folder name).
-			'source'             => get_stylesheet_directory() . '/plugins/acf-intl-tel-input.zip', // The plugin source.
+			'name'               => __( 'Advanced Custom Fields PRO', 'uamswp-uams-2020' ), // The plugin name.
+			'slug'               => 'advanced-custom-fields-pro', // The plugin slug (typically the folder name).
+			'source'             => get_stylesheet_directory() . '/plugins/advanced-custom-fields-pro.zip', // The plugin source.
+			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		),
+		array(
+			'name'               => 'Advanced Custom Fields: Mask Field', // The plugin name.
+			'slug'               => 'acf-maskfield', // The plugin slug (typically the folder name).
+			'source'             => get_stylesheet_directory() . '/plugins/acf-maskfield.zip', // The plugin source.
 			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
 		),
 
