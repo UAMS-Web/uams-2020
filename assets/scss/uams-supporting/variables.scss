@@ -233,6 +233,7 @@ $enable-deprecation-messages: true;
 // variables. Mostly focused on spacing.
 // You can add more entries to the $spacers map, should you need more variation.
 
+$spacer: 1rem;
 $spacer-min: 10px;
 $spacers: (
     0: 0,
@@ -405,6 +406,7 @@ $font-family-uni: "Uni sans", sans-serif;
 $font-family-base: $font-family-sans-serif;
 // stylelint-enable value-keyword-case
 
+$onerem: 16px;
 $font-size-base: 1.125rem; // 18px
 $font-size-base-px: 1.125 * 16px; // 18px
 $font-size-lg: $font-size-base * 1.25;
