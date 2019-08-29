@@ -44,7 +44,7 @@ if ( empty($list_more) )
 if ( empty($cta) ) 
     $cta = get_field('side_cta') ?: '';
     $cta_text = $cta['side_cta_text'] ?: '';
-    if ( get_field('side_cta_url') ) {
+    if ( $cta['side_cta_url'] ) {
         $cta_link = $cta['side_cta_url']['url'] ?: '';
         $cta_target = $cta['side_cta_url']['target'] ?: '';
     }
@@ -224,7 +224,7 @@ if ( empty($image_alt) )
                         <?php echo $list_more ? '<li><em>and more</em></li>' : ''; ?>
                     </ul>
                     <?php endif;
-                        if( $cta_link ){
+                        if( $cta_text ){
                             echo $cta_link;
                             echo $cta_text ? $cta_text : 'Learn More'; 
                             echo '</a>';
