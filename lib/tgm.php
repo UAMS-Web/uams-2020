@@ -52,7 +52,7 @@ function uamswp_do_plugins_register() {
 			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
 		),
 		array(
-			'name'               => 'Advanced Custom Fields: Mask Field', // The plugin name.
+			'name'               => __( 'Advanced Custom Fields: Mask Field', 'uamswp-uams-2020' ), // The plugin name.
 			'slug'               => 'acf-maskfield', // The plugin slug (typically the folder name).
 			'source'             => get_stylesheet_directory() . '/plugins/acf-maskfield.zip', // The plugin source.
 			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
