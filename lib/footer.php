@@ -335,10 +335,10 @@ function uamswp_footer_creds_text() {
 
     // Render this by default
     echo '<ul class="nav legal" role="navigation">';
-    echo '<li class="nav-item"><a class="nav-link" href="/sitemap">Site Map</a></li>';
     echo '<li class="nav-item"><a class="nav-link" href="https://www.uamshealth.com/disclaimer/">Disclaimer</a></li>';
     echo '<li class="nav-item"><a class="nav-link" href="https://www.uamshealth.com/termsofuse/">Terms of Use</a></li>';
     echo '<li class="nav-item"><a class="nav-link" href="https://www.uamshealth.com/privacy/">Privacy</a></li>';
+    //echo '<li class="nav-item"><a class="nav-link" href="/sitemap">Site Map</a></li>';
     echo '</ul>';
     echo '<p class="copyright">&copy; '. date('Y') . ' University of Arkansas for Medical Sciences</p>';
 }
