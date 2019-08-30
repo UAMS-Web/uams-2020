@@ -80,10 +80,7 @@ function ursidae_site_image() {
 					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="https://mychart.uamshealth.com/">MyChart</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="http://giving.uams.edu/">Giving</a>
+					<a class="nav-link" href="https://www.uamshealth.com/">UAMSHealth</a>
 				</li>
 				<!-- End right nav -->
 				<?php } ?>
