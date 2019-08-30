@@ -336,6 +336,19 @@ function format_phone_dash($phone) {
   }
 }
 
+if (!function_exists('apStyleDate')) {
+	function apStyleDate($date){
+
+		$date = strftime("%l:%M %P", strtotime($date));
+	
+		$date = str_replace(":00", "", $date);
+		$date = str_replace("m", ".m.", $date);
+	
+		return $date;
+	
+	}
+}
+
 /**
  * Return sized image.
  *
