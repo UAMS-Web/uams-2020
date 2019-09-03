@@ -53,7 +53,7 @@ function uamswp_nav_subsection(){
  */
 add_action( 'template_redirect', 'remove_primary_nav' );
 function remove_primary_nav() {
-	if ( uamswp_nav_subsection() ) {
+	if ( uamswp_nav_subsection() || ! has_nav_menu( 'primary' ) ) {
 		remove_action( 'genesis_after_header', 'genesis_do_nav' );
 	}
 }
@@ -66,7 +66,7 @@ function remove_primary_nav() {
  */
 add_action( 'genesis_after_header', 'custom_nav_menu' );
 function custom_nav_menu() {
-	if ( uamswp_nav_subsection() ) {
+	if ( uamswp_nav_subsection() || ! has_nav_menu( 'primary' ) ) {
 
         require_once( UAMSWP_THEME_MODULES . 'class-wp-bootstrap-pagewalker.php' );
 
