@@ -104,13 +104,24 @@ function uams_register_blocks() {
         acf_register_block_type(array(
             'name'              => 'post-category-tile',
             'title'             => __('UAMS Post Category Tile (Single)'),
-            'description'       => __('One tile displaying a post from an individual post categoriy.'),
+            'description'       => __('One tile displaying a post from an individual post category.'),
             'category'          => 'common',
             'icon'              => 'screenoptions',
             'keywords'          => array('uams', 'news', 'posts', 'post', 'articles', 'article', 'link', 'links', 'intranet', 'inside', 'tile', 'tiles', 'sidebar', 'side bar'),
             'mode'              => 'auto',
             'align'             => 'full',
             'render_template'   => 'blocks/post-category-tile.php',
+        ));
+        acf_register_block_type(array(
+            'name'              => 'link-list',
+            'title'             => __('UAMS Link List'),
+            'description'       => __('A list of linked tiles.'),
+            'category'          => 'common',
+            'icon'              => 'admin-links',
+            'keywords'          => array('uams', 'link', 'links', 'list'),
+            'mode'              => 'auto',
+            'align'             => 'full',
+            'render_template'   => 'blocks/link-list.php',
         ));
         if (class_exists('UAMS_Syndicate_News_Base')) { // Add block if news syndication plugin is active
             acf_register_block_type(array(
@@ -152,6 +163,7 @@ if( function_exists('acf_add_local_field_group') ):
     $post_tiles = require( get_stylesheet_directory() .'/acf_fields/post-category-tiles.php' );
     $side_by_side = require( get_stylesheet_directory() .'/acf_fields/image-side-by-side.php' );
     $stacked = require( get_stylesheet_directory() .'/acf_fields/stacked.php' );
+    $link_list = require( get_stylesheet_directory() .'/acf_fields/link-list.php' );
     $news = require( get_stylesheet_directory() .'/acf_fields/news.php' );
 
     
@@ -373,6 +385,30 @@ if( function_exists('acf_add_local_field_group') ):
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/post-category-tile',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+    ));
+
+    // Add local field group for UAMS Link List Block
+    acf_add_local_field_group(array(
+        'key' => 'group_uams_link_list',
+        'title' => 'Block: UAMS Link List',
+        'fields' => $link_list,
+        'location' => array(
+            array(
+                array(
+                    'param' => 'block',
+                    'operator' => '==',
+                    'value' => 'acf/link-list',
                 ),
             ),
         ),
