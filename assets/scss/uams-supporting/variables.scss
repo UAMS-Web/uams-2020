@@ -8,6 +8,7 @@
 // Color system
 
 $white: #fff;
+$bg-white: $white;
 $gray-50: #FAF8F9; // Lightest
 $gray-100: #F5F3F4; // Lighter
 $gray-200: #F0EEEF; // Light
@@ -20,6 +21,7 @@ $gray-800: #434142; // Darker
 $gray-900: #212121; // Base & Text
 $gray-accent: $gray-300; // Accent
 $black: #000;
+$bg-black: $black;
 
 $grays: (
   "50": $gray-50,
@@ -42,6 +44,7 @@ $red-dark: #8d1f30;
 $red-light: #ad253a;
 $red-lightest: #bd2940;
 $red-special: #C61029;
+$bg-red: $red;
 
 $green: #229d4d;
 $green-darkest: #186d35;
@@ -50,6 +53,7 @@ $green-dark: #1f8d45;
 $green-light: #25ad55;
 $green-lighter: #29bd5d;
 $green-lightest: #2ccd65;
+$bg-green: $green-dark;
 
 $blue: #22739d;
 $blue-darkest: #18506d;
@@ -58,6 +62,7 @@ $blue-dark: #1f678d;
 $blue-light: #257fad;
 $blue-lighter: #298bbd;
 $blue-lightest: #2c96cd;
+$bg-blue: $blue;
 
 $dark-blue: #1A365C;
 $dark-blue-darkest: #0d1b2e;
@@ -74,6 +79,7 @@ $teal-dark: #3b7274;
 $teal-light: #498c8e;
 $teal-lighter: #4f999b;
 $teal-lightest: #56a5a8;
+$bg-teal: $teal;
 
 $eggplant: #701D45;
 $eggplant-darkest: #411128;
@@ -82,6 +88,7 @@ $eggplant-dark: #60193b;
 $eggplant-light: #80214f;
 $eggplant-lighter: #8f2558;
 $eggplant-lightest: #9f2962;
+$bg-eggplant: $eggplant;
 
 $maroon: #6C0020;
 $maroon-darkest: #31000f;
@@ -99,6 +106,7 @@ $orange-light: #db521f;
 $orange-lighter: #e15e2d;
 $orange-lightest: #e36b3e;
 $orange-special: #ec7330;
+$bg-orange: $orange;
 
 $yellow: #ffb81c;
 
@@ -272,6 +280,7 @@ $image-hover-size-transition: transform 1s ease;
 
 $body-bg: $white;
 $body-bg-banded: $gray-50;
+$bg-gray: $body-bg-banded;
 $body-bg-border: $gray-200;
 $body-bg-border-dark: $gray-300;
 $body-color: $gray-900;
