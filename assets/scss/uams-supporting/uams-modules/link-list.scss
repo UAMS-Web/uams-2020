@@ -1,0 +1,125 @@
+.link-list {
+    .row {
+        margin-top: (-$grid-gutter-width * 0.75);
+        margin-bottom: (-$grid-gutter-width * 0.75);
+        justify-content: center;
+    }
+    .item {
+        padding-top: ($grid-gutter-width * 0.75);
+        padding-bottom: ($grid-gutter-width * 0.75);
+        flex: 0 0 (0.4375em * 35); // 35 characters per line
+        max-width: 100%;
+    }
+
+    .inner-container {
+        position: relative;
+        text-align:center;
+    }
+
+    .fa-stack {
+        margin-left: -0.25em;
+        color: inherit;
+    }
+
+    h3 {
+        margin: 0.5em 0;
+    }
+
+    &.bg-white,
+    &.bg-gray {
+        .inner-container {
+            &:hover {
+                .fa-stack {
+                    opacity: 0.75;
+                }
+            }
+        }
+    }
+
+    &.bg-white {
+        .fa-stack {
+            color: $gray-500;
+
+            .fa-inverse {
+                color: $bg-white;
+            }
+        }
+    }
+
+    &.bg-gray {
+        .fa-stack {
+            color: $gray-600;
+
+            .fa-inverse {
+                color: $bg-gray;
+            }
+        }
+    }
+
+    &.bg-red,
+    &.bg-black,
+    &.bg-blue,
+    &.bg-green,
+    &.bg-teal,
+    &.bg-eggplant {
+        .fa-stack {
+            color: inherit;
+            opacity: 0.66;
+        }
+        .inner-container {
+            &:hover {
+                .fa-stack {
+                    opacity: 0.5;
+                }
+            }
+        }
+    }
+
+    &.bg-red {
+        .fa-stack {
+            .fa-inverse {
+                color: $bg-red;
+            }
+        }
+    }
+
+    &.bg-black {
+        .fa-stack {
+            .fa-inverse {
+                color: $bg-black;
+            }
+        }
+    }
+
+    &.bg-blue {
+        .fa-stack {
+            .fa-inverse {
+                color: $bg-blue;
+            }
+        }
+    }
+
+    &.bg-green {
+        .fa-stack {
+            .fa-inverse {
+                color: $bg-green;
+            }
+        }
+    }
+
+    &.bg-teal {
+        .fa-stack {
+            .fa-inverse {
+                color: $bg-teal;
+            }
+        }
+    }
+
+    &.bg-eggplant {
+        .fa-stack {
+            .fa-inverse {
+                color: $bg-eggplant;
+            }
+        }
+    }
+}

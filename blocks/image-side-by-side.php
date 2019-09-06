@@ -43,30 +43,29 @@ if ( empty($list_more) )
     $list_more = get_field('side_link_include_more') ?: '';
 if ( empty($cta) ) 
     $cta = get_field('side_cta') ?: '';
-    $cta_text = $cta['side_cta_text'] ?: '';
-    if ( get_field('side_cta_url') ) {
-        $cta_link = $cta['side_cta_url']['url'] ?: '';
-        $cta_target = $cta['side_cta_url']['target'] ?: '';
-    }
-    $cta_desc = $cta['side_cta_description'] ?: '';
+$cta_text = $cta['side_cta_text'] ?: '';
+if ( $cta['side_cta_url'] ) {
+    $cta_link = $cta['side_cta_url']['url'] ?: '';
+    $cta_target = $cta['side_cta_url']['target'] ?: '';
+}
+$cta_desc = $cta['side_cta_description'] ?: '';
 if ( empty($image_group) ) 
     $image_group = get_field('side_image')?: '';
-    $side_image = $image_group['side_image_image'] ?: '';
-    $image_alt = $image_group['side_image_alt_text'] ?: '';
-    $image_crop = $image_group['side_image_crop'] ?: '';
+$side_image = $image_group['side_image_image'] ?: '';
+$image_alt = $image_group['side_image_alt_text'] ?: '';
+$image_crop = $image_group['side_image_crop'] ?: '';
 if ( empty($image_postion) ) 
     $image_postion = get_field('side_image_position') ?: 'left';
 if ( empty($image_anchor) ) 
     $image_anchor = get_field('side_image_anchor') ?: 'center';
 if ( empty($background_color) ) 
     $background_color = get_field('side_image_background_color') ?: 'bg-white';
-
 if ( empty($image_alt) ) 
     $image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachment_image_alt', true);
-    $cta_target = $cta_target ? ' target="'. $cta_target .'"' : '';
-    $cta_desc = $cta_desc ? ' aria-label="'.$cta_desc.'"' : '';
-    $cta_link = $cta_link ? '<a class="btn btn-primary" href="'. $cta_link .'"' . $cta_desc . $cta_target . '>' : '';
-    $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
+$cta_target = $cta_target ? ' target="'. $cta_target .'"' : '';
+$cta_desc = $cta_desc ? ' aria-label="'.$cta_desc.'"' : '';
+$cta_link = $cta_link ? '<a class="btn btn-primary" href="'. $cta_link .'"' . $cta_desc . $cta_target . '>' : '';
+$side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
 // $side_image_height = wp_get_attachment_image_src($side_image, 'full')[2];
 
 // Break it if it isn't "Landing" template
@@ -224,7 +223,7 @@ if ( empty($image_alt) )
                         <?php echo $list_more ? '<li><em>and more</em></li>' : ''; ?>
                     </ul>
                     <?php endif;
-                        if( $cta_link ){
+                        if( $cta_text ){
                             echo $cta_link;
                             echo $cta_text ? $cta_text : 'Learn More'; 
                             echo '</a>';

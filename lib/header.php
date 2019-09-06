@@ -24,7 +24,7 @@ function ursidae_site_image() {
 	?>
 	<!-- /* Begin Title / Logo */  -->
 	<div class="global-title">
-	<?php printf( '<a href="%s" class="navbar-brand">%s<span class="sr-only">%s</span></a>', uams_get_home_link(), $header_image, 'University of Arkansas for Medical Sciences' ); ?>
+	<?php printf( '<a href="https://www.uams.edu" class="navbar-brand">%s<span class="sr-only">%s</span></a>', $header_image, 'University of Arkansas for Medical Sciences' ); ?>
 	<div class="navbar-subbrand">
 
 	<?php
@@ -80,10 +80,7 @@ function ursidae_site_image() {
 					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="https://mychart.uamshealth.com/">MyChart</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="http://giving.uams.edu/">Giving</a>
+					<a class="nav-link" href="https://www.uamshealth.com/">UAMSHealth</a>
 				</li>
 				<!-- End right nav -->
 				<?php } ?>
