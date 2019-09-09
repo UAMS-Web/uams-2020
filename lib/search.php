@@ -17,7 +17,7 @@ function uamswp_search_form( $form ) {
     <div class="input-group">
         <input type="search" class="form-control" id="uams-search-bar" value="' . get_search_query() . '" placeholder="' . esc_attr__('Search', 'uams-2020') . '..." name="s" autocomplete="off" aria-label="Enter search text">
         <div class="input-group-append">
-            <button type="submit" id="searchsubmit" value="'. esc_attr__('Search', 'uams-2020') .'" class="btn btn-primary"><span class="fas fa-search"></span><span class="sr-only">Search</span></button>
+            <button type="submit" id="searchsubmit" value="'. esc_attr__('Search', 'uams-2020') .'" class="btn btn-primary" title="Search"><span class="fas fa-search" aria-hidden="true"></span><span class="sr-only">Search</span></button>
         </div>
     </div>
     <div class="form-group text-center" role="radiogroup" aria-labelledby="uams-search-picker-label">
