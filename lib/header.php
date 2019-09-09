@@ -94,10 +94,10 @@ function ursidae_site_image() {
 			</li>
 			<? } // endif ?>
 			<li class="nav-item">
-				<button class="search-toggler" type="button" id="toggle-search" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Search">
-					<span class="sr-only label">Expand Search</span>
-					<span class="fas fa-search fa-lg fa-fw"></span>
-					<span class="fas fa-times fa-lg fa-fw"></span>
+				<button class="search-toggler" type="button" id="toggle-search" aria-controls="quick-links" aria-expanded="false" title="Toggle Search">
+					<span class="sr-only label">Toggle Search</span>
+					<span class="fas fa-search fa-lg fa-fw" aria-hidden="true"></span>
+					<span class="fas fa-times fa-lg fa-fw" aria-hidden="true"></span>
 				</button>
 			</li>
 		</ul>
