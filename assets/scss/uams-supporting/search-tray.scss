@@ -34,8 +34,12 @@
             position: absolute;
             bottom: (7.75rem - 0.625);
             right: 0.625rem;
-            transform: translateY(100%); 
+            transform: translateY(100%);
+            @include border-radius($navbar-toggler-border-radius);
 
+            &:focus {
+                box-shadow: 0 0 0 $input-btn-focus-width rgba($gray-500, .25);
+            }
         }
 
         .uams-search {
