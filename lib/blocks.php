@@ -158,12 +158,12 @@ if( function_exists('acf_add_local_field_group') ):
     $call_out = require( get_stylesheet_directory() .'/acf_fields/call-out.php' );
     $cta = require( get_stylesheet_directory() .'/acf_fields/cta.php' );
     $hero = require( get_stylesheet_directory() .'/acf_fields/hero.php' );
+    $link_list = require( get_stylesheet_directory() .'/acf_fields/link-list.php' );
     $overlay = require( get_stylesheet_directory() .'/acf_fields/overlay.php' );
     $post_tile = require( get_stylesheet_directory() .'/acf_fields/post-category-tile.php' );
     $post_tiles = require( get_stylesheet_directory() .'/acf_fields/post-category-tiles.php' );
     $side_by_side = require( get_stylesheet_directory() .'/acf_fields/image-side-by-side.php' );
     $stacked = require( get_stylesheet_directory() .'/acf_fields/stacked.php' );
-    $link_list = require( get_stylesheet_directory() .'/acf_fields/link-list.php' );
     $news = require( get_stylesheet_directory() .'/acf_fields/news.php' );
 
     
