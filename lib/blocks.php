@@ -12,61 +12,16 @@ function uams_register_blocks() {
     // check function exists.
     if( function_exists('acf_register_block_type') ) {
 
-        // register a hero block.
         acf_register_block_type(array(
-            'name'              => 'hero',
-            'title'             => __('UAMS Hero'),
-            'description'       => __('UAMS Hero / Slideshow.'),
+            'name'              => 'action-bar',
+            'title'             => __('UAMS Action Bar'),
+            'description'       => __('Action Bar.'),
             'category'          => 'common',
-            'icon'              => 'images-alt2',
-            'keywords'          => array('uams', 'slides', 'slideshow', 'hero'),
+            'icon'              => 'admin-links',
+            'keywords'          => array('uams', 'action bar', 'links'),
             'mode'              => 'auto',
             'align'             => 'full',
-            'render_template'   => 'blocks/hero.php',
-        ));
-        acf_register_block_type(array(
-            'name'              => 'image-side',
-            'title'             => __('UAMS Side-by-Side Image & Text'),
-            'description'       => __('Image on one side, text on the other side.'),
-            'category'          => 'common',
-            'icon'              => 'id',
-            'keywords'          => array('uams', 'text', 'image', 'side'),
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'render_template'   => 'blocks/image-side-by-side.php',
-        ));
-        acf_register_block_type(array(
-            'name'              => 'text-stacked',
-            'title'             => __('UAMS Stacked Image & Text'),
-            'description'       => __('Stacked Image & Text'),
-            'category'          => 'common',
-            'icon'              => 'screenoptions',
-            'keywords'          => array('uams', 'text', 'image', 'stack', 'stacked'),
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'render_template'   => 'blocks/stacked.php',
-        ));
-        acf_register_block_type(array(
-            'name'              => 'text-overlay',
-            'title'             => __('UAMS Text & Image Overlay'),
-            'description'       => __('Text and a button on top of an image.'),
-            'category'          => 'common',
-            'icon'              => 'format-image',
-            'keywords'          => array('uams', 'text', 'image', 'overlay'),
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'render_template'   => 'blocks/overlay.php',
-        ));
-        acf_register_block_type(array(
-            'name'              => 'cta',
-            'title'             => __('UAMS CTA Bar'),
-            'description'       => __('Call-to-Action (CTA) Bar.'),
-            'category'          => 'common',
-            'icon'              => 'format-status',
-            'keywords'          => array('uams', 'cta', 'call-to-action', 'call to action', 'button'),
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'render_template'   => 'blocks/cta.php',
+            'render_template'   => 'blocks/action-bar.php',
         ));
         acf_register_block_type(array(
             'name'              => 'call-out',
@@ -80,37 +35,26 @@ function uams_register_blocks() {
             'render_template'   => 'blocks/call-out.php',
         ));
         acf_register_block_type(array(
-            'name'              => 'action-bar',
-            'title'             => __('UAMS Action Bar'),
-            'description'       => __('Action Bar.'),
+            'name'              => 'cta',
+            'title'             => __('UAMS CTA Bar'),
+            'description'       => __('Call-to-Action (CTA) Bar.'),
             'category'          => 'common',
-            'icon'              => 'admin-links',
-            'keywords'          => array('uams', 'action bar', 'links'),
+            'icon'              => 'format-status',
+            'keywords'          => array('uams', 'cta', 'call-to-action', 'call to action', 'button'),
             'mode'              => 'auto',
             'align'             => 'full',
-            'render_template'   => 'blocks/action-bar.php',
+            'render_template'   => 'blocks/cta.php',
         ));
         acf_register_block_type(array(
-            'name'              => 'post-category-tiles',
-            'title'             => __('UAMS Post Category Tile (Double)'),
-            'description'       => __('Two tiles displaying posts from individual post categories.'),
+            'name'              => 'hero',
+            'title'             => __('UAMS Hero'),
+            'description'       => __('UAMS Hero / Slideshow.'),
             'category'          => 'common',
-            'icon'              => 'screenoptions',
-            'keywords'          => array('uams', 'news', 'posts', 'post', 'articles', 'article', 'link', 'links', 'intranet', 'inside', 'tile', 'tiles', 'sidebar', 'side bar'),
+            'icon'              => 'images-alt2',
+            'keywords'          => array('uams', 'slides', 'slideshow', 'hero'),
             'mode'              => 'auto',
             'align'             => 'full',
-            'render_template'   => 'blocks/post-category-tiles.php',
-        ));
-        acf_register_block_type(array(
-            'name'              => 'post-category-tile',
-            'title'             => __('UAMS Post Category Tile (Single)'),
-            'description'       => __('One tile displaying a post from an individual post category.'),
-            'category'          => 'common',
-            'icon'              => 'screenoptions',
-            'keywords'          => array('uams', 'news', 'posts', 'post', 'articles', 'article', 'link', 'links', 'intranet', 'inside', 'tile', 'tiles', 'sidebar', 'side bar'),
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'render_template'   => 'blocks/post-category-tile.php',
+            'render_template'   => 'blocks/hero.php',
         ));
         acf_register_block_type(array(
             'name'              => 'link-list',
@@ -136,6 +80,61 @@ function uams_register_blocks() {
                 'render_template'   => 'blocks/news.php',
             ));
         }
+        acf_register_block_type(array(
+            'name'              => 'text-overlay',
+            'title'             => __('UAMS Text & Image Overlay'),
+            'description'       => __('Text and a button on top of an image.'),
+            'category'          => 'common',
+            'icon'              => 'format-image',
+            'keywords'          => array('uams', 'text', 'image', 'overlay'),
+            'mode'              => 'auto',
+            'align'             => 'full',
+            'render_template'   => 'blocks/overlay.php',
+        ));
+        acf_register_block_type(array(
+            'name'              => 'post-category-tile',
+            'title'             => __('UAMS Post Category Tile (Single)'),
+            'description'       => __('One tile displaying a post from an individual post category.'),
+            'category'          => 'common',
+            'icon'              => 'screenoptions',
+            'keywords'          => array('uams', 'news', 'posts', 'post', 'articles', 'article', 'link', 'links', 'intranet', 'inside', 'tile', 'tiles', 'sidebar', 'side bar'),
+            'mode'              => 'auto',
+            'align'             => 'full',
+            'render_template'   => 'blocks/post-category-tile.php',
+        ));
+        acf_register_block_type(array(
+            'name'              => 'post-category-tiles',
+            'title'             => __('UAMS Post Category Tile (Double)'),
+            'description'       => __('Two tiles displaying posts from individual post categories.'),
+            'category'          => 'common',
+            'icon'              => 'screenoptions',
+            'keywords'          => array('uams', 'news', 'posts', 'post', 'articles', 'article', 'link', 'links', 'intranet', 'inside', 'tile', 'tiles', 'sidebar', 'side bar'),
+            'mode'              => 'auto',
+            'align'             => 'full',
+            'render_template'   => 'blocks/post-category-tiles.php',
+        ));
+        acf_register_block_type(array(
+            'name'              => 'image-side',
+            'title'             => __('UAMS Side-by-Side Image & Text'),
+            'description'       => __('Image on one side, text on the other side.'),
+            'category'          => 'common',
+            'icon'              => 'id',
+            'keywords'          => array('uams', 'text', 'image', 'side'),
+            'mode'              => 'auto',
+            'align'             => 'full',
+            'render_template'   => 'blocks/image-side-by-side.php',
+        ));
+        acf_register_block_type(array(
+            'name'              => 'text-stacked',
+            'title'             => __('UAMS Stacked Image & Text'),
+            'description'       => __('Stacked Image & Text'),
+            'category'          => 'common',
+            'icon'              => 'screenoptions',
+            'keywords'          => array('uams', 'text', 'image', 'stack', 'stacked'),
+            'mode'              => 'auto',
+            'align'             => 'full',
+            'render_template'   => 'blocks/stacked.php',
+        ));
         // acf_register_block_type(array(
         //     'name'              => 'block',
         //     'title'             => __('UAMS Block'),
@@ -159,81 +158,26 @@ if( function_exists('acf_add_local_field_group') ):
     $cta = require( get_stylesheet_directory() .'/acf_fields/cta.php' );
     $hero = require( get_stylesheet_directory() .'/acf_fields/hero.php' );
     $link_list = require( get_stylesheet_directory() .'/acf_fields/link-list.php' );
+    $news = require( get_stylesheet_directory() .'/acf_fields/news.php' );
     $overlay = require( get_stylesheet_directory() .'/acf_fields/overlay.php' );
     $post_tile = require( get_stylesheet_directory() .'/acf_fields/post-category-tile.php' );
     $post_tiles = require( get_stylesheet_directory() .'/acf_fields/post-category-tiles.php' );
     $side_by_side = require( get_stylesheet_directory() .'/acf_fields/image-side-by-side.php' );
     $stacked = require( get_stylesheet_directory() .'/acf_fields/stacked.php' );
-    $news = require( get_stylesheet_directory() .'/acf_fields/news.php' );
 
     
 
-    // Add local field group for UAMS Side-by-Side Image & Text Block
+    // Add local field group for UAMS Action Bar Block
     acf_add_local_field_group(array(
-        'key' => 'group_5cefe13df1b97',
-        'title' => 'Block: Side-by-Side Image & Text',
-        'fields' => $side_by_side,
+        'key' => 'group_5cf9847426451',
+        'title' => 'Block: UAMS Action Bar',
+        'fields' => $action_bar,
         'location' => array(
             array(
                 array(
                     'param' => 'block',
                     'operator' => '==',
-                    'value' => 'acf/image-side',
-                ),
-            ),
-        ),
-        'menu_order' => 0,
-        'position' => 'normal',
-        'style' => 'default',
-        'label_placement' => 'left',
-        'instruction_placement' => 'label',
-        'hide_on_screen' => '',
-        'active' => true,
-        'description' => '',
-    ));
-
-    // Add local field group for UAMS Hero Block
-    acf_add_local_field_group(array(
-        'key' => 'group_5ceef46c9fe82',
-        'title' => 'Block: UAMS Hero',
-        'fields' => $hero,
-        'location' => array(
-            array(
-                array(
-                    'param' => 'block',
-                    'operator' => '==',
-                    'value' => 'acf/hero',
-                ),
-            ),
-        ),
-        'menu_order' => 0,
-        'position' => 'normal',
-        'style' => 'default',
-        'label_placement' => 'left',
-        'instruction_placement' => 'label',
-        'hide_on_screen' => '',
-        'active' => true,
-        'description' => '',
-    ));
-
-    // Add local field group for UAMS CTA Bar Block
-    acf_add_local_field_group(array(
-        'key' => 'group_5cf938222421c',
-        'title' => 'Block: UAMS CTA Bar',
-        'fields' => $cta,
-        'location' => array(
-            array(
-                array(
-                    'param' => 'block',
-                    'operator' => '==',
-                    'value' => 'acf/cta',
-                ),
-            ),
-            array(
-                array(
-                    'param' => 'widget',
-                    'operator' => '==',
-                    'value' => 'uamswp_cta_widget',
+                    'value' => 'acf/action-bar',
                 ),
             ),
         ),
@@ -278,17 +222,24 @@ if( function_exists('acf_add_local_field_group') ):
         'description' => '',
     ));
 
-    // Add local field group for UAMS Action Bar Block
+    // Add local field group for UAMS CTA Bar Block
     acf_add_local_field_group(array(
-        'key' => 'group_5cf9847426451',
-        'title' => 'Block: UAMS Action Bar',
-        'fields' => $action_bar,
+        'key' => 'group_5cf938222421c',
+        'title' => 'Block: UAMS CTA Bar',
+        'fields' => $cta,
         'location' => array(
             array(
                 array(
                     'param' => 'block',
                     'operator' => '==',
-                    'value' => 'acf/action-bar',
+                    'value' => 'acf/cta',
+                ),
+            ),
+            array(
+                array(
+                    'param' => 'widget',
+                    'operator' => '==',
+                    'value' => 'uamswp_cta_widget',
                 ),
             ),
         ),
@@ -302,96 +253,24 @@ if( function_exists('acf_add_local_field_group') ):
         'description' => '',
     ));
 
-    // Add local field group for UAMS Text & Image Overlay Block
+    // Add local field group for UAMS Hero Block
     acf_add_local_field_group(array(
-        'key' => 'group_5cfa9e13cb394',
-        'title' => 'Block: UAMS Text & Image Overlay',
-        'fields' => $overlay,
+        'key' => 'group_5ceef46c9fe82',
+        'title' => 'Block: UAMS Hero',
+        'fields' => $hero,
         'location' => array(
             array(
                 array(
                     'param' => 'block',
                     'operator' => '==',
-                    'value' => 'acf/text-overlay',
+                    'value' => 'acf/hero',
                 ),
             ),
         ),
         'menu_order' => 0,
         'position' => 'normal',
         'style' => 'default',
-        'label_placement' => 'top',
-        'instruction_placement' => 'label',
-        'hide_on_screen' => '',
-        'active' => true,
-        'description' => '',
-    ));
-
-    // Add local field group for UAMS Stacked Image & Text Block
-    acf_add_local_field_group(array(
-        'key' => 'group_5cfab4f342f6d',
-        'title' => 'Block: UAMS Stacked Image & Text',
-        'fields' => $stacked,
-        'location' => array(
-            array(
-                array(
-                    'param' => 'block',
-                    'operator' => '==',
-                    'value' => 'acf/text-stacked',
-                ),
-            ),
-        ),
-        'menu_order' => 0,
-        'position' => 'normal',
-        'style' => 'default',
-        'label_placement' => 'top',
-        'instruction_placement' => 'label',
-        'hide_on_screen' => '',
-        'active' => true,
-        'description' => '',
-    ));
-
-    // Add local field group for UAMS Post Category Tiles Block
-    acf_add_local_field_group(array(
-        'key' => 'group_5d03aeab567b9',
-        'title' => 'Block: Post Category Tiles',
-        'fields' => $post_tiles,
-        'location' => array(
-            array(
-                array(
-                    'param' => 'block',
-                    'operator' => '==',
-                    'value' => 'acf/post-category-tiles',
-                ),
-            ),
-        ),
-        'menu_order' => 0,
-        'position' => 'normal',
-        'style' => 'default',
-        'label_placement' => 'top',
-        'instruction_placement' => 'label',
-        'hide_on_screen' => '',
-        'active' => true,
-        'description' => '',
-    ));
-
-    // Add local field group for UAMS Post Category Tile Block
-    acf_add_local_field_group(array(
-        'key' => 'group_5d03e9584d86d',
-        'title' => 'Block: Post Category Tile Single',
-        'fields' => $post_tile,
-        'location' => array(
-            array(
-                array(
-                    'param' => 'block',
-                    'operator' => '==',
-                    'value' => 'acf/post-category-tile',
-                ),
-            ),
-        ),
-        'menu_order' => 0,
-        'position' => 'normal',
-        'style' => 'default',
-        'label_placement' => 'top',
+        'label_placement' => 'left',
         'instruction_placement' => 'label',
         'hide_on_screen' => '',
         'active' => true,
@@ -433,6 +312,126 @@ if( function_exists('acf_add_local_field_group') ):
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/uams-news',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+    ));
+
+    // Add local field group for UAMS Text & Image Overlay Block
+    acf_add_local_field_group(array(
+        'key' => 'group_5cfa9e13cb394',
+        'title' => 'Block: UAMS Text & Image Overlay',
+        'fields' => $overlay,
+        'location' => array(
+            array(
+                array(
+                    'param' => 'block',
+                    'operator' => '==',
+                    'value' => 'acf/text-overlay',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+    ));
+
+    // Add local field group for UAMS Post Category Tile Block
+    acf_add_local_field_group(array(
+        'key' => 'group_5d03e9584d86d',
+        'title' => 'Block: Post Category Tile Single',
+        'fields' => $post_tile,
+        'location' => array(
+            array(
+                array(
+                    'param' => 'block',
+                    'operator' => '==',
+                    'value' => 'acf/post-category-tile',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+    ));
+
+    // Add local field group for UAMS Post Category Tiles Block
+    acf_add_local_field_group(array(
+        'key' => 'group_5d03aeab567b9',
+        'title' => 'Block: Post Category Tiles',
+        'fields' => $post_tiles,
+        'location' => array(
+            array(
+                array(
+                    'param' => 'block',
+                    'operator' => '==',
+                    'value' => 'acf/post-category-tiles',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+    ));
+
+    // Add local field group for UAMS Side-by-Side Image & Text Block
+    acf_add_local_field_group(array(
+        'key' => 'group_5cefe13df1b97',
+        'title' => 'Block: Side-by-Side Image & Text',
+        'fields' => $side_by_side,
+        'location' => array(
+            array(
+                array(
+                    'param' => 'block',
+                    'operator' => '==',
+                    'value' => 'acf/image-side',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'left',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+    ));
+
+    // Add local field group for UAMS Stacked Image & Text Block
+    acf_add_local_field_group(array(
+        'key' => 'group_5cfab4f342f6d',
+        'title' => 'Block: UAMS Stacked Image & Text',
+        'fields' => $stacked,
+        'location' => array(
+            array(
+                array(
+                    'param' => 'block',
+                    'operator' => '==',
+                    'value' => 'acf/text-stacked',
                 ),
             ),
         ),
