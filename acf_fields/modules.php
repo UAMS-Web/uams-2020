@@ -64,6 +64,15 @@ return array (
                 'min' => '',
                 'max' => '',
             ),
+            'layout_modules_link_list' => array(
+                'key' => 'layout_modules_link_list',
+                'name' => 'modules_link_list',
+                'label' => 'Link List',
+                'display' => 'block',
+                'sub_fields' => $link_list,
+                'min' => '',
+                'max' => '',
+            ),
             'layout_modules_text_overlay' => array(
                 'key' => 'layout_modules_text_overlay',
                 'name' => 'modules_text_overlay',
