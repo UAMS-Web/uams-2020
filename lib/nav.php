@@ -102,8 +102,8 @@ function custom_nav_menu() {
             
         // Add the appropriate navbar coding
         $wrapper_open  = '<nav class="site-nav navbar navbar-expand-sm">';
-        $wrapper_open .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-primary" aria-controls="nav-primary" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon">Test</span></button>';
-        $wrapper_open .= '<div class="collapse navbar-collapse inner-container" id="nav-primary">';
+        $wrapper_open .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#genesis-nav-primary" aria-controls="genesis-nav-primary" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon">Test</span></button>';
+        $wrapper_open .= '<div class="collapse navbar-collapse inner-container" id="genesis-nav-primary">';
         $wrapper_open .= '<ul id="menu-dropdowns" class="nav navbar-nav align-self-end mr-auto">';
 
         $wrapper_close  = '</ul>'; // ul
@@ -116,7 +116,7 @@ function custom_nav_menu() {
         $pagenav_markup_open = genesis_markup( array(
             'html5'   => '<nav %s>',
             'xhtml'   => '<div id="pagenav">',
-            'context' => 'nav-primary',
+            'context' => 'genesis-nav-primary',
             'echo'    => false,
         ) );
 
@@ -162,7 +162,7 @@ function uamswp_nav_menu_markup_filter( $html, $args ) {
         return $html;
     }
 
-    $data_target = 'nav' . sanitize_html_class( '-' . $args->theme_location );
+    $data_target = 'genesis-nav' . sanitize_html_class( '-' . $args->theme_location );
     
     $output = '';
 
