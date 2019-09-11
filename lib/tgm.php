@@ -33,11 +33,11 @@ function uamswp_do_plugins_register() {
 			'required'  => true,
 		),
 
-		// array(
-		// 	'name'      => __( 'Meta Box - FacetWP Integrator', 'uamswp-uams-2020' ),
-		// 	'slug'      => 'meta-box-facetwp-integrator',
-		// 	'required'  => true,
-		// ),
+		array(
+			'name'      => __( 'WP YouTube Lyte', 'uamswp-uams-2020' ),
+			'slug'      => 'wp-youtube-lyte',
+			'required'  => true,
+		),
 
 		// array(
 		// 	'name'      => __( 'Meta Box Text Limiter', 'uamswp-uams-2020' ),
