@@ -195,14 +195,14 @@ function uamswp_skip_links() {
 	$links = (array) apply_filters( 'genesis_skip_links_output', $links );
 
 	// Write HTML, skiplinks in a list.
-	$skiplinks = '<ul class="genesis-skip-link" role="nav" aria-label="Skip links">';
+	$skiplinks = '<nav><ul class="genesis-skip-link" aria-label="Skip links">';
 
 	// Add markup for each skiplink.
 	foreach ( $links as $key => $value ) {
 		$skiplinks .= '<li><a href="' . esc_url( '#' . $key ) . '" class="screen-reader-shortcut"> ' . $value . '</a></li>';
 	}
 
-	$skiplinks .= '</ul>';
+	$skiplinks .= '</ul></nav>';
 
 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo $skiplinks;
