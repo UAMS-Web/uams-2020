@@ -530,3 +530,11 @@ function rest_api_filter_add_filter_param( $args, $request ) {
 }
 //Gravity Forms JS to footer
 add_filter('gform_init_scripts_footer', '__return_true');
+
+
+// Customize the entry meta in the entry header (requires HTML5 theme support)
+add_filter( 'genesis_post_info', 'uamswp_post_info_filter' );
+function uamswp_post_info_filter($post_info) {
+	$post_info = 'By [post_author_posts_link] on [post_date]';
+	return $post_info;
+}

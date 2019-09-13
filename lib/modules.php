@@ -88,6 +88,19 @@ function uamswp_module( $module = array(), $i = false ) {
 
             break;
 
+        case 'modules_link_list':
+            $id = $i;
+            $heading = $module['link_list_heading'];
+            $hide_heading = $module['link_list_hide_heading'];
+            $description = $module['link_list_description'];
+            $background_color = $module['link_list_background_color'];
+            $link_list_icons = $module['link_list_icons'];
+            $link_list_rows = $module['link_list_section'];
+
+            include( get_stylesheet_directory() .'/blocks/link-list.php' );
+
+            break;
+
         case 'modules_image_side':
             $id = $i;
             $layout = $module['side_text_layout'] ?: 'link-list';

@@ -104,9 +104,11 @@ function uamswp_footer_creds_text() {
     /* UAMS Health */
     if ( 'uamshealth' == $site ){
         $footer_image_url = 'https://uamshealth.com/';
+        $footer_image_title = 'UAMS Health';
         $footer_image_site = 'main-tagline';
     } elseif ( 'inside' == $site ) {
         $footer_image_url = 'https://inside.uams.edu/';
+        $footer_image_title = 'Inside UAMS';
         $footer_image_site = 'main';
     }
     $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_'.$footer_image_site.'_horizontal_white.svg" alt="'. $footer_image_title .' Logo" />';
@@ -325,20 +327,20 @@ function uamswp_footer_creds_text() {
     // Render this by default.
     // Replace social URLs if the relevant custom fields have values.
     echo '<ul class="nav social" role="navigation" aria-label="Social media">';
-    echo '<li class="nav-item"><a class="nav-link" href="'.$social_fb.'" target="_blank"><span class="fab fa-facebook"></span><span class="sr-only">Facebook</span></a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="'.$social_tw.'" target="_blank"><span class="fab fa-twitter"></span><span class="sr-only">Twitter</span></a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="'.$social_ig.'" target="_blank"><span class="fab fa-instagram"></span><span class="sr-only">Instagram</span></a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="'.$social_yt.'" target="_blank"><span class="fab fa-youtube"></span><span class="sr-only">YouTube</span></a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="'.$social_li.'" target="_blank"><span class="fab fa-linkedin"></span><span class="sr-only">LinkedIn</span></a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="'.$social_pn.'" target="_blank"><span class="fab fa-pinterest"></span><span class="sr-only">Pinterest</span></a></li>';
+    echo '<li class="nav-item"><a class="nav-link" href="'.$social_fb.'" target="_blank" title="Facebook"><span class="fab fa-facebook" aria-hidden="true"></span><span class="sr-only">Facebook</span></a></li>';
+    echo '<li class="nav-item"><a class="nav-link" href="'.$social_tw.'" target="_blank" title="Twitter"><span class="fab fa-twitter" aria-hidden="true"></span><span class="sr-only">Twitter</span></a></li>';
+    echo '<li class="nav-item"><a class="nav-link" href="'.$social_ig.'" target="_blank" title="Instagram"><span class="fab fa-instagram" aria-hidden="true"></span><span class="sr-only">Instagram</span></a></li>';
+    echo '<li class="nav-item"><a class="nav-link" href="'.$social_yt.'" target="_blank" title="YouTube"><span class="fab fa-youtube" aria-hidden="true"></span><span class="sr-only">YouTube</span></a></li>';
+    echo '<li class="nav-item"><a class="nav-link" href="'.$social_li.'" target="_blank" title="LinkedIn"><span class="fab fa-linkedin" aria-hidden="true"></span><span class="sr-only">LinkedIn</span></a></li>';
+    echo '<li class="nav-item"><a class="nav-link" href="'.$social_pn.'" target="_blank" title="Pinterest"><span class="fab fa-pinterest" aria-hidden="true"></span><span class="sr-only">Pinterest</span></a></li>';
     echo '</ul>';
 
     // Render this by default
-    echo '<ul class="nav legal" role="navigation">';
-    echo '<li class="nav-item"><a class="nav-link" href="/disclaimer">Disclaimer</a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="/termsofuse">Terms of Use</a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="/privacy">Privacy</a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="/sitemap">Site Map</a></li>';
+    echo '<ul class="nav legal" role="navigation" aria-label="Footer Navigation">';
+    echo '<li class="nav-item"><a class="nav-link" href="https://www.uamshealth.com/disclaimer/">Disclaimer</a></li>';
+    echo '<li class="nav-item"><a class="nav-link" href="https://www.uamshealth.com/termsofuse/">Terms of Use</a></li>';
+    echo '<li class="nav-item"><a class="nav-link" href="https://www.uamshealth.com/privacy/">Privacy</a></li>';
+    //echo '<li class="nav-item"><a class="nav-link" href="/sitemap">Site Map</a></li>';
     echo '</ul>';
     echo '<p class="copyright">&copy; '. date('Y') . ' University of Arkansas for Medical Sciences</p>';
 }

@@ -270,3 +270,20 @@ function remove_breadcrumbs() {
 		remove_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
 	}
 }
+
+/**
+ * Use h1 for all entry titles, linking if on archive page
+ */
+function uamswp_entry_title_h1( $title ) {
+    $post_title = get_the_title( get_the_ID() );
+    $post_link = get_the_permalink( get_the_ID() );
+    if( is_archive() ) {
+        $title = '<h1 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h1>';
+    }
+    else {
+        $title = '<h1 class="entry-title" itemprop="headline">' . $post_title . '</h1>';
+    }
+    
+    return $title;
+}
+add_filter( 'genesis_post_title_output', 'uamswp_entry_title_h1' );

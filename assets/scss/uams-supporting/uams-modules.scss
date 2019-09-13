@@ -102,7 +102,7 @@
 
     &.bg-white,
     .item.bg-white {
-        background-color: $white;
+        background-color: $bg-white;
 
         &.bg-image {
             &:before {
@@ -113,7 +113,7 @@
 
     &.bg-gray,
     .item.bg-gray {
-        background-color: $body-bg-banded;
+        background-color: $bg-gray;
 
         &.bg-image {
             &:before {
@@ -147,6 +147,15 @@
             }
         }
 
+        .page-title,
+        .module-title {
+            .title {
+                &:after {
+                    background-color: $white;
+                }
+            }
+        }
+
         a:not(.btn) {
             color: $white;
 
@@ -167,7 +176,7 @@
 
     &.bg-black,
     .item.bg-black {
-        background-color: $black;
+        background-color: $bg-black;
 
         &.bg-image {
             background-color: $gray-900;
@@ -201,10 +210,10 @@
 
     &.bg-blue,
     .item.bg-blue {
-        background-color: $blue;
+        background-color: $bg-blue;
 
         &.bg-image {
-            background-color: $blue;
+            background-color: $bg-blue;
 
             &:before {
                 opacity: 0.13; // 1.49 contrast ratio between blacks and whites
@@ -212,13 +221,13 @@
         }
 
         .btn {
-            color: $blue;
+            color: $bg-blue;
         }
     }
 
     &.bg-green,
     .item.bg-green {
-        background-color: $green-dark;
+        background-color: $bg-green;
 
         &.bg-image {
             background-color: $green-darker;
@@ -229,13 +238,13 @@
         }
 
         .btn {
-            color: $green;
+            color: $bg-green;
         }
     }
 
     &.bg-teal,
     .item.bg-teal {
-        background-color: $teal;
+        background-color: $bg-teal;
 
         &.bg-image {
             background-color: $teal-dark;
@@ -252,7 +261,7 @@
 
     &.bg-eggplant,
     .item.bg-eggplant {
-        background-color: $eggplant;
+        background-color: $bg-eggplant;
 
         &.bg-image {
             &:before {
@@ -267,7 +276,7 @@
 
     &.bg-orange,
     .item.bg-orange {
-        background-color: $orange;
+        background-color: $bg-orange;
 
         &.bg-image {
             background-color: $orange-dark;
@@ -278,7 +287,7 @@
         }
 
         .btn {
-            color: $orange;
+            color: $bg-orange;
         }
     }
 }
@@ -311,6 +320,20 @@ body.page-template-default {
                 }
             }
         }
+
+        &:first-child {
+            .uams-module {
+                &.alignfull {
+                    &:first-child {
+                        margin-top: -($uams-module-padding-mobile);
+    
+                        @include media-breakpoint-up(sm) {
+                            margin-top: -($uams-module-padding);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -323,3 +346,4 @@ body.page-template-default {
 @import "uams-modules/post-category-tile";
 @import "uams-modules/syndication";
 @import "uams-modules/graphic-title";
+@import "uams-modules/link-list";

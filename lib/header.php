@@ -24,7 +24,7 @@ function ursidae_site_image() {
 	?>
 	<!-- /* Begin Title / Logo */  -->
 	<div class="global-title">
-	<?php printf( '<a href="%s" class="navbar-brand">%s<span class="sr-only">%s</span></a>', uams_get_home_link(), $header_image, 'University of Arkansas for Medical Sciences' ); ?>
+	<?php printf( '<a href="https://www.uams.edu" class="navbar-brand">%s<span class="sr-only">%s</span></a>', $header_image, 'University of Arkansas for Medical Sciences' ); ?>
 	<div class="navbar-subbrand">
 
 	<?php
@@ -80,10 +80,7 @@ function ursidae_site_image() {
 					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="https://mychart.uamshealth.com/">MyChart</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="http://giving.uams.edu/">Giving</a>
+					<a class="nav-link" href="https://www.uamshealth.com/">UAMSHealth</a>
 				</li>
 				<!-- End right nav -->
 				<?php } ?>
@@ -97,25 +94,25 @@ function ursidae_site_image() {
 			</li>
 			<? } // endif ?>
 			<li class="nav-item">
-				<button class="search-toggler" type="button" id="toggle-search" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Search">
-					<span class="sr-only label">Expand Search</span>
-					<span class="fas fa-search fa-lg fa-fw"></span>
-					<span class="fas fa-times fa-lg fa-fw"></span>
+				<button class="search-toggler" type="button" id="toggle-search" aria-controls="quick-links" aria-expanded="false" title="Toggle Search">
+					<span class="sr-only label">Toggle Search</span>
+					<span class="fas fa-search fa-lg fa-fw" aria-hidden="true"></span>
+					<span class="fas fa-times fa-lg fa-fw" aria-hidden="true"></span>
 				</button>
 			</li>
 		</ul>
 
 		<!-- // Hiding this button until Quick Links is created. -->
-		<button class="quick-links-toggler" type="button" id="toggle-quick-links" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Quick Links navigation">
-			<span class="sr-only label">Expand Quick Links</span>
-			<span class="fas fa-bars fa-lg fa-fw"></span>
-			<span class="fas fa-times fa-lg fa-fw"></span>
+		<button class="quick-links-toggler" type="button" id="toggle-quick-links" aria-controls="quick-links" aria-expanded="false" title="Toggle Quick Links navigation">
+			<span class="sr-only label">Toggle Quick Links</span>
+			<span class="fas fa-bars fa-lg fa-fw" aria-hidden="true"></span>
+			<span class="fas fa-times fa-lg fa-fw" aria-hidden="true"></span>
 		</button>
 
 		<!-- // The data-target and aria-controls may need to be dynamically defined. -->
-		<button class="navbar-toggler mobile-menu-toggler" type="button" data-toggle="collapse" data-target="#genesis-nav-primary" aria-controls="genesis-nav-primary" aria-expanded="false" aria-label="Toggle Primary navigation">
-			<span class="sr-only label">Expand Primary Nav</span>
-			<span class="fas fa-bars fa-lg fa-fw"></span>
+		<button class="navbar-toggler mobile-menu-toggler" type="button" data-toggle="collapse" data-target="#genesis-nav-primary" aria-controls="genesis-nav-primary" aria-expanded="false" title="Toggle Primary navigation">
+			<span class="sr-only label">Toggle Primary Nav</span>
+			<span class="fas fa-bars fa-lg fa-fw" aria-hidden="true"></span>
 		</button>
 	
 	</nav>
