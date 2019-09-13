@@ -28,7 +28,7 @@ if( $hero_rows ) :
     $row_count = count($hero_rows);
 
 ?>
-    <section class="hero carousel slide<?php echo $row_count > 1 ? " multiple-slides" : ""; ?>" id="carousel-<?php echo esc_attr($id); ?>">
+    <section class="hero carousel slide<?php echo $row_count > 1 ? " multiple-slides" : ""; ?>" id="carousel-<?php echo esc_attr($id); ?>" aria-label="Hero banner">
 <?php
         $page_template = get_page_template_slug( $post_id );
         // echo $page_template;
