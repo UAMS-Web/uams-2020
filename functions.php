@@ -137,14 +137,77 @@ function uamswp_childtheme_setup() {
 	load_child_theme_textdomain( 'uams-2020', get_stylesheet_directory() . '/languages' );
 }
 
-// Add extra class to content
-// https://www.wpstud.io/add-extra-class-to-html-elements-in-genesis/
-//function wpstudio_add_class( $attributes ) {
-//	$attributes['class'] = $attributes['class']. ' container-fluid';
-//		return $attributes;
-//	}
-//	
-//	add_filter( 'genesis_attr_site-header', 'wpstudio_add_class' );
+// Custom Skip links - add aria and role
+remove_action ( 'genesis_before_header', 'genesis_skip_links', 5 );
+add_action( 'genesis_before_header', 'uamswp_skip_links', 5 );
+/**
+ * Add skip links for screen readers and keyboard navigation.
+ *
+ * @since 2.2.0
+ *
+ * @return void Return early if skip links are not supported.
+ */
+function uamswp_skip_links() {
+
+	if ( ! genesis_a11y( 'skip-links' ) ) {
+		return;
+	}
+
+	// Call function to add IDs to the markup.
+	genesis_skiplinks_markup();
+
+	// Determine which skip links are needed.
+	$links = [];
+
+	if ( genesis_nav_menu_supported( 'primary' ) && has_nav_menu( 'primary' ) ) {
+		$links['genesis-nav-primary'] = esc_html__( 'Skip to primary navigation', 'genesis' );
+	}
+
+	$links['genesis-content'] = esc_html__( 'Skip to main content', 'genesis' );
+
+	if ( 'full-width-content' !== genesis_site_layout() ) {
+		$links['genesis-sidebar-primary'] = esc_html__( 'Skip to primary sidebar', 'genesis' );
+	}
+
+	if ( in_array( genesis_site_layout(), [ 'sidebar-sidebar-content', 'sidebar-content-sidebar', 'content-sidebar-sidebar' ], true ) ) {
+		$links['genesis-sidebar-secondary'] = esc_html__( 'Skip to secondary sidebar', 'genesis' );
+	}
+
+	if ( current_theme_supports( 'genesis-footer-widgets' ) ) {
+		$footer_widgets = get_theme_support( 'genesis-footer-widgets' );
+		if ( isset( $footer_widgets[0] ) && is_numeric( $footer_widgets[0] ) && is_active_sidebar( 'footer-1' ) ) {
+			$links['genesis-footer-widgets'] = esc_html__( 'Skip to footer', 'genesis' );
+		}
+	}
+
+	/**
+	 * Filter the skip links.
+	 *
+	 * @since 2.2.0
+	 *
+	 * @param array $links {
+	 *     Default skiplinks.
+	 *
+	 *     @type string HTML ID attribute value to link to.
+	 *     @type string Anchor text.
+	 * }
+	 */
+	$links = (array) apply_filters( 'genesis_skip_links_output', $links );
+
+	// Write HTML, skiplinks in a list.
+	$skiplinks = '<nav><ul class="genesis-skip-link" aria-label="Skip links">';
+
+	// Add markup for each skiplink.
+	foreach ( $links as $key => $value ) {
+		$skiplinks .= '<li><a href="' . esc_url( '#' . $key ) . '" class="screen-reader-shortcut"> ' . $value . '</a></li>';
+	}
+
+	$skiplinks .= '</ul></nav>';
+
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo $skiplinks;
+
+}
 
 add_filter ( 'genesis_home_crumb', 'uams_breadcrumb_home_icon' ); 
 function uams_breadcrumb_home_icon( $crumb ) {
@@ -334,6 +397,19 @@ function format_phone_dash($phone) {
     return $phone;
   break;
   }
+}
+
+if (!function_exists('apStyleDate')) {
+	function apStyleDate($date){
+
+		$date = strftime("%l:%M %P", strtotime($date));
+	
+		$date = str_replace(":00", "", $date);
+		$date = str_replace("m", ".m.", $date);
+	
+		return $date;
+	
+	}
 }
 
 /**
