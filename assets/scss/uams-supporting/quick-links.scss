@@ -54,6 +54,11 @@
         left: (20rem - 0.625);
         transform: translateX(-100%);
         font-size: .975rem;
+        @include border-radius($navbar-toggler-border-radius);
+
+        &:focus {
+            box-shadow: 0 0 0 $input-btn-focus-width rgba($gray-500, .25);
+        }
     }
 
     h2 {

@@ -6,7 +6,7 @@
  */
 return array(
     array(
-        'key' => 'field_5d71396163667',
+        'key' => 'field_link_list_intro'. $suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
@@ -23,7 +23,7 @@ return array(
         'esc_html' => 0,
     ),
     array(
-        'key' => 'field_5d7139805c64b',
+        'key' => 'field_link_list_heading'. $suffix,
         'label' => 'Heading',
         'name' => 'link_list_heading',
         'type' => 'text',
@@ -42,7 +42,7 @@ return array(
         'maxlength' => '',
     ),
     array(
-        'key' => 'field_5d7139b55c64c',
+        'key' => 'field_link_list_hide_heading'. $suffix,
         'label' => 'Hide Heading?',
         'name' => 'link_list_hide_heading',
         'type' => 'true_false',
@@ -61,7 +61,7 @@ return array(
         'ui_off_text' => '',
     ),
     array(
-        'key' => 'field_5d715f3b47fa1',
+        'key' => 'field_link_list_description'. $suffix,
         'label' => 'List Description',
         'name' => 'link_list_description',
         'type' => 'textarea',
@@ -80,7 +80,7 @@ return array(
         'new_lines' => '',
     ),
     array(
-        'key' => 'field_5d713a025c64d',
+        'key' => 'field_link_list_background_color'. $suffix,
         'label' => 'Background Color',
         'name' => 'link_list_background_color',
         'type' => 'select',
@@ -114,7 +114,7 @@ return array(
         'placeholder' => '',
     ),
     array(
-        'key' => 'field_5d713c345c656',
+        'key' => 'field_link_list_icons'. $suffix,
         'label' => 'Include Icons?',
         'name' => 'link_list_icons',
         'type' => 'true_false',
@@ -133,7 +133,7 @@ return array(
         'ui_off_text' => '',
     ),
     array(
-        'key' => 'field_5d713a2a5c64e',
+        'key' => 'field_link_list_section'. $suffix,
         'label' => 'Links',
         'name' => 'link_list_section',
         'type' => 'repeater',
@@ -145,14 +145,14 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'collapsed' => 'field_5d713a585c64f',
+        'collapsed' => 'field_link_list_section_title'. $suffix,
         'min' => 1,
         'max' => 0,
         'layout' => 'block',
         'button_label' => 'Add Link',
         'sub_fields' => array(
             array(
-                'key' => 'field_5d713a585c64f',
+                'key' => 'field_link_list_section_title'. $suffix,
                 'label' => 'Link Title',
                 'name' => 'link_list_section_title',
                 'type' => 'text',
@@ -171,7 +171,7 @@ return array(
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_5d713a625c650',
+                'key' => 'field_link_list_section_body'. $suffix,
                 'label' => 'Link Caption',
                 'name' => 'link_list_section_body',
                 'type' => 'text',
@@ -190,7 +190,7 @@ return array(
                 'maxlength' => 90,
             ),
             array(
-                'key' => 'field_5d713b085c653',
+                'key' => 'field_link_list_section_url'. $suffix,
                 'label' => 'Link URL',
                 'name' => 'link_list_section_url',
                 'type' => 'link',
@@ -205,7 +205,7 @@ return array(
                 'return_format' => 'array',
             ),
             array(
-                'key' => 'field_5d713aaf5c652',
+                'key' => 'field_link_list_section_description'. $suffix,
                 'label' => 'Link Accessibility Description',
                 'name' => 'link_list_section_description',
                 'type' => 'text',
@@ -224,7 +224,7 @@ return array(
                 'maxlength' => '',
             ),
             array(
-                'key' => 'field_5d713ba85c655',
+                'key' => 'field_link_list_section_icon'. $suffix,
                 'label' => 'Icon Class',
                 'name' => 'link_list_section_icon',
                 'type' => 'text',

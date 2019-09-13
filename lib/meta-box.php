@@ -1040,6 +1040,7 @@ $action_bar = include( get_stylesheet_directory() .'/acf_fields/action-bar.php' 
 $call_out = include( get_stylesheet_directory() .'/acf_fields/call-out.php' );
 $cta = include( get_stylesheet_directory() .'/acf_fields/cta.php' );
 $hero = include( get_stylesheet_directory() .'/acf_fields/hero.php' );
+$link_list = include( get_stylesheet_directory() .'/acf_fields/link-list.php' );
 $overlay = include( get_stylesheet_directory() .'/acf_fields/overlay.php' );
 $post_tile = include( get_stylesheet_directory() .'/acf_fields/post-category-tile.php' );
 $post_tiles = include( get_stylesheet_directory() .'/acf_fields/post-category-tiles.php' );

@@ -272,10 +272,18 @@ function remove_breadcrumbs() {
 }
 
 /**
- * Use h1 for all entry titles
+ * Use h1 for all entry titles, linking if on archive page
  */
 function uamswp_entry_title_h1( $title ) {
-    $title = sprintf( '<h1 class="entry-title">%s</h1>', apply_filters( 'genesis_post_title_text', get_the_title() ) );
+    $post_title = get_the_title( get_the_ID() );
+    $post_link = get_the_permalink( get_the_ID() );
+    if( is_archive() ) {
+        $title = '<h1 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h1>';
+    }
+    else {
+        $title = '<h1 class="entry-title" itemprop="headline">' . $post_title . '</h1>';
+    }
+    
     return $title;
 }
 add_filter( 'genesis_post_title_output', 'uamswp_entry_title_h1' );
