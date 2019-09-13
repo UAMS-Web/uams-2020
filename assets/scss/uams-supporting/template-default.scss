@@ -241,6 +241,11 @@ body.advert-template-default {
             .entry-meta {
                 width: 100%;
                 text-align: inherit;
+                margin-bottom: 0.25em;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
             }
         }
     }
