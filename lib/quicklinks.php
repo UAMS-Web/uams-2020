@@ -39,7 +39,7 @@ function uamswp_quicklinks() {
                             $target = !empty($target) ? ' target="'. $target .'"' : '';
                             //$link_title = $menu_item->attr_title;
                             $menu_list .= '<li><a href="' . esc_url( $url ) . '"'. $target .'>';
-                            $menu_list .= !empty($classes) ? '<span class="'. implode( " ", $classes ) .' fa-fw"></span>' : '';
+                            $menu_list .= !empty($classes) ? '<span class="'. implode( " ", $classes ) .' fa-fw" aria-hidden="true"></span>' : '';
                             $menu_list .= $title . '</a></li>';
                         }
                         $menu_list .= '</ul>';
@@ -48,10 +48,10 @@ function uamswp_quicklinks() {
                         // Write Default
                         ?>
                         <ul class="list-unstyled links links-large">
-                            <li><a href="https://gus.uams.edu/"><span class="fas fa-graduation-cap fa-fw "></span>GUS</a></li>
-                            <li><a href="https://uams-triprofiles.uams.edu/profiles/search/"><span class="fas fa-users fa-fw "></span>Profiles</a></li>
-                            <li><a href="https://library.uams.edu/"><span class="fas fa-book fa-fw "></span>Library</a></li>
-                            <li><a href="http://libguides.uams.edu/onlinebookstore"><span class="fas fa-shopping-cart fa-fw "></span>UAMS Bookstore</a></li>
+                            <li><a href="https://gus.uams.edu/"><span class="fas fa-graduation-cap fa-fw " aria-hidden="true"></span>GUS</a></li>
+                            <li><a href="https://uams-triprofiles.uams.edu/profiles/search/"><span class="fas fa-users fa-fw " aria-hidden="true"></span>Profiles</a></li>
+                            <li><a href="https://library.uams.edu/"><span class="fas fa-book fa-fw " aria-hidden="true"></span>Library</a></li>
+                            <li><a href="http://libguides.uams.edu/onlinebookstore"><span class="fas fa-shopping-cart fa-fw " aria-hidden="true"></span>UAMS Bookstore</a></li>
                         </ul>
                     <?php
                     }
