@@ -169,11 +169,11 @@ if( $hero_rows ) :
 <?php
         if($row_count > 1) { ?>
             <a class="carousel-control-prev" href="#carousel-<?php echo esc_attr($id); ?>" role="button" data-slide="prev">
-                <span class="fas fa-angle-left" aria-hidden="true"></span>
+                <span class="fas fa-angle-left"></span>
                 <span class="sr-only">Previous</span>
             </a>
             <a class="carousel-control-next" href="#carousel-<?php echo esc_attr($id); ?>" role="button" data-slide="next">
-                <span class="fas fa-angle-right" aria-hidden="true"></span>
+                <span class="fas fa-angle-right"></span>
                 <span class="sr-only">Next</span>
             </a>
         <?php   }  ?>
