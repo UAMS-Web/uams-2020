@@ -34,8 +34,9 @@ function uamswp_do_plugins_register() {
 		),
 
 		array(
-			'name'      => __( 'WP YouTube Lyte', 'uamswp-uams-2020' ),
-			'slug'      => 'wp-youtube-lyte',
+			'name'      => __( 'UAMSWP YouTube Lyte', 'uamswp-uams-2020' ),
+			'slug'      => 'uamswp-youtube-lyte',
+			'source'             => get_stylesheet_directory() . '/plugins/uamswp-youtube-lyte.zip', // The plugin source.
 			'required'  => true,
 		),
 
