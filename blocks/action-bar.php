@@ -32,7 +32,7 @@ if( $action_bar_rows ) {
 } 
 
 ?>
-<section class="uams-module action-bar<?php echo $className; ?> count-<?php echo $row_count < 4 ? "3" : "4"; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>">
+<section class="uams-module action-bar<?php echo $className; ?> count-<?php echo $row_count < 4 ? "3" : "4"; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <h2 class="sr-only"><?php echo $heading; ?></h2>
     <div class="container-fluid">
         <div class="row">
