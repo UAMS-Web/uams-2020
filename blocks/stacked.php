@@ -34,7 +34,7 @@ if( $stacked_rows ) :
     $row_count = count($stacked_rows); // Not user, but just in case
 
 ?>
-<section class="uams-module stacked-image-text<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>">
+<section class="uams-module stacked-image-text<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12<?php echo $hide_heading ? " sr-only" : ""; ?>">

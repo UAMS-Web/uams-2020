@@ -165,12 +165,12 @@
         }
 
         .btn:not([class*="btn-"]) {
-            @extend .btn-light;
+            @extend .btn-white;
         }
 
         .more .btn:not([class*="btn-"]) {
             background-color: transparent;
-            @extend .btn-outline-light;
+            @extend .btn-outline-white;
         }
     }
 

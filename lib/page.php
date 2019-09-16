@@ -287,3 +287,15 @@ function uamswp_entry_title_h1( $title ) {
     return $title;
 }
 add_filter( 'genesis_post_title_output', 'uamswp_entry_title_h1' );
+
+
+// Customize the entry meta in the entry header (requires HTML5 theme support)
+add_filter( 'genesis_post_info', 'uamswp_post_info_filter' );
+function uamswp_post_info_filter($post_info) {
+	$post_info = 'By [post_author_posts_link] on [post_date]';
+	return $post_info;
+}
+
+// Relocate post info
+remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
+add_action( 'genesis_entry_footer', 'genesis_post_info', 9 );
