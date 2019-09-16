@@ -96,8 +96,8 @@ function ursidae_site_image() {
 			<li class="nav-item">
 				<button class="search-toggler" type="button" id="toggle-search" aria-controls="quick-links" aria-expanded="false" title="Toggle Search">
 					<span class="sr-only label">Toggle Search</span>
-					<span class="fas fa-search fa-lg fa-fw" aria-hidden="true"></span>
-					<span class="fas fa-times fa-lg fa-fw" aria-hidden="true"></span>
+					<span class="fas fa-search fa-lg fa-fw"></span>
+					<span class="fas fa-times fa-lg fa-fw"></span>
 				</button>
 			</li>
 		</ul>
@@ -105,14 +105,14 @@ function ursidae_site_image() {
 		<!-- // Hiding this button until Quick Links is created. -->
 		<button class="quick-links-toggler" type="button" id="toggle-quick-links" aria-controls="quick-links" aria-expanded="false" title="Toggle Quick Links navigation">
 			<span class="sr-only label">Toggle Quick Links</span>
-			<span class="fas fa-bars fa-lg fa-fw" aria-hidden="true"></span>
-			<span class="fas fa-times fa-lg fa-fw" aria-hidden="true"></span>
+			<span class="fas fa-bars fa-lg fa-fw"></span>
+			<span class="fas fa-times fa-lg fa-fw"></span>
 		</button>
 
 		<!-- // The data-target and aria-controls may need to be dynamically defined. -->
 		<button class="navbar-toggler mobile-menu-toggler" type="button" data-toggle="collapse" data-target="#genesis-nav-primary" aria-controls="genesis-nav-primary" aria-expanded="false" title="Toggle Primary navigation">
 			<span class="sr-only label">Toggle Primary Nav</span>
-			<span class="fas fa-bars fa-lg fa-fw" aria-hidden="true"></span>
+			<span class="fas fa-bars fa-lg fa-fw"></span>
 		</button>
 	
 	</nav>
