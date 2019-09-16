@@ -30,7 +30,7 @@ if( $hero_rows ) :
 ?>
     <section class="hero carousel slide<?php echo $row_count > 1 ? " multiple-slides" : ""; ?>" id="carousel-<?php echo esc_attr($id); ?>">
 <?php
-        $page_template = get_page_template_slug( $post_id );
+        // $page_template = get_page_template_slug( $post_id );
         // echo $page_template;
         // if ('templates/page_landing.php' != $page_template && 'templates/modules.php' != $page_template) {
         //     echo '<h4>This template is not supported. Please select "Landing"</h4>';
