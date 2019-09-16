@@ -6,8 +6,11 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-if ( empty( $id ) )
-    $id = 'link-list-' . $block['id'];  
+$id = '';
+if ( empty( $id ) && isset($block) )
+    $id = $block['id'];
+
+$id = 'link-list-' .  $id;  
     
 $className = '';
 if( !empty($block['className']) ) {

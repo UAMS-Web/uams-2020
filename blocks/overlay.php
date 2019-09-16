@@ -6,9 +6,10 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-if ( empty( $id ) ) {
+$id = '';
+if ( empty( $id ) && isset($block) )
     $id = $block['id'];
-}
+    
 $id = 'text-image-overlay-' . $id;
 
 $className = '';
