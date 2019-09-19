@@ -6,27 +6,17 @@
 
     .row {
         justify-content: center;
+        margin-bottom: -$grid-gutter-width;
     }
     .item {
         //flex: 0 0 $stacked-tile-width;
         display: flex;
         justify-content: center;
+        padding-bottom: $grid-gutter-width;
 
         @include media-breakpoint-up(xl) {
             flex: 0 1 auto;
             width: auto;
-        }
-
-        &:nth-child(-n+3) {
-            @include media-breakpoint-down(lg) {
-                padding-bottom: $grid-gutter-width;
-            }
-        }
-
-        &:nth-child(-n+4) {
-            @include media-breakpoint-down(xs) {
-                padding-bottom: $grid-gutter-width;
-            }
         }
 
         &:nth-child(even) {
