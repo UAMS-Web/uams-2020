@@ -48,6 +48,8 @@ function page_options() {
 
             // Add hero section
             add_action( 'genesis_before_content', 'uamswp_page_hero', 20 );
+        } else {
+            // do nothing
         }
     }
 }
@@ -279,8 +281,7 @@ function uamswp_entry_title_h1( $title ) {
     $post_link = get_the_permalink( get_the_ID() );
     if( is_archive() ) {
         $title = '<h1 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h1>';
-    }
-    else {
+    } else {
         $title = '<h1 class="entry-title" itemprop="headline">' . $post_title . '</h1>';
     }
     
