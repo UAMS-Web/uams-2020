@@ -274,12 +274,17 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
                         padding: 1.125rem 0.75rem;
                     }
 
-                    > .sub-arrow {
-                        color: $gray-700;
+                    &.has-submenu {
+                        > .sub-arrow {
+                            color: $gray-700;
+                        }
                     }
+
                 }
 
                 > .dropdown-menu { // L2 nested ul
+                    font-weight: $font-weight-base;
+                    line-height: $nav-line-height;
     
                     @include media-breakpoint-down(xs) {
                         background-color: gray("50");
@@ -288,6 +293,28 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
                     @include media-breakpoint-up(sm) {
                         border-top-right-radius: 0;
                         border-top-left-radius: 0;
+                    }
+
+                    a {
+                        color: $body-color;
+                    }
+
+                    .nav-link.has-submenu {
+                        @include media-breakpoint-up(sm) {
+                            padding-right: (1.25 + 0.6 + 0.75)+rem;
+                            position: relative;
+                        }
+                        > .sub-arrow {
+                            color: $link-color;
+
+                            @include media-breakpoint-up(sm) {
+                                position: absolute;
+                                right: 0;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                margin-right: 1.25rem;
+                            }
+                        }
                     }
 
                     > .nav-item { // L2 nested ul li
@@ -337,14 +364,16 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
             }
 
             .nav-item { // L2 li
-                .nav-link, .dropdown-item {
+                .nav-link,
+                .dropdown-item {
                     @include media-breakpoint-down(xs) {
                         padding-left: 2.5rem;
                     }
                 }
 
                 .nav-item { // L3 li
-                    .nav-link, .dropdown-item {
+                    .nav-link,
+                    .dropdown-item {
                         @include media-breakpoint-down(xs) {
                             padding-left: 3rem;
                         }
@@ -352,7 +381,8 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
         
 
                     .nav-item { // L4+ li
-                        .nav-link, .dropdown-item {
+                        .nav-link,
+                        .dropdown-item {
                             @include media-breakpoint-down(xs) {
                                 padding-left: 3.5rem;
                             }
@@ -376,6 +406,7 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
             }
 
             .nav-item {
+                .nav-link,
                 .dropdown-item {
                     @include media-breakpoint-up(sm) {
                         padding: 0.75rem 1.25rem;
