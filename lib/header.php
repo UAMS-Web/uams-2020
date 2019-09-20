@@ -17,9 +17,9 @@ remove_action( 'genesis_header', 'genesis_do_header' );
 
 //Does this need to move to nav.php and tie into function uamswp_navbar_brand_markup?
 // Here goes the logo in Header -- need to update this with SVG magic?
-add_action( 'genesis_header', 'ursidae_site_image', 5 );
+add_action( 'genesis_header', 'uamswp_site_image', 5 );
  
-function ursidae_site_image() {
+function uamswp_site_image() {
 	$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_main_dark.svg" alt="University of Arkansas for Medical Sciences Logo" />';
 	?>
 	<!-- /* Begin Title / Logo */  -->

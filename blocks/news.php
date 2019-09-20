@@ -6,8 +6,11 @@
  */
 $className = '';
 // Create id attribute allowing for custom "anchor" value.
-if ( empty( $id ) )
-    $id = 'uams-news-' . $block['id'];  
+$id = '';
+if ( empty( $id ) && isset($block) )
+    $id = $block['id'];
+
+$id = 'uams-news-' .  $id;  
     
 if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
