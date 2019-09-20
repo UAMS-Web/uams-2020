@@ -209,6 +209,16 @@ function uamswp_skip_links() {
 
 }
 
+add_filter( 'genesis_attr_site-header', 'uamswp_add_aria' );
+function uamswp_add_aria( $attributes ) {
+ if ( isset($attributes['aria-label']) ) {
+	$attributes['aria-label'] = $attributes['aria-label']. 'Site Header';
+ } else {
+	$attributes['aria-label'] = 'Site Header';
+ }
+ return $attributes;
+}
+
 add_filter ( 'genesis_home_crumb', 'uams_breadcrumb_home_icon' ); 
 function uams_breadcrumb_home_icon( $crumb ) {
 	if (is_front_page()) {
