@@ -79,7 +79,7 @@ function custom_nav_menu() {
             'theme_location' => 'primary',
             'container'      => '',
             'menu'           => 'subsection-navigation', // !important! you need to give the name/slug of your menu
-            'menu_class'     => $class,
+            // 'menu_class'     => $class,
             'echo'           => 0,
         );
 
@@ -132,7 +132,7 @@ function custom_nav_menu() {
             'theme_location' => 'primary',
             'container'      => '',
             'menu'           => 'page-navigation', // !important! you need to give the name/slug of your menu
-            'menu_class'     => $class,
+            // 'menu_class'     => $class,
             'echo'           => false,
         );
 
