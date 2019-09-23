@@ -183,6 +183,7 @@ function uamswp_module( $module = array(), $i = false ) {
                 $link = $module['news_include_link'];
                 $position = $module['news_position'];
                 $articleID = $module['news_article_id'];
+                $className = '';
 
                 if ( 'grid' == $output ) {
                     $count = '3';
