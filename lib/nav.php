@@ -51,7 +51,7 @@ function uamswp_nav_subsection(){
  * @since 1.0
  * @author Todd McKee
  */
-add_action( 'template_redirect', 'remove_primary_nav' );
+add_action( 'genesis_before', 'remove_primary_nav' );
 function remove_primary_nav() {
 	if ( uamswp_nav_subsection() || ! has_nav_menu( 'primary' ) ) {
 		remove_action( 'genesis_after_header', 'genesis_do_nav' );
@@ -64,9 +64,10 @@ function remove_primary_nav() {
  * @since 1.0
  * @author Todd McKee
  */
-add_action( 'genesis_after_header', 'custom_nav_menu' );
+add_action( 'genesis_after_header', 'custom_nav_menu', 5 );
 function custom_nav_menu() {
-	if ( uamswp_nav_subsection() || ! has_nav_menu( 'primary' ) ) {
+    $registered_nav_menus = get_registered_nav_menus();
+	if ( uamswp_nav_subsection() ) {
 
         require_once( UAMSWP_THEME_MODULES . 'class-wp-bootstrap-pagewalker.php' );
 
@@ -89,12 +90,13 @@ function custom_nav_menu() {
             return;
         
         // Build a menu listing top level parent's children
-		$args = array(
-			'child_of' => uamswp_nav_subsection(),
-			'title_li' => '',
+        $args = array(
+            'child_of' => uamswp_nav_subsection(),
+            'title_li' => '',
             'echo'     => false,
             'walker'   => new WP_Bootstrap_Pagewalker(), // !important! create Bootstrap style navigation
         );
+        
         
 		$pagenav = wp_list_pages( $args );
 		if( empty( $pagenav ) )
@@ -122,7 +124,58 @@ function custom_nav_menu() {
 
         echo $pagenav;
         
-	}
+	} elseif ( ! has_nav_menu( 'primary' ) || true !== has_nav_menu( 'primary' ) ) {
+
+        require_once( UAMSWP_THEME_MODULES . 'class-wp-bootstrap-pagewalker.php' );
+
+        $args = array(
+            'theme_location' => 'primary',
+            'container'      => '',
+            'menu'           => 'page-navigation', // !important! you need to give the name/slug of your menu
+            'menu_class'     => $class,
+            'echo'           => false,
+        );
+
+        $nav = wp_nav_menu( $args );
+
+        //* Do nothing if there is nothing to show
+        // if ( ! $nav )
+        //     return;
+        
+        // Build a menu listing top level parent's children
+        $args = array(
+            'title_li' => '',
+            'echo'     => false,
+            'walker'   => new WP_Bootstrap_Pagewalker(), // !important! create Bootstrap style navigation
+        );
+        
+        
+		$pagenav = wp_list_pages( $args );
+		if( empty( $pagenav ) )
+            return;
+            
+        // Add the appropriate navbar coding
+        $wrapper_open  = '<nav class="site-nav navbar navbar-expand-sm">';
+        //$wrapper_open .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#genesis-nav-primary" aria-controls="genesis-nav-primary" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon">Test</span></button>';
+        $wrapper_open .= '<div class="collapse navbar-collapse inner-container" id="genesis-nav-primary">';
+        $wrapper_open .= '<ul id="menu-dropdowns" class="nav navbar-nav align-self-end mr-auto">';
+
+        $wrapper_close  = '</ul>'; // ul
+        $wrapper_close  = '</div>'; // wrap
+        $wrapper_close .= '</nav>'; // navbar
+
+        // Wrap the list items in an unordered list and navbar
+        $pagenav = $wrapper_open . $pagenav . $wrapper_close;
+    
+        $pagenav_markup_open = genesis_markup( array(
+            'html5'   => '<nav %s>',
+            'xhtml'   => '<div id="pagenav">',
+            'context' => 'genesis-nav-primary',
+            'echo'    => false,
+        ) );
+
+        echo $pagenav;
+    }
 }
 
 // filter menu args for bootstrap walker and other settings
