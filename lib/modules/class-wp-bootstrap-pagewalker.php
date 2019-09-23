@@ -148,7 +148,8 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 					$attributes .= ' ' . $attr . '="' . $value . '"';
 				}
 			}
-			$item_output = $args->before;
+			// $item_output = $args->before; // Orig
+			$item_output = '';
 			$item_output .= '<a' . $attributes . '>';
 
 			// initiate empty icon var then if we have a string containing icon classes...
@@ -157,9 +158,10 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 				// append an <i> with the icon classes to what is output before links.
 				$icon_html = '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> ';
 			}
-			$item_output .= $args->link_before . $icon_html . apply_filters( 'the_title', $page->post_title, $page->ID ) . $args->link_after;
+			// $item_output .= $args->link_before . $icon_html . apply_filters( 'the_title', $page->post_title, $page->ID ) . $args->link_after; // Orig
+			$item_output .= $icon_html . apply_filters( 'the_title', $page->post_title, $page->ID );
 			$item_output .= '</a>';
-			$item_output .= $args->after;
+			// $item_output .= $args->after; // Orig
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $page, $depth, $args );
 
 			if ( !empty($show_date) ) {
