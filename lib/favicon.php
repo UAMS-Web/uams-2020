@@ -13,8 +13,8 @@ function uamswp_add_favicon() { ?>
     <link rel="icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/favicon/favicon-192x192.png?v=1" sizes="192x192">
     <?php // iOS ?>
     <link rel="apple-touch-icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/favicon/favicon-120x120.png?v=1" sizes="120x120">
-    <link rel="apple-touch-icon" href="path/to/favicon-152x152.png?v=1" sizes="152x152">
-    <link rel="apple-touch-icon" href="path/to/favicon-180x180.png?v=1" sizes="180x180">
+    <link rel="apple-touch-icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/favicon/favicon-152x152.png?v=1" sizes="152x152">
+    <link rel="apple-touch-icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/favicon/favicon-180x180.png?v=1" sizes="180x180">
     <?php // Windows 8 IE 10 ?>
     <meta name="msapplication-TileColor" content="#9D2235">
     <meta name="msapplication-TileImage" content="<?php echo get_stylesheet_directory_uri(); ?>/assets/favicon/favicon-144x144.png">
