@@ -299,4 +299,6 @@ function uamswp_post_info_filter($post_info) {
 
 // Relocate post info
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
-add_action( 'genesis_entry_footer', 'genesis_post_info', 9 );
+if ( is_single() && 'post' == get_post_type() ) {
+	add_action( 'genesis_entry_footer', 'genesis_post_info', 9 );
+}
