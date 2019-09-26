@@ -293,12 +293,17 @@ add_filter( 'genesis_post_title_output', 'uamswp_entry_title_h1' );
 // Customize the entry meta in the entry header (requires HTML5 theme support)
 add_filter( 'genesis_post_info', 'uamswp_post_info_filter' );
 function uamswp_post_info_filter($post_info) {
-	$post_info = 'By [post_author_posts_link] on [post_date]';
-	return $post_info;
+	if ( is_single() && 'post' == get_post_type() ) {
+        $author_info = get_field('post_hide_author');
+        if ( $author_info ) {
+            $post_info = 'Posted on [post_date]';
+        } else {
+            $post_info = 'Posted by [post_author_posts_link] on [post_date]';
+        }
+		return $post_info;
+	}
 }
 
 // Relocate post info
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
-if ( is_single() && 'post' == get_post_type() ) {
-	add_action( 'genesis_entry_footer', 'genesis_post_info', 9 );
-}
+add_action( 'genesis_entry_footer', 'genesis_post_info', 9 );

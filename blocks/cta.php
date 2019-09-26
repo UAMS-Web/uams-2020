@@ -7,12 +7,13 @@
 
 // Create id attribute allowing for custom "anchor" value.
 $id = '';
+$i = 0;
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
 if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
-}    $id = $block['id'];
+}
     
 $id = 'cta-bar-' . $id;
 

@@ -821,11 +821,11 @@ $suffix = '_o'; // Page Options
 $hero = include( get_stylesheet_directory() .'/acf_fields/hero.php' );
 /*
  *
- * Add Header Options
+ * Add Page Header Options
  * 
  */
 acf_add_local_field_group(array(
-	'key' => 'group_header_options',
+	'key' => 'group_page_header_options',
 	'title' => 'Header Options',
 	'fields' => array(
 		array(
@@ -948,6 +948,114 @@ acf_add_local_field_group(array(
 			array(
 				'param' => 'post_type',
 				'operator' => '==',
+				'value' => 'services',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'acf_after_title',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+));
+
+/*
+ *
+ * Add Post Header Options
+ * 
+ */
+acf_add_local_field_group(array(
+	'key' => 'group_post_header_options',
+	'title' => 'Header Options',
+	'fields' => array(
+		array(
+			'key' => 'field_post_title_options',
+			'label' => 'Title Options',
+			'name' => 'post_title_options',
+			'type' => 'button_group',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'none' => '<i class="dashicons dashicons-yes"></i> Normal',
+				'cover' => '<i class="dashicons dashicons-format-image"></i> Cover',
+			),
+			'allow_null' => 0,
+			'default_value' => 'none',
+			'layout' => 'horizontal',
+			'return_format' => 'value',
+		),
+		array(
+			'key' => 'field_5d8ce2200eaac',
+			'label' => 'Coming Soon',
+			'name' => '',
+			'type' => 'message',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_post_title_options',
+						'operator' => '==',
+						'value' => 'cover',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => 'Cover image coming soon. Will not display yet.',
+			'new_lines' => 'wpautop',
+			'esc_html' => 0,
+		),
+		array(
+			'key' => 'field_post_cover_image',
+			'label' => 'Cover Image',
+			'name' => 'post_cover_image',
+			'type' => 'image',
+			'instructions' => 'Recommended dimensions: 5120x1920 or larger. Minimum dimensions: 1920x720. The image will be automatically cropped to a 8:3 aspect ratio.',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_post_title_options',
+						'operator' => '==',
+						'value' => 'cover',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'id',
+			'preview_size' => 'medium',
+			'library' => 'all',
+			'min_width' => 1920,
+			'min_height' => 720,
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
 				'value' => 'post',
 			),
 		),
@@ -1028,6 +1136,62 @@ acf_add_local_field_group(array(
 	'hide_on_screen' => '',
 	'active' => true,
 	'description' => '',
+));
+
+/*
+ *
+ * Add UAMS Post Attributes
+ * 
+ */
+
+acf_add_local_field_group(array(
+	'key' => 'group_5d893f05c1c49',
+	'title' => 'UAMS Post Options',
+	'fields' => array(
+		array(
+			'key' => 'field_post_hide_author',
+			'label' => 'Hide Author',
+			'name' => 'post_hide_author',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => 'hide-label',
+				'id' => '',
+			),
+			'acfe_permissions' => '',
+			'message' => 'Hide Author information',
+			'default_value' => 0,
+			'ui' => 0,
+			'acfe_validate' => '',
+			'acfe_update' => '',
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'post',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'side',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+	'acfe_display_title' => '',
+	'acfe_permissions' => '',
+	'acfe_note' => '',
+	'acfe_meta' => '',
 ));
 
 /*
