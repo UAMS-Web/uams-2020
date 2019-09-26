@@ -7,8 +7,12 @@
 
 // Create id attribute allowing for custom "anchor" value.
 $id = '';
-if ( empty( $id ) && isset($block) )
+if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
+} 
+if ( empty ($id) ) {
+    $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
+}
        
 $id = 'stacked-image-text-' . $id; 
 
@@ -65,7 +69,7 @@ if( $post_tiles_rows ) :
                 if ( $arr_posts->have_posts() ) : while ( $arr_posts->have_posts() ) : $arr_posts->the_post();
 
                 // Load values.
-                $image = get_post_thumbnail_id( $post->ID );
+                $image = get_post_thumbnail_id( $arr_posts->ID );
                 $alt_text = get_post_meta( $image, '_wp_attachment_image_alt', true );
             ?>
             <div class="col-12 col-sm-6 item">
