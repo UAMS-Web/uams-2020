@@ -154,6 +154,7 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 
 			// initiate empty icon var then if we have a string containing icon classes...
 			$icon_html = '';
+			$icon_class_string = '';
 			if ( ! empty( $icon_class_string ) ) {
 				// append an <i> with the icon classes to what is output before links.
 				$icon_html = '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> ';
@@ -164,15 +165,15 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			// $item_output .= $args->after; // Orig
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $page, $depth, $args );
 
-			if ( !empty($show_date) ) {
-				if ( 'modified' == $show_date )
-				$time = $page->post_modified;
-				else
-				$time = $page->post_date;
+			// if ( !empty($show_date) ) {
+			// 	if ( 'modified' == $show_date )
+			// 	$time = $page->post_modified;
+			// 	else
+			// 	$time = $page->post_date;
 				
-				$output .= " " . mysql2date($date_format, $time);
+			// 	$output .= " " . mysql2date($date_format, $time);
 
-			}
+			// }
 
 		}
 
