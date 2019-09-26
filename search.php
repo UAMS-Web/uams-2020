@@ -262,6 +262,8 @@ function uamswp_loop_layout() {
 	// remove h1 modifications
     remove_filter( 'genesis_post_title_output', 'uamswp_entry_title_h1' );
 
+    add_filter( 'genesis_post_title_output', 'uamswp_search_title' );
+
     // force excerpts.
     // add_filter( 'genesis_pre_get_option_content_archive', 'uamswp_show_excerpts' );
 
@@ -319,6 +321,17 @@ function uamswp_prefix_search_breadcrumb( $args ) {
 
 }
 add_filter( 'genesis_breadcrumb_args', 'uamswp_prefix_search_breadcrumb' );
+
+function uamswp_search_title( $title ) {
+    global $post;
+    switch_to_blog($post->blog_id);
+    $post_title = get_the_title( $post->ID );
+    $post_link = get_the_permalink( $post->ID );
+    $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
+    restore_current_blog();
+
+    return $title;
+}
 
 function uamswp_custom_loop( $args = array() ) {
 
