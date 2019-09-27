@@ -8,3 +8,9 @@ body {
     // The 'alignfull' class uses 100vw which OSX calculates before taking vertical scrollbars into account.
     // This results in a horizontal scrollbar appearing. Hiding the overflow-x disables that horizontal scroll.
 }
+
+.content-width {
+    width: $content-width;
+    max-width: 100%;
+    margin: 0 auto;
+}
