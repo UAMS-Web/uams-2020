@@ -7,8 +7,12 @@
 
 // Create id attribute allowing for custom "anchor" value.
 $id = '';
-if ( empty( $id ) && isset($block) )
+if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
+} 
+if ( empty ($id) ) {
+    $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
+}
     
 $id = 'post-category-tile-' . $id;
 
@@ -44,7 +48,7 @@ $arr_posts = new WP_Query( $args );
 if ( $arr_posts->have_posts() ) : while ( $arr_posts->have_posts() ) : $arr_posts->the_post();
 
 // Load values.
-$image = get_post_thumbnail_id( $post->ID );
+$image = get_post_thumbnail_id( $arr_posts->ID );
 $alt_text = get_post_meta( $image, '_wp_attachment_image_alt', true );
 if ( empty( $post_button_text ) )
     $post_button_text = get_field('post_tile_post_button_text') ?: 'Read the Story';
