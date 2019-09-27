@@ -141,11 +141,14 @@ function custom_nav_menu() {
         //* Do nothing if there is nothing to show
         // if ( ! $nav )
         //     return;
+
+        $home_id = get_option( 'page_on_front' );
         
         // Build a menu listing top level parent's children
         $args = array(
             'title_li' => '',
             'echo'     => false,
+            'exclude'  => $home_id,
             'walker'   => new WP_Bootstrap_Pagewalker(), // !important! create Bootstrap style navigation
         );
         

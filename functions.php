@@ -540,3 +540,15 @@ function rest_api_filter_add_filter_param( $args, $request ) {
 }
 //Gravity Forms JS to footer
 add_filter('gform_init_scripts_footer', '__return_true');
+
+add_filter('relevanssi_modify_wp_query', 'rlv_search_all_blogs');
+function rlv_search_all_blogs($query) {
+	$raw_blog_list = get_sites(array('number' => 2000));
+	$blog_list = array();
+	foreach ($raw_blog_list as $blog) {
+		$blog_list[] = $blog->blog_id;
+	}
+	$blog_list = implode(",", $blog_list);
+	$query->set("searchblogs", $blog_list);
+	return $query;
+}
