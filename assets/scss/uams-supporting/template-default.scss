@@ -4,7 +4,8 @@ body.post-template-default,
 body.archive,
 body.error404,
 body.search,
-body.advert-template-default {
+body.advert-template-default,
+body.blog  {
     .archive-description,
     .entry {
         .entry-title,
@@ -63,7 +64,6 @@ body.page-template-default,
 body.post-template-default,
 body.archive,
 body.error404,
-body.search,
 body.advert-template-default {
 
     .entry,
@@ -248,6 +248,13 @@ body.advert-template-default {
                 }
             }
         }
+
+        .wp-caption-text,
+        figcaption {
+            .photo-credit {
+                font-style: italic;
+            }
+        }
     }
 
     .entry-comments {
@@ -325,8 +332,7 @@ body.advert-template-default {
     }
 }
 
-body.archive,
-body.search {
+body.archive {
     .archive-description {
         + .entry {
             padding-top: 0;
@@ -376,6 +382,27 @@ body.search {
 
         ul {
             margin: 0 auto;
+        }
+    }
+}
+
+body.search {
+    .entry {
+        border-bottom: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+
+        .entry-header {
+            padding-top: $uams-module-padding-mobile;
+            padding-right: $uams-module-padding-mobile;
+            padding-left: $uams-module-padding-mobile;
+            margin-bottom: 0;
+    
+            @include media-breakpoint-up(sm) {
+                padding-top: $uams-module-padding;
+                padding-right: $uams-module-padding;
+                padding-left: $uams-module-padding;
+            }
         }
     }
 }

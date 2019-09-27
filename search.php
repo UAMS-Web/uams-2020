@@ -61,7 +61,9 @@ function uamswp_do_search_loop() {
             array_push($post_types, 'physicians', 'locations', 'services' );
         }
             
-        echo '<div class="search-content">';
+        echo '<div class="uams-module bg-white">';
+        echo '<div class="container-fluid">';
+        echo '<div class="search-content row">';
 
             foreach ( $post_types as $post_type ) {
                 // get the search term entered by user.
@@ -81,7 +83,7 @@ function uamswp_do_search_loop() {
                     $post_type_text = $post_type_text . "s";
                 }
 
-                echo '<div class="post-type ' . $post_type . '"><h1 class="post-type-heading">' . $post_type_text . '</h1>';
+                echo '<div class="col-12 col-md-6 post-type ' . $post_type . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $post_type_text . '</h2>';
                     // Loop actions.
                     uamswp_loop_layout();
 
@@ -93,8 +95,8 @@ function uamswp_do_search_loop() {
                     uamswp_custom_loop( $args );
 
                     // More results link.
-                    printf( '<a href="%s">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&post_type=' . $post_type );
-                echo '</div>';
+                    printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&post_type=' . $post_type );
+                echo '</div></div>';
             }
 
             $taxonomies = array( 'category' );
@@ -150,87 +152,23 @@ function uamswp_do_search_loop() {
             }
 
         echo '</div>'; // .search-content
+        echo '</div>'; // .container-fluid
+        echo '</div>'; // .uams-module
         ?>
-        <div class="widget_search">
-            <p class="content">Search UAMS websites on the UAMS.edu and UAMShealth.com domains:</p>
-            <script async src="https://cse.google.com/cse.js?cx=014806496997774146681:pyl1jhwi-bo"></script>
-            <div class="gcse-searchresults-only" data-queryParameterName="s"></div>
+        <div class="uams-module bg-gray">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="widget_search col-12">
+                            <h2 class="module-title">Search All UAMS Sites</h2>
+                            <p class="content note">Search UAMS websites on the UAMS.edu and UAMShealth.com&nbsp;domains:</p>
+                        <div class="inner-container content-width">
+                            <script async src="https://cse.google.com/cse.js?cx=014806496997774146681:pyl1jhwi-bo"></script>
+                            <div class="gcse-searchresults-only" data-queryParameterName="s"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Google CSE  modifications -->
-        <style>
-            .cse .gsc-control-cse, .gsc-control-cse {
-                padding: 0;
-            }
-            .widget_search input.gsc-input {
-                height: 40px;
-                margin: 0;
-                padding: 0.7em;
-                border: 1px solid #ddd;
-                color: #666;
-                font-size: 16px;
-                line-height: normal !important;
-                background-image: none !important;
-            }
-            .widget_search input.gsc-search-button {
-                height: 40px !important;
-                margin: 0;
-                padding: 0.7em;
-                border: 1px solid #ddd;
-                color: #666;
-                font-size: 14px;
-                line-height: normal !important;
-            }
-            table.gsc-search-box td.gsc-input {
-                padding-right: 0;
-            }
-            .gs-webResult div.gs-per-result-labels a.gs-label,
-            .gs-result .gs-title, .gs-result .gs-title * {
-                /*text-decoration: none; */
-            }
-            .gsc-control-cse,
-            .gsc-control-cse .gsc-table-result,
-            .gsc-completion-container  {
-                font-family: 'Fira Sans', sans-serif;
-            }
-            .gsc-control-cse .gs-spelling,
-            .gsc-control-cse .gs-result .gs-title,
-            .gsc-control-cse .gs-result .gs-title *,
-            .gsc-label-result-heading,
-            .gsc-tabsArea {
-                font-size: 19px;
-            }
-            .gsc-getlink-label,
-            .gsc-richsnippet-popup-box-title {
-                font-size: 17px;
-            }
-            .gsc-control-cse .gs-result .gs-spelling-original,
-            .gsc-control-cse,
-            .gsc-control-cse .gsc-table-result,
-            form.gsc-search-box,
-            .gsc-keeper,
-            .gsc-result-selector,
-            .gsc-completion-container,
-            .gsc-result-info,
-            .gsc-control-cse .gsc-option-menu,
-            .gs-promotion table .gs-snippet a span.gs-title,
-            .gs-promotion table .gs-snippet a span.gs-title *,
-            .gs-videoResult *,
-            .gsc-label-result-url,
-            .gsc-label-result-labels,
-            .gsc-label-result-form-label,
-            .gsc-richsnippet-showsnippet-label {
-                font-size: 16px;
-            }
-            .gsc-branding-text,
-            .gcsc-branding-text,
-            .gsc-resultsHeader .gsc-stats,
-            .gsc-resultsHeader .gsc-configLabel,
-            input.gsc-configSettingSubmit,
-            .gsc-getlink-box,
-            .gsc-selected-option-container {
-                font-size: 13px;
-            }
-        </style>
     <?php
     }
 

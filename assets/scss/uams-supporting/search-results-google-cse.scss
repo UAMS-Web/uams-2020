@@ -1,0 +1,74 @@
+body.search {
+    .cse .gsc-control-cse, .gsc-control-cse {
+        padding: 0;
+    }
+    .widget_search input.gsc-input {
+        height: 40px;
+        margin: 0;
+        padding: 0.7em;
+        border: 1px solid #ddd;
+        color: #666;
+        font-size: 16px;
+        line-height: normal !important;
+        background-image: none !important;
+    }
+    .widget_search input.gsc-search-button {
+        height: 40px !important;
+        margin: 0;
+        padding: 0.7em;
+        border: 1px solid #ddd;
+        color: #666;
+        font-size: 14px;
+        line-height: normal !important;
+    }
+    table.gsc-search-box td.gsc-input {
+        padding-right: 0;
+    }
+    .gs-webResult div.gs-per-result-labels a.gs-label,
+    .gs-result .gs-title, .gs-result .gs-title * {
+        /*text-decoration: none; */
+    }
+    .gsc-control-cse,
+    .gsc-control-cse .gsc-table-result,
+    .gsc-completion-container  {
+        font-family: 'Fira Sans', sans-serif;
+    }
+    .gsc-control-cse .gs-spelling,
+    .gsc-control-cse .gs-result .gs-title,
+    .gsc-control-cse .gs-result .gs-title *,
+    .gsc-label-result-heading,
+    .gsc-tabsArea {
+        font-size: 19px;
+    }
+    .gsc-getlink-label,
+    .gsc-richsnippet-popup-box-title {
+        font-size: 17px;
+    }
+    .gsc-control-cse .gs-result .gs-spelling-original,
+    .gsc-control-cse,
+    .gsc-control-cse .gsc-table-result,
+    form.gsc-search-box,
+    .gsc-keeper,
+    .gsc-result-selector,
+    .gsc-completion-container,
+    .gsc-result-info,
+    .gsc-control-cse .gsc-option-menu,
+    .gs-promotion table .gs-snippet a span.gs-title,
+    .gs-promotion table .gs-snippet a span.gs-title *,
+    .gs-videoResult *,
+    .gsc-label-result-url,
+    .gsc-label-result-labels,
+    .gsc-label-result-form-label,
+    .gsc-richsnippet-showsnippet-label {
+        font-size: 16px;
+    }
+    .gsc-branding-text,
+    .gcsc-branding-text,
+    .gsc-resultsHeader .gsc-stats,
+    .gsc-resultsHeader .gsc-configLabel,
+    input.gsc-configSettingSubmit,
+    .gsc-getlink-box,
+    .gsc-selected-option-container {
+        font-size: 13px;
+    }
+}
