@@ -99,6 +99,16 @@ function uamswp_do_search_loop() {
                 echo '</div></div>';
             }
 
+
+        echo '</div>'; // .search-content
+        echo '</div>'; // .container-fluid
+        echo '</div>'; // .uams-module
+            
+        // If possible, nest within a condition so that it only displays if there are taxonomy results.
+        echo '<div class="uams-module bg-auto">';
+        echo '<div class="container-fluid">';
+        echo '<div class="search-content row">';
+
             $taxonomies = array( 'category' );
 
             foreach ( $taxonomies as $taxonomy ) {
@@ -123,7 +133,7 @@ function uamswp_do_search_loop() {
 
                 if( ! empty( $term_query->terms ) ) {
 
-                    echo '<div class="taxonomy ' . $taxonomy . '"><h1 class="post-type-heading">' . $taxonomy_text . '</h1>';
+                    echo '<div class="col-12 col-md-6 taxonomy ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
                         // Loop actions.
                         uamswp_loop_layout();
 
@@ -145,8 +155,8 @@ function uamswp_do_search_loop() {
                         
 
                         // More results link.
-                        printf( '<a href="%s">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&taxonomy=' . $taxonomy );
-                    echo '</div>';
+                        printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&taxonomy=' . $taxonomy );
+                    echo '</div></div>';
 
                 }
             }
@@ -155,7 +165,7 @@ function uamswp_do_search_loop() {
         echo '</div>'; // .container-fluid
         echo '</div>'; // .uams-module
         ?>
-        <div class="uams-module bg-gray">
+        <div class="uams-module bg-auto">
             <div class="container-fluid">
                 <div class="row">
                     <div class="widget_search col-12">
