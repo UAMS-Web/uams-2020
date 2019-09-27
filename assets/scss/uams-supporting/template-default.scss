@@ -248,6 +248,13 @@ body.advert-template-default {
                 }
             }
         }
+
+        .wp-caption-text,
+        figcaption {
+            .photo-credit {
+                font-style: italic;
+            }
+        }
     }
 
     .entry-comments {
