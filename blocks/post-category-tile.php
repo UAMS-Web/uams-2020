@@ -149,7 +149,7 @@ if ( empty( $cat_button_text ) )
                             // echo wp_trim_words(get_the_excerpt(), 25, ' ...');  // Words instead of character
                         }?></p>
                         <div class="cta-container">
-                            <a href="<?php the_permalink(); ?>" class="btn btn-primary"><?php echo $post_button_text; ?></a>
+                            <a href="<?php the_permalink(); ?>" class="btn btn-primary" aria-label="<?php the_title(); ?>"><?php echo $post_button_text; ?></a>
                             <a href="<?php echo get_category_link( $category->term_id ); ?>" class="btn btn-outline-primary" aria-label="Full list of <?php echo $category->name; ?> stories"><?php echo $cat_button_text; ?></a>
                         </div>
                     </div>
