@@ -69,7 +69,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $body = $module['cta_bar_body'];
             $button_text = $module['cta_bar_button_text'];
             $button_url = $module['cta_bar_button_url'];
-            $button_target = $module['cta_bar_button_target'];
+            $button_target = $module['cta_bar_button_url']['target'];
             $button_desc = $module['cta_bar_button_description'];
             $layout = $module['cta_bar_layout'];
             $use_image = $module['cta_bar_use_image'];

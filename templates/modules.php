@@ -17,6 +17,7 @@ function uamswp_modules_display()
 remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 add_action( 'genesis_entry_content', 'uamswp_modules_display' );
 
+remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 
 // Build the page // Original BE Code
 // get_header();

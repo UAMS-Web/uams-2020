@@ -345,7 +345,7 @@ acf_add_local_field_group(array(
 				'class' => '',
 				'id' => '',
 			),
-			'collapsed' => 'field_5ced844860649',
+			'collapsed' => 'field_address_title',
 			'min' => 1,
 			'max' => 2,
 			'layout' => 'block',
@@ -816,6 +816,68 @@ acf_add_local_field_group(array(
 	'description' => '',
 ));
 
+
+acf_add_local_field_group(array(
+	'key' => 'group_uamswp_gtm',
+	'title' => 'Tag Manager',
+	'fields' => array(
+		array(
+			'key' => 'field_gtm_accordion',
+			'label' => 'Google Tag Manager',
+			'name' => '',
+			'type' => 'accordion',
+			'instructions' => 'This will override the default Tag Manager ID',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'open' => 1,
+			'multi_expand' => 1,
+			'endpoint' => 0,
+		),
+		array(
+			'key' => 'field_google_tag_manager_id',
+			'label' => 'GTM Container ID',
+			'name' => 'google_tag_manager_id',
+			'type' => 'text',
+			'instructions' => 'Leave Blank for Default',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_validate' => '',
+			'acfe_update' => '',
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'options_page',
+				'operator' => '==',
+				'value' => 'uamswp-settings',
+			),
+		),
+	),
+	'menu_order' => 20,
+	'position' => 'normal',
+	'style' => 'seamless',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+));
 
 $suffix = '_o'; // Page Options
 $hero = include( get_stylesheet_directory() .'/acf_fields/hero.php' );
