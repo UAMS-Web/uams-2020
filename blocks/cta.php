@@ -36,7 +36,7 @@ if ( empty($button_text) )
 if ( empty($button_url) ) 
     $button_url = get_field('cta_bar_button_url');
 if ( empty($button_target) ) 
-    $button_target = get_field('cta_bar_button_target')['target'];
+    $button_target = get_field('cta_bar_button_url')['target'];
 if ( empty($button_desc) ) 
     $button_desc = get_field('cta_bar_button_description');
 if ( empty($layout) ) 
