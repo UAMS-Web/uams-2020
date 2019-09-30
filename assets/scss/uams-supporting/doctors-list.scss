@@ -211,6 +211,8 @@
                     }
 
                     .image {
+                        position: relative;
+                        
                         @media
                         (max-width: ($breakpoint-xs - 1)),
                         (min-width: $breakpoint-sm) and (max-width: (930px - 1)) { // Fixed image height, auto width
