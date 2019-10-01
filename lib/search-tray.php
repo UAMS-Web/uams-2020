@@ -1,4 +1,3 @@
-
 <?php
 //* Adding search form
 add_action('genesis_before_header', 'uams_toggle_search', 12);

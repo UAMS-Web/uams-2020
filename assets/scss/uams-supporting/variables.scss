@@ -283,8 +283,10 @@ $image-hover-size-transition: transform 1s ease;
 // Settings for the `<body>` element.
 
 $body-bg: $white;
+$body-bg-color-lightest: $gray-600;
 $body-bg-banded: $gray-50;
 $bg-gray: $body-bg-banded;
+$bg-gray-color-lightest: $gray-700;
 $body-bg-border: $gray-200;
 $body-bg-border-dark: $gray-300;
 $body-color: $gray-900;

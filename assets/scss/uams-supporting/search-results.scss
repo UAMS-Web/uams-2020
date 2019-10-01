@@ -4,7 +4,8 @@ body.search {
             margin-top: -$uams-module-padding-mobile;
             margin-bottom: -$uams-module-padding-mobile;
         }
-        .post-type {
+        .post-type,
+        .taxonomy {
             .inner-container {
                 @include media-breakpoint-down(sm) {
                     padding-top: $uams-module-padding-mobile;
