@@ -90,7 +90,7 @@ function uamswp_site_image() {
 			<?php if ('uamshealth' == uams_get_site_info()['site']) { ?>
 			<!-- uamshealth only -->
 			<li class="nav-item">
-				<a class="nav-link" href="javascript:void(0)"><span class="fas fa-ambulance fa-lg"></span><span class="sr-only">Emergency Room</span></a>
+				<a class="nav-link emergency-link" href="javascript:void(0)" aria-label="Emergency Room"><span class="fas fa-ambulance fa-lg"></span><span class="sr-only">Emergency Room</span></a>
 			</li>
 			<? } // endif ?>
 			<li class="nav-item">
