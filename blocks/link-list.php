@@ -34,8 +34,6 @@ if ( empty($description) )
     $description = get_field('link_list_description');
 if ( empty($background_color) )
     $background_color = get_field('link_list_background_color');
-if ( empty($link_list_icons) )
-    $link_list_icons = get_field('link_list_icons');
 if ( empty($link_list_rows) )
     $link_list_rows = get_field('link_list_section');
 
@@ -62,7 +60,6 @@ if ( empty($link_list_rows) )
                         $link_url = $link_list_row['link_list_section_url']['url'];
                         $link_target = $link_list_row['link_list_section_url']['target'];
                         $link_desc = $link_list_row['link_list_section_description'];
-                        $link_icon = $link_list_row['link_list_section_icon'];
 
                     ?>
                         <li class="item">
