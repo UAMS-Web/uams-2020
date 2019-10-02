@@ -141,19 +141,28 @@ function custom_nav_menu() {
         //* Do nothing if there is nothing to show
         // if ( ! $nav )
         //     return;
-
-        $home_id = get_option( 'page_on_front' );
+        function uamswp_wp_list_pages(){
+            $excluded_pages = array();
+            $all_pages = get_pages();
+            foreach ( $all_pages as $the_page ) {
+                $hide = get_post_meta($the_page->ID, 'page_hide_from_menu');
+                if ( isset($hide) && '1' == $hide[0] ) {
+                    $excluded_pages[] = $the_page->ID;
+                }
+            }
+            $excluded_pages[] = get_option( 'page_on_front' );
+            // Build a menu listing top level parent's children
+            $args = array(
+                'title_li' => '',
+                'echo'     => false,
+                'exclude'  => $home_id,
+                'walker'   => new WP_Bootstrap_Pagewalker(), // !important! create Bootstrap style navigation
+                'exclude' => implode(',',$excluded_pages),
+            );
+            return wp_list_pages( $args );
+        }        
         
-        // Build a menu listing top level parent's children
-        $args = array(
-            'title_li' => '',
-            'echo'     => false,
-            'exclude'  => $home_id,
-            'walker'   => new WP_Bootstrap_Pagewalker(), // !important! create Bootstrap style navigation
-        );
-        
-        
-		$pagenav = wp_list_pages( $args );
+		$pagenav = uamswp_wp_list_pages(); //wp_list_pages( $args );
 		if( empty( $pagenav ) )
             return;
             
