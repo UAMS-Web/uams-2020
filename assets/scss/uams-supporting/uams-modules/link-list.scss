@@ -1,5 +1,10 @@
 .link-list {
     &.link-list-layout-split {
+        .row {
+            @include media-breakpoint-up(md) {
+                justify-content: center;
+            }
+        }
         .heading,
         .list {
             margin: 0 -0.5px;
@@ -8,6 +13,7 @@
             @include media-breakpoint-up(md) {
                 display: flex;
                 padding-right: $uams-module-padding-mobile;
+                flex:0 0 ($font-size-base * $line-length-min + $uams-module-padding-mobile + ($grid-gutter-width-rem / 2));
             }
 
             .text-container {
@@ -20,8 +26,14 @@
 
             .module-title {
                 @include media-breakpoint-up(md) {
+                    width: auto;
                     text-align: left;
                 }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                
                 .title {
                     @include media-breakpoint-up(md) {
                         width: auto;
@@ -34,13 +46,12 @@
                 }
 
                 + .note {
+                    font-size: 1em;
+
                     @include media-breakpoint-up(md) {
                         width: auto;
                         text-align: left;
                         margin-bottom: 0;
-                    }
-                    @include media-breakpoint-only(md) {
-                        font-size: 1em;
                     }
                 }
             }
@@ -55,7 +66,9 @@
                 padding-bottom: 0.375em;
                 padding-left: $uams-module-padding-mobile;
                 border-left: 1px solid;
+                flex:0 0 ($font-size-base * $line-length-ideal + $uams-module-padding-mobile + ($grid-gutter-width-rem / 2));
             }
+            
             ul {
                 list-style: none;
                 margin: 0;
@@ -71,7 +84,8 @@
                 }
 
                 @include media-breakpoint-up(md) {
-                    width: $line-length-max + em;
+                    //width: $line-length-max + em;
+                    width: auto;
                 }
             }
 
