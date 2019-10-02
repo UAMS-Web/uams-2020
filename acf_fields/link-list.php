@@ -65,7 +65,7 @@ return array(
         'label' => 'List Description',
         'name' => 'link_list_description',
         'type' => 'textarea',
-        'instructions' => '',
+        'instructions' => 'Recommended characters: 317 or less. Maximum characters: 518.',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
@@ -75,7 +75,7 @@ return array(
         ),
         'default_value' => '',
         'placeholder' => '',
-        'maxlength' => '',
+        'maxlength' => 518,
         'rows' => 3,
         'new_lines' => '',
     ),
