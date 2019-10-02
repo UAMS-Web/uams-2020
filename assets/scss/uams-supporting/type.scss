@@ -105,10 +105,13 @@ b {
     + .note {
         @extend .line-length-max;
         text-align: center;
-        font-size: $lead-font-size;
         font-weight: $lead-font-weight;
         margin-top: (-$uams-module-padding-mobile / 2);
         margin-bottom: $uams-module-padding-mobile;
+    
+        @include media-breakpoint-up(xs) {
+            font-size: $lead-font-size;
+        }
     
         @include media-breakpoint-up(sm) {
             margin-top: (-$uams-module-padding / 2);
