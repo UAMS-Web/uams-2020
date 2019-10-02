@@ -65,7 +65,7 @@ return array(
         'label' => 'List Description',
         'name' => 'link_list_description',
         'type' => 'textarea',
-        'instructions' => '',
+        'instructions' => 'This has a 518-character limit, but the recommended number of characters is 317 or fewer.',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
@@ -75,7 +75,7 @@ return array(
         ),
         'default_value' => '',
         'placeholder' => '',
-        'maxlength' => '',
+        'maxlength' => 518,
         'rows' => 3,
         'new_lines' => '',
     ),
