@@ -155,7 +155,6 @@ function custom_nav_menu() {
             $args = array(
                 'title_li' => '',
                 'echo'     => false,
-                'exclude'  => $home_id,
                 'walker'   => new WP_Bootstrap_Pagewalker(), // !important! create Bootstrap style navigation
                 'exclude' => implode(',',$excluded_pages),
             );
