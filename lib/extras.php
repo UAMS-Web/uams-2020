@@ -117,9 +117,9 @@ function uamswp_filter_ptags_on_images( $content ) {
 // Add aria-label for download button
 add_filter( 'the_content', 'uamswp_filter_download_button' );
 function uamswp_filter_download_button( $content ) {
-    $string = $content;
-    preg_match('/<div class="wp-block-file"><a .*>([^<]*)<\/a>/iU', $string, $text);
-    return str_replace( 'download>', 'aria-label="Download for '. $text[1] .'" download>', $content );
+    if (preg_match('/<div class="wp-block-file"><a .*>([^<]*)<\/a>/iU', $content, $text)) {
+        return str_replace( 'download>', 'aria-label="Download for '. $text[1] .'" download>', $content );
+    }
 }
 
 // Replace custom logo class to bootstrap
