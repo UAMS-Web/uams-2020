@@ -34,45 +34,49 @@ if ( empty($description) )
     $description = get_field('link_list_description');
 if ( empty($background_color) )
     $background_color = get_field('link_list_background_color');
-if ( empty($link_list_icons) )
-    $link_list_icons = get_field('link_list_icons');
 if ( empty($link_list_rows) )
     $link_list_rows = get_field('link_list_section');
 
 ?>
-<section class="uams-module link-list<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
-    <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
-        <span class="title"><?php echo $heading; ?></span>
-    </h2>
-    <?php echo $description ? '<p class="note">'. $description . '</p>' : ''; ?>
+<section class="uams-module link-list link-list-layout-split<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+
     <div class="container-fluid">
         <div class="row">
-        <?php 
-            foreach($link_list_rows as $link_list_row) {
-            // Load values.
-            $link_title = $link_list_row['link_list_section_title'];
-            $body = $link_list_row['link_list_section_body'];
-            $link_url = $link_list_row['link_list_section_url']['url'];
-            $link_target = $link_list_row['link_list_section_url']['target'];
-            $link_desc = $link_list_row['link_list_section_description'];
-            $link_icon = $link_list_row['link_list_section_icon'];
-
-        ?>
-            <div class="col item">
-                <div class="inner-container">
-                    <?php if ( $link_list_icons ) { ?>
-                        <span class="fa-stack fa-lg">
-                            <span class="fas fa-circle fa-stack-2x"></span>
-                            <span class="<?php echo $link_icon ? $link_icon : "fas fa-link" ; ?> fa-stack-1x fa-inverse"></span>
-                        </span>
-                    <?php } // endif ?>
-                    <h3 class="h5"><a class="stretched-link" href="<?php echo $link_url; ?>"<?php echo $link_target ? ' target="'. $link_target . '"' : ''; ?> aria-label="<?php echo $link_desc; ?>"><?php echo $link_title; ?></a></h3>
-                    <?php echo $body ? '<p>'. $body . '</p>' : ''; ?>
+            <div class="col-12 col-md-6 heading">
+                <div class="text-container">
+                    <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
+                        <span class="title"><?php echo $heading; ?></span>
+                    </h2>
+                    <?php echo $description ? '<p class="note">'. $description . '</p>' : ''; ?>
                 </div>
             </div>
-        <?php
-        }
-        ?>
+            <div class="col-12 col-md-6 list">
+                    <ul>
+                    <?php 
+                        foreach($link_list_rows as $link_list_row) {
+                        // Load values.
+                        $link_title = $link_list_row['link_list_section_title'];
+                        $body = $link_list_row['link_list_section_body'];
+                        $link_url = $link_list_row['link_list_section_url']['url'];
+                        $link_target = $link_list_row['link_list_section_url']['target'];
+                        $link_desc = $link_list_row['link_list_section_description'];
+
+                    ?>
+                        <li class="item">
+                            <div class="text-container">
+                                <h3 class="h5"><a class="stretched-link" href="<?php echo $link_url; ?>"<?php echo $link_target ? ' target="'. $link_target . '"' : ''; ?> aria-label="<?php echo $link_desc; ?>"><?php echo $link_title; ?></a></h3>
+                                <?php echo $body ? '<p>'. $body . '</p>' : ''; ?>
+                            </div>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
         </div>
     </div>
 </section>
