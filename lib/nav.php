@@ -146,7 +146,7 @@ function custom_nav_menu() {
             $all_pages = get_pages();
             foreach ( $all_pages as $the_page ) {
                 $hide = get_post_meta($the_page->ID, 'page_hide_from_menu');
-                if ( isset($hide) && '1' == $hide[0] ) {
+                if ( isset($hide[0]) && '1' == $hide ) {
                     $excluded_pages[] = $the_page->ID;
                 }
             }
@@ -155,7 +155,6 @@ function custom_nav_menu() {
             $args = array(
                 'title_li' => '',
                 'echo'     => false,
-                'exclude'  => $home_id,
                 'walker'   => new WP_Bootstrap_Pagewalker(), // !important! create Bootstrap style navigation
                 'exclude' => implode(',',$excluded_pages),
             );
