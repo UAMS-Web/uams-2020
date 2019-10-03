@@ -54,7 +54,7 @@ if( $action_bar_rows ) {
     $button_desc = $action_bar_row['action_bar_section_button_description'];
 
 ?>
-            <div class="col-12 <?php echo $row_count < 4 ? 'col-sm-4' : 'col-md-3'; ?>">
+            <div class="col-12 <?php echo $row_count < 4 ? 'col-sm-4' : 'col-md-3'; ?> item">
                 <div class="inner-container">
                     <div class="text-container">
                         <h3 class="h5"><?php echo $section_heading; ?></h3>
