@@ -29,7 +29,7 @@
     .image-container, .text-container {
         @include media-breakpoint-up(md) {
             min-height: 488px;
-            min-height: 100vw / 2;
+            min-height: (100vw / 2);
             height: 100vw / 8 * 3;
             max-height: 100vh;
         }
