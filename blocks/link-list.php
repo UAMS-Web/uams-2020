@@ -64,7 +64,7 @@ if ( empty($link_list_rows) )
                     ?>
                         <li class="item">
                             <div class="text-container">
-                                <h3 class="h5"><a class="stretched-link" href="<?php echo $link_url; ?>"<?php echo $link_target ? ' target="'. $link_target . '"' : ''; ?> aria-label="<?php echo $link_desc; ?>"><?php echo $link_title; ?></a></h3>
+                                <h3 class="h5"><a class="stretched-link" href="<?php echo $link_url; ?>"<?php echo $link_target ? ' target="'. $link_target . '"' : ''; ?> aria-label="<?php echo $link_desc; ?>" data-moduletitle="<?php echo $heading; ?>"><?php echo $link_title; ?></a></h3>
                                 <?php echo $body ? '<p>'. $body . '</p>' : ''; ?>
                             </div>
                         </li>
