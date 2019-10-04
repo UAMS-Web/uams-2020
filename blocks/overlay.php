@@ -269,7 +269,7 @@ if( $overlay_rows ) :
                 <div class="text-container">
                     <h2><?php echo $heading; ?></h2>
                     <p><?php echo $body; ?></p>
-                    <a href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>" class="btn"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?>><?php echo $button_text; ?></a>
+                    <a href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>" class="btn"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?> data-itemtitle="<?php echo $heading; ?>"><?php echo $button_text; ?></a>
                 </div>
             </section>
 <?php

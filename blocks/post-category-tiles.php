@@ -127,7 +127,7 @@ if( $post_tiles_rows ) :
                     <div class="card-body">
                         
                         <h3 class="card-title h5">
-                            <span class="supertitle"><a href="<?php echo get_category_link( $category->term_id ); ?>"><?php echo $category->name; ?></a>:</span>
+                            <span class="supertitle"><a href="<?php echo get_category_link( $category->term_id ); ?>" aria-label="Full list of <?php echo $category->name; ?> stories" data-moduletitle="<?php echo $heading; ?>" data-categorytitle="<?php echo $category->name; ?>"><?php echo $category->name; ?></a>:</span>
                             <?php the_title(); ?>
                         </h3>
                         <p class="card-text"><?php 
@@ -142,8 +142,8 @@ if( $post_tiles_rows ) :
                         }
                         ?></p>
                         <div class="cta-container">
-                            <a class="btn btn-primary" href="<?php the_permalink(); ?>" aria-label="Read <?php the_title(); ?>"><?php echo $post_button_text; ?></a>
-                            <a class="btn btn-outline-primary" href="<?php echo get_category_link( $category->term_id ); ?>" aria-label="Full list of <?php echo $category->name; ?> stories"><?php echo $cat_button_text; ?></a>
+                            <a class="btn btn-primary" href="<?php the_permalink(); ?>" aria-label="Read <?php the_title(); ?>" data-moduletitle="<?php echo $heading; ?>" data-categorytitle="<?php echo $category->name; ?>"><?php echo $post_button_text; ?></a>
+                            <a class="btn btn-outline-primary" href="<?php echo get_category_link( $category->term_id ); ?>" aria-label="Full list of <?php echo $category->name; ?> stories" data-moduletitle="<?php echo $heading; ?>" data-categorytitle="<?php echo $category->name; ?>"><?php echo $cat_button_text; ?></a>
                         </div>
                         
                     </div>

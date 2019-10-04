@@ -210,7 +210,7 @@ return array(
         'name' => 'side_link_include_more',
         'type' => 'true_false',
         'instructions' => 'This option is only available if you have 1-5 items in the link list.',
-        'required' => 1,
+        'required' => 0,
         'conditional_logic' => array(
             array(
                 array(

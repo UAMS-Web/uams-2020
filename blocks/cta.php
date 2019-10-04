@@ -174,7 +174,7 @@ if ( empty($background_color) )
                         </div>
                         <?php echo $button_text ?
                         '<div class="btn-container">
-                            <a href="' . $button_url['url'] . '" aria-label="' . $button_desc . '" class="btn"' . ( $button_target ? ' target="'. $button_target . '"' : '' ) . '>' . $button_text . '</a>
+                            <a href="' . $button_url['url'] . '" aria-label="' . $button_desc . '" class="btn"' . ( $button_target ? ' target="'. $button_target . '"' : '' ) . ' data-moduletitle="' . $heading . '">' . $button_text . '</a>
                         </div>'
                         : ''; ?>
                     </div>
