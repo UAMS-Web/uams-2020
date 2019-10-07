@@ -266,6 +266,7 @@
 
                         .row {
                             margin: 0 (-$card-spacer-x / 2);
+                            align-content: flex-start;
                         
                             @media
                             (min-width: 1396px) and (max-width: (1784px - 1)),
