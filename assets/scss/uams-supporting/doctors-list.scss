@@ -244,10 +244,12 @@
                         }
 
                         img {
+                            width: 100%;
+
                             @media
                             (max-width: ($breakpoint-xs - 1)),
                             (min-width: $breakpoint-sm) and (max-width: (930px - 1)) { // Fixed image height, auto width
-                                height:245px;
+                                max-height:245px;
                                 width: auto;
                             }
 
@@ -264,6 +266,7 @@
 
                         .row {
                             margin: 0 (-$card-spacer-x / 2);
+                            align-content: flex-start;
                         
                             @media
                             (min-width: 1396px) and (max-width: (1784px - 1)),
