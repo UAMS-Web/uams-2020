@@ -69,7 +69,7 @@ if ( empty($image_alt) )
     $image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachment_image_alt', true);
 $cta_target = $cta_target ? ' target="'. $cta_target .'"' : '';
 $cta_desc = $cta_desc ? ' aria-label="'.$cta_desc.'"' : '';
-$cta_link = $cta_link ? '<a class="btn btn-primary" href="'. $cta_link .'"' . $cta_desc . $cta_target . '>' : '';
+$cta_link = $cta_link ? '<a class="btn btn-primary" href="'. $cta_link .'"' . $cta_desc . $cta_target . ' data-moduletitle="' . $heading . '">' : '';
 $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
 // $side_image_height = wp_get_attachment_image_src($side_image, 'full')[2];
 
@@ -215,7 +215,7 @@ $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
                         ?>
                         <li>
                             <?php if( $list_url ): ?>
-                            <a href="<?php echo $list_url; ?>"<?php echo $list_desc ? ' aria-label="' . $list_desc . '"' : ''; ?>>
+                            <a href="<?php echo $list_url; ?>"<?php echo $list_desc ? ' aria-label="' . $list_desc . '"' : ''; ?> data-moduletitle="<?php echo $heading; ?>">
                             <?php endif; ?>
                             <?php if( $list_text ): ?>
                                 <?php echo $list_text; ?>

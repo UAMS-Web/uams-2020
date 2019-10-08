@@ -100,7 +100,7 @@ if( $stacked_rows ) :
                         <h3 class="card-title h5"><?php echo $item_heading; ?></h3>
                         <p class="card-text"><?php echo $body; ?></p>
                         <?php if ( $button_text ) { ?>  
-                        <a href="<?php echo $button_url; ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?>><?php echo $button_text; ?></a>
+                        <a href="<?php echo $button_url; ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?> data-moduletitle="<?php echo $heading; ?>" data-itemtitle="<?php echo $item_heading; ?>"><?php echo $button_text; ?></a>
                         <?php } //endif ?>
                     </div>
                 </div>

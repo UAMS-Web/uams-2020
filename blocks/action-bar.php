@@ -54,13 +54,13 @@ if( $action_bar_rows ) {
     $button_desc = $action_bar_row['action_bar_section_button_description'];
 
 ?>
-            <div class="col-12 <?php echo $row_count < 4 ? 'col-sm-4' : 'col-md-3'; ?>">
+            <div class="col-12 <?php echo $row_count < 4 ? 'col-sm-4' : 'col-md-3'; ?> item">
                 <div class="inner-container">
                     <div class="text-container">
-                        <h3 class="h5"><?php echo $section_heading; ?></h3>
+                        <h3 class="h5" data-moduletitle="<?php echo $heading; ?>"><?php echo $section_heading; ?></h3>
                         <p><?php echo $body; ?></p>
                     </div>
-                    <a class="btn" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target . '"' : ''; ?>><?php echo $button_text; ?></a>
+                    <a class="btn" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target . '"' : ''; ?> data-moduletitle="<?php echo $heading; ?>" data-itemtitle="<?php echo $section_heading; ?>"><?php echo $button_text; ?></a>
                 </div>
             </div>
     <?php
