@@ -146,7 +146,7 @@ function custom_nav_menu() {
             $all_pages = get_pages();
             foreach ( $all_pages as $the_page ) {
                 $hide = get_post_meta($the_page->ID, 'page_hide_from_menu');
-                if ( isset($hide[0]) && '1' == $hide ) {
+                if ( isset($hide[0]) && '1' == $hide[0] ) {
                     $excluded_pages[] = $the_page->ID;
                 }
             }
