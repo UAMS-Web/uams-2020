@@ -553,7 +553,7 @@ function rlv_search_all_blogs($query) {
 	return $query;
 }
 
-if ( ! class_exists( 'acf' ) ) {
+if ( class_exists( 'acf' ) ) {
 	$gtm = get_field( 'google_tag_manager_id', 'option' );
 }
 $gtmvalue = (!empty($gtm) ? $gtm : 'GTM-NGG4P7F' );
