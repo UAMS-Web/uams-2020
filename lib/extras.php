@@ -119,6 +119,8 @@ add_filter( 'the_content', 'uamswp_filter_download_button' );
 function uamswp_filter_download_button( $content ) {
     if (preg_match('/<div class="wp-block-file"><a .*>([^<]*)<\/a>/iU', $content, $text)) {
         return str_replace( 'download>', 'aria-label="Download for '. $text[1] .'" download>', $content );
+    } else {
+        return $content;
     }
 }
 
