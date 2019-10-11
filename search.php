@@ -111,6 +111,10 @@ function uamswp_do_search_loop() {
 
             $taxonomies = array( 'category' );
 
+            if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
+                array_push($taxonomies, 'condition', 'treatment_procedure' );
+            }
+
             foreach ( $taxonomies as $taxonomy ) {
                 // get the search term entered by user.
                 $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
