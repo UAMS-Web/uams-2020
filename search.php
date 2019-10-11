@@ -57,7 +57,7 @@ function uamswp_do_search_loop() {
         // create an array variable with specific post types in your desired order.
         $post_types = array( 'page', 'post' );
 
-        if (class_exists('UAMS\Find_a_Doc')) { // Add doctors, locations, and services
+        if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
             array_push($post_types, 'physicians', 'locations', 'services' );
         }
             
