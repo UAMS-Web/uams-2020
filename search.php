@@ -57,7 +57,7 @@ function uamswp_do_search_loop() {
         // create an array variable with specific post types in your desired order.
         $post_types = array( 'page', 'post' );
 
-        if (class_exists('UAMS\Find_a_Doc')) { // Add doctors, locations, and services
+        if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
             array_push($post_types, 'physicians', 'locations', 'services' );
         }
             
@@ -110,6 +110,10 @@ function uamswp_do_search_loop() {
         echo '<div class="search-content row">';
 
             $taxonomies = array( 'category' );
+
+            if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
+                array_push($taxonomies, 'condition', 'treatment_procedure' );
+            }
 
             foreach ( $taxonomies as $taxonomy ) {
                 // get the search term entered by user.
