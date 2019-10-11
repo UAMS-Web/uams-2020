@@ -1,0 +1,25 @@
+.btn {
+    text-decoration: none;
+}
+
+.btn-container {
+    display: flex;
+    flex-flow: row wrap;
+    margin: (-$spacer-min / 2);
+
+    .btn {
+        margin: ($spacer-min / 2);
+    }
+}
+
+.wp-block-file {
+    a.wp-block-file__button {
+        @extend .btn;
+        @extend .btn-sm;
+        @extend .btn-outline-primary;
+
+        &:visited {
+            @extend .btn-outline-primary;
+        }
+    }
+}

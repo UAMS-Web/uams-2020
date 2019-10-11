@@ -11,13 +11,18 @@
  *
 */
 
-// Register Sidebar Function
-add_action( 'init', 'uamswp_register_sidebars' );
-function uamswp_register_sidebars() {
-	// Register Custom Sidebars
-	genesis_register_sidebar( array(
-		'id' => 'home-featured',
-		'name' => __( 'Home Featured', 'uams-2020' ),
-		'description' => __( 'This is the home featured area. It uses the jumbotron bootstrap section.', 'uams-2020' )
-	) );
-}
+// Register Footer Function
+// add_action( 'init', 'uamswp_register_sidebars' );
+// function uamswp_register_sidebars() {
+// 	// Register Custom Sidebars
+// 	genesis_register_sidebar( array(
+// 		'id' => 'uams-footer',
+// 		'name' => __( 'Footer', 'uams-2020' ),
+// 		'description' => __( 'This is the footer widget area. Widgets will be displayed horizontal / full width.', 'uams-2020' )
+// 	) );
+// }
+
+//* Unregister primary sidebar
+// unregister_sidebar( 'sidebar' );
+//* Unregister secondary sidebar
+unregister_sidebar( 'sidebar-alt' );

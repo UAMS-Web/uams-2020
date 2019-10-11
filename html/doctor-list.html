@@ -1,0 +1,435 @@
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i" rel="stylesheet">
+</head>
+<body>
+    <h1 class="sr-only">Doctors List</h1>
+    <main class="container-fluid doctor-list">
+        <div class="row">
+            <div class="col-12 col-sm filter-col collapse">
+                <!-- When user clicks button.filter-toggle, add/remove "show" class on div.filter-col. -->
+                <h2>Filters</h2>
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                <fieldset>
+                    <legend class="sr-only">Filter by...</legend>
+                    <h3>Search Doctors, Specialty or Condition</h3>
+                    <div class="filter-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button"><span class="fas fa-search"></span><span class="sr-only">Search</span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Last Name Starts With</h3>
+                    <div class="filter-group">
+                        <div class="az-filter">
+                            <!-- All Filters:
+                                Disable any checkbox input that does not represent any doctors. Add "disabled" to input.
+                                
+                                A-Z Filter:
+                                Start with "Any" checkbox input checked. Add "checked" attribute to input.
+                                If user checks any character's checkbox input, remove "checked" attribute from "Any" checkbox input.
+                                If user checks "Any" checkbox input, remove "checked" attribute from checkbox input of other characters. -->
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-any" checked>
+                                <label class="az-filter-label" for="az-filter-any">Any</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-number" disabled>
+                                <label class="az-filter-label" for="az-filter-number">#</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-A">
+                                <label class="az-filter-label" for="az-filter-A">A</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-B">
+                                <label class="az-filter-label" for="az-filter-B">B</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-C">
+                                <label class="az-filter-label" for="az-filter-C">C</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-D">
+                                <label class="az-filter-label" for="az-filter-D">D</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-E">
+                                <label class="az-filter-label" for="az-filter-E">E</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-F">
+                                <label class="az-filter-label" for="az-filter-F">F</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-G">
+                                <label class="az-filter-label" for="az-filter-G">G</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-H">
+                                <label class="az-filter-label" for="az-filter-H">H</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-I">
+                                <label class="az-filter-label" for="az-filter-I">I</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-J">
+                                <label class="az-filter-label" for="az-filter-J">J</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-K">
+                                <label class="az-filter-label" for="az-filter-K">K</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-L">
+                                <label class="az-filter-label" for="az-filter-L">L</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-M">
+                                <label class="az-filter-label" for="az-filter-M">M</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-N">
+                                <label class="az-filter-label" for="az-filter-N">N</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-O">
+                                <label class="az-filter-label" for="az-filter-O">O</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-P">
+                                <label class="az-filter-label" for="az-filter-P">P</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-Q">
+                                <label class="az-filter-label" for="az-filter-Q">Q</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-R">
+                                <label class="az-filter-label" for="az-filter-R">R</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-S">
+                                <label class="az-filter-label" for="az-filter-S">S</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-T">
+                                <label class="az-filter-label" for="az-filter-T">T</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-U">
+                                <label class="az-filter-label" for="az-filter-U">U</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-V">
+                                <label class="az-filter-label" for="az-filter-V">V</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-W">
+                                <label class="az-filter-label" for="az-filter-W">W</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-X">
+                                <label class="az-filter-label" for="az-filter-X">X</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-Y">
+                                <label class="az-filter-label" for="az-filter-Y">Y</label>
+                            </div>
+                            <div class="custom-control">
+                                <input type="checkbox" class="custom-control-input" id="az-filter-Z">
+                                <label class="az-filter-label" for="az-filter-Z">Z</label>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Primary Care</h3>
+                    <div class="filter-group">
+                        <!-- All filters except A-Z filter:
+                        Add numeral representing how many doctors are grouped in that filter option. -->
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="primary-care-1">
+                            <label class="custom-control-label" for="primary-care-1">
+                                Yes (1<span class="sr-only"> results</span>)
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="primary-care-2">
+                            <label class="custom-control-label" for="primary-care-2">
+                                No (1<span class="sr-only"> results</span>)
+                            </label>
+                        </div>
+                    </div>
+                    <h3>Conditions Treated</h3>
+                    <div class="filter-group">
+                        <label for="conditions-treated-1" class="sr-only">Select multiple conditions</label>
+                        <select multiple class="custom-select" id="conditions-treated-1">
+                            <option>Condition A</option>
+                            <option>Condition B</option>
+                            <option>Condition C</option>
+                            <option>Condition D</option>
+                            <option>Condition E</option>
+                            <option>Condition F</option>
+                        </select>
+                        <small id="conditions-treated-help-block">
+                            Hold down the Control key on PC or Command&nbsp;(&#8984;) key on Mac to select multiple conditions.
+                        </small>
+                    </div>
+                    <h3>Patient Type</h3>
+                    <div class="filter-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="patient-type-1">
+                            <label class="custom-control-label" for="patient-type-1">
+                                Adults (2<span class="sr-only"> results</span>)
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="patient-type-2">
+                            <label class="custom-control-label" for="patient-type-2">
+                                Children and Adolescents (1<span class="sr-only"> results</span>)
+                            </label>
+                        </div>
+                    </div>
+                    <h3>Gender</h3>
+                    <div class="filter-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="gender-1">
+                            <label class="custom-control-label" for="gender-1">
+                                Female (1<span class="sr-only"> results</span>)
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="gender-2">
+                            <label class="custom-control-label" for="gender-2">
+                                Male (1<span class="sr-only"> results</span>)
+                            </label>
+                        </div>
+                    </div>
+                    <h3>Languages</h3>
+                    <div class="filter-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="language-1">
+                            <label class="custom-control-label" for="language-1">
+                                Language A (2<span class="sr-only"> results</span>)
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="language-2">
+                            <label class="custom-control-label" for="language-2">
+                                Language B (1<span class="sr-only"> results</span>)
+                            </label>
+                        </div>
+                    </div>
+                    <h3>Location</h3>
+                    <div class="filter-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="location-1">
+                            <label class="custom-control-label" for="location-1">
+                                Location A (2<span class="sr-only"> results</span>)
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="location-2">
+                            <label class="custom-control-label" for="location-2">
+                                Location B (1<span class="sr-only"> results</span>)
+                            </label>
+                        </div>
+                    </div>
+                    <h3>Rating</h3>
+                    <div class="filter-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="rating-1" disabled>
+                            <label class="custom-control-label" for="rating-1">
+                                5 Stars only (0<span class="sr-only"> results</span>)
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="rating-2">
+                            <label class="custom-control-label" for="rating-2">
+                                4 Stars and up (2<span class="sr-only"> results</span>)
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="rating-3">
+                            <label class="custom-control-label" for="rating-3">
+                                3 Stars and up (1<span class="sr-only"> result</span>)
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="rating-4">
+                            <label class="custom-control-label" for="rating-4">
+                                2 Stars and up (1<span class="sr-only"> result</span>)
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="rating-5">
+                            <label class="custom-control-label" for="rating-5">
+                                1 Star and up (1<span class="sr-only"> result</span>)
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" value="" id="rating-6" disabled>
+                            <label class="custom-control-label" for="rating-6">
+                                No rating (0<span class="sr-only"> results</span>)
+                            </label>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="filter-buttons">
+                        <!-- Only use this if the filters aren't immediately applied.
+                            When user clicks "Reset" button, uncheck all filter inputs. Check "Any" checkbox input in the "Last name starts with" group. -->
+                        <button type="button" class="btn btn-outline-primary">Reset</button>
+                        <button type="button" class="btn btn-primary">Apply</button>
+                    </div>
+                </fieldset>
+                
+            </div>
+            <div class="col-12 col-sm list-col">
+                <h2 class="sr-only">List of Doctors</h2>
+                <div class="row list-col-header">
+                    <div class="col result-count"><p>10 Doctors</p></div>
+                    <div class="col filter-toggle-container">
+                        <!-- When button is active, add "active" class. -->
+                        <button title="Toggle Filter Tray" class="filter-toggle"><span class="sr-only">Toggle Filter Tray</span><span class="fas fa-filter"></span></button>
+                        
+                    </div>
+                    <div class="col sort-select">
+                        <select class="custom-select">
+                            <option>Sort By</option>
+                            <option>Name (A-Z)</option>
+                            <option>Name (Z-A)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row list">
+                    <div class="col item-container">
+                        <div class="item">
+                            <div class="row">
+                                <div class="col image">
+                                    <picture>
+                                        <source srcset="https://picsum.photos/243/324?image=669 1x, https://picsum.photos/486/648?image=669 2x" media="(min-width: 2054px)">
+                                        <source srcset="https://picsum.photos/184/245?image=669 1x, https://picsum.photos/368/490?image=669 2x" media="(min-width: 1784px)">
+                                        <source srcset="https://picsum.photos/243/324?image=669 1x, https://picsum.photos/486/648?image=669 2x" media="(min-width: 1200px)">
+                                        <source srcset="https://picsum.photos/184/245?image=669 1x, https://picsum.photos/368/490?image=669 2x" media="(min-width: 768px)">
+                                        <source srcset="https://picsum.photos/95/127?image=669 1x, https://picsum.photos/190/254?image=669 2x" media="(min-width: 576px)">
+                                        <source srcset="https://picsum.photos/184/245?image=669 1x, https://picsum.photos/368/490?image=669 2x" media="(min-width: 1px)">
+                                        <img src="https://picsum.photos/184/245?image=669" alt="C. Lowry Barnes, M.D.">
+                                    </picture>
+                                </div>
+                                <div class="col text">
+                                    <div class="row">
+                                        <div class="col-12 primary">
+                                        <h3 class="h4">
+                                            <span class="name">C. Lowry Barnes, M.D.</span>
+                                            <span class="subtitle">Orthopaedic Surgery</span>
+                                        </h3>
+                                        <div class="rating">
+                                            <div class="star-ratings-sprite" title="4.7 out of 5"><div class="star-ratings-sprite-percentage" style="width: 94%;"></div></div>
+                                            <div class="ratings-count">595 ratings</div>
+                                        </div>
+                                        <p>C. Lowry Barnes, MD, completed fellowship training in total joint replacement from Harvard Medical School and from Brigham and Women’s Hospital in Boston, Massachusetts. In 2000, Dr. Barnes was named&nbsp;...</p>
+                                        <a class="btn btn-primary" href="javascript:void(0)">Full Profile</a>
+                                        </div>
+                                        <div class="col-12 secondary">
+                                        <h4 class="h5">Locations</h5>
+                                        <ul>
+                                            <li><a href="javascript:void(0)">Orthopedic Clinic – Shackleford W Blvd</a></li>
+                                            <li><a href="javascript:void(0)">University of Arkansas for Medical Sciences</a></li>
+                                        </ul>
+                                        <a class="btn btn-primary" href="javascript:void(0)">Full Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col item-container">
+                        <div class="item">
+                            <div class="row">
+                                <div class="col image">
+                                    <picture>
+                                        <source srcset="https://picsum.photos/243/324?image=1011 1x, https://picsum.photos/486/648?image=1011 2x" media="(min-width: 2054px)">
+                                        <source srcset="https://picsum.photos/184/245?image=1011 1x, https://picsum.photos/368/490?image=1011 2x" media="(min-width: 1784px)">
+                                        <source srcset="https://picsum.photos/243/324?image=1011 1x, https://picsum.photos/486/648?image=1011 2x" media="(min-width: 1200px)">
+                                        <source srcset="https://picsum.photos/184/245?image=1011 1x, https://picsum.photos/368/490?image=1011 2x" media="(min-width: 768px)">
+                                        <source srcset="https://picsum.photos/95/127?image=1011 1x, https://picsum.photos/190/254?image=1011 2x" media="(min-width: 576px)">
+                                        <source srcset="https://picsum.photos/184/245?image=1011 1x, https://picsum.photos/368/490?image=1011 2x" media="(min-width: 1px)">
+                                        <img src="https://picsum.photos/184/245?image=1011" alt="Kathryn (Katie) Brown, O.D.">
+                                    </picture>
+                                </div>
+                                <div class="col text">
+                                    <div class="row">
+                                        <div class="col-12 primary">
+                                        <h3 class="h4">
+                                            <span class="name">Kathryn (Katie) Brown, O.D.</span>
+                                            <span class="subtitle">Ophthalmology</span>
+                                        </h3>
+                                        <div class="rating">
+                                            <div class="star-ratings-sprite" title="4.7 out of 5"><div class="star-ratings-sprite-percentage" style="width: 94%;"></div></div>
+                                            <div class="ratings-count">595 ratings</div>
+                                        </div>
+                                        <p>Katie L. Brown. O.D., is an optometric physician at the University of Arkansas for Medical Sciences (UAMS). Dr. Brown graduated from Southern College of Optometry Magna cum laude. She performs&nbsp;...</p>
+                                        <a class="btn btn-primary" href="javascript:void(0)">Full Profile</a>
+                                        </div>
+                                        <div class="col-12 secondary">
+                                        <h4 class="h5">Locations</h5>
+                                        <ul>
+                                            <li><a href="javascript:void(0)">Eye: Jones Eye Institute Clinic</a></li>
+                                            <li><a href="javascript:void(0)">University of Arkansas for Medical Sciences</a></li>
+                                        </ul>
+                                        <a class="btn btn-primary" href="javascript:void(0)">Full Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row list-pagination">
+                    <div class="col">
+                        <nav aria-label="Doctor list pagination">
+                            <ul class="pagination">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="text/javascript" src="../assets/js/all.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $( ".filter-toggle, .filter-col .close" ).click(function() {
+            $( ".filter-col" ).toggleClass( "show" );
+        });
+        $( ".az-filter input#az-filter-any" ).on("change", function() {
+            $(".az-filter input").not(this).prop('checked', false);
+        });
+        $( ".az-filter input:not(#az-filter-any)" ).on("change", function() {
+            $(".az-filter input#az-filter-any").prop('checked', false);
+        });
+    });
+    </script>
+</body>
+</html>

@@ -4,13 +4,60 @@
 // Bootstrap Genesis Theme Variables
 @import "supporting/variables-bootstrap-genesis";
 
+// UAMS Bootstrap Variables Override
+@import "uams-supporting/variables";
+
+// UAMS Bootstrap Mixins Override
+@import "uams-supporting/mixins";
+
 // Import Bootstrap Core
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 @import "../../node_modules/smartmenus-bootstrap-4/jquery.smartmenus.bootstrap-4";
 
-// Base Page Styles
-@import "supporting/page";
+// UAMS Bootstrap Core Override
+//@import "uams-supporting/functions";
+//@import "uams-supporting/variables";
+//@import "uams-supporting/mixins";
+//@import "uams-supporting/root";
+//@import "uams-supporting/reboot";
+@import "uams-supporting/type";
+//@import "uams-supporting/images";
+//@import "uams-supporting/code";
+@import "uams-supporting/grid";
+//@import "uams-supporting/tables";
+@import "uams-supporting/forms";
+@import "uams-supporting/buttons";
+//@import "uams-supporting/transitions";
+//@import "uams-supporting/dropdown";
+//@import "uams-supporting/button-group";
+//@import "uams-supporting/input-group";
+//@import "uams-supporting/custom-forms";
+@import "uams-supporting/nav";
+@import "uams-supporting/navbar";
+//@import "uams-supporting/card";
+@import "uams-supporting/breadcrumb";
+@import "uams-supporting/pagination";
+//@import "uams-supporting/badge";
+//@import "uams-supporting/jumbotron";
+//@import "uams-supporting/alert";
+//@import "uams-supporting/progress";
+//@import "uams-supporting/media";
+//@import "uams-supporting/list-group";
+//@import "uams-supporting/close";
+//@import "uams-supporting/toasts";
+//@import "uams-supporting/modal";
+//@import "uams-supporting/tooltip";
+//@import "uams-supporting/popover";
+//@import "uams-supporting/carousel";
+//@import "uams-supporting/spinners";
+@import "uams-supporting/utilities";
+//@import "uams-supporting/print";
+
+// New UAMS Supporting Styles
+@import "uams-supporting/page";
+@import "uams-supporting/layout";
+@import "uams-supporting/links-tel";
 
 // Screen Reader Classes
 @import "supporting/screen-reader-text";
@@ -38,17 +85,31 @@
 
 @import "supporting/gallery";
 
+// Global Search
+@import "uams-supporting/search-tray";
+@import "uams-supporting/search-results";
+@import "uams-supporting/search-results-google-cse";
+
+// Site Wrapper
+@import "uams-supporting/site-wrapper";
+
 // Navigation
 @import "supporting/nav";
 
 // Header
 @import "supporting/header";
+@import "uams-supporting/header";
+//@import "uams-supporting/header-2";
+
+// Quick Links
+@import "uams-supporting/quick-links";
 
 // Jumbotron
 @import "supporting/jumbotron";
 
 // Site Inner
 @import "supporting/site-inner";
+@import "uams-supporting/site-inner";
 
 // Archive/Blog
 @import "supporting/archive";
@@ -56,11 +117,54 @@
 // Single Post/Page
 @import "supporting/single";
 
+// Template, Default
+@import "uams-supporting/template-default";
+
+// Template, Landing Page
+@import "uams-supporting/template-landing-page";
+
 // Sidebar
 @import "supporting/sidebar";
+@import "uams-supporting/sidebar";
+
+// UAMS Modules
+@import "uams-supporting/uams-modules";
+
+// Hero
+@import "uams-supporting/hero";
+
+// Ratings
+@import "uams-supporting/ratings";
+
+// Doctors
+@import "uams-supporting/doctors-list";
+@import "uams-supporting/doctors-item";
+
+// Conditions and/or Treatments
+@import "uams-supporting/conditions-treatments";
+
+// Locations
+@import "uams-supporting/locations-list";
+@import "uams-supporting/locations-item";
+
+// CTA Bars
+@import "uams-supporting/cta-bar";
 
 // Footer Widgets
 @import "supporting/footer-widgets";
 
 // Site Footer
 @import "supporting/footer";
+@import "uams-supporting/footer";
+
+// Intranet
+@import "uams-supporting/intranet";
+
+// Awesome Weather
+@import "uams-supporting/awesome-weather";
+
+// Gravity Forms
+@import "uams-supporting/gravity-forms";
+
+// Gravity Forms
+@import "uams-supporting/wp-adverts/wp-adverts";

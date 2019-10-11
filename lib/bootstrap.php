@@ -72,15 +72,15 @@ function uamswp_merge_genesis_attr_classes() {
     global $wp_registered_sidebar;
     $classes = array(
             'content-sidebar-wrap'      => 'row',
-            'content'                   => 'col-sm-8',
-            'sidebar-primary'           => 'col-sm-4',
-            'sidebar-secondary'         => 'col-sm-2',
+            'content'                   => 'col-12 col-md-8',
+            'sidebar-primary'           => 'col-12 col-md-4',
+            'sidebar-secondary'         => 'col-12 col-sm-2',
             'archive-pagination'        => 'clearfix',
             'entry-content'             => 'clearfix',
             'entry-pagination'          => 'clearfix',
-            'structural-wrap'           => 'container',
+            // 'structural-wrap'           => 'container',
             'comment-list'              => 'list-unstyled',
-            'home-featured'             => 'jumbotron',
+            // 'home-featured'             => 'jumbotron',
             'entry-image'               => 'img-fluid'
     );
 
@@ -88,58 +88,58 @@ function uamswp_merge_genesis_attr_classes() {
 
     $navclasses[] = 'navbar';
 
-    $navposition = get_theme_mod( 'navposition', false );
+    //$navposition = get_theme_mod( 'navposition', false );
 
-    $navclasses[] = $navposition;
+    //$navclasses[] = $navposition;
 
-    $navcontainer = get_theme_mod( 'navcontainer', 'lg' );
-    $navclasses[] = 'navbar-expand-' . $navcontainer;
+    //$navcontainer = get_theme_mod( 'navcontainer', 'sm' );
+    $navclasses[] = 'navbar-expand-sm';
 
-    $navcolor = get_theme_mod( 'navcolor', 'dark' );
+    //$navcolor = get_theme_mod( 'navcolor', 'dark' );
 
-    switch( $navcolor ) {
-        case 'light':
-            $navclasses[] = 'navbar-light';
-            $navclasses[] = 'bg-light';
-            break;
-        case 'dark':
-        default:
-            $navclasses[] = 'navbar-dark';
-            $navclasses[] = 'bg-dark';
-            break;
-        case 'primary':
-            $navclasses[] = 'navbar-dark';
-            $navclasses[] = 'bg-primary';
-            break;
-    }
+    // switch( $navcolor ) {
+    //     case 'light':
+    //         $navclasses[] = 'navbar-light';
+    //         $navclasses[] = 'bg-light';
+    //         break;
+    //     case 'dark':
+    //     default:
+    //         $navclasses[] = 'navbar-dark';
+    //         $navclasses[] = 'bg-dark';
+    //         break;
+    //     case 'primary':
+    //         $navclasses[] = 'navbar-dark';
+    //         $navclasses[] = 'bg-primary';
+    //         break;
+    // }
 
     $classes['site-header'] = esc_attr( implode( ' ', $navclasses ) );
 
     // Footer Class
-    $footerwidgetbg = get_theme_mod( 'footerwidgetbg', 'dark' );
+    //$footerwidgetbg = get_theme_mod( 'footerwidgetbg', 'dark' );
     
     $footerwidgetclasses = array();
     
-    if ( $footerwidgetbg !== 'primary' ) {
-        $footerwidgetclasses[] = 'text-muted';
-    }
+    //if ( $footerwidgetbg !== 'primary' ) {
+    //    $footerwidgetclasses[] = 'text-muted';
+    //}
 
-    $footerwidgetclasses[] = 'bg-' . $footerwidgetbg;
+    //$footerwidgetclasses[] = 'bg-' . $footerwidgetbg;
 
     $classes['footer-widgets'] = esc_attr( implode( ' ', $footerwidgetclasses ) );
 
     // Footer Class
-    $footerbg = get_theme_mod( 'footerbg', 'dark' );
+    // $footerbg = get_theme_mod( 'footerbg', 'dark' );
 
-    $footerclasses = array();
+    //$footerclasses = array();
 
-    if ( $footerbg !== 'primary' ) {
-        $footerclasses[] = 'text-muted';
-    }
+    // if ( $footerbg !== 'primary' ) {
+    //     $footerclasses[] = 'text-muted';
+    // }
 
-    $footerclasses[] = 'bg-' . $footerbg;
+    // $footerclasses[] = 'bg-' . $footerbg;
 
-    $classes['site-footer'] = esc_attr( implode( ' ', $footerclasses ) );
+    //$classes['site-footer'] = esc_attr( implode( ' ', $footerclasses ) );
     
     if ( has_filter( 'uamswp_add_classes' ) ) {
         $classes = apply_filters( 'uamswp_add_classes', $classes );

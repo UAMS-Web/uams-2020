@@ -45,6 +45,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			// find all links with an id in the output.
 			preg_match_all( '/(<a.*?id=\"|\')(.*?)\"|\'.*?>/im', $output, $matches );
 			// with pointer at end of array check if we got an ID match.
+			$labledby = '';
 			if ( end( $matches[2] ) ) {
 				// build a string to use as aria-labelledby.
 				$labledby = 'aria-labelledby="' . end( $matches[2] ) . '"';

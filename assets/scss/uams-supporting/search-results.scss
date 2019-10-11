@@ -1,0 +1,41 @@
+body.search {
+    .search-content {
+        @include media-breakpoint-down(sm) {
+            margin-top: -$uams-module-padding-mobile;
+            margin-bottom: -$uams-module-padding-mobile;
+        }
+        .post-type,
+        .taxonomy {
+            .inner-container {
+                @include media-breakpoint-down(sm) {
+                    padding-top: $uams-module-padding-mobile;
+                    padding-bottom: $uams-module-padding-mobile;
+                }
+            }
+
+            &:nth-child(n+2) {
+                .inner-container {
+                    @include media-breakpoint-down(sm) {
+                        border-top: 1px solid $body-bg-border;
+                    }
+                }
+            }
+
+            &:nth-child(odd) {
+                .inner-container {
+                    @include media-breakpoint-up(md) {
+                        margin-right: 0;
+                    }
+                }
+            }
+
+            &:nth-child(even) {
+                .inner-container {
+                    @include media-breakpoint-up(md) {
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+    }
+}

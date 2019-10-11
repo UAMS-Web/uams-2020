@@ -19,11 +19,119 @@ function uamswp_do_plugins_register() {
 		array(
 			'name'      => __( 'Widget CSS Classes', 'uams-2020' ),
 			'slug'      => 'widget-css-classes',
-			'required'  => false
+			'required'  => false,
 		),
+		array(
+			'name'      => __( 'ACF Blocks', 'uamswp-uams-2020' ),
+			'slug'      => 'acf-blocks',
+			'required'  => true,
+		),
+
+		array(
+			'name'      => __( 'Fly Dynamic Image Resizer', 'uamswp-uams-2020' ),
+			'slug'      => 'fly-dynamic-image-resizer',
+			'required'  => true,
+		),
+
+		array(
+			'name'      => __( 'UAMSWP YouTube Lyte', 'uamswp-uams-2020' ),
+			'slug'      => 'uamswp-youtube-lyte',
+			'source'             => get_stylesheet_directory() . '/plugins/uamswp-youtube-lyte.zip', // The plugin source.
+			'required'  => true,
+		),
+
+		// array(
+		// 	'name'      => __( 'Meta Box Text Limiter', 'uamswp-uams-2020' ),
+		// 	'slug'      => 'meta-box-text-limiter',
+		// 	'required'  => false,
+		// ),
+		// Begin ACF extensions.
+		array(
+			'name'               => __( 'Advanced Custom Fields PRO', 'uamswp-uams-2020' ), // The plugin name.
+			'slug'               => 'advanced-custom-fields-pro', // The plugin slug (typically the folder name).
+			'source'             => get_stylesheet_directory() . '/plugins/advanced-custom-fields-pro.zip', // The plugin source.
+			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		),
+		array(
+			'name'               => __( 'Advanced Custom Fields: Mask Field', 'uamswp-uams-2020' ), // The plugin name.
+			'slug'               => 'acf-maskfield', // The plugin slug (typically the folder name).
+			'source'             => get_stylesheet_directory() . '/plugins/acf-maskfield.zip', // The plugin source.
+			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		),
+
+		// array(
+		// 	'name'               => __( 'MB Admin Columns', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'mb-admin-columns', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/mb-admin-columns.zip', // The plugin source.
+		// 	'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'MB Term Meta', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'mb-term-meta', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/mb-term-meta.zip', // The plugin source.
+		// 	'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'MB Custom Table', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'mb-custom-table', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/mb-custom-table.zip', // The plugin source.
+		// 	'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'Meta Box Group', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'meta-box-group', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/meta-box-group.zip', // The plugin source.
+		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'Meta Box Columns', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'meta-box-columns', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/meta-box-columns.zip', // The plugin source.
+		// 	'required'           => false, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'Meta Box Updater', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'meta-box-updater', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/meta-box-updater.zip', // The plugin source.
+		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'MB Settings Page', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'mb-settings-page', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/mb-settings-page.zip', // The plugin source.
+		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'MB Revision', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'mb-revision', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/mb-revision.zip', // The plugin source.
+		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'Meta Box Conditional Logic', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'meta-box-conditional-logic', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/meta-box-conditional-logic.zip', // The plugin source.
+		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		// ),
+
+		// array(
+		// 	'name'               => __( 'Meta Box Include Exclude', 'uamswp-uams-2020' ), // The plugin name.
+		// 	'slug'               => 'meta-box-include-exclude', // The plugin slug (typically the folder name).
+		// 	'source'             => get_stylesheet_directory() . '/plugins/meta-box-includeexclude.zip', // The plugin source.
+		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
+		// ),
 	);
 
 	$config = array(
+		'id'           => 'uamswp', 			   // Unique ID for hashing notices for multiple instances of TGMPA.
 		'default_path' => '',                      // Default absolute path to pre-packaged plugins.
 		'menu'         => 'tgmpa-install-plugins', // Menu slug.
 		'has_notices'  => true,                    // Show admin notices or not.

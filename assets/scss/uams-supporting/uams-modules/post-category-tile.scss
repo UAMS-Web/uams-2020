@@ -1,0 +1,52 @@
+.post-category-tile {
+    .inner-container {
+        //width: auto;
+        //max-width: none;
+        //margin: 0 (-$grid-gutter-width / 2);
+
+        display: flex;
+        justify-content: center;
+        flex-flow: column;
+
+        @include media-breakpoint-up(xs) {
+            flex-flow: row nowrap;
+        }
+    }
+    .image-container {
+        width: auto;
+        //padding: 0 ($grid-gutter-width / 2);
+
+        @include media-breakpoint-only(xxs) {
+            // Image full width on top.
+            margin-bottom: ($spacer * 2);
+        }
+
+        @include media-breakpoint-up(xs) {
+            // Image on left in 5/12 column.
+            //flex: 0 0 (100% * 5 / 12);
+            margin-bottom: 0;
+            max-width: 496px;
+            //flex: 0 0 25%;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+    .text-container {
+        width: auto;
+        //padding: 0 ($grid-gutter-width / 2);
+        align-self: center;
+
+        @include media-breakpoint-up(xs) {
+            padding-left: $grid-gutter-width;
+            //flex: 0 0 (100% * 7 / 12);
+            max-width: 36.6667em;
+            flex: 0 0 75%;
+        }
+
+        @include media-breakpoint-up(sm) {
+            padding-left: ($spacer * 3);
+        }
+    }
+}

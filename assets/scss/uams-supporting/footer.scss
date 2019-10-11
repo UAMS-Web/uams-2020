@@ -1,0 +1,210 @@
+//////////////////
+// Replace placeholder photos in .site-footer:before once the server-side image resizing has been solved.
+//////////////////
+.site-footer {
+    @extend .py-9;
+    @extend .px-8;
+    @extend .bg-primary;
+    @extend .text-light;
+    @extend .text-center;
+    position: relative;
+
+    &:before {
+        @supports (mix-blend-mode: overlay) and ((-webkit-filter: grayscale(100%)) or (filter: grayscale(100%))) {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 0;
+            mix-blend-mode: overlay;
+            opacity: 0.30;
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+            background-image: url('../jpg/fountain_670x670.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+    
+            /* XXS Breakpoint, retina */
+            @include media-breakpoint-up-retina(xxs) {
+                background-image: url("../jpg/fountain_1340x1340.jpg");
+            }
+    
+            /* XS Breakpoint */
+            @include media-breakpoint-up(xs) {
+                background-image: url("../jpg/fountain_767x650.jpg");
+            }
+    
+            /* XS Breakpoint, retina */
+            @include media-breakpoint-up-retina(xs) {
+                background-image: url("../jpg/fountain_1534x1300.jpg");
+            }
+    
+            /* SM Breakpoint */
+            @include media-breakpoint-up(sm) {
+                background-image: url("../jpg/fountain_992x372.jpg");
+            }
+    
+            /* SM Breakpoint, retina */
+            @include media-breakpoint-up-retina(sm) {
+                background-image: url("../jpg/fountain_1984x744.jpg");
+            }
+    
+            /* MD Breakpoint */
+            @include media-breakpoint-up(md) {
+                background-image: url("../jpg/fountain_1200x450.jpg");
+            }
+    
+            /* MD Breakpoint, retina */
+            @include media-breakpoint-up-retina(md) {
+                background-image: url("../jpg/fountain_2400x900.jpg");
+            }
+    
+            /* LG Breakpoint */
+            @include media-breakpoint-up(lg) {
+                background-image: url("../jpg/fountain_1500x563.jpg");
+            }
+    
+            /* LG Breakpoint, retina */
+            @include media-breakpoint-up-retina(lg) {
+                background-image: url("../jpg/fountain_3000x1125.jpg");
+            }
+    
+            /* XL Breakpoint */
+            @include media-breakpoint-up(xl) {
+                background-image: url("../jpg/fountain_1921x720.jpg");
+            }
+    
+            /* XL Breakpoint, retina */
+            @include media-breakpoint-up-retina(xl) {
+                background-image: url("../jpg/fountain_3842x1441.jpg");
+            }
+    
+            /* XXL Breakpoint */
+            @include media-breakpoint-up(xxl) {
+                background-image: url("../jpg/fountain_2560x960.jpg");
+            }
+    
+            /* XXL Breakpoint, retina */
+            @include media-breakpoint-up-retina(xxl) {
+                background-image: url("../jpg/fountain_5120x1920.jpg");
+            }
+        }
+    }
+
+    .logo,
+    .nav,
+    .schema,
+    .copyright {
+        z-index: 1;
+        position: relative;
+    }
+    
+
+    .logo {
+        @extend .d-inline-block;
+        @extend .mb-6;
+
+        img {
+            height: 2.5rem;
+
+            @at-root 
+            .uamshealth #{&},
+            .inside #{&} {
+                height: auto;
+                width: 11rem;
+            }
+        }
+    }
+
+    .nav {
+        @extend .justify-content-center;
+        @extend .mb-6;
+        line-height: 1;
+
+        .nav-item {
+            &:not(:last-child) {
+                margin-bottom: $spacer-min;
+
+                @include media-breakpoint-up(sm) {
+                    margin-bottom: 0;
+                    padding-right: $spacer-min / 2;
+                }
+            }
+            &:not(:first-child) {
+                @include media-breakpoint-up(sm) {
+                    padding-left: $spacer-min / 2;
+                }
+            }
+
+            .nav-link {
+                @extend .py-1;
+                color: $white;
+
+                &:hover,
+                &:active,
+                &:focus {
+                    color: mix($primary, $white, 15%);
+                }
+                // &:visited {
+                //     color: mix($primary, $white, 20%);
+                // }
+            }
+        }
+
+        &.social {
+            @include font-size(2rem);
+            .nav-item {
+                .nav-link {
+                    @extend .px-1;
+                }
+            }
+        }
+
+        &.legal {
+
+            @include media-breakpoint-down(xs) {
+                flex-direction: column;
+            }
+            .nav-item {
+                &:not(:last-child) {
+                    @include media-breakpoint-up(sm) {
+                        border-right: 1px solid rgba(255,255,255,0.5);
+                    }
+                }
+            }
+        }
+    }
+
+    .schema {
+        @extend .mb-6;
+        font-size: 1rem;
+
+        .schema-address,
+        .schema-phone {
+            strong {
+                @include media-breakpoint-down(xs) {
+                    display:block;
+                }
+            }
+
+            + .schema-address,
+            + .schema-phone {
+                @extend .mt-2;
+            }
+        }
+
+        .more-phone {
+            display: inline-block;
+            font-size: .84375rem;
+            @extend .mt-1;
+        }
+    }
+
+    .copyright {
+        @include font-size($font-size-sm);
+    }
+}

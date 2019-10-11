@@ -1,0 +1,451 @@
+<?php
+/*
+ *
+ * News Grid  
+ * 
+ */
+if (class_exists('UAMS_Syndicate_News_Base')) {
+    return array(
+		array(
+			'key' => 'field_news_base'. $suffix,
+			'label' => '<i class="dashicons dashicons-feedback"></i> Base',
+			'name' => '',
+			'type' => 'accordion',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'open' => 1,
+			'multi_expand' => 0,
+			'endpoint' => 0,
+		),
+		array(
+			'key' => 'field_news_format'. $suffix,
+			'label' => 'Format',
+			'name' => 'news_format',
+			'type' => 'select',
+			'instructions' => 'Select format (number of articles)',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'headlines' => 'Headlines',
+				'excerpts' => 'Excerpts',
+				'cards' => 'Cards (4)',
+				'full' => 'Full (1)',
+				'grid' => 'Grid (3)',
+				'side' => 'Side-by-Side Image & Text (1)',
+				// 'json' => 'JSON',
+			),
+			'default_value' => array(
+				0 => 'grid',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 0,
+			'return_format' => 'value',
+			'ajax' => 0,
+			'placeholder' => '',
+		),
+		array(
+			'key' => 'field_news_title'. $suffix,
+			'label' => 'Section Title',
+			'name' => 'news_title',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'side',
+					),
+				),
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'full',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => 'News & Announcements',
+			'placeholder' => 'News & Announcements',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		),
+		array(
+			'key' => 'field_news_hide_title'. $suffix,
+			'label' => 'Hide Section Title',
+			'name' => 'news_hide_title',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'side',
+					),
+				),
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'full',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => '',
+			'default_value' => 0,
+			'ui' => 1,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
+		array(
+			'key' => 'field_news_category'. $suffix,
+			'label' => 'Category',
+			'name' => 'news_category',
+			'type' => 'text',
+			'instructions' => 'Please enter the filter / category slug',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'full',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		),
+		array(
+			'key' => 'field_news_count'. $suffix,
+			'label' => 'Count',
+			'name' => 'news_count',
+			'type' => 'number',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '==',
+						'value' => 'headlines',
+					),
+				),
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '==',
+						'value' => 'excerpts',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => 3,
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'min' => 1,
+			'max' => 9,
+			'step' => '',
+		),
+		array(
+			'key' => 'field_news_offset'. $suffix,
+			'label' => 'Offset',
+			'name' => 'news_offset',
+			'type' => 'number',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'full',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => 0,
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'min' => 0,
+			'max' => 8,
+			'step' => '',
+		),
+		array(
+			'key' => 'field_news_bgcolor'. $suffix,
+			'label' => 'Background Color',
+			'name' => 'news_bgcolor',
+			'type' => 'button_group',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'bg-white' => 'White (default)',
+				'bg-gray' => 'Gray',
+			),
+			'allow_null' => 0,
+			'default_value' => '',
+			'layout' => 'horizontal',
+			'return_format' => 'value',
+		),
+		array(
+			'key' => 'field_news_hide_img'. $suffix,
+			'label' => 'Hide Images',
+			'name' => 'news_hide_img',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'side',
+					),
+				),
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'full',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => '',
+			'default_value' => 0,
+			'ui' => 1,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
+		array(
+			'key' => 'field_news_include_link'. $suffix,
+			'label' => 'Include link to category',
+			'name' => 'news_include_link',
+			'type' => 'button_group',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '==',
+						'value' => 'grid',
+					),
+				),
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '==',
+						'value' => 'cards',
+					),
+				),
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '==',
+						'value' => 'side',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'1' => 'Yes',
+				'0' => 'No',
+			),
+			'allow_null' => 0,
+			'default_value' => '1',
+			'layout' => 'horizontal',
+			'return_format' => 'value',
+		),
+		array(
+			'key' => 'field_news_position'. $suffix,
+			'label' => 'Image & Text Position',
+			'name' => 'news_position',
+			'type' => 'button_group',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '==',
+						'value' => 'side',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'left' => 'Image on Left, Text on Right',
+            	'right' => 'Image on Right, Text on Left',
+			),
+			'allow_null' => 0,
+			'default_value' => 'left',
+			'layout' => 'horizontal',
+			'return_format' => 'value',
+		),
+		array(
+			'key' => 'field_news_article_id'. $suffix,
+			'label' => 'Article ID',
+			'name' => 'news_article_id',
+			'type' => 'text',
+			'instructions' => 'Enter the Article ID from news.uams.edu',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '==',
+						'value' => 'full',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		),
+		array(
+			'key' => 'field_news_advanced'. $suffix,
+			'label' => '<i class="dashicons dashicons-admin-settings"></i> Advanced',
+			'name' => '',
+			'type' => 'accordion',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'open' => 0,
+			'multi_expand' => 0,
+			'endpoint' => 0,
+		),
+		array(
+			'key' => 'field_news_local'. $suffix,
+			'label' => 'Include Local',
+			'name' => 'news_local',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => '',
+			'default_value' => 0,
+			'ui' => 1,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
+		array(
+			'key' => 'field_news_advanced_cat'. $suffix,
+			'label' => 'Advanced Category',
+			'name' => 'news_advanced_cat',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		),
+    );
+} else {
+    return array(
+        array(
+            'key' => 'field_news_not_available'. $suffix,
+			'label' => 'Not Available',
+			'name' => '',
+			'type' => 'message',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => 'This module is not available, please activate News Syndication plugin.',
+			'new_lines' => 'wpautop',
+			'esc_html' => 0,
+        ),
+    );
+}

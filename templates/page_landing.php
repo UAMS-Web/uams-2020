@@ -12,36 +12,44 @@
 */
 
 // Remove the primary navigation
-remove_action( 'genesis_after_header', 'genesis_do_nav' ); 
+// remove_action( 'genesis_after_header', 'genesis_do_nav' ); 
 
 // Remove header
-remove_action( 'genesis_header', 'genesis_do_header' );
-remove_action( 'genesis_header', 'genesis_header_markup_open', 5 );
-remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
+// remove_action( 'genesis_header', 'genesis_do_header' );
+// remove_action( 'genesis_header', 'genesis_header_markup_open', 5 );
+// remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
 
 // Remove Footer Widgets
-remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
+// remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );
 
 // Remove Footer
-remove_action( 'genesis_footer', 'genesis_do_footer' );
-remove_action( 'genesis_footer', 'genesis_footer_markup_open', 5 );
-remove_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
+// remove_action( 'genesis_footer', 'genesis_do_footer' );
+// remove_action( 'genesis_footer', 'genesis_footer_markup_open', 5 );
+// remove_action( 'genesis_footer', 'genesis_footer_markup_close', 15 );
 
 // Force full-width-content layout setting
-add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
+// add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
 
 // Remove Breadcrumbs
-remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
+// remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
 
 // Remove Skip Links from a template
-remove_action ( 'genesis_before_header', 'genesis_skip_links', 5 );
+// remove_action ( 'genesis_before_header', 'genesis_skip_links', 5 );
 
 // Dequeue Skip Links Script
-add_action( 'wp_enqueue_scripts','child_dequeue_skip_links' );
-function child_dequeue_skip_links() {
-	wp_dequeue_script( 'skip-links' );
+// add_action( 'wp_enqueue_scripts','child_dequeue_skip_links' );
+// function child_dequeue_skip_links() {
+// 	wp_dequeue_script( 'skip-links' );
+// }
+
+// add_filter( 'wp_nav_menu', '__return_false' );
+
+// Add extra class to content
+function uamswp_add_class( $attributes ) {
+    $attributes['class'] = $attributes['class']. ' sr-only';
+      return $attributes;
 }
 
-add_filter( 'wp_nav_menu', '__return_false' );
+add_filter( 'genesis_attr_entry-title', 'uamswp_add_class' );
 
 genesis();

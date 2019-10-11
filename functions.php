@@ -46,7 +46,7 @@ function uamswp_childtheme_setup() {
 	add_theme_support( 'genesis-responsive-viewport' );
 
 	// Add support for 3-column footer widgets
-	add_theme_support( 'genesis-footer-widgets', 3 );
+	add_theme_support( 'genesis-footer-widgets', 1 ); 
 
 	// Custom Logo
 	add_theme_support( 'custom-logo', array(
@@ -56,15 +56,21 @@ function uamswp_childtheme_setup() {
 
 	// Structural Wraps
 	add_theme_support( 'genesis-structural-wraps', array(
-		'header',
-		'site-inner',
-		'footer-widgets',
-		'footer',
-		'home-featured'
+		//'header',
+		// 'site-inner',
+		// 'footer-widgets',
+		//'footer',
+		//'home-featured'
 	) );
 
 	// WooCommerce Support
 	add_theme_support( 'genesis-connect-woocommerce' );
+
+	// Responsive Embeds
+	add_theme_support( 'responsive-embeds' );
+
+	// Gutenberg Support for block editor
+	add_theme_support( 'align-wide' );
 
 	// Remove unneeded widget areas
 	unregister_sidebar( 'header-right' );
@@ -86,6 +92,34 @@ function uamswp_childtheme_setup() {
 
 	// Custom Image Size
 	add_image_size( 'bootstrap-featured', 730, 0, true );
+	add_image_size( 'aspect-16-9', 1024, 576, true );
+	add_image_size( 'aspect-16-9-small', 512, 288, true );
+	add_image_size( 'aspect-8-3', 1024, 384, true );
+	//add_image_size( 'aspect-8-3-small', 512, 192, true ); // hidden until needed
+	add_image_size( 'aspect-4-3', 1024, 768, true );
+	//add_image_size( 'aspect-4-3-small', 512, 384, true ); // hidden until needed
+	add_image_size( 'aspect-2-1', 1024, 512, true );
+	//add_image_size( 'aspect-2-1-small', 512, 256, true ); // hidden until needed
+	add_image_size( 'aspect-1-1', 1024, 1024, true );
+	//add_image_size( 'aspect-1-1-small', 512, 512, true ); // hidden until needed
+	add_image_size( 'hero-tablet', 455, 256, true );
+	add_image_size( 'content-image-side', 299, 9999 );
+	add_image_size( 'content-image-center', 630, 9999 );
+	add_image_size( 'content-image-wide', 1020, 9999 );
+	add_image_size( 'content-image-full', 1920, 9999 );
+
+	// Add custom image sizes to post editor
+
+	add_filter( 'image_size_names_choose', 'uams_custom_add_image_size_names' );
+	function uams_custom_add_image_size_names( $sizes ) {
+	return array_merge( $sizes, array(
+		'content-image-side' => __( 'Content image aligned left/right' ),
+		'content-image-center' => __( 'Content image aligned center' ),
+		'content-image-wide' => __( 'Content image aligned wide' ),
+		'content-image-full' => __( 'Content image aligned full' ),
+	) );
+	}
+
 
 	// Add Accessibility support
 	add_theme_support( 'genesis-accessibility', array( '404-page', 'drop-down-menu', 'headings', 'rems', 'search-form', 'skip-links' ) );
@@ -102,3 +136,445 @@ function uamswp_childtheme_setup() {
 	// Load Child theme text domain
 	load_child_theme_textdomain( 'uams-2020', get_stylesheet_directory() . '/languages' );
 }
+
+// Custom Skip links - add aria and role
+remove_action ( 'genesis_before_header', 'genesis_skip_links', 5 );
+add_action( 'genesis_before_header', 'uamswp_skip_links', 5 );
+/**
+ * Add skip links for screen readers and keyboard navigation.
+ *
+ * @since 2.2.0
+ *
+ * @return void Return early if skip links are not supported.
+ */
+function uamswp_skip_links() {
+
+	if ( ! genesis_a11y( 'skip-links' ) ) {
+		return;
+	}
+
+	// Call function to add IDs to the markup.
+	genesis_skiplinks_markup();
+
+	// Determine which skip links are needed.
+	$links = [];
+
+	if ( genesis_nav_menu_supported( 'primary' ) && has_nav_menu( 'primary' ) ) {
+		$links['genesis-nav-primary'] = esc_html__( 'Skip to primary navigation', 'genesis' );
+	}
+
+	$links['genesis-content'] = esc_html__( 'Skip to main content', 'genesis' );
+
+	if ( 'full-width-content' !== genesis_site_layout() ) {
+		$links['genesis-sidebar-primary'] = esc_html__( 'Skip to primary sidebar', 'genesis' );
+	}
+
+	if ( in_array( genesis_site_layout(), [ 'sidebar-sidebar-content', 'sidebar-content-sidebar', 'content-sidebar-sidebar' ], true ) ) {
+		$links['genesis-sidebar-secondary'] = esc_html__( 'Skip to secondary sidebar', 'genesis' );
+	}
+
+	if ( current_theme_supports( 'genesis-footer-widgets' ) ) {
+		$footer_widgets = get_theme_support( 'genesis-footer-widgets' );
+		if ( isset( $footer_widgets[0] ) && is_numeric( $footer_widgets[0] ) && is_active_sidebar( 'footer-1' ) ) {
+			$links['genesis-footer-widgets'] = esc_html__( 'Skip to footer', 'genesis' );
+		}
+	}
+
+	/**
+	 * Filter the skip links.
+	 *
+	 * @since 2.2.0
+	 *
+	 * @param array $links {
+	 *     Default skiplinks.
+	 *
+	 *     @type string HTML ID attribute value to link to.
+	 *     @type string Anchor text.
+	 * }
+	 */
+	$links = (array) apply_filters( 'genesis_skip_links_output', $links );
+
+	// Write HTML, skiplinks in a list.
+	$skiplinks = '<nav aria-label="Skip links"><ul class="genesis-skip-link">';
+
+	// Add markup for each skiplink.
+	foreach ( $links as $key => $value ) {
+		$skiplinks .= '<li><a href="' . esc_url( '#' . $key ) . '" class="screen-reader-shortcut"> ' . $value . '</a></li>';
+	}
+
+	$skiplinks .= '</ul></nav>';
+
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo $skiplinks;
+
+}
+
+add_filter( 'genesis_attr_site-header', 'uamswp_add_aria' );
+function uamswp_add_aria( $attributes ) {
+ if ( isset($attributes['aria-label']) ) {
+	$attributes['aria-label'] = $attributes['aria-label']. 'Site Header';
+ } else {
+	$attributes['aria-label'] = 'Site Header';
+ }
+ return $attributes;
+}
+
+add_filter ( 'genesis_home_crumb', 'uams_breadcrumb_home_icon' ); 
+function uams_breadcrumb_home_icon( $crumb ) {
+	if (is_front_page()) {
+		$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item">'.uams_site_title().'';
+	} else {
+	 	$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
+	}
+     return $crumb;
+}
+
+/** Returns site & subsite info **/
+if ( !function_exists('uams_get_site_info')):
+
+    function uams_get_site_info()
+    {
+		$site = '';
+		$subsite = '';
+		$option_name = 'uamswp_options'; // Settings page
+		$siteinfo = array();
+		if ( ! class_exists( 'acf' ) ) {
+			// Set base defaults if no ACF
+			$siteinfo = array('site' => 'uams', 'subsite' => 'uams');
+			return $siteinfo;
+			return;
+		}
+		$themestyle = get_field( 'uamswp_template', 'option' ); // uams, inside, health
+		$themelocation = get_field( 'uamswp_location', 'option' ); // campus, regional
+		$themeinstitute = get_field( 'uamswp_institute', 'option' ); // institute name
+		$uamsorganization = get_field( 'uamswp_uams_subsite', 'option' ); // college 
+		$healthorganization = get_field( 'uamswp_uamshealth_subsite', 'option' ); // health 
+		$insideorganization = get_field( 'uamswp_inside_subsite', 'option' ); // inside 
+		if ('health' == $themestyle) {
+			$site = "uamshealth";
+			if ('' != $healthorganization) {
+				$subsite = $healthorganization;
+			} else {
+				$subsite = "uams";
+			}
+		} elseif ('inside' == $themestyle) {
+			$site = "inside";
+			if ('' != $insideorganization) {
+				$subsite = $insideorganization;
+			} else {
+				$subsite = "uams";
+			}
+		} elseif ('institute' == $themestyle) {
+			$site = "institute";
+			if ('' != $themeinstitute) {
+				$subsite = $themeinstitute;
+			} else {
+				$subsite = "uams";
+			}
+		} elseif ('uams' == $themestyle) {
+			$site = "uams";
+			if ('' != $themelocation){
+				if ('uams' != $themelocation) {
+					$subsite = $themelocation;
+				} else {
+					if ('' != $uamsorganization) {
+						$subsite = $uamsorganization;
+					} else {
+						$subsite = "uams";
+					}
+				}
+			} else {
+				$subsite = "uams";
+			}
+		}
+		$siteinfo = array('site' => $site, 'subsite' => $subsite);
+        return $siteinfo;
+    }
+
+endif;
+
+if ( !function_exists('uams_get_permalink')):
+
+	function uams_get_permalink( $post = null )
+	{
+		if (empty($post)){
+		  $postID = get_the_ID();
+		} else {
+		  $post = get_post( $post );
+		  $postID = $post->ID;
+		}
+		$external_url = get_post_meta( $postID, 'post_custom_link', true);
+		$post_format = get_post_format( $postID );
+		if (!empty($external_url) && ($post_format == 'link')){
+			$link = $external_url;
+		} else {
+			$link = get_permalink( $postID );
+		}
+		return $link;
+	}
+  
+endif;
+
+/* Retrieve site site */
+if ( !function_exists('uams_site_title')):
+
+    function uams_site_title()
+    {
+		if ('uamshealth' == uams_get_site_info()['site']) {
+			return 'UAMS Health';
+		} else {
+			return get_bloginfo( 'name' );
+		}
+    }
+
+endif;
+
+/* returns home link for breadcrumbs, logo & anywhere else */
+if ( !function_exists('uams_get_home_link')):
+
+    function uams_get_home_link()
+    {
+		if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site'])) {
+			$homelink = 'http://www.uams.edu';
+		} elseif ('uamshealth' == uams_get_site_info()['site']) {
+			$homelink = 'https://uamshealth.com';
+		} elseif ('inside' == uams_get_site_info()['site']) {
+			$homelink = 'http://inside.uams.edu';
+		}
+		return $homelink;
+    }
+
+endif;
+
+/* Helper Functions */
+function startsWith($haystack, $needle)
+{
+     $length = strlen($needle);
+     return (substr($haystack, 0, $length) === $needle);
+}
+
+function format_phone($country, $phone) {
+  $function = 'format_phone_' . $country;
+  if(function_exists($function)) {
+    return $function($phone);
+  }
+  return $phone;
+}
+
+// usage
+// $phone = format_phone('us', $phone);
+// echo $phone;
+
+function format_phone_us($phone) {
+  // note: making sure we have something
+  if(!isset($phone{3})) { return ''; }
+  // note: strip out everything but numbers 
+  $phone = preg_replace("/[^0-9]/", "", $phone);
+  $length = strlen($phone);
+  switch($length) {
+  case 7:
+    return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
+  break;
+  case 10:
+   return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $phone);
+  break;
+  case 11:
+  return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "($2) $3-$4", $phone); // Removed country code
+  break;
+  default:
+    return $phone;
+  break;
+  }
+}
+ 
+function format_phone_dash($phone) {
+  // note: making sure we have something
+  if(!isset($phone{3})) { return ''; }
+  // note: strip out everything but numbers 
+  $phone = preg_replace("/[^0-9]/", "", $phone);
+  $length = strlen($phone);
+  switch($length) {
+  case 7:
+    return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
+  break;
+  case 10:
+   return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "$1-$2-$3", $phone);
+  break;
+  case 11:
+  return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "$2-$3-$4", $phone); // Removed country code
+  break;
+  default:
+    return $phone;
+  break;
+  }
+}
+
+if (!function_exists('apStyleDate')) {
+	function apStyleDate($date){
+
+		$date = strftime("%l:%M %P", strtotime($date));
+	
+		$date = str_replace(":00", "", $date);
+		$date = str_replace("m", ".m.", $date);
+	
+		return $date;
+	
+	}
+}
+
+/**
+ * Return sized image.
+ *
+ * @param integer  $id 			// id of image
+ * @param integer  $prefwidth	// Preferred Output width
+ * @param string   $prefheight	// Preferred Output height
+ * @param string   $hcrop		// horizontal crop position (left, center, right)
+ * @param string   $vcrop		// vertical crop position (top, center, bottom)
+ * @return string				// image url
+ */
+function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center' ) {
+
+	if ( ! function_exists( 'fly_add_image_size' ) ) {
+		return;
+	}
+	if ( ! $id ) {
+		return; // Make sure we have value
+	}
+	$image_width = wp_get_attachment_image_src($id, 'full')[1];
+	$image_height = wp_get_attachment_image_src($id, 'full')[2];
+	// Do the maths
+	$image_ratio = $image_width / $image_height;
+	$pref_ratio = $prefwidth / $prefheight;
+	if( $image_width >= $prefwidth && $image_height >= $prefheight ) { // Bigger image => Crop
+		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
+	} elseif ( $image_ratio > $pref_ratio ) { // wide image => figure out max crop
+		$prefwidth = $image_width;
+		$prefheight = $image_width / $pref_ratio;
+		if( $prefheight > $image_height ) {
+			$prefheight = $image_height;
+			$prefwidth = $prefheight * $pref_ratio;
+		}
+		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
+	} elseif ( $image_ratio < $pref_ratio ) { // tall image => figure out max crop
+		$prefwidth = $image_height * $pref_ratio;
+		$prefheight = $image_height;
+		if( $prefwidth > $image_width ) {
+			$prefwidth = $image_width;
+			$prefheight = $prefwidth / $pref_ratio;
+		}
+		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
+	} else { // Perfect ratio => no crop, return orig
+		$image_url = wp_get_attachment_url( $id, 'full' );
+	}
+	return $image_url;
+}
+
+//
+/* Add dynamic_sidebar_params filter */
+add_filter('dynamic_sidebar_params','footer_widgets');
+ 
+/* Register our callback function */
+function footer_widgets($params) {	 
+  
+     //Check if we are displaying "Footer Sidebar"
+      if(isset($params[0]['id']) && $params[0]['id'] == 'footer-1'){
+ 
+         //If widget is not uams widget, add class
+		if (strpos($params[0]['before_widget'], 'uamswp') == false) {
+	    $class = 'class="uams-module '; 
+	    $params[0]['before_widget'] = str_replace('class="', $class, $params[0]['before_widget']);
+	  	}
+ 
+	}
+ 
+      return $params;
+}
+
+add_action( 'admin_enqueue_scripts', 'enqueue_admin_style_sheet' );
+function enqueue_admin_style_sheet() {
+
+	wp_register_style( 'admin-css', get_stylesheet_directory_uri() . '/assets/css/admin.css', false, '1.0.0' );
+	wp_enqueue_style( 'admin-css' );
+
+}
+
+// Remove the edit link
+add_filter ( 'genesis_edit_post_link' , '__return_false' );
+
+// Add REST API Filter for local sites. Used for local News Syndication
+add_action( 'rest_api_init', 'rest_api_filter_add_filters' );
+ /**
+  * Add the necessary filter to each post type
+  **/
+function rest_api_filter_add_filters() {
+	foreach ( get_post_types( array( 'show_in_rest' => true ), 'objects' ) as $post_type ) {
+		add_filter( 'rest_' . $post_type->name . '_query', 'rest_api_filter_add_filter_param', 10, 2 );
+	}
+}
+/**
+ * Add the filter parameter
+ *
+ * @param  array           $args    The query arguments.
+ * @param  WP_REST_Request $request Full details about the request.
+ * @return array $args.
+ **/
+function rest_api_filter_add_filter_param( $args, $request ) {
+	// Bail out if no filter parameter is set.
+	if ( empty( $request['filter'] ) || ! is_array( $request['filter'] ) ) {
+		return $args;
+	}
+	$filter = $request['filter'];
+	if ( isset( $filter['posts_per_page'] ) && ( (int) $filter['posts_per_page'] >= 1 && (int) $filter['posts_per_page'] <= 100 ) ) {
+		$args['posts_per_page'] = $filter['posts_per_page'];
+	}
+	global $wp;
+	$vars = apply_filters( 'rest_query_vars', $wp->public_query_vars );
+	// Allow valid meta query vars.
+	$vars = array_unique( array_merge( $vars, array( 'meta_query', 'meta_key', 'meta_value', 'meta_compare' ) ) );
+	foreach ( $vars as $var ) {
+		if ( isset( $filter[ $var ] ) ) {
+			$args[ $var ] = $filter[ $var ];
+		}
+	}
+	return $args;
+}
+//Gravity Forms JS to footer
+add_filter('gform_init_scripts_footer', '__return_true');
+
+add_filter('relevanssi_modify_wp_query', 'rlv_search_all_blogs');
+function rlv_search_all_blogs($query) {
+	$raw_blog_list = get_sites(array('number' => 2000));
+	$blog_list = array();
+	foreach ($raw_blog_list as $blog) {
+		$blog_list[] = $blog->blog_id;
+	}
+	$blog_list = implode(",", $blog_list);
+	$query->set("searchblogs", $blog_list);
+	return $query;
+}
+
+// Add Google Tag Manager code in <head>
+add_action( 'wp_head', 'uamswp_gtm_1' );
+function uamswp_gtm_1() {
+	$gtm = get_option( 'options_google_tag_manager_id' );
+	$gtmvalue = (!empty($gtm) ? $gtm : 'GTM-NGG4P7F' );
+	?>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','<?php echo $gtmvalue; ?>');</script>
+	<!-- End Google Tag Manager -->
+<?php }
+// Add Google Tag Manager code immediately below opening <body> tag
+add_action( 'genesis_before', 'uamswp_gtm_2' );
+function uamswp_gtm_2( ) { 
+	$gtm = get_option( 'options_google_tag_manager_id' );
+	$gtmvalue = (!empty($gtm) ? $gtm : 'GTM-NGG4P7F' );
+	?>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $gtmvalue; ?>"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+<?php }
