@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Author: Sridhar Katakam
+ * Link: https://sridharkatakam.com/
+ */
+
 remove_action( 'genesis_loop', 'genesis_do_loop' );
 add_action( 'genesis_loop', 'uamswp_do_search_loop' );
 
@@ -16,37 +22,165 @@ function uamswp_do_search_loop() {
     $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
 
     // store the post type from the URL string.
-    $post_type = isset( $_GET["post_type"] ) ? $_GET["post_type"] : "";
+    $post_type = isset( $_GET["type"] ) ? $_GET["type"] : "";
 
     if ( $post_type ) {
         // $post_type = $_GET['post_type'];
-        $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+        if ('physicians' == $post_type) {
 
-        // accepts any wp_query args.
-        $args = (array(
-            's' => $s,
-            'post_type' => $post_type,
-            'order' => 'ASC',
-            'orderby' => 'title',
-            'paged' => $paged,
-        ));
+            $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
-        $post_type_text = ucfirst($post_type); 
-        if (substr($post_type_text, -1) !== 's') {
-            $post_type_text = $post_type_text . "s";
-        }
+            // accepts any wp_query args.
+            $args = (array(
+                's' => $s,
+                'post_type' => $post_type,
+                'order' => 'ASC',
+                'orderby' => 'title',
+                'posts_per_page' => 20,
+                'paged' => $paged,
+            ));
 
-        echo '<div class="search-content">';
-            echo '<div class="post-type ' . $post_type . '"><h1 class="post-type-heading">' . $post_type_text . '</h1>';
-                // Loop actions.
-                uamswp_loop_layout();
+            uamswp_custom_loop_base($args);
 
-                // custom genesis loop with the above query parameters and hooks.
-                // genesis_custom_loop( $args );
-                uamswp_custom_loop( $args );
+            echo '<div class="uams-module bg-auto">';
+            echo '<div class="container-fluid">';
+            echo '<div class="search-content row">';
 
+            if ( have_posts() ) :
+                
+                echo '<div class="inner-container content-width"><h2 class="post-type-heading">Doctors</h2><div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
+
+            while ( have_posts() ) : the_post(); 
+
+            $id =get_the_ID();
+            include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/physician-card.php' );
+
+            endwhile; 
+            echo '</div></div>';
+            genesis_posts_nav();
+            
+            else :
+                echo "<p>Sorry, no content matched your criteria.</p>";
+            endif; 
+
+
+            echo '</div>'; // .search-content
+            echo '</div>'; // .container-fluid
+            echo '</div>'; // .uams-module
+            
+        } elseif('locations' == $post_type) {
+
+            $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+
+            // accepts any wp_query args.
+            $args = (array(
+                's' => $s,
+                'post_type' => $post_type,
+                'order' => 'ASC',
+                'orderby' => 'title',
+                'posts_per_page' => 10,
+                'paged' => $paged,
+            ));
+
+            uamswp_custom_loop_base($args);
+
+            echo '<div class="uams-module bg-auto">';
+            echo '<div class="container-fluid">';
+            echo '<div class="search-content row">';
+
+            if ( have_posts() ) :
+                
+                echo '<div class="inner-container content-width"><h2 class="post-type-heading">Locations</h2><div class="card-list-container"><div class="card-list card-list-locations facetwp-template">';
+
+            while ( have_posts() ) : the_post(); 
+
+            $id =get_the_ID();
+            include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/location-card.php' );
+
+            endwhile; 
+            echo '</div></div>';
+            // More results link.
+            genesis_posts_nav();
+            else :
+                echo "<p>Sorry, no content matched your criteria.</p>";
+            endif; 
+
+
+            echo '</div>'; // .search-content
+            echo '</div>'; // .container-fluid
+            echo '</div>'; // .uams-module
+
+        } elseif('services' == $post_type) {
+
+            $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+
+            // accepts any wp_query args.
+            $args = (array(
+                's' => $s,
+                'post_type' => $post_type,
+                'order' => 'ASC',
+                'orderby' => 'title',
+                'posts_per_page' => 10,
+                'paged' => $paged,
+            ));
+
+            uamswp_custom_loop_base($args);
+
+            echo '<div class="uams-module bg-auto">';
+            echo '<div class="container-fluid">';
+            echo '<div class="search-content row">';
+
+            if ( have_posts() ) :
+                
+                echo '<div class="inner-container content-width"><h2 class="post-type-heading">Services</h2><div class="card-list-container"><div class="card-list card-list-services facetwp-template">';
+
+            while ( have_posts() ) : the_post(); 
+
+            $id =get_the_ID();
+            include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/service-card.php' );
+
+            endwhile; 
+            echo '</div></div>';
+            genesis_posts_nav();
+            
+            else :
+                echo "<p>Sorry, no content matched your criteria.</p>";
+            endif; 
+
+
+            echo '</div>'; // .search-content
+            echo '</div>'; // .container-fluid
+            echo '</div>'; // .uams-module
+
+        } else {
+            $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+
+            // accepts any wp_query args.
+            $args = (array(
+                's' => $s,
+                'post_type' => $post_type,
+                'order' => 'ASC',
+                'orderby' => 'title',
+                'paged' => $paged,
+            ));
+
+            $post_type_text = ucfirst($post_type); 
+            if (substr($post_type_text, -1) !== 's') {
+                $post_type_text = $post_type_text . "s";
+            }
+
+            echo '<div class="search-content">';
+                echo '<div class="post-type ' . $post_type . '"><h1 class="post-type-heading">' . $post_type_text . '</h1>';
+                    // Loop actions.
+                    uamswp_loop_layout();
+
+                    // custom genesis loop with the above query parameters and hooks.
+                    // genesis_custom_loop( $args );
+                    uamswp_custom_loop( $args );
+
+                echo '</div>';
             echo '</div>';
-        echo '</div>';
+        }
     } else {
         // create an array variable with specific post types in your desired order.
         $post_types = array( 'page', 'post' );
@@ -85,7 +219,7 @@ function uamswp_do_search_loop() {
                     uamswp_custom_loop( $args );
 
                     // More results link.
-                    printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&post_type=' . $post_type );
+                    printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type );
                 echo '</div></div>';
             }
 
@@ -182,59 +316,20 @@ function uamswp_do_search_loop() {
 
             uamswp_custom_loop_base($args);
 
-            if ( have_posts() ) : while ( have_posts() ) : the_post(); 
-            echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template"><div class="inner-container content-width"><h2 class="post-type-heading">Doctors</h2>';
+            if ( have_posts() ) :
+                
+                echo '<div class="inner-container content-width"><h2 class="post-type-heading">Doctors</h2><div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
 
-            
-            $degrees = get_field('physician_degree');
-            $degree_list = '';
-            $i = 1;
-            if ( $degrees ) {
-                foreach( $degrees as $degree ):
-                    $degree_name = get_term( $degree, 'degree');
-                    $degree_list .= $degree_name->name;
-                    if( count($degrees) > $i ) {
-                        $degree_list .= ", ";
-                    }
-                    $i++;
-                endforeach; 
-            } 
-            ?>
-            <?php $full_name = get_field('physician_first_name') .' ' .(get_field('physician_middle_name') ? get_field('physician_middle_name') . ' ' : '') . get_field('physician_last_name') .  ( $degree_list ? ', ' . $degree_list : '' ); ?>
-            <div class="card">
-                <picture>
-                    <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
-                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 510, 680, 'center', 'center'); ?>"
-                        media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
-                        (min-width: 1px) and (min-resolution: 192dpi)">
-                    <source srcset="<?php echo image_sizer(get_post_thumbnail_id(), 255, 340, 'center', 'center'); ?>"
-                        media="(min-width: 1px)">
-                    <img src="<?php echo image_sizer(get_post_thumbnail_id(), 255, 340, 'center', 'center'); ?>" class="card-img-top" alt="<?php echo $full_name; ?>" />
-                    <?php } else { ?>
-                    <?php the_post_thumbnail( 'medium',  array( 'itemprop' => 'image', 'class' => 'card-img-top' ) ); ?>
-                    <?php } //endif ?>
-                </picture>
-                <div class="card-body">
-                        <h3 class="card-title">
-                            <span class="name"><?php echo $full_name; ?></span>
-                            <?php 
-                            if(! empty( get_field('physician_clinical_title') ) || ! empty( get_field('physician_department') ) ){
-                                echo '<span class="subtitle">';
-                                echo (get_field('physician_clinical_title') ? get_field('physician_clinical_title')->name : '');
-                                echo ((! empty( get_field('physician_clinical_title') )) && (! empty( get_field('physician_department') ) ) ? ', ' : '' );
-                                echo (get_field('physician_department') ? get_field('physician_department')->name : '');
-                                echo '</span>';
-                            }
-                            ?>
-                        </h3>
-                    <a href="<?php the_permalink(); ?>" class="btn btn-primary stretched-link" aria-label="View profile for <?php echo $full_name; ?>">View Profile</a>
-                </div>
-            </div>
-            <?php 
-            // More results link.
-            printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&post_type=' . $post_type );
-            echo '</div></div></div>';
+            while ( have_posts() ) : the_post(); 
+
+            $id =get_the_ID();
+            include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/physician-card.php' );
+
             endwhile; 
+            echo '</div></div>';
+            // More results link.
+            printf( '<a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
+            
             else :
                 echo "<p>Sorry, no content matched your criteria.</p>";
             endif; 
@@ -265,35 +360,19 @@ function uamswp_do_search_loop() {
             uamswp_custom_loop_base($args);
 
             if ( have_posts() ) :
-                echo '<div class="card-list-container"><div class="card-list card-list-locations facetwp-template"><div class="inner-container content-width"><h2 class="post-type-heading">Locations</h2>';    
+                echo '<div class="inner-container content-width"><h2 class="post-type-heading">Locations</h2><div class="card-list-container"><div class="card-list card-list-locations facetwp-template">';    
             while ( have_posts() ) : the_post(); 
-            ?>
-                <div class="card">
-                <a href="<?php echo get_permalink(); ?>" aria-label="Go to location page for <?php the_title(); ?>"><?php if ( has_post_thumbnail() ) { ?>
-                <?php the_post_thumbnail('aspect-16-9-small', ['class' => 'card-img-top']); ?>
-                <?php } else { ?>
-                <img src="/wp-content/plugins/UAMSWP-Find-a-Doc/assets/svg/no-image_16-9.svg" alt="" class="card-image-top" />
-                <?php } ?></a>
-                <div class="card-body">
-                    <h3 class="card-title">
-                        <span class="name"><a href="<?php echo get_permalink(); ?>" target="_self"><?php the_title(); ?></a></span>
-                    </h3>
-                    <?php $map = get_field('location_map'); ?>
-                    <p class="card-text"><?php echo get_field('location_address_1', get_the_ID() ); ?><br/>
-                        <?php echo ( get_field('location_address_2' ) ? get_field('location_address_2') . '<br/>' : ''); ?>
-                        <?php echo get_field('location_city'); ?>, <?php echo get_field('location_state'); ?> <?php echo get_field('location_zip', get_the_ID()); ?><p/>
-                        <a href="<?php echo get_permalink(); ?>" class="btn btn-primary" aria-label="Go to location page for <?php the_title(); ?>">View Location</a>
-                        <?php if ($map) { ?>
-                        <a class="btn btn-outline-primary" href="https://www.google.com/maps/dir/Current+Location/<?php echo $map['lat'] ?>,<?php echo $map['lng'] ?>" target="_blank">Get Directions</a>
-                        <?php } ?>
-                    </p>
-                </div><!-- .card-body -->
-            </div><!-- .card --> 
-        <?php endwhile; 
-            echo '</div></div></div>';
-        else : ?>
-        <p><?php _e( 'Sorry, no locations matched your criteria.' ); ?></p>
-        <?php endif; 
+            
+            $id =get_the_ID();
+            include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/location-card.php' );
+            
+            endwhile; 
+                echo '</div></div>';
+                // More results link.
+                printf( '<a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
+            else : 
+                echo '<p>' . _e( 'Sorry, no locations matched your criteria.' ) . '</p>';
+            endif; 
 
 
             echo '</div>'; // .search-content
@@ -321,30 +400,19 @@ function uamswp_do_search_loop() {
             uamswp_custom_loop_base($args);
 
             if ( have_posts() ) : 
-                echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template"><div class="inner-container content-width"><h2 class="post-type-heading">Services</h2>';
+                echo '<div class="inner-container content-width"><h2 class="post-type-heading">Services</h2><div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
             while ( have_posts() ) : the_post(); 
-            ?>
-                <div class="card">
-                    <?php if ( has_post_thumbnail() ) { ?>
-                        <p>
-                        <?php the_post_thumbnail('aspect-16-9-small', ['class' => 'img-responsive']); ?>
-                        </p>
-                    <?php } ?>
-                    <?php $excerpt = get_the_excerpt(); ?>
-                    <div class="card-body">
-                        <h3 class="card-title">
-                            <span class="name"><a href="<?php echo get_permalink(); ?>" target="_self"><?php the_title(); ?></a></span>
-                        </h3>
-                        <p class="card-text"><?php echo ( $excerpt ? wp_trim_words( $excerpt, 30, ' &hellip;' ) : wp_trim_words( wp_strip_all_tags( get_the_content(), 30, ' &hellip;' ) ) ); ?></p>
-                            <a href="<?php echo get_permalink(); ?>" class="btn btn-primary stretched-link" aria-label="Go to Area of Expertise page for <?php the_title(); ?>">View Area of Expertise</a>
-                    </div><!-- .card-body -->
-                </div><!-- .card --> 
-            <?php endwhile; 
-                echo '</div></div></div>';
-            else : ?>
-            <?php  ?>
-                <p><?php _e( 'Sorry, no services matched your criteria.' ); ?></p>
-        <?php endif;
+            
+            $id =get_the_ID();
+            include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/service-card.php' );
+            
+            endwhile; 
+                echo '</div></div>';
+                // More results link.
+                printf( '<a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
+            else : 
+                echo '<p>' . _e( 'Sorry, no services matched your criteria.' ) . '</p>';
+            endif;
 
 
             echo '</div>'; // .search-content
