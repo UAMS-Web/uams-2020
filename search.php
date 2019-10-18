@@ -290,7 +290,7 @@ function uamswp_do_search_loop() {
                             $tax = get_term_by("name", $post_title, $taxonomy);
                             $post_id = $tax->term_id;
                             $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
-                            $content = get_field('conditions_content', $taxonomy.'_'.$post_id);
+                            $content = get_field($taxonomy.'_content', $taxonomy.'_'.$post_id);
 
                             echo $title;
                             // echo $taxonomy.'_'.$post_id;
@@ -616,6 +616,7 @@ function uamswp_custom_loop( $args = array() ) {
 	$more = is_singular() ? $more : 0; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Handle archives.
 
     genesis_standard_loop();
+
 
 	// Restore original query.
 	wp_reset_query(); // phpcs:ignore WordPress.WP.DiscouragedFunctions.wp_reset_query_wp_reset_query -- Making sure the query is really reset.
