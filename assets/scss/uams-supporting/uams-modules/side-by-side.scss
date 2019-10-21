@@ -37,15 +37,15 @@
 
     .image-container {
         position: relative;
-        display: block;
-        width: 100%;
+        //display: block; // commented out to try and fix IE flex flow bug
+        //width: 100%; // commented out to try and fix IE flex flow bug
         padding: 0;
         overflow: hidden;
         background-size: cover;
         background-repeat: no-repeat;
 
         @include media-breakpoint-up(md) {
-            width: auto;
+            //width: auto;
         }
 
         &:before {
@@ -64,7 +64,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        max-width: 100%;
+        //max-width: 100%; // commented out to try and fix IE flex flow bug
 
         @include media-breakpoint-up(sm) {
             padding: $uams-module-padding;
