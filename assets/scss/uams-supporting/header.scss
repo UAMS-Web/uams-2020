@@ -47,6 +47,7 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
 
             img {
                 height: $header-logo-height-mobile;
+                max-width: none;
 
                 @include media-breakpoint-up(sm) {
                     height: $header-logo-height;
