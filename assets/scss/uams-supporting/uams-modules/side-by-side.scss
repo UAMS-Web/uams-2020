@@ -28,9 +28,8 @@
 
     .image-container, .text-container {
         @include media-breakpoint-up(md) {
-            min-height: 488px;
-            min-height: (100vw / 2);
-            height: 100vw / 8 * 3;
+            min-height: 30.5rem;
+            height: 100vw / 8 * 3; // double the width of 4:3 ratio
             max-height: 100vh;
         }
     }
