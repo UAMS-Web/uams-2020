@@ -79,4 +79,12 @@
             }
         }
     }
+
+    .card-list {
+        .card {
+            .card-body {
+                align-items: stretch;
+            }
+        }
+    }
 }
