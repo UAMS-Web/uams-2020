@@ -2,10 +2,14 @@
 
     > .row {
         justify-content: center;
+
+        @include media-breakpoint-up(xs) {
+            flex-wrap: nowrap;
+        }
     }
     .text {
         @include media-breakpoint-up(xs) {
-            flex: 1 1 0px;
+            flex: 1 1 auto;
         }
         max-width: 44rem;
     }
