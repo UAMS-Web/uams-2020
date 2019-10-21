@@ -180,7 +180,7 @@
                 }
             }
             .item {
-                flex: 1 0 0;
+                flex: 1 0 0px;
                 background-color: $card-bg;
                 background-clip: border-box;
                 border: $card-border-width solid $card-border-color;
@@ -271,7 +271,7 @@
                             @media
                             (min-width: 1396px) and (max-width: (1784px - 1)),
                             (min-width: (1784px + 466)) {
-                                flex: 1 0 0;
+                                flex: 1 0 0px;
                                 flex-wrap: nowrap;
                             }
                         }
