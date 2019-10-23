@@ -431,7 +431,7 @@ function uamswp_do_search_loop() {
             wp_reset_query();
             /* Services */
 
-            $post_type = array('services');
+            $post_type = array('expertise');
 
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
@@ -448,17 +448,17 @@ function uamswp_do_search_loop() {
 
             uamswp_custom_loop_base($args);
 
-            echo '<div class="inner-container content-width"><h2 class="post-type-heading">Services</h2>';
+            echo '<div class="inner-container content-width"><h2 class="post-type-heading">Areas of Expertise</h2>';
 
             if ( have_posts() ) {
-                echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
+                echo '<div class="card-list-container"><div class="card-list card-list-expertise facetwp-template">';
 
                 while ( have_posts() ) : the_post(); 
 
                     global $wp_query;
                 
                     $id =get_the_ID();
-                    include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/service-card.php' );
+                    include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/expertise-card.php' );
                 
                 endwhile; 
 
