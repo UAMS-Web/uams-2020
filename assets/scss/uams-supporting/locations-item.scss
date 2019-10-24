@@ -4,15 +4,13 @@
         justify-content: center;
     }
     .text {
-        @include media-breakpoint-up(sm) {
-            max-width: 44rem;
-        }
         @include media-breakpoint-up(md) {
+            max-width: 44rem;
             flex: 1 1 0px;
         }
 
         .content-width {
-            @include media-breakpoint-up(sm) {
+            @include media-breakpoint-up(md) {
                 width: auto;
             }
         }
