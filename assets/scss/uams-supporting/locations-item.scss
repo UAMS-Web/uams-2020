@@ -5,9 +5,15 @@
     }
     .text {
         @include media-breakpoint-up(md) {
+            max-width: 44rem;
             flex: 1 1 0px;
         }
-        max-width: 44rem;
+
+        .content-width {
+            @include media-breakpoint-up(md) {
+                width: auto;
+            }
+        }
     }
     .image {
         text-align: center;
