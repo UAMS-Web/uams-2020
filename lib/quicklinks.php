@@ -59,7 +59,6 @@ function uamswp_quicklinks() {
                     uamswp_request_quicklinks();
                 }            
             ?>
-            </ul>
             <h3 class="h5">Campus Links</h3>
             <ul class="list-unstyled links">
                 <li><a href="http://webmail.uams.edu/"><span class="far fa-envelope fa-fw "></span>Webmail</a></li>

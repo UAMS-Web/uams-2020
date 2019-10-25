@@ -28,24 +28,23 @@
 
     .image-container, .text-container {
         @include media-breakpoint-up(md) {
-            min-height: 488px;
-            min-height: (100vw / 2);
-            height: 100vw / 8 * 3;
+            min-height: 30.5rem;
+            height: 100vw / 8 * 3; // double the width of 4:3 ratio
             max-height: 100vh;
         }
     }
 
     .image-container {
         position: relative;
-        display: block;
-        width: 100%;
+        //display: block; // commented out to try and fix IE flex flow bug
+        //width: 100%; // commented out to try and fix IE flex flow bug
         padding: 0;
         overflow: hidden;
         background-size: cover;
         background-repeat: no-repeat;
 
         @include media-breakpoint-up(md) {
-            width: auto;
+            //width: auto;
         }
 
         &:before {
@@ -64,7 +63,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        max-width: 100%;
+        //max-width: 100%; // commented out to try and fix IE flex flow bug
 
         @include media-breakpoint-up(sm) {
             padding: $uams-module-padding;
