@@ -33,11 +33,12 @@ function uamswp_site_image() {
 	?>
 	<!-- /* Begin Title / Logo */  -->
 	<div class="global-title">
-	<?php printf( '<a href="' . $header_image_link . '" class="navbar-brand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text ); ?>
 
 	<?php
 	if ('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] && !uamswp_nav_subsection()) { // If it's the main UAMS Health site and not a subsection
+		printf( '<a href="' . $header_image_link . '" class="navbar-brand no-subbrand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text );
 	} else {
+		printf( '<a href="' . $header_image_link . '" class="navbar-brand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text );
 		echo '<div class="navbar-subbrand">';
 
 		// If it's a subsection
