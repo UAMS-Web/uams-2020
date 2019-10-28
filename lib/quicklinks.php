@@ -11,7 +11,8 @@
  *
 */
 
-add_action( 'genesis_after', 'uamswp_quicklinks', 4 );
+// Removing Quick Links action via comments in case we decide to bring it back.
+// add_action( 'genesis_after', 'uamswp_quicklinks', 4 );
 
 function uamswp_quicklinks() { 
     ?>

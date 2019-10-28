@@ -108,12 +108,14 @@ function uamswp_site_image() {
 			</li>
 		</ul>
 
-		<!-- // Hiding this button until Quick Links is created. -->
-		<button class="quick-links-toggler" type="button" id="toggle-quick-links" aria-controls="quick-links" aria-expanded="false" title="Toggle Quick Links navigation">
-			<span class="sr-only label">Toggle Quick Links</span>
-			<span class="fas fa-bars fa-lg fa-fw"></span>
-			<span class="fas fa-times fa-lg fa-fw"></span>
-		</button>
+		<?php
+		// Removing Quick Links toggler via comments in case we decide to bring it back.
+		// <button class="quick-links-toggler" type="button" id="toggle-quick-links" aria-controls="quick-links" aria-expanded="false" title="Toggle Quick Links navigation">
+		// 	<span class="sr-only label">Toggle Quick Links</span>
+		// 	<span class="fas fa-bars fa-lg fa-fw"></span>
+		// 	<span class="fas fa-times fa-lg fa-fw"></span>
+		// </button>
+		?>
 
 		<!-- // The data-target and aria-controls may need to be dynamically defined. -->
 		<button class="navbar-toggler mobile-menu-toggler" type="button" data-toggle="collapse" data-target="#genesis-nav-primary" aria-controls="genesis-nav-primary" aria-expanded="false" title="Toggle Primary navigation">
