@@ -23,15 +23,17 @@ function uamswp_site_image() {
 	if ('uamshealth' == uams_get_site_info()['site']) {
 		$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark.svg" alt="UAMS Health Logo" />';
 		$header_image_link = 'https://www.uamshealth.com';
+		$header_image_text = 'UAMS Health';
 	}
 	else {
 		$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_main_dark.svg" alt="University of Arkansas for Medical Sciences Logo" />';
 		$header_image_link = 'https://www.uams.edu';
+		$header_image_text = 'University of Arkansas for Medical Sciences';
 	}
 	?>
 	<!-- /* Begin Title / Logo */  -->
 	<div class="global-title">
-	<?php printf( '<a href="' . $header_image_link . '" class="navbar-brand">%s<span class="sr-only">%s</span></a>', $header_image, 'University of Arkansas for Medical Sciences' ); ?>
+	<?php printf( '<a href="' . $header_image_link . '" class="navbar-brand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text ); ?>
 	<div class="navbar-subbrand">
 
 	<?php
