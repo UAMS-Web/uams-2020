@@ -34,30 +34,35 @@ function uamswp_site_image() {
 	<!-- /* Begin Title / Logo */  -->
 	<div class="global-title">
 	<?php printf( '<a href="' . $header_image_link . '" class="navbar-brand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text ); ?>
-	<div class="navbar-subbrand">
 
 	<?php
-	// If it's a subsection
-	if (uamswp_nav_subsection()) {
-		echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a><span class="sr-only">: </span>';
-		echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
-	} elseif ('inside' == uams_get_site_info()['site'] && 'main' !== uams_get_site_info()['subsite']) {
-		switch_to_blog(1);
-		$site_title = get_bloginfo( 'name' );
-		restore_current_blog();
-		echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( network_site_url() ).'">'.$site_title.'<span class="sr-only">:</span></a>';
-		echo '<a class="title" href="'. esc_url( home_url( '/' ) ) .'">'. get_bloginfo( 'name' ) .'</a>';
+	if ('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] && !uamswp_nav_subsection()) { // If it's the main UAMS Health site and not a subsection
 	} else {
-	// If it's a regular old homepage
-		echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a>';
+		echo '<div class="navbar-subbrand">';
+
+		// If it's a subsection
+		if (uamswp_nav_subsection()) {
+			echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a><span class="sr-only">: </span>';
+			echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
+		} elseif ('inside' == uams_get_site_info()['site'] && 'main' !== uams_get_site_info()['subsite']) {
+			switch_to_blog(1);
+			$site_title = get_bloginfo( 'name' );
+			restore_current_blog();
+			echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( network_site_url() ).'">'.$site_title.'<span class="sr-only">:</span></a>';
+			echo '<a class="title" href="'. esc_url( home_url( '/' ) ) .'">'. get_bloginfo( 'name' ) .'</a>';
+		} else {
+		// If it's a regular old homepage
+			echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a>';
+		}
+
+		echo '</div>';
 	}
   
 	// If it's an institute or other split title entity, separate the title descriptor (often the donor) and the functional title (often the center/institute of X) into two separate spans as below.
 	// Use three spaces in site title to indicate desire to split the title. Find/replace those three spaces 
 	//echo '<a class="title-split" href="javascript:void(0)"><span class="title-descriptor">Jackson T. Stephens</span> <span class="title-function">Spine and Neurosciences Institute</span></a>';
 	?>
-
-		</div>
+	
 	</div>
 	<!-- /* End Title / Logo */ -->
 
