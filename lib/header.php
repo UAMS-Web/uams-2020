@@ -20,7 +20,12 @@ remove_action( 'genesis_header', 'genesis_do_header' );
 add_action( 'genesis_header', 'uamswp_site_image', 5 );
  
 function uamswp_site_image() {
-	$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_main_dark.svg" alt="University of Arkansas for Medical Sciences Logo" />';
+	if ('uamshealth' == uams_get_site_info()['site']) {
+		$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark.svg" alt="UAMS Health Logo" />';
+	}
+	else {
+		$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_main_dark.svg" alt="University of Arkansas for Medical Sciences Logo" />';
+	}
 	?>
 	<!-- /* Begin Title / Logo */  -->
 	<div class="global-title">
