@@ -45,6 +45,15 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
                 border-right: 2px solid $primary;
             }
 
+            &.no-subbrand {
+                margin-bottom: 0;
+
+                @include media-breakpoint-up(lg) {
+                    padding-right: 0;
+                    border-right: 0;
+                }
+            }
+
             img {
                 height: $header-logo-height-mobile;
 
