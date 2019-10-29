@@ -116,7 +116,7 @@ function uamswp_site_image() {
 			</li>
 			<? } // endif ?>
 			<li class="nav-item">
-				<button class="search-toggler" type="button" id="toggle-search" aria-controls="quick-links" aria-expanded="false" title="Toggle Search">
+				<button class="search-toggler" type="button" id="toggle-search" aria-controls="header-search" aria-expanded="false" title="Toggle Search">
 					<span class="sr-only label">Toggle Search</span>
 					<span class="fas fa-search fa-lg fa-fw"></span>
 					<span class="fas fa-times fa-lg fa-fw"></span>
