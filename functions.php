@@ -366,47 +366,59 @@ function format_phone($country, $phone) {
 // echo $phone;
 
 function format_phone_us($phone) {
-  // note: making sure we have something
-  if(!isset($phone{3})) { return ''; }
-  // note: strip out everything but numbers 
-  $phone = preg_replace("/[^0-9]/", "", $phone);
-  $length = strlen($phone);
-  switch($length) {
-  case 7:
-    return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
-  break;
-  case 10:
-   return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $phone);
-  break;
-  case 11:
-  return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "($2) $3-$4", $phone); // Removed country code
-  break;
-  default:
-    return $phone;
-  break;
-  }
+	// note: making sure we have something
+	if(!isset($phone{3})) { return ''; }
+	// note: strip out everything but numbers 
+	$phone = preg_replace("/[^0-9]/", "", $phone);
+	$length = strlen($phone);
+	switch($length) {
+		case 7:
+			return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
+			break;
+		case 10:
+			return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $phone);
+			break;
+		case 11:
+			return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "($2) $3-$4", $phone); // Removed country code
+			break;
+		case 15:
+			return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/", "($1) $2-$3 Ext. $4", $phone); // Removed country code
+			break;
+		case 16:
+			return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/", "($2) $3-$4 Ext. $5", $phone); // Removed country code
+			break;
+		default:
+			return $phone;
+			break;
+	}
 }
- 
+   
 function format_phone_dash($phone) {
-  // note: making sure we have something
-  if(!isset($phone{3})) { return ''; }
-  // note: strip out everything but numbers 
-  $phone = preg_replace("/[^0-9]/", "", $phone);
-  $length = strlen($phone);
-  switch($length) {
-  case 7:
-    return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
-  break;
-  case 10:
-   return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "$1-$2-$3", $phone);
-  break;
-  case 11:
-  return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "$2-$3-$4", $phone); // Removed country code
-  break;
-  default:
-    return $phone;
-  break;
-  }
+	// note: making sure we have something
+	if(!isset($phone{3})) { return ''; }
+	// note: strip out everything but numbers 
+	$phone = preg_replace("/[^0-9]/", "", $phone);
+	$length = strlen($phone);
+	switch($length) {
+		case 7:
+			return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
+			break;
+		case 10:
+			return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "$1-$2-$3", $phone);
+			break;
+		case 11:
+			return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "$2-$3-$4", $phone); // Removed country code
+			break;
+		case 15:
+			return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/", "$1-$2-$3,$4", $phone); // Removed country code
+			break; 
+		case 16:
+			return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/", "$2-$3-$4,$5", $phone); // Removed country code
+			break;
+		default:
+			return $phone;
+			break;
+	}
 }
 
 if (!function_exists('apStyleDate')) {
