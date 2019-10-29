@@ -50,7 +50,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'uams' => 'UAMS.edu',
-				'health' => 'UAMSHealth',
+				'health' => 'UAMS Health',
 				'inside' => 'Inside',
 				'institute' => 'Institute',
 			),
@@ -227,7 +227,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'uams-aux' => 'UAMS Auxiliary',
-				'main' => 'Main UAMSHealth site',
+				'main' => 'Main UAMS Health site',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
