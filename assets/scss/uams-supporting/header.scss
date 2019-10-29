@@ -1,8 +1,19 @@
-$logo-clear-space-multiplier: 12.072 / 50 * 2.5; // Multiply the height of the logo by this variable.
+$logo-clear-space-multiplier: 12.072 / 50 * 2.5; // 2.5 dots relative to the height of the logo. Multiply the height of the logo by this variable.
 $header-logo-height-mobile: 40px;
 $header-logo-height: 50px;
 $header-logo-clear-space-mobile: $header-logo-height-mobile * $logo-clear-space-multiplier;
 $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
+
+$health-logo-clear-space-multiplier: $logo-clear-space-multiplier; // 2.5 dots relative to the height of the logo. Multiply the height of the logo by this variable.
+$health-logo-clear-space-multiplier-xxs: 8.751 / 72.988 * 2.5; // 2.5 dots relative to the height of the logo. Multiply the height of the logo by this variable.
+$header-health-logo-height-xxs: 66px;
+$header-health-logo-height-xs: $header-health-logo-height-xxs * 0.4832; // Should result in the UAMS element appearing the same when transitioning between xxs and xs
+$header-health-logo-height-sm: 37px;
+$header-health-logo-height: $header-logo-height;
+$header-health-logo-clear-space-xxs: $header-health-logo-height-xxs * $health-logo-clear-space-multiplier-xxs;
+$header-health-logo-clear-space-xs: $header-health-logo-height-xs * $health-logo-clear-space-multiplier;
+$header-health-logo-clear-space-sm: $header-health-logo-height-sm * $health-logo-clear-space-multiplier;
+$header-health-logo-clear-space: $header-logo-clear-space;
 
 .site-header {
     //@extend .navbar-expand-sm;
@@ -124,6 +135,112 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
                 }
             }
         }
+
+        @at-root body.uamshealth #{&} {
+            .navbar-brand {
+                margin: 0 0 $header-health-logo-clear-space-xxs 0;
+                
+                @include media-breakpoint-up(xs) {
+                    margin-bottom: $header-health-logo-clear-space-xs;
+                }
+                
+                @include media-breakpoint-up(sm) {
+                    margin-bottom: $header-health-logo-clear-space-sm;
+                }
+                
+                @include media-breakpoint-up(lg) {
+                    padding-right: $header-health-logo-clear-space-sm;
+                    margin-bottom: 0;
+                }
+
+                &.no-subbrand {
+                    margin-bottom: 0;
+                    
+                    @include media-breakpoint-up(xs) {
+                        margin-bottom: 0;
+                    }
+                    
+                    @include media-breakpoint-up(sm) {
+                        margin-bottom: 0;
+                    }
+                    
+                    @include media-breakpoint-up(lg) {
+                        padding-right: 0;
+                    }
+                }
+    
+                img {
+                    height: $header-health-logo-height-xxs;
+
+                    @media (max-width: 379px) { // fallback for when the viewport is smaller than 380px wide. The logo should proportionally shrink.
+                        height: auto;
+                        width: 35.2578947368421vw;
+                        max-width: calc(100vw - 32px - 32px - 32px - 134px);
+                    }
+    
+                    @include media-breakpoint-up(xs) {
+                        height: $header-health-logo-height-xs;
+                        margin-top: -1px;
+                    }
+    
+                    @include media-breakpoint-up(sm) {
+                        height: $header-health-logo-height-sm;
+                        margin-top: 0;
+                    }
+    
+                    @include media-breakpoint-up(xl) {
+                        height: $header-health-logo-height;
+                    }
+                }
+            }
+            .navbar-subbrand {
+                @include media-breakpoint-up(lg) {
+                    padding-left: $header-health-logo-clear-space-sm;
+                }
+                @include media-breakpoint-up(xl) {
+                    padding-left: $header-health-logo-clear-space;
+                }
+                .parent,
+                .title-descriptor {
+                    font-size: 16px;
+                    margin: -3.5px 0 0;
+                    padding: 3.5px 0;
+    
+                    @include media-breakpoint-up(sm) {
+                        font-size: 19px;
+                        padding: 2px 0;
+                        margin: -2px 0 0;
+                    }
+    
+                    @include media-breakpoint-up(lg) {
+                        font-size: 16px;
+                    }
+                }
+                .title,
+                .title-function {
+                    font-size: $header-health-logo-height-xs * 0.6; // 19.13472px, relative to a 31.8912px tall logo
+                    padding: 2px 0; // getting touch target to 26px minimum size.
+                    margin: -2px 0; // offsetting for the padding.
+    
+                    @include media-breakpoint-up(sm) {
+                        font-size: 37px * 0.7; // 25.9px, relative to a 37px tall logo
+                        padding: 0;
+                        margin: 0;
+                    }
+    
+                    @include media-breakpoint-up(lg) {
+                        margin: 0 0 (-37px * 0.16);
+                        padding: (37px * 0.08) 0;
+                    }
+    
+                    @include media-breakpoint-up(xl) {
+                        font-size: 50px * 0.7; // 35px, relative to a 50px tall logo
+                        padding: (50px * 0.08) 0;
+                        margin: 0 0 (-50px * 0.16);
+                    }
+                }
+            }
+        }
     }
 
     .header-nav {
@@ -138,6 +255,18 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
         @include media-breakpoint-down(md) {
             position: absolute;
             right: $spacer * 2;
+        }
+
+        @at-root body.uamshealth #{&} {
+            padding: 0;
+
+            @include media-breakpoint-up(sm) {
+                padding: 1px 0 1px ($spacer * 2);
+            }
+
+            @include media-breakpoint-up(xl) {
+                padding: 7.5px 0 7.5px ($spacer * 2);
+            }
         }
 
         .nav {
@@ -159,7 +288,10 @@ $header-logo-clear-space: $header-logo-height * $logo-clear-space-multiplier;
         .resource-nav {
             @extend .d-flex;
             @extend .flex-nowrap;
-            margin-left: $spacer-min;
+
+            @include media-breakpoint-up(sm) {
+                margin-left: $spacer-min;
+            }
 
             .nav-link {
                 @extend .d-flex;
