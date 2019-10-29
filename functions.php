@@ -320,7 +320,7 @@ if ( !function_exists('uams_site_title')):
 
     function uams_site_title()
     {
-		if ('uamshealth' == uams_get_site_info()['site']) {
+		if ('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite']) {
 			return 'UAMS Health';
 		} else {
 			return get_bloginfo( 'name' );

@@ -12,6 +12,10 @@
                 @include media-breakpoint-up(sm) {
                 }
 
+                img {
+                    flex-shrink: 0;
+                }
+
                 .card-title {
                     @extend .h5;
                 }

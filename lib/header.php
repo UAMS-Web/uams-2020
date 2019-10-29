@@ -20,35 +20,51 @@ remove_action( 'genesis_header', 'genesis_do_header' );
 add_action( 'genesis_header', 'uamswp_site_image', 5 );
  
 function uamswp_site_image() {
-	$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_main_dark.svg" alt="University of Arkansas for Medical Sciences Logo" />';
+	if ('uamshealth' == uams_get_site_info()['site']) {
+		$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark.svg" alt="UAMS Health Logo" />';
+		$header_image_link = 'https://www.uamshealth.com';
+		$header_image_text = 'UAMS Health';
+	}
+	else {
+		$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_main_dark.svg" alt="University of Arkansas for Medical Sciences Logo" />';
+		$header_image_link = 'https://www.uams.edu';
+		$header_image_text = 'University of Arkansas for Medical Sciences';
+	}
 	?>
 	<!-- /* Begin Title / Logo */  -->
 	<div class="global-title">
-	<?php printf( '<a href="https://www.uams.edu" class="navbar-brand">%s<span class="sr-only">%s</span></a>', $header_image, 'University of Arkansas for Medical Sciences' ); ?>
-	<div class="navbar-subbrand">
 
 	<?php
-	// If it's a subsection
-	if (uamswp_nav_subsection()) {
-		echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a><span class="sr-only">: </span>';
-		echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
-	} elseif ('inside' == uams_get_site_info()['site'] && 'main' !== uams_get_site_info()['subsite']) {
-		switch_to_blog(1);
-		$site_title = get_bloginfo( 'name' );
-		restore_current_blog();
-		echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( network_site_url() ).'">'.$site_title.'<span class="sr-only">:</span></a>';
-		echo '<a class="title" href="'. esc_url( home_url( '/' ) ) .'">'. get_bloginfo( 'name' ) .'</a>';
+	if ('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] && !uamswp_nav_subsection()) { // If it's the main UAMS Health site and not a subsection
+		printf( '<a href="' . $header_image_link . '" class="navbar-brand no-subbrand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text );
 	} else {
-	// If it's a regular old homepage
-		echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a>';
+		printf( '<a href="' . $header_image_link . '" class="navbar-brand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text );
+		echo '<div class="navbar-subbrand">';
+
+		if ('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] && uamswp_nav_subsection()) { // If it's a subsection on the main UAMS Health site
+			echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
+		} elseif (uamswp_nav_subsection()) { // If it's a subsection on any other site
+			echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a><span class="sr-only">: </span>';
+			echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
+		} elseif ('inside' == uams_get_site_info()['site'] && 'main' !== uams_get_site_info()['subsite']) {
+			switch_to_blog(1);
+			$site_title = get_bloginfo( 'name' );
+			restore_current_blog();
+			echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( network_site_url() ).'">'.$site_title.'<span class="sr-only">:</span></a>';
+			echo '<a class="title" href="'. esc_url( home_url( '/' ) ) .'">'. get_bloginfo( 'name' ) .'</a>';
+		} else {
+		// If it's a regular old homepage
+			echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a>';
+		}
+
+		echo '</div>';
 	}
   
 	// If it's an institute or other split title entity, separate the title descriptor (often the donor) and the functional title (often the center/institute of X) into two separate spans as below.
 	// Use three spaces in site title to indicate desire to split the title. Find/replace those three spaces 
 	//echo '<a class="title-split" href="javascript:void(0)"><span class="title-descriptor">Jackson T. Stephens</span> <span class="title-function">Spine and Neurosciences Institute</span></a>';
 	?>
-
-		</div>
+	
 	</div>
 	<!-- /* End Title / Logo */ -->
 
@@ -59,7 +75,7 @@ function uamswp_site_image() {
 				<?php if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site']) || empty(uams_get_site_info()['site'])) { ?>
 				<!-- Options - uams -->
 				<li class="nav-item">
-					<a class="nav-link" href="https://www.uamshealth.com/">UAMSHealth</a>
+					<a class="nav-link" href="https://www.uamshealth.com/">UAMS Health</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="https://jobs.uams.edu/">Jobs</a>
@@ -86,7 +102,7 @@ function uamswp_site_image() {
 					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="https://www.uamshealth.com/">UAMSHealth</a>
+					<a class="nav-link" href="https://www.uamshealth.com/">UAMS Health</a>
 				</li>
 				<!-- End right nav -->
 				<?php } ?>
@@ -108,12 +124,14 @@ function uamswp_site_image() {
 			</li>
 		</ul>
 
-		<!-- // Hiding this button until Quick Links is created. -->
-		<button class="quick-links-toggler" type="button" id="toggle-quick-links" aria-controls="quick-links" aria-expanded="false" title="Toggle Quick Links navigation">
-			<span class="sr-only label">Toggle Quick Links</span>
-			<span class="fas fa-bars fa-lg fa-fw"></span>
-			<span class="fas fa-times fa-lg fa-fw"></span>
-		</button>
+		<?php
+		// Removing Quick Links toggler via comments in case we decide to bring it back.
+		// <button class="quick-links-toggler" type="button" id="toggle-quick-links" aria-controls="quick-links" aria-expanded="false" title="Toggle Quick Links navigation">
+		// 	<span class="sr-only label">Toggle Quick Links</span>
+		// 	<span class="fas fa-bars fa-lg fa-fw"></span>
+		// 	<span class="fas fa-times fa-lg fa-fw"></span>
+		// </button>
+		?>
 
 		<!-- // The data-target and aria-controls may need to be dynamically defined. -->
 		<button class="navbar-toggler mobile-menu-toggler" type="button" data-toggle="collapse" data-target="#genesis-nav-primary" aria-controls="genesis-nav-primary" aria-expanded="false" title="Toggle Primary navigation">
