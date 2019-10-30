@@ -4,7 +4,8 @@ body.search {
             margin-top: -$uams-module-padding-mobile;
             margin-bottom: -$uams-module-padding-mobile;
         }
-        .post-type {
+        .post-type,
+        .module-body {
             .entry {
                 border-bottom: 0;
                 padding-bottom: 0;
