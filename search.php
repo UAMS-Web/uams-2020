@@ -368,7 +368,9 @@ function uamswp_do_search_loop() {
                 }
 
             } else {
-                echo "<p>Sorry, no content matched your criteria.</p>";
+                echo '<div class="module-body text-center">';
+                echo '<p>Sorry, no content matched your criteria.</p>';
+                echo '</div>';
             }
 
 
@@ -419,7 +421,9 @@ function uamswp_do_search_loop() {
                 }
 
             } else { 
-                echo '<p>' . _e( 'Sorry, no locations matched your criteria.' ) . '</p>';
+                echo '<div class="module-body text-center">';
+                echo '<p>Sorry, no content matched your criteria.</p>';
+                echo '</div>';
             } 
 
 
@@ -470,7 +474,9 @@ function uamswp_do_search_loop() {
                 }
 
             } else {
-                echo '<p>' . _e( 'Sorry, no services matched your criteria.' ) . '</p>';
+                echo '<div class="module-body text-center">';
+                echo '<p>Sorry, no content matched your criteria.</p>';
+                echo '</div>';
             }
 
             echo '</div>'; // .col-12
