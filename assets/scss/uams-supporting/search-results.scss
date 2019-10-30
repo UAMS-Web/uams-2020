@@ -1,9 +1,8 @@
 body.search {
+    .entry-header + .uams-module {
+        margin-top: -$uams-module-padding-mobile;
+    }
     .search-content {
-        @include media-breakpoint-down(sm) {
-            margin-top: -$uams-module-padding-mobile;
-            margin-bottom: -$uams-module-padding-mobile;
-        }
         .post-type,
         .module-body {
             .entry {
