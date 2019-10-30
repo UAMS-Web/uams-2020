@@ -289,7 +289,7 @@ function uamswp_do_search_loop() {
                             $post_link = get_the_permalink();
                             $tax = get_term_by("name", $post_title, $taxonomy);
                             $post_id = $tax->term_id;
-                            $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
+                            $title = '<h3 class="h4"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
                             $content = get_field($taxonomy.'_content', $taxonomy.'_'.$post_id);
 
                             echo $title;
