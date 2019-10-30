@@ -289,7 +289,7 @@ function uamswp_do_search_loop() {
                             $post_link = get_the_permalink();
                             $tax = get_term_by("name", $post_title, $taxonomy);
                             $post_id = $tax->term_id;
-                            $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
+                            $title = '<h3 class="h4"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
                             $content = get_field($taxonomy.'_content', $taxonomy.'_'.$post_id);
 
                             echo $title;
@@ -334,6 +334,7 @@ function uamswp_do_search_loop() {
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
+            echo '<div class="col-12">';
 
             // accepts any wp_query args.
             $args = (array(
@@ -346,7 +347,7 @@ function uamswp_do_search_loop() {
 
             uamswp_custom_loop_base($args);
 
-            echo '<div class="inner-container content-width"><h2 class="post-type-heading">Doctors</h2>';
+            echo '<h2 class="module-title">Doctors</h2>';
 
             if ( have_posts() ) {
                 
@@ -367,12 +368,13 @@ function uamswp_do_search_loop() {
                 }
 
             } else {
-                echo "<p>Sorry, no content matched your criteria.</p>";
+                echo '<div class="module-body text-center">';
+                echo '<p>Sorry, no content matched your criteria.</p>';
+                echo '</div>';
             }
 
-            echo '</div>';
 
-
+            echo '</div>'; // .col-12
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
@@ -385,6 +387,7 @@ function uamswp_do_search_loop() {
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
+            echo '<div class="col-12">';
 
             // accepts any wp_query args.
             $args = (array(
@@ -397,7 +400,7 @@ function uamswp_do_search_loop() {
 
             uamswp_custom_loop_base($args);
 
-            echo '<div class="inner-container content-width"><h2 class="post-type-heading">Locations</h2>';
+            echo '<h2 class="module-title">Locations</h2>';
 
             if ( have_posts() ) {
                 echo '<div class="card-list-container"><div class="card-list card-list-locations facetwp-template">'; 
@@ -418,12 +421,13 @@ function uamswp_do_search_loop() {
                 }
 
             } else { 
-                echo '<p>' . _e( 'Sorry, no locations matched your criteria.' ) . '</p>';
+                echo '<div class="module-body text-center">';
+                echo '<p>Sorry, no content matched your criteria.</p>';
+                echo '</div>';
             } 
 
-            echo '</div>';
 
-
+            echo '</div>'; // .col-12
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
@@ -436,6 +440,7 @@ function uamswp_do_search_loop() {
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
+            echo '<div class="col-12">';
 
             // accepts any wp_query args.
             $args = (array(
@@ -448,7 +453,7 @@ function uamswp_do_search_loop() {
 
             uamswp_custom_loop_base($args);
 
-            echo '<div class="inner-container content-width"><h2 class="post-type-heading">Areas of Expertise</h2>';
+            echo '<h2 class="module-title">Areas of Expertise</h2>';
 
             if ( have_posts() ) {
                 echo '<div class="card-list-container"><div class="card-list card-list-expertise facetwp-template">';
@@ -469,11 +474,12 @@ function uamswp_do_search_loop() {
                 }
 
             } else {
-                echo '<p>' . _e( 'Sorry, no services matched your criteria.' ) . '</p>';
+                echo '<div class="module-body text-center">';
+                echo '<p>Sorry, no content matched your criteria.</p>';
+                echo '</div>';
             }
 
-            echo '</div>';
-
+            echo '</div>'; // .col-12
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
