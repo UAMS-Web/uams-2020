@@ -46,10 +46,11 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
+            echo '<h2 class="module-title">Doctors</h2>';
 
             if ( have_posts() ) :
                 
-                echo '<div class="inner-container content-width"><h2 class="post-type-heading">Doctors</h2><div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
+                echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
 
             while ( have_posts() ) : the_post(); 
 
@@ -61,7 +62,7 @@ function uamswp_do_search_loop() {
             genesis_posts_nav();
             
             else :
-                echo "<p>Sorry, no content matched your criteria.</p>";
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
             endif; 
 
 
@@ -90,22 +91,24 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
+            echo '<h2 class="module-title">Locations</h2>';
 
             if ( have_posts() ) :
                 
-                echo '<div class="inner-container content-width"><h2 class="post-type-heading">Locations</h2><div class="card-list-container"><div class="card-list card-list-locations facetwp-template">';
+                echo '<div class="card-list-container"><div class="card-list card-list-locations facetwp-template">';
 
-            while ( have_posts() ) : the_post(); 
+                while ( have_posts() ) : the_post(); 
 
-            $id =get_the_ID();
-            include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/location-card.php' );
+                $id =get_the_ID();
+                include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/location-card.php' );
 
-            endwhile; 
-            echo '</div></div>';
-            // More results link.
-            genesis_posts_nav();
+                endwhile; 
+                echo '</div></div>';
+                // More results link.
+                genesis_posts_nav();
+
             else :
-                echo "<p>Sorry, no content matched your criteria.</p>";
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
             endif; 
 
 
@@ -134,22 +137,23 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
+            echo '<h2 class="module-title">Services</h2>';
 
             if ( have_posts() ) :
                 
-                echo '<div class="inner-container content-width"><h2 class="post-type-heading">Services</h2><div class="card-list-container"><div class="card-list card-list-services facetwp-template">';
+                echo '<div class="card-list-container"><div class="card-list card-list-services facetwp-template">';
 
-            while ( have_posts() ) : the_post(); 
+                while ( have_posts() ) : the_post(); 
 
-            $id =get_the_ID();
-            include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/service-card.php' );
+                $id =get_the_ID();
+                include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/service-card.php' );
 
-            endwhile; 
-            echo '</div></div>';
-            genesis_posts_nav();
+                endwhile; 
+                echo '</div></div>';
+                genesis_posts_nav();
             
             else :
-                echo "<p>Sorry, no content matched your criteria.</p>";
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
             endif; 
 
 
@@ -180,8 +184,9 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-                echo '<h2 class="module-heading">' . $post_type_text . '</h2>';
+                echo '<h2 class="module-title">' . $post_type_text . '</h2>';
                 echo '<div class="module-body">';
+
                     // Loop actions.
                     uamswp_loop_layout();
 
@@ -190,6 +195,7 @@ function uamswp_do_search_loop() {
                     uamswp_custom_loop( $args );
 
                 echo '</div>'; // module-body
+
             echo '</div>'; // col-12
             echo '</div>'; // search-content
             echo '</div>'; // container-fluid
