@@ -334,6 +334,7 @@ function uamswp_do_search_loop() {
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
+            echo '<div class="col-12">';
 
             // accepts any wp_query args.
             $args = (array(
@@ -373,6 +374,7 @@ function uamswp_do_search_loop() {
             echo '</div>';
 
 
+            echo '</div>'; // .col-12
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
@@ -385,6 +387,7 @@ function uamswp_do_search_loop() {
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
+            echo '<div class="col-12">';
 
             // accepts any wp_query args.
             $args = (array(
@@ -424,6 +427,7 @@ function uamswp_do_search_loop() {
             echo '</div>';
 
 
+            echo '</div>'; // .col-12
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
@@ -436,6 +440,7 @@ function uamswp_do_search_loop() {
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
+            echo '<div class="col-12">';
 
             // accepts any wp_query args.
             $args = (array(
@@ -474,6 +479,7 @@ function uamswp_do_search_loop() {
 
             echo '</div>';
 
+            echo '</div>'; // .col-12
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
