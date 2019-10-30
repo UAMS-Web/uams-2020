@@ -600,7 +600,7 @@ function uamswp_search_title( $title ) {
     switch_to_blog($post->blog_id);
     $post_title = get_the_title( $post->ID );
     $post_link = get_the_permalink( $post->ID );
-    $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
+    $title = '<h3 class="h4"><a href="' . $post_link . '">' . $post_title . '</a></h4>';
     restore_current_blog();
 
     return $title;
