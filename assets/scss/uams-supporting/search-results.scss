@@ -4,6 +4,18 @@ body.search {
             margin-top: -$uams-module-padding-mobile;
             margin-bottom: -$uams-module-padding-mobile;
         }
+        .post-type {
+            .entry {
+                border-bottom: 0;
+                padding-bottom: 0;
+                margin-bottom: 0;
+                
+                .entry-header {
+                    padding: 0;
+                    margin: 0;
+                }
+            }
+        }
         .post-type,
         .taxonomy {
             .inner-container {
