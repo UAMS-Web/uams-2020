@@ -347,7 +347,9 @@ function uamswp_do_search_loop() {
 
             uamswp_custom_loop_base($args);
 
-            echo '<div class="inner-container content-width"><h2 class="post-type-heading">Doctors</h2>';
+            echo '<h2 class="module-title">Doctors</h2>';
+
+            echo '<div class="inner-container content-width">';
 
             if ( have_posts() ) {
                 
@@ -400,7 +402,9 @@ function uamswp_do_search_loop() {
 
             uamswp_custom_loop_base($args);
 
-            echo '<div class="inner-container content-width"><h2 class="post-type-heading">Locations</h2>';
+            echo '<h2 class="module-title">Locations</h2>';
+
+            echo '<div class="inner-container content-width">';
 
             if ( have_posts() ) {
                 echo '<div class="card-list-container"><div class="card-list card-list-locations facetwp-template">'; 
@@ -453,7 +457,9 @@ function uamswp_do_search_loop() {
 
             uamswp_custom_loop_base($args);
 
-            echo '<div class="inner-container content-width"><h2 class="post-type-heading">Areas of Expertise</h2>';
+            echo '<h2 class="module-title">Areas of Expertise</h2>';
+
+            echo '<div class="inner-container content-width">';
 
             if ( have_posts() ) {
                 echo '<div class="card-list-container"><div class="card-list card-list-expertise facetwp-template">';
