@@ -42,6 +42,15 @@
             margin-top: ($spacer * 3);
             padding-top: ($spacer * 3);
         }
+
+        .cta-container,
+        .pagination {
+            font-style: normal;
+        }
+
+        .pagination {
+            justify-content: center;
+        }
     }
 
     &.bg-image,
