@@ -98,6 +98,10 @@ div:not(.bg-auto):not(.bg-white) {
     white-space: nowrap;
 }
 
+.card-list-container {
+    padding: ($grid-gutter-width / 2);
+}
+
 .card-list {
     display: flex;
     flex-flow: row wrap;
