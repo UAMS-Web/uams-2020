@@ -8,6 +8,16 @@ body.advert-template-default,
 body.blog  {
     .archive-description,
     .entry {
+
+        .entry-header {
+            &:last-child {
+                .entry-title,
+                .archive-title {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
         .entry-title,
         .archive-title {
             max-width: 100%;
