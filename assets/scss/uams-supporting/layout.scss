@@ -170,11 +170,12 @@ div:not(.bg-auto):not(.bg-white) {
 }
 
 .list-pagination {
-    @extend .mt-8;
-    @extend .pt-8;
-    border-top: 1px solid $gray-accent;
 
     .pagination {
+        margin-top: map-get($spacers, 8); 
+        margin-bottom: 0;
+        padding-top: map-get($spacers, 8); 
+        border-top: 1px solid $gray-accent;
         justify-content: center;
     }
 }
