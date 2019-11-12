@@ -148,24 +148,29 @@ div:not(.bg-auto):not(.bg-white) {
 
     + .sr-only + .card-list-container,
     + .card-list-container {
-        @extend .mt-8;
-        @extend .mt-xs-10;
+        margin-top: $uams-module-padding-mobile;
+
+        @include media-breakpoint-up(xs) {
+            margin-top: $uams-module-padding;
+        }
     }
 }
 
 .list-legend {
-    @extend .mt-8;
-    @extend .mt-xs-10;
-    @extend .pb-8;
+    margin-top: $uams-module-padding-mobile;
+    padding-bottom: $uams-module-padding-mobile;
     border-bottom: 1px solid $gray-accent;
+
+    @include media-breakpoint-up(sm) {
+        margin-top: $uams-module-padding;
+        padding-bottom: $uams-module-padding;
+    }
 
     .az-filter {
         justify-content: center;
     }
-
-    + .list-container,
     + .card-list-container {
-        @extend .mt-8;
+        margin-top: map-get($spacers, 8);
     }
 }
 

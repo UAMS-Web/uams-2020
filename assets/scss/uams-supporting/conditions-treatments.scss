@@ -1,7 +1,13 @@
 .conditions-treatments {
+    .list-legend {
+        margin-top: 0;
+    }
     .list-container {
-        @extend .mt-8;
-        @extend .mt-xs-10;
+        padding-top: $uams-module-padding-mobile;
+
+        @include media-breakpoint-up(sm) {
+            padding-top: $uams-module-padding;
+        }
 
         .list {
             @extend .list-unstyled;
@@ -67,7 +73,7 @@
                 @extend .m-n2;
 
                 li {
-                    @extend .m-2;
+                    margin: map-get($spacers, 2);
                 }
             }
         }
