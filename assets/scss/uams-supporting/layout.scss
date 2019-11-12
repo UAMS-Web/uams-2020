@@ -177,10 +177,47 @@ div:not(.bg-auto):not(.bg-white) {
 .list-pagination {
 
     .pagination {
-        margin-top: map-get($spacers, 8); 
+        margin-top: $uams-module-padding-mobile; 
         margin-bottom: 0;
-        padding-top: map-get($spacers, 8); 
+        padding-top: $uams-module-padding-mobile; 
         border-top: 1px solid $gray-accent;
         justify-content: center;
+
+        @include media-breakpoint-up(sm) {
+            margin-top: $uams-module-padding;
+            padding-top: $uams-module-padding;
+        }
+
+        li {
+            margin-bottom: 0;
+
+            &.current {
+                cursor: default;
+            }
+        }
+    }
+}
+
+.show-all,
+.show-paged {
+    text-align: center;
+
+    p {
+        @extend .content-width;
+    }
+}
+
+.show-all {
+    margin-top: map-get($spacers, 4);
+}
+
+.show-paged {
+    margin-top: $uams-module-padding-mobile; 
+    padding-top: $uams-module-padding-mobile; 
+    border-top: 1px solid $gray-accent;
+
+    @include media-breakpoint-up(sm) {
+        margin-top: $uams-module-padding;
+        padding-top: $uams-module-padding;
     }
 }
