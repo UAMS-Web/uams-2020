@@ -251,102 +251,102 @@ function uamswp_do_search_loop() {
         echo '</div>'; // .search-content
         echo '</div>'; // .container-fluid
         echo '</div>'; // .uams-module
-            
-        // If possible, nest within a condition so that it only displays if there are taxonomy results.
-        echo '<div class="uams-module bg-auto">';
-        echo '<div class="container-fluid">';
-        echo '<div class="search-content row">';
+
+        if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
+
+            // Begin Conditions and Treatments
 
             $taxonomies = array();
 
-            if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
-                array_push($taxonomies, 'condition', 'treatment_procedure' );
+            echo '<div class="uams-module bg-auto">';
+            echo '<div class="container-fluid">';
+            echo '<div class="search-content row">';
 
-                foreach ( $taxonomies as $taxonomy ) {
-                    // get the search term entered by user.
-                    $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
+            array_push($taxonomies, 'condition', 'treatment_procedure' );
 
-                    // accepts any wp_query args.
-                    $args = (array(
-                        's' => $s,
-                        'post_type' => $taxonomy,
-                        'posts_per_page' => 5,
-                        'order' => 'ASC',
-                        'orderby' => 'title',
-                    ));
+            foreach ( $taxonomies as $taxonomy ) {
+                // get the search term entered by user.
+                $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
 
-                    // $term_query = new WP_Term_Query( $args );
-                    $taxonomy_text = get_taxonomy($taxonomy)->labels->name; 
-                    // if (substr($taxonomy_text, -1) !== 's') {
-                    //     $taxonomy_text = $taxonomy_text . "s";
-                    // }
+                // accepts any wp_query args.
+                $args = (array(
+                    's' => $s,
+                    'post_type' => $taxonomy,
+                    'posts_per_page' => 5,
+                    'order' => 'ASC',
+                    'orderby' => 'title',
+                ));
 
-                    // echo '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
-                    //     // Loop actions.
-                    //     uamswp_loop_layout();
+                // $term_query = new WP_Term_Query( $args );
+                $taxonomy_text = get_taxonomy($taxonomy)->labels->name; 
+                // if (substr($taxonomy_text, -1) !== 's') {
+                //     $taxonomy_text = $taxonomy_text . "s";
+                // }
 
-                    //     // remove archive pagination.
-                    //     remove_action( 'genesis_after_endwhile', 'genesis_posts_nav' );
+                // echo '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
+                //     // Loop actions.
+                //     uamswp_loop_layout();
 
-                    //     // custom genesis loop with the above query parameters and hooks.
-                    //     //genesis_custom_loop( $args );
-                    //     uamswp_custom_loop( $args );
+                //     // remove archive pagination.
+                //     remove_action( 'genesis_after_endwhile', 'genesis_posts_nav' );
 
-                    //     // More results link.
-                    //     printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $taxonomy );
-                    // echo '</div></div>';
+                //     // custom genesis loop with the above query parameters and hooks.
+                //     //genesis_custom_loop( $args );
+                //     uamswp_custom_loop( $args );
 
-                    uamswp_custom_loop_base($args);
+                //     // More results link.
+                //     printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $taxonomy );
+                // echo '</div></div>';
 
-                    if ( have_posts() ) :
-                        
-                        echo '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
+                uamswp_custom_loop_base($args);
 
-                        while ( have_posts() ) : the_post(); 
+                if ( have_posts() ) :
+                    
+                    echo '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
 
-                            $post_count = $wp_query->found_posts;
-                            $post_title = get_the_title();
-                            $post_link = get_the_permalink();
-                            $tax = get_term_by("name", $post_title, $taxonomy);
-                            $post_id = $tax->term_id;
-                            $title = '<h3 class="h4"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
-                            $content = get_field($taxonomy.'_content', $taxonomy.'_'.$post_id);
+                    while ( have_posts() ) : the_post(); 
 
-                            echo $title;
-                            // echo $taxonomy.'_'.$post_id;
-                            echo $content ? $content : '';
+                        $post_count = $wp_query->found_posts;
+                        $post_title = get_the_title();
+                        $post_link = get_the_permalink();
+                        $tax = get_term_by("name", $post_title, $taxonomy);
+                        $post_id = $tax->term_id;
+                        $title = '<h3 class="h4"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
+                        $content = get_field($taxonomy.'_content', $taxonomy.'_'.$post_id);
 
-                        endwhile; 
-                        if ($post_count > 5) {
-                            // More results link.
-                            printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $taxonomy );
-                        } else {
-                            echo '</div>';
-                        }
+                        echo $title;
+                        // echo $taxonomy.'_'.$post_id;
+                        echo $content ? $content : '';
+
+                    endwhile; 
+                    if ($post_count > 5) {
+                        // More results link.
+                        printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $taxonomy );
+                    } else {
                         echo '</div>';
-                    else :
-                        echo '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
-                        echo "<p>Sorry, no content matched your criteria.</p>";
-                        echo '</div></div>';
-                    endif; 
-                    // foreach ( $term_query->terms as $term ) {
-                    //     echo '<article class="'. $taxonomy .'-'. $term->slug .' entry">';
-                    //     echo '    <header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="'. get_term_link( $term->term_id , $taxonomy ) .'">'. $term->name .'</a></h2></header>';
-                    //     echo '   <div class="entry-content clearfix"><p>'. wp_trim_words( $term->description , 20, '... <a class="more-link" href="' . get_term_link( $term->term_id , $taxonomy ) . '">Continue Reading</a>' ) .'</p></div>';
-                    //     echo '</article>';
-                    // }
-                    wp_reset_query();
-                }
+                    }
+                    echo '</div>';
+                else :
+                    echo '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
+                    echo "<p>Sorry, no content matched your criteria.</p>";
+                    echo '</div></div>';
+                endif; 
+                // foreach ( $term_query->terms as $term ) {
+                //     echo '<article class="'. $taxonomy .'-'. $term->slug .' entry">';
+                //     echo '    <header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="'. get_term_link( $term->term_id , $taxonomy ) .'">'. $term->name .'</a></h2></header>';
+                //     echo '   <div class="entry-content clearfix"><p>'. wp_trim_words( $term->description , 20, '... <a class="more-link" href="' . get_term_link( $term->term_id , $taxonomy ) . '">Continue Reading</a>' ) .'</p></div>';
+                //     echo '</article>';
+                // }
+                wp_reset_query();
             }
 
-        echo '</div>'; // .search-content
-        echo '</div>'; // .container-fluid
-        echo '</div>'; // .uams-module
-
-        if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
+            echo '</div>'; // .search-content
+            echo '</div>'; // .container-fluid
+            echo '</div>'; // .uams-module
+            
+            // End Conditions and Treatments
             
             $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
-
 
             /* Physicians */
             $post_type = array('physicians');
@@ -401,6 +401,7 @@ function uamswp_do_search_loop() {
 
             /* End Physicians */ 
             wp_reset_query();
+            
             /* Locations */
             $post_type = array('locations');
 
