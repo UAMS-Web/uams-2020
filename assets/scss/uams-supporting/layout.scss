@@ -221,3 +221,19 @@ div:not(.bg-auto):not(.bg-white) {
         padding-top: $uams-module-padding;
     }
 }
+
+.map-legend {
+    padding: map-get($spacers, 4);
+
+    ol {
+        margin: 0;
+        padding: 0;
+        list-style-position: inside;
+
+        li {
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
