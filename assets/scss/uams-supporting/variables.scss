@@ -188,7 +188,7 @@ $colors: (
 
 $primary: $red;
 $secondary: $gray-600;
-$success: $green;
+$success: $green-darker;
 $info: $steel;
 $warning: $orange-special;
 $danger: $red-special;
@@ -205,6 +205,18 @@ $theme-colors: (
   "light": $light,
   "dark": $dark,
   "white": $white
+);
+
+$theme-colors-text: (
+  "primary": $white,
+  "secondary": $white,
+  "success": $white,
+  "info": $white,
+  "warning": $gray-800,
+  "danger": $white,
+  "light": $body-color,
+  "dark": $white,
+  "white": $body-color
 );
 
 // Set a specific jump point for requesting color jumps
@@ -304,6 +316,18 @@ $link-hover-decoration: none;
 $link-visited-color: darken($link-color, 20%);
 // Darken percentage for links with `.text-*` class (e.g. `.text-success`)
 $emphasized-link-hover-darken-percentage: 15%;
+
+$theme-colors-link: (
+  "primary": $white,
+  "secondary": $white,
+  "success": $white,
+  "info": $white,
+  "warning": $gray-800,
+  "danger": $white,
+  "light": $link-color,
+  "dark": $white,
+  "white": $link-color
+);
 
 
 // Paragraphs
