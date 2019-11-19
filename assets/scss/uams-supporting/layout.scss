@@ -74,9 +74,12 @@ article.entry .entry-content,
 section.archive-description .entry-content {
 
     .embed-responsive {
-        @extend .my-8;
-        @extend .my-sm-10;
+        margin-top: $uams-module-padding-mobile;
         width: auto;
+
+        @include media-breakpoint-up(sm) {
+            margin-top: $uams-module-padding;
+        }
 
         &:last-child {
             @extend .mb-0;
