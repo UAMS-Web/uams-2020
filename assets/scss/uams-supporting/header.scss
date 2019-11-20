@@ -191,6 +191,10 @@ $header-health-logo-clear-space: $header-logo-clear-space;
                     @include media-breakpoint-up(xl) {
                         height: $header-health-logo-height;
                     }
+
+                    @media (-ms-high-contrast: active) and (max-width: 379px), (-ms-high-contrast: none) and (max-width: 379px) {
+                        height: $header-health-logo-height-xxs;
+                    }
                 }
             }
             .navbar-subbrand {
