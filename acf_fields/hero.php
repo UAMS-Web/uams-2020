@@ -270,7 +270,7 @@ return array(
                 'label' => 'Image Tablet',
                 'name' => 'hero_image_tablet',
                 'type' => 'image',
-                'instructions' => 'Recommended dimensions: 1156x818 or larger. Minimum dimensions: 578x509. The image will be automatically cropped to a 1.4132:1 aspect ratio.',
+                'instructions' => 'Recommended dimensions: 1156x818 or larger. Minimum dimensions: 578x409. The image will be automatically cropped to a 1.4132:1 aspect ratio.',
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array(
