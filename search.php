@@ -513,7 +513,7 @@ function uamswp_do_search_loop() {
                 <div class="row">
                     <div class="widget_search col-12">
                             <h2 class="module-title">Search All UAMS Sites</h2>
-                            <p class="content note">Search UAMS websites on the UAMS.edu and UAMShealth.com&nbsp;domains:</p>
+                            <p class="content note">Search UAMS websites on the UAMS.edu and UAMSHealth.com&nbsp;domains:</p>
                         <div class="inner-container content-width">
                             <script async src="https://cse.google.com/cse.js?cx=014806496997774146681:pyl1jhwi-bo"></script>
                             <div class="gcse-searchresults-only" data-queryParameterName="s"></div>
