@@ -24,7 +24,7 @@ function uamswp_site_image() {
 		$header_image = '<picture>
 		<source srcset="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark.svg" media="(min-width: 576px)">
 		<source srcset="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_vertical_dark.svg" media="(min-width: 1px)">
-		<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark.svg" alt="UAMS Health Logo" />
+		<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png" alt="UAMS Health Logo" />
 		</picture>';
 		$header_image_link = 'https://www.uamshealth.com';
 		$header_image_text = 'UAMS Health';
