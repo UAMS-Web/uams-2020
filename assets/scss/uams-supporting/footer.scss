@@ -2,6 +2,8 @@
 // Replace placeholder photos in .site-footer:before once the server-side image resizing has been solved.
 //////////////////
 .site-footer {
+    display: flex;
+    flex-flow: column;
     @extend .py-9;
     @extend .px-8;
     @extend .bg-primary;
@@ -105,7 +107,8 @@
     
 
     .logo {
-        @extend .d-inline-block;
+        display: block;
+        margin: 0 auto;
         @extend .mb-6;
 
         img {

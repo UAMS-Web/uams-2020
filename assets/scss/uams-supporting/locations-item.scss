@@ -90,3 +90,15 @@
         }
     }
 }
+
+.parking-map-container {
+    margin-top: $uams-module-padding-mobile;
+
+    @include media-breakpoint-up(sm) {
+        margin-top: $uams-module-padding;
+    }
+
+    @include media-breakpoint-up(md) {
+        margin-top: 0;
+    }
+}

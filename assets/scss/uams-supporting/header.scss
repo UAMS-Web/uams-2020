@@ -172,7 +172,9 @@ $header-health-logo-clear-space: $header-logo-clear-space;
                 img {
                     height: $header-health-logo-height-xxs;
 
-                    @media (max-width: 379px) { // fallback for when the viewport is smaller than 380px wide. The logo should proportionally shrink.
+                    @media (max-width: 379px),
+                    (-ms-high-contrast: active) and (max-width: 575px),
+                    (-ms-high-contrast: none) and (max-width: 575px) { // fallback for when the viewport is smaller than 380px wide. The logo should proportionally shrink.
                         height: auto;
                         width: 35.2578947368421vw;
                         max-width: calc(100vw - 32px - 32px - 32px - 134px);
