@@ -30,7 +30,10 @@ function uamswp_site_image() {
 		$header_image_text = 'UAMS Health';
 	}
 	else {
-		$header_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_main_dark.svg" alt="University of Arkansas for Medical Sciences Logo" />';
+		$header_image = '<picture>
+		<source srcset="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_main_dark.svg" media="(min-width: 1px)">
+		<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_main_dark_189x50.png" alt="University of Arkansas for Medical Sciences Logo" />
+		</picture>';
 		$header_image_link = 'https://www.uams.edu';
 		$header_image_text = 'University of Arkansas for Medical Sciences';
 	}
