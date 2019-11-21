@@ -121,7 +121,7 @@ function uamswp_site_image() {
 			<li class="nav-item">
 				<a class="nav-link emergency-link" href="javascript:void(0)" aria-label="Emergency Room"><span class="fas fa-ambulance fa-lg"></span><span class="sr-only">Emergency Room</span></a>
 			</li>
-			<? } // endif ?>
+			<?php } // endif ?>
 			<li class="nav-item">
 				<button class="search-toggler" type="button" id="toggle-search" aria-controls="header-search" aria-expanded="false" title="Toggle Search">
 					<span class="sr-only label">Toggle Search</span>
