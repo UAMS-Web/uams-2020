@@ -251,3 +251,48 @@ section.archive-description .entry-content {
         }
     }
 }
+
+.content-split {
+    &-lg {
+        > [class^="col-lg-"],
+        > [class*=" col-lg-"] {
+            &:first-child {
+                @include media-breakpoint-up(lg) {
+                    padding-right: ($uams-module-padding / 2);
+                }
+
+                .content-width {
+                    @include media-breakpoint-up(lg) {
+                        margin-right: 0;
+                    }
+
+                    > :last-child {
+                        @include media-breakpoint-down(md) {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+            &:last-child {
+                @include media-breakpoint-up(lg) {
+                    padding-left: ($uams-module-padding / 2);
+                }
+
+                .content-width {
+                    @include media-breakpoint-up(lg) {
+                        margin-left: 0;
+                    }
+
+                    > h1, > h2, > h3, > h4, > h5, > h6,
+                    > .h1, > .h2, > .h3, > .h4, > .h5, > .h6 {
+                        &:first-child {
+                            @include media-breakpoint-down(md) {
+                                margin-top: $headings-margin-top;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

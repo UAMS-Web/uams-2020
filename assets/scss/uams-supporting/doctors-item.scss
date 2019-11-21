@@ -112,3 +112,43 @@
         }
     }
 }
+
+.academic-info,
+.research-info {
+
+    .content-split {
+        &-lg {
+            @include media-breakpoint-up(lg) {
+                flex-wrap: nowrap;
+            }
+
+            > [class^="col-lg-"],
+            > [class*=" col-lg-"] {
+                &:first-child {
+                    @include media-breakpoint-up(lg) {
+                        width: auto;
+                        flex-grow: 0;
+                        flex-shrink: 0;
+                        flex-basis: auto;
+                        margin-left: auto;
+                    }
+                }
+                &:last-child {
+                    @include media-breakpoint-up(lg) {
+                        width: auto;
+                        flex-grow: 0;
+                        flex-shrink: 1;
+                        flex-basis: auto;
+                        margin-right: auto;
+                    }
+
+                    .content-width {
+                        @include media-breakpoint-up(lg) {
+                            width: 21em; // adjust to account for potential contents of these sections
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
