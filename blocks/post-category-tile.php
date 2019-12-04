@@ -79,54 +79,26 @@ if ( empty( $cat_button_text ) )
                         <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>      
                             <!-- 1:1 Aspect Ratio -->
                             <source 
-                                media="(min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2), 
-                                (min-width: 1921px) and (min-resolution: 192dpi)"
-                                srcset="<?php echo image_sizer($image, 992, 992, 'center', 'center'); ?>">
-                            <source 
                                 media="(min-width: 1921px)" 
-                                srcset="<?php echo image_sizer($image, 496, 496, 'center', 'center'); ?>">
-                            <source 
-                                media="(min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2), 
-                                (min-width: 1500px) and (min-resolution: 192dpi)"
-                                srcset="<?php echo image_sizer($image, 906, 906, 'center', 'center'); ?>">
+                                srcset="<?php echo image_sizer($image, 496, 496, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 992, 992, 'center', 'center'); ?> 2x">
                             <source 
                                 media="(min-width: 1500px)" 
-                                srcset="<?php echo image_sizer($image, 453, 453, 'center', 'center'); ?>">
-                            <source 
-                                media="(min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), 
-                                (min-width: 1200px) and (min-resolution: 192dpi)"
-                                srcset="<?php echo image_sizer($image, 696, 696, 'center', 'center'); ?>">
+                                srcset="<?php echo image_sizer($image, 453, 453, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 906, 906, 'center', 'center'); ?> 2x">
                             <source 
                                 media="(min-width: 1200px)" 
-                                srcset="<?php echo image_sizer($image, 348, 348, 'center', 'center'); ?>">
-                            <source 
-                                media="(min-width: 992px) and (-webkit-min-device-pixel-ratio: 2), 
-                                (min-width: 992px) and (min-resolution: 192dpi)"
-                                srcset="<?php echo image_sizer($image, 546, 546, 'center', 'center'); ?>">
+                                srcset="<?php echo image_sizer($image, 348, 348, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 696, 696, 'center', 'center'); ?> 2x">
                             <source 
                                 media="(min-width: 992px)" 
-                                srcset="<?php echo image_sizer($image, 273, 273, 'center', 'center'); ?>">
-                            <source 
-                                media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), 
-                                (min-width: 768px) and (min-resolution: 192dpi)"
-                                srcset="<?php echo image_sizer($image, 442, 442, 'center', 'center'); ?>">
+                                srcset="<?php echo image_sizer($image, 273, 273, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 546, 546, 'center', 'center'); ?> 2x">
                             <source 
                                 media="(min-width: 768px)" 
-                                srcset="<?php echo image_sizer($image, 221, 221, 'center', 'center'); ?>">
-                            <source 
-                                media="(min-width: 576px) and (-webkit-min-device-pixel-ratio: 2), 
-                                (min-width: 576px) and (min-resolution: 192dpi)"
-                                srcset="<?php echo image_sizer($image, 346, 346, 'center', 'center'); ?>">
+                                srcset="<?php echo image_sizer($image, 221, 221, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 442, 442, 'center', 'center'); ?> 2x">
                             <source 
                                 media="(min-width: 576px)" 
-                                srcset="<?php echo image_sizer($image, 173, 173, 'center', 'center'); ?>">
-                            <source 
-                                media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
-                                (min-width: 1px) and (min-resolution: 192dpi)"
-                                srcset="<?php echo image_sizer($image, 994, 994, 'center', 'center'); ?>">
+                                srcset="<?php echo image_sizer($image, 173, 173, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 346, 346, 'center', 'center'); ?> 2x">
                             <source 
                                 media="(min-width: 1px)" 
-                                srcset="<?php echo image_sizer($image, 497, 497, 'center', 'center'); ?>">
+                                srcset="<?php echo image_sizer($image, 497, 497, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 994, 994, 'center', 'center'); ?> 2x">
                             <!-- Fallback -->
                             <img src="<?php echo image_sizer($image, 496, 496, 'center', 'center'); ?>" alt="<?php echo $alt_text ? $alt_text : ''; ?>" />
                             <?php } else { ?>
