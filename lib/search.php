@@ -20,7 +20,7 @@ function uamswp_search_form( $form ) {
             <button type="submit" id="searchsubmit" value="'. esc_attr__('Search', 'uams-2020') .'" class="btn btn-primary" title="Search"><span class="fas fa-search"></span><span class="sr-only">Search</span></button>
         </div>
     </div>
-    <div class="form-group text-center" role="radiogroup" aria-labelledby="uams-search-picker-label">
+    <div class="form-group text-center d-none" role="radiogroup" aria-labelledby="uams-search-picker-label">
         <span class="sr-only" id="uams-search-picker-label">Choose which site to search.</span>
         <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" id="search-scope-1" name="search-scope" class="custom-control-input" checked>
