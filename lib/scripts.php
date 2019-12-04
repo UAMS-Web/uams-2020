@@ -70,6 +70,10 @@ function uamswp_theme_scripts() {
 		// // Register theme JS and enqueue it
 		// wp_register_script( 'app-js', UAMSWP_THEME_JS . 'app.min.js', array( 'jquery' ), $version, true );
 		// wp_enqueue_script( 'app-js' );
+
+		// Alert system based on uams-2016
+		wp_enqueue_script( 'uams-alert', get_stylesheet_directory_uri() . '/assets/js/alert.js', array(), '1.0.0', true );
+		// wp_enqueue_style( 'uams-alert-style', get_stylesheet_directory_uri() . '/assets/css/uams.alert.css', array(), '1.0.0', 'all' );
 		
 	}
 }
