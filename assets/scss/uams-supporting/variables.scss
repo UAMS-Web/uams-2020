@@ -1024,9 +1024,10 @@ $card-group-margin: $grid-gutter-width / 2;
 $card-deck-margin: $card-group-margin;
 
 $card-columns-count: 3;
-$card-columns-gap: 1.25rem;
+$card-columns-gap: $grid-gutter-width;
 $card-columns-margin: $card-spacer-y;
 
+$card-list-gap: $card-columns-gap / 2;
 
 // Tooltips
 
