@@ -7,6 +7,7 @@
     flex-flow: row wrap;
     margin: (-$spacer-min / 2);
 
+    .inner-container .btn,
     .btn {
         margin: ($spacer-min / 2);
     }
