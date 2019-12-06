@@ -95,7 +95,7 @@ function uamswp_do_search_loop() {
 
             if ( have_posts() ) :
                 
-                echo '<div class="card-list-container"><div class="card-list card-list-locations facetwp-template">';
+                echo '<div class="card-list-container location-card-list-container"><div class="card-list facetwp-template">';
 
                 while ( have_posts() ) : the_post(); 
 
