@@ -108,19 +108,23 @@ section.archive-description .entry-content {
     white-space: nowrap;
 }
 
-.card-list-container {
-    padding: ($grid-gutter-width / 2);
-}
+// .card-list-container {
+//     padding: ($grid-gutter-width / 2);
+// }
 
 .card-list {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    margin: (-$grid-gutter-width / 2);
+    margin: (-$card-list-gap);
+
+    > .card-list {
+        margin: 0;
+    }
 
     .card {
         width: 434px;
-        margin: $grid-gutter-width / 2;
+        margin: $card-list-gap;
         text-align: center;
 
         @include media-breakpoint-up(xs) {
@@ -139,16 +143,6 @@ section.archive-description .entry-content {
         }
         .btn {
             margin-top: auto;
-        }
-    }
-
-    &-doctors {
-        .card {
-            width: 255px;
-
-            .card-title {
-                @extend .h6;
-            }
         }
     }
 }
@@ -243,6 +237,51 @@ section.archive-description .entry-content {
         li {
             &:last-child {
                 margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.content-split {
+    &-lg {
+        > [class^="col-lg-"],
+        > [class*=" col-lg-"] {
+            &:first-child {
+                @include media-breakpoint-up(lg) {
+                    padding-right: ($uams-module-padding / 2);
+                }
+
+                .content-width {
+                    @include media-breakpoint-up(lg) {
+                        margin-right: 0;
+                    }
+
+                    > :last-child {
+                        @include media-breakpoint-down(md) {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+            &:last-child {
+                @include media-breakpoint-up(lg) {
+                    padding-left: ($uams-module-padding / 2);
+                }
+
+                .content-width {
+                    @include media-breakpoint-up(lg) {
+                        margin-left: 0;
+                    }
+
+                    > h1, > h2, > h3, > h4, > h5, > h6,
+                    > .h1, > .h2, > .h3, > .h4, > .h5, > .h6 {
+                        &:first-child {
+                            @include media-breakpoint-down(md) {
+                                margin-top: $headings-margin-top;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

@@ -1,13 +1,16 @@
 .conditions-treatments {
     .list-legend {
         margin-top: 0;
+
+        + .list-container {
+            padding-top: $uams-module-padding-mobile;
+    
+            @include media-breakpoint-up(sm) {
+                padding-top: $uams-module-padding;
+            }
+        }
     }
     .list-container {
-        padding-top: $uams-module-padding-mobile;
-
-        @include media-breakpoint-up(sm) {
-            padding-top: $uams-module-padding;
-        }
 
         .list {
             @extend .list-unstyled;

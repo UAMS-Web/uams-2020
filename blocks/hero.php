@@ -115,42 +115,21 @@ if( $hero_rows ) :
                 <picture>
                     <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
                     <!-- Desktop Image, Aspect ratio 1.8685:1 -->
-                    <source srcset="<?php echo image_sizer($image_desktop, 2870, 1536, 'center', 'center'); ?>"
-                        media="(min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2), 
-                        (min-width: 1921px) and (min-resolution: 192dpi)">
-                    <source srcset="<?php echo image_sizer($image_desktop, 1435, 768, 'center', 'center'); ?>"
+                    <source srcset="<?php echo image_sizer($image_desktop, 1435, 768, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_desktop, 2870, 1536, 'center', 'center'); ?> 2x"
                         media="(min-width: 1921px)">
-                    <source srcset="<?php echo image_sizer($image_desktop, 2152, 1152, 'center', 'center'); ?>"
-                        media="(min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2), 
-                        (min-width: 1500px) and (min-resolution: 192dpi)">
-                    <source srcset="<?php echo image_sizer($image_desktop, 1076, 576, 'center', 'center'); ?>"
+                    <source srcset="<?php echo image_sizer($image_desktop, 1076, 576, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_desktop, 2152, 1152, 'center', 'center'); ?> 2x"
                         media="(min-width: 1500px)">
-                    <source srcset="<?php echo image_sizer($image_desktop, 1682, 900, 'center', 'center'); ?>"
-                        media="(min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), 
-                        (min-width: 1200px) and (min-resolution: 192dpi)">
-                    <source srcset="<?php echo image_sizer($image_desktop, 841, 450, 'center', 'center'); ?>"
+                    <source srcset="<?php echo image_sizer($image_desktop, 841, 450, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_desktop, 1682, 900, 'center', 'center'); ?> 2x"
                         media="(min-width: 1200px)">
-                    <source srcset="<?php echo image_sizer($image_desktop, 1346, 720, 'center', 'center'); ?>"
-                        media="(min-width: 992px) and (-webkit-min-device-pixel-ratio: 2), 
-                        (min-width: 992px) and (min-resolution: 192dpi)">
-                    <source srcset="<?php echo image_sizer($image_desktop, 673, 360, 'center', 'center'); ?>"
+                    <source srcset="<?php echo image_sizer($image_desktop, 673, 360, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_desktop, 1346, 720, 'center', 'center'); ?> 2x"
                         media="(min-width: 992px)">
                     <!-- Tablet Image, Aspect ratio 1.4132:1 -->
-                    <source srcset="<?php echo image_sizer($image_tablet, 1156, 818, 'center', 'center'); ?>"
-                        media="(min-width: 768px) and (-webkit-min-device-pixel-ratio: 2), 
-                        (min-width: 768px) and (min-resolution: 192dpi)">
-                    <source srcset="<?php echo image_sizer($image_tablet, 578, 409, 'center', 'center'); ?>"
+                    <source srcset="<?php echo image_sizer($image_tablet, 578, 409, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_tablet, 1156, 818, 'center', 'center'); ?> 2x"
                         media="(min-width: 768px)">
                     <!-- Mobile Image, Aspect ratio 16:9 -->
-                    <source srcset="<?php echo image_sizer($image_mobile, 1536, 864, 'center', 'center'); ?>"
-                        media="(min-width: 576px) and (-webkit-min-device-pixel-ratio: 2), 
-                        (min-width: 576px) and (min-resolution: 192dpi)">
-                    <source srcset="<?php echo image_sizer($image_mobile, 768, 432, 'center', 'center'); ?>"
+                    <source srcset="<?php echo image_sizer($image_mobile, 768, 432, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_mobile, 1536, 864, 'center', 'center'); ?> 2x"
                         media="(min-width: 576px)">
-                    <source srcset="<?php echo image_sizer($image_mobile, 1152, 648, 'center', 'center'); ?>"
-                        media="(min-width: 1px) and (-webkit-min-device-pixel-ratio: 2), 
-                        (min-width: 1px) and (min-resolution: 192dpi)">
-                    <source srcset="<?php echo image_sizer($image_mobile, 576, 324, 'center', 'center'); ?>"
+                    <source srcset="<?php echo image_sizer($image_mobile, 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_mobile, 1152, 648, 'center', 'center'); ?> 2x"
                         media="(min-width: 1px)">
                     <!-- Fallback -->
                     <img src="<?php echo image_sizer($image_tablet, 455, 256, 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />

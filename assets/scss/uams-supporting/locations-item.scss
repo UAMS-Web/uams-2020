@@ -45,6 +45,7 @@
         dt, dd {
             @include media-breakpoint-up(xs) {
                 float: left;
+                margin-top: 0.5em;
             }
         }
         dt {
@@ -52,6 +53,13 @@
                 clear: both;
                 width: 7.5em;
                 padding-right: $grid-gutter-width;
+            }
+
+            &:first-child,
+            &:first-child + dd {
+                @include media-breakpoint-up(xs) {
+                    margin-top: 0;
+                }
             }
         }
     }
