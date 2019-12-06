@@ -1,0 +1,37 @@
+$doctor-card-width: 255px;
+$doctor-card-count: 12;
+$doctor-card-calculated-width: ($card-list-gap * 2) + $doctor-card-width;
+
+$doctor-list-sizes: ( // Only list doctor cards counts of 1, 2, 3, 4, 6 or 12
+    1: ($doctor-card-calculated-width * 1) + ($uams-module-padding-px * 2),
+    2: ($doctor-card-calculated-width * 2) + ($uams-module-padding-px * 2),
+    3: ($doctor-card-calculated-width * 3) + ($uams-module-padding-px * 2),
+    4: ($doctor-card-calculated-width * 4) + ($uams-module-padding-px * 2),
+    6: ($doctor-card-calculated-width * 6) + ($uams-module-padding-px * 2),
+    12: ($doctor-card-calculated-width * 12) + ($uams-module-padding-px * 2)
+);
+
+@mixin doctor-list-width($count, $value) {
+    @include media-custom-up($value) {
+        width: $doctor-card-calculated-width * $count;
+    }
+}
+
+
+.card-list {
+    &-doctors {
+        margin-right: auto;
+        margin-left: auto;
+
+        @each $count, $value in $doctor-list-sizes {
+            @include doctor-list-width($count, $value);
+        }
+        .card {
+            width: $doctor-card-width;
+
+            .card-title {
+                @extend .h6;
+            }
+        }
+    }
+}
