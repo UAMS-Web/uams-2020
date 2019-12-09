@@ -52,7 +52,7 @@ function uamswp_do_search_loop() {
             if ( have_posts() ) :
 
                 echo '<h2 class="module-title">Doctors</h2>';
-                echo '<div class="inner-container content-width text-center"><div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
+                echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
 
             while ( have_posts() ) : the_post();
 
@@ -97,7 +97,7 @@ function uamswp_do_search_loop() {
             if ( have_posts() ) :
 
                 echo '<h2 class="module-title">Locations</h2>';
-                echo '<div class="inner-container content-width text-center"><div class="card-list-container location-card-list-container"><div class="card-list facetwp-template">';
+                echo '<div class="card-list-container location-card-list-container"><div class="card-list facetwp-template">';
 
             while ( have_posts() ) : the_post();
 
@@ -141,7 +141,7 @@ function uamswp_do_search_loop() {
             if ( have_posts() ) :
 
                 echo '<h2 class="module-title">Services</h2>';
-                echo '<div class="inner-container content-width text-center"><div class="card-list-container"><div class="card-list card-list-services facetwp-template">';
+                echo '<div class="card-list-container"><div class="card-list card-list-services facetwp-template">';
 
             while ( have_posts() ) : the_post();
 
@@ -367,7 +367,6 @@ function uamswp_do_search_loop() {
             uamswp_custom_loop_base($args);
 
             echo '<h2 class="module-title">Doctors</h2>';
-            echo '<div class="inner-container content-width text-center">';
 
             if ( have_posts() ) {
 
@@ -390,8 +389,6 @@ function uamswp_do_search_loop() {
             } else {
                 echo "<p>Sorry, no content matched your criteria.</p>";
             }
-
-            echo '</div>';
 
             echo '</div>'; // .col-12
             echo '</div>'; // .search-content
@@ -420,7 +417,6 @@ function uamswp_do_search_loop() {
             uamswp_custom_loop_base($args);
 
             echo '<h2 class="module-title">Locations</h2>';
-            echo '<div class="inner-container content-width text-center">';
 
             if ( have_posts() ) {
                 echo '<div class="card-list-container location-card-list-container"><div class="card-list facetwp-template">';
@@ -443,8 +439,6 @@ function uamswp_do_search_loop() {
             } else {
                 echo '<p>' . _e( 'Sorry, no locations matched your criteria.' ) . '</p>';
             }
-
-            echo '</div>';
 
             echo '</div>'; // .col-12
             echo '</div>'; // .search-content
@@ -473,7 +467,6 @@ function uamswp_do_search_loop() {
             uamswp_custom_loop_base($args);
 
             echo '<h2 class="module-title">Areas of Expertise</h2>';
-            echo '<div class="inner-container content-width text-center">';
 
             if ( have_posts() ) {
                 echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
@@ -496,8 +489,6 @@ function uamswp_do_search_loop() {
             } else {
                 echo '<p>' . _e( 'Sorry, no services matched your criteria.' ) . '</p>';
             }
-
-            echo '</div>';
 
             echo '</div>'; // .col-12
             echo '</div>'; // .search-content
