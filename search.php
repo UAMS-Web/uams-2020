@@ -38,7 +38,7 @@ function uamswp_do_search_loop() {
                 'post_type' => $post_type,
                 'order' => 'ASC',
                 'orderby' => 'title',
-                'posts_per_page' => 20,
+                'posts_per_page' => 6,
                 'paged' => $paged,
             ));
 
@@ -277,7 +277,7 @@ function uamswp_do_search_loop() {
             $args = (array(
                 's' => $s,
                 'post_type' => $post_type,
-                'posts_per_page' => 4,
+                'posts_per_page' => 6,
                 'order' => 'ASC',
                 'orderby' => 'title',
             ));
@@ -300,7 +300,7 @@ function uamswp_do_search_loop() {
                 endwhile;
                 echo '</div></div>';
                 // More results link.
-                if ($wp_query->found_posts > 4) {
+                if ($wp_query->found_posts > 6) {
                     printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
                 }
 
