@@ -179,17 +179,24 @@ function uamswp_do_search_loop() {
                 $post_type_text = $post_type_text . "s";
             }
 
-            echo '<div class="search-content">';
-                echo '<div class="post-type ' . $post_type . '"><h1 class="post-type-heading">' . $post_type_text . '</h1>';
+            echo '<div class="uams-module bg-auto">';
+            echo '<div class="container-fluid">';
+            echo '<div class="search-content row">';
+            echo '<div class="col-12">';
+                echo '<h2 class="module-heading">' . $post_type_text . '</h2>';
+                echo '<div class="module-body">';
                     // Loop actions.
                     uamswp_loop_layout();
 
                     // custom genesis loop with the above query parameters and hooks.
                     // genesis_custom_loop( $args );
                     uamswp_custom_loop( $args );
-
-                echo '</div>';
-            echo '</div>';
+                
+                echo '</div>'; // module-body
+            echo '</div>'; // col-12
+            echo '</div>'; // search-content
+            echo '</div>'; // container-fluid
+            echo '</div>'; // uams-module
         }
     } else {
         // create an array variable with specific post types in your desired order.
