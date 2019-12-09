@@ -259,7 +259,8 @@ function uamswp_do_search_loop() {
         echo '</div>'; // .uams-module
 
         if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
-            
+        
+        // Begin Conditions & Treatments
         // If possible, nest within a condition so that it only displays if there are taxonomy results.
         echo '<div class="uams-module bg-auto">';
         echo '<div class="container-fluid">';
@@ -350,6 +351,8 @@ function uamswp_do_search_loop() {
         echo '</div>'; // .uams-module
 
         // End Conditions and Treatments
+        
+        // Begin Physicians
 
             $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
 
@@ -402,9 +405,10 @@ function uamswp_do_search_loop() {
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
 
-            /* End Physicians */
             wp_reset_query();
-            /* Locations */
+        // End Physicians
+
+        // Begin Locations
             $post_type = array('locations');
 
             echo '<div class="uams-module bg-auto">';
@@ -451,10 +455,10 @@ function uamswp_do_search_loop() {
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
-            /* End Locations */
             wp_reset_query();
-            /* Services */
+        // End Locations
 
+        // Begin Areas of Expertise
             $post_type = array('expertise');
 
             echo '<div class="uams-module bg-auto">';
@@ -501,9 +505,8 @@ function uamswp_do_search_loop() {
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
-
-            /* End Services */
             wp_reset_query();
+        // End Areas of Expertise
         }
         ?>
         <div class="uams-module bg-auto">
