@@ -237,7 +237,7 @@ function uamswp_do_search_loop() {
                     endwhile;
                     if ($post_count > 5) {
                         // More results link.
-                        printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type );
+                        printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type );
                     }
                 } else {
                     echo "<p>Sorry, no content matched your criteria.</p>";
@@ -318,7 +318,7 @@ function uamswp_do_search_loop() {
                         endwhile;
                         if ($post_count > 5) {
                             // More results link.
-                            printf( '<a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $taxonomy );
+                            printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $taxonomy );
                         } else {
                             echo '</div>';
                         }
@@ -383,7 +383,7 @@ function uamswp_do_search_loop() {
                 echo '</div></div>';
                 // More results link.
                 if ($wp_query->found_posts > 4) {
-                    printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
+                    printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
                 }
 
             } else {
@@ -433,7 +433,7 @@ function uamswp_do_search_loop() {
                 echo '</div></div>';
                 // More results link.
                 if ($wp_query->found_posts > 4) {
-                    printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
+                    printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
                 }
 
             } else {
@@ -483,7 +483,7 @@ function uamswp_do_search_loop() {
                 echo '</div></div>';
                 // More results link.
                 if ($wp_query->found_posts > 4) {
-                    printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
+                    printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
                 }
 
             } else {
