@@ -48,10 +48,10 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
+            echo '<h2 class="module-title">Doctors</h2>';
 
             if ( have_posts() ) :
 
-                echo '<h2 class="module-title">Doctors</h2>';
                 echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
 
             while ( have_posts() ) : the_post();
@@ -93,10 +93,10 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
+            echo '<h2 class="module-title">Locations</h2>';
 
             if ( have_posts() ) :
 
-                echo '<h2 class="module-title">Locations</h2>';
                 echo '<div class="card-list-container location-card-list-container"><div class="card-list facetwp-template">';
 
             while ( have_posts() ) : the_post();
@@ -137,10 +137,10 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
+            echo '<h2 class="module-title">Services</h2>';
 
             if ( have_posts() ) :
 
-                echo '<h2 class="module-title">Services</h2>';
                 echo '<div class="card-list-container"><div class="card-list card-list-services facetwp-template">';
 
             while ( have_posts() ) : the_post();
@@ -183,7 +183,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-                echo '<h2 class="module-heading">' . $post_type_text . '</h2>';
+                echo '<h2 class="module-title">' . $post_type_text . '</h2>';
                 echo '<div class="module-body">';
                     // Loop actions.
                     uamswp_loop_layout();
