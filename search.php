@@ -64,7 +64,7 @@ function uamswp_do_search_loop() {
             genesis_posts_nav();
 
             else :
-                echo "<p>Sorry, no content matched your criteria.</p>";
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
             endif;
 
 
@@ -109,7 +109,7 @@ function uamswp_do_search_loop() {
             // More results link.
             genesis_posts_nav();
             else :
-                echo "<p>Sorry, no content matched your criteria.</p>";
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
             endif;
 
             echo '</div>'; // .col-12
@@ -153,7 +153,7 @@ function uamswp_do_search_loop() {
             genesis_posts_nav();
 
             else :
-                echo "<p>Sorry, no content matched your criteria.</p>";
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
             endif;
 
 
@@ -387,7 +387,7 @@ function uamswp_do_search_loop() {
                 }
 
             } else {
-                echo "<p>Sorry, no content matched your criteria.</p>";
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
             }
 
             echo '</div>'; // .col-12
@@ -437,7 +437,7 @@ function uamswp_do_search_loop() {
                 }
 
             } else {
-                echo '<p>' . _e( 'Sorry, no locations matched your criteria.' ) . '</p>';
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
             }
 
             echo '</div>'; // .col-12
@@ -487,7 +487,7 @@ function uamswp_do_search_loop() {
                 }
 
             } else {
-                echo '<p>' . _e( 'Sorry, no services matched your criteria.' ) . '</p>';
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
             }
 
             echo '</div>'; // .col-12
