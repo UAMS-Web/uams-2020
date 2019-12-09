@@ -258,6 +258,8 @@ function uamswp_do_search_loop() {
         echo '</div>'; // .container-fluid
         echo '</div>'; // .uams-module
 
+        if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
+            
         // If possible, nest within a condition so that it only displays if there are taxonomy results.
         echo '<div class="uams-module bg-auto">';
         echo '<div class="container-fluid">';
@@ -265,7 +267,6 @@ function uamswp_do_search_loop() {
 
             $taxonomies = array();
 
-            if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
                 array_push($taxonomies, 'condition', 'treatment_procedure' );
 
                 foreach ( $taxonomies as $taxonomy ) {
@@ -343,13 +344,12 @@ function uamswp_do_search_loop() {
                     // }
                     wp_reset_query();
                 }
-            }
 
         echo '</div>'; // .search-content
         echo '</div>'; // .container-fluid
         echo '</div>'; // .uams-module
 
-        if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
+        // End Conditions and Treatments
 
             $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
 
