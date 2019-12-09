@@ -260,6 +260,62 @@ function uamswp_do_search_loop() {
 
         if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
         
+        // Begin Physicians
+
+            $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
+
+
+            /* Physicians */
+            $post_type = array('physicians');
+
+            echo '<div class="uams-module bg-auto">';
+            echo '<div class="container-fluid">';
+            echo '<div class="search-content row">';
+            echo '<div class="col-12">';
+
+            // accepts any wp_query args.
+            $args = (array(
+                's' => $s,
+                'post_type' => $post_type,
+                'posts_per_page' => 4,
+                'order' => 'ASC',
+                'orderby' => 'title',
+            ));
+
+            uamswp_custom_loop_base($args);
+
+            echo '<h2 class="module-title">Doctors</h2>';
+
+            if ( have_posts() ) {
+
+                echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
+
+                while ( have_posts() ) : the_post();
+
+                    global $wp_query;
+
+                    $id =get_the_ID();
+                    include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/physician-card.php' );
+
+                endwhile;
+                echo '</div></div>';
+                // More results link.
+                if ($wp_query->found_posts > 4) {
+                    printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
+                }
+
+            } else {
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
+            }
+
+            echo '</div>'; // .col-12
+            echo '</div>'; // .search-content
+            echo '</div>'; // .container-fluid
+            echo '</div>'; // .uams-module
+
+            wp_reset_query();
+        // End Physicians
+
         // Begin Conditions & Treatments
         // If possible, nest within a condition so that it only displays if there are taxonomy results.
         echo '<div class="uams-module bg-auto">';
@@ -352,62 +408,6 @@ function uamswp_do_search_loop() {
 
         // End Conditions and Treatments
         
-        // Begin Physicians
-
-            $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
-
-
-            /* Physicians */
-            $post_type = array('physicians');
-
-            echo '<div class="uams-module bg-auto">';
-            echo '<div class="container-fluid">';
-            echo '<div class="search-content row">';
-            echo '<div class="col-12">';
-
-            // accepts any wp_query args.
-            $args = (array(
-                's' => $s,
-                'post_type' => $post_type,
-                'posts_per_page' => 4,
-                'order' => 'ASC',
-                'orderby' => 'title',
-            ));
-
-            uamswp_custom_loop_base($args);
-
-            echo '<h2 class="module-title">Doctors</h2>';
-
-            if ( have_posts() ) {
-
-                echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
-
-                while ( have_posts() ) : the_post();
-
-                    global $wp_query;
-
-                    $id =get_the_ID();
-                    include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/physician-card.php' );
-
-                endwhile;
-                echo '</div></div>';
-                // More results link.
-                if ($wp_query->found_posts > 4) {
-                    printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
-                }
-
-            } else {
-                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
-            }
-
-            echo '</div>'; // .col-12
-            echo '</div>'; // .search-content
-            echo '</div>'; // .container-fluid
-            echo '</div>'; // .uams-module
-
-            wp_reset_query();
-        // End Physicians
-
         // Begin Locations
             $post_type = array('locations');
 
