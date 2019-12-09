@@ -337,7 +337,7 @@ if ( !function_exists('uams_get_home_link')):
 		if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site'])) {
 			$homelink = 'http://www.uams.edu';
 		} elseif ('uamshealth' == uams_get_site_info()['site']) {
-			$homelink = 'https://uamshealth.com';
+			$homelink = 'https://www.uamshealth.com';
 		} elseif ('inside' == uams_get_site_info()['site']) {
 			$homelink = 'http://inside.uams.edu';
 		}
