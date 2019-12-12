@@ -137,9 +137,9 @@ section.archive-description .entry-content {
             @extend .h5;
         }
         .card-body {
-            display: flex;
-            flex-flow: column nowrap;
-            align-items: center;
+            > :last-child {
+                margin-bottom: 0;
+            }
         }
         .btn {
             margin-top: auto;
