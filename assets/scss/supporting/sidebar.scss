@@ -13,7 +13,9 @@
         @include border-radius($card-border-radius);
         margin-bottom: $spacer*2;
         .widget-wrap {
-            flex: 1 1 auto;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: auto;
             padding: $card-spacer-y $card-spacer-x;
         }
     }
