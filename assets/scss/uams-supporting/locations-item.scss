@@ -5,10 +5,18 @@
     }
     .text, .image {
         @include media-breakpoint-up(md) {
-            max-width: 44rem;
+            //max-width: 44rem;
             flex-grow: 1;
             flex-shrink: 1;
             flex-basis: 0px;
+        }
+        .content-width {
+            width: auto;
+            max-width: 100%;
+
+            @include media-breakpoint-up(md) {
+                max-width: $content-width;
+            }
         }
     }
     .text {
@@ -20,7 +28,8 @@
 
         .content-width {
             @include media-breakpoint-up(md) {
-                width: auto;
+                //width: auto;
+                margin-left: 0;
             }
         }
     }
@@ -28,11 +37,16 @@
         @extend .px-0;
         @extend .px-md-8;
         order: 1;
-
         text-align: center;
 
         @include media-breakpoint-up(md) {
             text-align: left;
+        }
+
+        .content-width {
+            @include media-breakpoint-up(md) {
+                margin-right: 0;
+            }
         }
         img {
             @include media-breakpoint-up(md) {
