@@ -193,7 +193,9 @@
         .item {
             padding-top: ($grid-gutter-width * 0.75);
             padding-bottom: ($grid-gutter-width * 0.75);
-            flex: 0 0 (0.4375em * 35); // 35 characters per line
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: (0.4375em * 35); // 35 characters per line
             max-width: 100%;
         }
 
