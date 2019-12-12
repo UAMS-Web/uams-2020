@@ -179,6 +179,7 @@
                     flex-grow: 0;
                     flex-shrink: 0;
                     flex-basis: 50%;
+                    -ms-flex-preferred-size: calc(50% - #{$grid-gutter-width});
                     //max-width: 50%;
                     max-width: 1400px;
                 }
