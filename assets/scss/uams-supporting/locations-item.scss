@@ -11,10 +11,8 @@
             flex-basis: 0px;
         }
         .content-width {
-            width: auto;
-            max-width: 100%;
-
             @include media-breakpoint-up(md) {
+                width: auto;
                 max-width: $content-width;
             }
         }
@@ -28,7 +26,6 @@
 
         .content-width {
             @include media-breakpoint-up(md) {
-                //width: auto;
                 margin-left: 0;
             }
         }
@@ -44,14 +41,15 @@
         }
 
         .content-width {
+            width: auto;
+            max-width: 100%;
+
             @include media-breakpoint-up(md) {
                 margin-right: 0;
             }
         }
         img {
-            @include media-breakpoint-up(md) {
-                width: 100%;
-            }
+            width: 100%;
         }
     }
 
