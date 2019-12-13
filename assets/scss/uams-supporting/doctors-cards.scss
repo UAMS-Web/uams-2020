@@ -2,7 +2,35 @@ $doctor-card-width: 255px;
 $doctor-card-count: 12;
 $doctor-card-calculated-width: ($card-list-gap * 2) + $doctor-card-width;
 
-$doctor-list-sizes: ( // Only list doctor cards counts of 1, 2, 3, 4, 6 or 12
+$doctor-list-sizes-4: (
+    1: ($doctor-card-calculated-width * 1) + ($uams-module-padding-px * 2),
+    2: ($doctor-card-calculated-width * 2) + ($uams-module-padding-px * 2),
+    4: ($doctor-card-calculated-width * 4) + ($uams-module-padding-px * 2)
+);
+
+$doctor-list-sizes-6: (
+    1: ($doctor-card-calculated-width * 1) + ($uams-module-padding-px * 2),
+    2: ($doctor-card-calculated-width * 2) + ($uams-module-padding-px * 2),
+    3: ($doctor-card-calculated-width * 3) + ($uams-module-padding-px * 2),
+    6: ($doctor-card-calculated-width * 6) + ($uams-module-padding-px * 2),
+    12: ($doctor-card-calculated-width * 12) + ($uams-module-padding-px * 2)
+);
+
+$doctor-list-sizes-8: (
+    1: ($doctor-card-calculated-width * 1) + ($uams-module-padding-px * 2),
+    2: ($doctor-card-calculated-width * 2) + ($uams-module-padding-px * 2),
+    4: ($doctor-card-calculated-width * 4) + ($uams-module-padding-px * 2),
+    8: ($doctor-card-calculated-width * 8) + ($uams-module-padding-px * 2)
+);
+
+$doctor-list-sizes-10: (
+    1: ($doctor-card-calculated-width * 1) + ($uams-module-padding-px * 2),
+    2: ($doctor-card-calculated-width * 2) + ($uams-module-padding-px * 2),
+    5: ($doctor-card-calculated-width * 5) + ($uams-module-padding-px * 2),
+    10: ($doctor-card-calculated-width * 10) + ($uams-module-padding-px * 2)
+);
+
+$doctor-list-sizes-12: (
     1: ($doctor-card-calculated-width * 1) + ($uams-module-padding-px * 2),
     2: ($doctor-card-calculated-width * 2) + ($uams-module-padding-px * 2),
     3: ($doctor-card-calculated-width * 3) + ($uams-module-padding-px * 2),
@@ -17,14 +45,39 @@ $doctor-list-sizes: ( // Only list doctor cards counts of 1, 2, 3, 4, 6 or 12
     }
 }
 
-
 .card-list {
     &-doctors {
         margin-right: auto;
         margin-left: auto;
 
-        @each $count, $value in $doctor-list-sizes {
-            @include doctor-list-width($count, $value);
+        &-count-4 {
+            @each $count, $value in $doctor-list-sizes-4 {
+                @include doctor-list-width($count, $value);
+            }
+        }
+
+        &-count-6 {
+            @each $count, $value in $doctor-list-sizes-6 {
+                @include doctor-list-width($count, $value);
+            }
+        }
+
+        &-count-8 {
+            @each $count, $value in $doctor-list-sizes-8 {
+                @include doctor-list-width($count, $value);
+            }
+        }
+
+        &-count-10 {
+            @each $count, $value in $doctor-list-sizes-10 {
+                @include doctor-list-width($count, $value);
+            }
+        }
+
+        &-count-12 {
+            @each $count, $value in $doctor-list-sizes-12 {
+                @include doctor-list-width($count, $value);
+            }
         }
         .card {
             width: $doctor-card-width;
