@@ -72,6 +72,9 @@ function uamswp_childtheme_setup() {
 	// Gutenberg Support for block editor
 	add_theme_support( 'align-wide' );
 
+	//* Add Excerpt support to Pages in Genesis
+	add_post_type_support( 'page', 'excerpt' ); 
+
 	// Remove unneeded widget areas
 	unregister_sidebar( 'header-right' );
 
