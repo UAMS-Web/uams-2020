@@ -243,6 +243,15 @@ body.blog {
                     float: right;
                 }
             }
+
+            .wp-block-image + .wp-block-image {
+                .alignleft {
+                    clear: left;
+                }
+                .alignright {
+                    clear: right;
+                }
+            }
         }
         
         .entry-footer {
