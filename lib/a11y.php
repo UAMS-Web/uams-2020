@@ -47,5 +47,10 @@ function filter_oembed_dataparse( $return, $data, $url ) {
     } else {
         $return = preg_replace( '/^\<iframe/i', '<iframe title="' . $title . '"', $return );
     }
+
+    $return = str_replace( 'frameborder="0"', '', $return ); // Quick strip of frameborder
+    $return = preg_replace( ￼'(width\s*=\s*["\'](.*?)["\'])' ￼, '', $return ); // Standard height
+    $return = preg_replace( ￼'(height\s*=\s*["\'](.*?)["\'])', '', $return ); // Standard width
+    
     return $return;
 }
