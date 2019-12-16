@@ -49,9 +49,8 @@ function filter_oembed_dataparse( $return, $data, $url ) {
     }
 
     $return = str_replace( 'frameborder="0"', '', $return ); // Quick strip of frameborder
-    $return = preg_replace( ￼'(width\s*=\s*["\'](.*?)["\'])' ￼, '', $return ); // Standard height
-    $return = preg_replace( ￼'(height\s*=\s*["\'](.*?)["\'])', '', $return ); // Standard width
-    
+    $return = preg_replace( '/(width|height)="\d*"\s/', '', $return ); // Remove width="" height=""
+
     return $return;
 }
 
