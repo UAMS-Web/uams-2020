@@ -169,18 +169,25 @@
 
             .item-container {
                 display: flex;
-                flex: 0 0 100%;
+                flex-grow: 0;
+                flex-shrink: 0;
+                flex-basis: 100%;
                 max-width: 100%;
                 padding: ($grid-gutter-width / 2);
 
                 @media (min-width: 1784px) {
-                    flex: 0 0 50%;
+                    flex-grow: 0;
+                    flex-shrink: 0;
+                    flex-basis: 50%;
+                    -ms-flex-preferred-size: calc(50% - #{$grid-gutter-width});
                     //max-width: 50%;
                     max-width: 1400px;
                 }
             }
             .item {
-                flex: 1 0 0px;
+                flex-grow: 1;
+                flex-shrink: 0;
+                flex-basis: 0px;
                 background-color: $card-bg;
                 background-clip: border-box;
                 border: $card-border-width solid $card-border-color;
@@ -191,6 +198,7 @@
 
                 .row {
                     margin: -$card-spacer-x;
+                    flex-grow: 1;
                     
                     @media
                     (min-width: $breakpoint-xs) and (max-width: ($breakpoint-sm - 1)),
@@ -205,7 +213,9 @@
                         @media
                         (max-width: ($breakpoint-xs - 1)),
                         (min-width: $breakpoint-sm) and (max-width: (930px - 1)) { // Fixed image height, auto width
-                            flex: 0 0 100%;
+                            flex-grow: 0;
+                            flex-shrink: 0;
+                            flex-basis: 100%;
                             max-width: 100%;
                         }
                     }
@@ -271,7 +281,9 @@
                             @media
                             (min-width: 1396px) and (max-width: (1784px - 1)),
                             (min-width: (1784px + 466)) {
-                                flex: 1 0 0px;
+                                flex-grow: 1;
+                                flex-shrink: 0;
+                                flex-basis: 0px;
                                 flex-wrap: nowrap;
                             }
                         }

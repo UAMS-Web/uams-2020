@@ -3,29 +3,53 @@
     > .row {
         justify-content: center;
     }
-    .text {
+    .text, .image {
         @include media-breakpoint-up(md) {
-            max-width: 44rem;
-            flex: 1 1 0px;
+            //max-width: 44rem;
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 0px;
         }
-
         .content-width {
             @include media-breakpoint-up(md) {
                 width: auto;
+                max-width: $content-width;
+            }
+        }
+    }
+    .text {
+        @extend .p-8;
+        @extend .p-sm-10;
+        @extend .px-md-8;
+        @extend .py-md-0;
+        order: 2;
+
+        .content-width {
+            @include media-breakpoint-up(md) {
+                margin-left: 0;
             }
         }
     }
     .image {
+        @extend .px-0;
+        @extend .px-md-8;
+        order: 1;
         text-align: center;
 
         @include media-breakpoint-up(md) {
-            flex: 0 0 0px;
             text-align: left;
         }
-        img {
+
+        .content-width {
+            width: auto;
+            max-width: 100%;
+
             @include media-breakpoint-up(md) {
-                max-width: none;
+                margin-right: 0;
             }
+        }
+        img {
+            width: 100%;
         }
     }
 
