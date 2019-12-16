@@ -38,7 +38,7 @@ function uamswp_do_search_loop() {
                 'post_type' => $post_type,
                 'order' => 'ASC',
                 'orderby' => 'title',
-                'posts_per_page' => 20,
+                'posts_per_page' => 6,
                 'paged' => $paged,
             ));
 
@@ -47,10 +47,12 @@ function uamswp_do_search_loop() {
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
+            echo '<div class="col-12">';
+            echo '<h2 class="module-title">Doctors</h2>';
 
             if ( have_posts() ) :
 
-                echo '<div class="inner-container content-width text-center"><h2 class="post-type-heading">Doctors</h2><div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
+                echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
 
             while ( have_posts() ) : the_post();
 
@@ -62,10 +64,11 @@ function uamswp_do_search_loop() {
             genesis_posts_nav();
 
             else :
-                echo "<p>Sorry, no content matched your criteria.</p>";
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
             endif;
 
 
+            echo '</div>'; // .col-12
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
@@ -89,10 +92,12 @@ function uamswp_do_search_loop() {
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
+            echo '<div class="col-12">';
+            echo '<h2 class="module-title">Locations</h2>';
 
             if ( have_posts() ) :
 
-                echo '<div class="inner-container content-width text-center"><h2 class="post-type-heading">Locations</h2><div class="card-list-container location-card-list-container"><div class="card-list facetwp-template">';
+                echo '<div class="card-list-container location-card-list-container"><div class="card-list facetwp-template">';
 
             while ( have_posts() ) : the_post();
 
@@ -104,10 +109,10 @@ function uamswp_do_search_loop() {
             // More results link.
             genesis_posts_nav();
             else :
-                echo "<p>Sorry, no content matched your criteria.</p>";
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
             endif;
 
-
+            echo '</div>'; // .col-12
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
@@ -131,10 +136,12 @@ function uamswp_do_search_loop() {
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
+            echo '<div class="col-12">';
+            echo '<h2 class="module-title">Services</h2>';
 
             if ( have_posts() ) :
 
-                echo '<div class="inner-container content-width text-center"><h2 class="post-type-heading">Services</h2><div class="card-list-container"><div class="card-list card-list-services facetwp-template">';
+                echo '<div class="card-list-container"><div class="card-list card-list-services facetwp-template">';
 
             while ( have_posts() ) : the_post();
 
@@ -146,10 +153,11 @@ function uamswp_do_search_loop() {
             genesis_posts_nav();
 
             else :
-                echo "<p>Sorry, no content matched your criteria.</p>";
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
             endif;
 
 
+            echo '</div>'; // .col-12
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
@@ -171,17 +179,24 @@ function uamswp_do_search_loop() {
                 $post_type_text = $post_type_text . "s";
             }
 
-            echo '<div class="search-content">';
-                echo '<div class="post-type ' . $post_type . '"><h1 class="post-type-heading">' . $post_type_text . '</h1>';
+            echo '<div class="uams-module bg-auto">';
+            echo '<div class="container-fluid">';
+            echo '<div class="search-content row">';
+            echo '<div class="col-12">';
+                echo '<h2 class="module-title">' . $post_type_text . '</h2>';
+                echo '<div class="module-body">';
                     // Loop actions.
                     uamswp_loop_layout();
 
                     // custom genesis loop with the above query parameters and hooks.
                     // genesis_custom_loop( $args );
                     uamswp_custom_loop( $args );
-
-                echo '</div>';
-            echo '</div>';
+                
+                echo '</div>'; // module-body
+            echo '</div>'; // col-12
+            echo '</div>'; // search-content
+            echo '</div>'; // container-fluid
+            echo '</div>'; // uams-module
         }
     } else {
         // create an array variable with specific post types in your desired order.
@@ -229,7 +244,7 @@ function uamswp_do_search_loop() {
                     endwhile;
                     if ($post_count > 5) {
                         // More results link.
-                        printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type );
+                        printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type );
                     }
                 } else {
                     echo "<p>Sorry, no content matched your criteria.</p>";
@@ -243,6 +258,65 @@ function uamswp_do_search_loop() {
         echo '</div>'; // .container-fluid
         echo '</div>'; // .uams-module
 
+        if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
+        
+        // Begin Physicians
+
+            $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
+
+
+            /* Physicians */
+            $post_type = array('physicians');
+
+            echo '<div class="uams-module bg-auto">';
+            echo '<div class="container-fluid">';
+            echo '<div class="search-content row">';
+            echo '<div class="col-12">';
+
+            // accepts any wp_query args.
+            $args = (array(
+                's' => $s,
+                'post_type' => $post_type,
+                'posts_per_page' => 6,
+                'order' => 'ASC',
+                'orderby' => 'title',
+            ));
+
+            uamswp_custom_loop_base($args);
+
+            echo '<h2 class="module-title">Doctors</h2>';
+
+            if ( have_posts() ) {
+
+                echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
+
+                while ( have_posts() ) : the_post();
+
+                    global $wp_query;
+
+                    $id =get_the_ID();
+                    include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/physician-card.php' );
+
+                endwhile;
+                echo '</div></div>';
+                // More results link.
+                if ($wp_query->found_posts > 6) {
+                    printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
+                }
+
+            } else {
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
+            }
+
+            echo '</div>'; // .col-12
+            echo '</div>'; // .search-content
+            echo '</div>'; // .container-fluid
+            echo '</div>'; // .uams-module
+
+            wp_reset_query();
+        // End Physicians
+
+        // Begin Conditions & Treatments
         // If possible, nest within a condition so that it only displays if there are taxonomy results.
         echo '<div class="uams-module bg-auto">';
         echo '<div class="container-fluid">';
@@ -250,7 +324,6 @@ function uamswp_do_search_loop() {
 
             $taxonomies = array();
 
-            if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
                 array_push($taxonomies, 'condition', 'treatment_procedure' );
 
                 foreach ( $taxonomies as $taxonomy ) {
@@ -300,7 +373,7 @@ function uamswp_do_search_loop() {
                             $post_link = get_the_permalink();
                             $tax = get_term_by("name", $post_title, $taxonomy);
                             $post_id = $tax->term_id;
-                            $title = '<h3 class="h4" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
+                            $title = '<h3 class="h4" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
                             $content = get_field($taxonomy.'_content', $taxonomy.'_'.$post_id);
 
                             echo $title;
@@ -310,7 +383,7 @@ function uamswp_do_search_loop() {
                         endwhile;
                         if ($post_count > 5) {
                             // More results link.
-                            printf( '<a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $taxonomy );
+                            printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $taxonomy );
                         } else {
                             echo '</div>';
                         }
@@ -328,74 +401,20 @@ function uamswp_do_search_loop() {
                     // }
                     wp_reset_query();
                 }
-            }
 
         echo '</div>'; // .search-content
         echo '</div>'; // .container-fluid
         echo '</div>'; // .uams-module
 
-        if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
-
-            $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
-
-
-            /* Physicians */
-            $post_type = array('physicians');
-
-            echo '<div class="uams-module bg-auto">';
-            echo '<div class="container-fluid">';
-            echo '<div class="search-content row">';
-
-            // accepts any wp_query args.
-            $args = (array(
-                's' => $s,
-                'post_type' => $post_type,
-                'posts_per_page' => 4,
-                'order' => 'ASC',
-                'orderby' => 'title',
-            ));
-
-            uamswp_custom_loop_base($args);
-
-            echo '<div class="inner-container content-width text-center"><h2 class="post-type-heading">Doctors</h2>';
-
-            if ( have_posts() ) {
-
-                echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
-
-                while ( have_posts() ) : the_post();
-
-                    global $wp_query;
-
-                    $id =get_the_ID();
-                    include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/physician-card.php' );
-
-                endwhile;
-                echo '</div></div>';
-                // More results link.
-                if ($wp_query->found_posts > 4) {
-                    printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
-                }
-
-            } else {
-                echo "<p>Sorry, no content matched your criteria.</p>";
-            }
-
-            echo '</div>';
-
-
-            echo '</div>'; // .search-content
-            echo '</div>'; // .container-fluid
-            echo '</div>'; // .uams-module
-
-            /* End Physicians */
-            wp_reset_query();
-            /* Locations */
+        // End Conditions and Treatments
+        
+        // Begin Locations
             $post_type = array('locations');
 
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
+            echo '<div class="col-12">';
 
             // accepts any wp_query args.
             $args = (array(
@@ -408,7 +427,7 @@ function uamswp_do_search_loop() {
 
             uamswp_custom_loop_base($args);
 
-            echo '<div class="inner-container content-width text-center"><h2 class="post-type-heading">Locations</h2>';
+            echo '<h2 class="module-title">Locations</h2>';
 
             if ( have_posts() ) {
                 echo '<div class="card-list-container location-card-list-container"><div class="card-list facetwp-template">';
@@ -425,28 +444,27 @@ function uamswp_do_search_loop() {
                 echo '</div></div>';
                 // More results link.
                 if ($wp_query->found_posts > 4) {
-                    printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
+                    printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
                 }
 
             } else {
-                echo '<p>' . _e( 'Sorry, no locations matched your criteria.' ) . '</p>';
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
             }
 
-            echo '</div>';
-
-
+            echo '</div>'; // .col-12
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
-            /* End Locations */
             wp_reset_query();
-            /* Services */
+        // End Locations
 
+        // Begin Areas of Expertise
             $post_type = array('expertise');
 
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
+            echo '<div class="col-12">';
 
             // accepts any wp_query args.
             $args = (array(
@@ -459,7 +477,7 @@ function uamswp_do_search_loop() {
 
             uamswp_custom_loop_base($args);
 
-            echo '<div class="inner-container content-width text-center"><h2 class="post-type-heading">Areas of Expertise</h2>';
+            echo '<h2 class="module-title">Areas of Expertise</h2>';
 
             if ( have_posts() ) {
                 echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
@@ -476,21 +494,19 @@ function uamswp_do_search_loop() {
                 echo '</div></div>';
                 // More results link.
                 if ($wp_query->found_posts > 4) {
-                    printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
+                    printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
                 }
 
             } else {
-                echo '<p>' . _e( 'Sorry, no services matched your criteria.' ) . '</p>';
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
             }
 
-            echo '</div>';
-
+            echo '</div>'; // .col-12
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
-
-            /* End Services */
             wp_reset_query();
+        // End Areas of Expertise
         }
         ?>
         <div class="uams-module bg-auto">
