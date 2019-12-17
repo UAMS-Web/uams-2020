@@ -593,3 +593,5 @@ function uamswp_gtm_2( ) {
 	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
 <?php }
+
+add_filter( 'big_image_size_threshold', '__return_false' );
