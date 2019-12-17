@@ -59,7 +59,9 @@
                 margin: 0 -0.5px;
                 display: flex;
                 justify-content: center;
-                flex: 0 1 auto;
+                flex-grow: 0;
+                flex-shrink: 1;
+                flex-basis: auto;
                 width: auto;
             }
 
@@ -110,7 +112,9 @@
                 margin: 0 -0.5px;
                 display: flex;
                 justify-content: center;
-                flex: 0 1 auto;
+                flex-grow: 0;
+                flex-shrink: 1;
+                flex-basis: auto;
                 width: auto;
             }
 

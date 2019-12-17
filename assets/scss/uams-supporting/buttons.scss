@@ -7,8 +7,23 @@
     flex-flow: row wrap;
     margin: (-$spacer-min / 2);
 
+    .inner-container .btn,
     .btn {
         margin: ($spacer-min / 2);
+    }
+
+    @at-root .card #{&} {
+        padding: 0 $card-spacer-x $card-spacer-x;
+        margin: auto 0 0;
+        justify-content: center;
+
+        .inner-container {
+            margin: (-$spacer-min / 2);
+
+            .btn {
+                margin: ($spacer-min / 2);
+            }
+        }
     }
 }
 

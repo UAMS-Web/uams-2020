@@ -133,13 +133,17 @@ section.archive-description .entry-content {
         @include media-breakpoint-up(sm) {
         }
 
+        > picture {
+            flex-shrink: 0; // added so the picture element doesn't take up space in IE11
+        }
+
         .card-title {
             @extend .h5;
         }
         .card-body {
-            display: flex;
-            flex-flow: column nowrap;
-            align-items: center;
+            > :last-child {
+                margin-bottom: 0;
+            }
         }
         .btn {
             margin-top: auto;
