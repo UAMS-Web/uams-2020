@@ -224,11 +224,15 @@ function uamswp_add_aria( $attributes ) {
 
 add_filter ( 'genesis_home_crumb', 'uams_breadcrumb_home_icon' ); 
 function uams_breadcrumb_home_icon( $crumb ) {
-	if (is_front_page()) {
-		$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item">'.uams_site_title().'';
-	} else {
-	 	$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
-	}
+	// if ( !('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'])) {
+		if (('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'])) {
+			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li>';
+		} elseif ( is_front_page() ) { 
+			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item">'.uams_site_title().'';
+		} else {
+			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
+		}
+	// }
      return $crumb;
 }
 
@@ -340,7 +344,7 @@ if ( !function_exists('uams_get_home_link')):
 		if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site'])) {
 			$homelink = 'http://www.uams.edu';
 		} elseif ('uamshealth' == uams_get_site_info()['site']) {
-			$homelink = 'https://www.uamshealth.com';
+			$homelink = 'https://uamshealth.com';
 		} elseif ('inside' == uams_get_site_info()['site']) {
 			$homelink = 'http://inside.uams.edu';
 		}
