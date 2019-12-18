@@ -288,7 +288,7 @@ function uamswp_do_search_loop() {
 
             if ( have_posts() ) {
 
-                echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
+                echo '<div class="card-list-container"><div class="card-list card-list-doctors card-list-doctors-count-6 facetwp-template">';
 
                 while ( have_posts() ) : the_post();
 
