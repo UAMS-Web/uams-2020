@@ -29,6 +29,16 @@
                 margin-left: 0;
             }
         }
+
+        &:first-child:last-child {
+            order: 0;
+            
+            .content-width {
+                @include media-breakpoint-up(md) {
+                    margin-left: auto;
+                }
+            }
+        }
     }
     .image {
         @extend .px-0;
