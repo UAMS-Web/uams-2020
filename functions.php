@@ -608,3 +608,61 @@ function uamswp_gtm_2( ) {
 <?php }
 
 add_filter( 'big_image_size_threshold', '__return_false' );
+
+function uamswp_list_child_posts( $posttype, $posttitle ) {
+	if (!isset($posttype)) {
+		$posttype = "page";
+	}
+	if (!isset($posttitle)) {
+		$posttitle = "Pages";
+	}
+	$page_id = get_the_ID();
+	$args =  array(
+		"post_type" => $posttype,
+		"post_status" => "publish",
+		"post_parent" => $page_id,
+		'meta_query' => array(
+			"relation" => "OR",
+			array(
+				"key" => "page_hide_from_menu",
+				"value" => "1",
+				"compare" => "!=",
+			),
+			array(
+				"key" => "page_hide_from_menu",
+				"compare" => "NOT EXISTS",
+			)
+		),
+	);
+	$pages = New WP_Query ( $args );
+	if ( $pages->have_posts() ) { ?>
+		<section class="uams-module link-list bg-auto" aria-label="Sub Page List">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12 col-md-6 heading">
+						<div class="text-container">
+							<h2 class="module-title"><span class="title">Sub <?php echo $posttitle; ?></span></h2>
+						</div>
+            		</div>
+            		<div class="col-12 col-md-6 list">
+						<ul>
+						<?php
+						while ( $pages->have_posts() ) : $pages->the_post();
+							echo '<li><a href="'.get_permalink().'">';
+							echo get_the_title();
+							echo '</a></li>';
+						endwhile;
+						?>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+	<?php
+	}
+}
+function uamswp_list_child_pages() {
+	return uamswp_list_child_posts( "page", "Pages" );
+}
+
+add_action('genesis_after_entry', 'uamswp_list_child_pages');
