@@ -48,7 +48,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-            echo '<h2 class="module-title">Doctors</h2>';
+            echo '<h2 class="module-title">Physicians</h2>';
 
             if ( have_posts() ) :
 
@@ -284,11 +284,11 @@ function uamswp_do_search_loop() {
 
             uamswp_custom_loop_base($args);
 
-            echo '<h2 class="module-title">Doctors</h2>';
+            echo '<h2 class="module-title">Physicians</h2>';
 
             if ( have_posts() ) {
 
-                echo '<div class="card-list-container"><div class="card-list card-list-doctors facetwp-template">';
+                echo '<div class="card-list-container"><div class="card-list card-list-doctors card-list-doctors-count-6 facetwp-template">';
 
                 while ( have_posts() ) : the_post();
 
