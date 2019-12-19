@@ -222,18 +222,27 @@ function uamswp_add_aria( $attributes ) {
  return $attributes;
 }
 
-add_filter ( 'genesis_home_crumb', 'uams_breadcrumb_home_icon' ); 
+add_filter ( 'genesis_home_crumb', 'uams_breadcrumb_home_icon' );
 function uams_breadcrumb_home_icon( $crumb ) {
-	// if ( !('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'])) {
-		if (('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'])) {
-			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li>';
-		} elseif ( is_front_page() ) { 
-			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item">'.uams_site_title().'';
+		if (('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite']) || ('uamshealth' == uams_get_site_info()['site'] && is_front_page() ) ) {
+			$crumb = '<a href="'.uams_get_home_link().'" title="UAMS Health"><span class="fas fa-home"></span></a>';
+		} elseif ( ('uams' == uams_get_site_info()['site'] && is_front_page() ) ) {
+			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a>';
+		} elseif ( ('inside' == uams_get_site_info()['site'] && is_front_page() ) ) {
+			$crumb = '<a href="'.uams_get_home_link().'" title="Inside UAMS"><span class="fas fa-home"></span></a>';
 		} else {
 			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
 		}
-	// }
      return $crumb;
+}
+// Add Site Title as the Breadcrumb Title for front page
+add_filter ( 'genesis_page_crumb', 'uams_breadcrumb_home' );
+add_filter ( 'genesis_single_crumb', 'uams_breadcrumb_home' );
+function uams_breadcrumb_home( $crumb ) {
+	if ( ! is_front_page() )
+		return $crumb;
+
+	return uams_site_title();
 }
 
 /** Returns site & subsite info **/
