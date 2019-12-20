@@ -611,10 +611,10 @@ add_filter( 'big_image_size_threshold', '__return_false' );
 
 function uamswp_list_child_posts( $posttype, $posttitle ) {
 	if (!isset($posttype)) {
-		$posttype = "page";
+		$posttype = "page"; // What post_type
 	}
 	if (!isset($posttitle)) {
-		$posttitle = "Pages";
+		$posttitle = "Related Pages"; // Title for the section
 	}
 	$page_id = get_the_ID();
 	$args =  array(
@@ -641,7 +641,7 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 				<div class="row">
 					<div class="col-12 col-md-6 heading">
 						<div class="text-container">
-							<h2 class="module-title"><span class="title">Sub <?php echo $posttitle; ?></span></h2>
+							<h2 class="module-title"><span class="title"><?php echo $posttitle; ?></span></h2>
 						</div>
             		</div>
             		<div class="col-12 col-md-6 list">
@@ -661,8 +661,3 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 	<?php
 	}
 }
-function uamswp_list_child_pages() {
-	return uamswp_list_child_posts( "page", "Pages" );
-}
-
-add_action('genesis_after_entry', 'uamswp_list_child_pages');
