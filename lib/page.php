@@ -307,3 +307,14 @@ function uamswp_post_info_filter($post_info) {
 // Relocate post info
 remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
 add_action( 'genesis_entry_footer', 'genesis_post_info', 9 );
+
+function uamswp_list_child_pages() {
+	$hidechildmenu = false;
+    if ((get_post_meta( get_the_id(), 'page_hide_child_menu', true) ) || ( 0 === count( get_pages('child_of=' . get_the_id())) ) ) { // If it's suppressed or none available, set to false
+        $hidechildmenu = true;
+    }
+    if (!$hidechildmenu) {
+        return uamswp_list_child_posts( "page", "Subpages" );
+    }
+}
+add_action('genesis_after_entry', 'uamswp_list_child_pages');

@@ -608,3 +608,56 @@ function uamswp_gtm_2( ) {
 <?php }
 
 add_filter( 'big_image_size_threshold', '__return_false' );
+
+function uamswp_list_child_posts( $posttype, $posttitle ) {
+	if (!isset($posttype)) {
+		$posttype = "page"; // What post_type
+	}
+	if (!isset($posttitle)) {
+		$posttitle = "Subpages"; // Title for the section
+	}
+	$page_id = get_the_ID();
+	$args =  array(
+		"post_type" => $posttype,
+		"post_status" => "publish",
+		"post_parent" => $page_id,
+		'meta_query' => array(
+			"relation" => "OR",
+			array(
+				"key" => "page_hide_from_menu",
+				"value" => "1",
+				"compare" => "!=",
+			),
+			array(
+				"key" => "page_hide_from_menu",
+				"compare" => "NOT EXISTS",
+			)
+		),
+	);
+	$pages = New WP_Query ( $args );
+	if ( $pages->have_posts() ) { ?>
+		<section class="uams-module link-list link-list-layout-split bg-auto" aria-label="List of subpages under the current page">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12 col-md-6 heading">
+						<div class="text-container">
+							<h2 class="module-title"><span class="title"><?php echo $posttitle; ?></span></h2>
+						</div>
+            		</div>
+            		<div class="col-12 col-md-6 list">
+						<ul>
+						<?php
+						while ( $pages->have_posts() ) : $pages->the_post();
+							echo '<li class="item"><div class="text-container"><span class="h5"><a href="'.get_permalink().'">';
+							echo get_the_title();
+							echo '</a></span></div></li>';
+						endwhile;
+						wp_reset_postdata(); ?>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+	<?php
+	}
+}
