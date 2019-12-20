@@ -1199,6 +1199,25 @@ acf_add_local_field_group(array(
 			'ui_on_text' => '',
 			'ui_off_text' => '',
 		),
+		array(
+			'key' => 'field_page_hide_child_menu',
+			'label' => 'Hide Sub-page menu',
+			'name' => 'page_hide_child_menu',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => 'hide-label',
+				'id' => '',
+			),
+			'message' => 'Hide related page menu (children)',
+			'default_value' => 0,
+			'ui' => 0,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
 	),
 	'location' => array(
 		array(
