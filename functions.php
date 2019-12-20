@@ -614,7 +614,7 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 		$posttype = "page"; // What post_type
 	}
 	if (!isset($posttitle)) {
-		$posttitle = "Related Pages"; // Title for the section
+		$posttitle = "Subpages"; // Title for the section
 	}
 	$page_id = get_the_ID();
 	$args =  array(
