@@ -314,7 +314,7 @@ function uamswp_list_child_pages() {
         $hidechildmenu = true;
     }
     if (!$hidechildmenu) {
-        return uamswp_list_child_posts( "page", "Related Pages" );
+        return uamswp_list_child_posts( "page", "Subpages" );
     }
 }
 add_action('genesis_after_entry', 'uamswp_list_child_pages');
