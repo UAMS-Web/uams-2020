@@ -652,7 +652,7 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 							echo get_the_title();
 							echo '</a></li>';
 						endwhile;
-						?>
+						wp_reset_postdata(); ?>
 						</ul>
 					</div>
 				</div>
