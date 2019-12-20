@@ -636,7 +636,7 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 	);
 	$pages = New WP_Query ( $args );
 	if ( $pages->have_posts() ) { ?>
-		<section class="uams-module link-list bg-auto" aria-label="Sub Page List">
+		<section class="uams-module link-list link-list-layout-split bg-auto" aria-label="Sub Page List">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12 col-md-6 heading">
