@@ -648,9 +648,9 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 						<ul>
 						<?php
 						while ( $pages->have_posts() ) : $pages->the_post();
-							echo '<li><a href="'.get_permalink().'">';
+							echo '<li class="item"><div class="text-container"><span class="h5"><a href="'.get_permalink().'">';
 							echo get_the_title();
-							echo '</a></li>';
+							echo '</a></span></div></li>';
 						endwhile;
 						wp_reset_postdata(); ?>
 						</ul>
