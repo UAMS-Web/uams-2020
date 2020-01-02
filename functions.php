@@ -267,28 +267,28 @@ if ( !function_exists('uams_get_site_info')):
 		$healthorganization = get_field( 'uamswp_uamshealth_subsite', 'option' ); // health 
 		$insideorganization = get_field( 'uamswp_inside_subsite', 'option' ); // inside 
 		if ('health' == $themestyle) {
-			$site = "uamshealth";
+			$site = 'uamshealth';
 			if ('' != $healthorganization) {
 				$subsite = $healthorganization;
 			} else {
-				$subsite = "uams";
+				$subsite = 'uams';
 			}
 		} elseif ('inside' == $themestyle) {
-			$site = "inside";
+			$site = 'inside';
 			if ('' != $insideorganization) {
 				$subsite = $insideorganization;
 			} else {
-				$subsite = "uams";
+				$subsite = 'uams';
 			}
 		} elseif ('institute' == $themestyle) {
-			$site = "institute";
+			$site = 'institute';
 			if ('' != $themeinstitute) {
 				$subsite = $themeinstitute;
 			} else {
-				$subsite = "uams";
+				$subsite = 'uams';
 			}
 		} elseif ('uams' == $themestyle) {
-			$site = "uams";
+			$site = 'uams';
 			if ('' != $themelocation){
 				if ('uams' != $themelocation) {
 					$subsite = $themelocation;
@@ -296,11 +296,11 @@ if ( !function_exists('uams_get_site_info')):
 					if ('' != $uamsorganization) {
 						$subsite = $uamsorganization;
 					} else {
-						$subsite = "uams";
+						$subsite = 'uams';
 					}
 				}
 			} else {
-				$subsite = "uams";
+				$subsite = 'uams';
 			}
 		}
 		$siteinfo = array('site' => $site, 'subsite' => $subsite);
@@ -385,23 +385,23 @@ function format_phone_us($phone) {
 	// note: making sure we have something
 	if(!isset($phone{3})) { return ''; }
 	// note: strip out everything but numbers 
-	$phone = preg_replace("/[^0-9]/", "", $phone);
+	$phone = preg_replace('/[^0-9]/', '', $phone);
 	$length = strlen($phone);
 	switch($length) {
 		case 7:
-			return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
+			return preg_replace('/([0-9]{3})([0-9]{4})/', '$1-$2', $phone);
 			break;
 		case 10:
-			return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $phone);
+			return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})/', '($1) $2-$3', $phone);
 			break;
 		case 11:
-			return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "($2) $3-$4", $phone); // Removed country code
+			return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/', '($2) $3-$4', $phone); // Removed country code
 			break;
 		case 15:
-			return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/", "($1) $2-$3 Ext. $4", $phone); // Removed country code
+			return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '($1) $2-$3 Ext. $4', $phone); // Removed country code
 			break;
 		case 16:
-			return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/", "($2) $3-$4 Ext. $5", $phone); // Removed country code
+			return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '($2) $3-$4 Ext. $5', $phone); // Removed country code
 			break;
 		default:
 			return $phone;
@@ -413,23 +413,23 @@ function format_phone_dash($phone) {
 	// note: making sure we have something
 	if(!isset($phone{3})) { return ''; }
 	// note: strip out everything but numbers 
-	$phone = preg_replace("/[^0-9]/", "", $phone);
+	$phone = preg_replace('/[^0-9]/', '', $phone);
 	$length = strlen($phone);
 	switch($length) {
 		case 7:
-			return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $phone);
+			return preg_replace('/([0-9]{3})([0-9]{4})/', '$1-$2', $phone);
 			break;
 		case 10:
-			return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "$1-$2-$3", $phone);
+			return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})/', '$1-$2-$3', $phone);
 			break;
 		case 11:
-			return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "$2-$3-$4", $phone); // Removed country code
+			return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/', '$2-$3-$4', $phone); // Removed country code
 			break;
 		case 15:
-			return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/", "$1-$2-$3,$4", $phone); // Removed country code
+			return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '$1-$2-$3,$4', $phone); // Removed country code
 			break; 
 		case 16:
-			return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/", "$2-$3-$4,$5", $phone); // Removed country code
+			return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '$2-$3-$4,$5', $phone); // Removed country code
 			break;
 		default:
 			return $phone;
@@ -440,10 +440,10 @@ function format_phone_dash($phone) {
 if (!function_exists('apStyleDate')) {
 	function apStyleDate($date){
 
-		$date = strftime("%l:%M %P", strtotime($date));
+		$date = strftime('%l:%M %P', strtotime($date));
 	
-		$date = str_replace(":00", "", $date);
-		$date = str_replace("m", ".m.", $date);
+		$date = str_replace(':00', '', $date);
+		$date = str_replace('m', '.m.', $date);
 	
 		return $date;
 	
@@ -576,8 +576,8 @@ function rlv_search_all_blogs($query) {
 	foreach ($raw_blog_list as $blog) {
 		$blog_list[] = $blog->blog_id;
 	}
-	$blog_list = implode(",", $blog_list);
-	$query->set("searchblogs", $blog_list);
+	$blog_list = implode(',', $blog_list);
+	$query->set('searchblogs', $blog_list);
 	return $query;
 }
 
@@ -611,26 +611,23 @@ add_filter( 'big_image_size_threshold', '__return_false' );
 
 function uamswp_list_child_posts( $posttype, $posttitle ) {
 	if (!isset($posttype)) {
-		$posttype = "page"; // What post_type
+		$posttype = 'page'; // What post_type
 	}
 	if (!isset($posttitle)) {
-		$posttitle = "Subpages"; // Title for the section
+		$posttitle = 'Subpages'; // Title for the section
 	}
 	$page_id = get_the_ID();
 	$args =  array(
-		"post_type" => $posttype,
-		"post_status" => "publish",
-		"post_parent" => $page_id,
+		'post_type' => $posttype,
+		'post_status' => 'publish',
+		'post_parent' => $page_id,
+		'order' => 'ASC',
+		'orderby' => 'title',
 		'meta_query' => array(
-			"relation" => "OR",
 			array(
-				"key" => "page_hide_from_menu",
-				"value" => "1",
-				"compare" => "!=",
-			),
-			array(
-				"key" => "page_hide_from_menu",
-				"compare" => "NOT EXISTS",
+				'key' => 'page_hide_from_menu',
+				'value' => '1',
+				'compare' => '!=',
 			)
 		),
 	);
