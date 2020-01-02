@@ -47,7 +47,7 @@ add_filter( 'the_password_form', function() {
 
     $label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
 
-    $o = '<p>'.__( "To view this protected post, enter the password below:" ).'</p><form class="form-inline" action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post"><label for="' . $label . '" class="sr-only">' . __( "Password:" ) . ' </label><input class="form-control mr-2"name="post_password" id="' . $label . '" type="password" size="20" maxlength="20" /><input type="submit" class="btn btn-primary" name="Submit" value="' . esc_attr__( "Submit" ) . '" />
+    $o = '<p>'.__( "To view this protected post, enter the password below:" ).'</p><form class="form-inline" action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" method="post"><label for="' . $label . '" class="sr-only">' . __( "Password:" ) . ' </label><input class="form-control mr-2"name="post_password" id="' . $label . '" type="password" size="20" maxlength="20" /><input type="submit" class="btn btn-primary" name="Submit" value="' . esc_attr__( 'Submit' ) . '" />
     </form>
     ';
     return $o;
@@ -72,7 +72,7 @@ add_filter( 'genesis_register_widget_area_defaults', function( $defaults ) {
                 'echo'    => false,
             ) ),
             'after_widget'  => genesis_markup( array(
-                'close'   => '</section>' . "\n",
+                'close'   => '</section>' . '\n',
                 'context' => 'widget-wrap',
                 'echo'    => false
             ) ),
