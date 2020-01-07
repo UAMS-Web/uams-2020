@@ -206,7 +206,7 @@ $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
                 <div class="text-inner-container">
                     <h2 class="h3"><?php echo $heading; ?></h2>
                     <?php echo !empty($body) ? '<p>' . $body . '</p>' : ''; ?>
-                    <?php if ($link_list): ?>
+                    <?php if ($layout == 'link-list' && $link_list): ?>
                     <ul>
                         <?php foreach( $link_list as $link ) {
                             $list_text = $link['side_link_list_text'];
