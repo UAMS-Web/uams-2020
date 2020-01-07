@@ -48,7 +48,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-            echo '<h2 class="module-title">Physicians</h2>';
+            echo '<h2 class="module-title">Providers</h2>';
 
             if ( have_posts() ) :
 
@@ -260,12 +260,12 @@ function uamswp_do_search_loop() {
 
         if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
         
-        // Begin Physicians
+        // Begin Providers
 
             $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
 
 
-            /* Physicians */
+            /* Providers */
             $post_type = array('physicians');
 
             echo '<div class="uams-module bg-auto">';
@@ -284,7 +284,7 @@ function uamswp_do_search_loop() {
 
             uamswp_custom_loop_base($args);
 
-            echo '<h2 class="module-title">Physicians</h2>';
+            echo '<h2 class="module-title">Providers</h2>';
 
             if ( have_posts() ) {
 
@@ -314,7 +314,7 @@ function uamswp_do_search_loop() {
             echo '</div>'; // .uams-module
 
             wp_reset_query();
-        // End Physicians
+        // End Providers
 
         // Begin Conditions & Treatments
         // If possible, nest within a condition so that it only displays if there are taxonomy results.

@@ -340,7 +340,7 @@ function uamswp_footer_creds_text() {
     // Render this by default
     echo '<ul class="nav legal" role="navigation" aria-label="Footer Navigation">';
     echo '<li class="nav-item"><a class="nav-link" href="https://www.uamshealth.com/disclaimer/">Disclaimer</a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="https://www.uamshealth.com/termsofuse/">Terms of Use</a></li>';
+    echo '<li class="nav-item"><a class="nav-link" href="https://www.uamshealth.com/terms-of-use/">Terms of Use</a></li>';
     echo '<li class="nav-item"><a class="nav-link" href="https://www.uamshealth.com/privacy/">Privacy</a></li>';
     //echo '<li class="nav-item"><a class="nav-link" href="/sitemap">Site Map</a></li>';
     echo '</ul>';
