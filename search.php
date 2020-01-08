@@ -117,7 +117,7 @@ function uamswp_do_search_loop() {
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
 
-        } elseif('services' == $post_type) {
+        } elseif('expertise' == $post_type) {
 
             $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
