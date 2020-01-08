@@ -28,7 +28,7 @@ function uamswp_do_search_loop() {
 
     if ( $post_type ) {
         // $post_type = $_GET['post_type'];
-        if ('physicians' == $post_type) {
+        if ('provider' == $post_type) {
 
             $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
@@ -73,7 +73,7 @@ function uamswp_do_search_loop() {
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
 
-        } elseif('locations' == $post_type) {
+        } elseif('location' == $post_type) {
 
             $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
@@ -258,7 +258,7 @@ function uamswp_do_search_loop() {
         echo '</div>'; // .container-fluid
         echo '</div>'; // .uams-module
 
-        if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
+        if (class_exists('UAMSPhysicians')) { // Add doctors, location, and services
         
         // Begin Providers
 
@@ -266,7 +266,7 @@ function uamswp_do_search_loop() {
 
 
             /* Providers */
-            $post_type = array('physicians');
+            $post_type = array('provider');
 
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
@@ -324,7 +324,7 @@ function uamswp_do_search_loop() {
 
             $taxonomies = array();
 
-                array_push($taxonomies, 'condition', 'treatment_procedure' );
+                array_push($taxonomies, 'condition', 'treatment' );
 
                 foreach ( $taxonomies as $taxonomy ) {
                     // get the search term entered by user.
@@ -409,7 +409,7 @@ function uamswp_do_search_loop() {
         // End Conditions and Treatments
         
         // Begin Locations
-            $post_type = array('locations');
+            $post_type = array('location');
 
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
