@@ -111,9 +111,9 @@ function uamswp_footer_creds_text() {
         $footer_image_title = 'Inside UAMS';
         $footer_image_site = 'main';
     }
-    $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_'.$footer_image_site.'_horizontal_white.svg" alt="'. $footer_image_title .' Logo" />';
+    $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_'.$footer_image_site.'_horizontal_white.svg" alt="'. $footer_image_title .' Logo" itemprop="logo" />';
     
-    printf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
+    // printf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
     
     /**
      * End Image
@@ -134,6 +134,7 @@ function uamswp_footer_creds_text() {
     // Overrides, if available
     if( ! empty( $custom_addresses ) && ( ('institute' == $site) || ('nw-campus' == $subsite) || ( startsWith($subsite, 'regional-') ) ) ) {
         $address = '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
+        $address .= sprintf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
         $address .= '<span itemprop="name" class="sr-only">'.$footer_image_title .'</span>';
         foreach ( $custom_addresses as $custom_address ) {
             $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">';
@@ -147,6 +148,7 @@ function uamswp_footer_creds_text() {
         echo $address;
     } else { //write default
         $address = '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
+        $address .= sprintf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
         $address .= '<span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span>';
         $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">';
         $address .= '<strong class="sr-only">Mailing Address:</strong> ';
@@ -338,7 +340,7 @@ function uamswp_footer_creds_text() {
     // Render this by default
     echo '<ul class="nav legal" role="navigation" aria-label="Footer Navigation">';
     echo '<li class="nav-item"><a class="nav-link" href="https://www.uamshealth.com/disclaimer/">Disclaimer</a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="https://www.uamshealth.com/termsofuse/">Terms of Use</a></li>';
+    echo '<li class="nav-item"><a class="nav-link" href="https://www.uamshealth.com/terms-of-use/">Terms of Use</a></li>';
     echo '<li class="nav-item"><a class="nav-link" href="https://www.uamshealth.com/privacy/">Privacy</a></li>';
     //echo '<li class="nav-item"><a class="nav-link" href="/sitemap">Site Map</a></li>';
     echo '</ul>';
