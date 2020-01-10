@@ -225,13 +225,13 @@ function uamswp_add_aria( $attributes ) {
 add_filter ( 'genesis_home_crumb', 'uams_breadcrumb_home_icon' );
 function uams_breadcrumb_home_icon( $crumb ) {
 		if (('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite']) || ('uamshealth' == uams_get_site_info()['site'] && is_front_page() ) ) {
-			$crumb = '<a href="'.uams_get_home_link().'" title="UAMS Health"><span class="fas fa-home"></span></a>';
+			$crumb = '<a href="'.uams_get_home_link().'" title="UAMS Health"><span class="fas fa-home"></span><span class="sr-only">UAMS Health</span></a>';
 		} elseif ( ('uams' == uams_get_site_info()['site'] && is_front_page() ) ) {
-			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a>';
+			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span></a>';
 		} elseif ( ('inside' == uams_get_site_info()['site'] && is_front_page() ) ) {
-			$crumb = '<a href="'.uams_get_home_link().'" title="Inside UAMS"><span class="fas fa-home"></span></a>';
+			$crumb = '<a href="'.uams_get_home_link().'" title="Inside UAMS"><span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span></a>';
 		} else {
-			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
+			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
 		}
      return $crumb;
 }
