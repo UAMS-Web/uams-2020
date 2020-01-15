@@ -230,16 +230,20 @@ function uamswp_do_search_loop() {
                 if ( have_posts() ) {
 
                     while ( have_posts() ) : the_post();
-						global $wp_query;
+                        global $wp_query;
+                        
+                        switch_to_blog($wp_query->post->blog_id);
 
                         $post_count = $wp_query->found_posts;
-                        $post_title = get_the_title();
-                        $post_link = get_the_permalink();
+                        $post_title = get_the_title( $wp_query->post->blog_id );
+                        $post_link = get_the_permalink( $wp_query->post->blog_id );
                         $title = '<h3 class="h4"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
-                        $content = get_the_excerpt();
+                        $content = get_the_excerpt( $wp_query->post->blog_id );
                         echo $title;
                         // echo $taxonomy.'_'.$post_id;
                         echo $content ? '<p>'. $content . '</p>' : '';
+
+                        restore_current_blog();
 
                     endwhile;
                     if ($post_count > 5) {
