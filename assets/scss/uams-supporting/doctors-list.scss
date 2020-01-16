@@ -95,8 +95,12 @@
 
         fieldset {
 
-            legend + h3 {
-                margin-top: 0;
+            legend {
+                + h3,
+                + .filter-group,
+                + .fwp-filter {
+                    margin-top: 0;
+                }
             }
             .filter-group,
             .fwp-filter {
