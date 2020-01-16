@@ -37,6 +37,11 @@ if( $action_bar_rows ) {
     // $rows = get_field('action_bar_section');
     $row_count = count($action_bar_rows);
 } 
+if ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) {
+    $btn_color = 'primary';
+} else {
+    $btn_color = 'white';
+}
 
 ?>
 <section class="uams-module action-bar<?php echo $className; ?> count-<?php echo $row_count < 4 ? "3" : "4"; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
@@ -60,7 +65,7 @@ if( $action_bar_rows ) {
                         <h3 class="h5" data-moduletitle="<?php echo $heading; ?>"><?php echo $section_heading; ?></h3>
                         <p><?php echo $body; ?></p>
                     </div>
-                    <a class="btn" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target . '"' : ''; ?> data-moduletitle="<?php echo $heading; ?>" data-itemtitle="<?php echo $section_heading; ?>"><?php echo $button_text; ?></a>
+                    <a class="btn btn-<?php echo $btn_color; ?>" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target . '"' : ''; ?> data-moduletitle="<?php echo $heading; ?>" data-itemtitle="<?php echo $section_heading; ?>"><?php echo $button_text; ?></a>
                 </div>
             </div>
     <?php
