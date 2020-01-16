@@ -161,6 +161,7 @@
             button[onclick="FWP.reset()"] {
                 @extend .btn;
                 @extend .btn-outline-primary;
+                margin-left: 5px;
             }
         }
     }
