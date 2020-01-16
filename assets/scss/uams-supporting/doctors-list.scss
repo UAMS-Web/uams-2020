@@ -151,9 +151,11 @@
             }
 
             button#filter-apply {
+                @extend .btn;
                 @extend .btn-primary;
             }
             button[onclick="FWP.reset()"] {
+                @extend .btn;
                 @extend .btn-outline-primary;
             }
         }
