@@ -45,7 +45,7 @@
             }
         }
 
-        h3 {
+        h3, h4 {
             @extend .h6;
         }
 
@@ -90,6 +90,71 @@
 
             button {
                 margin: $spacer-min / 2;
+            }
+        }
+
+        fieldset {
+
+            legend + h3 {
+                margin-top: 0;
+            }
+            .filter-group,
+            .fwp-filter {
+                margin-bottom: ($spacer * 2);
+
+                .facetwp-facet {
+                    margin: 0;
+
+                    &.facetwp-type-alpha {
+                        margin: -($spacer-min / 2) 0;
+    
+                        .facetwp-alpha {
+                            margin: ($spacer-min / 2) $spacer-min ($spacer-min / 2) 0;
+                            text-decoration: none;
+    
+                            &.disabled {
+                                color: $btn-link-disabled-color;
+    
+                                &:hover, &:active {
+                                    color: $btn-link-disabled-color;
+                                }
+                            }
+                        }
+                    }
+
+                    &.facetwp-type-fselect {
+                        .fs-dropdown {
+                            .fs-options {
+                                .fs-option {
+                                    .fs-checkbox {
+                                        i {
+                                            top: 9px;
+                                            bottom: auto;
+                                        }
+                                    }
+                                    .fs-option-label {
+                                        white-space: normal;
+                                        line-height: $nav-line-height;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            p.asp-try {
+                font-weight: 1em;
+                line-height: $line-height-base;
+                margin-top: 0.5em;
+                margin-bottom: ($spacer * 2);
+            }
+
+            button#filter-apply {
+                @extend .btn-primary;
+            }
+            button[onclick="FWP.reset()"] {
+                @extend .btn-outline-primary;
             }
         }
     }
