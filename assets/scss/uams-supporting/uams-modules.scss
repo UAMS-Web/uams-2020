@@ -91,9 +91,9 @@
             }
         }
 
-        .btn:not([class*="btn-"]) {
-            @extend .btn-primary;
-        }
+        //.btn:not([class*="btn-"]) {
+            //@extend .btn-primary;
+        //}
 
         .more .btn:not([class*="btn-"]) {
             background-color: transparent;
@@ -173,9 +173,9 @@
             }
         }
 
-        .btn:not([class*="btn-"]) {
-            @extend .btn-white;
-        }
+        //.btn:not([class*="btn-"]) {
+            //@extend .btn-white;
+        //}
 
         .more .btn:not([class*="btn-"]) {
             background-color: transparent;
