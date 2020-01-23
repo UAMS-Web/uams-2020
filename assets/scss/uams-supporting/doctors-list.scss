@@ -449,47 +449,45 @@
         min-height: 0 !important;
         margin: $spacer-min / 2 !important;
 
-        :checked ~ .az-filter-label {
-            border-color: $primary;
-            background-color: $primary;
-            color: $white;
-        }
-
-        :disabled ~ .az-filter-label {
-            color: $gray-300;
-            border-color: $gray-300;
-        }
-
-        :not(:disabled) {
-            ~ .az-filter-label {
-                &:hover, &:active, &:focus {
-                    border-color: $primary;
-                    background-color: $primary;
-                    color: $white;
-                }
-            }
-    
-            &:focus {
-                ~ .az-filter-label {
-                    @if $enable-shadows {
-                        box-shadow: $custom-select-box-shadow, $custom-select-focus-box-shadow;
-                    } @else {
-                        box-shadow: $custom-select-focus-box-shadow;
-                    }
-                }
-            }
-        }
-
         .az-filter-label {
             margin: 0;
             padding: 0;
             display: inline-block;
             min-width: 26px;
             text-align: center;
+            text-decoration: none;
             border: $border-width solid $input-border-color;
             padding: 2px 7px;
             border-radius: $border-radius;
             background-color: $body-bg;
+
+            &:hover,
+            &:active,
+            &:focus,
+            &[aria-selected="true"] {
+                border-color: $primary;
+                background-color: $primary;
+                color: $white;
+            }
+
+            &:focus {
+                @if $enable-shadows {
+                    box-shadow: $custom-select-box-shadow, $custom-select-focus-box-shadow;
+                } @else {
+                    box-shadow: $custom-select-focus-box-shadow;
+                }
+            }
+
+            &[aria-disabled="true"] {
+                color: $gray-300;
+                border-color: $gray-300;
+
+                &:hover, &:active, &:focus {
+                    border-color: $gray-300;
+                    background-color: transparent;
+                    color: $gray-300;
+                }
+            }
         }
     }
 }
