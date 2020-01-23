@@ -32,9 +32,9 @@ dt {
 
     .supertitle,
     .subtitle {
-        font-size: 0.75em;
+        font-size: $small-font-size;
         font-weight: $font-weight-normal;
-        color: $gray-600;
+        color: $bg-gray-color-lightest;
     }
 
     .supertitle {
