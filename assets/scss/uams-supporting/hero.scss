@@ -424,9 +424,9 @@ $triangles: url("../svg/triangles_seamless_white.svg");
             .text-container {
                 @include hero-text-container-bg();
 
-                .btn {
-                    @extend .btn-light;
-                }
+                //.btn {
+                    //@extend .btn-light;
+                //}
             }
         }
 
@@ -436,9 +436,9 @@ $triangles: url("../svg/triangles_seamless_white.svg");
             .text-container {
                 @include hero-text-container-bg(1, 128, 159);
 
-                .btn {
-                    @extend .btn-light;
-                }
+                //.btn {
+                    //@extend .btn-light;
+                //}
             }
         }
 
@@ -448,9 +448,9 @@ $triangles: url("../svg/triangles_seamless_white.svg");
             .text-container {
                 @include hero-text-container-bg(27, 125, 61);
 
-                .btn {
-                    @extend .btn-light;
-                }
+                //.btn {
+                    //@extend .btn-light;
+                //}
             }
         }
 
@@ -460,9 +460,9 @@ $triangles: url("../svg/triangles_seamless_white.svg");
             .text-container {
                 @include hero-text-container-bg(26, 54, 92);
 
-                .btn {
-                    @extend .btn-light;
-                }
+                //.btn {
+                    //@extend .btn-light;
+                //}
             }
         }
 
@@ -472,9 +472,9 @@ $triangles: url("../svg/triangles_seamless_white.svg");
             .text-container {
                 @include hero-text-container-bg(66, 127, 129);
 
-                .btn {
-                    @extend .btn-light;
-                }
+                //.btn {
+                    //@extend .btn-light;
+                //}
             }
         }
 
@@ -496,9 +496,9 @@ $triangles: url("../svg/triangles_seamless_white.svg");
             .text-container {
                 @include hero-text-container-bg(108, 0, 32);
 
-                .btn {
-                    @extend .btn-light;
-                }
+                //.btn {
+                    //@extend .btn-light;
+                //}
             }
         }
 
@@ -508,9 +508,9 @@ $triangles: url("../svg/triangles_seamless_white.svg");
             .text-container {
                 @include hero-text-container-bg(202, 76, 29);
 
-                .btn {
-                    @extend .btn-light;
-                }
+                //.btn {
+                    //@extend .btn-light;
+                //}
             }
         }
     }

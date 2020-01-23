@@ -1,5 +1,5 @@
-.single-physicians,
-.single-locations,
+.doctor-item,
+.location-item,
 .location-card-list-container {
     dl {
         line-height: $nav-line-height;
@@ -17,12 +17,6 @@
         }
         dd {
             margin: 0.5em 0 0;
-
-            .subtitle {
-                display: block;
-                color: $bg-gray-color-lightest;
-                font-size: $small-font-size;
-            }
         }
     }
 
