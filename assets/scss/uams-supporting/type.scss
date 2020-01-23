@@ -36,6 +36,14 @@ dt {
         font-weight: $font-weight-normal;
         color: $gray-600;
     }
+
+    .supertitle {
+        margin-bottom: 0.25em;
+    }
+
+    .subtitle {
+        margin-top: 0.25em;
+    }
 }
 
 h1,
@@ -54,7 +62,6 @@ h6,
     margin-bottom: $headings-margin-bottom;
 
     .supertitle {
-        margin-bottom: 0.25em;
 
         a {
             text-decoration: none;
@@ -63,10 +70,6 @@ h6,
                 text-decoration: underline;
             }
         }
-    }
-
-    .subtitle {
-        margin-top: 0.25em;
     }
 }
 
