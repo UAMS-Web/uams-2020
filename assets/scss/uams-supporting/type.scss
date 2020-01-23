@@ -20,8 +20,21 @@ dt {
     &:first-child {
         margin-top: 0;
     }
-    &:last-child {
+    //&:last-child {
         //margin-bottom: 0;
+    //}
+
+    .name,
+    .supertitle,
+    .subtitle {
+        display: block;
+    }
+
+    .supertitle,
+    .subtitle {
+        font-size: 0.75em;
+        font-weight: $font-weight-normal;
+        color: $gray-600;
     }
 }
 
@@ -39,19 +52,6 @@ h6,
 .h6 {
     margin-top: $headings-margin-top;
     margin-bottom: $headings-margin-bottom;
-
-    .name,
-    .supertitle,
-    .subtitle {
-        display: block;
-    }
-
-    .supertitle,
-    .subtitle {
-        font-size: 0.75em;
-        font-weight: $font-weight-normal;
-        color: $gray-600;
-    }
 
     .supertitle {
         margin-bottom: 0.25em;
