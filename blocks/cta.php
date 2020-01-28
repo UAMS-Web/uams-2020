@@ -47,6 +47,11 @@ if ( empty($image) )
     $image = get_field('cta_bar_image');
 if ( empty($background_color) ) 
     $background_color = get_field('cta_bar_background_color');
+if ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) {
+    $btn_color = 'primary';
+} else {
+    $btn_color = 'white';
+}
 
 ?>
 <section class="uams-module cta-bar <?php echo $className; ?> <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
@@ -174,7 +179,7 @@ if ( empty($background_color) )
                         </div>
                         <?php echo $button_text ?
                         '<div class="btn-container">
-                            <a href="' . $button_url['url'] . '" aria-label="' . $button_desc . '" class="btn"' . ( $button_target ? ' target="'. $button_target . '"' : '' ) . ' data-moduletitle="' . $heading . '">' . $button_text . '</a>
+                            <a href="' . $button_url['url'] . '" aria-label="' . $button_desc . '" class=" btn btn-' . $btn_color . '"' . ( $button_target ? ' target="'. $button_target . '"' : '' ) . ' data-moduletitle="' . $heading . '">' . $button_text . '</a>
                         </div>'
                         : ''; ?>
                     </div>

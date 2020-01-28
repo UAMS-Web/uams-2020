@@ -45,7 +45,7 @@
             }
         }
 
-        h3 {
+        h3, h4 {
             @extend .h6;
         }
 
@@ -90,6 +90,78 @@
 
             button {
                 margin: $spacer-min / 2;
+            }
+        }
+
+        fieldset {
+
+            legend {
+                + h3,
+                + .filter-group,
+                + .fwp-filter {
+                    margin-top: 0;
+                }
+            }
+            .filter-group,
+            .fwp-filter {
+                margin: ($spacer * 2) 0;
+
+                .facetwp-facet {
+                    margin: 0;
+
+                    &.facetwp-type-alpha {
+                        margin: -($spacer-min / 2) 0;
+    
+                        .facetwp-alpha {
+                            margin: ($spacer-min / 2) $spacer-min ($spacer-min / 2) 0;
+                            text-decoration: none;
+    
+                            &.disabled {
+                                color: $btn-link-disabled-color;
+    
+                                &:hover, &:active {
+                                    color: $btn-link-disabled-color;
+                                }
+                            }
+                        }
+                    }
+
+                    &.facetwp-type-fselect {
+                        .fs-dropdown {
+                            .fs-options {
+                                .fs-option {
+                                    .fs-checkbox {
+                                        i {
+                                            top: 9px;
+                                            bottom: auto;
+                                        }
+                                    }
+                                    .fs-option-label {
+                                        white-space: normal;
+                                        line-height: $nav-line-height;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            p.asp-try {
+                font-weight: 1em;
+                line-height: $line-height-base;
+                margin-top: 0.5em;
+                margin-bottom: ($spacer * 2);
+            }
+
+            button#filter-apply {
+                @extend .btn;
+                @extend .btn-primary;
+            }
+            button[onclick="FWP.reset()"] {
+                @extend .btn;
+                @extend .btn-outline-primary;
+                margin-left: 5px;
             }
         }
     }
@@ -377,47 +449,45 @@
         min-height: 0 !important;
         margin: $spacer-min / 2 !important;
 
-        :checked ~ .az-filter-label {
-            border-color: $primary;
-            background-color: $primary;
-            color: $white;
-        }
-
-        :disabled ~ .az-filter-label {
-            color: $gray-300;
-            border-color: $gray-300;
-        }
-
-        :not(:disabled) {
-            ~ .az-filter-label {
-                &:hover, &:active, &:focus {
-                    border-color: $primary;
-                    background-color: $primary;
-                    color: $white;
-                }
-            }
-    
-            &:focus {
-                ~ .az-filter-label {
-                    @if $enable-shadows {
-                        box-shadow: $custom-select-box-shadow, $custom-select-focus-box-shadow;
-                    } @else {
-                        box-shadow: $custom-select-focus-box-shadow;
-                    }
-                }
-            }
-        }
-
         .az-filter-label {
             margin: 0;
             padding: 0;
             display: inline-block;
             min-width: 26px;
             text-align: center;
+            text-decoration: none;
             border: $border-width solid $input-border-color;
             padding: 2px 7px;
             border-radius: $border-radius;
             background-color: $body-bg;
+
+            &:hover,
+            &:active,
+            &:focus,
+            &[aria-selected="true"] {
+                border-color: $primary;
+                background-color: $primary;
+                color: $white;
+            }
+
+            &:focus {
+                @if $enable-shadows {
+                    box-shadow: $custom-select-box-shadow, $custom-select-focus-box-shadow;
+                } @else {
+                    box-shadow: $custom-select-focus-box-shadow;
+                }
+            }
+
+            &[aria-disabled="true"] {
+                color: $gray-300;
+                border-color: $gray-300;
+
+                &:hover, &:active, &:focus {
+                    border-color: $gray-300;
+                    background-color: transparent;
+                    color: $gray-300;
+                }
+            }
         }
     }
 }
