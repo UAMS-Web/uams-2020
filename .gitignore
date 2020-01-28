@@ -77,3 +77,4 @@ yarn.lock
 #include plugin folder
 !plugins/*
 plugins/*.DS_Store
+package-lock.json

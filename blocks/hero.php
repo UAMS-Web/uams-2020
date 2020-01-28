@@ -143,7 +143,7 @@ if( $hero_rows ) :
                 <div class="inner-container">
                     <h2><?php echo $heading; ?></h2>
                     <p><?php echo $body; ?></p>
-                    <a class="btn" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?> data-itemtitle="<?php echo $heading; ?>"><?php echo $button_text; ?></a>
+                    <a class="btn btn-white" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?> data-itemtitle="<?php echo $heading; ?>"><?php echo $button_text; ?></a>
                 </div>
             </div>
         </div>
