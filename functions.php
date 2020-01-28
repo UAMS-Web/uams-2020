@@ -238,7 +238,7 @@ function uams_breadcrumb_home_icon( $crumb ) {
 		} elseif ( ('inside' == uams_get_site_info()['site'] && is_front_page() ) ) {
 			$crumb = '<a href="'.uams_get_home_link().'" title="Inside UAMS"><span class="fas fa-home"></span></a>';
 		} else {
-			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
+			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Scineces"><span class="fas fa-home"></span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '/" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
 		}
      return $crumb;
 }
