@@ -29,12 +29,11 @@
 
 .wp-block-file {
     a.wp-block-file__button {
-        @extend .btn;
-        @extend .btn-sm;
-        @extend .btn-outline-primary;
+        @extend .btn, .btn-sm;
+        @include button-outline-variant($primary);
 
         &:visited {
-            @extend .btn-outline-primary;
+            @include button-outline-variant($primary);
         }
     }
 }
