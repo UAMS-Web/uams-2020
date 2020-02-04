@@ -130,3 +130,44 @@ add_filter( 'get_custom_logo', function( $html ) {
 
     return $html;
 }, 10 );
+
+function uamswp_title($html) { 
+    // Get site information
+    $site = uams_get_site_info()['site'];
+    $subsite = uams_get_site_info()['subsite'];
+
+    if( 'uams' == $site && 'main' == $subsite && is_home() ) {
+        // Main UAMS site homepage
+        $html = 'University of Arkansas for Medical Sciences (UAMS)';
+    } elseif ( 'uams' == $site && 'main' == $subsite ) {
+        $html = get_the_title() . ' | University of Arkansas for Medical Sciences';
+    } elseif ( 'uams' == $site && 'main' != $subsite && is_home() ) {
+        $html = get_bloginfo( "name" );
+    } elseif ( 'uams' == $site && 'main' != $subsite ) {
+        $html = get_the_title() . ' | ' . get_bloginfo( "name" );
+    } elseif ( 'uamshealth' == $site && 'main' == $subsite && is_home() ) { 
+        // Main UAMS Health site homepage
+        $html = 'UAMS Health';
+    } elseif ( 'uamshealth' == $site && 'main' == $subsite ) { 
+        $html = get_the_title() . ' | UAMS Health';
+    } elseif ( 'uamshealth' == $site && 'main' != $subsite && is_home() ) { 
+        $html = get_bloginfo( "name" ) . ' | UAMS Health';
+    } elseif ( 'uamshealth' == $site && 'main' != $subsite ) {
+        $html = get_the_title() . ' | UAMS Health';
+    } elseif ( 'inside' == $site && 'main' == $subsite && is_home() ) { 
+        // Main UAMS Health site homepage
+        $html = 'UAMS Health';
+    } elseif ( 'inside' == $site && 'main' == $subsite ) { 
+        $html = get_the_title() . ' | Inside UAMS';
+    } elseif ( 'inside' == $site && 'main' != $subsite && is_home() ) { 
+        $html = get_bloginfo( "name" ) . ' | Inside UAMS';
+    } elseif ( 'inside' == $site && 'main' != $subsite ) {
+        $html = get_the_title() . ' | ' . get_bloginfo( "name" );
+    } else {
+        $html = get_the_title() . ' | ' . get_bloginfo( "name" );
+    }
+
+    
+    return $html;
+}
+add_filter('seopress_titles_title', 'uamswp_title', 10, 2);

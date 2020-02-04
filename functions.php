@@ -36,6 +36,13 @@ function uamswp_childtheme_setup() {
 	remove_action( 'wp_head', 'adjacent_posts_rel_link' );
 	remove_action( 'wp_head', 'wp_shortlink_wp_head' );
 
+	// Disable REST API link tag
+	remove_action('wp_head', 'rest_output_link_wp_head', 10);
+	// Disable oEmbed Discovery Links
+	remove_action('wp_head', 'wp_oembed_add_discovery_links', 10);
+	// Disable REST API link in HTTP headers
+	remove_action('template_redirect', 'rest_output_link_header', 11, 0);
+
 	// Add HTML5 markup structure
 	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list' ) );
 
@@ -231,7 +238,7 @@ function uams_breadcrumb_home_icon( $crumb ) {
 		} elseif ( ('inside' == uams_get_site_info()['site'] && is_front_page() ) ) {
 			$crumb = '<a href="'.uams_get_home_link().'" title="Inside UAMS"><span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span></a>';
 		} else {
-			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
+			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '/" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
 		}
      return $crumb;
 }
