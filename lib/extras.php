@@ -170,4 +170,4 @@ function uamswp_title($html) {
     
     return $html;
 }
-add_filter('pre_get_document_title', 'uamswp_title', 15, 2);
+add_filter('seopress_titles_title', 'uamswp_title', 10, 2);

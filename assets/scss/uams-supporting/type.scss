@@ -73,6 +73,14 @@ h6,
     }
 }
 
+.lwcw:not(:first-child) {
+    .lw_events_day {
+        h4.lw_events_header_date:first-child {
+            margin-top: $headings-margin-top;
+        }
+    }
+}
+
 address,
 dl,
 ol,
