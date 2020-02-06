@@ -111,7 +111,7 @@ function uamswp_footer_creds_text() {
         $footer_image_title = 'Inside UAMS';
         $footer_image_site = 'main';
     }
-    $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_'.$footer_image_site.'_horizontal_white.svg" alt="'. $footer_image_title .' Logo" itemprop="logo" />';
+    $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_'.$footer_image_site.'_horizontal_white.svg" alt="'. $footer_image_title .' Logo" itemprop="image" />';
     
     // printf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
     
@@ -134,7 +134,7 @@ function uamswp_footer_creds_text() {
     // Overrides, if available
     if( ! empty( $custom_addresses ) && ( ('institute' == $site) || ('nw-campus' == $subsite) || ( startsWith($subsite, 'regional-') ) ) ) {
         $address = '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
-        $address .= sprintf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
+        $address .= sprintf( '<a href="%s" class="logo" itemprop="url">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
         $address .= '<span itemprop="name" class="sr-only">'.$footer_image_title .'</span>';
         foreach ( $custom_addresses as $custom_address ) {
             $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">';

@@ -28,7 +28,7 @@ function uamswp_do_search_loop() {
 
     if ( $post_type ) {
         // $post_type = $_GET['post_type'];
-        if ('physicians' == $post_type) {
+        if ('provider' == $post_type) {
 
             $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
@@ -73,7 +73,7 @@ function uamswp_do_search_loop() {
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
 
-        } elseif('locations' == $post_type) {
+        } elseif('location' == $post_type) {
 
             $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
@@ -117,7 +117,7 @@ function uamswp_do_search_loop() {
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
 
-        } elseif('services' == $post_type) {
+        } elseif('expertise' == $post_type) {
 
             $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
@@ -230,16 +230,20 @@ function uamswp_do_search_loop() {
                 if ( have_posts() ) {
 
                     while ( have_posts() ) : the_post();
-						global $wp_query;
+                        global $wp_query;
+                        
+                        switch_to_blog($wp_query->post->blog_id);
 
                         $post_count = $wp_query->found_posts;
-                        $post_title = get_the_title();
-                        $post_link = get_the_permalink();
+                        $post_title = get_the_title( $wp_query->post->blog_id );
+                        $post_link = get_the_permalink( $wp_query->post->blog_id );
                         $title = '<h3 class="h4"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
-                        $content = get_the_excerpt();
+                        $content = get_the_excerpt( $wp_query->post->blog_id );
                         echo $title;
                         // echo $taxonomy.'_'.$post_id;
                         echo $content ? '<p>'. $content . '</p>' : '';
+
+                        restore_current_blog();
 
                     endwhile;
                     if ($post_count > 5) {
@@ -258,7 +262,7 @@ function uamswp_do_search_loop() {
         echo '</div>'; // .container-fluid
         echo '</div>'; // .uams-module
 
-        if (class_exists('UAMSPhysicians')) { // Add doctors, locations, and services
+        if (class_exists('UAMSPhysicians')) { // Add doctors, location, and services
         
         // Begin Providers
 
@@ -266,7 +270,7 @@ function uamswp_do_search_loop() {
 
 
             /* Providers */
-            $post_type = array('physicians');
+            $post_type = array('provider');
 
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
@@ -324,7 +328,7 @@ function uamswp_do_search_loop() {
 
             $taxonomies = array();
 
-                array_push($taxonomies, 'condition', 'treatment_procedure' );
+                array_push($taxonomies, 'condition', 'treatment' );
 
                 foreach ( $taxonomies as $taxonomy ) {
                     // get the search term entered by user.
@@ -409,7 +413,7 @@ function uamswp_do_search_loop() {
         // End Conditions and Treatments
         
         // Begin Locations
-            $post_type = array('locations');
+            $post_type = array('location');
 
             echo '<div class="uams-module bg-auto">';
             echo '<div class="container-fluid">';
