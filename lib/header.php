@@ -82,7 +82,7 @@ function uamswp_site_image() {
 				<?php if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site']) || empty(uams_get_site_info()['site'])) { ?>
 				<!-- Options - uams -->
 				<li class="nav-item">
-					<a class="nav-link" href="https://www.uamshealth.com/">UAMS Health</a>
+					<a class="nav-link" href="https://uamshealth.com/">UAMS Health</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="https://jobs.uams.edu/">Jobs</a>
@@ -109,7 +109,7 @@ function uamswp_site_image() {
 					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="https://www.uamshealth.com/">UAMS Health</a>
+					<a class="nav-link" href="https://uamshealth.com/">UAMS Health</a>
 				</li>
 				<!-- End right nav -->
 				<?php } ?>

@@ -20,8 +20,29 @@ dt {
     &:first-child {
         margin-top: 0;
     }
-    &:last-child {
+    //&:last-child {
         //margin-bottom: 0;
+    //}
+
+    .name,
+    .supertitle,
+    .subtitle {
+        display: block;
+    }
+
+    .supertitle,
+    .subtitle {
+        font-size: $small-font-size;
+        font-weight: $font-weight-normal;
+        color: $bg-gray-color-lightest;
+    }
+
+    .supertitle {
+        margin-bottom: 0.25em;
+    }
+
+    .subtitle {
+        margin-top: 0.25em;
     }
 }
 
@@ -40,21 +61,7 @@ h6,
     margin-top: $headings-margin-top;
     margin-bottom: $headings-margin-bottom;
 
-    .name,
-    .supertitle,
-    .subtitle {
-        display: block;
-    }
-
-    .supertitle,
-    .subtitle {
-        font-size: 0.75em;
-        font-weight: $font-weight-normal;
-        color: $gray-600;
-    }
-
     .supertitle {
-        margin-bottom: 0.25em;
 
         a {
             text-decoration: none;
@@ -64,9 +71,13 @@ h6,
             }
         }
     }
+}
 
-    .subtitle {
-        margin-top: 0.25em;
+.lwcw:not(:first-child) {
+    .lw_events_day {
+        h4.lw_events_header_date:first-child {
+            margin-top: $headings-margin-top;
+        }
     }
 }
 
