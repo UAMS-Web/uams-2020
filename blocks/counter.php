@@ -1,0 +1,120 @@
+<?php
+/*
+ *
+ * UAMS Counter List Block
+ * (Based on UAMS Link List Block)
+ * 
+ */
+
+// Create id attribute allowing for custom "anchor" value.
+$id = '';
+if ( empty( $id ) && isset($block) ) {
+    $id = $block['id'];
+} 
+if ( empty ($id) ) {
+    $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
+}
+
+$id = 'link-list-' .  $id;
+    
+
+// Load values.
+$heading = get_field('counter_list_heading');
+$hide_heading = get_field('counter_list_hide_heading');
+$description = get_field('counter_list_description');
+$start = get_field('counter_list_start');
+$start_custom = get_field('counter_list_start_custom');
+$background_color = get_field('counter_list_background_color');
+$counter_list_rows = get_field('counter_list_section');
+$row = 0;
+
+?>
+<section class="uams-module link-list counter-list link-list-layout-split <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-6 heading">
+                <div class="text-container">
+                    <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
+                        <span class="title"><?php echo $heading; ?></span>
+                    </h2>
+                    <?php echo $description ? '<p class="note">'. $description . '</p>' : ''; ?>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 list">
+                    <ul>
+                    <?php 
+                        foreach($counter_list_rows as $counter_list_row) {
+                        // Load values.
+                        $row++;
+                        $counter_item_title = $counter_list_row['counter_list_section_title'];
+                        $counter_item_unit = $counter_list_row['counter_list_section_unit']; // Singular
+                        $counter_item_units = $counter_list_row['counter_list_section_units']; // Plural
+                        $counter_item_rate = $counter_list_row['counter_list_section_rate'];
+                        $counter_item_start_inherit = $counter_list_row['counter_list_section_start_inherit'];
+                        $counter_item_start_override = $counter_list_row['counter_list_section_start_override'];
+                        $counter_item_start_custom = $counter_list_row['counter_list_section_start_custom'];
+                        if ( $counter_item_start_inherit == 1 ) {
+                            $counter_item_start = $start;
+
+                            if ($counter_item_start == 'custom') {
+                                $counter_item_start_custom = $start_custom;
+                            }
+                        } else {
+                            $counter_item_start = $counter_item_start_override;
+
+                            if ($counter_item_start == 'custom') {
+                                $counter_item_start_custom = $counter_item_start_custom;
+                            }
+                        }
+                        $date_day = date('Y-m-d') . ' 0:00:00';
+                        $date_week = date('Y-m-d',strtotime('last sunday')) . ' 0:00:00';
+                        $date_month = date('Y-m') . '-01 0:00:00';
+                        $date_year = date('Y') . '-01-01 0:00:00';
+                        $date_custom = $counter_item_start_custom;
+                        //$date_user = date('Y-m-d H:i:s'); // Replace with user input date picker value
+
+                        $date = ${'date_'.$counter_item_start}; // set the date value based on editor's selection
+                        $date_js = date('D M d Y H:i:s O', strtotime($date));
+                        $date_diff = strtotime(date('Y-m-d H:i:s')) - strtotime($date);
+                        $count_value = $counter_item_rate * $date_diff;
+                        if ($date_diff <= 1) {
+                            $append = $counter_item_unit;
+                        } else {
+                            $append = $counter_item_units;
+                        }
+                        if ($count_value < 1) {
+                            $count_value_display = 'Less than 1';
+                        } else {
+                            $count_value_display = number_format(floor($count_value));
+                        }
+
+                    ?>
+                        <li class="item" data-start-date="<?php echo $date; ?>" data-rate="<?php echo $counter_item_rate; ?>" data-time-elapsed="<?php echo $date_diff; ?>" data-current-count="<?php echo $count_value; ?>" id="item-<?php echo $id . '-row-' . $row; ?>">
+                            <div class="text-container">
+                                <h3 class="h5"><?php echo $counter_item_title; ?></h3>
+                                <p><?php echo $count_value_display . ' ' . $append; ?></p>
+                                <p class="test"></p>
+                            </div>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+$(document).ready(function () {
+    $('.counter-list .item').each(function() {
+        var $this = $(this);
+        var startDate = $this.attr('data-start-date');
+        var rate = $this.attr('data-rate');
+        var timeElapsed = $this.attr('data-time-elapsed');
+        var count = $this.attr('data-current-count');
+
+        $('p.test').text( "some new text" );
+    });
+});
+</script>
+
