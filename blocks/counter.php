@@ -82,8 +82,9 @@ $row = 0;
                         //$date_user = date('Y-m-d H:i:s'); // Replace with user input date picker value
 
                         $date_now  = strtotime('now');
-                        $date = ${'date_'.$counter_item_start}; // set the date value based on editor's selection
-                        $date_diff = $date_now - strtotime($date);
+                        $date_string = ${'date_'.$counter_item_start};
+                        $date = strtotime($date_string); // set the date value based on editor's selection
+                        $date_diff = $date_now - $date;
                         $count_value = $counter_item_rate * $date_diff;
                         if ($date_diff <= 1) {
                             $append = $counter_item_unit;
@@ -97,7 +98,7 @@ $row = 0;
                         }
 
                     ?>
-                        <li class="item" data-start-date="<?php echo $date; ?>" data-rate="<?php echo $counter_item_rate; ?>" data-time-elapsed="<?php echo $date_diff; ?>" data-current-count="<?php echo $count_value; ?>" id="item-<?php echo $id . '-row-' . $row; ?>">
+                        <li class="item" data-start-date="<?php echo $date_string; ?>" data-rate="<?php echo $counter_item_rate; ?>" data-time-elapsed="<?php echo $date_diff; ?>" data-current-count="<?php echo $count_value; ?>" data-unit-singular="<?php echo $counter_item_unit; ?>" data-unit-plural="<?php echo $counter_item_units; ?>" id="item-<?php echo $id . '-row-' . $row; ?>">
                             <div class="text-container">
                                 <h3 class="h5"><?php echo $counter_item_title; ?></h3>
                                 <p class="count"><span class="value"><?php echo $count_value_display; ?></span> <span class="append"><?php echo $append; ?></span></p>
@@ -111,3 +112,42 @@ $row = 0;
         </div>
     </div>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+        $('.counter-list .item').each(function() {
+            var $id = $(this).attr('id');
+            var $this = $('#' + $id);
+            var $startDate = new Date($this.attr('data-start-date'));
+            var $dateDiff_php = $this.attr('data-time-elapsed');
+            var $rate = $this.attr('data-rate');
+            var $unit_singular = $this.attr('data-unit-singular');
+            var $unit_plural = $this.attr('data-unit-plural');
+            var $currentDate_js = new Date();
+            var $dateDiff_js = ($currentDate_js - $startDate) / 1000; // seconds
+            var $count = $dateDiff_js * $rate;
+
+            function recalculateCount() {
+                var $currentDate_js = new Date();
+                var $dateDiff_js = ($currentDate_js - $startDate) / 1000; // seconds
+                var $count = $dateDiff_js * $rate;
+                if ($count < 1) {
+                    var $count_display = '<1';
+                    var $unit_display = $unit_singular;
+                } else {
+                    var $count_display = Math.floor($dateDiff_js * $rate).toLocaleString('en');
+                    var $unit_display = $unit_plural;
+                }
+                $('#' + $id + ' .count .value').text($count_display);
+                $('#' + $id + ' .count .append').text($unit_display);
+            }
+
+            recalculateCount();
+
+            setInterval(function() {
+                recalculateCount();
+            }, 1000);
+        });
+	});
+</script>
+
