@@ -239,7 +239,7 @@
         background-color: $bg-green;
 
         &.bg-image {
-            background-color: $green-darker;
+            background-color: $bg-green;
 
             &:before {
                 opacity: 0.13; // 1.52 contrast ratio between blacks and whites (green-darkest)
