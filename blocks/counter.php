@@ -73,9 +73,9 @@ $row = 0;
                         $date_custom = $counter_item_start_custom;
                         //$date_user = date('Y-m-d H:i:s'); // Replace with user input date picker value
 
+                        $date_now  = strtotime('now');
                         $date = ${'date_'.$counter_item_start}; // set the date value based on editor's selection
-                        $date_js = date('D M d Y H:i:s O', strtotime($date));
-                        $date_diff = strtotime(date('Y-m-d H:i:s')) - strtotime($date);
+                        $date_diff = $date_now - strtotime($date);
                         $count_value = $counter_item_rate * $date_diff;
                         if ($date_diff <= 1) {
                             $append = $counter_item_unit;
@@ -92,8 +92,7 @@ $row = 0;
                         <li class="item" data-start-date="<?php echo $date; ?>" data-rate="<?php echo $counter_item_rate; ?>" data-time-elapsed="<?php echo $date_diff; ?>" data-current-count="<?php echo $count_value; ?>" id="item-<?php echo $id . '-row-' . $row; ?>">
                             <div class="text-container">
                                 <h3 class="h5"><?php echo $counter_item_title; ?></h3>
-                                <p><?php echo $count_value_display . ' ' . $append; ?></p>
-                                <p class="test"></p>
+                                <p class="count"><span class="value"><?php echo $count_value_display; ?></span> <span class="append"><?php echo $append; ?></span></p>
                             </div>
                         </li>
                     <?php
@@ -104,17 +103,3 @@ $row = 0;
         </div>
     </div>
 </section>
-<script>
-$(document).ready(function () {
-    $('.counter-list .item').each(function() {
-        var $this = $(this);
-        var startDate = $this.attr('data-start-date');
-        var rate = $this.attr('data-rate');
-        var timeElapsed = $this.attr('data-time-elapsed');
-        var count = $this.attr('data-current-count');
-
-        $('p.test').text( "some new text" );
-    });
-});
-</script>
-
