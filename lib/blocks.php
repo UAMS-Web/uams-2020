@@ -135,6 +135,17 @@ function uams_register_blocks() {
             'align'             => 'full',
             'render_template'   => 'blocks/stacked.php',
         ));
+        acf_register_block_type(array(
+            'name'              => 'counter-list',
+            'title'             => __('UAMS Counter List'),
+            'description'       => __('Counter List'),
+            'category'          => 'common',
+            'icon'              => 'clock',
+            'keywords'          => array('uams', 'counter', 'list'),
+            'mode'              => 'auto',
+            'align'             => 'full',
+            'render_template'   => 'blocks/counter.php',
+        ));
         // acf_register_block_type(array(
         //     'name'              => 'block',
         //     'title'             => __('UAMS Block'),
@@ -164,6 +175,7 @@ if( function_exists('acf_add_local_field_group') ):
     $post_tiles = require( get_stylesheet_directory() .'/acf_fields/post-category-tiles.php' );
     $side_by_side = require( get_stylesheet_directory() .'/acf_fields/image-side-by-side.php' );
     $stacked = require( get_stylesheet_directory() .'/acf_fields/stacked.php' );
+    $counter_list = require( get_stylesheet_directory() .'/acf_fields/counter.php' );
 
     
 
@@ -432,6 +444,30 @@ if( function_exists('acf_add_local_field_group') ):
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/text-stacked',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+    ));
+
+    // Add local field group for UAMS Counter List Block
+    acf_add_local_field_group(array(
+        'key' => 'group_uams_counter_list',
+        'title' => 'Block: UAMS Counter List',
+        'fields' => $counter_list,
+        'location' => array(
+            array(
+                array(
+                    'param' => 'block',
+                    'operator' => '==',
+                    'value' => 'acf/counter-list',
                 ),
             ),
         ),
