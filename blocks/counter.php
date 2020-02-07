@@ -16,6 +16,14 @@ if ( empty ($id) ) {
 }
 
 $id = 'link-list-' .  $id;
+
+$className = '';
+if( !empty($block['className']) ) {
+    $className .= ' ' . $block['className'];
+}
+if( !empty($block['align']) ) {
+    $className .= ' align' . $block['align'];
+}
     
 
 // Load values.
@@ -29,7 +37,7 @@ $counter_list_rows = get_field('counter_list_section');
 $row = 0;
 
 ?>
-<section class="uams-module link-list counter-list link-list-layout-split <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module link-list counter-list link-list-layout-split<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 heading">
