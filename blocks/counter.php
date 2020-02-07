@@ -35,6 +35,7 @@ $start_custom = get_field('counter_list_start_custom');
 $background_color = get_field('counter_list_background_color');
 $counter_list_rows = get_field('counter_list_section');
 $row = 0;
+date_default_timezone_set("America/Chicago");
 
 ?>
 <section class="uams-module link-list counter-list link-list-layout-split<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
