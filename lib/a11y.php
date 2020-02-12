@@ -43,9 +43,9 @@ function filter_oembed_dataparse( $return, $data, $url ) {
         * Otherwise, add the title attribute.
         */
     if ( $has_title_attr ) {
-        $return = preg_replace( $preg_match, 'title="' . $title . '"', $return );
+        $return = preg_replace( $preg_match, 'title="' . esc_attr($title) . '"', $return );
     } else {
-        $return = preg_replace( '/^\<iframe/i', '<iframe title="' . $title . '"', $return );
+        $return = preg_replace( '/^\<iframe/i', '<iframe title="' . esc_attr($title) . '"', $return );
     }
 
     $return = str_replace( 'frameborder="0"', '', $return ); // Quick strip of frameborder
