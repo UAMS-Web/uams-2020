@@ -1,0 +1,10 @@
+.wp-block-embed.is-type-video {
+    &:not(.wp-has-aspect-ratio) { // only do the things when there is no assigned aspect ratio class
+        @extend .embed-responsive, .embed-responsive-16by9;
+
+        .wp-block-embed__wrapper,
+        iframe {
+            @extend .embed-responsive-item;
+        }
+    }
+}
