@@ -324,6 +324,10 @@ figure[class="wp-block-image"]
 .alignwide,
 .alignfull {
     margin: $page-title-margin-bottom-mobile 0;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 .alignnone,
