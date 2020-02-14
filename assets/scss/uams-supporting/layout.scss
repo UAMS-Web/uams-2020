@@ -92,20 +92,20 @@ article.entry .entry-content,
 section.archive-description .entry-content {
 
     .embed-responsive {
-        margin-top: $uams-module-padding-mobile;
-        width: auto;
+        //margin-top: $uams-module-padding-mobile;
+        //width: auto;
 
         @include media-breakpoint-up(sm) {
-            margin-top: $uams-module-padding;
+            //margin-top: $uams-module-padding;
         }
 
         &:last-child {
-            @extend .mb-0;
+            //@extend .mb-0;
         }
 
         @include media-breakpoint-up(md) {
-            margin-right: -20%;
-            margin-left: -20%;
+            //margin-right: -20%;
+            //margin-left: -20%;
         }
     }
 }
