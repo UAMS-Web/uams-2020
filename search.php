@@ -235,11 +235,15 @@ function uamswp_do_search_loop() {
                         switch_to_blog($wp_query->post->blog_id);
 
                         $post_count = $wp_query->found_posts;
-                        $post_title = get_the_title( $wp_query->post->blog_id );
-                        $post_link = get_the_permalink( $wp_query->post->blog_id );
-                        $title = '<h3 class="h4"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
-                        $content = get_the_excerpt( $wp_query->post->blog_id );
-                        echo $title;
+                        $post_title = get_the_title( $wp_query->post->ID );
+                        $post_link = get_the_permalink( $wp_query->post->ID );
+                        $title = '<h3 class="h4" data-id="'. $wp_query->post->ID .'"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
+                        if ( has_excerpt( $wp_query->post->blog_id ) ) {
+                        	$content = get_the_excerpt( $wp_query->post->ID );
+                        } else {
+	                        $content = wp_trim_excerpt( "", $wp_query->post->ID );
+                        }
+                        echo $title ? $title : '';
                         // echo $taxonomy.'_'.$post_id;
                         echo $content ? '<p>'. $content . '</p>' : '';
 
@@ -560,17 +564,6 @@ function uamswp_loop_layout() {
 
     add_filter( 'genesis_post_title_output', 'uamswp_search_title' );
 
-    // force excerpts.
-    // add_filter( 'genesis_pre_get_option_content_archive', 'uamswp_show_excerpts' );
-
-    add_filter( 'get_the_excerpt', 'strip_shortcodes', 20 );
-
-    // modify the Excerpt read more link.
-    add_filter( 'excerpt_more', 'new_excerpt_more' );
-
-    // modify the length of post excerpts.
-    add_filter( 'excerpt_length', 'uamswp_excerpt_length' );
-
     // remove entry footer.
     remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
     remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
@@ -609,6 +602,18 @@ function uamswp_search_page_heading () {
 function uamswp_search_page_after_entry () {
     echo '</article>';
 }
+/* Modilfy Excerpts */
+// force excerpts.
+// add_filter( 'genesis_pre_get_option_content_archive', 'uamswp_show_excerpts' );
+
+add_filter( 'get_the_excerpt', 'strip_shortcodes', 20 );
+
+// modify the Excerpt read more link.
+add_filter( 'excerpt_more', 'new_excerpt_more' );
+
+// modify the length of post excerpts.
+add_filter( 'excerpt_length', 'uamswp_excerpt_length' );
+
 
 //* Prefix search breadcrumb trail with the text 'Search results for'
 function uamswp_prefix_search_breadcrumb( $args ) {
