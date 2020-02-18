@@ -31,15 +31,11 @@ if ( empty($heading) )
     $heading = get_field('livewhale_heading');
 if ( empty($livewhale) )
     $livewhale = get_field('livewhale_id');
-
-// if ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) {
-//     $btn_color = 'primary';
-// } else {
-//     $btn_color = 'white';
-// }
+if ( empty($background_color) )
+    $background_color = get_field('livewhale_background_color');
 
 ?>
-<section class="uams-module livewhale<?php echo $className; ?> <?php //echo $background_color; ?>" id="<?php echo $livewhale; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module livewhale<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $livewhale; ?>" aria-label="<?php echo $heading; ?>">
     <h2 class="sr-only"><?php echo $heading; ?></h2>
     <div class="container-fluid">
         <div class="row">
