@@ -325,10 +325,12 @@ function uamswp_do_search_loop() {
         // End Providers
 
         // Begin Conditions & Treatments
+        $conditions_treatments = '';
+        $show_conditions_treatments = false;
         // If possible, nest within a condition so that it only displays if there are taxonomy results.
-        echo '<div class="uams-module bg-auto">';
-        echo '<div class="container-fluid">';
-        echo '<div class="search-content row">';
+        $conditions_treatments .= '<div class="uams-module bg-auto">';
+        $conditions_treatments .= '<div class="container-fluid">';
+        $conditions_treatments .= '<div class="search-content row">';
 
             $taxonomies = array();
 
@@ -371,8 +373,8 @@ function uamswp_do_search_loop() {
                     uamswp_custom_loop_base($args);
 
                     if ( have_posts() ) :
-
-                        echo '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
+						$show_conditions_treatments = true;
+                        $conditions_treatments .= '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
 
                         while ( have_posts() ) : the_post();
 
@@ -384,22 +386,24 @@ function uamswp_do_search_loop() {
                             $title = '<h3 class="h4" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
                             $content = get_field($taxonomy.'_content', $taxonomy.'_'.$post_id);
 
-                            echo $title;
+                            $conditions_treatments .= $title;
                             // echo $taxonomy.'_'.$post_id;
-                            echo $content ? '<p>'. wp_trim_words($content, 30) .'<p>' : '';
+                            $conditions_treatments .= $content ? '<p>'. wp_trim_words($content, 30) .'<p>' : '';
 
                         endwhile;
                         if ($post_count > 5) {
                             // More results link.
-                            printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $taxonomy );
+                            $conditions_treatments .= sprintf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $taxonomy );
                         } else {
-                            echo '</div>';
+                            $conditions_treatments .= '</div>';
                         }
-                        echo '</div>';
+                        $conditions_treatments .= '</div>';
+/*
                     else :
                         echo '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
                         echo "<p>Sorry, no content matched your criteria.</p>";
                         echo '</div></div>';
+*/
                     endif;
                     // foreach ( $term_query->terms as $term ) {
                     //     echo '<article class="'. $taxonomy .'-'. $term->slug .' entry">';
@@ -410,9 +414,13 @@ function uamswp_do_search_loop() {
                     wp_reset_query();
                 }
 
-        echo '</div>'; // .search-content
-        echo '</div>'; // .container-fluid
-        echo '</div>'; // .uams-module
+        $conditions_treatments .= '</div>'; // .search-content
+        $conditions_treatments .= '</div>'; // .container-fluid
+        $conditions_treatments .= '</div>'; // .uams-module
+
+        if ($show_conditions_treatments) {
+	        echo $conditions_treatments;
+        }
 
         // End Conditions and Treatments
         
