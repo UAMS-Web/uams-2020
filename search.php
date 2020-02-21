@@ -36,8 +36,6 @@ function uamswp_do_search_loop() {
             $args = (array(
                 's' => $s,
                 'post_type' => $post_type,
-                'order' => 'ASC',
-                'orderby' => 'title',
                 'posts_per_page' => 6,
                 'paged' => $paged,
             ));
@@ -81,8 +79,6 @@ function uamswp_do_search_loop() {
             $args = (array(
                 's' => $s,
                 'post_type' => $post_type,
-                'order' => 'ASC',
-                'orderby' => 'title',
                 'posts_per_page' => 10,
                 'paged' => $paged,
             ));
@@ -125,8 +121,6 @@ function uamswp_do_search_loop() {
             $args = (array(
                 's' => $s,
                 'post_type' => $post_type,
-                'order' => 'ASC',
-                'orderby' => 'title',
                 'posts_per_page' => 10,
                 'paged' => $paged,
             ));
@@ -162,6 +156,124 @@ function uamswp_do_search_loop() {
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
 
+        } elseif('condition' == $post_type) {
+
+            $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+            $taxonomy = 'condition';
+
+            // accepts any wp_query args.
+            $args = (array(
+                's' => $s,
+                'post_type' => $post_type,
+                'posts_per_page' => 10,
+                'paged' => $paged,
+            ));
+
+            uamswp_custom_loop_base($args);
+
+            echo '<div class="uams-module bg-auto">';
+            echo '<div class="container-fluid">';
+            echo '<div class="search-content row">';
+            echo '<div class="col-12">';
+            echo '<h2 class="module-title">Conditions</h2>';
+            echo '<div class="module-body">';
+
+            if ( have_posts() ) :
+
+
+
+            while ( have_posts() ) : the_post();
+
+            	$post_title = get_the_title();
+                $post_link = get_the_permalink();
+                $tax = get_term_by("name", $post_title, $taxonomy);
+                $post_id = $tax->term_id;
+                $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
+                $content = get_field($taxonomy.'_content', $taxonomy.'_'.$post_id);
+
+                echo '<article class="'. $taxonomy .'-'. $post_id .' entry">';
+                echo '<header class="entry-header">';
+                echo $title;
+                echo '</header>';
+                echo '<div class="entry-content clearfix">';
+                // echo $taxonomy.'_'.$post_id;
+                echo $content ? '<p>'. wp_trim_words($content, 30) .'... <a class="more-link" href="' . $post_link . '">Continue Reading</a><p>' : '';
+                echo '</div>';
+                echo '</article>';
+
+            endwhile;
+
+            genesis_posts_nav();
+
+            else :
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
+            endif;
+
+			echo '</div>'; // .module-body
+            echo '</div>'; // .col-12
+            echo '</div>'; // .search-content
+            echo '</div>'; // .container-fluid
+            echo '</div>'; // .uams-module
+
+        } elseif('treatment' == $post_type) {
+
+            $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+            $taxonomy = 'treatment';
+
+            // accepts any wp_query args.
+            $args = (array(
+                's' => $s,
+                'post_type' => $post_type,
+                'posts_per_page' => 10,
+                'paged' => $paged,
+            ));
+
+            uamswp_custom_loop_base($args);
+
+            echo '<div class="uams-module bg-auto">';
+            echo '<div class="container-fluid">';
+            echo '<div class="search-content row">';
+            echo '<div class="col-12">';
+            echo '<h2 class="module-title">Treatments &amp; Procedures</h2>';
+            echo '<div class="module-body">';
+
+            if ( have_posts() ) :
+
+
+
+            while ( have_posts() ) : the_post();
+
+            	$post_title = get_the_title();
+                $post_link = get_the_permalink();
+                $tax = get_term_by("name", $post_title, $taxonomy);
+                $post_id = $tax->term_id;
+                $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
+                $content = get_field($taxonomy.'_content', $taxonomy.'_'.$post_id);
+
+                echo '<article class="'. $taxonomy .'-'. $post_id .' entry">';
+                echo '<header class="entry-header">';
+                echo $title;
+                echo '</header>';
+                echo '<div class="entry-content clearfix">';
+                // echo $taxonomy.'_'.$post_id;
+                echo $content ? '<p>'. wp_trim_words($content, 30) .'... <a class="more-link" href="' . $post_link . '">Continue Reading</a><p>' : '';
+                echo '</div>';
+                echo '</article>';
+
+            endwhile;
+
+            genesis_posts_nav();
+
+            else :
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
+            endif;
+
+			echo '</div>'; // .module-body
+            echo '</div>'; // .col-12
+            echo '</div>'; // .search-content
+            echo '</div>'; // .container-fluid
+            echo '</div>'; // .uams-module
+
         } else {
             $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 
@@ -169,8 +281,6 @@ function uamswp_do_search_loop() {
             $args = (array(
                 's' => $s,
                 'post_type' => $post_type,
-                'order' => 'ASC',
-                'orderby' => 'title',
                 'paged' => $paged,
             ));
 
@@ -191,7 +301,7 @@ function uamswp_do_search_loop() {
                     // custom genesis loop with the above query parameters and hooks.
                     // genesis_custom_loop( $args );
                     uamswp_custom_loop( $args );
-                
+
                 echo '</div>'; // module-body
             echo '</div>'; // col-12
             echo '</div>'; // search-content
@@ -215,8 +325,6 @@ function uamswp_do_search_loop() {
                     's' => $s,
                     'post_type' => $post_type,
                     'posts_per_page' => 5,
-                    'order' => 'ASC',
-                    'orderby' => 'title',
                 ));
 
                 uamswp_custom_loop_base($args);
@@ -231,7 +339,7 @@ function uamswp_do_search_loop() {
 
                     while ( have_posts() ) : the_post();
                         global $wp_query;
-                        
+
                         switch_to_blog($wp_query->post->blog_id);
 
                         $post_count = $wp_query->found_posts;
@@ -267,7 +375,7 @@ function uamswp_do_search_loop() {
         echo '</div>'; // .uams-module
 
         if (class_exists('UAMSPhysicians')) { // Add doctors, location, and services
-        
+
         // Begin Providers
 
             $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
@@ -276,25 +384,25 @@ function uamswp_do_search_loop() {
             /* Providers */
             $post_type = array('provider');
 
-            echo '<div class="uams-module bg-auto">';
-            echo '<div class="container-fluid">';
-            echo '<div class="search-content row">';
-            echo '<div class="col-12">';
-
             // accepts any wp_query args.
             $args = (array(
                 's' => $s,
                 'post_type' => $post_type,
                 'posts_per_page' => 6,
-                'order' => 'ASC',
-                'orderby' => 'title',
             ));
 
             uamswp_custom_loop_base($args);
 
-            echo '<h2 class="module-title">Providers</h2>';
+
 
             if ( have_posts() ) {
+
+	             echo '<div class="uams-module bg-auto">';
+            echo '<div class="container-fluid">';
+            echo '<div class="search-content row">';
+            echo '<div class="col-12">';
+
+            echo '<h2 class="module-title">Providers</h2>';
 
                 echo '<div class="card-list-container"><div class="card-list card-list-doctors card-list-doctors-count-6 facetwp-template">';
 
@@ -312,14 +420,18 @@ function uamswp_do_search_loop() {
                     printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
                 }
 
-            } else {
-                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
-            }
-
-            echo '</div>'; // .col-12
+                 echo '</div>'; // .col-12
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
+
+/*
+            } else {
+                echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
+*/
+            }
+
+
 
             wp_reset_query();
         // End Providers
@@ -345,8 +457,6 @@ function uamswp_do_search_loop() {
                         's' => $s,
                         'post_type' => $taxonomy,
                         'posts_per_page' => 5,
-                        'order' => 'ASC',
-                        'orderby' => 'title',
                     ));
 
                     // $term_query = new WP_Term_Query( $args );
@@ -423,29 +533,31 @@ function uamswp_do_search_loop() {
         }
 
         // End Conditions and Treatments
-        
+
         // Begin Locations
             $post_type = array('location');
 
-            echo '<div class="uams-module bg-auto">';
-            echo '<div class="container-fluid">';
-            echo '<div class="search-content row">';
-            echo '<div class="col-12">';
+
 
             // accepts any wp_query args.
             $args = (array(
                 's' => $s,
                 'post_type' => $post_type,
                 'posts_per_page' => 4,
-                'order' => 'ASC',
-                'orderby' => 'title',
             ));
 
             uamswp_custom_loop_base($args);
 
-            echo '<h2 class="module-title">Locations</h2>';
 
             if ( have_posts() ) {
+
+	            echo '<div class="uams-module bg-auto">';
+            echo '<div class="container-fluid">';
+            echo '<div class="search-content row">';
+            echo '<div class="col-12">';
+
+            echo '<h2 class="module-title">Locations</h2>';
+
                 echo '<div class="card-list-container location-card-list-container"><div class="card-list facetwp-template">';
 
                 while ( have_posts() ) : the_post();
@@ -463,39 +575,45 @@ function uamswp_do_search_loop() {
                     printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
                 }
 
+/*
             } else {
                 echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
-            }
+*/
 
-            echo '</div>'; // .col-12
+			echo '</div>'; // .col-12
             echo '</div>'; // .search-content
             echo '</div>'; // .container-fluid
             echo '</div>'; // .uams-module
+            }
+
+
             wp_reset_query();
         // End Locations
 
         // Begin Areas of Expertise
             $post_type = array('expertise');
 
-            echo '<div class="uams-module bg-auto">';
-            echo '<div class="container-fluid">';
-            echo '<div class="search-content row">';
-            echo '<div class="col-12">';
+
 
             // accepts any wp_query args.
             $args = (array(
                 's' => $s,
                 'post_type' => $post_type,
                 'posts_per_page' => 4,
-                'order' => 'ASC',
-                'orderby' => 'title',
             ));
 
             uamswp_custom_loop_base($args);
 
-            echo '<h2 class="module-title">Areas of Expertise</h2>';
+
 
             if ( have_posts() ) {
+
+	            echo '<div class="uams-module bg-auto">';
+	            echo '<div class="container-fluid">';
+	            echo '<div class="search-content row">';
+	            echo '<div class="col-12">';
+
+            	echo '<h2 class="module-title">Areas of Expertise</h2>';
                 echo '<div class="card-list-container"><div class="card-list card-list-expertise facetwp-template">';
 
                 while ( have_posts() ) : the_post();
@@ -513,14 +631,18 @@ function uamswp_do_search_loop() {
                     printf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type[0] );
                 }
 
+/*
             } else {
                 echo '<div class="module-body text-center"><p>Sorry, no content matched your criteria.</p></div>';
+*/
+
+				echo '</div>'; // .col-12
+	            echo '</div>'; // .search-content
+	            echo '</div>'; // .container-fluid
+	            echo '</div>'; // .uams-module
             }
 
-            echo '</div>'; // .col-12
-            echo '</div>'; // .search-content
-            echo '</div>'; // .container-fluid
-            echo '</div>'; // .uams-module
+
             wp_reset_query();
         // End Areas of Expertise
         }
@@ -572,6 +694,9 @@ function uamswp_loop_layout() {
 
     add_filter( 'genesis_post_title_output', 'uamswp_search_title' );
 
+    // force excerpts.
+    // add_filter( 'genesis_pre_get_option_content_archive', 'uamswp_show_excerpts' );
+
     // remove entry footer.
     remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_open', 5 );
     remove_action( 'genesis_entry_footer', 'genesis_entry_footer_markup_close', 15 );
@@ -610,18 +735,6 @@ function uamswp_search_page_heading () {
 function uamswp_search_page_after_entry () {
     echo '</article>';
 }
-/* Modilfy Excerpts */
-// force excerpts.
-// add_filter( 'genesis_pre_get_option_content_archive', 'uamswp_show_excerpts' );
-
-add_filter( 'get_the_excerpt', 'strip_shortcodes', 20 );
-
-// modify the Excerpt read more link.
-add_filter( 'excerpt_more', 'new_excerpt_more' );
-
-// modify the length of post excerpts.
-add_filter( 'excerpt_length', 'uamswp_excerpt_length' );
-
 
 //* Prefix search breadcrumb trail with the text 'Search results for'
 function uamswp_prefix_search_breadcrumb( $args ) {
@@ -683,5 +796,13 @@ function uamswp_custom_loop_base( $args = array() ) {
 	$more = is_singular() ? $more : 0; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Handle archives.
 
 }
+
+add_filter( 'get_the_excerpt', 'strip_shortcodes', 20 );
+
+// modify the Excerpt read more link.
+add_filter( 'excerpt_more', 'new_excerpt_more' );
+
+// modify the length of post excerpts.
+add_filter( 'excerpt_length', 'uamswp_excerpt_length' );
 
 genesis();
