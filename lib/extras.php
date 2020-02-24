@@ -136,35 +136,40 @@ function uamswp_title($html) {
     $site = uams_get_site_info()['site'];
     $subsite = uams_get_site_info()['subsite'];
 
+    $pagetitle = get_the_title();
+    if ( is_search() ) {
+        $pagetitle = 'Search Results';
+    }
+
     if( 'uams' == $site && 'main' == $subsite && is_home() ) {
         // Main UAMS site homepage
         $html = 'University of Arkansas for Medical Sciences (UAMS)';
     } elseif ( 'uams' == $site && 'main' == $subsite ) {
-        $html = get_the_title() . ' | University of Arkansas for Medical Sciences';
+        $html = $pagetitle . ' | University of Arkansas for Medical Sciences';
     } elseif ( 'uams' == $site && 'main' != $subsite && is_home() ) {
         $html = get_bloginfo( "name" );
     } elseif ( 'uams' == $site && 'main' != $subsite ) {
-        $html = get_the_title() . ' | ' . get_bloginfo( "name" );
+        $html = $pagetitle . ' | ' . get_bloginfo( "name" );
     } elseif ( 'uamshealth' == $site && 'main' == $subsite && is_home() ) { 
         // Main UAMS Health site homepage
         $html = 'UAMS Health';
     } elseif ( 'uamshealth' == $site && 'main' == $subsite ) { 
-        $html = get_the_title() . ' | UAMS Health';
+        $html = $pagetitle . ' | UAMS Health';
     } elseif ( 'uamshealth' == $site && 'main' != $subsite && is_home() ) { 
         $html = get_bloginfo( "name" ) . ' | UAMS Health';
     } elseif ( 'uamshealth' == $site && 'main' != $subsite ) {
-        $html = get_the_title() . ' | UAMS Health';
+        $html = $pagetitle . ' | UAMS Health';
     } elseif ( 'inside' == $site && 'main' == $subsite && is_home() ) { 
         // Main UAMS Health site homepage
         $html = 'UAMS Health';
     } elseif ( 'inside' == $site && 'main' == $subsite ) { 
-        $html = get_the_title() . ' | Inside UAMS';
+        $html = $pagetitle . ' | Inside UAMS';
     } elseif ( 'inside' == $site && 'main' != $subsite && is_home() ) { 
         $html = get_bloginfo( "name" ) . ' | Inside UAMS';
     } elseif ( 'inside' == $site && 'main' != $subsite ) {
-        $html = get_the_title() . ' | ' . get_bloginfo( "name" );
+        $html = $pagetitle . ' | ' . get_bloginfo( "name" );
     } else {
-        $html = get_the_title() . ' | ' . get_bloginfo( "name" );
+        $html = $pagetitle . ' | ' . get_bloginfo( "name" );
     }
 
     
