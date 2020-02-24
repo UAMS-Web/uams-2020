@@ -28,8 +28,6 @@ if( !empty($block['align']) ) {
 // Load values.
 if ( empty($heading) )
     $heading = get_field('link_list_heading');
-if ( empty($hide_heading) )
-    $hide_heading = get_field('link_list_hide_heading');
 if ( empty($description) )
     $description = get_field('link_list_description');
 if ( empty($background_color) )
@@ -44,7 +42,7 @@ if ( empty($link_list_rows) )
         <div class="row">
             <div class="col-12 col-md-6 heading">
                 <div class="text-container">
-                    <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
+                    <h2 class="module-title">
                         <span class="title"><?php echo $heading; ?></span>
                     </h2>
                     <?php echo $description ? '<p class="note">'. $description . '</p>' : ''; ?>
