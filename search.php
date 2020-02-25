@@ -511,12 +511,10 @@ function uamswp_do_search_loop() {
                             $conditions_treatments .= '</div>';
                         }
                         $conditions_treatments .= '</div>';
-/*
                     else :
-                        echo '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
-                        echo "<p>Sorry, no content matched your criteria.</p>";
-                        echo '</div></div>';
-*/
+                        $conditions_treatments .=' <div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
+                        $conditions_treatments .= '<p>Sorry, no content matched your criteria.</p>';
+                        $conditions_treatments .= '</div></div>';
                     endif;
                     // foreach ( $term_query->terms as $term ) {
                     //     echo '<article class="'. $taxonomy .'-'. $term->slug .' entry">';
