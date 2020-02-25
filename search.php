@@ -495,6 +495,9 @@ function uamswp_do_search_loop() {
                             $post_id = $tax->term_id;
                             $title = '<h3 class="h4" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
                             $content = get_field($taxonomy.'_content', $taxonomy.'_'.$post_id);
+                            if ('treatment' == $taxonomy) {
+	                            $content = get_field('treatment_procedure_content', $taxonomy.'_'.$post_id); // Fix for naming convention
+                            }
 
                             $conditions_treatments .= $title;
                             // echo $taxonomy.'_'.$post_id;
