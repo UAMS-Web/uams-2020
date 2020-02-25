@@ -14,7 +14,8 @@ var gulp = require('gulp'),
     cmq = require('css-mqpacker'),
     autoprefixer = require('autoprefixer'),
     comments = require('postcss-discard-comments'),
-    Fiber = require('fibers');
+    critical = require('critical');
+    // Fiber = require('fibers');
 
 var plugins = [
     autoprefixer,
@@ -32,14 +33,36 @@ var paths = {
     },
     scripts: {
         src: [
-            'node_modules/jquery/dist/jquery.js', // Changed from jquery.slim.js for AJAX
+            // 'node_modules/jquery/dist/jquery.js', // Changed from jquery.slim.js for AJAX
             'node_modules/popper.js/dist/umd/popper.js',
-            'node_modules/bootstrap/dist/js/bootstrap.js',
+            // 'node_modules/bootstrap/dist/js/bootstrap.js',
+            // 'node_modules/bootstrap/dist/js/bootstrap.bundle.js', // Includes popper
+            'node_modules/bootstrap/js/dist/alert.js',
+            'node_modules/bootstrap/js/dist/button.js',
+            'node_modules/bootstrap/js/dist/carousel.js',
+            'node_modules/bootstrap/js/dist/dropdown.js',
+            'node_modules/bootstrap/js/dist/modal.js',
+            'node_modules/bootstrap/js/dist/scrollspy.js',
+            'node_modules/bootstrap/js/dist/tab.js',
+            'node_modules/bootstrap/js/dist/util.js',
             'node_modules/smartmenus/dist/jquery.smartmenus.js',
             'node_modules/smartmenus-bootstrap-4/jquery.smartmenus.bootstrap-4.js',
             'assets/js/source/overflowing-navbar.min.js',
             'assets/js/source/headertrays.js',
             'assets/js/source/app.js',
+            // 'assets/js/source/all.js', // FontAwesome 
+            // 'assets/js/source/v4-shims.js', // FontAwesome v4 Shims
+        ],
+        dest: 'assets/js'
+    },
+    jquery: {
+        src: [
+            'node_modules/jquery/dist/jquery.min.js',
+        ],
+        dest: 'assets/js'
+    },
+    fontawesome: {
+        src: [
             'assets/js/source/all.js', // FontAwesome 
             'assets/js/source/v4-shims.js', // FontAwesome v4 Shims
         ],
@@ -78,10 +101,24 @@ function style() {
         .pipe(notify({ message: 'Styles task complete' }));
 }
 
+function fa() {
+    return gulp.src(paths.fontawesome.src)
+        .pipe(changed(paths.fontawesome.dest))
+        .pipe(concat('all.js'))
+        // .pipe(foreach(function(stream, file){
+        //     return stream
+                .pipe(uglify())
+                .pipe(rename({suffix: '.min'}))
+        // }))
+        .pipe(gulp.dest(paths.fontawesome.dest))
+        // .pipe(browserSync.stream({match: '**/*.js'}))
+        // .pipe(notify({ message: 'Scripts task complete' }));
+}
+
 function js() {
     return gulp.src(paths.scripts.src)
         .pipe(changed(paths.scripts.dest))
-        .pipe(concat('all.js'))
+        .pipe(concat('uams.js'))
         // .pipe(foreach(function(stream, file){
         //     return stream
                 .pipe(uglify())
@@ -90,6 +127,11 @@ function js() {
         .pipe(gulp.dest(paths.scripts.dest))
         .pipe(browserSync.stream({match: '**/*.js'}))
         .pipe(notify({ message: 'Scripts task complete' }));
+}
+
+function jquery() {
+    return gulp.src(paths.jquery.src)
+    .pipe(gulp.dest(paths.jquery.dest))
 }
 
 function browserSyncServe(done) {
@@ -119,4 +161,24 @@ function watch() {
 
 gulp.task('translation', translation);
 
-gulp.task('default', gulp.parallel(style, js, browserSyncServe, watch));
+gulp.task('default', gulp.parallel(style, fa, jquery, js, browserSyncServe, watch));
+
+var dimensionSettings = [{
+    width: 1300,
+    height: 900
+  },
+  {
+    width: 400,
+    height: 800
+  }];
+
+gulp.task('criticalhealth', function(cb) {
+    critical.generate({
+        base: 'assets/css/',
+        src: "https://uamshealth.com/",
+        dest: "healthtop.css",
+        dimensions: dimensionSettings,
+        minify: true,
+        ignore: ['@font-face']
+    }, cb);
+});

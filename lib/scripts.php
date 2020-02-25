@@ -20,7 +20,7 @@ function uamswp_theme_scripts() {
 		wp_enqueue_style( 'app-css', UAMSWP_THEME_CSS . 'app.css' );
 
 		// Enqueue Google Fonts
-		wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i', array(), 'CHILD_THEME_VERSION' );
+		wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i&display=swap', array(), 'CHILD_THEME_VERSION' );
 
 		// Disable the superfish script
 		wp_deregister_script( 'superfish' );
@@ -28,12 +28,12 @@ function uamswp_theme_scripts() {
 
 		// Deregister jQuery and use Bootstrap supplied version
 		wp_deregister_script( 'jquery' );
-		// wp_register_script( 'jquery', UAMSWP_THEME_JS . 'jquery.slim.min.js', array(), $version, true );
-		// wp_enqueue_script( 'jquery' );
+		wp_register_script( 'jquery', UAMSWP_THEME_JS . 'jquery.min.js', array(), $version, false );
+		wp_enqueue_script( 'jquery' );
 
 		// Register theme JS and enqueue it
-		wp_register_script( 'jquery', UAMSWP_THEME_JS . 'all.min.js', array( ), $version, true ); // Renamed for dependencies
-		wp_enqueue_script( 'jquery' );
+		wp_register_script( 'app-js', UAMSWP_THEME_JS . 'uams.min.js', array( 'jquery' ), $version, true ); // Renamed for dependencies
+		wp_enqueue_script( 'app-js' );
 
 		// // Register Popper JS and enqueue it
 		// wp_register_script( 'app-popper-js', UAMSWP_THEME_JS . 'popper.min.js', array( 'jquery' ), $version, true );
@@ -56,12 +56,12 @@ function uamswp_theme_scripts() {
 		// wp_enqueue_script( 'app-overflowing-navbar-js' );
 
 		// Register Font Awesome JS and enqueue it
-		// wp_register_script( 'app-fontawesome-js', 'https://use.fontawesome.com/releases/v5.6.3/js/all.js', array(), $version, true );
-		// wp_enqueue_script( 'app-fontawesome-js' );
+		wp_register_script( 'app-fontawesome-js', 'https://use.fontawesome.com/releases/v5.6.3/js/all.js', array(), $version, true );
+		wp_enqueue_script( 'app-fontawesome-js' );
 
 		// // Register Font Awesome 4 Shim and enqueue it
-		// wp_register_script( 'app-fontawesome-shim-js', 'https://use.fontawesome.com/releases/v5.6.3/js/v4-shims.js', array( 'app-fontawesome-js', $version, true ) );
-		// wp_enqueue_script( 'app-fontawesome-shim-js' );
+		wp_register_script( 'app-fontawesome-shim-js', 'https://use.fontawesome.com/releases/v5.6.3/js/v4-shims.js', array( 'app-fontawesome-js', $version, true ) );
+		wp_enqueue_script( 'app-fontawesome-shim-js' );
 
 		// // Register Search and Quick Links Trays JS and enqueue it
 		// wp_register_script( 'app-headertrays-js', UAMSWP_THEME_JS . 'headertrays.min.js', array( 'jquery' ), $version, true );
@@ -83,3 +83,11 @@ add_action( 'init', 'uamswp_custom_editor_css' );
 function uamswp_custom_editor_css() {
 	add_editor_style( get_stylesheet_uri() );
 }
+
+function defer_parsing_of_js( $url ) {
+    if ( is_user_logged_in() ) return $url; //don't break WP Admin
+    if ( FALSE === strpos( $url, '.js' ) ) return $url;
+    if ( strpos( $url, 'jquery.min.js' ) ) return $url; // Skip jquery file
+    return str_replace( ' src', ' defer src', $url );
+}
+add_filter( 'script_loader_tag', 'defer_parsing_of_js', 10 );
