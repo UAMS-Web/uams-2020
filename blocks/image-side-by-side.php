@@ -59,10 +59,9 @@ if ( empty($image_group) )
 $side_image = $image_group['side_image_image'] ?: '';
 $image_alt = $image_group['side_image_alt_text'] ?: '';
 $image_crop = $image_group['side_image_crop'] ?: '';
+$image_anchor = $image_group['side_image_anchor'] ?: 'center';
 if ( empty($image_postion) ) 
     $image_postion = get_field('side_image_position') ?: 'left';
-if ( empty($image_anchor) ) 
-    $image_anchor = get_field('side_image_anchor') ?: 'center';
 if ( empty($background_color) ) 
     $background_color = get_field('side_image_background_color') ?: 'bg-white';
 if ( empty($image_alt) ) 
