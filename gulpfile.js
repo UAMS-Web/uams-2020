@@ -34,9 +34,9 @@ var paths = {
     scripts: {
         src: [
             // 'node_modules/jquery/dist/jquery.js', // Changed from jquery.slim.js for AJAX
-            'node_modules/popper.js/dist/umd/popper.js',
+            // 'node_modules/popper.js/dist/umd/popper.js',
             // 'node_modules/bootstrap/dist/js/bootstrap.js',
-            // 'node_modules/bootstrap/dist/js/bootstrap.bundle.js', // Includes popper
+            'node_modules/bootstrap/dist/js/bootstrap.bundle.js', // Includes popper
             'node_modules/bootstrap/js/dist/alert.js',
             'node_modules/bootstrap/js/dist/button.js',
             'node_modules/bootstrap/js/dist/carousel.js',
@@ -101,18 +101,20 @@ function style() {
         .pipe(notify({ message: 'Styles task complete' }));
 }
 
-function fa() {
+async function fa() {
     return gulp.src(paths.fontawesome.src)
         .pipe(changed(paths.fontawesome.dest))
-        .pipe(concat('all.js'))
-        // .pipe(foreach(function(stream, file){
-        //     return stream
-                .pipe(uglify())
-                .pipe(rename({suffix: '.min'}))
-        // }))
+        .pipe(concat('fa.js'))
+        .pipe(uglify())
+        .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(paths.fontawesome.dest))
-        // .pipe(browserSync.stream({match: '**/*.js'}))
-        // .pipe(notify({ message: 'Scripts task complete' }));
+        .pipe(notify({ message: 'FontAwesome task complete' }));
+}
+
+async function jquery() {
+    return gulp.src(paths.jquery.src)
+    .pipe(gulp.dest(paths.jquery.dest))
+    .pipe(notify({ message: 'JQuery task complete' }));
 }
 
 function js() {
@@ -127,11 +129,6 @@ function js() {
         .pipe(gulp.dest(paths.scripts.dest))
         .pipe(browserSync.stream({match: '**/*.js'}))
         .pipe(notify({ message: 'Scripts task complete' }));
-}
-
-function jquery() {
-    return gulp.src(paths.jquery.src)
-    .pipe(gulp.dest(paths.jquery.dest))
 }
 
 function browserSyncServe(done) {
@@ -161,7 +158,7 @@ function watch() {
 
 gulp.task('translation', translation);
 
-gulp.task('default', gulp.parallel(style, fa, jquery, js, browserSyncServe, watch));
+gulp.task('default', gulp.parallel(fa, jquery, style, js, browserSyncServe, watch));
 
 var dimensionSettings = [{
     width: 1300,
