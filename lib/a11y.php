@@ -37,11 +37,11 @@ function filter_oembed_dataparse( $return, $data, $url ) {
     }
     $title = apply_filters( 'uamswp_oembed_title', $title, $return, $data, $url );
     /*
-        * If the title attribute already
-        * exists, replace with new value.
-        *
-        * Otherwise, add the title attribute.
-        */
+     * If the title attribute already
+     * exists, replace with new value.
+     *
+     * Otherwise, add the title attribute.
+     */
     if ( $has_title_attr ) {
         $return = preg_replace( $preg_match, 'title="' . esc_attr($title) . '"', $return );
     } else {

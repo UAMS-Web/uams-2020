@@ -18,7 +18,7 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'message' => '<h2>Text-Image Overlay</h2>',
+        'message' => '<h2>Text &amp; Image Overlay</h2>',
         'new_lines' => 'wpautop',
         'esc_html' => 0,
     ),

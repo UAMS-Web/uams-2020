@@ -38,6 +38,9 @@ function uamswp_nav_subsection(){
         }
         
     }
+    if (is_search()) {
+        $subsection = false;
+    }
     if ($subsection) {
         return $id;
     } else {
