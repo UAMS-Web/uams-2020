@@ -27,9 +27,9 @@ function uamswp_theme_scripts() {
 		wp_deregister_script( 'superfish-args' );
 
 		// Deregister jQuery and use Bootstrap supplied version
-		wp_deregister_script( 'jquery' );
-		wp_register_script( 'jquery', UAMSWP_THEME_JS . 'jquery.min.js', array(), $version, false );
-		wp_enqueue_script( 'jquery' );
+		// wp_deregister_script( 'jquery' );
+		// wp_register_script( 'jquery', UAMSWP_THEME_JS . 'jquery.min.js', array(), $version, false );
+		// wp_enqueue_script( 'jquery' );
 
 		// Register theme JS and enqueue it
 		wp_register_script( 'app-js', UAMSWP_THEME_JS . 'uams.min.js', array( 'jquery' ), $version, true ); // Renamed for dependencies
