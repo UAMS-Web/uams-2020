@@ -55,12 +55,12 @@ var paths = {
         ],
         dest: 'assets/js'
     },
-    jquery: {
-        src: [
-            'node_modules/jquery/dist/jquery.min.js',
-        ],
-        dest: 'assets/js'
-    },
+    // jquery: {
+    //     src: [
+    //         'node_modules/jquery/dist/jquery.min.js',
+    //     ],
+    //     dest: 'assets/js'
+    // },
     fontawesome: {
         src: [
             'assets/js/source/all.js', // FontAwesome 
@@ -111,11 +111,11 @@ async function fa() {
         .pipe(notify({ message: 'FontAwesome task complete' }));
 }
 
-async function jquery() {
-    return gulp.src(paths.jquery.src)
-    .pipe(gulp.dest(paths.jquery.dest))
-    .pipe(notify({ message: 'JQuery task complete' }));
-}
+// async function jquery() {
+//     return gulp.src(paths.jquery.src)
+//     .pipe(gulp.dest(paths.jquery.dest))
+//     .pipe(notify({ message: 'JQuery task complete' }));
+// }
 
 function js() {
     return gulp.src(paths.scripts.src)
@@ -158,7 +158,7 @@ function watch() {
 
 gulp.task('translation', translation);
 
-gulp.task('default', gulp.parallel(fa, jquery, style, js, browserSyncServe, watch));
+gulp.task('default', gulp.parallel(fa, style, js, browserSyncServe, watch));
 
 var dimensionSettings = [{
     width: 1300,
