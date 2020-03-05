@@ -91,10 +91,27 @@ function uamswp_custom_editor_css() {
 	add_editor_style( get_stylesheet_uri() );
 }
 
-function defer_parsing_of_js( $url ) {
-    if ( is_user_logged_in() ) return $url; //don't break WP Admin
-    if ( FALSE === strpos( $url, '.js' ) ) return $url;
-    if ( strpos( $url, 'jquery' ) ) return $url; // Skip jquery file(s)
-    return str_replace( ' src', ' defer src', $url );
-}
-add_filter( 'script_loader_tag', 'defer_parsing_of_js', 10 );
+// function defer_parsing_of_js( $url ) {
+//     if ( is_user_logged_in() ) return $url; //don't break WP Admin
+//     if ( FALSE === strpos( $url, '.js' ) ) return $url;
+//     if ( strpos( $url, 'jquery' ) ) return $url; // Skip jquery file(s)
+//     return str_replace( ' src', ' defer src', $url );
+// }
+// add_filter( 'script_loader_tag', 'defer_parsing_of_js', 10 );
+
+// function add_rel_preload($html, $handle, $href, $media) {
+    
+//     if (is_admin())
+//         return $html;
+
+//      $html = <<<EOT
+// <link rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'" id='$handle' href='$href' type='text/css' media='all' />
+// EOT;
+//     return $html;
+// }
+// add_filter( 'style_loader_tag', 'add_rel_preload', 10, 4 );
+
+// function hook_css() {
+//     include get_theme_file_path( '/assets/css/critical.css');
+// }
+// add_action('wp_head', 'hook_css');
