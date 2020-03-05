@@ -161,21 +161,22 @@ gulp.task('translation', translation);
 gulp.task('default', gulp.parallel(fa, style, js, browserSyncServe, watch));
 
 var dimensionSettings = [{
-    width: 1300,
-    height: 900
+    width: 1280,
+    height: 720
   },
   {
-    width: 400,
-    height: 800
+    width: 300,
+    height: 500
   }];
 
-gulp.task('criticalhealth', function(cb) {
+gulp.task('criticalcss', function(cb) {
     critical.generate({
         base: 'assets/css/',
-        src: "https://uamshealth.com/",
-        dest: "healthtop.css",
+        src: "http://uamshealthmu.local/",
+        dest: "critical.css",
         dimensions: dimensionSettings,
         minify: true,
         ignore: ['@font-face']
     }, cb);
+    console.log('Generated critical CSS');
 });
