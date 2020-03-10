@@ -333,17 +333,17 @@ if ( !function_exists('uams_get_site_info')):
 				} else {
 					if ('' != $uamsorganization) {
 						$subsite = $uamsorganization;
-						if ('' != $cohp_dept) {
+						if ($subsite == 'health-prof' && '' != $cohp_dept) {
 							$department = $cohp_dept;
-						} elseif ('' != $com_dept) {
+						} elseif ($subsite == 'medicine' && '' != $com_dept) {
 							$department = $com_dept;
-						} elseif ('' != $con_dept) {
+						} elseif ($subsite == 'nursing' && '' != $con_dept) {
 							$department = $con_dept;
-						} elseif ('' != $cop_dept) {
+						} elseif ($subsite == 'pharmacy' && '' != $cop_dept) {
 							$department = $cop_dept;
-						} elseif ('' != $coph_dept) {
+						} elseif ($subsite == 'public-health' && '' != $coph_dept) {
 							$department = $coph_dept;
-						} elseif ('' != $grad_dept) {
+						} elseif ($subsite == 'grad-school' && '' != $grad_dept) {
 							$department = $grad_dept;
 						} else {
 							$department = 'uams';
