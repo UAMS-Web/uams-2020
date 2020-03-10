@@ -23,6 +23,7 @@ function uamswp_footer_creds_text() {
     /* Set the defaults */
     $site = uams_get_site_info()['site'];
     $subsite = uams_get_site_info()['subsite'];
+    $department = uams_get_site_info()['department'];
 
     /**
      * Start Image
