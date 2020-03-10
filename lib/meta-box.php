@@ -35,6 +35,7 @@ acf_add_local_field_group(array(
 	'key' => 'group_uams_theme_settings',
 	'title' => 'Theme Settings',
 	'fields' => array(
+		// Theme Styles
 		array(
 			'key' => 'field_template',
 			'label' => 'Theme Style',
@@ -64,6 +65,7 @@ acf_add_local_field_group(array(
 			'return_format' => 'value',
 			'placeholder' => '',
 		),
+		// Site Locations
 		array(
 			'key' => 'field_location',
 			'label' => 'Site Location',
@@ -107,6 +109,7 @@ acf_add_local_field_group(array(
 			'ajax' => 0,
 			'placeholder' => '',
 		),
+		// Institutes
 		array(
 			'key' => 'field_institute',
 			'label' => 'UAMS Institute',
@@ -398,6 +401,7 @@ acf_add_local_field_group(array(
 			'return_format' => 'value',
 			'placeholder' => '',
 		),
+		// UAMS.edu Main Campus Organizations
 		array(
 			'key' => 'field_uams_subsite',
 			'label' => 'Organization',
@@ -672,6 +676,7 @@ acf_add_local_field_group(array(
 			'return_format' => 'value',
 			'placeholder' => '',
 		),
+		// UAMS Health Organizations
 		array(
 			'key' => 'field_uamshealth_subsite',
 			'label' => 'Organization',
@@ -708,6 +713,7 @@ acf_add_local_field_group(array(
 			'ajax' => 0,
 			'placeholder' => '',
 		),
+		// Inside UAMS Organizations
 		array(
 			'key' => 'field_inside_subsite',
 			'label' => 'Organization',
@@ -743,6 +749,7 @@ acf_add_local_field_group(array(
 			'ajax' => 0,
 			'placeholder' => '',
 		),
+		// Custom Addresses
 		array(
 			'key' => 'field_address_accordion',
 			'label' => 'Custom Addresses',
