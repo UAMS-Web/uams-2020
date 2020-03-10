@@ -80,7 +80,7 @@ function uamswp_footer_creds_text() {
             $footer_image_site = $subsite;
         } elseif ( startsWith($subsite, 'public-health') ) {
             $footer_image_url = 'https://publichealth.uams.edu/';
-            $footer_image_title = 'UAMS College of Publice Health';
+            $footer_image_title = 'UAMS College of Public Health';
             $footer_image_site = $subsite;
         } elseif ( startsWith($subsite, 'grad-school') ) {
             $footer_image_url = 'https://gradschool.uams.edu/';

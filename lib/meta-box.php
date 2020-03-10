@@ -180,7 +180,7 @@ acf_add_local_field_group(array(
 				'nursing' => 'College of Nursing',
 				'pharmacy' => 'College of Pharmacy',
 				'pharmacy_arpoison' => 'College of Pharmacy - Arkansas Poison and Drug Information Center',
-				'public-health' => 'College of Publice Health',
+				'public-health' => 'College of Public Health',
 				'grad-school' => 'Graduate school',
 				'12th-st' => '12th St. Health & Wellness Center',
 				'cda' => 'Center for Diversity Affairs',
