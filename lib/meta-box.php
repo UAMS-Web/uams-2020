@@ -471,9 +471,9 @@ acf_add_local_field_group(array(
 			'conditional_logic' => array(
 				array(
 					array(
-						'field' => 'field_location',
+						'field' => 'field_uams_subsite',
 						'operator' => '==',
-						'value' => 'uams',
+						'value' => 'health-prof',
 					),
 				),
 			),
@@ -507,9 +507,9 @@ acf_add_local_field_group(array(
 			'conditional_logic' => array(
 				array(
 					array(
-						'field' => 'field_location',
+						'field' => 'field_uams_subsite',
 						'operator' => '==',
-						'value' => 'uams',
+						'value' => 'medicine',
 					),
 				),
 			),
@@ -543,9 +543,9 @@ acf_add_local_field_group(array(
 			'conditional_logic' => array(
 				array(
 					array(
-						'field' => 'field_location',
+						'field' => 'field_uams_subsite',
 						'operator' => '==',
-						'value' => 'uams',
+						'value' => 'nursing',
 					),
 				),
 			),
@@ -579,9 +579,9 @@ acf_add_local_field_group(array(
 			'conditional_logic' => array(
 				array(
 					array(
-						'field' => 'field_location',
+						'field' => 'field_uams_subsite',
 						'operator' => '==',
-						'value' => 'uams',
+						'value' => 'pharmacy',
 					),
 				),
 			),
@@ -615,9 +615,9 @@ acf_add_local_field_group(array(
 			'conditional_logic' => array(
 				array(
 					array(
-						'field' => 'field_location',
+						'field' => 'field_uams_subsite',
 						'operator' => '==',
-						'value' => 'uams',
+						'value' => 'public-health',
 					),
 				),
 			),
@@ -642,18 +642,18 @@ acf_add_local_field_group(array(
 		),
 		// Graduate School Departments
 		array(
-			'key' => 'field_uams_grad_dept',
+			'key' => 'field_uams_grad-school_dept',
 			'label' => 'Grad School Department',
-			'name' => 'uamswp_uams_grad_dept',
+			'name' => 'uamswp_uams_grad-school_dept',
 			'type' => 'select',
 			'instructions' => '',
 			'required' => 0,
 			'conditional_logic' => array(
 				array(
 					array(
-						'field' => 'field_location',
+						'field' => 'field_uams_subsite',
 						'operator' => '==',
-						'value' => 'uams',
+						'value' => 'grad-school',
 					),
 				),
 			),
