@@ -96,10 +96,6 @@ function uamswp_site_image() {
 				$parent_title_split_function = 'Cancer Institute';
 				$parent_title_text = 'Winthrop P. Rockefeller Cancer Institute';
 				$parent_title_link = 'https://cancer.uams.edu/';
-			} else {
-				$parent_title_split = false;
-				$parent_title_text = 'fallback';
-				$parent_title_link = 'https://uams.edu/';
 			}
 			if ('main' != uams_get_site_info()['department'] && !uamswp_nav_subsection()) {
 				echo '<a class="parent" title="'.$parent_title_text.'" href="'.$parent_title_link.'">'.$parent_title_text.'</a><span class="sr-only">: </span>';
