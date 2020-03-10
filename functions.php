@@ -264,7 +264,7 @@ if ( !function_exists('uams_get_site_info')):
 		$siteinfo = array();
 		if ( ! class_exists( 'acf' ) ) {
 			// Set base defaults if no ACF
-			$siteinfo = array('site' => 'uams', 'subsite' => 'uams');
+			$siteinfo = array('site' => 'uams', 'subsite' => 'uams', 'department' => 'uams');
 			return $siteinfo;
 			return;
 		}
