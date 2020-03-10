@@ -259,6 +259,10 @@ function uamswp_footer_creds_text() {
         } elseif ( startsWith($subsite, 'pharmacy') ) {
             $social_fb = 'https://www.facebook.com/UAMSPharm';
             $social_ig = 'https://www.instagram.com/uamspharmacy/';
+            
+            if ('arpoison' == $department) {
+                $social_fb = 'https://www.facebook.com/ArkDrugHelp/';
+            }
         } elseif ( startsWith($subsite, 'public-health') ) {
             $social_fb = 'https://www.facebook.com/uamscoph/';
         } elseif ( startsWith($subsite, 'grad-school') ) {
@@ -267,8 +271,6 @@ function uamswp_footer_creds_text() {
             $social_fb = 'https://www.facebook.com/UAMSNW/';
         // } elseif ( startsWith($subsite, 'regional-') ) {
         //     $social_fb = '';
-        } elseif ( 'pharmacy_arpoison' == $subsite ) {
-             $social_fb = 'https://www.facebook.com/ArkDrugHelp/';
         } elseif ( 'get-healthy' == $subsite ) {
             $social_fb = 'https://www.facebook.com/GetHealthyUAMS/';
             $social_ig = 'https://www.instagram.com/GetHealthyUAMS/';
