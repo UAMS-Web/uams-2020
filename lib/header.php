@@ -64,19 +64,19 @@ function uamswp_site_image() {
 				$parent_title_split = true;
 				$parent_title_split_descr = 'Donald W. Reynolds';
 				$parent_title_split_function = 'Institute on Aging';
-				$parent_title_text = $title_split_descr . ' ' . $title_split_function;
+				$parent_title_text = 'Donald W. Reynolds Institute on Aging';
 				$parent_title_link = 'https://aging.uams.edu/';
 			} elseif ('institute_eye' == uams_get_site_info()['subsite']) {
 				$parent_title_split = true;
 				$parent_title_split_descr = 'Harvey & Bernice Jones';
 				$parent_title_split_function = 'Eye Institute';
-				$parent_title_text = $title_split_descr . ' ' . $title_split_function;
+				$parent_title_text = 'Harvey & Bernice Jones Eye Institute';
 				$parent_title_link = 'https://eye.uams.edu/';
 			} elseif ('institute_spine' == uams_get_site_info()['subsite']) {
 				$parent_title_split = true;
 				$parent_title_split_descr = 'Jackson T. Stephens';
 				$parent_title_split_function = 'Spine &amp; Neurosciences Institute';
-				$parent_title_text = $title_split_descr . ' ' . $title_split_function;
+				$parent_title_text = 'Jackson T. Stephens Spine &amp; Neurosciences Institute';
 				$parent_title_link = 'https://spine.uams.edu/';
 			} elseif ('institute_digi-health' == uams_get_site_info()['subsite']) {
 				$parent_title_split = false;
@@ -94,8 +94,12 @@ function uamswp_site_image() {
 				$parent_title_split = true;
 				$parent_title_split_descr = 'Winthrop P. Rockefeller';
 				$parent_title_split_function = 'Cancer Institute';
-				$parent_title_text = $title_split_descr . ' ' . $title_split_function;
+				$parent_title_text = 'Winthrop P. Rockefeller Cancer Institute';
 				$parent_title_link = 'https://cancer.uams.edu/';
+			} else {
+				$parent_title_split = false;
+				$parent_title_text = 'fallback';
+				$parent_title_link = 'https://uams.edu/';
 			}
 			if ('main' != uams_get_site_info()['department'] && !uamswp_nav_subsection()) {
 				echo '<a class="parent" title="'.$parent_title_text.'" href="'.$parent_title_link.'">'.$parent_title_text.'</a><span class="sr-only">: </span>';
