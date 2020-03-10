@@ -426,16 +426,16 @@ acf_add_local_field_group(array(
 			'choices' => array(
 				'health-prof' => 'College of Health Professions',
 				'medicine' => 'College of Medicine',
-				'medicine_emergency-medicine' => 'College of Medicine -	Emergency Medicine',
-				'medicine_pediatrics' => 'College of Medicine - Pediatrics',
-				'medicine_otolaryngology' => 'College of Medicine - ENT',
-				'medicine_family-medicine' => 'College of Medicine - Family Medicine',
-				'medicine_orthopaedic-surgery' => 'College of Medicine - Orthopaedics',
-				'medicine_pathology' => 'College of Medicine - Pathology',
-				'medicine_urology' => 'College of Medicine - Urology',
+				'medicine_emergency-medicine' => 'College of Medicine -	Emergency Medicine', // moving to nested field
+				'medicine_pediatrics' => 'College of Medicine - Pediatrics', // moving to nested field
+				'medicine_otolaryngology' => 'College of Medicine - ENT', // moving to nested field
+				'medicine_family-medicine' => 'College of Medicine - Family Medicine', // moving to nested field
+				'medicine_orthopaedic-surgery' => 'College of Medicine - Orthopaedics', // moving to nested field
+				'medicine_pathology' => 'College of Medicine - Pathology', // moving to nested field
+				'medicine_urology' => 'College of Medicine - Urology', // moving to nested field
 				'nursing' => 'College of Nursing',
 				'pharmacy' => 'College of Pharmacy',
-				'pharmacy_arpoison' => 'College of Pharmacy - Arkansas Poison and Drug Information Center',
+				'pharmacy_arpoison' => 'College of Pharmacy - Arkansas Poison and Drug Information Center', // moving to nested field
 				'public-health' => 'College of Public Health',
 				'grad-school' => 'Graduate school',
 				'12th-st' => '12th St. Health & Wellness Center',
@@ -520,6 +520,13 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
+				'emergency-medicine' => 'Emergency Medicine',
+				'family-medicine' => 'Family Medicine',
+				'orthopaedic-surgery' => 'Orthopaedics',
+				'otolaryngology' => 'Otolaryngology (ENT)',
+				'pathology' => 'Pathology',
+				'pediatrics' => 'Pediatrics',
+				'urology' => 'Urology',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -592,6 +599,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
+				'arpoison' => 'Arkansas Poison and Drug Information Center',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
