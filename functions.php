@@ -305,19 +305,19 @@ if ( !function_exists('uams_get_site_info')):
 			$site = 'institute';
 			if ('' != $themeinstitute) {
 				$subsite = $themeinstitute;
-				if ('' != $aging_dept) {
+				if ($subsite == 'institute_aging' && '' != $aging_dept) {
 					$department = $aging_dept;
-				} elseif ('' != $eye_dept) {
+				} elseif ($subsite == 'institute_eye' && '' != $eye_dept) {
 					$department = $eye_dept;
-				} elseif ('' != $spine_dept) {
+				} elseif ($subsite == 'institute_spine' && '' != $spine_dept) {
 					$department = $spine_dept;
-				} elseif ('' != $digihealth_dept) {
+				} elseif ($subsite == 'institute_digi-health' && '' != $digihealth_dept) {
 					$department = $digihealth_dept;
-				} elseif ('' != $pri_dept) {
+				} elseif ($subsite == 'institute_pri' && '' != $pri_dept) {
 					$department = $pri_dept;
-				} elseif ('' != $tri_dept) {
+				} elseif ($subsite == 'institute_tri' && '' != $tri_dept) {
 					$department = $tri_dept;
-				} elseif ('' != $cancer_dept) {
+				} elseif ($subsite == 'institute_cancer' && '' != $cancer_dept) {
 					$department = $cancer_dept;
 				} else {
 					$department = 'uams';
