@@ -11,6 +11,11 @@
  *
 */
 
+/* Set the defaults */
+$site = uams_get_site_info()['site'];
+$subsite = uams_get_site_info()['subsite'];
+$department = uams_get_site_info()['department'];
+
 // Custom Header
 // remove_action( 'wp_head', 'genesis_custom_header_style' );
 remove_action( 'genesis_header', 'genesis_do_header' );
@@ -20,7 +25,7 @@ remove_action( 'genesis_header', 'genesis_do_header' );
 add_action( 'genesis_header', 'uamswp_site_image', 5 );
  
 function uamswp_site_image() {
-	if ('uamshealth' == uams_get_site_info()['site']) {
+	if ('uamshealth' == $site) {
 		$header_image = '<picture>
 		<source srcset="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark.svg" media="(min-width: 576px)">
 		<source srcset="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_vertical_dark.svg" media="(min-width: 1px)">
@@ -42,18 +47,18 @@ function uamswp_site_image() {
 	<div class="global-title">
 
 	<?php
-	if ('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] && !uamswp_nav_subsection()) { // If it's the main UAMS Health site and not a subsection
+	if ('uamshealth' == $site && 'main' == $subsite && !uamswp_nav_subsection()) { // If it's the main UAMS Health site and not a subsection
 		printf( '<a href="' . $header_image_link . '" class="navbar-brand no-subbrand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text );
 	} else {
 		printf( '<a href="' . $header_image_link . '" class="navbar-brand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text );
 		echo '<div class="navbar-subbrand">';
 
-		if ('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] && uamswp_nav_subsection()) { // If it's a subsection on the main UAMS Health site
+		if ('uamshealth' == $site && 'main' == $subsite && uamswp_nav_subsection()) { // If it's a subsection on the main UAMS Health site
 			echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
 		} elseif (uamswp_nav_subsection()) { // If it's a subsection on any other site
 			echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a><span class="sr-only">: </span>';
 			echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
-		} elseif ('inside' == uams_get_site_info()['site'] && 'main' !== uams_get_site_info()['subsite']) {
+		} elseif ('inside' == $site && 'main' !== $subsite) {
 			switch_to_blog(1);
 			$site_title = get_bloginfo( 'name' );
 			restore_current_blog();
@@ -79,7 +84,7 @@ function uamswp_site_image() {
 	<nav class="header-nav" aria-label="Resource Navigation">
 		<div class="collapse navbar-collapse" id="nav-secondary">
 			<ul class="nav">
-				<?php if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site']) || empty(uams_get_site_info()['site'])) { ?>
+				<?php if (('uams' == $site) || ('institute' == $site) || empty($site)) { ?>
 				<!-- Options - uams -->
 				<li class="nav-item">
 					<a class="nav-link" href="https://uamshealth.com/">UAMS Health</a>
@@ -91,7 +96,7 @@ function uamswp_site_image() {
 					<a class="nav-link" href="http://giving.uams.edu/">Giving</a>
 				</li>
 				<!-- End right nav -->
-				<?php } elseif ('uamshealth' == uams_get_site_info()['site']) { ?>
+				<?php } elseif ('uamshealth' == $site) { ?>
 				<!-- Options - uamshealth -->
 				<li class="nav-item">
 					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
@@ -103,7 +108,7 @@ function uamswp_site_image() {
 					<a class="nav-link" href="http://giving.uams.edu/">Giving</a>
 				</li>
 				<!-- End right nav -->
-				<?php } elseif ('inside' == uams_get_site_info()['site']) { ?>
+				<?php } elseif ('inside' == $site) { ?>
 				<!-- Options - inside -->
 				<li class="nav-item">
 					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
@@ -116,7 +121,7 @@ function uamswp_site_image() {
 			</ul>
 		</div>
 		<ul class="nav resource-nav" id="nav-resource">
-			<?php if ('uamshealth' == uams_get_site_info()['site']) { ?>
+			<?php if ('uamshealth' == $site) { ?>
 			<!-- uamshealth only -->
 			<li class="nav-item">
 				<a class="nav-link emergency-link" href="javascript:void(0)" aria-label="Emergency Room"><svg class="" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ambulance" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M624 352h-16V243.9c0-12.7-5.1-24.9-14.1-33.9L494 110.1c-9-9-21.2-14.1-33.9-14.1H416V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h16c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zM160 464c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm144-248c0 4.4-3.6 8-8 8h-56v56c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-56h-56c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h56v-56c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v56h56c4.4 0 8 3.6 8 8v48zm176 248c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-208H416V144h44.1l99.9 99.9V256z"></path></svg><span class="sr-only">Emergency Room</span></a>
