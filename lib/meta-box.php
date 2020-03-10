@@ -146,6 +146,258 @@ acf_add_local_field_group(array(
 			'ajax' => 0,
 			'placeholder' => '',
 		),
+		// Institute on Aging Departments
+		array(
+			'key' => 'field_institute_aging_dept',
+			'label' => 'Institute on Aging Department',
+			'name' => 'uamswp_institute_aging_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_aging',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Eye Institute Departments
+		array(
+			'key' => 'field_institute_eye_dept',
+			'label' => 'Eye Institute Department',
+			'name' => 'uamswp_institute_eye_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_eye',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Spine & Neurosciences Institute Departments
+		array(
+			'key' => 'field_institute_spine_dept',
+			'label' => 'Spine & Neurosciences Institute Department',
+			'name' => 'uamswp_institute_spine_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_spine',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Institute for Digital Health & Innovation Departments
+		array(
+			'key' => 'field_institute_digi-health_dept',
+			'label' => 'Institute for Digital Health & Innovation Department',
+			'name' => 'uamswp_institute_digi-health_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_digi-health',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Psychiatric Research Institute Departments
+		array(
+			'key' => 'field_institute_pri_dept',
+			'label' => 'Psychiatric Research Institute Department',
+			'name' => 'uamswp_institute_pri_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_pri',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Translational Research Institute Departments
+		array(
+			'key' => 'field_institute_tri_dept',
+			'label' => 'Translational Research Institute Department',
+			'name' => 'uamswp_institute_tri_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_tri',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Cancer Institute Departments
+		array(
+			'key' => 'field_institute_cancer_dept',
+			'label' => 'Cancer Institute Department',
+			'name' => 'uamswp_institute_cancer_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_cancer',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
 		array(
 			'key' => 'field_uams_subsite',
 			'label' => 'Organization',
