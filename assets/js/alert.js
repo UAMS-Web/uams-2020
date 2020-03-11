@@ -1,19 +1,20 @@
-/*  University of Washington - Alert 2.0 Beta
+/*  University of Arkansas for Medical Sciences - Alert 2.0 Beta
+ *  Based on UW Alert Banner - https://github.com/uweb/UW-Alert-Banner
  *  (c) 2011 Chris Heiland
  *
  *  Script should be included like such:
- * 
+ *
  *  <html>
  *  <head>
  *  <title>Page Title</title>
  *  </head>
  *  <body>
- * 
- *  <script type="text/javascript" src="//washington.edu/static/alert.js"></script>
+ *
+ *  <script type="text/javascript" src="//www.uams.edu/web/alert/alert.js"></script>
  *  </body>
  *  </html>
  *
- *  Full docs at:
+ *  Original docs at:
  *  uw.edu/marketing/uw-alert-banner/
  *
  *--------------------------------------------------------------------------*/
@@ -21,15 +22,27 @@
 // Thanks Dane!
 var strTestStatus = window.location.hash.indexOf('uamsalert') === -1 ? 'false' : 'true';
 // Allow for local testing
-var strDomain = (window.location.hostname == 'localhost') ? 'localhost' : 'www.uams.edu/web/alert/';
-var strDataFeed = 'https://public-api.wordpress.com/rest/v1/sites/uamsalert.wordpress.com/posts/';//'/data/?c=displayAlert&test='+strTestStatus;
+var strDomain = (window.location.hostname == 'localhost') ? 'localhost' : 'www.uams.edu/web/alert';
+var strDataFeed = '/data/?c=displayAlert&test='+strTestStatus;
 var strBaseUrl = window.location.protocol + '//' + strDomain;
+// var strBaseUrl = 'http://' + strDomain; // Test
+var strSiteStatus = '';
+
+if (document.body.className.indexOf('uamshealth')!== -1) {
+    strSiteStatus = 'uamshealth';
+} else if (document.body.className.indexOf('insidenew')!== -1) {
+    strSiteStatus = 'insidenew';
+} else if (document.body.className.indexOf('inside')!== -1) {
+    strSiteStatus = 'inside';
+} else {
+    strSiteStatus = 'uams';
+}
 
 var strScript = document.createElement('script');
-strScript.setAttribute('src', strDataFeed);
-document.getElementsByTagName('head')[0].appendChild(strScript); 
+strScript.setAttribute('src', strBaseUrl + strDataFeed);
+document.getElementsByTagName('head')[0].appendChild(strScript);
 
-// displayAlert - grab content to display message 
+// displayAlert - grab content to display message
 function displayAlert(objAlertData)
 {
 
@@ -38,15 +51,23 @@ function displayAlert(objAlertData)
     if ((!objAlertData) || (objAlertData.found == 0))
         return false;
 
+    var alertUrgent = "urgent-"+ strSiteStatus;
+    var alertAlert = "alert-"+ strSiteStatus;
+    var alertFyi = "fyi-"+ strSiteStatus;
+    var alertTest = strSiteStatus;
+
+    console.log( alertTest );
+
     // Alert colors
-    arrAlertTypes = {
-        'red-alert-urgent' : 'uamsalert-red',
-        'orange-alert'     : 'uamsalert-orange',
-        'steel-alert-fyis' : 'uamsalert-steel'
-    };
+    arrAlertTypes = {};
+        arrAlertTypes[alertUrgent] = "uamsalert-urgent";
+        arrAlertTypes[alertAlert] = "uamsalert-alert";
+        arrAlertTypes[alertFyi] = "uamsalert-fyi";
+
+    // };
 
     var arrCategories = objAlertData.posts[0].categories;
-    // If there is a test alert 
+    // If there is a test alert
     if ( window.location.hash.indexOf('uamsalert') != -1 )
     {
         // Sometimes we don't get a category from the w.com test feed
@@ -64,7 +85,7 @@ function displayAlert(objAlertData)
         if (arrAlertTypes[objCategory.slug] || objFakeCat)
         {
             var strAlertTitle    = objAlertData.posts[0].title;
-            var strAlertLink     = 'https://uamshealth.com/weather';
+            var strAlertLink     = 'https://uamshealth.com/weather/';
             var strAlertMessage  = objAlertData.posts[0].excerpt;
             var strAlertColor    = arrAlertTypes[objCategory.slug] ? arrAlertTypes[objCategory.slug] : objFakeCat.slug;
             strSuccess           = true;
@@ -73,18 +94,19 @@ function displayAlert(objAlertData)
 
     // Banners must have an actual color
     // Don't load anything unless we have something to present
-    if (strSuccess) 
+    if (strSuccess)
     {
         addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage);
         // Code contributed by Dustin Brewer
         var strCSS = document.createElement('link');
-        strCSS.setAttribute('href', strBaseUrl + '/UW-Alert-Banner/uwalert.css');
+        strCSS.setAttribute('href', strBaseUrl + '/uamsalert.css');
+        // strCSS.setAttribute('href', './uamsalert.css');
         strCSS.setAttribute('rel','stylesheet');
         strCSS.setAttribute('type','text/css');
         document.getElementsByTagName('head')[0].appendChild(strCSS);
         // Because content is loaded dynamically, need to wait to grab the height
         setTimeout(function() {
-            var strHeight = document.getElementById('uwalert-alert-message').offsetHeight;
+            var strHeight = document.getElementById('uamsalert-alert-message').offsetHeight;
             var bodyTag = document.getElementsByTagName('body')[0];
             bodyTag.style.backgroundPosition='0px '+strHeight+'px';
         },10);
@@ -106,11 +128,11 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
 
     var wrapperDiv = document.createElement('div');
     wrapperDiv.setAttribute('id','uamsalert-alert-message');
-    wrapperDiv.setAttribute('class', strAlertColor);
+    wrapperDiv.setAttribute('class', strAlertColor + ' ' + strSiteStatus);
 
     var alertBoxTextDiv = document.createElement('div');
     alertBoxTextDiv.setAttribute('id','uamsalert-alert-inner');
-    alertBoxTextDiv.setAttribute('class', strAlertColor);
+    alertBoxTextDiv.setAttribute('class', strAlertColor + ' ' + strSiteStatus);
 
     var anchorLink = document.createElement('a');
     anchorLink.setAttribute('href', strAlertLink);
@@ -120,7 +142,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     header1.setAttribute('id', 'uamsalert-alert-header');
 
     // Supporting titles with special characters
-    try 
+    try
     {
         anchorLink.innerHTML = strAlertTitle;
     }
@@ -131,7 +153,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
 
     }
     header1.appendChild(anchorLink);
-    
+
     var alertTextP = document.createElement('p');
 
     var div = document.createElement("div");
@@ -140,7 +162,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     var alertTextMessage = div.textContent || div.innerText || "";
     // Build alert text node and cut of max characters
     var alertText = document.createTextNode(
-    alertTextMessage.substring(0,360) + 
+    alertTextMessage.substring(0,360) +
         (alertTextMessage.length >= 360 ? '... ' : ' ')
     );
     alertTextP.appendChild(alertText);
@@ -160,4 +182,4 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     wrapperDiv.appendChild(alertBoxTextDiv);
 
     bodyTag.insertBefore(wrapperDiv, bodyTag.firstChild);
-} 
+}
