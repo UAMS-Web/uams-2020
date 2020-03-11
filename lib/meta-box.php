@@ -173,6 +173,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
+				'dept' => 'Department or Organization',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -209,6 +210,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
+				'dept' => 'Department or Organization',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -245,6 +247,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
+				'dept' => 'Department or Organization',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -281,6 +284,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
+				'dept' => 'Department or Organization',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -317,6 +321,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
+				'dept' => 'Department or Organization',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -353,6 +358,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
+				'dept' => 'Department or Organization',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -389,6 +395,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
+				'dept' => 'Department or Organization',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -476,6 +483,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
+				'dept' => 'Department or Organization',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -519,6 +527,7 @@ acf_add_local_field_group(array(
 				'pathology' => 'Pathology',
 				'pediatrics' => 'Pediatrics',
 				'urology' => 'Urology',
+				'dept' => 'Other Department or Organization',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -555,6 +564,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
+				'dept' => 'Department or Organization',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -592,6 +602,7 @@ acf_add_local_field_group(array(
 			'choices' => array(
 				'main' => 'Main site',
 				'arpoison' => 'Arkansas Poison and Drug Information Center',
+				'dept' => 'Other Department or Organization',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -628,6 +639,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
+				'dept' => 'Department or Organization',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -664,6 +676,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
+				'dept' => 'Department or Organization',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
