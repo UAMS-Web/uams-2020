@@ -90,14 +90,8 @@ acf_add_local_field_group(array(
 			'choices' => array(
 				'uams' => 'Main Campus',
 				'nw-campus' => 'Northwest Campus',
-				'regional-campus-e' => 'Regional Campus - East',
-				'regional-campus-ne' => 'Regional Campus - Northeast',
-				'regional-campus-nw' => 'Regional Campus - Northwest',
-				'regional-campus-nc' => 'Regional Campus - North Central',
-				'regional-campus-s' => 'Regional Campus - South',
-				'regional-campus-sw' => 'Regional Campus - Southwest',
-				'regional-campus-sc' => 'Regional Campus - South Central',
-				'regional-campus-w' => 'Regional Campus - West',
+				'regional-campus' => 'Regional Campus',
+				
 			),
 			'default_value' => array(
 				0 => 'uams',
@@ -107,6 +101,50 @@ acf_add_local_field_group(array(
 			'ui' => 0,
 			'return_format' => 'value',
 			'ajax' => 0,
+			'placeholder' => '',
+		),
+		// Regional Campus
+		array(
+			'key' => 'field_regional_campus',
+			'label' => 'Regional Campus',
+			'name' => 'uamswp_regional_campus',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_location',
+						'operator' => '==',
+						'value' => 'regional-campus',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'regional-campus-e' => 'Regional Campus - East',
+				'regional-campus-ne' => 'Regional Campus - Northeast',
+				'regional-campus-nw' => 'Regional Campus - Northwest',
+				'regional-campus-nc' => 'Regional Campus - North Central',
+				'regional-campus-s' => 'Regional Campus - South',
+				'regional-campus-sw' => 'Regional Campus - Southwest',
+				'regional-campus-sc' => 'Regional Campus - South Central',
+				'regional-campus-w' => 'Regional Campus - West',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
 			'placeholder' => '',
 		),
 		// Institutes
@@ -173,7 +211,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
-				'dept' => 'Department or Organization',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -210,7 +248,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
-				'dept' => 'Department or Organization',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -247,7 +285,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
-				'dept' => 'Department or Organization',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -284,7 +322,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
-				'dept' => 'Department or Organization',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -321,7 +359,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
-				'dept' => 'Department or Organization',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -358,7 +396,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
-				'dept' => 'Department or Organization',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -395,7 +433,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
-				'dept' => 'Department or Organization',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -483,7 +521,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
-				'dept' => 'Department or Organization',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -527,7 +565,7 @@ acf_add_local_field_group(array(
 				'pathology' => 'Pathology',
 				'pediatrics' => 'Pediatrics',
 				'urology' => 'Urology',
-				'dept' => 'Other Department or Organization',
+				'dept' => 'Other Department or Organization Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -564,7 +602,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
-				'dept' => 'Department or Organization',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -602,7 +640,7 @@ acf_add_local_field_group(array(
 			'choices' => array(
 				'main' => 'Main site',
 				'arpoison' => 'Arkansas Poison and Drug Information Center',
-				'dept' => 'Other Department or Organization',
+				'dept' => 'Other Department or Organization Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -639,7 +677,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
-				'dept' => 'Department or Organization',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -676,7 +714,7 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'main' => 'Main site',
-				'dept' => 'Department or Organization',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -712,8 +750,9 @@ acf_add_local_field_group(array(
 				'id' => '',
 			),
 			'choices' => array(
-				'uams-aux' => 'UAMS Auxiliary',
 				'main' => 'Main UAMS Health site',
+				'uams-aux' => 'UAMS Auxiliary',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -751,6 +790,7 @@ acf_add_local_field_group(array(
 			'choices' => array(
 				'fitness-center' => 'Fitness Center',
 				'main' => 'Main Site',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -854,7 +894,7 @@ acf_add_local_field_group(array(
 					),
 					'acfe_validate' => '',
 					'acfe_update' => '',
-							'default_value' => '',
+					'default_value' => '',
 					'placeholder' => 'Mailing Address',
 					'prepend' => '',
 					'append' => '',
@@ -896,7 +936,7 @@ acf_add_local_field_group(array(
 					),
 					'acfe_validate' => '',
 					'acfe_update' => '',
-							'default_value' => '',
+					'default_value' => '',
 					'placeholder' => '',
 					'prepend' => '',
 					'append' => '',
@@ -917,7 +957,7 @@ acf_add_local_field_group(array(
 					),
 					'acfe_validate' => '',
 					'acfe_update' => '',
-							'default_value' => '',
+					'default_value' => '',
 					'placeholder' => '',
 					'prepend' => '',
 					'append' => '',
@@ -1016,7 +1056,7 @@ acf_add_local_field_group(array(
 					),
 					'acfe_validate' => '',
 					'acfe_update' => '',
-							'default_value' => '',
+					'default_value' => '',
 					'placeholder' => '',
 					'prepend' => '',
 					'append' => '',
