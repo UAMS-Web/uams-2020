@@ -50,15 +50,6 @@ function uamswp_site_image() {
 
 		if ('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] && uamswp_nav_subsection()) { // If it's a subsection on the main UAMS Health site
 			echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
-		} elseif (uamswp_nav_subsection()) { // If it's a subsection on any other site
-			echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a><span class="sr-only">: </span>';
-			echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
-		} elseif ('inside' == uams_get_site_info()['site'] && 'main' !== uams_get_site_info()['subsite']) {
-			switch_to_blog(1);
-			$site_title = get_bloginfo( 'name' );
-			restore_current_blog();
-			echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( network_site_url() ).'">'.$site_title.'<span class="sr-only">:</span></a>';
-			echo '<a class="title" href="'. esc_url( home_url( '/' ) ) .'">'. get_bloginfo( 'name' ) .'</a>';
 		} elseif ( // If it's an institute, college or grad school
 			'institute' == uams_get_site_info()['site']
 			|| 'health-prof' == uams_get_site_info()['subsite']
@@ -112,6 +103,15 @@ function uamswp_site_image() {
 				// Main site, not subsection, not split title
 				echo '<a class="title" href="'.$site_title_link.'">'.$site_title.'</a>';
 			}
+		} elseif (uamswp_nav_subsection()) { // If it's a subsection on any other site
+			echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a><span class="sr-only">: </span>';
+			echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
+		} elseif ('inside' == uams_get_site_info()['site'] && 'main' !== uams_get_site_info()['subsite']) {
+			switch_to_blog(1);
+			$site_title = get_bloginfo( 'name' );
+			restore_current_blog();
+			echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( network_site_url() ).'">'.$site_title.'<span class="sr-only">:</span></a>';
+			echo '<a class="title" href="'. esc_url( home_url( '/' ) ) .'">'. get_bloginfo( 'name' ) .'</a>';
 		} else {
 		// If it's a regular old homepage
 			echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a>';
