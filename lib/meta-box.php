@@ -35,6 +35,7 @@ acf_add_local_field_group(array(
 	'key' => 'group_uams_theme_settings',
 	'title' => 'Theme Settings',
 	'fields' => array(
+		// Theme Styles
 		array(
 			'key' => 'field_template',
 			'label' => 'Theme Style',
@@ -64,6 +65,7 @@ acf_add_local_field_group(array(
 			'return_format' => 'value',
 			'placeholder' => '',
 		),
+		// Site Locations
 		array(
 			'key' => 'field_location',
 			'label' => 'Site Location',
@@ -107,6 +109,7 @@ acf_add_local_field_group(array(
 			'ajax' => 0,
 			'placeholder' => '',
 		),
+		// Institutes
 		array(
 			'key' => 'field_institute',
 			'label' => 'UAMS Institute',
@@ -146,6 +149,259 @@ acf_add_local_field_group(array(
 			'ajax' => 0,
 			'placeholder' => '',
 		),
+		// Institute on Aging Departments
+		array(
+			'key' => 'field_institute_aging_dept',
+			'label' => 'Institute on Aging Department',
+			'name' => 'uamswp_institute_aging_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_aging',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Eye Institute Departments
+		array(
+			'key' => 'field_institute_eye_dept',
+			'label' => 'Eye Institute Department',
+			'name' => 'uamswp_institute_eye_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_eye',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Spine & Neurosciences Institute Departments
+		array(
+			'key' => 'field_institute_spine_dept',
+			'label' => 'Spine & Neurosciences Institute Department',
+			'name' => 'uamswp_institute_spine_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_spine',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Institute for Digital Health & Innovation Departments
+		array(
+			'key' => 'field_institute_digi-health_dept',
+			'label' => 'Institute for Digital Health & Innovation Department',
+			'name' => 'uamswp_institute_digi-health_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_digi-health',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Psychiatric Research Institute Departments
+		array(
+			'key' => 'field_institute_pri_dept',
+			'label' => 'Psychiatric Research Institute Department',
+			'name' => 'uamswp_institute_pri_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_pri',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Translational Research Institute Departments
+		array(
+			'key' => 'field_institute_tri_dept',
+			'label' => 'Translational Research Institute Department',
+			'name' => 'uamswp_institute_tri_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_tri',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Cancer Institute Departments
+		array(
+			'key' => 'field_institute_cancer_dept',
+			'label' => 'Cancer Institute Department',
+			'name' => 'uamswp_institute_cancer_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_cancer',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// UAMS.edu Main Campus Organizations
 		array(
 			'key' => 'field_uams_subsite',
 			'label' => 'Organization',
@@ -170,16 +426,8 @@ acf_add_local_field_group(array(
 			'choices' => array(
 				'health-prof' => 'College of Health Professions',
 				'medicine' => 'College of Medicine',
-				'medicine_emergency-medicine' => 'College of Medicine -	Emergency Medicine',
-				'medicine_pediatrics' => 'College of Medicine - Pediatrics',
-				'medicine_otolaryngology' => 'College of Medicine - ENT',
-				'medicine_family-medicine' => 'College of Medicine - Family Medicine',
-				'medicine_orthopaedic-surgery' => 'College of Medicine - Orthopaedics',
-				'medicine_pathology' => 'College of Medicine - Pathology',
-				'medicine_urology' => 'College of Medicine - Urology',
 				'nursing' => 'College of Nursing',
 				'pharmacy' => 'College of Pharmacy',
-				'pharmacy_arpoison' => 'College of Pharmacy - Arkansas Poison and Drug Information Center',
 				'public-health' => 'College of Public Health',
 				'grad-school' => 'Graduate school',
 				'12th-st' => '12th St. Health & Wellness Center',
@@ -204,6 +452,231 @@ acf_add_local_field_group(array(
 			'return_format' => 'value',
 			'placeholder' => '',
 		),
+		// College of Health Professions Departments
+		array(
+			'key' => 'field_uams_cohp_dept',
+			'label' => 'College of Health Professions Department',
+			'name' => 'uamswp_uams_cohp_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'health-prof',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// College of Medicine Departments
+		array(
+			'key' => 'field_uams_com_dept',
+			'label' => 'College of Medicine Department',
+			'name' => 'uamswp_uams_com_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'medicine',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'emergency-medicine' => 'Emergency Medicine',
+				'family-medicine' => 'Family Medicine',
+				'orthopaedic-surgery' => 'Orthopaedics',
+				'otolaryngology' => 'Otolaryngology (ENT)',
+				'pathology' => 'Pathology',
+				'pediatrics' => 'Pediatrics',
+				'urology' => 'Urology',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// College of Nursing Departments
+		array(
+			'key' => 'field_uams_con_dept',
+			'label' => 'College of Nursing Department',
+			'name' => 'uamswp_uams_con_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'nursing',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// College of Pharmacy Departments
+		array(
+			'key' => 'field_uams_cop_dept',
+			'label' => 'College of Pharmacy Department',
+			'name' => 'uamswp_uams_cop_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'pharmacy',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'arpoison' => 'Arkansas Poison and Drug Information Center',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// College of Public Health Departments
+		array(
+			'key' => 'field_uams_coph_dept',
+			'label' => 'College of Public Health Department',
+			'name' => 'uamswp_uams_coph_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'public-health',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Graduate School Departments
+		array(
+			'key' => 'field_uams_grad-school_dept',
+			'label' => 'Grad School Department',
+			'name' => 'uamswp_uams_grad-school_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'grad-school',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// UAMS Health Organizations
 		array(
 			'key' => 'field_uamshealth_subsite',
 			'label' => 'Organization',
@@ -240,6 +713,7 @@ acf_add_local_field_group(array(
 			'ajax' => 0,
 			'placeholder' => '',
 		),
+		// Inside UAMS Organizations
 		array(
 			'key' => 'field_inside_subsite',
 			'label' => 'Organization',
@@ -275,6 +749,7 @@ acf_add_local_field_group(array(
 			'ajax' => 0,
 			'placeholder' => '',
 		),
+		// Custom Addresses
 		array(
 			'key' => 'field_address_accordion',
 			'label' => 'Custom Addresses',

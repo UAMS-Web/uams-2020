@@ -59,6 +59,95 @@ function uamswp_site_image() {
 			restore_current_blog();
 			echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( network_site_url() ).'">'.$site_title.'<span class="sr-only">:</span></a>';
 			echo '<a class="title" href="'. esc_url( home_url( '/' ) ) .'">'. get_bloginfo( 'name' ) .'</a>';
+		} elseif ('institute' == uams_get_site_info()['site']) {
+			if ('institute_aging' == uams_get_site_info()['subsite']) {
+				$parent_title_split = true;
+				$parent_title_split_descr = 'Donald W. Reynolds';
+				$parent_title_split_function = 'Institute on Aging';
+				$parent_title_text = 'Donald W. Reynolds Institute on Aging';
+				$parent_title_link = 'https://aging.uams.edu/';
+			} elseif ('institute_eye' == uams_get_site_info()['subsite']) {
+				$parent_title_split = true;
+				$parent_title_split_descr = 'Harvey & Bernice Jones';
+				$parent_title_split_function = 'Eye Institute';
+				$parent_title_text = 'Harvey & Bernice Jones Eye Institute';
+				$parent_title_link = 'https://eye.uams.edu/';
+			} elseif ('institute_spine' == uams_get_site_info()['subsite']) {
+				$parent_title_split = true;
+				$parent_title_split_descr = 'Jackson T. Stephens';
+				$parent_title_split_function = 'Spine &amp; Neurosciences Institute';
+				$parent_title_text = 'Jackson T. Stephens Spine &amp; Neurosciences Institute';
+				$parent_title_link = 'https://spine.uams.edu/';
+			} elseif ('institute_digi-health' == uams_get_site_info()['subsite']) {
+				$parent_title_split = false;
+				$parent_title_text = 'Institute for Digital Health &amp; Innovation';
+				$parent_title_link = 'https://idhi.uams.edu/';
+			} elseif ('institute_pri' == uams_get_site_info()['subsite']) {
+				$parent_title_split = false;
+				$parent_title_text = 'Psychiatric Research Institute';
+				$parent_title_link = 'https://psychiatry.uams.edu/';
+			} elseif ('institute_tri' == uams_get_site_info()['subsite']) {
+				$parent_title_split = false;
+				$parent_title_text = 'Translational Research Institute';
+				$parent_title_link = 'https://tri.uams.edu/';
+			} elseif ('institute_cancer' == uams_get_site_info()['subsite']) {
+				$parent_title_split = true;
+				$parent_title_split_descr = 'Winthrop P. Rockefeller';
+				$parent_title_split_function = 'Cancer Institute';
+				$parent_title_text = 'Winthrop P. Rockefeller Cancer Institute';
+				$parent_title_link = 'https://cancer.uams.edu/';
+			}
+			if ('main' != uams_get_site_info()['department'] && !uamswp_nav_subsection()) {
+				// Hardcoding parent values. Come back when multisite settings are smoothed out and set these relative to root site.
+				echo '<a class="parent" title="'.$parent_title_text.'" href="'.$parent_title_link.'">'.$parent_title_text.'</a><span class="sr-only">: </span>';
+				echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a>';
+			} elseif (uamswp_nav_subsection()) {
+				// Hardcoding parent values. Come back when multisite settings are smoothed out and set these relative to root site.
+				echo '<a class="parent" title="'.$parent_title_text.'" href="'.$parent_title_link.'">'.$parent_title_text.'</a><span class="sr-only">: </span>';
+				echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
+			} elseif ($parent_title_split) {
+				echo '<a class="title-split" href="'. esc_url( home_url( '/' ) ) .'"><span class="title-descriptor">' . $parent_title_split_descr . '</span> <span class="title-function">' . $parent_title_split_function . '</span></a>';
+			} else {
+				echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.$parent_title_text.'</a>';
+			}
+		} elseif (
+			'health-prof' == uams_get_site_info()['subsite']
+			|| 'medicine' == uams_get_site_info()['subsite']
+			|| 'nursing' == uams_get_site_info()['subsite']
+			|| 'pharmacy' == uams_get_site_info()['subsite']
+			|| 'public-health' == uams_get_site_info()['subsite']
+			|| 'grad-school' == uams_get_site_info()['subsite']
+			) {
+			if ('health-prof' == uams_get_site_info()['subsite']) {
+				$parent_title_text = 'College of Health Professions';
+				$parent_title_link = 'https://healthprofessions.uams.edu/';
+			} elseif ('medicine' == uams_get_site_info()['subsite']) {
+				$parent_title_text = 'College of Medicine';
+				$parent_title_link = 'https://medicine.uams.edu/';
+			} elseif ('nursing' == uams_get_site_info()['subsite']) {
+				$parent_title_text = 'College of Nursing';
+				$parent_title_link = 'https://nursing.uams.edu/';
+			} elseif ('pharmacy' == uams_get_site_info()['subsite']) {
+				$parent_title_text = 'College of Pharmacy';
+				$parent_title_link = 'https://pharmacy.uams.edu/';
+			} elseif ('public-health' == uams_get_site_info()['subsite']) {
+				$parent_title_text = 'College of Public Health';
+				$parent_title_link = 'https://publichealth.uams.edu/';
+			} elseif ('grad-school' == uams_get_site_info()['subsite']) {
+				$parent_title_text = 'Graduate School';
+				$parent_title_link = 'https://gradschool.uams.edu/';
+			}
+			if ('main' != uams_get_site_info()['department'] && !uamswp_nav_subsection()) {
+				// Hardcoding parent values. Come back when multisite settings are smoothed out and set these relative to root site.
+				echo '<a class="parent" title="'.$parent_title_text.'" href="'.$parent_title_link.'">'.$parent_title_text.'</a><span class="sr-only">: </span>';
+				echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a>';
+			} elseif (uamswp_nav_subsection()) {
+				// Hardcoding parent values. Come back when multisite settings are smoothed out and set these relative to root site.
+				echo '<a class="parent" title="'.$parent_title_text.'" href="'.$parent_title_link.'">'.$parent_title_text.'</a><span class="sr-only">: </span>';
+				echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
+			} else {
+				echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.$parent_title_text.'</a>';
+			}
 		} else {
 		// If it's a regular old homepage
 			echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a>';
