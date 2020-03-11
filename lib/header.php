@@ -72,11 +72,11 @@ function uamswp_site_image() {
 			$split_str = '   ';
 			if(strpos($root_title_text, $split_str) !== false){
 				$root_title_split = true;
-				$split_str_pos = strpos($site_title, $split_str);
+				$split_str_pos = strpos($root_title_text, $split_str);
 				$split_a_end = $split_str_pos;
 				$split_b_begin = $split_str_pos + 3;
-				$root_title_split_descr = substr($site_title, 0, $split_a_end);
-				$root_title_split_function = substr($site_title, $split_b_begin);
+				$root_title_split_descr = substr($root_title_text, 0, $split_a_end);
+				$root_title_split_function = substr($root_title_text, $split_b_begin);
 				$root_title_text = str_replace($split_str, ' ', $root_title_text);
 			}
 			// Test if current site title contains three spaces. Replace with one space if so.
