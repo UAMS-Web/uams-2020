@@ -146,8 +146,8 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     anchorLink.setAttribute('href', strAlertLink);
     anchorLink.setAttribute('title', strAlertTitle);
 
-    var header1 = document.createElement('div');
-    header1.setAttribute('id', 'uamsalert-alert-header');
+    var alertHeading = document.createElement('div');
+    alertHeading.setAttribute('id', 'uamsalert-alert-header');
 
     // Supporting titles with special characters
     try
@@ -160,7 +160,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
         anchorLink.appendChild(header1Text);
 
     }
-    header1.appendChild(anchorLink);
+    alertHeading.appendChild(anchorLink);
 
     var alertTextP = document.createElement('p');
 
@@ -184,7 +184,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     // Start Building the Actual Div
     alertTextP.appendChild(alertLink);
 
-    wrapperBody.appendChild(header1);
+    wrapperBody.appendChild(alertHeading);
     wrapperBody.appendChild(alertTextP);
 
     wrapperCol.appendChild(wrapperBody);
