@@ -3,6 +3,7 @@
         .inner-container {
             text-align: center;
 
+            h1,
             h2,
             .text-container,
             .btn-container {
@@ -11,6 +12,11 @@
                 margin-left: auto;
             }
 
+            h1 {
+                @extend .h2;
+            }
+
+            h1,
             h2 {
                 width: $line-length-min + em;
             }
@@ -42,6 +48,7 @@
                 text-align: center;
             }
             .cta-heading {
+                h1,
                 h2 {
                     @include media-breakpoint-up(md) {
                         max-width: $line-length-min + em;
@@ -79,7 +86,6 @@
 
                     @include media-breakpoint-up(md) {
                         padding-left: $uams-module-padding-mobile;
-                        
                     }
                 }
             }
@@ -96,6 +102,7 @@
 
     &.cta-bar-sm {
         .cta-heading {
+            h1,
             h2 {
                 @extend .h4;
             }
