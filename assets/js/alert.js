@@ -211,7 +211,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
     alertLink.setAttribute('class', 'btn btn-white');
     alertLink.setAttribute('href', strAlertLink);
     alertLink.setAttribute('title', strAlertTitle);
-    var alertLinkText = document.createTextNode('More Info');
+    var alertLinkText = document.createTextNode('Read More');
     alertLink.appendChild(alertLinkText);
 
     // Standard/Base Link - Inclement Weather
@@ -219,7 +219,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
     alertLinkBase.setAttribute('class', 'btn btn-outline-white');
     alertLinkBase.setAttribute('href', 'https://uamshealth.com/weather/');
     alertLinkBase.setAttribute('title', 'UAMS Inclement Weather');
-    var alertLinkTextBase = document.createTextNode('More Info');
+    var alertLinkTextBase = document.createTextNode('All Updates');
     alertLinkBase.appendChild(alertLinkTextBase);
 
     wrapperBtn.appendChild(alertLink);
