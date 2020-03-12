@@ -100,7 +100,7 @@ function displayAlert(objAlertData)
         addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent); // Removed strAlertMessage
         // Code contributed by Dustin Brewer
         var strCSS = document.createElement('link');
-        strCSS.setAttribute('href', strBaseUrl + '/uamsalert.css');
+        //strCSS.setAttribute('href', strBaseUrl + '/uamsalert.css');
         // strCSS.setAttribute('href', './uamsalert.css');
         strCSS.setAttribute('rel','stylesheet');
         strCSS.setAttribute('type','text/css');
