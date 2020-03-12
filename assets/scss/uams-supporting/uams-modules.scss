@@ -24,6 +24,14 @@
         }
     }
 
+    &.less-padding {
+        padding: ($uams-module-padding-mobile / 2) $uams-module-padding-mobile;
+
+        @include media-breakpoint-up(sm) {
+            padding: ($uams-module-padding / 2) $uams-module-padding;
+        }
+    }
+
     .cta-container {
         margin: -0.25em;
         .btn {
