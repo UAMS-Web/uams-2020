@@ -99,7 +99,7 @@ function displayAlert(objAlertData)
         addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage);
         // Code contributed by Dustin Brewer
         var strCSS = document.createElement('link');
-        //strCSS.setAttribute('href', strBaseUrl + '/uamsalert.css');
+        strCSS.setAttribute('href', strBaseUrl + '/uamsalert.css');
         // strCSS.setAttribute('href', './uamsalert.css');
         strCSS.setAttribute('rel','stylesheet');
         strCSS.setAttribute('type','text/css');
@@ -126,40 +126,33 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     bodyTag.style.padding = '0px';
     bodyTag.className += ' uams-alert';
 
-    var wrapperSection = document.createElement('section');
-    wrapperSection.setAttribute('id','uamsalert-alert-message');
-    wrapperSection.setAttribute('class', 'uams-module ' + strAlertColor + ' ' + strSiteStatus);
+    var wrapperDiv = document.createElement('div');
+    wrapperDiv.setAttribute('id','uamsalert-alert-message');
+    wrapperDiv.setAttribute('class', strAlertColor + ' ' + strSiteStatus);
 
-    var wrapperContainer = document.createElement('div');
-    wrapperContainer.setAttribute('class', 'container-fluid');
+    var alertBoxTextDiv = document.createElement('div');
+    alertBoxTextDiv.setAttribute('id','uamsalert-alert-inner');
+    alertBoxTextDiv.setAttribute('class', strAlertColor + ' ' + strSiteStatus);
 
-    var wrapperRow = document.createElement('div');
-    wrapperRow.setAttribute('class', 'row');
+    var anchorLink = document.createElement('a');
+    anchorLink.setAttribute('href', strAlertLink);
+    anchorLink.setAttribute('title', strAlertTitle);
 
-    var wrapperCol = document.createElement('div');
-    wrapperCol.setAttribute('class', 'col-xs-12');
-
-    var wrapperBody = document.createElement('div');
-    wrapperBody.setAttribute('class', 'module-body');
-
-    var alertHeadingLink = document.createElement('a');
-    alertHeadingLink.setAttribute('href', strAlertLink);
-    alertHeadingLink.setAttribute('title', strAlertTitle);
-
-    var alertHeading = document.createElement('h2');
+    var header1 = document.createElement('div');
+    header1.setAttribute('id', 'uamsalert-alert-header');
 
     // Supporting titles with special characters
     try
     {
-        alertHeadingLink.innerHTML = strAlertTitle;
+        anchorLink.innerHTML = strAlertTitle;
     }
     catch (err)
     {
         var header1Text = document.createTextNode(strAlertTitle);
-        alertHeadingLink.appendChild(header1Text);
+        anchorLink.appendChild(header1Text);
 
     }
-    alertHeading.appendChild(alertHeadingLink);
+    header1.appendChild(anchorLink);
 
     var alertTextP = document.createElement('p');
 
@@ -175,25 +168,18 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     alertTextP.appendChild(alertText);
 
     var alertLink = document.createElement('a');
-    alertLink.setAttribute('class', 'btn btn-white');
     alertLink.setAttribute('href', strAlertLink);
     alertLink.setAttribute('title', strAlertTitle);
     var alertLinkText = document.createTextNode('More Info');
     alertLink.appendChild(alertLinkText);
 
     // Start Building the Actual Div
+    alertTextP.appendChild(alertLink);
 
-    wrapperBody.appendChild(alertHeading);
-    wrapperBody.appendChild(alertTextP);
-    wrapperBody.appendChild(alertLink);
+    alertBoxTextDiv.appendChild(header1);
+    alertBoxTextDiv.appendChild(alertTextP);
 
-    wrapperCol.appendChild(wrapperBody);
+    wrapperDiv.appendChild(alertBoxTextDiv);
 
-    wrapperRow.appendChild(wrapperCol);
-
-    wrapperContainer.appendChild(wrapperRow);
-
-    wrapperSection.appendChild(wrapperContainer);
-
-    bodyTag.insertBefore(wrapperSection, bodyTag.firstChild);
+    bodyTag.insertBefore(wrapperDiv, bodyTag.firstChild);
 }
