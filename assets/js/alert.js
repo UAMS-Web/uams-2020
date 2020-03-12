@@ -164,7 +164,6 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
     anchorLink.setAttribute('title', strAlertTitle);
 
     var alertHeading = document.createElement('h1');
-    alertHeading.setAttribute('id', 'uamsalert-alert-header');
 
     var contentDiv = document.createElement('div');
     contentDiv.setAttribute('id', 'uamsalert-alert-content');
