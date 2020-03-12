@@ -91,6 +91,19 @@ function uamswp_custom_editor_css() {
 	add_editor_style( get_stylesheet_uri() );
 }
 
+
+// CORS header fix
+add_filter('allowed_http_origins', 'add_allowed_origins');
+
+function add_allowed_origins($origins) {
+    $origins[] = 'https://www.uams.edu';
+    $origins[] = 'http://www.uams.edu';
+	$origins[] = 'https://public-api.wordpress.com';
+	$origins[] = 'https://uamshealth.com';
+	$origins[] = 'https://news.uams.edu';
+    return $origins;
+}
+
 // function defer_parsing_of_js( $url ) {
 //     if ( is_user_logged_in() ) return $url; //don't break WP Admin
 //     if ( FALSE === strpos( $url, '.js' ) ) return $url;
