@@ -228,13 +228,14 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
     // alertLinkDiv.appendChild(alertLinkBase); // Add standard / base link
 
     // Start Building the Actual Div
-    alertBoxTextDiv.appendChild(alertHeading);
     alertBoxTextDiv.appendChild(contentDiv);
 
     // Add link if needed
     if(alertLinkTrue) {
         alertBoxTextDiv.appendChild(alertLinkDiv);
     }
+
+    wrapperHeading.appendChild(alertHeading);
 
     wrapperBody.appendChild(wrapperText);
     wrapperBody.appendChild(wrapperBtn);
