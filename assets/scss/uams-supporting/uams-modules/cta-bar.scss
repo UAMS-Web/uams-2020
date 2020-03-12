@@ -19,6 +19,9 @@
             .btn-container {
                 width: $line-length-ideal + em;
             }
+            .text-container {
+                margin-bottom: 1em;
+            }
             .btn-container {
                 justify-content: center;
             }
@@ -60,6 +63,10 @@
 
                 .text-container {
                     max-width: $line-length-ideal + em;
+
+                    @include media-breakpoint-down(sm) {
+                        margin-bottom: 1em;
+                    }
 
                     @include media-breakpoint-up(md) {
                         //flex-grow: 1;
