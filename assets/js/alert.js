@@ -129,7 +129,31 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
 
     var wrapperSection = document.createElement('section');
     wrapperSection.setAttribute('id','uamsalert-alert-message');
-    wrapperSection.setAttribute('class', strAlertColor + ' ' + strSiteStatus);
+    wrapperSection.setAttribute('class', 'uams-module less-padding cta-bar cta-bar-sm cta-bar-weighted ' + strAlertColor + ' ' + strSiteStatus);
+
+    var wrapperContainer = document.createElement('div');
+    wrapperContainer.setAttribute('class', 'container-fluid');
+
+    var wrapperRow = document.createElement('div');
+    wrapperRow.setAttribute('class', 'row');
+
+    var wrapperCol = document.createElement('div');
+    wrapperCol.setAttribute('class', 'col-12');
+
+    var wrapperInner = document.createElement('div');
+    wrapperInner.setAttribute('class', 'inner-container');
+
+    var wrapperHeading = document.createElement('div');
+    wrapperHeading.setAttribute('class', 'cta-heading');
+
+    var wrapperBody = document.createElement('div');
+    wrapperBody.setAttribute('class', 'cta-body');
+
+    var wrapperText = document.createElement('div');
+    wrapperText.setAttribute('class', 'text-container');
+
+    var wrapperBtn = document.createElement('div');
+    wrapperBtn.setAttribute('class', 'btn-container');
 
     var alertBoxTextDiv = document.createElement('div');
     alertBoxTextDiv.setAttribute('id','uamsalert-alert-inner');
@@ -213,6 +237,19 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
         alertBoxTextDiv.appendChild(alertLinkDiv);
     }
 
+    wrapperBody.appendChild(wrapperText);
+    wrapperBody.appendChild(wrapperBtn);
+
+    wrapperInner.appendChild(wrapperHeading);
+    wrapperInner.appendChild(wrapperBody);
+
+    wrapperCol.appendChild(wrapperInner);
+
+    wrapperRow.appendChild(wrapperCol);
+
+    wrapperContainer.appendChild(wrapperRow);
+
+    wrapperSection.appendChild(wrapperContainer);
     wrapperSection.appendChild(alertBoxTextDiv);
 
     bodyTag.insertBefore(wrapperSection, bodyTag.firstChild);
