@@ -126,13 +126,21 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     bodyTag.style.padding = '0px';
     bodyTag.className += ' uams-alert';
 
-    var wrapperDiv = document.createElement('div');
-    wrapperDiv.setAttribute('id','uamsalert-alert-message');
-    wrapperDiv.setAttribute('class', strAlertColor + ' ' + strSiteStatus);
+    var wrapperSection = document.createElement('section');
+    wrapperSection.setAttribute('id','uamsalert-alert-message');
+    wrapperSection.setAttribute('class', 'uams-module ' + strAlertColor + ' ' + strSiteStatus);
 
-    var alertBoxTextDiv = document.createElement('div');
-    alertBoxTextDiv.setAttribute('id','uamsalert-alert-inner');
-    alertBoxTextDiv.setAttribute('class', strAlertColor + ' ' + strSiteStatus);
+    var wrapperContainer = document.createElement('div');
+    wrapperContainer.setAttribute('class', 'container-fluid');
+
+    var wrapperRow = document.createElement('div');
+    wrapperRow.setAttribute('class', 'row');
+
+    var wrapperCol = document.createElement('div');
+    wrapperCol.setAttribute('class', 'col-xs-12');
+
+    var wrapperBody = document.createElement('div');
+    wrapperBody.setAttribute('class', 'module-body');
 
     var anchorLink = document.createElement('a');
     anchorLink.setAttribute('href', strAlertLink);
@@ -176,10 +184,16 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     // Start Building the Actual Div
     alertTextP.appendChild(alertLink);
 
-    alertBoxTextDiv.appendChild(header1);
-    alertBoxTextDiv.appendChild(alertTextP);
+    wrapperBody.appendChild(header1);
+    wrapperBody.appendChild(alertTextP);
 
-    wrapperDiv.appendChild(alertBoxTextDiv);
+    wrapperCol.appendChild(wrapperBody);
 
-    bodyTag.insertBefore(wrapperDiv, bodyTag.firstChild);
+    wrapperRow.appendChild(wrapperCol);
+
+    wrapperContainer.appendChild(wrapperRow);
+
+    wrapperSection.appendChild(wrapperContainer);
+
+    bodyTag.insertBefore(wrapperSection, bodyTag.firstChild);
 }
