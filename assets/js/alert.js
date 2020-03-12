@@ -129,7 +129,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
 
     var wrapperSection = document.createElement('section');
     wrapperSection.setAttribute('id','uamsalert-alert-message');
-    wrapperSection.setAttribute('class', 'uams-module less-padding cta-bar cta-bar-sm cta-bar-weighted ' + strAlertColor + ' ' + strSiteStatus);
+    wrapperSection.setAttribute('class', 'uams-module less-padding cta-bar cta-bar-sm ' + strAlertColor + ' ' + strSiteStatus);
 
     var wrapperContainer = document.createElement('div');
     wrapperContainer.setAttribute('class', 'container-fluid');
@@ -221,9 +221,18 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
     alertLinkBase.setAttribute('title', 'UAMS Inclement Weather');
     var alertLinkTextBase = document.createTextNode('All Updates');
     alertLinkBase.appendChild(alertLinkTextBase);
+    alertLinkBaseInclude = false; // Set to true if we want to include base link
 
-    wrapperBtn.appendChild(alertLink);
-    // wrapperBtn.appendChild(alertLinkBase); // Add standard / base link
+
+    if(alertLinkTrue) {
+        wrapperBtn.appendChild(alertLink); // Add more link to container
+        alertLinkContainer = true; // Set to true so link container is added to body container
+    }
+
+    if(alertLinkBaseInclude) {
+        wrapperBtn.appendChild(alertLinkBase); // Add standard / base link to container
+        alertLinkContainer = true; // Set to true so link container is added to body container
+    }
 
     // Start Building the Actual Div
 
@@ -231,9 +240,12 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
 
     wrapperBody.appendChild(wrapperText);
 
-    // Add link if needed
-    if(alertLinkTrue) {
+    // Add link container if needed
+    if(alertLinkContainer) {
         wrapperBody.appendChild(wrapperBtn);
+        wrapperSection.setAttribute('class', wrapperSection.getAttribute('class') + ' cta-bar-weighted');
+    } else {
+        wrapperSection.setAttribute('class', wrapperSection.getAttribute('class') + ' cta-bar-centered no-link');
     }
 
     wrapperInner.appendChild(wrapperHeading);
