@@ -142,9 +142,9 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     var wrapperBody = document.createElement('div');
     wrapperBody.setAttribute('class', 'module-body');
 
-    var anchorLink = document.createElement('a');
-    anchorLink.setAttribute('href', strAlertLink);
-    anchorLink.setAttribute('title', strAlertTitle);
+    var alertHeadingLink = document.createElement('a');
+    alertHeadingLink.setAttribute('href', strAlertLink);
+    alertHeadingLink.setAttribute('title', strAlertTitle);
 
     var alertHeading = document.createElement('div');
     alertHeading.setAttribute('id', 'uamsalert-alert-header');
@@ -152,15 +152,15 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     // Supporting titles with special characters
     try
     {
-        anchorLink.innerHTML = strAlertTitle;
+        alertHeadingLink.innerHTML = strAlertTitle;
     }
     catch (err)
     {
         var header1Text = document.createTextNode(strAlertTitle);
-        anchorLink.appendChild(header1Text);
+        alertHeadingLink.appendChild(header1Text);
 
     }
-    alertHeading.appendChild(anchorLink);
+    alertHeading.appendChild(alertHeadingLink);
 
     var alertTextP = document.createElement('p');
 
