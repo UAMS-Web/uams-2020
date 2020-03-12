@@ -163,8 +163,8 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
     anchorLink.setAttribute('href', strAlertLink);
     anchorLink.setAttribute('title', strAlertTitle);
 
-    var headerDiv = document.createElement('div');
-    headerDiv.setAttribute('id', 'uamsalert-alert-header');
+    var alertHeading = document.createElement('h1');
+    alertHeading.setAttribute('id', 'uamsalert-alert-header');
 
     var contentDiv = document.createElement('div');
     contentDiv.setAttribute('id', 'uamsalert-alert-content');
@@ -184,7 +184,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
     //     anchorLink.appendChild(headerDivText);
 
     // }
-    // headerDiv.appendChild(anchorLink);
+    // alertHeading.appendChild(anchorLink);
 
     // -- Remove Excerpt -- //
     // var div = document.createElement("div");
@@ -199,7 +199,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
     // alertTextP.appendChild(alertText);
 
     // Header Text - No link
-    headerDiv.innerHTML = strAlertTitle;
+    alertHeading.innerHTML = strAlertTitle;
 
     var alertContent = document.createElement("div");
     alertContent.innerHTML = strAlertContent;
@@ -229,7 +229,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
     // alertLinkDiv.appendChild(alertLinkBase); // Add standard / base link
 
     // Start Building the Actual Div
-    alertBoxTextDiv.appendChild(headerDiv);
+    alertBoxTextDiv.appendChild(alertHeading);
     alertBoxTextDiv.appendChild(contentDiv);
 
     // Add link if needed
