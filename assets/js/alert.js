@@ -151,6 +151,12 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
 
     var wrapperText = document.createElement('div');
     wrapperText.setAttribute('class', 'text-container');
+    wrapperText.innerHTML = strAlertContent;
+    // Split HTML if read more is used
+    if(wrapperText.innerHTML.indexOf("<!--noteaser-->") !== -1) {
+        wrapperText.innerHTML = wrapperText.innerHTML.split('<!--noteaser-->', 1);
+        var alertLinkTrue = true; // Set to true if more link is used
+    }
 
     var wrapperBtn = document.createElement('div');
     wrapperBtn.setAttribute('class', 'btn-container');
@@ -200,18 +206,9 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
     // Header Text - No link
     alertHeading.innerHTML = strAlertTitle;
 
-    var alertContent = document.createElement("div");
-    alertContent.innerHTML = strAlertContent;
-    // Split HTML if read more is used
-    if(alertContent.innerHTML.indexOf("<!--noteaser-->") !== -1) {
-        alertContent.innerHTML = alertContent.innerHTML.split('<!--noteaser-->', 1);
-        var alertLinkTrue = true; // Set to true if more link is used
-    }
-    
-    contentDiv.appendChild(alertContent);
-
     // Build the alert link
     var alertLink = document.createElement('a');
+    alertLink.setAttribute('class', 'btn btn-white');
     alertLink.setAttribute('href', strAlertLink);
     alertLink.setAttribute('title', strAlertTitle);
     var alertLinkText = document.createTextNode('More Info');
@@ -219,26 +216,25 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
 
     // Standard/Base Link - Inclement Weather
     var alertLinkBase = document.createElement('a');
+    alertLinkBase.setAttribute('class', 'btn btn-outline-white');
     alertLinkBase.setAttribute('href', 'https://uamshealth.com/weather/');
     alertLinkBase.setAttribute('title', 'UAMS Inclement Weather');
     var alertLinkTextBase = document.createTextNode('More Info');
     alertLinkBase.appendChild(alertLinkTextBase);
 
-    alertLinkDiv.appendChild(alertLink);
-    // alertLinkDiv.appendChild(alertLinkBase); // Add standard / base link
+    wrapperBtn.appendChild(alertLink);
+    // wrapperBtn.appendChild(alertLinkBase); // Add standard / base link
 
     // Start Building the Actual Div
-    alertBoxTextDiv.appendChild(contentDiv);
-
-    // Add link if needed
-    if(alertLinkTrue) {
-        alertBoxTextDiv.appendChild(alertLinkDiv);
-    }
 
     wrapperHeading.appendChild(alertHeading);
 
     wrapperBody.appendChild(wrapperText);
-    wrapperBody.appendChild(wrapperBtn);
+
+    // Add link if needed
+    if(alertLinkTrue) {
+        wrapperBody.appendChild(wrapperBtn);
+    }
 
     wrapperInner.appendChild(wrapperHeading);
     wrapperInner.appendChild(wrapperBody);
