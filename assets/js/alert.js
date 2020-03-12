@@ -85,8 +85,9 @@ function displayAlert(objAlertData)
         if (arrAlertTypes[objCategory.slug] || objFakeCat)
         {
             var strAlertTitle    = objAlertData.posts[0].title;
-            var strAlertLink     = 'https://uamshealth.com/weather/';
-            var strAlertMessage  = objAlertData.posts[0].excerpt;
+            var strAlertLink     = objAlertData.posts[0].URL;
+            // var strAlertMessage  = objAlertData.posts[0].excerpt; // Not used
+            var strAlertContent  = objAlertData.posts[0].content;
             var strAlertColor    = arrAlertTypes[objCategory.slug] ? arrAlertTypes[objCategory.slug] : objFakeCat.slug;
             strSuccess           = true;
         }
@@ -96,7 +97,7 @@ function displayAlert(objAlertData)
     // Don't load anything unless we have something to present
     if (strSuccess)
     {
-        addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage);
+        addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent); // Removed strAlertMessage
         // Code contributed by Dustin Brewer
         var strCSS = document.createElement('link');
         strCSS.setAttribute('href', strBaseUrl + '/uamsalert.css');
@@ -117,7 +118,7 @@ function displayAlert(objAlertData)
 
 // addElement - display HTML on page right below the body page
 // don't want the alert to show up randomly
-function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
+function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) // Removed strAlertMessage
 {
     // Grab the tag to start the party
     var bodyTag = document.getElementsByTagName('body')[0];
@@ -138,46 +139,79 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     anchorLink.setAttribute('href', strAlertLink);
     anchorLink.setAttribute('title', strAlertTitle);
 
-    var header1 = document.createElement('div');
-    header1.setAttribute('id', 'uamsalert-alert-header');
+    var headerDiv = document.createElement('div');
+    headerDiv.setAttribute('id', 'uamsalert-alert-header');
 
+    var contentDiv = document.createElement('div');
+    contentDiv.setAttribute('id', 'uamsalert-alert-content');
+
+    var alertLinkDiv = document.createElement('div');
+    alertLinkDiv.setAttribute('id', 'uamsalert-alert-more');
+
+    // -- Remove Link -- //
     // Supporting titles with special characters
-    try
-    {
-        anchorLink.innerHTML = strAlertTitle;
+    // try
+    // {
+    //     anchorLink.innerHTML = strAlertTitle;
+    // }
+    // catch (err)
+    // {
+    //     var headerDivText = document.createTextNode(strAlertTitle);
+    //     anchorLink.appendChild(headerDivText);
+
+    // }
+    // headerDiv.appendChild(anchorLink);
+
+    // -- Remove Excerpt -- //
+    // var div = document.createElement("div");
+    // div.innerHTML = strAlertMessage;
+    // // Strip out html that wordpress.com gives us
+    // var alertTextMessage = div.textContent || div.innerText || "";
+    // // Build alert text node and cut of max characters
+    // var alertText = document.createTextNode(
+    // alertTextMessage.substring(0,360) +
+    //     (alertTextMessage.length >= 360 ? '... ' : ' ')
+    // );
+    // alertTextP.appendChild(alertText);
+
+    // Header Text - No link
+    headerDiv.innerHTML = strAlertTitle;
+
+    var alertContent = document.createElement("div");
+    alertContent.innerHTML = strAlertContent;
+    // Split HTML if read more is used
+    if(alertContent.innerHTML.indexOf("<!--noteaser-->") !== -1) {
+        alertContent.innerHTML = alertContent.innerHTML.split('<!--noteaser-->', 1);
+        var alertLinkTrue = true; // Set to true if more link is used
     }
-    catch (err)
-    {
-        var header1Text = document.createTextNode(strAlertTitle);
-        anchorLink.appendChild(header1Text);
+    
+    contentDiv.appendChild(alertContent);
 
-    }
-    header1.appendChild(anchorLink);
-
-    var alertTextP = document.createElement('p');
-
-    var div = document.createElement("div");
-    div.innerHTML = strAlertMessage;
-    // Strip out html that wordpress.com gives us
-    var alertTextMessage = div.textContent || div.innerText || "";
-    // Build alert text node and cut of max characters
-    var alertText = document.createTextNode(
-    alertTextMessage.substring(0,360) +
-        (alertTextMessage.length >= 360 ? '... ' : ' ')
-    );
-    alertTextP.appendChild(alertText);
-
+    // Build the alert link
     var alertLink = document.createElement('a');
     alertLink.setAttribute('href', strAlertLink);
     alertLink.setAttribute('title', strAlertTitle);
     var alertLinkText = document.createTextNode('More Info');
     alertLink.appendChild(alertLinkText);
 
-    // Start Building the Actual Div
-    alertTextP.appendChild(alertLink);
+    // Standard/Base Link - Inclement Weather
+    var alertLinkBase = document.createElement('a');
+    alertLinkBase.setAttribute('href', 'https://uamshealth.com/weather/');
+    alertLinkBase.setAttribute('title', 'UAMS Inclement Weather');
+    var alertLinkTextBase = document.createTextNode('More Info');
+    alertLinkBase.appendChild(alertLinkTextBase);
 
-    alertBoxTextDiv.appendChild(header1);
-    alertBoxTextDiv.appendChild(alertTextP);
+    alertLinkDiv.appendChild(alertLink);
+    // alertLinkDiv.appendChild(alertLinkBase); // Add standard / base link
+
+    // Start Building the Actual Div
+    alertBoxTextDiv.appendChild(headerDiv);
+    alertBoxTextDiv.appendChild(contentDiv);
+
+    // Add link if needed
+    if(alertLinkTrue) {
+        alertBoxTextDiv.appendChild(alertLinkDiv);
+    }
 
     wrapperDiv.appendChild(alertBoxTextDiv);
 
