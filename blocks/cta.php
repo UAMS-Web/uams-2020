@@ -41,6 +41,8 @@ if ( empty($button_desc) )
     $button_desc = get_field('cta_bar_button_description');
 if ( empty($layout) ) 
     $layout = get_field('cta_bar_layout');
+if ( empty($size) ) 
+    $size = get_field('cta_bar_size');
 if ( empty($use_image) ) 
     $use_image = get_field('cta_bar_use_image');
 if ( empty($image) ) 
@@ -54,7 +56,7 @@ if ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) {
 }
 
 ?>
-<section class="uams-module cta-bar <?php echo $className; ?> <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?><?php echo $button_url ? '' : ' no-link'; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module cta-bar <?php echo $className; ?> <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?><?php echo $size == 'small' ? ' less-padding cta-bar-sm' : ''; ?><?php echo $button_url ? '' : ' no-link'; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
 <?php if ( $use_image && function_exists( 'fly_add_image_size' ) ) { ?>
     <style>
         #<?php echo $id; ?>:before {
