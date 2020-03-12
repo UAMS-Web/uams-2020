@@ -127,9 +127,9 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
     bodyTag.style.padding = '0px';
     bodyTag.className += ' uams-alert';
 
-    var wrapperDiv = document.createElement('div');
-    wrapperDiv.setAttribute('id','uamsalert-alert-message');
-    wrapperDiv.setAttribute('class', strAlertColor + ' ' + strSiteStatus);
+    var wrapperSection = document.createElement('section');
+    wrapperSection.setAttribute('id','uamsalert-alert-message');
+    wrapperSection.setAttribute('class', strAlertColor + ' ' + strSiteStatus);
 
     var alertBoxTextDiv = document.createElement('div');
     alertBoxTextDiv.setAttribute('id','uamsalert-alert-inner');
@@ -213,7 +213,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
         alertBoxTextDiv.appendChild(alertLinkDiv);
     }
 
-    wrapperDiv.appendChild(alertBoxTextDiv);
+    wrapperSection.appendChild(alertBoxTextDiv);
 
-    bodyTag.insertBefore(wrapperDiv, bodyTag.firstChild);
+    bodyTag.insertBefore(wrapperSection, bodyTag.firstChild);
 }
