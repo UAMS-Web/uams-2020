@@ -81,5 +81,20 @@
 
     .text-container {
         @include font-size($lead-font-size);
+
+        > :last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &.cta-bar-sm {
+        .cta-heading {
+            h2 {
+                @extend .h4;
+            }
+        }
+        .text-container {
+            @include font-size($font-size-base);
+        }
     }
 }
