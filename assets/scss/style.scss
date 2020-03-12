@@ -11,7 +11,52 @@
 @import "uams-supporting/mixins";
 
 // Import Bootstrap Core
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+//@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+//@import "../../node_modules/bootstrap/scss/root";
+@import "../../node_modules/bootstrap/scss/reboot";
+@import "../../node_modules/bootstrap/scss/grid"; // moved from below code partial
+@import "../../node_modules/bootstrap/scss/type";
+
+// New UAMS Supporting Styles
+@import "uams-supporting/page";
+
+///////////////////////////////////////////////////
+// Proverbial line in the paint/sand for page load
+///////////////////////////////////////////////////
+
+@import "../../node_modules/bootstrap/scss/images";
+@import "../../node_modules/bootstrap/scss/code";
+@import "../../node_modules/bootstrap/scss/tables";
+@import "../../node_modules/bootstrap/scss/forms";
+@import "../../node_modules/bootstrap/scss/buttons";
+@import "../../node_modules/bootstrap/scss/transitions";
+@import "../../node_modules/bootstrap/scss/dropdown";
+@import "../../node_modules/bootstrap/scss/button-group";
+@import "../../node_modules/bootstrap/scss/input-group";
+@import "../../node_modules/bootstrap/scss/custom-forms";
+@import "../../node_modules/bootstrap/scss/nav";
+@import "../../node_modules/bootstrap/scss/navbar";
+@import "../../node_modules/bootstrap/scss/card";
+@import "../../node_modules/bootstrap/scss/breadcrumb";
+@import "../../node_modules/bootstrap/scss/pagination";
+//@import "../../node_modules/bootstrap/scss/badge";
+//@import "../../node_modules/bootstrap/scss/jumbotron";
+@import "../../node_modules/bootstrap/scss/alert";
+//@import "../../node_modules/bootstrap/scss/progress";
+//@import "../../node_modules/bootstrap/scss/media";
+//@import "../../node_modules/bootstrap/scss/list-group";
+@import "../../node_modules/bootstrap/scss/close";
+//@import "../../node_modules/bootstrap/scss/toasts";
+@import "../../node_modules/bootstrap/scss/modal";
+//@import "../../node_modules/bootstrap/scss/tooltip";
+//@import "../../node_modules/bootstrap/scss/popover";
+@import "../../node_modules/bootstrap/scss/carousel";
+//@import "../../node_modules/bootstrap/scss/spinners";
+@import "../../node_modules/bootstrap/scss/utilities";
+@import "../../node_modules/bootstrap/scss/print";
 
 @import "../../node_modules/smartmenus-bootstrap-4/jquery.smartmenus.bootstrap-4";
 
@@ -55,9 +100,8 @@
 //@import "uams-supporting/print";
 
 // New UAMS Supporting Styles
-@import "uams-supporting/page";
 @import "uams-supporting/layout";
-@import "uams-supporting/links-tel";
+@import "uams-supporting/links";
 @import "uams-supporting/text-callouts";
 
 // Screen Reader Classes
@@ -168,8 +212,14 @@
 // Gravity Forms
 @import "uams-supporting/gravity-forms";
 
-// Gravity Forms
+// WP Adverts
 @import "uams-supporting/wp-adverts/wp-adverts";
+
+// Tablepress
+@import "uams-supporting/tablepress";
+
+// Leaflet map
+@import "uams-supporting/leaflet-map";
 
 // Responsive Embedded Videos
 @import "uams-supporting/embed-video";
