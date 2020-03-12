@@ -175,6 +175,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     alertTextP.appendChild(alertText);
 
     var alertLink = document.createElement('a');
+    alertLink.setAttribute('class', 'btn btn-white');
     alertLink.setAttribute('href', strAlertLink);
     alertLink.setAttribute('title', strAlertTitle);
     var alertLinkText = document.createTextNode('More Info');
