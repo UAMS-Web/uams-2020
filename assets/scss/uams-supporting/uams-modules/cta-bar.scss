@@ -111,4 +111,15 @@
             @include font-size($font-size-base);
         }
     }
+
+    &.no-link {
+        &.cta-bar-centered,
+        &.cta-bar-weighted {
+            .inner-container {
+                .text-container {
+                    width: $line-length-max + em;
+                }
+            }
+        }
+    }
 }
