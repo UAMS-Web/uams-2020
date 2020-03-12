@@ -3,14 +3,14 @@
     position: relative;
     z-index: 1;
 
-   @media only screen and (min-width: 1201px) {
-      background: url(../images/alert.png) no-repeat 0 -10px transparent;
-      padding-left: 125px;
-   }
+    @media only screen and (min-width: 1201px) {
+        background: url(../images/alert.png) no-repeat 0 -10px transparent;
+        padding-left: 125px;
+    }
 
     &.uamsalert-red,
-    &.urgent-inside  {
-        background-color: #C61029;
+    &.urgent-inside {
+        background-color: #c61029;
     }
 
     &.uamsalert-orange,
@@ -31,7 +31,7 @@
 
     a {
         &.more {
-            color: #FDE048 ;
+            color: #fde048;
             display: inline-block;
             font-size: 19px;
             position: relative;
@@ -85,63 +85,83 @@
     width: 1100px;
     margin: 0 auto;
     padding: 5px 0 15px;
+
+    @media (min-width: 768px) {
+        width: 1100px;
+    }
+    @media (min-width: 768px) and (max-width: 979px) {
+        width: 768px;
+    }
+
+    &.uamsalert-urgent {
+        background: url("alert_logo_red.jpg") no-repeat 0 -38px;
+    }
+
+    &.uamsalert-fyi {
+        background: url("alert_logo_steel.jpg") no-repeat 0 -38px;
+    }
+
+    &.uamsalert-alert {
+        background: url("alert_logo_orange.jpg") no-repeat 0 -38px;
+    }
 }
+
 #uamsalert-alert-header,
 #uamsalert-alert-message p {
     color: white;
     padding: 5px 100px 0 200px;
     margin: 0;
+
+    @media (max-width: 767px) {
+        color: white;
+        margin: 0;
+        border: none;
+        padding: 5px 20px 0 20px;
+    }
+    
+    @media (min-width: 768px) and (max-width: 979px) {
+        color: white;
+        margin: 0;
+    }
 }
+
 #uamsalert-alert-header {
     font-size: 18px;
-}
-#uamsalert-alert-message p {
-    font-size: 13px;
-    line-height: 15px;
-}
-#uamsalert-alert-message a {
-    color: #fde048;
-}
 
-#uamsalert-alert-inner.uamsalert-urgent {
-    background: url("alert_logo_red.jpg") no-repeat 0 -38px;
-}
-#alert-mini.uamsalert-urgent {
-    background: url("alert_logo_red.jpg") no-repeat 16% 14% #c61029;
-    background-size: 18%;
-}
-#uamsalert-alert-message.uamsalert-urgent {
-    background-color: #c61029;
-}
-
-#uamsalert-alert-inner.uamsalert-fyi {
-    background: url("alert_logo_steel.jpg") no-repeat 0 -38px;
-}
-#alert-mini.uamsalert-fyi {
-    background: url("alert_logo_steel.jpg") no-repeat 16% 14% #597286;
-    background-size: 18%;
-}
-#uamsalert-alert-message.uamsalert-fyi {
-    background-color: #597286;
-}
-
-#uamsalert-alert-inner.uamsalert-alert {
-    background: url("alert_logo_orange.jpg") no-repeat 0 -38px;
-}
-#alert-mini.uamsalert-alert {
-    background: url("alert_logo_orange.jpg") no-repeat 16% 14% #ec7330;
-    background-size: 18%;
-}
-#uamsalert-alert-message.uamsalert-alert {
-    background-color: #ec7330;
-}
-
-/* Widescreen */
-@media (min-width: 768px) {
-    #uamsalert-alert-inner {
-        width: 1100px;
+    @media (max-width: 767px) {
+        width: 100%;
+        padding-top: 65px;
+        line-height: 18px;
     }
-    #alert-mini {
+
+    p {
+        font-size: 13px;
+        line-height: 15px;
+    }
+}
+
+#uamsalert-alert-message {
+    @media (max-width: 767px) {
+        position: relative;
+        z-index: 1;
+    }
+
+    &.uamsalert-urgent {
+        background-color: #c61029;
+    }
+    &.uamsalert-fyi {
+        background-color: #597286;
+    }
+    &.uamsalert-alert {
+        background-color: #ec7330;
+    }
+    a {
+        color: #fde048;
+    }
+}
+
+#alert-mini {
+    @media (min-width: 768px) {
         position: fixed;
         display: none;
         top: 0;
@@ -152,40 +172,17 @@
         color: #fff;
         padding: 40px 0 10px 0;
     }
-}
-/* Normal Desktop */
-@media (max-width: 979px) and (min-width: 768px) {
-    #uamsalert-alert-header,
-    #uamsalert-alert-message p {
-        color: white;
-        margin: 0;
-    }
-    #uamsalert-alert-inner {
-        width: 768px;
-    }
-}
 
-/* Mobile */
-@media (max-width: 767px) {
-    #uamsalert-alert-message {
-        position: relative;
-        z-index: 1;
+    &.uamsalert-urgent {
+        background: url("alert_logo_red.jpg") no-repeat 16% 14% #c61029;
+        background-size: 18%;
     }
-    #uamsalert-alert-inner {
-        width: 100%;
-        padding-top: 65px;
+    &.uamsalert-fyi {
+        background: url("alert_logo_steel.jpg") no-repeat 16% 14% #597286;
+        background-size: 18%;
     }
-    #uamsalert-alert-header,
-    #uamsalert-alert-message p {
-        color: white;
-        margin: 0;
-        border: none;
-    }
-    #uamsalert-alert-header {
-        line-height: 18px;
-    }
-    #uamsalert-alert-header,
-    #uamsalert-alert-message p {
-        padding: 5px 20px 0 20px;
+    &.uamsalert-alert {
+        background: url("alert_logo_orange.jpg") no-repeat 16% 14% #ec7330;
+        background-size: 18%;
     }
 }
