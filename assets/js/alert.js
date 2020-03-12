@@ -182,10 +182,10 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     alertLink.appendChild(alertLinkText);
 
     // Start Building the Actual Div
-    alertTextP.appendChild(alertLink);
 
     wrapperBody.appendChild(alertHeading);
     wrapperBody.appendChild(alertTextP);
+    wrapperBody.appendChild(alertLink);
 
     wrapperCol.appendChild(wrapperBody);
 
