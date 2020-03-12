@@ -146,8 +146,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertMessage)
     alertHeadingLink.setAttribute('href', strAlertLink);
     alertHeadingLink.setAttribute('title', strAlertTitle);
 
-    var alertHeading = document.createElement('div');
-    alertHeading.setAttribute('id', 'uamsalert-alert-header');
+    var alertHeading = document.createElement('h2');
 
     // Supporting titles with special characters
     try
