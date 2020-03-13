@@ -1,3 +1,20 @@
+// Bootstrap Core Variable Override
+@import "supporting/variables-bootstrap-core-override";
+
+// Bootstrap Genesis Theme Variables
+@import "supporting/variables-bootstrap-genesis";
+
+// UAMS Bootstrap Variables Override
+@import "uams-supporting/variables";
+
+// UAMS Bootstrap Mixins Override
+@import "uams-supporting/mixins";
+
+// Bootstrap Core
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
 // UAMS Alert CSS
 
 #uamsalert-alert-message.cta-bar.cta-bar-sm {
