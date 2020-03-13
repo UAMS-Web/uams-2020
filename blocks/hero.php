@@ -34,8 +34,20 @@ if ( empty($hero_rows) )
 if( $hero_rows ) :
     $row_count = count($hero_rows);
 
+$char_per_word = 5.9; // Average calculated using blindtextgenerator.com
+$char_heading = 79; // Character limit of slide heading
+$char_body = 177; // Character limit of slide body
+$char_button = 29; // Character limit of slide button
+$char_total = $char_heading + $char_body + $char_button;
+$word_est = $char_total / $char_per_word; // Estimate of total words in slide
+$wpm = 214; // National average for optimal silent reading rate for 9th grade, as words per minute (Hasbrouck & Tindal, 2006)
+$wps = $wpm / 60; // words per second
+$read_time = $word_est / $wps; // Time to read total words
+$slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + time to read + 1 second to interact (in milliseconds)
+
+
 ?>
-    <section class="hero carousel slide<?php echo $row_count > 1 ? " multiple-slides" : ""; ?>" id="carousel-<?php echo esc_attr($id); ?>" aria-label="Hero banner"<?php echo $row_count > 1 ? ' data-ride="carousel" data-interval="8000" data-keyboard="true"' : ''; ?>>
+    <section class="hero carousel slide<?php echo $row_count > 1 ? " multiple-slides" : ""; ?>" id="carousel-<?php echo esc_attr($id); ?>" aria-label="Hero banner"<?php echo $row_count > 1 ? ' data-ride="carousel" data-interval="' . $slide_time . '" data-keyboard="true"' : ''; ?>>
 <?php
         // $page_template = get_page_template_slug( $post_id );
         // echo $page_template;

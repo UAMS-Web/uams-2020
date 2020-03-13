@@ -91,10 +91,10 @@ function uamswp_module( $module = array(), $i = false ) {
         case 'modules_link_list':
             $id = $i;
             $heading = $module['link_list_heading'];
-            $hide_heading = $module['link_list_hide_heading'];
+            // $hide_heading = $module['link_list_hide_heading'];
             $description = $module['link_list_description'];
             $background_color = $module['link_list_background_color'];
-            $link_list_icons = $module['link_list_icons'];
+            // $link_list_icons = $module['link_list_icons'];
             $link_list_rows = $module['link_list_section'];
 
             include( get_stylesheet_directory() .'/blocks/link-list.php' );
@@ -117,7 +117,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $cta = $module['side_cta'] ?: '';
             $image_group = $module['side_image']?: '';
             $image_postion = $module['side_image_position'] ?: 'left';
-            $image_anchor = $module['side_image_anchor'] ?: 'center';
+            $image_anchor = $module['side_image']['side_image_anchor'] ?: 'center';
             $background_color = $module['side_image_background_color'] ?: 'bg-white';
 
             include( get_stylesheet_directory() .'/blocks/image-side-by-side.php' );

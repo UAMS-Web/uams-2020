@@ -1,0 +1,7 @@
+a {
+    cursor: pointer;
+  }
+  
+  a:not([href]):not([tabindex]) {
+    cursor: default;
+  }

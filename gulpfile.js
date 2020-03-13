@@ -8,19 +8,18 @@ var gulp = require('gulp'),
     notify = require('gulp-notify'),
     foreach = require('gulp-flatmap'),
     changed = require('gulp-changed'),
-    browserSync = require('browser-sync').create(),
+    // browserSync = require('browser-sync').create(),
     wpPot = require('gulp-wp-pot'),
     cssnano = require('cssnano'),
-    cmq = require('css-mqpacker'),
+    // cmq = require('css-mqpacker'),
     autoprefixer = require('autoprefixer'),
-    comments = require('postcss-discard-comments'),
-    critical = require('critical');
-    // Fiber = require('fibers');
+    comments = require('postcss-discard-comments');
+    // critical = require('critical');
 
 var plugins = [
     autoprefixer,
     cssnano,
-    cmq,
+    // cmq,
     comments({
         removeAllButFirst: true
     })
@@ -31,12 +30,20 @@ var paths = {
         src: 'assets/scss/style.scss',
         dest: 'assets/css'
     },
+    criticalcss: {
+        src: 'assets/scss/inline.scss',
+        dest: 'assets/css'
+    },
+    uamsalert: {
+        src: 'assets/scss/uamsalert.scss',
+        dest: 'assets/css'
+    },
     scripts: {
         src: [
             // 'node_modules/jquery/dist/jquery.js', // Changed from jquery.slim.js for AJAX
-            'node_modules/popper.js/dist/umd/popper.js',
+            // 'node_modules/popper.js/dist/umd/popper.js',
             // 'node_modules/bootstrap/dist/js/bootstrap.js',
-            // 'node_modules/bootstrap/dist/js/bootstrap.bundle.js', // Includes popper
+            'node_modules/bootstrap/dist/js/bootstrap.bundle.js', // Includes popper
             'node_modules/bootstrap/js/dist/alert.js',
             'node_modules/bootstrap/js/dist/button.js',
             'node_modules/bootstrap/js/dist/carousel.js',
@@ -55,12 +62,12 @@ var paths = {
         ],
         dest: 'assets/js'
     },
-    jquery: {
-        src: [
-            'node_modules/jquery/dist/jquery.min.js',
-        ],
-        dest: 'assets/js'
-    },
+    // jquery: {
+    //     src: [
+    //         'node_modules/jquery/dist/jquery.min.js',
+    //     ],
+    //     dest: 'assets/js'
+    // },
     fontawesome: {
         src: [
             'assets/js/source/all.js', // FontAwesome 
@@ -97,23 +104,49 @@ function style() {
         .pipe(postcss(plugins))
         .pipe(rename('app.css'))
         .pipe(gulp.dest(paths.styles.dest))
-        .pipe(browserSync.stream())
+        // .pipe(browserSync.stream())
         .pipe(notify({ message: 'Styles task complete' }));
 }
 
-function fa() {
+function criticalstyle() {
+    return gulp.src(paths.criticalcss.src)
+        .pipe(changed(paths.criticalcss.dest))
+        .pipe(sass.sync().on('error', sass.logError))
+        .pipe(concat('inline.scss'))
+        .pipe(postcss(plugins))
+        .pipe(rename('inline.css'))
+        .pipe(gulp.dest(paths.styles.dest))
+        // .pipe(browserSync.stream())
+        .pipe(notify({ message: 'Critical Styles task complete' }));
+}
+
+function uamsalert() {
+    return gulp.src(paths.uamsalert.src)
+        .pipe(changed(paths.uamsalert.dest))
+        .pipe(sass.sync().on('error', sass.logError))
+        .pipe(concat('uamsalert.scss'))
+        .pipe(postcss(plugins))
+        .pipe(rename('uamsalert.css'))
+        .pipe(gulp.dest(paths.styles.dest))
+        // .pipe(browserSync.stream())
+        .pipe(notify({ message: 'UAMS Alert Styles task complete' }));
+}
+
+async function fa() {
     return gulp.src(paths.fontawesome.src)
         .pipe(changed(paths.fontawesome.dest))
-        .pipe(concat('all.js'))
-        // .pipe(foreach(function(stream, file){
-        //     return stream
-                .pipe(uglify())
-                .pipe(rename({suffix: '.min'}))
-        // }))
+        .pipe(concat('fa.js'))
+        .pipe(uglify())
+        .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(paths.fontawesome.dest))
-        // .pipe(browserSync.stream({match: '**/*.js'}))
-        // .pipe(notify({ message: 'Scripts task complete' }));
+        .pipe(notify({ message: 'FontAwesome task complete' }));
 }
+
+// async function jquery() {
+//     return gulp.src(paths.jquery.src)
+//     .pipe(gulp.dest(paths.jquery.dest))
+//     .pipe(notify({ message: 'JQuery task complete' }));
+// }
 
 function js() {
     return gulp.src(paths.scripts.src)
@@ -125,60 +158,61 @@ function js() {
                 .pipe(rename({suffix: '.min'}))
         // }))
         .pipe(gulp.dest(paths.scripts.dest))
-        .pipe(browserSync.stream({match: '**/*.js'}))
+        // .pipe(browserSync.stream({match: '**/*.js'}))
         .pipe(notify({ message: 'Scripts task complete' }));
 }
 
-function jquery() {
-    return gulp.src(paths.jquery.src)
-    .pipe(gulp.dest(paths.jquery.dest))
-}
+// function browserSyncServe(done) {
+//     browserSync.init({
+//         injectChanges: true,
+//         proxy: paths.site.url
+//     })
+//     done();
+// }
 
-function browserSyncServe(done) {
-    browserSync.init({
-        injectChanges: true,
-        proxy: paths.site.url
-    })
-    done();
-}
-
-function browserSyncReload(done) {
-    browserSync.reload();
-    done();
-}
+// function browserSyncReload(done) {
+//     browserSync.reload();
+//     done();
+// }
 
 function watch() {
-    gulp.watch(['assets/scss/*.scss', 'assets/scss/**/*.scss'], style).on('change', browserSync.reload)
+    gulp.watch(['assets/scss/*.scss', 'assets/scss/**/*.scss'], style).on('change', gulp.parallel(style, uamsalert, criticalstyle, js))
     gulp.watch(paths.scripts.src, gulp.series(scriptsLint, js))
     gulp.watch([
             '*.php',
             'lib/*',
             '**/**/*.php'
         ],
-        gulp.series(browserSyncReload)
+        notify({ message: 'Watching' })
+        // gulp.series(browserSyncReload)
     )
 }
 
 gulp.task('translation', translation);
 
-gulp.task('default', gulp.parallel(style, fa, jquery, js, browserSyncServe, watch));
+gulp.task('fa', fa);
 
+gulp.task('default', gulp.parallel(style, uamsalert, criticalstyle, js, watch));
+
+/* 
 var dimensionSettings = [{
-    width: 1300,
-    height: 900
+    width: 1280,
+    height: 720
   },
   {
-    width: 400,
-    height: 800
+    width: 300,
+    height: 500
   }];
 
-gulp.task('criticalhealth', function(cb) {
+gulp.task('criticalcss', function(cb) {
     critical.generate({
         base: 'assets/css/',
-        src: "https://uamshealth.com/",
-        dest: "healthtop.css",
+        src: "http://uamshealthmu.local/",
+        dest: "critical.css",
         dimensions: dimensionSettings,
         minify: true,
         ignore: ['@font-face']
     }, cb);
+    console.log('Generated critical CSS');
 });
+*/
