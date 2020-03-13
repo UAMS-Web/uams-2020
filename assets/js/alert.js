@@ -223,7 +223,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
     alertLinkBase.appendChild(alertLinkTextBase);
     alertLinkBaseInclude = false; // Set to true if we want to include base link
 
-
+    var alertLinkContainer = false;
     if(alertLinkTrue) {
         wrapperBtn.appendChild(alertLink); // Add more link to container
         alertLinkContainer = true; // Set to true so link container is added to body container
