@@ -3,6 +3,7 @@
         .inner-container {
             text-align: center;
 
+            h1,
             h2,
             .text-container,
             .btn-container {
@@ -11,6 +12,11 @@
                 margin-left: auto;
             }
 
+            h1 {
+                @extend .h2;
+            }
+
+            h1,
             h2 {
                 width: $line-length-min + em;
             }
@@ -18,6 +24,9 @@
             .text-container,
             .btn-container {
                 width: $line-length-ideal + em;
+            }
+            .text-container {
+                margin-bottom: 1em;
             }
             .btn-container {
                 justify-content: center;
@@ -39,6 +48,7 @@
                 text-align: center;
             }
             .cta-heading {
+                h1,
                 h2 {
                     @include media-breakpoint-up(md) {
                         max-width: $line-length-min + em;
@@ -61,6 +71,10 @@
                 .text-container {
                     max-width: $line-length-ideal + em;
 
+                    @include media-breakpoint-down(sm) {
+                        margin-bottom: 1em;
+                    }
+
                     @include media-breakpoint-up(md) {
                         //flex-grow: 1;
                         //flex-shrink: 0;
@@ -72,7 +86,6 @@
 
                     @include media-breakpoint-up(md) {
                         padding-left: $uams-module-padding-mobile;
-                        
                     }
                 }
             }
@@ -81,5 +94,32 @@
 
     .text-container {
         @include font-size($lead-font-size);
+
+        > :last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &.cta-bar-sm {
+        .cta-heading {
+            h1,
+            h2 {
+                @extend .h4;
+            }
+        }
+        .text-container {
+            @include font-size($font-size-base);
+        }
+    }
+
+    &.no-link {
+        &.cta-bar-centered,
+        &.cta-bar-weighted {
+            .inner-container {
+                .text-container {
+                    width: $line-length-max + em;
+                }
+            }
+        }
     }
 }

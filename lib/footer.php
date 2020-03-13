@@ -23,6 +23,7 @@ function uamswp_footer_creds_text() {
     /* Set the defaults */
     $site = uams_get_site_info()['site'];
     $subsite = uams_get_site_info()['subsite'];
+    $department = uams_get_site_info()['department'];
 
     /**
      * Start Image
@@ -80,7 +81,7 @@ function uamswp_footer_creds_text() {
             $footer_image_site = $subsite;
         } elseif ( startsWith($subsite, 'public-health') ) {
             $footer_image_url = 'https://publichealth.uams.edu/';
-            $footer_image_title = 'UAMS College of Publice Health';
+            $footer_image_title = 'UAMS College of Public Health';
             $footer_image_site = $subsite;
         } elseif ( startsWith($subsite, 'grad-school') ) {
             $footer_image_url = 'https://gradschool.uams.edu/';
@@ -253,11 +254,33 @@ function uamswp_footer_creds_text() {
             $social_ig = 'https://www.instagram.com/uamschp';
         } elseif ( startsWith($subsite, 'medicine') ) {
             $social_fb = 'https://www.facebook.com/UAMSCOM/';
+
+            if ( 'emergency-medicine' == $department) {
+                $social_fb = 'https://www.facebook.com/UAMSEmergencyMedicine';
+            } elseif ( 'pediatrics' == $department) {
+                $social_fb = 'https://www.facebook.com/pages/UAMS-Department-of-Pediatrics/';
+                $social_tw = 'https://twitter.com/UAMSPeds';
+            } elseif ( 'otolaryngology' == $department) {
+                $social_fb = 'https://www.facebook.com/pg/uamsotolaryngology/';
+                $social_tw = 'https://twitter.com/UAMSENT';
+            } elseif ( 'family-medicine' == $department) {
+                $social_fb = 'https://www.facebook.com/UAMSFamilyMedicineResidency/';
+            } elseif ( 'orthopaedic-surgery' == $department) {
+                $social_fb = 'https://www.facebook.com/UAMSOrtho/';
+            } elseif ( 'pathology' == $department) {
+                $social_fb = 'https://www.facebook.com/pathologyuams/';
+            } elseif ( 'urology' == $department) {
+                $social_fb = 'https://www.facebook.com/UAMSUrology/';
+            }
         } elseif ( startsWith($subsite, 'nursing') ) {
             $social_fb = 'https://www.facebook.com/pages/UAMS-College-of-Nursing/';
         } elseif ( startsWith($subsite, 'pharmacy') ) {
             $social_fb = 'https://www.facebook.com/UAMSPharm';
             $social_ig = 'https://www.instagram.com/uamspharmacy/';
+
+            if ('arpoison' == $department) {
+                $social_fb = 'https://www.facebook.com/ArkDrugHelp/';
+            }
         } elseif ( startsWith($subsite, 'public-health') ) {
             $social_fb = 'https://www.facebook.com/uamscoph/';
         } elseif ( startsWith($subsite, 'grad-school') ) {
@@ -266,29 +289,11 @@ function uamswp_footer_creds_text() {
             $social_fb = 'https://www.facebook.com/UAMSNW/';
         // } elseif ( startsWith($subsite, 'regional-') ) {
         //     $social_fb = '';
-        } elseif ( 'pharmacy_arpoison' == $subsite ) {
-             $social_fb = 'https://www.facebook.com/ArkDrugHelp/';
         } elseif ( 'get-healthy' == $subsite ) {
             $social_fb = 'https://www.facebook.com/GetHealthyUAMS/';
             $social_ig = 'https://www.instagram.com/GetHealthyUAMS/';
         } elseif ( 'cda' == $subsite ) {
            $social_fb = 'https://www.facebook.com/pages/UAMS-Center-for-Diversity-Affairs/';
-        } elseif ( 'medicine_emergency-medicine' == $subsite) {
-            $social_fb = 'https://www.facebook.com/UAMSEmergencyMedicine';
-        } elseif ( 'medicine_pediatrics' == $subsite) {
-            $social_fb = 'https://www.facebook.com/pages/UAMS-Department-of-Pediatrics/';
-            $social_tw = 'https://twitter.com/UAMSPeds';
-        } elseif ( 'medicine_otolaryngology' == $subsite) {
-            $social_fb = 'https://www.facebook.com/pg/uamsotolaryngology/';
-            $social_tw = 'https://twitter.com/UAMSENT';
-        } elseif ( 'medicine_family-medicine' == $subsite) {
-            $social_fb = 'https://www.facebook.com/UAMSFamilyMedicineResidency/';
-        } elseif ( 'medicine_orthopaedic-surgery' == $subsite) {
-            $social_fb = 'https://www.facebook.com/UAMSOrtho/';
-        } elseif ( 'medicine_pathology' == $subsite) {
-            $social_fb = 'https://www.facebook.com/pathologyuams/';
-        } elseif ( 'medicine_urology' == $subsite) {
-            $social_fb = 'https://www.facebook.com/UAMSUrology/';
         } elseif ( 'gsa' == $subsite) {
             $social_fb = 'https://www.facebook.com/UAMSgsa/';
         } elseif ( 'continuing-ed' == $subsite) {
