@@ -182,7 +182,16 @@
                         line-height: inherit;
 
                         h1, h2 {
-                            @extend .h4;
+                            margin-top: $headings-margin-top;
+                            margin-bottom: $headings-margin-bottom;
+                            font-family: $headings-font-family;
+                            font-weight: $headings-font-weight;
+                            line-height: $headings-line-height;
+                            @include font-size($h4-font-size);
+
+                            &:first-child {
+                                margin-top: 0;
+                            }
                         }
                     }
                     .cta-body {
