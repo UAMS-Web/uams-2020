@@ -181,6 +181,33 @@ return array(
         'placeholder' => '',
     ),
     array(
+        'key' => 'field_cta_bar_size'. $suffix,
+        'label' => 'Size',
+        'name' => 'cta_bar_size',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 1,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'choices' => array(
+            'normal' => 'Normal',
+            'small' => 'Small',
+        ),
+        'default_value' => array(
+            0 => 'normal',
+        ),
+        'allow_null' => 0,
+        'multiple' => 0,
+        'ui' => 0,
+        'return_format' => 'value',
+        'ajax' => 0,
+        'placeholder' => '',
+    ),
+    array(
         'key' => 'field_cta_bar_background_color'. $suffix,
         'label' => 'Background Color',
         'name' => 'cta_bar_background_color',
