@@ -13,7 +13,7 @@ var gulp = require('gulp'),
     cssnano = require('cssnano'),
     // cmq = require('css-mqpacker'),
     autoprefixer = require('autoprefixer'),
-    comments = require('postcss-discard-comments'),
+    comments = require('postcss-discard-comments');
     // critical = require('critical');
 
 var plugins = [
