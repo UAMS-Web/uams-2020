@@ -34,6 +34,7 @@
             position: absolute;
             top: -0.625rem;
             right: 0.625rem;
+            bottom: auto;
             transform: translateY(100%);
             @include border-radius($navbar-toggler-border-radius);
 
