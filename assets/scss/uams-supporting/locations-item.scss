@@ -103,10 +103,6 @@
 .location-alert {
     border-top: $alert-border-width solid transparent;
     border-bottom: $alert-border-width solid transparent;
-
-    a {
-        color: inherit;
-    }
 }
 
 @each $color, $value in $theme-colors {
