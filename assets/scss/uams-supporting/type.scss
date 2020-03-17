@@ -73,6 +73,16 @@ h6,
     }
 }
 
+p,
+ul,
+ol,
+ul li,
+ol li {
+    &:last-child {
+        margin-bottom: 0;
+    }    
+}
+
 .lwcw:not(:first-child) {
     .lw_events_day {
         h4.lw_events_header_date:first-child {
