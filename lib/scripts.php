@@ -23,8 +23,8 @@ function uamswp_theme_scripts() {
 		wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i&display=swap', array(), 'CHILD_THEME_VERSION' );
 
 		// Disable the superfish script
-		wp_deregister_script( 'superfish' );
-		wp_deregister_script( 'superfish-args' );
+		// wp_deregister_script( 'superfish' );
+		// wp_deregister_script( 'superfish-args' );
 
 		// Deregister jQuery and use Bootstrap supplied version
 		// wp_deregister_script( 'jquery' );
@@ -76,7 +76,7 @@ function uamswp_theme_scripts() {
 		wp_enqueue_script( 'fa-js' );
 
 		// Alert system based on uams-2016
-		wp_enqueue_script( 'uams-alert', get_stylesheet_directory_uri() . '/assets/js/alert.js', array(), '1.0.0', true );
+		wp_enqueue_script( 'uams-alert', get_stylesheet_directory_uri() . '/assets/js/uamsalert.js', array(), '2.5.0', true );
 		// wp_enqueue_style( 'uams-alert-style', get_stylesheet_directory_uri() . '/assets/css/uams.alert.css', array(), '1.0.0', 'all' );
 
 		// Deregister shourtcode-ui styles

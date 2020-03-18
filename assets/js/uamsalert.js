@@ -57,6 +57,7 @@ function displayAlert(objAlertData)
     var alertTest = strSiteStatus;
 
     console.log( alertTest );
+    console.log( objAlertData.posts.length );
 
     // Alert colors
     arrAlertTypes = {};
@@ -65,55 +66,55 @@ function displayAlert(objAlertData)
         arrAlertTypes[alertFyi] = "uamsalert-fyi";
 
     // };
-
-    var arrCategories = objAlertData.posts[0].categories;
-    // If there is a test alert
-    if ( window.location.hash.indexOf('uamsalert') != -1 )
-    {
-        // Sometimes we don't get a category from the w.com test feed
-        var objFakeCat = new Object();
-        var strTestAlertColor = window.location.hash.replace('#','');
-        objFakeCat.slug = strTestAlertColor;
-        arrCategories['Fake Category'] = objFakeCat;
-    }
-
-    var strSuccess = false;
-    for (strCategory in arrCategories)
-    {
-        var objCategory = arrCategories[strCategory];
-        // Quick way to determine color
-        if (arrAlertTypes[objCategory.slug] || objFakeCat)
+    for (i = 0; i < objAlertData.posts.length; i++) {
+        var arrCategories = objAlertData.posts[i].categories;
+        // If there is a test alert
+        if ( window.location.hash.indexOf('uamsalert') != -1 )
         {
-            var strAlertTitle    = objAlertData.posts[0].title;
-            var strAlertLink     = objAlertData.posts[0].URL;
-            // var strAlertMessage  = objAlertData.posts[0].excerpt; // Not used
-            var strAlertContent  = objAlertData.posts[0].content;
-            var strAlertColor    = arrAlertTypes[objCategory.slug] ? arrAlertTypes[objCategory.slug] : objFakeCat.slug;
-            strSuccess           = true;
+            // Sometimes we don't get a category from the w.com test feed
+            var objFakeCat = new Object();
+            var strTestAlertColor = window.location.hash.replace('#','');
+            objFakeCat.slug = strTestAlertColor;
+            arrCategories['Fake Category'] = objFakeCat;
+        }
+
+        var strSuccess = false;
+        for (strCategory in arrCategories)
+        {
+            var objCategory = arrCategories[strCategory];
+            // Quick way to determine color
+            if (arrAlertTypes[objCategory.slug] || objFakeCat)
+            {
+                var strAlertTitle    = objAlertData.posts[i].title;
+                var strAlertLink     = objAlertData.posts[i].URL;
+                // var strAlertMessage  = objAlertData.posts[0].excerpt; // Not used
+                var strAlertContent  = objAlertData.posts[i].content;
+                var strAlertColor    = arrAlertTypes[objCategory.slug] ? arrAlertTypes[objCategory.slug] : objFakeCat.slug;
+                strSuccess           = true;
+            }
+        }
+
+        // Banners must have an actual color
+        // Don't load anything unless we have something to present
+        if (strSuccess)
+        {
+            addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent); // Removed strAlertMessage
+            // Code contributed by Dustin Brewer
+            var strCSS = document.createElement('link');
+            //strCSS.setAttribute('href', strBaseUrl + '/uamsalert.css');
+            // strCSS.setAttribute('href', './uamsalert.css');
+            strCSS.setAttribute('rel','stylesheet');
+            strCSS.setAttribute('type','text/css');
+            document.getElementsByTagName('head')[0].appendChild(strCSS);
+            // Because content is loaded dynamically, need to wait to grab the height
+            setTimeout(function() {
+                var strHeight = document.getElementById('uamsalert-alert-message').offsetHeight;
+                var bodyTag = document.getElementsByTagName('body')[0];
+                bodyTag.style.backgroundPosition='0px '+strHeight+'px';
+            },10);
+            break;
         }
     }
-
-    // Banners must have an actual color
-    // Don't load anything unless we have something to present
-    if (strSuccess)
-    {
-        addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent); // Removed strAlertMessage
-        // Code contributed by Dustin Brewer
-        var strCSS = document.createElement('link');
-        //strCSS.setAttribute('href', strBaseUrl + '/uamsalert.css');
-        // strCSS.setAttribute('href', './uamsalert.css');
-        strCSS.setAttribute('rel','stylesheet');
-        strCSS.setAttribute('type','text/css');
-        document.getElementsByTagName('head')[0].appendChild(strCSS);
-        // Because content is loaded dynamically, need to wait to grab the height
-        setTimeout(function() {
-            var strHeight = document.getElementById('uamsalert-alert-message').offsetHeight;
-            var bodyTag = document.getElementsByTagName('body')[0];
-            bodyTag.style.backgroundPosition='0px '+strHeight+'px';
-        },10);
-
-    }
-
 }
 
 // addElement - display HTML on page right below the body page
