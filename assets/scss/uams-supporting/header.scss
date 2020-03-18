@@ -502,7 +502,9 @@ $header-health-logo-clear-space: $header-logo-clear-space;
                 }
 
                 &.has-submenu {
-                    padding-right: 0.5em + 2em + 1em;
+                    @include media-breakpoint-down(xs) {
+                        padding-right: 0.5em + 2em + 1em;
+                    }
                 }
             }
 
