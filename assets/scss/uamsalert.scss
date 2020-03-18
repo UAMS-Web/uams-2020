@@ -1,3 +1,20 @@
+// Bootstrap Core Variable Override
+@import "supporting/variables-bootstrap-core-override";
+
+// Bootstrap Genesis Theme Variables
+@import "supporting/variables-bootstrap-genesis";
+
+// UAMS Bootstrap Variables Override
+@import "uams-supporting/variables";
+
+// UAMS Bootstrap Mixins Override
+@import "uams-supporting/mixins";
+
+// Bootstrap Core
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
 // UAMS Alert CSS
 
 #uamsalert-alert-message.cta-bar.cta-bar-sm {
@@ -165,7 +182,16 @@
                         line-height: inherit;
 
                         h1, h2 {
-                            @extend .h4;
+                            margin-top: $headings-margin-top;
+                            margin-bottom: $headings-margin-bottom;
+                            font-family: $headings-font-family;
+                            font-weight: $headings-font-weight;
+                            line-height: $headings-line-height;
+                            @include font-size($h4-font-size);
+
+                            &:first-child {
+                                margin-top: 0;
+                            }
                         }
                     }
                     .cta-body {
@@ -185,8 +211,53 @@
                             font-size: 1em;
                             line-height: inherit;
 
-                            a.btn.btn-white {
+                            .btn {
+                                display: inline-block;
+                                font-family: $btn-font-family;
+                                font-weight: $btn-font-weight;
+                                color: $body-color;
+                                text-align: center;
+                                vertical-align: middle;
+                                user-select: none;
+                                background-color: transparent;
+                                border: $btn-border-width solid transparent;
+                                @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-line-height, $btn-border-radius);
+                                @include transition($btn-transition);
+                              
+                                @include hover {
+                                  color: $body-color;
+                                  text-decoration: none;
+                                }
+                              
+                                &:focus,
+                                &.focus {
+                                  outline: 0;
+                                  box-shadow: $btn-focus-box-shadow;
+                                }
+                              
+                                // Disabled comes first so active can properly restyle
+                                &.disabled,
+                                &:disabled {
+                                  opacity: $btn-disabled-opacity;
+                                  @include box-shadow(none);
+                                }
+                              
+                                &:not(:disabled):not(.disabled):active,
+                                &:not(:disabled):not(.disabled).active {
+                                  @include box-shadow($btn-active-box-shadow);
+                              
+                                  &:focus {
+                                    @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
+                                  }
+                                }
 
+                                &.btn-white {
+                                    @include button-variant($white, $white);
+                                }
+
+                                &.btn-outline-white {
+                                    @include button-outline-variant($white);
+                                }
                             }
                         }
                     }
