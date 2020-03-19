@@ -234,7 +234,7 @@ $yiq-text-light: $white;
 //
 // Quickly modify global styling by enabling or disabling optional features.
 
-$enable-caret: true;
+$enable-caret: false; // bootstrap default was true
 $enable-rounded: true;
 $enable-shadows: true;
 $enable-gradients: false;
