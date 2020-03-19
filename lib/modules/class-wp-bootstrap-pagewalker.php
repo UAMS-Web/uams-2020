@@ -66,18 +66,18 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			$css_class[] = 'nav-item';
 
 			if( isset( $args['pages_with_children'][ $page->ID ] ) )
-				$css_class[] = 'page_item_has_children dropdown';
+				$css_class[] = 'page-item-has-children dropdown';
 
 			if ( !empty($current_page) ) {
 				$_current_page = get_post( $current_page );
 			if ( in_array( $page->ID, $_current_page->ancestors ) )
-				$css_class[] = 'current_page_ancestor';
+				$css_class[] = 'current-page-ancestor';
 			if ( $page->ID == $current_page )
-				$css_class[] = 'current_page_item';
+				$css_class[] = 'current-page-item';
 			elseif ( $_current_page && $page->ID == $_current_page->post_parent )
-				$css_class[] = 'current_page_parent';
+				$css_class[] = 'current-page-parent';
 			} elseif ( $page->ID == get_option('page_for_posts') ) {
-				$css_class[] = 'current_page_parent';
+				$css_class[] = 'current-page-parent';
 			}
 			
 			/**
@@ -94,7 +94,7 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			* @param array $args An array of arguments.
 			* @param int $current_page ID of the current page.
 			*/	
-			if ( in_array( 'current_page_item', $css_class, true ) || in_array( 'current_page_parent', $css_class, true ) ) {
+			if ( in_array( 'current-page-item', $css_class, true ) || in_array( 'current-page-parent', $css_class, true ) ) {
 				$css_class[] = ' active';
 			}
 			
@@ -131,7 +131,6 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 				$atts['class']			= 'dropdown-toggle nav-link';
 				$atts['id']				= 'menu-item-dropdown-' . $page->ID;
 			} else {
-				;
 				// if we are in a dropdown then the the class .dropdown-item
 				// should be used instead of .nav-link.
 				if ( $depth > 0 ) {
