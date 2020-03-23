@@ -21,10 +21,10 @@ add_action( 'genesis_after_loop', 'uamswp_search_page_after_entry', 10 );
  */
 function uamswp_do_search_loop() {
     // get the search term entered by user.
-    $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
+    $s = isset( $_GET["s"] ) ? esc_html($_GET["s"]) : "";
 
     // store the post type from the URL string.
-    $post_type = isset( $_GET["type"] ) ? $_GET["type"] : "";
+    $post_type = isset( $_GET["type"] ) ? esc_html($_GET["type"]) : "";
 
     if ( $post_type ) {
         // $post_type = $_GET['post_type'];
@@ -318,7 +318,7 @@ function uamswp_do_search_loop() {
 
             foreach ( $post_types as $post_type ) {
                 // get the search term entered by user.
-                $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
+                $s = isset( $_GET["s"] ) ? esc_html($_GET["s"]) : "";
 
                 // accepts any wp_query args.
                 $args = (array(
@@ -378,7 +378,7 @@ function uamswp_do_search_loop() {
 
         // Begin Providers
 
-            $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
+            $s = isset( $_GET["s"] ) ? esc_html($_GET["s"]) : "";
 
 
             /* Providers */
@@ -450,7 +450,7 @@ function uamswp_do_search_loop() {
 
                 foreach ( $taxonomies as $taxonomy ) {
                     // get the search term entered by user.
-                    $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
+                    $s = isset( $_GET["s"] ) ? esc_html($_GET["s"]) : "";
 
                     // accepts any wp_query args.
                     $args = (array(
@@ -729,7 +729,7 @@ function uamswp_search_page_before_entry () {
 }
 
 function uamswp_search_page_heading () {
-    $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
+    $s = isset( $_GET["s"] ) ? esc_html($_GET["s"]) : "";
     echo '<header class="entry-header"><h1 class="entry-title" itemprop="headline">Search results for: '. $s .'</h1></header>';
 }
 
