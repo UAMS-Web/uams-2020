@@ -98,14 +98,14 @@ $maroon-light: #800026;
 $maroon-lighter: #93002c;
 $maroon-lightest: #a70031;
 
-$orange: #CA4C1D;
-$orange-darkest: #973916;
-$orange-darker: #a83f18;
-$orange-dark: #b9461b;
-$orange-light: #db521f;
-$orange-lighter: #e15e2d;
-$orange-lightest: #e36b3e;
-$orange-special: #ec7330;
+$orange: #CA4C1D; // 4.6 contrast ratio relative to white
+$orange-darkest: #973916; // 7.2 contrast ratio relative to white
+$orange-darker: #a83f18; // 6.19 contrast ratio relative to white
+$orange-dark: #b9461b; // 5.31 contrast ratio relative to white
+$orange-light: #db521f; // 4.0 contrast ratio relative to white
+$orange-lighter: #e15e2d; // 3.59 contrast ratio relative to white
+$orange-lightest: #e36b3e; // 3.26 contrast ratio relative to white
+$orange-special: #eb712f; // 3.02 contrast ratio relative to white
 $bg-orange: $orange;
 
 $yellow: #ffb81c;
@@ -234,7 +234,7 @@ $yiq-text-light: $white;
 //
 // Quickly modify global styling by enabling or disabling optional features.
 
-$enable-caret: true;
+$enable-caret: false; // bootstrap default was true
 $enable-rounded: true;
 $enable-shadows: true;
 $enable-gradients: false;
