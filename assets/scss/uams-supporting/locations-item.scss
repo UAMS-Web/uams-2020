@@ -102,6 +102,15 @@
 
             &.carousel-thumbnails {
                 .carousel-indicators {
+                    @include media-breakpoint-up(md) {
+                        position: static;
+                        top: auto;
+                        right: auto;
+                        bottom: auto;
+                        left: auto;
+                        padding: $spacer-min 0;
+                    }
+
                     li {
                         @include media-breakpoint-up(md) {
                             height: auto;
