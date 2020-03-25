@@ -101,6 +101,11 @@
             }
 
             &.carousel-thumbnails {
+                .carousel-control-next,
+                .carousel-control-prev {
+                    bottom: 73px;
+                }
+
                 .carousel-indicators {
                     @include media-breakpoint-up(md) {
                         position: static;
