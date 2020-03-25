@@ -115,9 +115,17 @@
                         @include media-breakpoint-up(md) {
                             height: auto;
                             flex-basis: 60px;
-                            border: none;
-                            box-shadow: 0 ($carousel-indicator-spacer * 0.6) $carousel-indicator-spacer 0px rgba(0,0,0,0.75);
-                            border-bottom: 4px solid #fff;
+                            padding: 2px;
+                            background-color: transparent;
+                            border: 2px solid transparent;
+                            opacity: 1;
+                        }
+
+                        &.active {
+                            @include media-breakpoint-up(md) {
+                                border-color: $primary;
+                                opacity: 1;
+                            }
                         }
 
                         &:before {
