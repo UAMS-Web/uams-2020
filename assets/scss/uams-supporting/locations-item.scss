@@ -70,8 +70,6 @@
                 }
             }
             .carousel-indicators {
-                right: 0;
-                padding: 0;
                 // Use the .carousel-control's width as horizontal margin so we don't overlay those
                 padding: $spacer-min $carousel-control-width;
                 margin: 0;
