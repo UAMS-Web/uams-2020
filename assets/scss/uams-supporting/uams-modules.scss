@@ -309,6 +309,13 @@
     }
 }
 
+:not([class^="bg-"]),
+:not([class*=" bg-"]) {
+    + .uams-module.bg-white {
+        border-top: 2px solid $body-bg-border;
+    }
+}
+
 body.page-template-default {
     .entry-content {
         .uams-module {
