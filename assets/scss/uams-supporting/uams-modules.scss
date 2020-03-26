@@ -309,6 +309,13 @@
     }
 }
 
+:not([class^="bg-"]),
+:not([class*=" bg-"]) {
+    + .uams-module.bg-white {
+        border-top: 2px solid $body-bg-border;
+    }
+}
+
 body.page-template-default {
     .entry-content {
         .uams-module {
@@ -321,6 +328,14 @@ body.page-template-default {
                     margin-bottom: $uams-module-padding;
                 }
 
+                &.bg-white:first-child:not(.bg-image) {
+                    margin-top: -$page-title-margin-bottom-mobile;
+
+                    @include media-breakpoint-up(sm) {
+                        margin-top: -$page-title-margin-bottom;
+                    }
+                }
+
                 + .uams-module.alignfull {
                     margin-top: -($uams-module-padding-mobile);
 
@@ -328,6 +343,7 @@ body.page-template-default {
                         margin-top: -($uams-module-padding);
                     }
                 }
+
                 &:last-child {
                     margin-bottom: -($uams-module-padding-mobile);
 
@@ -340,7 +356,8 @@ body.page-template-default {
 
         &:first-child {
             .uams-module {
-                &.alignfull {
+                &.alignfull,
+                &.alignfull.bg-white:not(.bg-image) {
                     &:first-child {
                         margin-top: -($uams-module-padding-mobile);
     
@@ -364,3 +381,4 @@ body.page-template-default {
 @import "uams-modules/syndication";
 @import "uams-modules/graphic-title";
 @import "uams-modules/link-list";
+@import "uams-modules/facetwp-blocks";
