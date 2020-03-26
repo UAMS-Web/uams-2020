@@ -4,4 +4,8 @@ a {
   &:not([href]):not([tabindex]) {
     cursor: default;
   }
+
+  &[href^="tel:"] {
+    white-space: nowrap;
+  }
 }
