@@ -33,6 +33,16 @@
             }
         }
     }
+    
+    .facetwp-template {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+
+    .pagination {
+        margin-top: $grid-gutter-width
+    }
 }
 
 :not([class*=" bg-"]),
