@@ -33,6 +33,10 @@
             }
         }
     }
+
+    .pagination {
+        margin-top: $grid-gutter-width
+    }
 }
 
 :not([class*=" bg-"]),
