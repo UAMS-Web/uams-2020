@@ -357,10 +357,10 @@ figure[class="wp-block-image"],
 
 .alignwide {
     @include media-breakpoint-up(md) {
-        @include alignwide(1.309);
+        @include alignwide($alignwide-ratio-md);
     }
     @include media-breakpoint-up(lg) {
-        @include alignwide(1.618);
+        @include alignwide($alignwide-ratio-lg);
     }
 }
 
