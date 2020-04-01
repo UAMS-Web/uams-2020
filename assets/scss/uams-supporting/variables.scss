@@ -514,6 +514,8 @@ $blockquote-font-size: $font-size-base;
 $blockquote-large-font-size: $lead-font-size;
 $blockquote-border-width: $font-size-base * 0.2;
 
+$cite-border-color: $gray-300;
+
 $hr-border-color: rgba($black, .1);
 $hr-border-width: $border-width;
 
@@ -873,6 +875,8 @@ $zindex-modal-backdrop: 1040;
 $zindex-modal: 1050;
 $zindex-popover: 1060;
 $zindex-tooltip: 1070;
+$zindex-carousel-indicators: 15;
+$zindex-carousel-arrows: 15;
 
 
 // Navs
