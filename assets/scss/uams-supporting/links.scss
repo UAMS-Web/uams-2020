@@ -1,7 +1,11 @@
 a {
-    cursor: pointer;
-  }
-  
-  a:not([href]):not([tabindex]) {
+  cursor: pointer;
+
+  &:not([href]):not([tabindex]) {
     cursor: default;
   }
+
+  &[href^="tel:"] {
+    white-space: nowrap;
+  }
+}
