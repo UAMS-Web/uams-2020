@@ -172,15 +172,15 @@
 
         dt, dd {
             @include media-breakpoint-up(xs) {
-                float: left;
-                margin-top: 0.5em;
+                margin-top: 1em;
             }
         }
         dt {
             @include media-breakpoint-up(xs) {
-                clear: both;
                 width: 7.5em;
                 padding-right: $grid-gutter-width;
+                clear: both;
+                float: left;
             }
 
             &:first-child,
@@ -188,6 +188,15 @@
                 @include media-breakpoint-up(xs) {
                     margin-top: 0;
                 }
+            }
+        }
+        dd {
+            @include media-breakpoint-up(xs) {
+                margin-left: 7.5em;
+            }
+
+            + dd {
+                margin-top: 0.5em;
             }
         }
     }
