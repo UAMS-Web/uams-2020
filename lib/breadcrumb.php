@@ -34,9 +34,11 @@ add_filter( 'genesis_build_crumbs', 'uamswp_build_crumbs', 10, 2 );
 function uamswp_build_crumbs( $crumbs ){
 
 	foreach( $crumbs as &$crumb ){
-		$crumb = str_replace( '     ','</li><li class="breadcrumb-item active">', $crumb );
+		$crumb = str_replace( '     ','</li><li class="breadcrumb-item active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">', $crumb );
+		$crumb = str_replace( '<a ','<a itemprop="item" ', $crumb );
 		$class = strpos( $crumb, '</a>' ) ? 'class="breadcrumb-item"' : 'class="breadcrumb-item active"';
-		$crumb = '<li ' . $class .'>' . $crumb . '</li>';
+		$crumb = '<li ' . $class .' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">' . $crumb . '</li>';
+		
 	}
 
 	return $crumbs;

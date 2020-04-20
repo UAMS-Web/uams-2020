@@ -35,13 +35,21 @@ if ( empty($background_color) )
     $background_color = get_field('livewhale_background_color');
 
 ?>
-<section class="uams-module livewhale<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $livewhale; ?>" aria-label="<?php echo $heading; ?>">
-    <h2 class="sr-only"><?php echo $heading; ?></h2>
+<section class="uams-module link-list link-list-layout-split livewhale<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $livewhale; ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
         <div class="row">
-            <!-- Livewhale Calendar Widget -->
-            <div class="lwcw" data-options="id=<?php echo $livewhale; ?>&format=html"></div> 
-            <script type="text/javascript" id="lw_lwcw" src="https://calendar.uams.edu/livewhale/theme/core/scripts/lwcw.js"></script>
+            <div class="col-12 col-md-6 heading">
+                <div class="text-container">
+                    <h2 class="module-title">
+                        <span class="title"><?php echo $heading; ?></span>
+                    </h2>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 list">
+                <!-- Livewhale Calendar Widget -->
+                <div class="lwcw" data-options="id=<?php echo $livewhale; ?>&format=html"></div> 
+                <script type="text/javascript" id="lw_lwcw" src="https://calendar.uams.edu/livewhale/theme/core/scripts/lwcw.js"></script>
+            </div>
         </div>
     </div>
 </section>

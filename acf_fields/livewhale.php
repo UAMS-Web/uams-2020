@@ -46,7 +46,7 @@ return array(
         'label' => 'ID Number of Widget',
         'name' => 'livewhale_id',
         'type' => 'number',
-        'instructions' => 'ex. ID=2 ex. ID=2  <code>(&lt;div class="lwcw" data-options="id=<b>2</b>&format=html"&gt;)</code>',
+        'instructions' => 'ex. ID=2 <code>(&lt;div class="lwcw" data-options="id=<b>2</b>&format=html"&gt;)</code>',
         'required' => 1,
         'conditional_logic' => 0,
         'wrapper' => array(
