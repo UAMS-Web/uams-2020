@@ -232,19 +232,13 @@ function uamswp_add_aria( $attributes ) {
 add_filter ( 'genesis_home_crumb', 'uams_breadcrumb_home_icon' );
 function uams_breadcrumb_home_icon( $crumb ) {
 		if (('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite']) || ('uamshealth' == uams_get_site_info()['site'] && is_front_page() ) ) {
-			$crumb = '<a href="'.uams_get_home_link().'" title="UAMS Health"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">UAMS Health</span></a><meta itemprop="position" content="1">';
+			$crumb = '<a href="'.uams_get_home_link().'" title="UAMS Health"><span class="fas fa-home"></span><span class="sr-only">UAMS Health</span></a>';
+		} elseif ( ('uams' == uams_get_site_info()['site'] && is_front_page() ) ) {
+			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span></a>';
 		} elseif ( ('inside' == uams_get_site_info()['site'] && is_front_page() ) ) {
-			$crumb = '<a href="'.uams_get_home_link().'" title="Inside UAMS"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1">';
+			$crumb = '<a href="'.uams_get_home_link().'" title="Inside UAMS"><span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span></a>';
 		} else {
-			if ( is_front_page() && 'main' != uams_get_site_info()['department'] && 'none' != uams_get_site_info()['department'] ) {
-				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . network_home_url() . '" title="' . get_blog_details(1)->blogname . '"><span itemprop="name">'.get_blog_details(1)->blogname.'</span></a><meta itemprop="position" content="2">';
-			} elseif ( 'main' != uams_get_site_info()['department'] && 'none' != uams_get_site_info()['department'] ) {
-				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . network_home_url() . '" title="' . get_blog_details(1)->blogname . '"><span itemprop="name">'.get_blog_details(1)->blogname.'</span></a><meta itemprop="position" content="2"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . home_url() . '/" title="' . uams_site_title() . '"><span itemprop="name">'.uams_site_title().'</span></a><meta itemprop="position" content="3">';
-			} elseif ( is_front_page() ) {
-				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1">';
-			} else {
-				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . home_url() . '/" title="' . uams_site_title() . '"><span itemprop="name">'.uams_site_title().'</span></a><meta itemprop="position" content="2">';
-			}
+			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '/" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
 		}
      return $crumb;
 }
@@ -252,89 +246,10 @@ function uams_breadcrumb_home_icon( $crumb ) {
 add_filter ( 'genesis_page_crumb', 'uams_breadcrumb_home' );
 add_filter ( 'genesis_single_crumb', 'uams_breadcrumb_home' );
 function uams_breadcrumb_home( $crumb ) {
-	if ( is_front_page() ) {
-		$crumb = uams_site_title();
-	}
-	
-	return $crumb;
-	
-}
+	if ( ! is_front_page() )
+		return $crumb;
 
-add_filter('seopress_pro_breadcrumbs_crumbs', 'sp_pro_breadcrumbs_crumbs');
-function sp_pro_breadcrumbs_crumbs($crumbs) {
-	//$crumbs is a multidimensional array.
-	//First array: key=position, second array: 0=>page title, 1=>URL
-	//do your stuff
-	// Change "Home" to site title
-	$crumbs[0][0] = uams_site_title();
-	if ( 'uamshealth' == uams_get_site_info()['site'] ) {
-		if ( ( 'main' == uams_get_site_info()['subsite']) || is_front_page() ) {
-		$crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">UAMS Health</span>', uams_get_home_link().'/');
-		} else {
-			$home = array('<span class="fas fa-home"></span><span class="sr-only">UAMS Health</span>', uams_get_home_link().'/');
-			array_unshift($crumbs, $home);
-		}
-	} elseif ( ('inside' == uams_get_site_info()['site'] ) ) {
-		if ( ( 'main' == uams_get_site_info()['subsite']) || is_front_page() ) {
-			$crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">Inside UAMS</span>', uams_get_home_link().'/');
-		} else {
-			$home = array('<span class="fas fa-home"></span><span class="sr-only">Inside UAMS</span>', uams_get_home_link().'/');
-			array_unshift($crumbs, $home);
-		}
-	} elseif ( ('institute' == uams_get_site_info()['site'] ) ) {
-		if ( ( 'main' == uams_get_site_info()['department']) || is_front_page() ) {
-			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
-			array_unshift($crumbs, $home);
-			// $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
-		} else {
-			// if ('dept' == uams_get_site_info()['department']) {
-			$sitehome = array(get_blog_details(1)->blogname, network_home_url());
-			array_unshift($crumbs, $sitehome);
-			// }
-			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
-			array_unshift($crumbs, $home);
-		}
-	} else { // Site == uams
-
-		if ( ( 'main' == uams_get_site_info()['subsite']) && !is_front_page() ) {
-			// Set www.uams.edu as home
-			$crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
-		//  } elseif ( 'main' == uams_get_site_info()['subsite'] && is_front_page() ) {
-		// 	// UAMS Home	
-		// 	$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
-		// 	array_unshift($crumbs, $home); 
-		// 	} elseif ( ( 'main' != uams_get_site_info()['subsite']) && is_front_page() ) {
-		// 	// UAMS Home
-		// 	$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
-		// 	array_unshift($crumbs, $home);
-		} elseif ( 'main' != uams_get_site_info()['subsite'] && 'main' != uams_get_site_info()['department'] && '' != uams_get_site_info()['department'] && 'uams' != uams_get_site_info()['department'] ) {
-			// Multisite Home
-			$sitehome = array(get_blog_details(1)->blogname, network_home_url());
-			array_unshift($crumbs, $sitehome);
-			// UAMS Home
-			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
-			array_unshift($crumbs, $home);
-		} else {
-			// UAMS Home
-			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu');
-			array_unshift($crumbs, $home);
-		}
-	}
-	// var_dump(uams_get_site_info());
-	// var_dump($crumbs);
-	return $crumbs;
-}
-function sp_pro_breadcrumbs_css() { 
-	//Disable breadcrumbs inline CSS 
-	return false; 
-} 
-add_action('seopress_pro_breadcrumbs_css', 'sp_pro_breadcrumbs_css');
-add_filter('seopress_pro_breadcrumbs_html', 'sp_pro_breadcrumbs_html');
-function sp_pro_breadcrumbs_html($html) {
-	//$html = <nav aria-label="breadcrumb"><ol class="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList"><li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemtype="http://schema.org/Thing" itemprop="item" href="https://www.seopress.org/"><span itemprop="name">Home</span></a><meta itemprop="position" content="1"></li>...
-	//Remove last link
-	$html = preg_replace('#^(.*)<a[^>]*?>(.*?)</a>(.*?)#im', '$1$2$3', $html);
-	return $html;
+	return uams_site_title();
 }
 
 /** Returns site & subsite info **/
@@ -356,7 +271,6 @@ if ( !function_exists('uams_get_site_info')):
 		$themestyle = get_field( 'uamswp_template', 'option' ); // uams, inside, health
 		$themelocation = get_field( 'uamswp_location', 'option' ); // campus, regional
 		$themeinstitute = get_field( 'uamswp_institute', 'option' ); // institute name
-		$regional_campus = get_field( 'uamswp_regional_campus', 'option' ); // regional location
 		$aging_dept = get_field( 'uamswp_institute_aging_dept', 'option' ); // Institute on Aging Departments
 		$eye_dept = get_field( 'uamswp_institute_eye_dept', 'option' ); // Eye Institute Departments
 		$spine_dept = get_field( 'uamswp_institute_spine_dept', 'option' ); // Spine & Neurosciences Institute Departments
@@ -416,9 +330,6 @@ if ( !function_exists('uams_get_site_info')):
 			if ('' != $themelocation){
 				if ('uams' != $themelocation) {
 					$subsite = $themelocation;
-					if ($subsite == 'regional-campus' && '' != $regional_campus) {
-						$department = $regional_campus;
-					}
 				} else {
 					if ('' != $uamsorganization) {
 						$subsite = $uamsorganization;
