@@ -69,11 +69,11 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
     foreach($hero_rows as $hero_row) {
 // Load values and adding defaults.
     // if ( empty($heading) )
-        $heading = $hero_row['hero_heading'] ?: 'Heading goes here...';
+        $heading = $hero_row['hero_heading'] ?: 'Heading goes here...'; // Required
     // if ( empty($body) )
-        $body = $hero_row['hero_body'] ?: 'This is where the description goes';
+        $body = $hero_row['hero_body'] ?: 'This is where the description goes'; // Required
     // if ( empty($button_text) )
-        $button_text = $hero_row['hero_button_text'] ?: 'Learn More';
+        $button_text = $hero_row['hero_button_text'] ?: '';
     // if ( empty($button_url) )
         $button_url = $hero_row['hero_button_url']['url'] ?: '';
     // if ( empty($button_target) )
@@ -155,7 +155,9 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
                 <div class="inner-container">
                     <h2><?php echo $heading; ?></h2>
                     <p><?php echo $body; ?></p>
-                    <a class="btn btn-white" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?> data-itemtitle="<?php echo $heading; ?>"><?php echo $button_text; ?></a>
+                    <?php if ($button_text) { ?>
+                        <a class="btn btn-white" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?> data-itemtitle="<?php echo $heading; ?>"><?php echo $button_text; ?></a>
+                    <?php } // endif ?>
                 </div>
             </div>
         </div>
