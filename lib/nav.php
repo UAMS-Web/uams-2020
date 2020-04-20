@@ -315,4 +315,11 @@ function uamswp_override_do_nav($nav_output, $nav, $args) {
 }
 
 remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
-add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
+function sp_breadcrumb_after_header() { 
+	if(function_exists('seopress_display_breadcrumbs')) { 
+		seopress_display_breadcrumbs(); 
+	} else {
+        add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
+    }
+} 
+add_action('genesis_after_header', 'sp_breadcrumb_after_header');
