@@ -11,19 +11,9 @@
         }
     }
     .list-container {
-
         .list {
             @include list-unstyled; // equivalent of @extend .list-unstyled
             margin: 0 auto;
-
-            li {
-
-                a {
-                    @extend .btn;
-                    @extend .btn-outline-primary;
-                    background-color: $body-bg;
-                }
-            }
         }
 
         &.list-container-columns {
