@@ -13,7 +13,7 @@
     .list-container {
 
         .list {
-            @extend .list-unstyled;
+            @include list-unstyled; // equivalent of @extend .list-unstyled
             margin: 0 auto;
 
             li {
