@@ -88,7 +88,7 @@
         width: 33em;
         max-width: 100%;
 
-        @include media-breakpoint-down(xs) {
+        @include media-breakpoint-up(xs) {
             margin-bottom: map-get($spacers, 10); // equivalent of @extend .mb-xs-10
         }
 
