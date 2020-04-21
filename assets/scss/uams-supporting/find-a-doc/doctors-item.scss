@@ -101,7 +101,6 @@
             padding-bottom: $card-spacer-x;
             p {
                 &:first-child {
-                    @extend .h5;
                     margin-bottom: 0.5em;
                 }
 
