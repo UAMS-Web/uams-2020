@@ -109,10 +109,6 @@ $doctor-list-rows: (
 
         .card {
             width: $doctor-card-width;
-
-            .card-title {
-                @extend .h6;
-            }
         }
     }
 }
