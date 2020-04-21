@@ -148,14 +148,7 @@
                 margin-top: 0.5em;
                 margin-bottom: ($spacer * 2);
             }
-
-            button#filter-apply {
-                @extend .btn;
-                @extend .btn-primary;
-            }
-            button[onclick="FWP.reset()"] {
-                @extend .btn;
-                @extend .btn-outline-primary;
+            button#filter-reset {
                 margin-left: 5px;
             }
         }
