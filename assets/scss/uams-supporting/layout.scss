@@ -155,14 +155,6 @@ section.archive-description .entry-content {
             flex-shrink: 0; // added so the picture element doesn't take up space in IE11
         }
 
-        .card-title {
-            font-size: $h5-font-size;
-
-            &.h6 {
-                font-size: $h6-font-size;
-            }
-        }
-
         .card-body {
             > :last-child {
                 margin-bottom: 0;
