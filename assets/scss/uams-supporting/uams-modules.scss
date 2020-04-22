@@ -311,7 +311,7 @@
 
 :not([class^="bg-"]),
 :not([class*=" bg-"]) {
-    &:not(.archive-description) {
+    &:not(.archive-description):not(.entry-header) {
         + .uams-module.bg-white {
             border-top: 2px solid $body-bg-border;
         }
