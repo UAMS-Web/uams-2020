@@ -156,8 +156,13 @@ section.archive-description .entry-content {
         }
 
         .card-title {
-            @extend .h5;
+            font-size: $h5-font-size;
+
+            &.h6 {
+                font-size: $h6-font-size;
+            }
         }
+
         .card-body {
             > :last-child {
                 margin-bottom: 0;
