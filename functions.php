@@ -329,6 +329,7 @@ function sp_pro_breadcrumbs_css() {
 	return false; 
 } 
 add_action('seopress_pro_breadcrumbs_css', 'sp_pro_breadcrumbs_css');
+/* Disabled for latest version of SEOPress Pro > 3.8.5 Included as default in plugin
 add_filter('seopress_pro_breadcrumbs_html', 'sp_pro_breadcrumbs_html');
 function sp_pro_breadcrumbs_html($html) {
 	//$html = <nav aria-label="breadcrumb"><ol class="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList"><li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemtype="http://schema.org/Thing" itemprop="item" href="https://www.seopress.org/"><span itemprop="name">Home</span></a><meta itemprop="position" content="1"></li>...
@@ -336,6 +337,7 @@ function sp_pro_breadcrumbs_html($html) {
 	$html = preg_replace('#^(.*)<a[^>]*?>(.*?)</a>(.*?)#im', '$1$2$3', $html);
 	return $html;
 }
+*/
 
 /** Returns site & subsite info **/
 if ( !function_exists('uams_get_site_info')):
