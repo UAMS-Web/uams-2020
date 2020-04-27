@@ -268,21 +268,21 @@ function sp_pro_breadcrumbs_crumbs($crumbs) {
 	// Change "Home" to site title
 	$crumbs[0][0] = uams_site_title();
 	if ( 'uamshealth' == uams_get_site_info()['site'] ) {
-		if ( ( 'main' == uams_get_site_info()['subsite']) || is_front_page() ) {
+		if ( ( 'main' == uams_get_site_info()['subsite']) ) {
 		$crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">UAMS Health</span>', uams_get_home_link().'/');
 		} else {
 			$home = array('<span class="fas fa-home"></span><span class="sr-only">UAMS Health</span>', uams_get_home_link().'/');
 			array_unshift($crumbs, $home);
 		}
 	} elseif ( ('inside' == uams_get_site_info()['site'] ) ) {
-		if ( ( 'main' == uams_get_site_info()['subsite']) || is_front_page() ) {
+		if ( ( 'main' == uams_get_site_info()['subsite']) ) {
 			$crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">Inside UAMS</span>', uams_get_home_link().'/');
 		} else {
 			$home = array('<span class="fas fa-home"></span><span class="sr-only">Inside UAMS</span>', uams_get_home_link().'/');
 			array_unshift($crumbs, $home);
 		}
 	} elseif ( ('institute' == uams_get_site_info()['site'] ) ) {
-		if ( ( 'main' == uams_get_site_info()['department']) || is_front_page() ) {
+		if ( ( 'main' == uams_get_site_info()['department']) ) {
 			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
 			array_unshift($crumbs, $home);
 			// $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
