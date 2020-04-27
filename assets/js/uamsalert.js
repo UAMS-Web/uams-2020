@@ -10,7 +10,7 @@
  *  </head>
  *  <body>
  *
- *  <script type="text/javascript" src="//uamshealth.com/_alert'/alert.js"></script>
+ *  <script type="text/javascript" src="//uamshealth.com/_alert/alert.js"></script>
  *  </body>
  *  </html>
  *
@@ -22,7 +22,7 @@
 // Thanks Dane!
 var strTestStatus = window.location.hash.indexOf('uamsalert') === -1 ? 'false' : 'true';
 // Allow for local testing
-var strDomain = (window.location.hostname == 'localhost') ? 'localhost' : 'uamshealth.com/_alert'';
+var strDomain = (window.location.hostname == 'localhost') ? 'localhost' : 'uamshealth.com/_alert';
 var strDataFeed = '/data/?c=displayAlert&test='+strTestStatus;
 var strBaseUrl = window.location.protocol + '//' + strDomain;
 // var strBaseUrl = 'http://' + strDomain; // Test
