@@ -18,6 +18,8 @@ add_action( 'customize_register', function( $wp_customize ) {
         'type' => 'theme_mod'
     ) );
 
+    $wp_customize->remove_section( 'genesis_breadcrumbs' );
+
     // // Add Bootstrap Panel
     // $wp_customize->add_panel( 'bootstrap', array(
     //     'title' => __( 'Bootstrap for Genesis', 'uams-2020' ),
