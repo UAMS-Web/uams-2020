@@ -1839,6 +1839,7 @@ $post_tiles = include( get_stylesheet_directory() .'/acf_fields/post-category-ti
 $side_by_side = include( get_stylesheet_directory() .'/acf_fields/image-side-by-side.php' );
 $stacked = include( get_stylesheet_directory() .'/acf_fields/stacked.php' );
 $news = include( get_stylesheet_directory() .'/acf_fields/news.php' );
+$gallery = include( get_stylesheet_directory() .'/acf_fields/gallery.php' );
 
 $modules = require( get_stylesheet_directory() .'/acf_fields/modules.php' );
 acf_add_local_field_group(array(
