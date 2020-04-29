@@ -83,11 +83,14 @@
 .ratings-and-reviews {
     .overall-ratings {
         margin: 0 auto;
-        @extend .mb-8;
-        @extend .mb-xs-10;
+        margin-bottom: map-get($spacers, 8); // equivalent of @extend .mb-8
         text-align: center;
         width: 33em;
         max-width: 100%;
+
+        @include media-breakpoint-up(xs) {
+            margin-bottom: map-get($spacers, 10); // equivalent of @extend .mb-xs-10
+        }
 
         .rating {
             justify-content: center;
@@ -98,7 +101,6 @@
             padding-bottom: $card-spacer-x;
             p {
                 &:first-child {
-                    @extend .h5;
                     margin-bottom: 0.5em;
                 }
 

@@ -23,7 +23,6 @@
 
         h2 {
             margin-bottom: $spacer * 2;
-            @extend .h3;
         }
 
         .close {
@@ -43,10 +42,6 @@
                 display: inline-block;
                 height: 26px;
             }
-        }
-
-        h3, h4 {
-            @extend .h6;
         }
 
         .filter-group {
@@ -153,14 +148,7 @@
                 margin-top: 0.5em;
                 margin-bottom: ($spacer * 2);
             }
-
-            button#filter-apply {
-                @extend .btn;
-                @extend .btn-primary;
-            }
-            button[onclick="FWP.reset()"] {
-                @extend .btn;
-                @extend .btn-outline-primary;
+            button#filter-reset {
                 margin-left: 5px;
             }
         }

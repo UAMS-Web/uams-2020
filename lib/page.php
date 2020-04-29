@@ -269,7 +269,8 @@ function uamswp_hide_breadcrumbs(){
 add_action( 'template_redirect', 'remove_breadcrumbs' );
 function remove_breadcrumbs() {
 	if ( uamswp_hide_breadcrumbs() ) {
-		remove_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
+        remove_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
+        remove_action( 'genesis_after_header', 'sp_breadcrumb_after_header' );
 	}
 }
 

@@ -110,7 +110,7 @@ add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_c
 // remove_theme_support( 'genesis-inpost-layouts' );
 
 // Remove gutenberg blocks
-add_filter( 'allowed_block_types', 'uamswp_allowed_block_types' );
+// add_filter( 'allowed_block_types', 'uamswp_allowed_block_types' );
  
 function uamswp_allowed_block_types( $allowed_blocks ) {
 
@@ -144,6 +144,7 @@ function uamswp_allowed_block_types( $allowed_blocks ) {
 		'core/list',
 		'core/quote',
 		'core/file',
+		'core/gallery',
 		// 'core/video', // Use embeds??
 		// Formatting
 		'core/table',

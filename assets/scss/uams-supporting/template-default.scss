@@ -302,6 +302,7 @@ body.search {
 
 .alignnone,
 figure[class="wp-block-image"],
+figure[class="wp-block-image size-large"],
 .aligncenter,
 .alignleft,
 .alignright,
@@ -319,7 +320,8 @@ figure[class="wp-block-image"],
 }
 
 .alignnone,
-figure[class="wp-block-image"]
+figure[class="wp-block-image"],
+figure[class="wp-block-image size-large"],
 .aligncenter,
 .alignwide,
 .alignfull {
@@ -332,6 +334,7 @@ figure[class="wp-block-image"]
 
 .alignnone,
 figure[class="wp-block-image"],
+figure[class="wp-block-image size-large"],
 .alignleft,
 .alignright {
     .wp-caption-text,
@@ -340,6 +343,7 @@ figure[class="wp-block-image"],
     }
 }
 
+figure[class="wp-block-image size-large"],
 .aligncenter,
 .alignwide,
 .alignfull {
@@ -351,6 +355,7 @@ figure[class="wp-block-image"],
     }
 }
 
+figure[class="wp-block-image size-large"],
 .aligncenter {
     width: 100% !important;
 }

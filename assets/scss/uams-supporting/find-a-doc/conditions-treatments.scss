@@ -11,19 +11,9 @@
         }
     }
     .list-container {
-
         .list {
-            @extend .list-unstyled;
+            @include list-unstyled; // equivalent of @extend .list-unstyled
             margin: 0 auto;
-
-            li {
-
-                a {
-                    @extend .btn;
-                    @extend .btn-outline-primary;
-                    background-color: $body-bg;
-                }
-            }
         }
 
         &.list-container-columns {
@@ -55,10 +45,10 @@
             }
 
             li {
-                @extend .mt-4;
+                margin-top: map-get($spacers, 4) !important; // equivalent of @extend .mt-4
 
                 &:first-child {
-                    @extend .mt-0;
+                    margin-top: map-get($spacers, 0) !important; // equivalent of @extend .mt-0
                 }
 
                 a {
@@ -73,7 +63,7 @@
                 display: flex;
                 flex-flow: row wrap;
                 justify-content: center;
-                @extend .m-n2;
+                margin: -(map-get($spacers, 2)) !important; // equivalent of @extend .m-n2
 
                 li {
                     margin: map-get($spacers, 2);

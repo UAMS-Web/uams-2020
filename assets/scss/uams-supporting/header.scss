@@ -285,6 +285,7 @@ $header-health-logo-clear-space: $header-logo-clear-space;
         .nav-link {
             @extend .p-1;
             @extend .text-reset;
+            white-space: nowrap;
         }
 
         .resource-nav {
@@ -305,6 +306,7 @@ $header-health-logo-clear-space: $header-logo-clear-space;
                 }
             }
         }
+        
         .toggle-search {
             .fa-search-minus {
                 opacity: 0;
