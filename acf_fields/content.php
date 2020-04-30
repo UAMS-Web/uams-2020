@@ -47,7 +47,7 @@ return array(
     ),
     array(
         'key' => 'field_content_description'. $suffix,
-        'label' => 'Content \/ Text',
+        'label' => 'Content / Text',
         'name' => 'content_content',
         'type' => 'wysiwyg',
         'instructions' => '(optional)',
