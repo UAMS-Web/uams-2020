@@ -214,6 +214,17 @@ function uamswp_module( $module = array(), $i = false ) {
                 include( get_stylesheet_directory() .'/blocks/gallery.php' );
     
                 break;
+
+        case 'modules_uams_content':
+                    $id = $i;
+                    $heading = $module['content_heading'];
+                    $hide_heading = $module['content_hide_heading'];
+                    $content_block = $module['content_content'];
+                    $background_color = $module['content_background_color'];
+        
+                    include( get_stylesheet_directory() .'/blocks/content.php' );
+        
+                    break;
  
 		// More modules go here
 	}

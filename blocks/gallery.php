@@ -68,11 +68,12 @@ if ($gallery_columns == '2') {
     // Load values.
     $image_url = $gallery_image['url'];
     $image_alt = $gallery_image['alt'];
-    $image_md_url = $gallery_image['sizes']['medium'];
-
+    $image_md_url = $gallery_image['sizes']['aspect-16-9'];
+    $image_id = $gallery_image['id'];
+    /* <img class="w-100" src="<?php echo esc_url($image_url); ?>" alt="<?php echo $image_alt; ?>"> */
     ?>
             <div class="col-12 col-sm-<?php echo $sm ?> col-lg-<?php echo $lg; ?> pb-6">
-                <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>"><img class="w-100" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>"></a>
+                <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>"><?php echo wp_get_attachment_image($image_id, 'full', "", array( "class" => "w-100" )) ?></a>
             </div>
             <div class="modal fade" id="modal_<?php echo $i; ?>_<?php echo $id; ?>" tabindex="-1" role="dialog" aria-label="<?php echo $image_alt; ?>" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
@@ -83,7 +84,7 @@ if ($gallery_columns == '2') {
                             </button>
                         </div>
                         <div class="modal-body">
-                            <img class="w-100" src="<?php echo $image_url; ?>" alt="<?php echo $image_alt; ?>">
+                            <img class="w-100" src="<?php echo esc_url($image_url); ?>" alt="<?php echo $image_alt; ?>">
                         </div>
                     </div>
                 </div>

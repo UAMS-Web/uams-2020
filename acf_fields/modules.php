@@ -28,6 +28,15 @@ return array (
             //     'min' => '',
             //     'max' => '',
             // ),
+            'layout_content' => array(
+                'key' => 'layout_content',
+                'name' => 'modules_uams_content',
+                'label' => 'Content',
+                'display' => 'block',
+                'sub_fields' => $content,
+                'min' => '',
+                'max' => '',
+            ),
             'layout_modules_action_bar' => array(
                 'key' => 'layout_modules_action_bar',
                 'name' => 'modules_action_bar',
