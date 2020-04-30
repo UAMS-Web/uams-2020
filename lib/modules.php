@@ -202,6 +202,30 @@ function uamswp_module( $module = array(), $i = false ) {
                 echo '</div>';
             }
             break;
+
+        case 'modules_uams_gallery':
+                $id = $i;
+                $heading = $module['gallery_heading'];
+                $hide_heading = $module['gallery_hide_heading'];
+                $description = $module['gallery_description'];
+                $gallery_columns = $module['gallery_columns'];
+                $gallery_images = $module['gallery_images'];
+                $background_color = $module['gallery_background_color'];
+    
+                include( get_stylesheet_directory() .'/blocks/gallery.php' );
+    
+                break;
+
+        case 'modules_uams_content':
+                    $id = $i;
+                    $heading = $module['content_heading'];
+                    $hide_heading = $module['content_hide_heading'];
+                    $content_block = $module['content_content'];
+                    $background_color = $module['content_background_color'];
+        
+                    include( get_stylesheet_directory() .'/blocks/content.php' );
+        
+                    break;
  
 		// More modules go here
 	}

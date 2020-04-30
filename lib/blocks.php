@@ -145,6 +145,17 @@ function uams_register_blocks() {
             'mode'              => 'auto',
             'align'             => 'full',
             'render_template'   => 'blocks/livewhale.php',
+        ));
+        acf_register_block_type(array(
+            'name'              => 'uams-gallery',
+            'title'             => __('UAMS Gallery'),
+            'description'       => __('Custom Gallery with lightbox'),
+            'category'          => 'common',
+            'icon'              => 'format-gallery',
+            'keywords'          => array('uams', 'gallery'),
+            'mode'              => 'auto',
+            'align'             => 'full',
+            'render_template'   => 'blocks/gallery.php',
 		));
         // acf_register_block_type(array(
         //     'name'              => 'block',
@@ -176,6 +187,7 @@ if( function_exists('acf_add_local_field_group') ):
     $side_by_side = require( get_stylesheet_directory() .'/acf_fields/image-side-by-side.php' );
     $stacked = require( get_stylesheet_directory() .'/acf_fields/stacked.php' );
     $livewhale = require( get_stylesheet_directory() .'/acf_fields/livewhale.php' );
+    $gallery = require( get_stylesheet_directory() .'/acf_fields/gallery.php' );
     
 
     // Add local field group for UAMS Action Bar Block
@@ -467,6 +479,30 @@ if( function_exists('acf_add_local_field_group') ):
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/livewhale-calendar',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+    ));
+
+    // Add local field group for UAMS LiveWhale Calendar Block
+    acf_add_local_field_group(array(
+        'key' => 'group_uams_gallery',
+        'title' => 'Block: UAMS Gallery',
+        'fields' => $gallery,
+        'location' => array(
+            array(
+                array(
+                    'param' => 'block',
+                    'operator' => '==',
+                    'value' => 'acf/uams-gallery',
                 ),
             ),
         ),

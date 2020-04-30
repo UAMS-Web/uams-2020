@@ -1,7 +1,7 @@
 <?php
 /*
  *
- * UAMS Action Bar Block
+ * UAMS Livewhale Calendar Block
  * 
  */
 
