@@ -55,7 +55,7 @@ if ($gallery_columns == '2') {
 
 
 ?>
-<section class="uams-module gallery<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module gallery-block<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
         <span class="title"><?php echo $heading; ?></span>
     </h2>
