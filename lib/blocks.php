@@ -157,17 +157,6 @@ function uams_register_blocks() {
             'align'             => 'full',
             'render_template'   => 'blocks/gallery.php',
 		));
-        acf_register_block_type(array(
-            'name'              => 'uams-content',
-            'title'             => __('UAMS Content'),
-            'description'       => __('Basic text content'),
-            'category'          => 'common',
-            'icon'              => 'editor-alignleft',
-            'keywords'          => array('uams', 'content'),
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'render_template'   => 'blocks/content.php',
-		));
         // acf_register_block_type(array(
         //     'name'              => 'block',
         //     'title'             => __('UAMS Block'),
@@ -199,7 +188,6 @@ if( function_exists('acf_add_local_field_group') ):
     $stacked = require( get_stylesheet_directory() .'/acf_fields/stacked.php' );
     $livewhale = require( get_stylesheet_directory() .'/acf_fields/livewhale.php' );
     $gallery = require( get_stylesheet_directory() .'/acf_fields/gallery.php' );
-    $content = require( get_stylesheet_directory() .'/acf_fields/content.php' );
     
 
     // Add local field group for UAMS Action Bar Block
@@ -515,30 +503,6 @@ if( function_exists('acf_add_local_field_group') ):
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/uams-gallery',
-                ),
-            ),
-        ),
-        'menu_order' => 0,
-        'position' => 'normal',
-        'style' => 'default',
-        'label_placement' => 'top',
-        'instruction_placement' => 'label',
-        'hide_on_screen' => '',
-        'active' => true,
-        'description' => '',
-    ));
-
-    // Add local field group for UAMS Content Block
-    acf_add_local_field_group(array(
-        'key' => 'group_uams_content',
-        'title' => 'Block: UAMS Content',
-        'fields' => $content,
-        'location' => array(
-            array(
-                array(
-                    'param' => 'block',
-                    'operator' => '==',
-                    'value' => 'acf/uams-content',
                 ),
             ),
         ),
