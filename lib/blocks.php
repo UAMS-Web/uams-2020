@@ -492,7 +492,7 @@ if( function_exists('acf_add_local_field_group') ):
         'description' => '',
     ));
 
-    // Add local field group for UAMS LiveWhale Calendar Block
+    // Add local field group for UAMS Gallery Block
     acf_add_local_field_group(array(
         'key' => 'group_uams_gallery',
         'title' => 'Block: UAMS Gallery',
