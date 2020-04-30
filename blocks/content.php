@@ -36,8 +36,14 @@ if ( empty($background_color) )
 
 ?>
 <section class="uams-module content-block<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
-    <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
-        <span class="title"><?php echo $heading; ?></span>
-    </h2>
-    <?php echo $content_block ? '<div class="entry-content">'. $content_block .'</div>' : ''; ?>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
+                    <span class="title"><?php echo $heading; ?></span>
+                </h2>
+                <?php echo $content_block ? '<div class="module-body">'. $content_block .'</div>' : ''; ?>
+            </div>
+        </div>
+    </div>
 </section>
