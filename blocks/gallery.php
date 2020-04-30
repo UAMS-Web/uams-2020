@@ -61,7 +61,7 @@ if ($gallery_columns == '2') {
     </h2>
     <div class="container-fluid">
         <?php echo $description ? '<div class="entry-content">'. $description .'</div>' : ''; ?>
-        <div class="row" id="gallery">
+        <div class="row" class="image-container">
 <?php 
     $i=0;
     foreach($gallery_images as $gallery_image) {
