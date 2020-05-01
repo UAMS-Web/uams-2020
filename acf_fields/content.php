@@ -68,7 +68,7 @@ return array(
         'name' => 'content_content',
         'type' => 'wysiwyg',
         'instructions' => '(optional)',
-        'required' => 0,
+        'required' => 1,
         'conditional_logic' => 0,
         'wrapper' => array(
             'width' => '',
