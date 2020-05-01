@@ -38,6 +38,25 @@ if ( empty($gallery_images) )
     $gallery_images = get_field('gallery_images');
 if ( empty($background_color) )
     $background_color = get_field('gallery_background_color');
+if ( empty($more) )
+    $more = get_field('gallery_more');
+if ( $more == '1' ) {
+    if ( empty($more_text) )
+        $more_text = get_field('gallery_more_text');
+    if ( empty($more_button_text) )
+        $more_button_text = get_field('gallery_more_button_text');
+    if ( empty($more_button_url) )
+        $more_button_url = get_field('gallery_more_button_url');
+    if ( empty($more_button_target) ) 
+        $more_button_target = $more_button_url['target'];
+    if ( empty($more_button_description) )
+        $more_button_description = get_field('gallery_more_button_description');
+    if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) ) {
+        $more_button_color = 'primary';
+    } else {
+        $more_button_color = 'white';
+    }
+}
 
 if ($gallery_columns == '2') {
     $sm = 6;
@@ -98,6 +117,14 @@ if ($gallery_columns == '2') {
                     $i++;
                 }
                 ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 more">
+                <p class="lead"><?php echo $more_text; ?></p>
+                <div class="cta-container">
+                    <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                </div>
             </div>
         </div>
     </div>
