@@ -18,7 +18,7 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'message' => '<h2>Stacked Image &amp; Text</h2>',
+        'message' => '<h2>UAMS Stacked Image &amp; Text Block</h2>',
         'new_lines' => '',
         'esc_html' => 0,
     ),

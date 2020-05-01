@@ -6,6 +6,23 @@
  */
 return array(
     array(
+        'key' => 'field_gallery_intro'. $suffix,
+        'label' => '',
+        'name' => '',
+        'type' => 'message',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'message' => '<h2>UAMS Gallery Block</h2>',
+        'new_lines' => '',
+        'esc_html' => 0,
+    ),
+    array(
         'key' => 'field_gallery_heading'. $suffix,
         'label' => 'Heading',
         'name' => 'gallery_heading',

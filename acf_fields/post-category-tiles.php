@@ -18,7 +18,7 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'message' => '<h2>News Category Tiles</h2>
+        'message' => '<h2>UAMS Post Category Tile (Double) Block</h2>
             <p>This block is only intended to be used on the sidebar layout.</p>',
         'new_lines' => '',
         'esc_html' => 0,

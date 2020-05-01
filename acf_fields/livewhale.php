@@ -18,7 +18,7 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'message' => '<h2>Livewhale</h2>',
+        'message' => '<h2>UAMS Livewhale Calendar Block</h2>',
         'new_lines' => 'wpautop',
         'esc_html' => 0,
     ),

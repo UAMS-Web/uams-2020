@@ -18,7 +18,7 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'message' => '<h2>Call-to-Action (CTA) Bar</h2>',
+        'message' => '<h2>UAMS Call-to-Action (CTA) Bar Block</h2>',
         'new_lines' => '',
         'esc_html' => 0,
     ),
