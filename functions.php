@@ -669,6 +669,9 @@ function gallery_image_dimension( $breakpoint, $columns, $density = 1, $ratio = 
 	} elseif ( $breakpoint == 'lg' ) {
 		$viewportwidth = 1500;
 		$modulepadding = 48;
+	} elseif ( $breakpoint == 'xl' ) {
+		$viewportwidth = 1921;
+		$modulepadding = 48;
 	} else {
 		$viewportwidth = 2560;
 		$modulepadding = 48;
