@@ -47,7 +47,7 @@ return array(
         'label' => 'Hide Heading',
         'name' => 'gallery_hide_heading',
         'type' => 'true_false',
-        'instructions' => '',
+        'instructions' => 'The heading is necessary for page hierarchy. But it can be hidden from all but screen readers and search engines. This is not recommended in most cases.',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
@@ -87,7 +87,7 @@ return array(
         'label' => 'Number of Columns',
         'name' => 'gallery_columns',
         'type' => 'button_group',
-        'instructions' => '',
+        'instructions' => 'This will be the number of columns used on desktop browser sizes.',
         'required' => 1,
         'conditional_logic' => 0,
         'wrapper' => array(
@@ -114,7 +114,7 @@ return array(
         'label' => 'Images',
         'name' => 'gallery_images',
         'type' => 'gallery',
-        'instructions' => '',
+        'instructions' => 'Recommended minimum dimensions: 2434x2434',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
@@ -142,7 +142,7 @@ return array(
         'label' => 'Image Crop',
         'name' => 'gallery_crop',
         'type' => 'select',
-        'instructions' => '',
+        'instructions' => 'Choose the aspect ratio of the image crop. The remaining center portion will be visible.',
         'required' => 1,
         'conditional_logic' => 0,
         'wrapper' => array(
