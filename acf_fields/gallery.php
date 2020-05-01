@@ -114,7 +114,7 @@ return array(
         'label' => 'Images',
         'name' => 'gallery_images',
         'type' => 'gallery',
-        'instructions' => 'Recommended minimum dimensions: 2434x2434',
+        'instructions' => 'Recommended minimum dimensions: 2454x3270',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
