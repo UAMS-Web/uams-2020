@@ -647,6 +647,42 @@ function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 
 	return $image_url;
 }
 
+/**
+ * Return dimension for gallery image.
+ *
+ * @param string	$breakpoint	// short name of breakpoint (xxs, xs, sm, md, lg, xl, xxl)
+ * @param integer 	$columns	// Number of columns displayed per row
+ * @param integer 	$density	// Pixel density (1 or 2)
+ * @param integer	$ratio		// Aspect ratio of the image to return height in decimal (16:9 = 1.7778). Leave as 1 if not returning height.
+ * @return integer				// image dimension
+ */
+function gallery_image_dimension( $breakpoint, $columns, $density = 1, $ratio = 1 ) {
+	if ( $breakpoint == 'xxs' || $breakpoint == 'xs' ) {
+		$viewportwidth = 768;
+		$modulepadding = 32;
+	} elseif ( $breakpoint == 'sm' ) {
+		$viewportwidth = 992;
+		$modulepadding = 48;
+	} elseif ( $breakpoint == 'md' ) {
+		$viewportwidth = 1200;
+		$modulepadding = 48;
+	} elseif ( $breakpoint == 'lg' ) {
+		$viewportwidth = 1500;
+		$modulepadding = 48;
+	} else {
+		$viewportwidth = 2560;
+		$modulepadding = 48;
+	}
+	$dimension = ( $viewportwidth - (2 * $modulepadding) - (($columns - 1) * 30) ) / $columns;
+	if ( $ratio != 1 ) {
+		$dimension = $dimension / $ratio;
+	}
+	if ( $density > 1 ) {
+		$dimension = $dimension * 2;
+	}
+	return $dimension;
+}
+
 //
 /* Add dynamic_sidebar_params filter */
 add_filter('dynamic_sidebar_params','footer_widgets');
