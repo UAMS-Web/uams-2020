@@ -60,15 +60,19 @@ if ( $more ) {
 
 if ($gallery_columns == '2') {
     $sm = 6;
+    $md = $sm;
     $lg = 6;
 } elseif ($gallery_columns == '3') {
     $sm = 6;
+    $md = $sm;
     $lg = 4;
 } elseif ($gallery_columns == '4') {
     $sm = 6;
+    $md = $sm;
     $lg = 3;
 } else { // $gallery_columns == '6'
     $sm = 6;
+    $md = 4;
     $lg = 2;
 } 
 
@@ -95,7 +99,7 @@ if ($gallery_columns == '2') {
                         $image_id = $gallery_image['id'];
                         /* <img class="w-100" src="<?php echo esc_url($image_url); ?>" alt="<?php echo $image_alt; ?>"> */
                         ?>
-                                <div class="col-12 col-sm-<?php echo $sm ?> col-lg-<?php echo $lg; ?>">
+                                <div class="col-12 col-sm-<?php echo $sm ?> col-md-<?php echo $md ?> col-lg-<?php echo $lg; ?>">
                                     <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>">
                                         <picture>
                                             <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
