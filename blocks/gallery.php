@@ -36,6 +36,10 @@ if ( empty($gallery_columns) )
     $gallery_columns = get_field('gallery_columns');
 if ( empty($gallery_images) )
     $gallery_images = get_field('gallery_images');
+if ( empty($gallery_crop) )
+    $gallery_crop = get_field('gallery_crop');
+if ( $gallery_crop == 'none' || empty($gallery_crop) )
+    $gallery_crop = -1;
 if ( empty($background_color) )
     $background_color = get_field('gallery_background_color');
 if ( empty($more) )
@@ -103,20 +107,20 @@ if ($gallery_columns == '2') {
                                     <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>">
                                         <picture>
                                             <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xxl', 12 / $lg, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xxl', 12 / $lg, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xxl', 12 / $lg, 1), gallery_image_dimension('xxl', 12 / $lg, 1, $gallery_crop), 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xxl', 12 / $lg, 2), gallery_image_dimension('xxl', 12 / $lg, 2, $gallery_crop), 'center', 'center'); ?> 2x" 
                                                     media="(min-width: 1921px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xl', 12 / $lg, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xl', 12 / $lg, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xl', 12 / $lg, 1), gallery_image_dimension('xl', 12 / $lg, 1, $gallery_crop), 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xl', 12 / $lg, 2), gallery_image_dimension('xl', 12 / $lg, 2, $gallery_crop), 'center', 'center'); ?> 2x" 
                                                     media="(min-width: 1500px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('lg', 12 / $lg, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('lg', 12 / $lg, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('lg', 12 / $lg, 1), gallery_image_dimension('lg', 12 / $lg, 1, $gallery_crop), 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('lg', 12 / $lg, 2), gallery_image_dimension('lg', 12 / $lg, 2, $gallery_crop), 'center', 'center'); ?> 2x" 
                                                     media="(min-width: 1200px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('md', 12 / $md, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('md', 12 / $md, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('md', 12 / $md, 1), gallery_image_dimension('md', 12 / $lg, 1, $gallery_crop), 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('md', 12 / $md, 2), gallery_image_dimension('md', 12 / $lg, 2, $gallery_crop), 'center', 'center'); ?> 2x" 
                                                     media="(min-width: 992px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('sm', 12 / $sm, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('sm', 12 / $sm, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('sm', 12 / $sm, 1), gallery_image_dimension('sm', 12 / $lg, 1, $gallery_crop), 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('sm', 12 / $sm, 2), gallery_image_dimension('sm', 12 / $lg, 2, $gallery_crop), 'center', 'center'); ?> 2x" 
                                                     media="(min-width: 768px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 1), gallery_image_dimension('xs', 12 / $lg, 1, $gallery_crop), 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 2), gallery_image_dimension('xs', 12 / $lg, 2, $gallery_crop), 'center', 'center'); ?> 2x" 
                                                     media="(min-width: 1px)">
                                                 <!-- Fallback -->
-                                                <img src="<?php echo image_sizer($image_id, gallery_image_dimension('xl', $gallery_columns, 1), 'inherit', 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
+                                                <img src="<?php echo image_sizer($image_id, gallery_image_dimension('xl', $gallery_columns, 1), gallery_image_dimension('xl', $gallery_columns, 1, $gallery_crop), 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
                                             <?php } else { ?>
                                                 <!-- Fallback -->
                                                 <img src="<?php echo wp_get_attachment_image_url( $image_id, 'aspect-16-9' ); ?>" alt="<?php echo $image_alt; ?>" />
