@@ -94,7 +94,7 @@ function uams_register_blocks() {
         acf_register_block_type(array(
             'name'              => 'post-category-tile',
             'title'             => __('UAMS Post Category Tile (Single)'),
-            'description'       => __('One tile displaying a post from an individual post category.'),
+            'description'       => __('One tile displaying a post from an individual post category. This block is only intended to be used on the sidebar layout.'),
             'category'          => 'common',
             'icon'              => 'screenoptions',
             'keywords'          => array('uams', 'news', 'posts', 'post', 'articles', 'article', 'link', 'links', 'intranet', 'inside', 'tile', 'tiles', 'sidebar', 'side bar'),
@@ -105,7 +105,7 @@ function uams_register_blocks() {
         acf_register_block_type(array(
             'name'              => 'post-category-tiles',
             'title'             => __('UAMS Post Category Tile (Double)'),
-            'description'       => __('Two tiles displaying posts from individual post categories.'),
+            'description'       => __('Two tiles displaying posts from individual post categories. This block is only intended to be used on the sidebar layout.'),
             'category'          => 'common',
             'icon'              => 'screenoptions',
             'keywords'          => array('uams', 'news', 'posts', 'post', 'articles', 'article', 'link', 'links', 'intranet', 'inside', 'tile', 'tiles', 'sidebar', 'side bar'),
