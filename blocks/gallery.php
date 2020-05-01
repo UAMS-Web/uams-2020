@@ -118,7 +118,6 @@ if ($gallery_columns == '2') {
                                                 <img src="<?php echo wp_get_attachment_image_url( $image_id, 'aspect-16-9' ); ?>" alt="<?php echo $image_alt; ?>" />
                                             <?php } //endif ?>
                                         </picture>
-                                        <!-- <?php echo wp_get_attachment_image($image_id, 'full', "", array( "class" => "w-100" )) ?> -->
                                     </a>
                                 </div>
                                 <div class="modal fade" id="modal_<?php echo $i; ?>_<?php echo $id; ?>" tabindex="-1" role="dialog" aria-label="<?php echo $image_alt; ?>" aria-hidden="true">
@@ -130,7 +129,7 @@ if ($gallery_columns == '2') {
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <img class="w-100" src="<?php echo esc_url($image_url); ?>" alt="<?php echo $image_alt; ?>">
+                                                <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo $image_alt; ?>">
                                             </div>
                                         </div>
                                     </div>
