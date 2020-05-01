@@ -40,7 +40,7 @@ if ( empty($background_color) )
     $background_color = get_field('gallery_background_color');
 if ( empty($more) )
     $more = get_field('gallery_more');
-if ( $more == '1' ) {
+if ( $more ) {
     if ( empty($more_text) )
         $more_text = get_field('gallery_more_text');
     if ( empty($more_button_text) )
@@ -118,12 +118,14 @@ if ($gallery_columns == '2') {
                     ?>
                 </div>
             </div>
-            <div class="col-12 more">
-                <p class="lead"><?php echo $more_text; ?></p>
-                <div class="cta-container">
-                    <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+            <?php if ( $more ) { ?>
+                <div class="col-12 more">
+                    <p class="lead"><?php echo $more_text; ?></p>
+                    <div class="cta-container">
+                        <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                    </div>
                 </div>
-            </div>
+            <?php } // endif ?>
         </div>
     </div>
 </section>
