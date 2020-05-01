@@ -67,7 +67,7 @@ return array(
         'label' => 'Content / Text',
         'name' => 'content_content',
         'type' => 'wysiwyg',
-        'instructions' => '(optional)',
+        'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
         'wrapper' => array(
