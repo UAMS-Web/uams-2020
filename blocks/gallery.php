@@ -117,10 +117,10 @@ if ($gallery_columns == '2') {
                                                     media="(min-width: 992px)">
                                                 <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('sm', 12 / $sm, 1), gallery_image_dimension('sm', 12 / $sm, 1, $gallery_crop), 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('sm', 12 / $sm, 2), gallery_image_dimension('sm', 12 / $lg, 2, $gallery_crop), 'center', 'center'); ?> 2x" 
                                                     media="(min-width: 768px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 1), gallery_image_dimension('xs', 12 / $lg, 1, $gallery_crop), 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 2), gallery_image_dimension('xs', 12 / $lg, 2, $gallery_crop), 'center', 'center'); ?> 2x" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 1), gallery_image_dimension('xs', 1, 1, $gallery_crop), 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 2), gallery_image_dimension('xs', 1, 2, $gallery_crop), 'center', 'center'); ?> 2x" 
                                                     media="(min-width: 1px)">
                                                 <!-- Fallback -->
-                                                <img src="<?php echo image_sizer($image_id, gallery_image_dimension('xl', $gallery_columns, 1), gallery_image_dimension('xl', $gallery_columns, 1, $gallery_crop), 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
+                                                <img src="<?php echo image_sizer($image_id, gallery_image_dimension('xl', 2, 1), gallery_image_dimension('xl', 2, 1, $gallery_crop), 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
                                             <?php } else { ?>
                                                 <!-- Fallback -->
                                                 <img src="<?php echo wp_get_attachment_image_url( $image_id, 'aspect-16-9' ); ?>" alt="<?php echo $image_alt; ?>" />
