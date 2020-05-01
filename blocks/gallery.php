@@ -103,15 +103,15 @@ if ($gallery_columns == '2') {
                                     <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>">
                                         <picture>
                                             <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xxl', $gallery_columns, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xxl', $gallery_columns, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xxl', 12 / $lg, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xxl', 12 / $lg, 2), 'inherit', 'center', 'center'); ?> 2x" 
                                                     media="(min-width: 1921px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xl', $gallery_columns, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xl', $gallery_columns, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xl', 12 / $lg, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xl', 12 / $lg, 2), 'inherit', 'center', 'center'); ?> 2x" 
                                                     media="(min-width: 1500px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('lg', $gallery_columns, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('lg', $gallery_columns, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('lg', 12 / $lg, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('lg', 12 / $lg, 2), 'inherit', 'center', 'center'); ?> 2x" 
                                                     media="(min-width: 1200px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('md', 2, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('md', 2, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('md', 12 / $md, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('md', 12 / $md, 2), 'inherit', 'center', 'center'); ?> 2x" 
                                                     media="(min-width: 992px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('sm', 2, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('sm', 2, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('sm', 12 / $sm, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('sm', 12 / $sm, 2), 'inherit', 'center', 'center'); ?> 2x" 
                                                     media="(min-width: 768px)">
                                                 <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 2), 'inherit', 'center', 'center'); ?> 2x" 
                                                     media="(min-width: 1px)">
