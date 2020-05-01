@@ -156,7 +156,6 @@ return array(
             '1.7778' => '16:9 (landscape)',
             '1.3333' => '4:3 (landscape)',
             '1' => '1:1 (square)',
-            '0.5625' => '9:16 (portrait)',
             '0.75' => '3:4 (portrait)',
         ),
         'default_value' => array(
