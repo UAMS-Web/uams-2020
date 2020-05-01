@@ -38,7 +38,7 @@ if ( empty($gallery_images) )
     $gallery_images = get_field('gallery_images');
 if ( empty($gallery_crop) )
     $gallery_crop = get_field('gallery_crop');
-if ( $gallery_crop == 'none' || empty($gallery_crop) )
+if ( $gallery_crop == 'none' || $gallery_crop[0] == 'none' )
     $gallery_crop = -1;
 if ( empty($background_color) )
     $background_color = get_field('gallery_background_color');
