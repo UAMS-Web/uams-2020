@@ -111,7 +111,7 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			'label' => 'Hide Section Title',
 			'name' => 'news_hide_title',
 			'type' => 'true_false',
-			'instructions' => '',
+			'instructions' => 'The heading is necessary for page hierarchy. But it can be hidden from all but screen readers and search engines. This is not recommended in most cases.',
 			'required' => 0,
 			'conditional_logic' => array(
 				array(

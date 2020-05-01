@@ -46,7 +46,7 @@ return array(
         'label' => 'Hide the Module Heading?',
         'name' => 'stacked_hide_heading',
         'type' => 'true_false',
-        'instructions' => '',
+        'instructions' => 'The heading is necessary for page hierarchy. But it can be hidden from all but screen readers and search engines. This is not recommended in most cases.',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
