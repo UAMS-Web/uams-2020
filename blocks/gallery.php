@@ -96,7 +96,30 @@ if ($gallery_columns == '2') {
                         /* <img class="w-100" src="<?php echo esc_url($image_url); ?>" alt="<?php echo $image_alt; ?>"> */
                         ?>
                                 <div class="col-12 col-sm-<?php echo $sm ?> col-lg-<?php echo $lg; ?>">
-                                    <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>"><?php echo wp_get_attachment_image($image_id, 'full', "", array( "class" => "w-100" )) ?></a>
+                                    <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>">
+                                        <picture>
+                                            <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xxl', $gallery_columns, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xxl', $gallery_columns, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                    media="(min-width: 1921px)">
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xl', $gallery_columns, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xl', $gallery_columns, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                    media="(min-width: 1500px)">
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('lg', $gallery_columns, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('lg', $gallery_columns, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                    media="(min-width: 1200px)">
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('md', 2, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('md', 2, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                    media="(min-width: 992px)">
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('sm', 2, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('sm', 2, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                    media="(min-width: 768px)">
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 1), 'inherit', 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 2), 'inherit', 'center', 'center'); ?> 2x" 
+                                                    media="(min-width: 1px)">
+                                                <!-- Fallback -->
+                                                <img src="<?php echo image_sizer($image_id, gallery_image_dimension('xl', $gallery_columns, 1), 'inherit', 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
+                                            <?php } else { ?>
+                                                <!-- Fallback -->
+                                                <img src="<?php echo wp_get_attachment_image_url( $image_id, 'aspect-16-9' ); ?>" alt="<?php echo $image_alt; ?>" />
+                                            <?php } //endif ?>
+                                        </picture>
+                                        <!-- <?php echo wp_get_attachment_image($image_id, 'full', "", array( "class" => "w-100" )) ?> -->
+                                    </a>
                                 </div>
                                 <div class="modal fade" id="modal_<?php echo $i; ?>_<?php echo $id; ?>" tabindex="-1" role="dialog" aria-label="<?php echo $image_alt; ?>" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
