@@ -34,6 +34,12 @@
     }
     
     .image-container .row {
-        justify-content: center;
+        .row {
+            justify-content: center;
+        }
+
+        img {
+            width: 100%;
+        }
     }
 }
