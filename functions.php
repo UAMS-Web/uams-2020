@@ -616,6 +616,12 @@ function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 
 	$image_height = wp_get_attachment_image_src($id, 'full')[2];
 	// Do the maths
 	$image_ratio = $image_width / $image_height;
+	if ($prefheight == 'inherit') {
+		$prefheight = $prefwidth / $image_ratio;
+	}
+	if ($prefwidth == 'inherit') {
+		$prefwidth = $prefheight * $image_ratio;
+	}
 	$pref_ratio = $prefwidth / $prefheight;
 	if( $image_width >= $prefwidth && $image_height >= $prefheight ) { // Bigger image => Crop
 		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
