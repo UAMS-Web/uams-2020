@@ -137,7 +137,11 @@ if ($gallery_columns == '2') {
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo $image_alt; ?>">
+                                                <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
+                                                    <img src="<?php echo image_sizer($image_id, 1106, -1, 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
+                                                <?php } else { ?>
+                                                    <img src="<?php echo wp_get_attachment_image_url( $image_id, 'content-image-full' ); ?>" alt="<?php echo $image_alt; ?>">
+                                                <?php } //endif ?>
                                             </div>
                                         </div>
                                     </div>
