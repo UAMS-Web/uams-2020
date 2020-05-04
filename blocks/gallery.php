@@ -42,6 +42,8 @@ if ( $gallery_crop == 'none' || $gallery_crop[0] == 'none' )
     $gallery_crop = -1;
 if ( empty($background_color) )
     $background_color = get_field('gallery_background_color');
+if ( empty($modal) )
+    $modal = get_field('gallery_modal');
 if ( empty($more) )
     $more = get_field('gallery_more');
 if ( $more ) {
@@ -104,7 +106,9 @@ if ($gallery_columns == '2') {
                         /* <img class="w-100" src="<?php echo esc_url($image_url); ?>" alt="<?php echo $image_alt; ?>"> */
                         ?>
                                 <div class="col-12 col-sm-<?php echo $sm ?> col-md-<?php echo $md ?> col-lg-<?php echo $lg; ?>">
-                                    <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>" aria-label="Show larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': ' . $image_alt : ''; ?>">
+                                        <?php if ($modal) { ?>
+                                            <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>" aria-label="Show larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': ' . $image_alt : ''; ?>">
+                                        <?php } // endif ?>
                                         <picture>
                                             <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
                                                 <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xxl', 12 / $lg, 1), gallery_image_dimension('xxl', 12 / $lg, 1, $gallery_crop), 'center', 'center'); ?>" 
@@ -126,26 +130,30 @@ if ($gallery_columns == '2') {
                                                 <img src="<?php echo wp_get_attachment_image_url( $image_id, 'aspect-16-9' ); ?>" alt="<?php echo $image_alt; ?>" />
                                             <?php } //endif ?>
                                         </picture>
-                                    </a>
+                                    <?php if ($modal) { ?>
+                                        </a>
+                                    <?php } //endif ?>
                                 </div>
-                                <div class="modal fade" id="modal_<?php echo $i; ?>_<?php echo $id; ?>" tabindex="-1" role="dialog" aria-label="Larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': ' . $image_alt : ''; ?>" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
-                                                    <img src="<?php echo image_sizer($image_id, 1106, -1, 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
-                                                <?php } else { ?>
-                                                    <img src="<?php echo wp_get_attachment_image_url( $image_id, 'content-image-full' ); ?>" alt="<?php echo $image_alt; ?>">
-                                                <?php } //endif ?>
+                                <?php if ($modal) { ?>
+                                    <div class="modal fade" id="modal_<?php echo $i; ?>_<?php echo $id; ?>" tabindex="-1" role="dialog" aria-label="Larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': ' . $image_alt : ''; ?>" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
+                                                        <img src="<?php echo image_sizer($image_id, 1106, -1, 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
+                                                    <?php } else { ?>
+                                                        <img src="<?php echo wp_get_attachment_image_url( $image_id, 'content-image-full' ); ?>" alt="<?php echo $image_alt; ?>">
+                                                    <?php } //endif ?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                <?php } // endif ?>
                     <?php
                         $i++;
                     }
