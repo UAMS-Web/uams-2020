@@ -114,7 +114,7 @@ return array(
         'label' => 'Images',
         'name' => 'gallery_images',
         'type' => 'gallery',
-        'instructions' => 'Minimum dimensions: 1227x1635',
+        'instructions' => 'It is recommended that you select images that are of a similar aspect ratio.<br />Minimum dimensions: 1227x1635',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
