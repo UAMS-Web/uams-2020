@@ -142,7 +142,7 @@ return array(
         'label' => 'Image Crop',
         'name' => 'gallery_crop',
         'type' => 'select',
-        'instructions' => 'Choose the aspect ratio of the image crop. The remaining center portion will be visible.',
+        'instructions' => 'It is recommended that you select a crop option if your images are not all the same aspect ratio.<br />Choose the aspect ratio of the image crop. The remaining center portion will be visible.',
         'required' => 1,
         'conditional_logic' => 0,
         'wrapper' => array(
