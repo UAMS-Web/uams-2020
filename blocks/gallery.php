@@ -104,7 +104,7 @@ if ($gallery_columns == '2') {
                         /* <img class="w-100" src="<?php echo esc_url($image_url); ?>" alt="<?php echo $image_alt; ?>"> */
                         ?>
                                 <div class="col-12 col-sm-<?php echo $sm ?> col-md-<?php echo $md ?> col-lg-<?php echo $lg; ?>">
-                                    <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>">
+                                    <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>" aria-label="Show larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': ' . $image_alt : ''; ?>">
                                         <picture>
                                             <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
                                                 <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xxl', 12 / $lg, 1), gallery_image_dimension('xxl', 12 / $lg, 1, $gallery_crop), 'center', 'center'); ?> 1x, <?php echo image_sizer($image_id, gallery_image_dimension('xxl', 12 / $lg, 2), gallery_image_dimension('xxl', 12 / $lg, 2, $gallery_crop), 'center', 'center'); ?> 2x" 
@@ -128,7 +128,7 @@ if ($gallery_columns == '2') {
                                         </picture>
                                     </a>
                                 </div>
-                                <div class="modal fade" id="modal_<?php echo $i; ?>_<?php echo $id; ?>" tabindex="-1" role="dialog" aria-label="<?php echo $image_alt; ?>" aria-hidden="true">
+                                <div class="modal fade" id="modal_<?php echo $i; ?>_<?php echo $id; ?>" tabindex="-1" role="dialog" aria-label="Larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': ' . $image_alt : ''; ?>" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
