@@ -46,7 +46,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-            echo '<h2 class="module-title">Providers</h2>';
+            echo '<h2 class="module-title"><span class="title">Providers</span></h2>';
 
             if ( have_posts() ) :
 
@@ -89,7 +89,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-            echo '<h2 class="module-title">Locations</h2>';
+            echo '<h2 class="module-title"><span class="title">Locations</span></h2>';
 
             if ( have_posts() ) :
 
@@ -131,7 +131,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-            echo '<h2 class="module-title">Services</h2>';
+            echo '<h2 class="module-title"><span class="title">Services</span></h2>';
 
             if ( have_posts() ) :
 
@@ -175,7 +175,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-            echo '<h2 class="module-title">Conditions</h2>';
+            echo '<h2 class="module-title"><span class="title">Conditions</span></h2>';
             echo '<div class="module-body">';
 
             if ( have_posts() ) :
@@ -234,7 +234,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-            echo '<h2 class="module-title">Treatments &amp; Procedures</h2>';
+            echo '<h2 class="module-title"><span class="title">Treatments &amp; Procedures</span></h2>';
             echo '<div class="module-body">';
 
             if ( have_posts() ) :
@@ -293,7 +293,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-                echo '<h2 class="module-title">' . $post_type_text . '</h2>';
+                echo '<h2 class="module-title"><span class="title">' . $post_type_text . '</span></h2>';
                 echo '<div class="module-body">';
                     // Loop actions.
                     uamswp_loop_layout();
@@ -334,7 +334,7 @@ function uamswp_do_search_loop() {
                     $post_type_text = $post_type_text . "s";
                 }
 
-                echo '<div class="col-12 col-md-6 post-type ' . $post_type . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $post_type_text . '</h2>';
+                echo '<div class="col-12 col-md-6 post-type ' . $post_type . '"><div class="inner-container content-width"><h2 class="module-title post-type-heading"><span class="title">' . $post_type_text . '</span></h2>';
                 if ( have_posts() ) {
 
                     while ( have_posts() ) : the_post();
@@ -402,7 +402,7 @@ function uamswp_do_search_loop() {
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
 
-            echo '<h2 class="module-title">Providers</h2>';
+            echo '<h2 class="module-title"><span class="title">Providers</span></h2>';
 
                 echo '<div class="card-list-container"><div class="card-list card-list-doctors card-list-doctors-count-6 facetwp-template">';
 
@@ -465,7 +465,7 @@ function uamswp_do_search_loop() {
                     //     $taxonomy_text = $taxonomy_text . "s";
                     // }
 
-                    // echo '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
+                    // echo '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="module-title post-type-heading"><span class="title">' . $taxonomy_text . '</span></h2>';
                     //     // Loop actions.
                     //     uamswp_loop_layout();
 
@@ -484,7 +484,7 @@ function uamswp_do_search_loop() {
 
                     if ( have_posts() ) :
 						$show_conditions_treatments = true;
-                        $conditions_treatments .= '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
+                        $conditions_treatments .= '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="module-title post-type-heading"><span class="title">' . $taxonomy_text . '</span></h2>';
 
                         while ( have_posts() ) : the_post();
 
@@ -512,7 +512,7 @@ function uamswp_do_search_loop() {
                         }
                         $conditions_treatments .= '</div>';
                     else :
-                        $conditions_treatments .=' <div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
+                        $conditions_treatments .=' <div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="module-title post-type-heading"><span class="title">' . $taxonomy_text . '</span></h2>';
                         $conditions_treatments .= '<p>Sorry, no content matched your criteria.</p>';
                         $conditions_treatments .= '</div></div>';
                     endif;
@@ -557,7 +557,7 @@ function uamswp_do_search_loop() {
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
 
-            echo '<h2 class="module-title">Locations</h2>';
+            echo '<h2 class="module-title"><span class="title">Locations</span></h2>';
 
                 echo '<div class="card-list-container location-card-list-container"><div class="card-list facetwp-template">';
 
@@ -614,7 +614,7 @@ function uamswp_do_search_loop() {
 	            echo '<div class="search-content row">';
 	            echo '<div class="col-12">';
 
-            	echo '<h2 class="module-title">Areas of Expertise</h2>';
+            	echo '<h2 class="module-title"><span class="title">Areas of Expertise</span></h2>';
                 echo '<div class="card-list-container"><div class="card-list card-list-expertise facetwp-template">';
 
                 while ( have_posts() ) : the_post();
@@ -652,7 +652,7 @@ function uamswp_do_search_loop() {
             <div class="container-fluid">
                 <div class="row">
                     <div class="widget_search col-12">
-                            <h2 class="module-title">Search All UAMS Sites</h2>
+                            <h2 class="module-title"><span class="title">Search All UAMS Sites</span></h2>
                             <p class="content note">Search UAMS websites on the UAMS.edu and UAMShealth.com&nbsp;domains:</p>
                         <div class="inner-container content-width">
                             <script async src="https://cse.google.com/cse.js?cx=014806496997774146681:pyl1jhwi-bo"></script>
