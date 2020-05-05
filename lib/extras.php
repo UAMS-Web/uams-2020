@@ -117,11 +117,18 @@ function uamswp_filter_ptags_on_images( $content ) {
 // Add aria-label for download button
 add_filter( 'the_content', 'uamswp_filter_download_button' );
 function uamswp_filter_download_button( $content ) {
-    if ( preg_match('/<div class="wp-block-file"><a .*>([^<]*)<\/a>/iU', $content, $text) ) {
-        return str_replace( ' download>', ' aria-label="Download for '. $text[1] .'" download>', $content );
-    } else {
-        return $content;
+    $preg_match = '/<div class="wp-block-file"><a .*>([^<]*)<\/a><a(.*)/iU';
+    $has_download_button = preg_match( $preg_match, $content, $matches );
+    if ( $has_download_button && ! empty( $matches[1] ) ) {
+        $content = preg_replace_callback( $preg_match, 'add_download_title', $content );
     }
+    return $content;
+}
+function add_download_title( $matches ) {
+    // matches[0] = <div class="wp-block-file"><a href="">File Name</a><a 
+    // matches[1] = File Name
+    // matches[2] = href="" class="wp-block-file__button" download>Download</a></div>
+    return $matches[0] . ' aria-label="Download for '. $matches[1] .'"' . $matches[2];
 }
 
 // Replace custom logo class to bootstrap
