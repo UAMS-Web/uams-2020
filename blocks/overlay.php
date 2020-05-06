@@ -33,7 +33,7 @@ if( $overlay_rows ) :
 
 
 ?>
-<div class="uams-module no-padding text-image-overlay" id="<?php echo $id; ?>">
+<div class="uams-module no-padding text-image-overlay<?php echo $className; ?>" id="<?php echo $id; ?>">
     <div class="container-fluid">
         <div class="row">
 <?php 
@@ -50,7 +50,7 @@ if( $overlay_rows ) :
         $image = $overlay_row['overlay_section_image'];
 
 ?>
-            <section class="col-12<?php echo $row_count > 1 ? " col-sm-6" : ""; ?> item bg-image<?php echo $className; ?> item-<?php echo $index; ?> <?php echo $background_color; ?>" aria-label="<?php echo $heading; ?>">
+            <section class="col-12<?php echo $row_count > 1 ? " col-sm-6" : ""; ?> item bg-image item-<?php echo $index; ?> <?php echo $background_color; ?>" aria-label="<?php echo $heading; ?>">
                 <?php if ( $row_count > 1 && function_exists( 'fly_add_image_size' ) ) { // Background styles for two tiles in one row with Fly plugin ?>
                 <style>
                     #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
