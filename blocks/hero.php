@@ -68,6 +68,8 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
     $index = 1;
     foreach($hero_rows as $hero_row) {
 // Load values and adding defaults.
+    // if ( empty($disable) )
+        $disable = $hero_row['hero_disable'] ?: '';
     // if ( empty($heading) )
         $heading = $hero_row['hero_heading'] ?: 'Heading goes here...'; // Required
     // if ( empty($body) )
@@ -107,6 +109,7 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
     if ( empty($image_mobile) ) {
         $image_mobile = $image_desktop;
     }
+    if ( !$disable ) {
 ?>
         <div class="carousel-item <?php 
         if ($background_color == 'auto') {
@@ -161,7 +164,7 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
                 </div>
             </div>
         </div>
-<?php
+<?php } // endif
             $index++;
         } // end foreach
 ?>
