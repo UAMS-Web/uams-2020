@@ -18,7 +18,7 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'message' => '<h2>Side-by-Side Image & Text</h2>',
+        'message' => '<h2>UAMS Side-by-Side Image &amp; Text Block</h2>',
         'new_lines' => 'wpautop',
         'esc_html' => 0,
     ),

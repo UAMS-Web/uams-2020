@@ -598,8 +598,8 @@ if (!function_exists('apStyleDate')) {
  * Return sized image.
  *
  * @param integer  $id 			// id of image
- * @param integer  $prefwidth	// Preferred Output width
- * @param string   $prefheight	// Preferred Output height
+ * @param integer  $prefwidth	// Preferred Output width. Set as -1 to inherit width as native ratio of prefered height.
+ * @param string   $prefheight	// Preferred Output height. Set as -1 to inherit width as native ratio of prefered width.
  * @param string   $hcrop		// horizontal crop position (left, center, right)
  * @param string   $vcrop		// vertical crop position (top, center, bottom)
  * @return string				// image url
@@ -616,6 +616,12 @@ function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 
 	$image_height = wp_get_attachment_image_src($id, 'full')[2];
 	// Do the maths
 	$image_ratio = $image_width / $image_height;
+	if ($prefheight == -1) {
+		$prefheight = $prefwidth / $image_ratio;
+	}
+	if ($prefwidth == -1) {
+		$prefwidth = $prefheight * $image_ratio;
+	}
 	$pref_ratio = $prefwidth / $prefheight;
 	if( $image_width >= $prefwidth && $image_height >= $prefheight ) { // Bigger image => Crop
 		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
@@ -639,6 +645,53 @@ function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 
 		$image_url = wp_get_attachment_url( $id, 'full' );
 	}
 	return $image_url;
+}
+
+/**
+ * Return dimension for gallery image.
+ * For use inside image_sizer function.
+ *
+ * @param string	$breakpoint	// short name of breakpoint (xxs, xs, sm, md, lg, xl, xxl)
+ * @param integer 	$columns	// Number of columns displayed per row
+ * @param integer 	$density	// Pixel density (1 or 2)
+ * @param integer	$ratio		// Aspect ratio of the image to return height in decimal (16:9 = 1.7778). Leave as 0 if not returning height. Set to -1 if height should be set as native ratio of preferred width.
+ * @return integer				// image dimension
+ */
+function gallery_image_dimension( $breakpoint, $columns, $density = 1, $ratio = 0 ) {
+	if ( $breakpoint == 'xxs' || $breakpoint == 'xs' ) {
+		$viewportwidth = 768;
+		$modulepadding = 32;
+	} elseif ( $breakpoint == 'sm' ) {
+		$viewportwidth = 992;
+		$modulepadding = 48;
+	} elseif ( $breakpoint == 'md' ) {
+		$viewportwidth = 1200;
+		$modulepadding = 48;
+	} elseif ( $breakpoint == 'lg' ) {
+		$viewportwidth = 1500;
+		$modulepadding = 48;
+	} elseif ( $breakpoint == 'xl' ) {
+		$viewportwidth = 1921;
+		$modulepadding = 48;
+	} else {
+		$viewportwidth = 2560;
+		$modulepadding = 48;
+	}
+	if ( $ratio == -1 ) {
+		$dimension = -1;
+	} else {
+		$dimension = ( $viewportwidth - (2 * $modulepadding) - (($columns - 1) * 30) ) / $columns;
+
+		if ( $ratio != 0 ) {
+			$dimension = $dimension / $ratio;
+		}
+
+		if ( $density > 1 ) {
+			$dimension = $dimension * 2;
+		}
+	}
+	
+	return $dimension;
 }
 
 //

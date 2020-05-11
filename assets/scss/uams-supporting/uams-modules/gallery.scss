@@ -1,0 +1,45 @@
+.gallery-block {
+    &:not(.no-padding) {
+        .image-container {
+            padding-top: $uams-module-padding-mobile;
+    
+            @include media-breakpoint-up(sm) {
+                padding-top: $uams-module-padding;
+            }
+        }
+    }
+
+    &.extra-padding {
+        .image-container {
+            padding-top: ($uams-module-padding-mobile * 2);
+    
+            @include media-breakpoint-up(sm) {
+                padding-top: ($uams-module-padding * 2);
+            }
+        }
+    }
+
+    &.less-padding {
+        .image-container {
+            padding-top: ($uams-module-padding-mobile / 2);
+    
+            @include media-breakpoint-up(sm) {
+                padding-top: ($uams-module-padding / 2);
+            }
+        }
+    }
+
+    .module-body {
+        text-align: center;
+    }
+    
+    .image-container {
+        .row {
+            justify-content: center;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+}

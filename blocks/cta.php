@@ -6,14 +6,19 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+$id = $id ? ( $id + 1 ) : '';
 $i = 0;
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
-} 
-if ( empty ($id) ) {
-    $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
+if (!empty($id)) {
+    $id = 'module-' . $id; 
+} else {
+    $id = $i + 1;
+}
+// if ( empty ($id) ) {
+//     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
+// }
     
 $id = 'cta-bar-' . $id;
 
@@ -25,7 +30,7 @@ if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
 }
 
-// Load values and assing defaults.
+// Load values and assessing defaults.
 // if empty - allow values to be set for widgets
 if ( empty($heading) ) 
     $heading = get_field('cta_bar_heading');

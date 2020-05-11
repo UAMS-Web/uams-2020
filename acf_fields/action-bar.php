@@ -18,7 +18,7 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'message' => '<h2>Action Bar</h2>',
+        'message' => '<h2>UAMS Action Bar Block</h2>',
         'new_lines' => '',
         'esc_html' => 0,
     ),

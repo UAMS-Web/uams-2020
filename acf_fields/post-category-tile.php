@@ -18,7 +18,7 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'message' => '<h2>Post Category Tile (Single)</h2>
+        'message' => '<h2>UAMS Post Category Tile (Single) Block</h2>
         <p>This block is only intended to be used on the sidebar layout.</p>',
         'new_lines' => '',
         'esc_html' => 0,
@@ -47,7 +47,7 @@ return array(
         'label' => 'Hide Heading?',
         'name' => 'post_tile_hide_heading',
         'type' => 'true_false',
-        'instructions' => '',
+        'instructions' => 'The heading is necessary for page hierarchy. But it can be hidden from all but screen readers and search engines. This is not recommended in most cases.',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(

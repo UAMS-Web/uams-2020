@@ -18,7 +18,7 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'message' => '<h2>Link List</h2>',
+        'message' => '<h2>UAMS Link List Block</h2>',
         'new_lines' => '',
         'esc_html' => 0,
     ),

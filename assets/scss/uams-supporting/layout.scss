@@ -177,6 +177,12 @@ section.archive-description .entry-content {
             margin-top: $uams-module-padding;
         }
     }
+
+    > p, > ul, > ol {
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 }
 
 .list-legend {

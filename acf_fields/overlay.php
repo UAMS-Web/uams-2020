@@ -18,7 +18,7 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'message' => '<h2>Text &amp; Image Overlay</h2>',
+        'message' => '<h2>UAMS Text &amp; Image Overlay Block</h2>',
         'new_lines' => 'wpautop',
         'esc_html' => 0,
     ),
