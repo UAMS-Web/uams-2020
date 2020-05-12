@@ -1,0 +1,140 @@
+.tshowcase {
+    line-height: $line-height-base;
+    @include make-container();
+    padding: 0;
+
+    .ts-col_1,
+    .ts-col_2,
+    .ts-col_3,
+    .ts-col_3c,
+    .ts-col_4,
+    .ts-col_4c,
+    .ts-col_5,
+    .ts-col_5c,
+    .ts-col_6,
+    .ts-col_6c {
+        padding-bottom: $grid-gutter-width;
+    }
+
+    .ts-theme-white-card-style {
+        @include make-row();
+
+        .tshowcase-box {
+            // Wraps each member
+            @include make-col-ready();
+
+            &.ts-float-left.ts-col_1 {
+                width: auto;
+                float: none;
+                @include make-col-ready();
+                //@include make-col(12);
+
+                .ts-float-left {
+                    float: none;
+                }
+
+                .tshowcase-inner-box {
+                    display: flex;
+                    width: auto;
+                    margin: 0;
+                    background-color: transparent;
+                    border: none;
+                    color: inherit;
+                    @include make-row();
+
+                    .tshowcase-box-photo,
+                    .tshowcase-box-info {
+                        @include make-col-ready();
+                    }
+
+                    .tshowcase-box-photo {
+                        line-height: inherit;
+                        margin-bottom: ($grid-gutter-width / 2);
+                        @include media-breakpoint-up(xs) {
+                            margin-bottom: 0;
+                            @include make-col(3);
+                        }
+
+                        &.ts-square {
+                        }
+                        &.ts-img-left {
+                            float: none;
+                        }
+                        img {
+                            max-height: 171px;
+                            @include media-breakpoint-up(xs) {
+                                max-height: none;
+                            }
+                        }
+                    }
+                    .tshowcase-box-info {
+                        @include media-breakpoint-up(xs) {
+                            @include make-col(9);
+                        }
+                        .tshowcase-box-title {
+                            margin: 0 0 $headings-margin-bottom;
+                            padding: 0;
+                            color: inherit;
+                            font-size: $h4-font-size;
+                            font-weight: $headings-font-weight;
+                            line-height: $headings-line-height;
+                            text-transform: none;
+                        }
+                        .tshowcase-box-details {
+                            padding: 0;
+
+                            [class^='tshowcase-single-'] {
+                                margin-bottom: 0.5em;
+
+                                &:last-child {
+                                    margin-bottom: 0;
+                                }
+                            }
+
+                            .tshowcase-single-groups {
+                                span {
+                                }
+                            }
+                            .tshowcase-single-position {
+                            }
+                            .tshowcase-single-location {
+                            }
+                        }
+                        .tshowcase-box-social {
+                        }
+                    }
+                }
+            }
+            &.ts-col_1 {
+            }
+            .tshowcase-inner-box {
+                &.ts-float-left {
+                }
+                .tshowcase-box-photo {
+                    &.ts-square {
+                    }
+                    &.ts-img-left {
+                    }
+                    img {
+                    }
+                }
+                .tshowcase-box-info {
+                    .tshowcase-box-title {
+                    }
+                    .tshowcase-box-details {
+                        .tshowcase-single-groups {
+                            span {
+                            }
+                        }
+                        .tshowcase-single-position {
+                        }
+                        .tshowcase-single-location {
+                        }
+                    }
+                    .tshowcase-box-social {
+                    }
+                }
+            }
+        }
+    }
+}
