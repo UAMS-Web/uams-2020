@@ -5,7 +5,8 @@ body.archive,
 body.error404,
 body.search,
 body.advert-template-default,
-body.blog  {
+body.blog,
+body.tshowcase-template-default  {
     .archive-description,
     .entry {
 
@@ -75,7 +76,8 @@ body.post-template-default,
 body.archive,
 body.error404,
 body.advert-template-default,
-body.blog {
+body.blog,
+body.tshowcase-template-default {
 
     .entry,
     .entry-comments,
@@ -84,6 +86,7 @@ body.blog {
     .archive-pagination {
         padding: $uams-module-padding-mobile;
         margin-bottom: 0;
+        line-height: inherit;
     
         @include media-breakpoint-up(sm) {
             padding: $uams-module-padding;
