@@ -226,6 +226,16 @@ function uamswp_module( $module = array(), $i = false ) {
                     include( get_stylesheet_directory() .'/blocks/content.php' );
         
                     break;
+
+        case 'modules_uams_livewhale':
+                    $id = $i;
+                    $heading = $module['livewhale_heading'];
+                    $livewhale = $module['livewhale_id'];
+                    $background_color = $module['livewhale_background_color'];
+        
+                    include( get_stylesheet_directory() .'/blocks/livewhale.php' );
+        
+                    break;
  
 		// More modules go here
 	}
