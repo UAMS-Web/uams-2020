@@ -715,13 +715,16 @@ function footer_widgets($params) {
       return $params;
 }
 
-add_action( 'admin_enqueue_scripts', 'enqueue_admin_style_sheet' );
-function enqueue_admin_style_sheet() {
+// add_action( 'admin_enqueue_scripts', 'enqueue_admin_style_sheet' );
+// function enqueue_admin_style_sheet() {
 
-	wp_register_style( 'admin-css', get_stylesheet_directory_uri() . '/assets/css/admin.css', false, '1.0.0' );
-	wp_enqueue_style( 'admin-css' );
+// 	wp_register_style( 'admin-css', get_stylesheet_directory_uri() . '/assets/css/admin.css', false, '1.0.0' );
+// 	wp_enqueue_style( 'admin-css' );
 
-}
+// }
+
+add_theme_support('editor-styles');
+add_editor_style(get_stylesheet_directory_uri() . '/assets/css/admin.css');
 
 // Remove the edit link
 add_filter ( 'genesis_edit_post_link' , '__return_false' );
