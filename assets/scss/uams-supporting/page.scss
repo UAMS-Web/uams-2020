@@ -12,5 +12,6 @@ body {
 .content-width {
     width: $content-width;
     max-width: 100%;
-    margin: 0 auto;
+    margin-right: auto;
+    margin-left: auto;
 }
