@@ -112,7 +112,7 @@ return array(
         'name' => 'stacked_section',
         'type' => 'repeater',
         'instructions' => '',
-        'required' => 0,
+        'required' => 1,
         'conditional_logic' => 0,
         'wrapper' => array(
             'width' => '',
