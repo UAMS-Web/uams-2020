@@ -39,6 +39,18 @@ if ( empty($stacked_rows) )
 if( $stacked_rows ) :
     $row_count = count($stacked_rows); // Not user, but just in case
 
+    
+$more = get_field('stacked_more');
+
+if ( $more ) {
+    $more_text = get_field('stacked_more_text');
+    $more_button_text = get_field('stacked_more_button_text');
+    $more_button_link = get_field('stacked_more_button_url');
+    $more_button_url = $more_button_link['url'];
+    $more_button_target = $more_button_link['target'];
+    $more_button_description = get_field('stacked_more_button_description');
+}
+
 ?>
 <section class="uams-module stacked-image-text<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
@@ -97,6 +109,12 @@ if( $stacked_rows ) :
             <?php
                 }
             ?>
+            </div>
+            <div class="col-12 more">
+                <p class="lead content-width"><?php echo $more_text; ?></p>
+                <div class="cta-container">
+                    <a href="<?php echo $more_button_url; ?>" class="btn btn-outline-primary" aria-label="<?php echo $more_button_description; ?>" data-moduletitle="<?php echo $heading; ?>"><?php echo $more_button_text; ?></a>
+                </div>
             </div>
         </div>
     </div>
