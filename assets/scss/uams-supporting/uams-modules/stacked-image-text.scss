@@ -11,6 +11,7 @@
 
     .module-body {
         margin-bottom: $uams-module-padding-mobile;
+        text-align: center;
     
         @include media-breakpoint-up(sm) {
             margin-bottom: $uams-module-padding;
