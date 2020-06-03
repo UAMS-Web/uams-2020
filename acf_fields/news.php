@@ -396,6 +396,33 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			'type' => 'true_false',
 			'instructions' => '',
 			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_local_only'. $suffix,
+						'operator' => '!=',
+						'value' => '1',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => '',
+			'default_value' => 0,
+			'ui' => 1,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
+		array(
+			'key' => 'field_news_local_only'. $suffix,
+			'label' => 'Use Local ONLY',
+			'name' => 'news_local_only',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
 				'width' => '',
