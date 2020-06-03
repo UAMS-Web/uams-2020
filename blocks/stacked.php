@@ -57,7 +57,7 @@ if ( $more ) {
         <div class="row">
             <div class="col-12<?php echo $hide_heading ? " sr-only" : ""; ?>">
                 <h2 class="module-title"><span class="title"><?php echo $heading; ?></span></h2>
-                <?php echo $description ? '<div class="module-body">'. $description .'</div>' : ''; ?>
+                <?php echo $description ? '<div class="module-body"><p>'. $description .'</p></div>' : ''; ?>
             </div>
             <div class="card-list">
             <?php 
