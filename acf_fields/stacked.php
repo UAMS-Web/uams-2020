@@ -111,7 +111,7 @@ return array(
         'label' => 'Items',
         'name' => 'stacked_section',
         'type' => 'repeater',
-        'instructions' => '',
+        'instructions' => 'You must have at least two sections. It is recommended that you have four sections. Beyond that, it is recommended that you have an even number of sections.',
         'required' => 1,
         'conditional_logic' => 0,
         'wrapper' => array(
