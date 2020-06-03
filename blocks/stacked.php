@@ -29,6 +29,8 @@ if ( empty($heading) )
     $heading = get_field('stacked_heading');
 if ( empty($hide_heading) )
     $hide_heading = get_field('stacked_hide_heading');
+    if ( empty($description) )
+        $description = get_field('stacked_description');
 if ( empty($background_color) )
     $background_color = get_field('stacked_background_color');
 if ( empty($stacked_rows) )
@@ -43,6 +45,7 @@ if( $stacked_rows ) :
         <div class="row">
             <div class="col-12<?php echo $hide_heading ? " sr-only" : ""; ?>">
                 <h2 class="module-title"><span class="title"><?php echo $heading; ?></span></h2>
+                <?php echo $description ? '<div class="module-body">'. $description .'</div>' : ''; ?>
             </div>
             <?php 
                 foreach($stacked_rows as $stacked_row) {
