@@ -29,8 +29,8 @@ if ( empty($heading) )
     $heading = get_field('stacked_heading');
 if ( empty($hide_heading) )
     $hide_heading = get_field('stacked_hide_heading');
-    if ( empty($description) )
-        $description = get_field('stacked_description');
+if ( empty($description) )
+    $description = get_field('stacked_description');
 if ( empty($background_color) )
     $background_color = get_field('stacked_background_color');
 if ( empty($stacked_rows) )
