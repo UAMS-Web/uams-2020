@@ -202,6 +202,12 @@ function uamswp_title($html) {
             } else { 
                 $html = $pagetitle . ' | UAMS Health';
             }
+        } elseif( ( 'dept' == uams_get_site_info()['subsite']) ) {
+            if ( is_home() || is_front_page() ) {
+                $html = $sitename . ' | UAMS Health';
+            } else {
+                $html = $pagetitle . ' | ' . $uams_sitename;
+            }
 		} else {
             if ( is_home() || is_front_page() ) {
                 $html = $sitename . ' | UAMS Health';
@@ -216,11 +222,17 @@ function uamswp_title($html) {
             } else { 
                 $html = $pagetitle . ' | Inside UAMS';
             }
+        } elseif( ( 'none' != uams_get_site_info()['subsite']) ) {
+            if ( is_home() || is_front_page() ) {
+                $html = $sitename . ' | Inside UAMS';
+            } else {
+                $html = $pagetitle . ' | ' . $uams_sitename;
+            }
 		} else {
 			if ( is_home() || is_front_page() ) {
                 $html = $sitename . ' | Inside UAMS';
             } else {
-                $html = $pagetitle . ' | ' . $sitename;
+                $html = $pagetitle . ' | Inside UAMS';
             }
 		}
 	} elseif ( ('institute' == uams_get_site_info()['site'] ) ) {
@@ -234,7 +246,7 @@ function uamswp_title($html) {
             if ( is_home() || is_front_page() ) {
                 $html = $sitename . ' | ' . $uams_sitehome;
             } else {
-                $html = $pagetitle . ' | ' . $sitename;
+                $html = $pagetitle . ' | ' . $uams_sitename;
             }
 		} else { // Not an org unit
 			if ( is_home() || is_front_page() ) {
@@ -244,7 +256,7 @@ function uamswp_title($html) {
             }
 		}
     } else { // Site == uams
-        if ( 'main' != uams_get_site_info()['subsite'] ) { // NW & Regional Campus
+        if ( 'main' != uams_get_site_info()['subsite'] && 'none' != uams_get_site_info()['subsite'] ) { // NW & Regional Campus
             if ( ( 'main' == uams_get_site_info()['department']) || ( '' == uams_get_site_info()['department']) ) {
                 if ( is_home() || is_front_page() ) {
                     $html = $uams_sitename;
@@ -255,7 +267,7 @@ function uamswp_title($html) {
                 if ( is_home() || is_front_page() ) {
                     $html = $sitename . ' | ' . $uams_sitehome;
                 } else {
-                    $html = $pagetitle . ' | ' . $sitename;
+                    $html = $pagetitle . ' | ' . $uams_sitename;
                 }
             } else { // Not an org unit
                 if ( is_home() || is_front_page() ) {
@@ -270,14 +282,14 @@ function uamswp_title($html) {
             } else {
                 $html = $pagetitle . ' | UAMS';
             }
+        // } elseif ('none' == uams_get_site_info()['subsite'] ) { // Option if needed in the future
+        //         if ( is_home() || is_front_page() ) {
+        //             $html = $sitename . ' | UAMS';
+        //         } else {
+        //             $html = $pagetitle . ' | UAMS';
+        //         }
         } elseif ('main' != uams_get_site_info()['department'] && '' != uams_get_site_info()['department'] && 'uams' != uams_get_site_info()['department'] ) {
-            if ( ( 'main' == uams_get_site_info()['department']) ) {
-                if ( is_home() || is_front_page() ) {
-                    $html = $uams_sitename;
-                } else {
-                    $html = $pagetitle . ' | ' . $uams_sitename;
-                }
-            } elseif( ( 'none' != uams_get_site_info()['department']) ) { // Dept / org unit
+            if( ( 'none' != uams_get_site_info()['department']) ) { // Dept / org unit
                 if ( is_home() || is_front_page() ) {
                     $html = $sitename . ' | ' . $uams_sitehome;
                 } else {
