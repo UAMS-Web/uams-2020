@@ -147,6 +147,9 @@ function uamswp_title($html) {
     if ( is_search() ) {
         $pagetitle = 'Search Results';
     }
+    if ( is_category() && is_archive() ) {
+        $pagetitle = single_cat_title("", false);
+    }
     // Replace three spaces in sitename with one
     $sitename = str_replace('   ', ' ', get_bloginfo( "name" ));
     // Multisite - get the base multisite name
