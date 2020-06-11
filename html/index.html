@@ -71,31 +71,17 @@
                         <span class="sr-only label">Toggle Search</span>
                         <span class="fas fa-times fa-lg fa-fw"></span>
                     </button>
-                    <form class="uams-search" role="search" method="get" id="searchform" action="index.html">
-                        <div class="input-group">
-                            <input type="search" class="form-control" id="uams-search-bar" value=""
-                                placeholder="Search..." name="s" autocomplete="off" aria-label="Enter search text">
-                            <div class="input-group-append">
-                                <button type="submit" id="searchsubmit" value="Search" class="btn btn-primary"
-                                    title="Search"><span class="fas fa-search"></span><span
-                                        class="sr-only">Search</span></button>
-                            </div>
-                        </div>
-                        <div class="form-group text-center d-none" role="radiogroup"
-                            aria-labelledby="uams-search-picker-label">
-                            <span class="sr-only" id="uams-search-picker-label">Choose which site to search.</span>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="search-scope-1" name="search-scope" class="custom-control-input"
-                                    checked>
-                                <label class="custom-control-label" for="search-scope-1">Current site</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="search-scope-2" name="search-scope"
-                                    class="custom-control-input">
-                                <label class="custom-control-label" for="search-scope-2">All of UAMS</label>
-                            </div>
-                        </div>
-                    </form>
+                    <form class="uams-search" role="search" method="get" id="searchform" action="http://www.uams.edu/google-search/">
+						<div class="input-group">
+							<input type="search" class="form-control" id="uams-search-bar" value=""
+								placeholder="Search..." name="q" autocomplete="off" aria-label="Enter search text">
+							<div class="input-group-append">
+								<button type="submit" id="searchsubmit" value="Search" class="btn btn-primary"
+									title="Search"><span class="fas fa-search"></span><span
+										class="sr-only">Search</span></button>
+							</div>
+						</div>
+					</form>
                 </div>
             </section>
             <header class="site-header navbar navbar-expand-sm" aria-label="Site Header" itemscope
