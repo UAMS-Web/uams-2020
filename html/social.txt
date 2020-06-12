@@ -1,0 +1,40 @@
+<!-- // Start Social Meta // -->
+<!-- // Variables Required
+    Site URL : {{ site url }} 
+    Site Name : {{ site name }} 
+    Page URL : {[ page url }} 
+    Page Title : {{ page title }} 
+    Page Content / Description : {{ content }} 
+    // End Variables // -->
+<!-- // Dublin Core // -->
+<meta name="dc.relation" content="{{ site url }}/{[ page url }}/" />
+<meta name="dc.source" content="{{ site url }}" />
+<meta name="dc.language" content="en_US" />
+<!-- // Schema Data // -->
+<script
+	type="application/ld+json">{"@context" : "http://schema.org","@type" : "Organization","logo": "http:\/\/clean.local\/wp-content\/uploads\/2020\/06\/uams-logo_main_dark_189x50.png","name" : "University of Arkansas for Medical Sciences (UAMS)","url" : "http:\/\/clean.local","contactPoint": [{
+					"@type": "ContactPoint",
+					"telephone": "+15016867000","contactOption": "None","contactType": "customer support"
+                }],"sameAs" : ["https:\/\/www.facebook.com\/UAMShealth\/", "https:\/\/twitter.com\/@uamshealth", "https:\/\/www.pinterest.com\/uamshealth\/", "https:\/\/www.instagram.com\/uamshealth\/", "https:\/\/www.youtube.com\/user\/UAMSHealth", "https:\/\/www.linkedin.com\/school\/university-of-arkansas-for-medical-sciences\/"]}</script>
+<!-- // Open Graph/Social Networks // -->
+<meta property="og:url" content="{{ site url }}/{{ page url }}/" />
+<meta property="og:site_name" content="{{ site name }}" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="article:author" content="https://www.facebook.com/UAMShealth/" />
+<meta property="article:publisher" content="https://www.facebook.com/UAMShealth/" />
+<meta property="og:title" content="{{ page title }}" />
+<meta property="og:description"
+	content="{{ content }} " />
+<meta property="og:image" content="uploads/uams_fb.png" />
+<meta property="og:image:width" content="960" />
+<meta property="og:image:height" content="960" />
+<meta property="og:image:alt" content="UAMS Health Facebook" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@uamshealth" />
+<meta name="twitter:creator" content="@uamshealth" />
+<meta name="twitter:title" content="{{ page title }}" />
+<meta name="twitter:description"
+	content="{{ content }}" />
+<meta name="twitter:image" content="uploads/uams_fb.png" />
+<!-- // End Social Meta // -->
