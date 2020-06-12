@@ -4,7 +4,14 @@
 <head itemscope itemtype="https://schema.org/WebSite">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>{{ Site Title }} | UAMS</title>
+    <!-- // Variable Site / Page Title: {{ meta title }} // -->
+    <title>{{ meta title }} | UAMS</title>
+    <!-- // End Meta Title // -->
+    <!-- // Variable Meta Description: {{ description }} // -->
+    <meta name="description" content="{{ description }}" />
+    <!-- // End Meta Description // -->
+    <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <link rel="canonical" href="http://clean.local/" />
     <link rel='dns-prefetch' href='http://fonts.googleapis.com/' />
     <link rel='stylesheet' id='wp-block-library-css' href='assets/css/block-library/style.min.css' type='text/css'
         media='all' />
@@ -12,15 +19,9 @@
     <link rel='stylesheet' id='google-fonts-css'
         href='http://fonts.googleapis.com/css?family=Fira+Sans%3A300%2C300i%2C500%2C500i%2C600%2C600i%2C800%2C800i&amp;display=swap'
         type='text/css' media='all' />
-    <!-- <script>
-			/* <![CDATA[ */
-			var rcewpp = {
-				"ajax_url":"http://clean.local/wp-admin/admin-ajax.php",
-				"nonce": "17f78d3433",
-				"home_url": "http://clean.local"
-			};
-			/* ]]\> */
-		</script> -->
+    <!-- // Custom Head CSS // -->
+
+    <!-- // End Custom Head CSS // -->
     <script type='text/javascript' src='assets/js/jquery/jquery.js'></script>
     <script type='text/javascript' src='assets/js/jquery/jquery-migrate.min.js'></script>
     <!-- Google Tag Manager -->
@@ -33,6 +34,9 @@
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-NGG4P7F');</script>
     <!-- End Google Tag Manager -->
+    <!-- // Custom Head Scripts // -->
+
+    <!-- // End Custom Head Scripts // -->
     <link rel="icon" href="assets/favicon/favicon.ico" />
     <link rel="icon" href="assets/favicon/favicon-32x32.png" sizes="32x32">
     <link rel="icon" href="assets/favicon/favicon-96x96.png" sizes="96x96">
@@ -189,11 +193,20 @@
                 </nav>
                 <!-- /* End Right Navbar */ -->
             </header>
+            <!-- // Navigation //-->
+             <!-- // 
+                Example below:
+                - Landing Page
+                - Sample Page
+                    - Page with Cover
+                        - Test Child
+                    - Page with Hero Header
+                // -->
             <nav class="site-nav navbar navbar-expand-sm">
                 <div class="collapse navbar-collapse inner-container" id="genesis-nav-primary">
                     <ul id="menu-dropdowns" class="nav navbar-nav align-self-end mr-auto">
                         <li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"
-                            id="page-item-72" class="page-item-72 nav-item"><a title="Landing Page"
+                            id="page-item-1" class="page-item-1 nav-item"><a title="Landing Page"
                                 href="landing-page/index.html" class="nav-link">Landing Page</a></li>
                         <li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"
                             id="page-item-2" class="page-item-2 nav-item page-item-has-children dropdown"><a
@@ -202,26 +215,34 @@
                                 id="menu-item-dropdown-2">Sample Page</a>
                             <ul role="menu" class=" dropdown-menu" aria-labelledby="menu-item-dropdown-2">
                                 <li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"
-                                    id="page-item-91" class="page-item-91 nav-item page-item-has-children dropdown"><a
+                                    id="page-item-3" class="page-item-3 nav-item page-item-has-children dropdown"><a
                                         title="Page with Cover" href="sample-page/page-with-cover/index.html"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                        class="dropdown-toggle nav-link" id="menu-item-dropdown-91">Page with Cover</a>
-                                    <ul role="menu" class=" dropdown-menu" aria-labelledby="menu-item-dropdown-91">
+                                        class="dropdown-toggle nav-link" id="menu-item-dropdown-3">Page with Cover</a>
+                                    <ul role="menu" class=" dropdown-menu" aria-labelledby="menu-item-dropdown-3">
                                         <li itemscope="itemscope"
-                                            itemtype="https://www.schema.org/SiteNavigationElement" id="page-item-49"
-                                            class="page-item-49 nav-item"><a title="Test Child"
+                                            itemtype="https://www.schema.org/SiteNavigationElement" id="page-item-4"
+                                            class="page-item-4 nav-item"><a title="Test Child"
                                                 href="sample-page/page-with-cover/test-child/index.html"
                                                 class="dropdown-item">Test Child</a></li>
                                     </ul>
                                 </li>
                                 <li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"
-                                    id="page-item-98" class="page-item-98 nav-item"><a title="Page with Hero Header"
+                                    id="page-item-5" class="page-item-5 nav-item"><a title="Page with Hero Header"
                                         href="sample-page/page-with-hero-header/index.html" class="dropdown-item">Page
                                         with Hero Header</a></li>
                             </ul>
                         </li>
                 </div>
             </nav>
+            <!-- // End Navigation // -->
+            <!-- // Breadcrumbs //-->
+            <!-- // 
+                Should be UAMS > Site > Page(s)
+                Last item should not be linked
+                Example Below:
+                UAMS > Site Name
+                // -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
                     <li class="breadcrumb-item" itemprop="itemListElement" itemscope
@@ -237,20 +258,25 @@
                     </li>
                 </ol>
             </nav>
+            <!-- // End Breadcrumbs // -->
             <div class="content-sidebar-wrap row">
                 <main class="content col-sm-12" id="genesis-content">
                     <article class="post-85 page type-page status-publish entry" itemscope
                         itemtype="https://schema.org/CreativeWork">
                         <header class="entry-header">
+                            <!-- // Begin Page Title // -->
                             <h1 class="entry-title" itemprop="headline">Base Page</h1>
+                            <!-- // Begin Page Title // -->
                         </header>
                         <div class="entry-content clearfix" itemprop="text">
+                            <!-- // Begin Content // -->
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                                 ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                                 ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
                                 reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
                                 sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
                                 est laborum.</p>
+                            <!-- // End Content // -->
                         </div>
                     </article>
                 </main>
@@ -313,6 +339,9 @@
     <script type='text/javascript' src='assets/js/fa.min.js'></script>
     <script type='text/javascript' src='assets/js/uamsalert.js'></script>
     <script type='text/javascript' src='assets/js/wp-embed.min.js'></script>
+    <!-- // Custom Footer Scripts // -->
+
+    <!-- // End Custom Footer Scripts // -->
 </body>
 
 </html>
