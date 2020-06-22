@@ -100,8 +100,13 @@
                                 alt="University of Arkansas for Medical Sciences Logo" />
                         </picture><span class="sr-only">University of Arkansas for Medical Sciences</span>
                     </a>
-                    <div class="navbar-subbrand"><a class="title" title="Just another WordPress site"
-                            href="index.html">UAMS Template</a></div>
+                    <!-- // 
+                            Variable Site Title: {{ site title }}
+                            Variable Site URL: {{ site url }} // Match to home URL example: "/index.html"
+                        // -->
+                    <div class="navbar-subbrand"><a class="title" title="{{ site title }}"
+                            href="{{ site url }}">{{ site title }}</a></div>
+                    <!-- // End Site Title // -->
                 </div>
                 <!-- /* End Title / Logo */ -->
 
