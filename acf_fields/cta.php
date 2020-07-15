@@ -196,6 +196,7 @@ return array(
         'choices' => array(
             'normal' => 'Normal',
             'small' => 'Small',
+            'large' => 'Large',
         ),
         'default_value' => array(
             0 => 'normal',
