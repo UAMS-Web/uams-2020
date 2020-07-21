@@ -102,12 +102,25 @@
 
     &.cta-bar-sm {
         .cta-heading {
-            h1,
             h2 {
                 @extend .h4;
             }
         }
         .text-container {
+            @include font-size($font-size-base);
+        }
+        .btn-container .btn {
+            @include font-size($font-size-base);
+        }
+    }
+
+    &.cta-bar-lg {
+        .cta-heading {
+            h2 {
+                @extend .h1;
+            }
+        }
+        .btn-container .btn {
             @include font-size($font-size-base);
         }
     }
