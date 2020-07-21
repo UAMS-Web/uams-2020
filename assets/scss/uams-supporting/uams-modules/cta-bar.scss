@@ -29,11 +29,13 @@
     &.cta-bar-centered {
         .inner-container {
             text-align: center;
+            max-width: 100%;
         }
 
         .cta-heading {
             h2 {
                 width: $line-length-min + em;
+                max-width: 100%;
             }
         }
 
@@ -142,11 +144,11 @@
         $cta-bar-heading-level: 1; // Make h2 emulate any heading level. Use integer 1-6.
         $cta-bar-heading-font-size: $h1-font-size; // Used for calculations. Match with heading level. Can't combine variable interpolation inside variable names.
 
-        .inner-container {
-            @include media-breakpoint-up(md) {
-                max-width: $cta-bar-font-size * $line-length-max;
-            }
-        }
+        // .inner-container {
+        //     @include media-breakpoint-up(md) {
+        //         max-width: $cta-bar-font-size * $line-length-max;
+        //     }
+        // }
 
         .cta-heading {
             h2 {
