@@ -1,9 +1,43 @@
 .cta-bar {
+    // Variables: Will be used in building classes and dimensions in this partial
+    $cta-bar-font-size: $lead-font-size;
+    $cta-bar-heading-level: 2; // Make h2 emulate any heading level. Use integer 1-6.
+    $cta-bar-heading-font-size: $h2-font-size; // Used for calculations. Match with heading level. Can't combine variable interpolation inside variable names.
+
+    .col-12 {
+        display: flex;
+        flex-grow: 0;
+        flex-shrink: 1;
+        flex-basis: auto;
+        justify-content: center;
+    }
+
+    .cta-body {
+        @include font-size($cta-bar-font-size);
+
+        .text-container {
+            > :last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .btn-container .btn {
+            font-size: inherit;
+        }
+    }
+
     &.cta-bar-centered {
         .inner-container {
             text-align: center;
+        }
 
-            h1,
+        .cta-heading {
+            h2 {
+                width: $line-length-min + em;
+            }
+        }
+
+        .cta-body {
             h2,
             .text-container,
             .btn-container {
@@ -12,116 +46,124 @@
                 margin-left: auto;
             }
 
-            h1 {
-                @extend .h2;
-            }
-
-            h1,
-            h2 {
-                width: $line-length-min + em;
-            }
-
             .text-container,
             .btn-container {
                 width: $line-length-ideal + em;
             }
+
             .text-container {
                 margin-bottom: 1em;
             }
+
             .btn-container {
                 justify-content: center;
             }
         }
     }
+
     &.cta-bar-weighted {
-        .col-12 {
+        .inner-container {
+            text-align: center;
+
             @include media-breakpoint-up(md) {
-                display: flex;
-                flex-grow: 0;
-                flex-shrink: 1;
-                flex-basis: auto;
-                justify-content: center;
+                text-align: left;
+                max-width: $cta-bar-font-size * $line-length-max;
             }
         }
-        .inner-container {
-            @include media-breakpoint-down(sm) {
-                text-align: center;
+
+        .cta-body {
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+
+            @include media-breakpoint-up(md) {
+                flex-flow: row nowrap;
+                align-items: flex-start;
+                justify-content: space-between;
             }
-            .cta-heading {
-                h1,
-                h2 {
-                    @include media-breakpoint-up(md) {
-                        max-width: $line-length-min + em;
-                        max-width: 21.9101em;
-                    }
+
+            .text-container {
+                max-width: $line-length-ideal + em;
+
+                @include media-breakpoint-down(sm) {
+                    margin-bottom: 1em;
                 }
-            }
-            .cta-body {
-                display: flex;
-                flex-flow: column;
-                justify-content: center;
-                align-items: center;
 
                 @include media-breakpoint-up(md) {
-                    flex-flow: row nowrap;
-                    align-items: flex-start;
-                    justify-content: space-between;
-                }
-
-                .text-container {
-                    max-width: $line-length-ideal + em;
-
-                    @include media-breakpoint-down(sm) {
-                        margin-bottom: 1em;
-                    }
-
-                    @include media-breakpoint-up(md) {
-                        //flex-grow: 1;
-                        //flex-shrink: 0;
-                        //flex-basis: ($line-length-min+em);
-                    }
-                }
-                .btn-container {
-                    justify-content: center;
-
-                    @include media-breakpoint-up(md) {
-                        padding-left: $uams-module-padding-mobile;
-                    }
+                    //flex-grow: 1;
+                    //flex-shrink: 0;
+                    //flex-basis: ($line-length-min+em);
                 }
             }
-        }
-    }
 
-    .text-container {
-        @include font-size($lead-font-size);
+            .btn-container {
+                justify-content: center;
 
-        > :last-child {
-            margin-bottom: 0;
+                @include media-breakpoint-up(md) {
+                    padding-left: $uams-module-padding-mobile;
+                    flex-grow: 1;
+                    flex-shrink: 0;
+                    flex-basis: auto;
+                    max-width: ($h2-font-size * $line-length-min) - ($cta-bar-font-size * $line-length-min);
+                }
+            }
         }
     }
 
     &.cta-bar-sm {
+        // Variables overrides: Will be used in building classes and dimensions in this rule-set
+        $cta-bar-font-size: $font-size-base;
+        $cta-bar-heading-level: 4; // Make h2 emulate any heading level. Use integer 1-6.
+        $cta-bar-heading-font-size: $h4-font-size; // Used for calculations. Match with heading level. Can't combine variable interpolation inside variable names.
+
         .cta-heading {
             h2 {
-                @extend .h4;
+                @extend .h#{$cta-bar-heading-level};
             }
         }
-        .text-container {
-            @include font-size($font-size-base);
+
+        .cta-body {
+            @include font-size($cta-bar-font-size);
         }
-        .btn-container .btn {
-            @include font-size($font-size-base);
+
+        &.cta-bar-weighted {
+            .inner-container {
+                @include media-breakpoint-up(md) {
+                    max-width: $cta-bar-font-size * $line-length-max;
+                }
+            }
         }
     }
 
     &.cta-bar-lg {
-        .cta-heading {
-            h2 {
-                @extend .h1;
+        // Variables overrides: Will be used in building classes and dimensions in this rule-set
+        $cta-bar-font-size: $lead-font-size;
+        $cta-bar-heading-level: 1; // Make h2 emulate any heading level. Use integer 1-6.
+        $cta-bar-heading-font-size: $h1-font-size; // Used for calculations. Match with heading level. Can't combine variable interpolation inside variable names.
+
+        .inner-container {
+            @include media-breakpoint-up(md) {
+                max-width: $cta-bar-font-size * $line-length-max;
             }
         }
-        .btn-container .btn {
-            @include font-size($font-size-base);
+
+        .cta-heading {
+            h2 {
+                @extend .h#{$cta-bar-heading-level};
+            }
+        }
+
+        .cta-body {
+            @include font-size($cta-bar-font-size);
+        }
+
+        &.cta-bar-weighted {
+            .inner-container {
+                @include media-breakpoint-up(md) {
+                    max-width: $cta-bar-heading-font-size * $line-length-min;
+                }
+            }
         }
     }
 
@@ -129,8 +171,10 @@
         &.cta-bar-centered,
         &.cta-bar-weighted {
             .inner-container {
-                .text-container {
-                    width: $line-length-max + em;
+                .cta-body {
+                    .text-container {
+                        width: $line-length-max + em;
+                    }
                 }
             }
         }
