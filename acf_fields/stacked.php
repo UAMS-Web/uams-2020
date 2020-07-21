@@ -101,7 +101,7 @@ return array(
             'id' => '',
         ),
         'collapsed' => '',
-        'min' => 4,
+        'min' => 2,
         'max' => '',
         'layout' => 'block',
         'button_label' => '',
