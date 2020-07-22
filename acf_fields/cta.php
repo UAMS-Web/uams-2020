@@ -194,8 +194,8 @@ return array(
             'id' => '',
         ),
         'choices' => array(
-            'normal' => 'Normal',
             'small' => 'Small',
+            'normal' => 'Normal',
             'large' => 'Large',
         ),
         'default_value' => array(
