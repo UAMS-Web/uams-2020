@@ -170,12 +170,11 @@
     }
 
     &.no-link {
-        &.cta-bar-centered,
         &.cta-bar-weighted {
             .inner-container {
                 .cta-body {
                     .text-container {
-                        width: $line-length-max + em;
+                        max-width: $line-length-max + em;
                     }
                 }
             }
