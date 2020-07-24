@@ -1503,11 +1503,38 @@ acf_add_local_field_group(array(
 			'new_lines' => '',
 		),
 		array(
+			'key' => 'field_page_landing_page_message',
+			'label' => '',
+			'name' => 'page_landing_page_message',
+			'type' => 'message',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_permissions' => '',
+			'message' => '<h3>Stop</h3>
+				<p>The Landing Page Title option should only be used for Marketing Landing Pages.</p>',
+			'new_lines' => '',
+			'esc_html' => 0,
+		),
+		array(
 			'key' => 'field_page_landing_page_cover_image',
-			'label' => 'Landing Page Cover Image',
+			'label' => 'Landing Page Cover Image (Desktop)',
 			'name' => 'page_landing_page_cover_image',
 			'type' => 'image',
-			'instructions' => 'Recommended dimensions: 5120x1920 or larger. Minimum dimensions: 1920x720. The image will be automatically cropped to a 8:3 aspect ratio.',
+			'instructions' => 'Recommended dimensions: 5120x800 or larger. Minimum dimensions: 1920x600. The image will be automatically cropped to a 16:5 aspect ratio.',
 			'required' => 1,
 			'conditional_logic' => array(
 				array(
@@ -1527,7 +1554,39 @@ acf_add_local_field_group(array(
 			'preview_size' => 'medium',
 			'library' => 'all',
 			'min_width' => 1920,
-			'min_height' => 720,
+			'min_height' => 600,
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+		),
+		array(
+			'key' => 'field_page_landing_page_cover_image_mobile',
+			'label' => 'Landing Page Cover Image (Mobile)',
+			'name' => 'page_landing_page_cover_image_mobile',
+			'type' => 'image',
+			'instructions' => 'This image is optional. Add an image here if you do not want the mobile image to be automatically cropped from the desktop image.<br />Recommended dimensions: 1984x1612 or larger. Minimum dimensions: 992x806. The image will be automatically cropped to a 16:13 aspect ratio.',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'id',
+			'preview_size' => 'medium',
+			'library' => 'all',
+			'min_width' => 992,
+			'min_height' => 806,
 			'min_size' => '',
 			'max_width' => '',
 			'max_height' => '',
