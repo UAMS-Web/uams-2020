@@ -1598,7 +1598,7 @@ acf_add_local_field_group(array(
 			'label' => 'Marketing Landing Page Title Heading',
 			'name' => 'page_landing_page_heading',
 			'type' => 'text',
-			'instructions' => 'Optional override for page title for the purposes of this header. Page title will still be used for meta title, search results, etc.',
+			'instructions' => 'Optional override for page title for the purposes of this header. Page title will still be used for meta title, search results, etc. There is a 62 character limit.',
 			'required' => 0,
 			'conditional_logic' => array(
 				array(
@@ -1616,7 +1616,7 @@ acf_add_local_field_group(array(
 			),
 			'default_value' => '',
 			'placeholder' => '',
-			'maxlength' => 500,
+			'maxlength' => 62,
 			'rows' => '',
 			'new_lines' => '',
 		),
@@ -1625,7 +1625,7 @@ acf_add_local_field_group(array(
 			'label' => 'Marketing Landing Page Title Lead Paragraph',
 			'name' => 'page_landing_page_description',
 			'type' => 'textarea',
-			'instructions' => 'Appears below the page title. Basic description of the page. 500 character limit.',
+			'instructions' => 'Appears below the page title. Basic description of the page. There is a 119 character limit.',
 			'required' => 0,
 			'conditional_logic' => array(
 				array(
@@ -1643,7 +1643,7 @@ acf_add_local_field_group(array(
 			),
 			'default_value' => '',
 			'placeholder' => '',
-			'maxlength' => 500,
+			'maxlength' => 119,
 			'rows' => '',
 			'new_lines' => '',
 		),
