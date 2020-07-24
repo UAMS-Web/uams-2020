@@ -1435,7 +1435,7 @@ acf_add_local_field_group(array(
 				'none' => '<i class="dashicons dashicons-yes"></i> Normal',
 				'hidden' => '<i class="dashicons dashicons-no"></i> Hidden',
 				'graphic' => '<i class="dashicons dashicons-format-image"></i> Graphic',
-				'landingpage' => '<i class="dashicons dashicons-format-image"></i> Landing Page',
+				'landingpage' => '<i class="dashicons dashicons-format-image"></i> Marketing Landing Page',
 				'hero' => '<i class="dashicons dashicons-slides"></i> Hero',
 			),
 			'allow_null' => 0,
@@ -1525,13 +1525,13 @@ acf_add_local_field_group(array(
 			),
 			'acfe_permissions' => '',
 			'message' => '<h3>Stop</h3>
-				<p>The Landing Page Title option should only be used for Marketing Landing Pages.</p>',
+				<p>The Marketing Landing Page Title option should only be used for Marketing Landing Pages.</p>',
 			'new_lines' => '',
 			'esc_html' => 0,
 		),
 		array(
 			'key' => 'field_page_landing_page_cover_image',
-			'label' => 'Landing Page Cover Image (Desktop)',
+			'label' => 'Marketing Landing Page Cover Image (Desktop)',
 			'name' => 'page_landing_page_cover_image',
 			'type' => 'image',
 			'instructions' => 'Recommended dimensions: 5120x800 or larger. Minimum dimensions: 1920x600. The image will be automatically cropped to a 16:5 aspect ratio.',
@@ -1563,7 +1563,7 @@ acf_add_local_field_group(array(
 		),
 		array(
 			'key' => 'field_page_landing_page_cover_image_mobile',
-			'label' => 'Landing Page Cover Image (Mobile)',
+			'label' => 'Marketing Landing Page Cover Image (Mobile)',
 			'name' => 'page_landing_page_cover_image_mobile',
 			'type' => 'image',
 			'instructions' => 'This image is optional. Add an image here if you do not want the mobile image to be automatically cropped from the desktop image.<br />Recommended dimensions: 1984x1612 or larger. Minimum dimensions: 992x806. The image will be automatically cropped to a 16:13 aspect ratio.',
@@ -1595,7 +1595,7 @@ acf_add_local_field_group(array(
 		),
 		array(
 			'key' => 'field_page_landing_page_heading',
-			'label' => 'Landing Page Title Heading',
+			'label' => 'Marketing Landing Page Title Heading',
 			'name' => 'page_landing_page_heading',
 			'type' => 'text',
 			'instructions' => 'Optional override for page title for the purposes of this header. Page title will still be used for meta title, search results, etc.',
@@ -1622,7 +1622,7 @@ acf_add_local_field_group(array(
 		),
 		array(
 			'key' => 'field_page_landing_page_description',
-			'label' => 'Landing Page Title Lead Paragraph',
+			'label' => 'Marketing Landing Page Title Lead Paragraph',
 			'name' => 'page_landing_page_description',
 			'type' => 'textarea',
 			'instructions' => 'Appears below the page title. Basic description of the page. 500 character limit.',
