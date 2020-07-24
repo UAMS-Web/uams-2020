@@ -1625,7 +1625,7 @@ acf_add_local_field_group(array(
 			'label' => 'Marketing Landing Page Title Lead Paragraph',
 			'name' => 'page_landing_page_description',
 			'type' => 'textarea',
-			'instructions' => 'Appears below the page title. Basic description of the page. There is a 119 character limit.',
+			'instructions' => 'Appears below the page title. Basic description of the page. There is a 117 character limit.',
 			'required' => 0,
 			'conditional_logic' => array(
 				array(
@@ -1643,7 +1643,7 @@ acf_add_local_field_group(array(
 			),
 			'default_value' => '',
 			'placeholder' => '',
-			'maxlength' => 119,
+			'maxlength' => 117,
 			'rows' => '',
 			'new_lines' => '',
 		),
