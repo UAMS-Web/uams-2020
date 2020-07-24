@@ -27,7 +27,10 @@
     }
 
     &.extra-padding {
-        padding: ($uams-module-padding-mobile * 2) $uams-module-padding-mobile;
+
+        @include media-breakpoint-up(xs) {
+            padding: ($uams-module-padding * 2) $uams-module-padding;
+        }
 
         @include media-breakpoint-up(sm) {
             padding: ($uams-module-padding * 2) $uams-module-padding;
