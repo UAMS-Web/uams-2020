@@ -194,7 +194,6 @@ return array(
             'id' => '',
         ),
         'choices' => array(
-            'normal' => 'Normal',
             'small' => 'Small',
             'large' => 'Large',
         ),
