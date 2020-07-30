@@ -37,7 +37,7 @@
                 justify-content: center;
             }
         }
-
+        
         &:nth-child(even):last-child {
             @include media-breakpoint-up(sm) {
                 justify-content: center;
