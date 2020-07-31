@@ -484,6 +484,7 @@ acf_add_local_field_group(array(
 				'ipe' => 'Office of Interprofessional Education',
 				'library' => 'Library',
 				'employee_nurses' => 'Nurses (Employee)',
+				'other' => 'Other Site (Multisite)',
 				'main' => 'Main UAMS site',
 				'none' => 'None of the above',
 			),
@@ -704,6 +705,43 @@ acf_add_local_field_group(array(
 						'field' => 'field_uams_subsite',
 						'operator' => '==',
 						'value' => 'grad-school',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Other 
+		array(
+			'key' => 'field_uams_other_dept',
+			'label' => 'Grad School Department',
+			'name' => 'uamswp_uams_other_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'other',
 					),
 				),
 			),
