@@ -33,6 +33,26 @@ function page_options() {
             // Add relevant classes
             add_filter('genesis_attr_entry-header', 'uamswp_attributes_entry_header_graphic_title');
 
+        } elseif ('landingpage' == $pageTitle) {
+            // Landing Page Header
+            // Remove original
+            remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
+            remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+            remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
+            // Add new location
+            add_action( 'genesis_before_content', 'uamswp_landing_page_title_wrap_open', 5 );
+            add_action( 'genesis_before_content', 'genesis_entry_header_markup_open', 5 );
+            add_action( 'genesis_before_content', 'uamswp_landing_page_title_inner_1', 5 );
+            add_action( 'genesis_before_content', 'uamswp_landing_page_title_do_post_title' );
+            add_action( 'genesis_before_content', 'uamswp_landing_page_title_inner_2', 15 );
+            add_action( 'genesis_before_content', 'uamswp_landing_page_title_lead_paragraph', 15 );
+            add_action( 'genesis_before_content', 'uamswp_landing_page_title_inner_3', 15 );
+            add_action( 'genesis_before_content', 'genesis_entry_header_markup_close', 15 );
+            add_action( 'genesis_before_content', 'uamswp_landing_page_title_wrap_close', 15 );
+
+            // Add relevant classes
+            add_filter('genesis_attr_entry-header', 'uamswp_attributes_entry_header_landing_page_title');
+
         } elseif ('hero' == $pageTitle) {
             // Hero
             // Remove original header
@@ -226,6 +246,194 @@ function uamswp_graphic_title_inner_3()
 }
 
 function uamswp_graphic_title_wrap_close()
+{
+    echo '</div>';
+}
+
+function uamswp_attributes_entry_header_landing_page_title($attributes)
+{
+    if ( empty($page_landing_page_cover_image) ) 
+    $page_landing_page_cover_image = get_field('page_landing_page_cover_image');
+
+    if ($page_landing_page_cover_image) {
+        $attributes['class'] .= ' uams-module extra-padding landing-page-title bg-image';
+    }
+    else {
+        $attributes['class'] .= ' uams-module extra-padding landing-page-title';
+    }
+	
+	return $attributes;
+}
+
+function uamswp_landing_page_title_wrap_open()
+{
+    echo '<div class="col-12">';
+}
+
+function uamswp_landing_page_title_inner_1()
+{
+    if ( empty($page_landing_page_cover_image) ) 
+    $page_landing_page_cover_image = get_field('page_landing_page_cover_image');
+
+    if ( empty($page_landing_page_cover_image_mobile) ) 
+    $page_landing_page_cover_image_mobile = get_field('page_landing_page_cover_image_mobile');
+
+    if ( empty($page_landing_page_cover_image_mobile) ) 
+    $page_landing_page_cover_image_mobile = $page_landing_page_cover_image; // fallback to desktop image
+    
+    if ($page_landing_page_cover_image && function_exists( 'fly_add_image_size' ) ) {
+        echo '<style>
+        .entry-header:before {
+            background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 576, 468, 'center', 'center') . '");
+        }
+
+        /* XXS Breakpoint, retina */
+        @media (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 1152, 936, 'center', 'center') . '");
+            }
+        }
+
+        /* XS Breakpoint */
+        @media (min-width: 576px) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 768, 624, 'center', 'center') . '");
+            }
+        }
+
+        /* XS Breakpoint, retina */
+        @media (min-width: 576px) and (-webkit-min-device-pixel-ratio: 2),
+        (min-width: 576px) and (min-resolution: 192dpi) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 1536, 1248, 'center', 'center') . '");
+            }
+        }
+
+        /* SM Breakpoint */
+        @media (min-width: 768px) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 992, 806, 'center', 'center') . '");
+            }
+        }
+
+        /* SM Breakpoint, retina */
+        @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
+        (min-width: 768px) and (min-resolution: 192dpi) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 1984, 1612, 'center', 'center') . '");
+            }
+        }
+
+        /* MD Breakpoint */
+        @media (min-width: 992px) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 1200, 375, 'center', 'center') . '");
+            }
+        }
+
+        /* MD Breakpoint, retina */
+        @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
+        (min-width: 992px) and (min-resolution: 192dpi) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 2400, 750, 'center', 'center') . '");
+            }
+        }
+
+        /* LG Breakpoint */
+        @media (min-width: 1200px) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 1500, 469, 'center', 'center') . '");
+            }
+        }
+
+        /* LG Breakpoint, retina */
+        @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
+        (min-width: 1200px) and (min-resolution: 192dpi) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 3000, 938, 'center', 'center') . '");
+            }
+        }
+
+        /* XL Breakpoint */
+        @media (min-width: 1500px) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 1921, 601, 'center', 'center') . '");
+            }
+        }
+
+        /* XL Breakpoint, retina */
+        @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
+        (min-width: 1500px) and (min-resolution: 192dpi) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 3842, 1201, 'center', 'center') . '");
+            }
+        }
+
+        /* XXL Breakpoint */
+        @media (min-width: 1921px) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 2560, 800, 'center', 'center') . '");
+            }
+        }
+
+        /* XXL Breakpoint, retina */
+        @media (min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2),
+        (min-width: 1921px) and (min-resolution: 192dpi) {
+            .entry-header:before {
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 5120, 1600, 'center', 'center') . '");
+            }
+        }
+    </style>';
+    }
+    elseif ($page_cover_image) {
+        echo '<style>
+            .entry-header:before {
+                background-image: url("' . wp_get_attachment_url( $page_landing_page_cover_image, 'full' ) . '");
+            }
+        </style>';
+    }
+
+    echo '<div class="text-container">
+    <div class="landing-page-title-heading">';
+}
+
+function uamswp_landing_page_title_do_post_title()
+{
+    $page_landing_page_heading = get_field('page_landing_page_heading');
+
+    if ( empty($page_landing_page_heading) ) {
+        $page_landing_page_heading = get_the_title();
+    }
+
+    echo '<h1 class="entry-title" itemprop="headline">';
+    echo $page_landing_page_heading;
+    echo '</h1>';
+}
+
+function uamswp_landing_page_title_inner_2()
+{
+    echo '</div>';
+}
+
+function uamswp_landing_page_title_lead_paragraph()
+{
+    if ( empty($page_landing_page_description) ) 
+    $page_landing_page_description = get_field('page_landing_page_description');
+
+    if ($page_landing_page_description) {
+        echo '<div class="landing-page-title-body"><p>';
+        echo $page_landing_page_description;
+        echo '</p></div>';
+    }
+}
+
+function uamswp_landing_page_title_inner_3()
+{
+    echo '</div>';
+}
+
+function uamswp_landing_page_title_wrap_close()
 {
     echo '</div>';
 }
