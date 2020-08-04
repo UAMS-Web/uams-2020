@@ -1598,8 +1598,8 @@ acf_add_local_field_group(array(
 			'label' => 'Marketing Landing Page Title Heading',
 			'name' => 'page_landing_page_heading',
 			'type' => 'text',
-			'instructions' => 'Optional override for page title for the purposes of this header. Page title will still be used for meta title, search results, etc. There is a 62 character limit.',
-			'required' => 0,
+			'instructions' => 'Override for page title for the purposes of this header. The normal page title will still be used for meta title, search results, etc. There is a 62 character limit. You can reuse your normal page title here if it fits in the character limit.',
+			'required' => 1,
 			'conditional_logic' => array(
 				array(
 					array(
