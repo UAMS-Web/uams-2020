@@ -136,6 +136,15 @@ return array (
                 'min' => '',
                 'max' => '',
             ),
+            'layout_modules_uams_livewhale' => array(
+                'key' => 'layout_modules_uams_livewhale',
+                'name' => 'modules_uams_livewhale',
+                'label' => 'Livewhale Calendar',
+                'display' => 'block',
+                'sub_fields' => $livewhale,
+                'min' => '',
+                'max' => '',
+            ),
             'layout_modules_uams_gallery' => array(
                 'key' => 'layout_modules_uams_gallery',
                 'name' => 'modules_uams_gallery',
