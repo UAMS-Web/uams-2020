@@ -21,11 +21,11 @@ function uamswp_do_plugins_register() {
 			'slug'      => 'widget-css-classes',
 			'required'  => false,
 		),
-		array(
-			'name'      => __( 'ACF Blocks', 'uamswp-uams-2020' ),
-			'slug'      => 'acf-blocks',
-			'required'  => true,
-		),
+		// array(
+		// 	'name'      => __( 'ACF Blocks', 'uamswp-uams-2020' ),
+		// 	'slug'      => 'acf-blocks',
+		// 	'required'  => true,
+		// ),
 
 		array(
 			'name'      => __( 'Fly Dynamic Image Resizer', 'uamswp-uams-2020' ),
