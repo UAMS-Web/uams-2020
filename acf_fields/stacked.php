@@ -28,7 +28,7 @@ return array(
         'name' => 'stacked_heading',
         'type' => 'text',
         'instructions' => 'Even if this heading is hidden, it is necessary for accessibility.',
-        'required' => 0,
+        'required' => 1,
         'conditional_logic' => 0,
         'wrapper' => array(
             'width' => '',
