@@ -32,12 +32,6 @@ $triangles: url("../svg/triangles_seamless_white.svg");
 }
 
 .hero {
-    $hero-slide-padding-ratio-xs: 0.9313;
-    $hero-slide-padding-ratio-sm: 0.4125;
-    $hero-slide-padding-ratio-md: 0.3;
-    $hero-slide-padding-ratio-lg: $hero-slide-padding-ratio-md;
-    $hero-slide-padding-ratio-xl: $hero-slide-padding-ratio-md;
-    $hero-slide-padding-ratio-xxl: $hero-slide-padding-ratio-md;
     $hero-triangle-base-ratio: 0.402;
 
     * {
@@ -79,7 +73,7 @@ $triangles: url("../svg/triangles_seamless_white.svg");
         }
 
         @include media-breakpoint-up(xl) {
-            font-size: 2.1333vw;
+            font-size: 2.1333vw; // starts proportionally increasing with viewport width
             width: 2.2667vw;
         }
     }
@@ -367,11 +361,11 @@ $triangles: url("../svg/triangles_seamless_white.svg");
                 }
 
                 @include media-breakpoint-up(xl) {
-                    font-size: 1.2667vw;
+                    font-size: 1.2667vw; // starts proportionally increasing with viewport width
                 }
 
                 @include media-custom-up(2560px) {
-                    font-size: 32px;
+                    font-size: 32px; // stops proportionally increasing with viewport width
                 }
 
                 h1,
