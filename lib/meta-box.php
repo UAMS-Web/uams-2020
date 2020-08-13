@@ -1572,7 +1572,7 @@ acf_add_local_field_group(array(
 			'label' => 'Marketing Landing Page Cover Image (Desktop)',
 			'name' => 'page_landing_page_cover_image',
 			'type' => 'image',
-			'instructions' => 'Recommended dimensions: 5120x800 or larger. Minimum dimensions: 1920x600. The image will be automatically cropped to a 16:5 aspect ratio.',
+			'instructions' => 'Recommended dimensions: 5120x1600 or larger. Minimum dimensions: 1920x600. The image will be automatically cropped to a 16:5 aspect ratio.',
 			'required' => 1,
 			'conditional_logic' => array(
 				array(
