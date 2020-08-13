@@ -44,26 +44,10 @@ if ( empty($background_color) )
             background-image: url("<?php echo image_sizer($image, 576, 216, 'center', 'center'); ?>");
         }
 
-        /* XXS Breakpoint, retina */
-        @media (-webkit-min-device-pixel-ratio: 2),
-        (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1152, 432, 'center', 'center'); ?>");
-            }
-        }
-
         /* XS Breakpoint */
         @media (min-width: 576px) {
             #<?php echo $id; ?>:before {
                 background-image: url("<?php echo image_sizer($image, 768, 288, 'center', 'center'); ?>");
-            }
-        }
-
-        /* XS Breakpoint, retina */
-        @media (min-width: 576px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 576px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1536, 576, 'center', 'center'); ?>");
             }
         }
 
@@ -74,26 +58,10 @@ if ( empty($background_color) )
             }
         }
 
-        /* SM Breakpoint, retina */
-        @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 768px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1984, 744, 'center', 'center'); ?>");
-            }
-        }
-
         /* MD Breakpoint */
         @media (min-width: 992px) {
             #<?php echo $id; ?>:before {
                 background-image: url("<?php echo image_sizer($image, 1200, 450, 'center', 'center'); ?>");
-            }
-        }
-
-        /* MD Breakpoint, retina */
-        @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 992px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 2400, 900, 'center', 'center'); ?>");
             }
         }
 
@@ -104,14 +72,6 @@ if ( empty($background_color) )
             }
         }
 
-        /* LG Breakpoint, retina */
-        @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1200px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 3000, 1125, 'center', 'center'); ?>");
-            }
-        }
-
         /* XL Breakpoint */
         @media (min-width: 1500px) {
             #<?php echo $id; ?>:before {
@@ -119,26 +79,10 @@ if ( empty($background_color) )
             }
         }
 
-        /* XL Breakpoint, retina */
-        @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1500px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 3842, 1441, 'center', 'center'); ?>");
-            }
-        }
-
         /* XXL Breakpoint */
         @media (min-width: 1921px) {
             #<?php echo $id; ?>:before {
                 background-image: url("<?php echo image_sizer($image, 2560, 960, 'center', 'center'); ?>");
-            }
-        }
-
-        /* XXL Breakpoint, retina */
-        @media (min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1921px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 5120, 1920, 'center', 'center'); ?>");
             }
         }
     </style>
