@@ -130,3 +130,21 @@ function add_allowed_origins($origins) {
 //     include get_theme_file_path( '/assets/css/critical.css');
 // }
 // add_action('wp_head', 'hook_css');
+
+/**
+ * Gutenberg scripts and styles
+ *
+ */
+function uamswp_gutenberg_scripts() {
+	wp_enqueue_style( 'theme-fonts', uamswp_theme_fonts_url() );
+	wp_enqueue_script( 'theme-editor', get_stylesheet_directory_uri() . '/assets/js/editor.js', array( 'wp-blocks', 'wp-dom' ), filemtime( get_stylesheet_directory_uri() . '/assets/js/editor.js' ), true );
+}
+add_action( 'enqueue_block_editor_assets', 'uamswp_gutenberg_scripts' );
+
+/**
+ * Theme Fonts URL
+ *
+ */
+function uamswp_theme_fonts_url() {
+	return 'https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap';
+}
