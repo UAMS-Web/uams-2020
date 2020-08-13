@@ -355,7 +355,7 @@ return array(
                 'label' => 'Image',
                 'name' => 'side_image_image',
                 'type' => 'image',
-                'instructions' => 'Recommended image dimensions: 5120x2880. Minimum image dimensions: 1920x1080. The image will be automatically cropped to a 16:9 aspect ratio.',
+                'instructions' => 'Recommended image dimensions: 2560x1440. Minimum image dimensions: 1920x1080. The image will be automatically cropped to a 16:9 aspect ratio.',
                 'required' => 1,
                 'conditional_logic' => 0,
                 'wrapper' => array(
