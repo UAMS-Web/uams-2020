@@ -355,7 +355,7 @@ return array(
                 'label' => 'Image',
                 'name' => 'side_image_image',
                 'type' => 'image',
-                'instructions' => 'Recommended image dimensions: 2560x1440. Minimum image dimensions: 1920x1080. The image will be automatically cropped to a 16:9 aspect ratio.<br />Ensure that any critical content of your image be within the middle 75% of the image (horizontally), as the block will be displayed at times where only that middle portion is displayed.',
+                'instructions' => 'Recommended image dimensions: 2560x1440. Minimum image dimensions: 1920x1080. The image will be automatically cropped to a 16:9 aspect ratio.<br />Ensure that any critical content of your image be within the middle 57% (horizontally) of the image — 46% if it is a logo — as the block will be displayed at times where only that middle portion is displayed.',
                 'required' => 1,
                 'conditional_logic' => 0,
                 'wrapper' => array(
