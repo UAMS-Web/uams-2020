@@ -148,8 +148,6 @@ if ($gallery_columns == '2') {
                                                     <figure class="figure">
                                                         <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
                                                             <picture>
-                                                                <source srcset="<?php echo image_sizer($image_id, 2454, -1, 'center', 'center'); ?>" media="(min-width: 1921px)">
-                                                                <source srcset="<?php echo image_sizer($image_id, 1815, -1, 'center', 'center'); ?>" media="(min-width: 1500px)">
                                                                 <source srcset="<?php echo image_sizer($image_id, 1394, -1, 'center', 'center'); ?>" media="(min-width: 1200px)">
                                                                 <source srcset="<?php echo image_sizer($image_id, 1094, -1, 'center', 'center'); ?>" media="(min-width: 992px)">
                                                                 <source srcset="<?php echo image_sizer($image_id, 886, -1, 'center', 'center'); ?>" media="(min-width: 768px)">
