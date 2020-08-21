@@ -148,12 +148,12 @@ if ($gallery_columns == '2') {
                                                     <figure class="figure">
                                                         <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
                                                             <picture>
-                                                                <source srcset="<?php echo image_sizer($image_id, 1394, -1, 'center', 'center'); ?>" media="(min-width: 1200px)">
+                                                                <source srcset="<?php echo image_sizer($image_id, 1106, -1, 'center', 'center'); ?>" media="(min-width: 1200px)">
                                                                 <source srcset="<?php echo image_sizer($image_id, 1094, -1, 'center', 'center'); ?>" media="(min-width: 992px)">
                                                                 <source srcset="<?php echo image_sizer($image_id, 886, -1, 'center', 'center'); ?>" media="(min-width: 768px)">
                                                                 <source srcset="<?php echo image_sizer($image_id, 702, -1, 'center', 'center'); ?>" media="(min-width: 1px)">
                                                                 <!-- Fallback -->
-                                                                <img src="<?php echo image_sizer($image_id, 1094, -1, 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
+                                                                <img src="<?php echo image_sizer($image_id, 1106, -1, 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
                                                             </picture>
                                                         <?php } else { ?>
                                                             <img src="<?php echo wp_get_attachment_image_url( $image_id, 'content-image-full' ); ?>" alt="<?php echo $image_alt; ?>">
