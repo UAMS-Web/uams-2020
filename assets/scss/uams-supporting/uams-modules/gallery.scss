@@ -29,6 +29,12 @@
         }
     }
 
+    .module-title {
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
     .module-body {
         text-align: center;
     }
