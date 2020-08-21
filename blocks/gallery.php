@@ -101,6 +101,7 @@ if ($gallery_columns == '2') {
                         // Load values.
                         $image_url = $gallery_image['url'];
                         $image_alt = $gallery_image['alt'];
+                        $image_caption = $gallery_image['caption'];
                         $image_md_url = $gallery_image['sizes']['aspect-16-9'];
                         $image_id = $gallery_image['id'];
                         /* <img class="w-100" src="<?php echo esc_url($image_url); ?>" alt="<?php echo $image_alt; ?>"> */
@@ -144,11 +145,25 @@ if ($gallery_columns == '2') {
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
-                                                        <img src="<?php echo image_sizer($image_id, 1106, -1, 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
-                                                    <?php } else { ?>
-                                                        <img src="<?php echo wp_get_attachment_image_url( $image_id, 'content-image-full' ); ?>" alt="<?php echo $image_alt; ?>">
-                                                    <?php } //endif ?>
+                                                    <figure class="figure">
+                                                        <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+                                                            <picture>
+                                                                <source srcset="<?php echo image_sizer($image_id, 2454, -1, 'center', 'center'); ?>" media="(min-width: 1921px)">
+                                                                <source srcset="<?php echo image_sizer($image_id, 1815, -1, 'center', 'center'); ?>" media="(min-width: 1500px)">
+                                                                <source srcset="<?php echo image_sizer($image_id, 1394, -1, 'center', 'center'); ?>" media="(min-width: 1200px)">
+                                                                <source srcset="<?php echo image_sizer($image_id, 1094, -1, 'center', 'center'); ?>" media="(min-width: 992px)">
+                                                                <source srcset="<?php echo image_sizer($image_id, 886, -1, 'center', 'center'); ?>" media="(min-width: 768px)">
+                                                                <source srcset="<?php echo image_sizer($image_id, 702, -1, 'center', 'center'); ?>" media="(min-width: 1px)">
+                                                                <!-- Fallback -->
+                                                                <img src="<?php echo image_sizer($image_id, 1094, -1, 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
+                                                            </picture>
+                                                        <?php } else { ?>
+                                                            <img src="<?php echo wp_get_attachment_image_url( $image_id, 'content-image-full' ); ?>" alt="<?php echo $image_alt; ?>">
+                                                        <?php } //endif 
+                                                        if ( $image_caption ) { ?>
+                                                            <figcaption class="figure-caption"><?php echo $image_caption; ?></figcaption>
+                                                        <?php } // endif ?>
+                                                    </figure>
                                                 </div>
                                             </div>
                                         </div>
