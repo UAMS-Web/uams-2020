@@ -22,6 +22,7 @@
 
         &.table-borderless {
             table {
+                border: none;
                 @extend .table-borderless;
             }
         }
