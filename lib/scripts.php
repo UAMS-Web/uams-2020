@@ -148,3 +148,15 @@ add_action( 'enqueue_block_editor_assets', 'uamswp_gutenberg_scripts' );
 function uamswp_theme_fonts_url() {
 	return 'https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap';
 }
+/**
+ * Remove Gutenberg Block Directory
+ *
+ */
+add_action( 'admin_init', function() {
+	remove_action( 'enqueue_block_editor_assets', 'wp_enqueue_editor_block_directory_assets' );
+ } );
+ /**
+ * Remove Gutenberg Block Patterns
+ *
+ */
+remove_theme_support( 'core-block-patterns' );
