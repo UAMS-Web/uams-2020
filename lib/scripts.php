@@ -137,7 +137,7 @@ function add_allowed_origins($origins) {
  */
 function uamswp_gutenberg_scripts() {
 	wp_enqueue_style( 'theme-fonts', uamswp_theme_fonts_url() );
-	wp_enqueue_script( 'theme-editor', get_stylesheet_directory_uri() . '/assets/js/editor.js', array( 'wp-blocks', 'wp-dom' ), filemtime( get_stylesheet_directory_uri() . '/assets/js/editor.js' ), true );
+	wp_enqueue_script( 'theme-editor', get_stylesheet_directory_uri() . '/assets/js/editor.js', array( 'wp-blocks', 'wp-dom' ), filemtime( get_stylesheet_directory() . '/assets/js/editor.js' ), true );
 }
 add_action( 'enqueue_block_editor_assets', 'uamswp_gutenberg_scripts' );
 
