@@ -1444,6 +1444,33 @@ acf_add_local_field_group(array(
 			'return_format' => 'value',
 		),
 		array(
+			'key' => 'field_page_hidden_message',
+			'label' => '',
+			'name' => 'page_hidden_message',
+			'type' => 'message',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options',
+						'operator' => '==',
+						'value' => 'hidden',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_permissions' => '',
+			'message' => '<h3>Stop</h3>
+				<p>The Hidden title option should only be used in specific situations. Contact the web team to discuss if this page should have its page title hidden.</p>',
+			'new_lines' => '',
+			'esc_html' => 0,
+		),
+		array(
 			'key' => 'field_page_cover_image',
 			'label' => 'Graphic Title Cover Image',
 			'name' => 'page_cover_image',
