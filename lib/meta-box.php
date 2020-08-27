@@ -1433,10 +1433,10 @@ acf_add_local_field_group(array(
 			),
 			'choices' => array(
 				'none' => '<i class="dashicons dashicons-yes"></i> Normal',
-				'hidden' => '<i class="dashicons dashicons-no"></i> Hidden',
 				'graphic' => '<i class="dashicons dashicons-format-image"></i> Graphic',
-				'landingpage' => '<i class="dashicons dashicons-format-image"></i> Marketing Landing Page',
 				'hero' => '<i class="dashicons dashicons-slides"></i> Hero',
+				'landingpage' => '<i class="dashicons dashicons-format-image"></i> Marketing Landing Page',
+				'hidden' => '<i class="dashicons dashicons-no"></i> Hidden',
 			),
 			'allow_null' => 0,
 			'default_value' => 'none',
