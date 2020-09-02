@@ -25,8 +25,9 @@
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^4.1.0",
     "gulp-uglify": "^3.0.2",
-    "gulp-wp-pot": "^2.4.3",
-    "jshint": "^2.12.0",
+    "gulp-wp-pot": "^2.3.6",
+    "gulp-zip": "^5.0.1",
+    "jshint": "^2.11.0",
     "node-sass": "^4.14.1",
     "postcss-discard-comments": "^4.0.2",
     "sass": "^1.26.10"
