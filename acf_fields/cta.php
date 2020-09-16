@@ -161,6 +161,33 @@ return array(
         'maxlength' => '',
     ),
     array(
+        'key' => 'field_cta_bar_phone'. $suffix,
+        'label' => 'Phone Number',
+        'name' => 'cta_bar_phone',
+        'type' => 'text',
+        'instructions' => 'Format your phone number using dashes. Include the area code. Example: 999-999-9999',
+        'required' => 1,
+        'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'operator' => '==',
+                    'value' => 'phone',
+                ),
+            ),
+        ),
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'default_value' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'maxlength' => '',
+    ),
+    array(
         'key' => 'field_cta_bar_layout'. $suffix,
         'label' => 'Layout',
         'name' => 'cta_bar_layout',
