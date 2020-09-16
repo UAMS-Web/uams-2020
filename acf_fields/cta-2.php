@@ -59,7 +59,8 @@ return array(
         'toolbar' => 'basic',
         'media_upload' => 0,
         'delay' => 0,
-    ),array(
+    ),
+    array(
         'key' => 'field_cta_bar_action_type'. $suffix,
         'label' => 'Action Type',
         'name' => 'cta_bar_action_type',
