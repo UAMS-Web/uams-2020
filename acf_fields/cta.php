@@ -89,8 +89,16 @@ return array(
         'name' => 'cta_bar_button_text',
         'type' => 'text',
         'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => 0,
+        'required' => 1,
+        'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'operator' => '==',
+                    'value' => 'url',
+                ),
+            ),
+        ),
         'wrapper' => array(
             'width' => '',
             'class' => '',
@@ -112,8 +120,9 @@ return array(
         'conditional_logic' => array(
             array(
                 array(
-                    'field' => 'field_cta_bar_button_text'. $suffix,
-                    'operator' => '!=empty',
+                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'operator' => '==',
+                    'value' => 'url',
                 ),
             ),
         ),
@@ -134,8 +143,9 @@ return array(
         'conditional_logic' => array(
             array(
                 array(
-                    'field' => 'field_cta_bar_button_text'. $suffix,
-                    'operator' => '!=empty',
+                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'operator' => '==',
+                    'value' => 'url',
                 ),
             ),
         ),
