@@ -161,6 +161,33 @@ return array(
         'maxlength' => '',
     ),
     array(
+        'key' => 'field_cta_bar_phone_prepend'. $suffix,
+        'label' => 'Text before phone number',
+        'name' => 'cta_bar_phone_prepend',
+        'type' => 'text',
+        'instructions' => 'This, combined with the phone number will generate a short action phrase. Keep this text very short. Do not include the phone number here. Examples: "Call", "Fax Referrals to"',
+        'required' => 1,
+        'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'operator' => '==',
+                    'value' => 'phone',
+                ),
+            ),
+        ),
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'default_value' => 'Call',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'maxlength' => '',
+    ),
+    array(
         'key' => 'field_cta_bar_phone'. $suffix,
         'label' => 'Phone Number',
         'name' => 'cta_bar_phone',
