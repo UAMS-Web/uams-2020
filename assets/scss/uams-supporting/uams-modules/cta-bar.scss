@@ -124,6 +124,14 @@
                 }
             }
         }
+
+        .btn-container {
+            a[href^="tel:"] {
+                white-space: normal;
+                text-align: center;
+                line-height: $headings-line-height;
+            }
+        }
     }
 
     &.cta-bar-sm {
@@ -190,7 +198,13 @@
         &.cta-bar-weighted {
             .inner-container {
                 @include media-breakpoint-up(md) {
+                    $cta-bar-phone-font-size: $h2-font-size;
+
                     max-width: $cta-bar-heading-font-size * $line-length-min;
+                    
+                    a[href^="tel:"] {
+                        @include font-size($cta-bar-phone-font-size);
+                    }
                 }
             }
         }
