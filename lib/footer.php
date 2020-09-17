@@ -293,8 +293,8 @@ function uamswp_footer_creds_text() {
             $social_fb = 'https://www.facebook.com/GetHealthyUAMS/';
             $social_ig = 'https://www.instagram.com/GetHealthyUAMS/';
         } elseif ( 'cda' == $subsite ) {
-            $social_fb = 'https://www.facebook.com/UAMSDDEI/';
-            $social_tw = 'https://twitter.com/uams_ddei';
+           $social_fb = 'https://www.facebook.com/UAMSDDEI/';
+           $social_tw = 'https://twitter.com/uams_ddei';
         } elseif ( 'gsa' == $subsite) {
             $social_fb = 'https://www.facebook.com/UAMSgsa/';
         } elseif ( 'continuing-ed' == $subsite) {

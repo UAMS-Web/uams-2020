@@ -190,7 +190,7 @@ return array(
                 'label' => 'Link Accessibility Description',
                 'name' => 'link_list_section_description',
                 'type' => 'text',
-                'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". This text will not be displayed on the page. Describe the intent of the link, like "Learn more about the ABC Department".',
+                'instructions' => 'This is needed for accessibility. Describe the intent of the link, like "Learn more about the ABC Department". It needs to be unique relative to the other links on this page (not reusing any other value for Link Title or Link Accessibility Description). <strong>Do not copy the Link Title value here</strong>.',
                 'required' => 1,
                 'conditional_logic' => 0,
                 'wrapper' => array(

@@ -417,6 +417,18 @@ body.page-template-default {
     }
 }
 
+body.page-template-page_landing {
+    .entry-content {
+        .uams-module {
+            &.alignfull {
+                width: auto;
+                max-width: 100%;
+                margin: 0;
+            }
+        }
+    }
+}
+
 @import "uams-modules/side-by-side";
 @import "uams-modules/text-image-overlay";
 @import "uams-modules/stacked-image-text";

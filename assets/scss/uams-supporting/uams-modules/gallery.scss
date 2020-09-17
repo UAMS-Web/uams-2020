@@ -29,6 +29,12 @@
         }
     }
 
+    .module-title {
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
     .module-body {
         text-align: center;
     }
@@ -40,6 +46,21 @@
 
         img {
             width: 100%;
+        }
+    }
+
+    .modal-dialog.modal-xl {
+        @include media-breakpoint-up(sm) {
+            max-width: 100%;
+            padding: 0 1.75rem;
+        }
+        @include media-breakpoint-up(lg) {
+            max-width: 100%;
+        }
+
+        .modal-content {
+            width: auto;
+            margin: 0 auto;
         }
     }
 }
