@@ -36,15 +36,15 @@ if ( empty($heading) )
     $heading = get_field('cta_bar_heading');
 if ( empty($body) ) 
     $body = get_field('cta_bar_body');
-if ( empty($button_text) ) 
-    $button_text = get_field('cta_bar_button_text');
 if ( empty($action_type) ) 
     $action_type = get_field('cta_bar_action_type');
 if ( empty($action_type) ) // If still empty (meaning page hasn't been updated since code changed)
     $action_type = 'none';
+if ( empty($button_text) ) 
+    $button_text = get_field('cta_bar_button_text');
 if ( empty($button_url) ) 
     $button_url = get_field('cta_bar_button_url');
-if ( empty($button_target) ) 
+if ( $button_url && empty($button_target) ) 
     $button_target = get_field('cta_bar_button_url')['target'];
 if ( empty($button_desc) ) 
     $button_desc = get_field('cta_bar_button_description');
@@ -54,6 +54,18 @@ if ( empty($phone) )
     $phone = get_field('cta_bar_phone');
 if ( empty($phone_link) ) 
     $phone_link = '<a href="tel:' . format_phone_dash( $phone ) . '">' . format_phone_us( $phone ) . '</a>';
+if (
+    empty($action_type) || // If still empty (meaning page hasn't been updated since code changed)
+    (
+        $action_type == 'url' && 
+        ( !$button_text || !$button_url || !$button_desc ) // required fields aren't populated
+    ) ||
+    (
+        $action_type == 'phone' && 
+        ( !$phone_prepend || !$phone ) // required fields aren't populated
+    )
+)
+    $action_type = 'none';
 if ( empty($layout) ) 
     $layout = get_field('cta_bar_layout');
 if ( empty($size) ) 
