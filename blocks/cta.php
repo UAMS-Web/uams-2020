@@ -38,12 +38,22 @@ if ( empty($body) )
     $body = get_field('cta_bar_body');
 if ( empty($button_text) ) 
     $button_text = get_field('cta_bar_button_text');
+if ( empty($action_type) ) 
+    $action_type = get_field('cta_bar_action_type');
+if ( empty($action_type) ) // If still empty (meaning page hasn't been updated since code changed)
+    $action_type = 'none';
 if ( empty($button_url) ) 
     $button_url = get_field('cta_bar_button_url');
 if ( empty($button_target) ) 
     $button_target = get_field('cta_bar_button_url')['target'];
 if ( empty($button_desc) ) 
     $button_desc = get_field('cta_bar_button_description');
+if ( empty($phone_prepend) ) 
+    $phone_prepend = get_field('cta_bar_phone_prepend') ? get_field('cta_bar_phone_prepend') : 'Call';
+if ( empty($phone) ) 
+    $phone = get_field('cta_bar_phone');
+if ( empty($phone_link) ) 
+    $phone_link = '<a href="tel:' . format_phone_dash( $phone ) . '">' . format_phone_us( $phone ) . '</a>';
 if ( empty($layout) ) 
     $layout = get_field('cta_bar_layout');
 if ( empty($size) ) 
@@ -61,7 +71,7 @@ if ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) {
 }
 
 ?>
-<section class="uams-module cta-bar <?php echo $className; ?> <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?><?php echo $size == 'small' ? ' cta-bar-sm' : ''; ?><?php echo $size == 'large' ? ' extra-padding cta-bar-lg' : ''; ?><?php echo $button_url ? '' : ' no-link'; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module cta-bar <?php echo $className; ?> <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?><?php echo $size == 'small' ? ' cta-bar-sm' : ''; ?><?php echo $size == 'large' ? ' extra-padding cta-bar-lg' : ''; ?><?php echo $action_type == 'none' ? ' no-link' : ''; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
 <?php if ( $use_image && function_exists( 'fly_add_image_size' ) ) { ?>
     <style>
         #<?php echo $id; ?>:before {
@@ -184,9 +194,14 @@ if ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) {
                         <div class="text-container">
                             <?php echo $body; ?>
                         </div>
-                        <?php echo $button_text ?
+                        <?php echo $action_type == 'url' ?
                         '<div class="btn-container">
                             <a href="' . $button_url['url'] . '" aria-label="' . $button_desc . '" class=" btn btn-' . $btn_color . ( $size == 'large' ? ' btn-lg' : '' ) . '"' . ( $button_target ? ' target="'. $button_target . '"' : '' ) . ' data-moduletitle="' . $heading . '">' . $button_text . '</a>
+                        </div>'
+                        : ''; ?>
+                        <?php echo $action_type == 'phone' ?
+                        '<div class="btn-container">
+                            <a href="tel:' . $phone . '" data-moduletitle="' . $heading . '">' . $phone_prepend . ' <span class="no-break">' . $phone . '</span></a>
                         </div>'
                         : ''; ?>
                     </div>

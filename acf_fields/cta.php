@@ -61,13 +61,44 @@ return array(
         'delay' => 0,
     ),
     array(
+        'key' => 'field_cta_bar_action_type'. $suffix,
+        'label' => 'Action Type',
+        'name' => 'cta_bar_action_type',
+        'type' => 'button_group',
+        'instructions' => 'Only choose None if your action is contained within your body text.',
+        'required' => 1,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'choices' => array(
+            'url' => 'URL',
+            'phone' => 'Phone Number',
+            'none' => 'None',
+        ),
+        'allow_null' => 0,
+        'default_value' => 'url',
+        'layout' => 'vertical',
+        'return_format' => 'value',
+    ),
+    array(
         'key' => 'field_cta_bar_button_text'. $suffix,
         'label' => 'Button Text',
         'name' => 'cta_bar_button_text',
         'type' => 'text',
         'instructions' => '',
-        'required' => 0,
-        'conditional_logic' => 0,
+        'required' => 1,
+        'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'operator' => '==',
+                    'value' => 'url',
+                ),
+            ),
+        ),
         'wrapper' => array(
             'width' => '',
             'class' => '',
@@ -89,8 +120,9 @@ return array(
         'conditional_logic' => array(
             array(
                 array(
-                    'field' => 'field_cta_bar_button_text'. $suffix,
-                    'operator' => '!=empty',
+                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'operator' => '==',
+                    'value' => 'url',
                 ),
             ),
         ),
@@ -101,32 +133,6 @@ return array(
         ),
         'return_format' => 'array',
     ),
-    // array(
-    //     'key' => 'field_cta_bar_button_target'. $suffix,
-    //     'label' => 'Open in New Window?',
-    //     'name' => 'cta_bar_button_target',
-    //     'type' => 'true_false',
-    //     'instructions' => '',
-    //     'required' => 0,
-    //     'conditional_logic' => array(
-    //         array(
-    //             array(
-    //                 'field' => 'field_cta_bar_button_text'. $suffix,
-    //                 'operator' => '!=empty',
-    //             ),
-    //         ),
-    //     ),
-    //     'wrapper' => array(
-    //         'width' => '',
-    //         'class' => '',
-    //         'id' => '',
-    //     ),
-    //     'message' => '',
-    //     'default_value' => 0,
-    //     'ui' => 1,
-    //     'ui_on_text' => '',
-    //     'ui_off_text' => '',
-    // ),
     array(
         'key' => 'field_cta_bar_button_description'. $suffix,
         'label' => 'Button Link Description',
@@ -137,8 +143,63 @@ return array(
         'conditional_logic' => array(
             array(
                 array(
-                    'field' => 'field_cta_bar_button_text'. $suffix,
-                    'operator' => '!=empty',
+                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'operator' => '==',
+                    'value' => 'url',
+                ),
+            ),
+        ),
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'default_value' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'maxlength' => '',
+    ),
+    array(
+        'key' => 'field_cta_bar_phone_prepend'. $suffix,
+        'label' => 'Text before phone number',
+        'name' => 'cta_bar_phone_prepend',
+        'type' => 'text',
+        'instructions' => 'This, combined with the phone number will generate a short action phrase. Keep this text very short. Do not include the phone number here. Examples: "Call", "Fax Referrals to"',
+        'required' => 1,
+        'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'operator' => '==',
+                    'value' => 'phone',
+                ),
+            ),
+        ),
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'default_value' => 'Call',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'maxlength' => '',
+    ),
+    array(
+        'key' => 'field_cta_bar_phone'. $suffix,
+        'label' => 'Phone Number',
+        'name' => 'cta_bar_phone',
+        'type' => 'text',
+        'instructions' => 'Format your phone number using dashes. Include the area code. Example: 999-999-9999',
+        'required' => 1,
+        'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'operator' => '==',
+                    'value' => 'phone',
                 ),
             ),
         ),
