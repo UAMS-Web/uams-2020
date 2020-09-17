@@ -66,12 +66,12 @@
 //@import "uams-supporting/variables";
 //@import "uams-supporting/mixins";
 //@import "uams-supporting/root";
-//@import "uams-supporting/reboot";
+@import "uams-supporting/reboot";
 @import "uams-supporting/type";
 //@import "uams-supporting/images";
 //@import "uams-supporting/code";
 @import "uams-supporting/grid";
-//@import "uams-supporting/tables";
+@import "uams-supporting/tables";
 @import "uams-supporting/forms";
 @import "uams-supporting/buttons";
 //@import "uams-supporting/transitions";
@@ -121,7 +121,7 @@
 @import "supporting/wordpress-images";
 
 // Table
-@import "supporting/table";
+// @import "supporting/table";
 
 // Widgets
 @import "supporting/widgets";
