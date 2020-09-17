@@ -58,11 +58,11 @@ if (
     empty($action_type) || // If still empty (meaning page hasn't been updated since code changed)
     (
         $action_type == 'url' && 
-        ( !$button_text || !$button_url || !$button_desc ) // required fields aren't populated
+        ( empty($button_text) || empty($button_url) || empty($button_desc) ) // required fields aren't populated
     ) ||
     (
         $action_type == 'phone' && 
-        ( !$phone_prepend || !$phone ) // required fields aren't populated
+        ( empty($phone_prepend) || empty($phone) ) // required fields aren't populated
     )
 )
     $action_type = 'none';
