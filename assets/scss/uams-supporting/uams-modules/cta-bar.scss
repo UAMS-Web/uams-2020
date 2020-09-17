@@ -40,27 +40,25 @@
 
         .text-container {
             margin-bottom: 1em;
-        }
 
-        .btn-container {
-            justify-content: center;
-        }
-
-        .text-container {
             > :last-child {
                 margin-bottom: 0;
             }
         }
 
         .btn-container {
+            justify-content: center;
+
             .btn {
                 font-size: inherit;
             }
 
             a[href^="tel:"] {
                 @include font-size($cta-bar-phone-font-size);
-                text-decoration: none;
                 font-weight: $font-weight-medium;
+                line-height: $headings-line-height;
+                text-decoration: none;
+                white-space: normal;
 
                 @include hover-focus() {
                     text-decoration: underline;
@@ -103,9 +101,7 @@
                 }
 
                 a[href^="tel:"] {
-                    white-space: normal;
                     text-align: center;
-                    line-height: $headings-line-height;
                 }
             }
         }
@@ -146,7 +142,7 @@
                     a[href^="tel:"] {
                         @include media-breakpoint-up(md) {
                             $cta-bar-phone-font-size: $h2-font-size;
-                            
+
                             @include font-size($cta-bar-phone-font-size);
                         }
                     }
@@ -170,7 +166,7 @@
 
         .cta-body {
             @include font-size($cta-bar-font-size);
-            
+
             .btn-container {
                 a[href^="tel:"] {
                     @include font-size($cta-bar-phone-font-size);
