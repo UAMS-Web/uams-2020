@@ -54,6 +54,7 @@
             }
 
             a[href^="tel:"] {
+                color: inherit;
                 @include font-size($cta-bar-phone-font-size);
                 font-weight: $font-weight-medium;
                 line-height: $headings-line-height;
