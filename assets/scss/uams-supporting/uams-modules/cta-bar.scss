@@ -3,6 +3,7 @@
     $cta-bar-font-size: $lead-font-size;
     $cta-bar-heading-level: 2; // Make h2 emulate any heading level. Use integer 1-6.
     $cta-bar-heading-font-size: $h2-font-size; // Used for calculations. Match with heading level. Can't combine variable interpolation inside variable names.
+    $cta-bar-phone-font-size: $cta-bar-heading-font-size;
 
     .col-12 {
         display: flex;
@@ -51,8 +52,20 @@
             }
         }
 
-        .btn-container .btn {
-            font-size: inherit;
+        .btn-container {
+            .btn {
+                font-size: inherit;
+            }
+
+            a[href^="tel:"] {
+                @include font-size($cta-bar-phone-font-size);
+                text-decoration: none;
+                font-weight: $font-weight-medium;
+
+                @include hover-focus() {
+                    text-decoration: underline;
+                }
+            }
         }
     }
 
@@ -97,6 +110,7 @@
         $cta-bar-font-size: $font-size-base;
         $cta-bar-heading-level: 4; // Make h2 emulate any heading level. Use integer 1-6.
         $cta-bar-heading-font-size: $h4-font-size; // Used for calculations. Match with heading level. Can't combine variable interpolation inside variable names.
+        $cta-bar-phone-font-size: $cta-bar-heading-font-size;
 
         .cta-heading {
             h2 {
@@ -106,6 +120,12 @@
 
         .cta-body {
             @include font-size($cta-bar-font-size);
+
+            .btn-container {
+                a[href^="tel:"] {
+                    @include font-size($cta-bar-phone-font-size);
+                }
+            }
         }
 
         &.cta-bar-weighted {
@@ -122,6 +142,7 @@
         $cta-bar-font-size: $lead-font-size;
         $cta-bar-heading-level: 1; // Make h2 emulate any heading level. Use integer 1-6.
         $cta-bar-heading-font-size: $h1-font-size; // Used for calculations. Match with heading level. Can't combine variable interpolation inside variable names.
+        $cta-bar-phone-font-size: $cta-bar-heading-font-size;
 
         .cta-heading {
             h2 {
@@ -131,6 +152,12 @@
 
         .cta-body {
             @include font-size($cta-bar-font-size);
+            
+            .btn-container {
+                a[href^="tel:"] {
+                    @include font-size($cta-bar-phone-font-size);
+                }
+            }
         }
 
         &.cta-bar-weighted {
