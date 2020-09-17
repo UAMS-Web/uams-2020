@@ -727,6 +727,43 @@ acf_add_local_field_group(array(
 			'return_format' => 'value',
 			'placeholder' => '',
 		),
+		// Other 
+		array(
+			'key' => 'field_uams_other_dept',
+			'label' => 'Grad School Department',
+			'name' => 'uamswp_uams_other_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'other',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
 		// UAMS Health Organizations
 		array(
 			'key' => 'field_uamshealth_subsite',
