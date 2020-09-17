@@ -136,18 +136,6 @@
                     max-width: $cta-bar-font-size * $line-length-max;
                 }
             }
-
-            .cta-body {
-                .btn-container {
-                    a[href^="tel:"] {
-                        @include media-breakpoint-up(md) {
-                            $cta-bar-phone-font-size: $h2-font-size;
-
-                            @include font-size($cta-bar-phone-font-size);
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -178,6 +166,18 @@
             .inner-container {
                 @include media-breakpoint-up(md) {
                     max-width: $cta-bar-heading-font-size * $line-length-min;
+                }
+            }
+
+            .cta-body {
+                .btn-container {
+                    a[href^="tel:"] {
+                        @include media-breakpoint-up(md) {
+                            $cta-bar-phone-font-size: $h2-font-size;
+
+                            @include font-size($cta-bar-phone-font-size);
+                        }
+                    }
                 }
             }
         }
