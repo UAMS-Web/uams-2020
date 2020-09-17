@@ -730,7 +730,7 @@ acf_add_local_field_group(array(
 		// Other 
 		array(
 			'key' => 'field_uams_other_dept',
-			'label' => 'Grad School Department',
+			'label' => 'Other (Multisite)',
 			'name' => 'uamswp_uams_other_dept',
 			'type' => 'select',
 			'instructions' => '',
