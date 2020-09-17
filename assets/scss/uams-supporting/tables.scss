@@ -27,7 +27,8 @@
             }
         }
 
-        &.table-striped {
+        &.table-striped,
+        &.is-style-stripes {
             table {
                 @extend .table-striped;
             }
