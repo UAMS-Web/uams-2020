@@ -829,6 +829,7 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 		'post_parent' => $page_id,
 		'order' => 'ASC',
 		'orderby' => 'title',
+		'posts_per_page' => -1, // We do not want to limit the post count
 		'meta_query' => array(
 			array(
 				'key' => 'page_hide_from_menu',
