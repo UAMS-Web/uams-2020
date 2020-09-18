@@ -38,8 +38,6 @@ if ( empty($body) )
     $body = get_field('cta_bar_body');
 if ( empty($action_type) ) 
     $action_type = get_field('cta_bar_action_type');
-if ( empty($action_type) ) // If still empty (meaning page hasn't been updated since code changed)
-    $action_type = 'none';
 if ( empty($button_text) ) 
     $button_text = get_field('cta_bar_button_text');
 if ( empty($button_url) ) 
@@ -48,6 +46,8 @@ if ( $button_url && empty($button_target) )
     $button_target = get_field('cta_bar_button_url')['target'];
 if ( empty($button_desc) ) 
     $button_desc = get_field('cta_bar_button_description');
+if ( empty($action_type) && $button_text ) // If still empty (meaning page hasn't been updated since code changed)
+    $action_type = 'url';
 if ( empty($phone_prepend) ) 
     $phone_prepend = get_field('cta_bar_phone_prepend') ? get_field('cta_bar_phone_prepend') : 'Call';
 if ( empty($phone) ) 
