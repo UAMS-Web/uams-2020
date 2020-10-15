@@ -47,7 +47,7 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
 
 
 ?>
-    <section class="hero carousel slide<?php echo $row_count > 1 ? " multiple-slides" : ""; ?>" id="carousel-<?php echo esc_attr($id); ?>" aria-label="Hero banner"<?php echo $row_count > 1 ? ' data-ride="carousel" data-interval="' . $slide_time . '" data-keyboard="true"' : ''; ?>>
+    <section class="hero carousel <?php echo esc_attr($className); ?> slide<?php echo $row_count > 1 ? " multiple-slides" : ""; ?>" id="carousel-<?php echo esc_attr($id); ?>" aria-label="Hero banner"<?php echo $row_count > 1 ? ' data-ride="carousel" data-interval="' . $slide_time . '" data-keyboard="true"' : ''; ?>>
 <?php
         // $page_template = get_page_template_slug( $post_id );
         // echo $page_template;
@@ -63,7 +63,7 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
                 <?php } ?>
             </ol>
 <?php   }  ?>
-    <div class="carousel-inner <?php echo esc_attr($className); ?>">
+    <div class="carousel-inner">
 <?php 
     $index = 1;
     foreach($hero_rows as $hero_row) {
