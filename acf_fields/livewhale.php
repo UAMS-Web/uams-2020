@@ -90,4 +90,23 @@ return array(
         'ajax' => 0,
         'placeholder' => '',
     ),
+    array(
+		'key' => 'field_livewhale_geo'. $suffix,
+		'label' => 'Regions',
+		'name' => 'livewhale_geo',
+		'type' => 'geot_field',
+		'instructions' => '',
+		'required' => 0,
+		'conditional_logic' => 0,
+		'wrapper' => array(
+			'width' => '',
+			'class' => '',
+			'id' => '',
+		),
+		'acfe_permissions' => '',
+		'geot_show' => 'city-regions',
+		'geot_condition' => 'include',
+		'geot_regions' => '',
+		'geot_countries' => '',
+	),
 );

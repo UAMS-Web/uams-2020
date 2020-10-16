@@ -27,9 +27,13 @@ if( !empty($block['className']) ) {
 if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
 }
+if ( empty($geo) )
+    $geo = get_field('hero_geo');
 
 if ( empty($hero_rows) )
     $hero_rows = get_field('hero');
+
+    if( isset($geo) && ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) {
 
 if( $hero_rows ) :
     $row_count = count($hero_rows);
@@ -44,7 +48,6 @@ $wpm = 214; // National average for optimal silent reading rate for 9th grade, a
 $wps = $wpm / 60; // words per second
 $read_time = $word_est / $wps; // Time to read total words
 $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + time to read + 1 second to interact (in milliseconds)
-
 
 ?>
     <section class="hero carousel slide<?php echo $row_count > 1 ? " multiple-slides" : ""; ?>" id="carousel-<?php echo esc_attr($id); ?>" aria-label="Hero banner"<?php echo $row_count > 1 ? ' data-ride="carousel" data-interval="' . $slide_time . '" data-keyboard="true"' : ''; ?>>
@@ -183,3 +186,4 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
   </section>
 <?php
 endif;
+}

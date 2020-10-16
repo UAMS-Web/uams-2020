@@ -33,7 +33,10 @@ if ( empty($livewhale) )
     $livewhale = get_field('livewhale_id');
 if ( empty($background_color) )
     $background_color = get_field('livewhale_background_color');
+if ( empty($geo) )
+    $geo = get_field('livewhale_geo');
 
+    if( isset($geo) && ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) :
 ?>
 <section class="uams-module link-list link-list-layout-split livewhale<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $livewhale; ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
@@ -53,3 +56,4 @@ if ( empty($background_color) )
         </div>
     </div>
 </section>
+<?php endif;

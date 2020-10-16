@@ -42,6 +42,8 @@ if ( $gallery_crop == 'none' || $gallery_crop[0] == 'none' )
     $gallery_crop = -1;
 if ( empty($background_color) )
     $background_color = get_field('gallery_background_color');
+if ( empty($geo) )
+    $geo = get_field('gallery_geo');
 if ( empty($modal) )
     $modal = get_field('gallery_modal');
 if ( empty($more) )
@@ -82,7 +84,7 @@ if ($gallery_columns == '2') {
     $lg = 2;
 } 
 
-
+if( isset($geo) && ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) :
 ?>
 <section class="uams-module gallery-block<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
@@ -184,3 +186,4 @@ if ($gallery_columns == '2') {
         </div>
     </div>
 </section>
+<?php endif;

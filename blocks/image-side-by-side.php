@@ -64,6 +64,8 @@ if ( empty($image_postion) )
     $image_postion = get_field('side_image_position') ?: 'left';
 if ( empty($background_color) ) 
     $background_color = get_field('side_image_background_color') ?: 'bg-white';
+if ( empty($geo) )
+    $geo = get_field('side_image_geo');
 if ( empty($image_alt) ) 
     $image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachment_image_alt', true);
 $cta_target = $cta_target ? ' target="'. $cta_target .'"' : '';
@@ -80,7 +82,7 @@ $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
 //     return;
 // }
 
-
+if( isset($geo) && ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) :
 ?>
 <section class="uams-module no-padding side-by-side <?php echo $className; ?> image-on-<?php echo $image_postion; ?> image-background-<?php echo $image_anchor; ?> <?php echo $background_color; ?>" id="side-by-side-<?php echo esc_attr($id); ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
@@ -237,3 +239,4 @@ $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
         </div>
     </div>
 </section>
+<?php endif;

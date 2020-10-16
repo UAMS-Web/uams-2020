@@ -31,8 +31,12 @@ if ( empty($hide_heading) )
     $hide_heading = get_field('stacked_hide_heading');
 if ( empty($background_color) )
     $background_color = get_field('stacked_background_color');
+if ( empty($geo) )
+    $geo = get_field('stacked_geo');
 if ( empty($stacked_rows) )
     $stacked_rows = get_field('stacked_section');
+
+    if( isset($geo) && ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) {
 
 if( $stacked_rows ) :
     $row_count = count($stacked_rows); // Not user, but just in case
@@ -97,3 +101,4 @@ if( $stacked_rows ) :
     </div>
 </section>
 <?php endif;
+}
