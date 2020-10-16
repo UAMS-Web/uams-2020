@@ -55,6 +55,12 @@ body.kb-template-default  {
                 right: 0;
             }
         }
+
+        .archive-title {
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
 }
 
