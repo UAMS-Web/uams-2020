@@ -439,7 +439,7 @@ function uamswp_landing_page_title_wrap_close()
 }
 
 function uamswp_page_hero() {
-    $id = 'header';
+    //$id = 'header';
     $hero_rows = get_field('page_hero', $id)['hero'];
     echo '<div class="col-12">';
     include( get_stylesheet_directory() .'/blocks/hero.php' );
