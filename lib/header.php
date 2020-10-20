@@ -131,6 +131,7 @@ function uamswp_site_image() {
 
 	<!-- /* Begin Right Navbar */ -->
 	<nav class="header-nav" aria-label="Resource Navigation">
+		<?php if (! is_page_template( 'templates/marketing.php' ) ) { ?>
 		<div class="collapse navbar-collapse" id="nav-secondary">
 			<ul class="nav">
 				<?php if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site']) || empty(uams_get_site_info()['site'])) { ?>
@@ -169,6 +170,7 @@ function uamswp_site_image() {
 				<?php } ?>
 			</ul>
 		</div>
+		<?php } ?>
 		<ul class="nav resource-nav" id="nav-resource">
 			<?php if ('uamshealth' == uams_get_site_info()['site']) { ?>
 			<!-- uamshealth only -->
@@ -194,11 +196,13 @@ function uamswp_site_image() {
 		// </button>
 		?>
 
+		<?php if (! is_page_template( 'templates/marketing.php' ) ) { ?>
 		<!-- // The data-target and aria-controls may need to be dynamically defined. -->
 		<button class="navbar-toggler mobile-menu-toggler" type="button" data-toggle="collapse" data-target="#genesis-nav-primary" aria-controls="genesis-nav-primary" aria-expanded="false" title="Toggle Primary navigation">
 			<span class="sr-only label">Toggle Primary Nav</span>
 			<svg class="" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg>
 		</button>
+		<?php } ?>
 
 		<style>
 			.emergency-link svg {
