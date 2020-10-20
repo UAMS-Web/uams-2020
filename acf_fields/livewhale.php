@@ -91,6 +91,23 @@ return array(
         'placeholder' => '',
     ),
     array(
+        'key' => 'field_livewhale_regions'. $suffix,
+        'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
+        'name' => '',
+        'type' => 'accordion',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'open' => 0,
+        'multi_expand' => 0,
+        'endpoint' => 0,
+    ),
+    array(
 		'key' => 'field_livewhale_geo'. $suffix,
 		'label' => 'Regions',
 		'name' => 'livewhale_geo',
