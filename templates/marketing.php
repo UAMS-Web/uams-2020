@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Marketing
+ * Template Name: Marketing Landing Page
  *
  * @package      UAMSWP
  * @author       Bill Erickson
