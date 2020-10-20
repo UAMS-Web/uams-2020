@@ -27,6 +27,7 @@ remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 
 // Remove Primary Nav
 remove_action( 'genesis_after_header', 'genesis_do_nav' );
+remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
 
 // Remove breadcrumbs
 remove_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
