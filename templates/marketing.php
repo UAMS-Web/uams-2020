@@ -17,11 +17,11 @@
 // remove_action( 'genesis_entry_content', 'genesis_do_post_content' );
 // add_action( 'genesis_entry_content', 'uamswp_modules_display' );
 
-add_filter( 'body_class', 'uamswp_marketing_body_class' );
-function uamswp_marketing_body_class( $classes ) {
-    $classes[] = 'page-template-default';
-    return $classes;
-}
+// add_filter( 'body_class', 'uamswp_marketing_body_class' );
+// function uamswp_marketing_body_class( $classes ) {
+//     $classes[] = 'page-template-default';
+//     return $classes;
+// }
 
 remove_action( 'genesis_entry_footer', 'genesis_post_meta' );
 
