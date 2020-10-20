@@ -40,7 +40,7 @@ if ( empty($geo) )
 
 echo '<!-- '; print_r($geo); echo ' -->';
 echo '<!-- ' . do_shortcode( '[geot_debug]' ) . ' -->';
-if( isset($geo) && ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', $geo['geot_city_regions'] ) )) ) :?>
+if( isset($geo) && ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) :?>
     <section class="uams-module extra-padding call-out<?php echo $className; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
         <?php if ( $use_image && function_exists( 'fly_add_image_size' ) ) { ?>
         <style>
