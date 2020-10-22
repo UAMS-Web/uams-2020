@@ -82,7 +82,22 @@ $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
 //     return;
 // }
 
-if( !isset($geo) || ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) :
+// GEO Logic
+$geo_display = false;
+if (!isset($geo)){
+    $geo_display = true;
+} else {
+    if( $geo['geot_condition'] == 'include' ) {
+        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }  else {
+        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }
+}
+if ($geo_display) :
 ?>
 <section class="uams-module no-padding side-by-side <?php echo $className; ?> image-on-<?php echo $image_postion; ?> image-background-<?php echo $image_anchor; ?> <?php echo $background_color; ?>" id="side-by-side-<?php echo esc_attr($id); ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
