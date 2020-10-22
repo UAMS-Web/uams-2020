@@ -29,7 +29,7 @@ if ( empty($geo) )
 if( empty($overlay_rows) )
     $overlay_rows = get_field('overlay_section');
 
-    if( isset($geo) && ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) {
+    if( !isset($geo) || ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) {
 
 if( $overlay_rows ) :
     $row_count = count($overlay_rows);
