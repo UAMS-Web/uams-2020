@@ -33,7 +33,7 @@ if ( empty($geo) )
 if ( empty($hero_rows) )
     $hero_rows = get_field('hero');
 
-    if( isset($geo) && ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) {
+    if( !isset($geo) || ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) {
 
 if( $hero_rows ) :
     $row_count = count($hero_rows);

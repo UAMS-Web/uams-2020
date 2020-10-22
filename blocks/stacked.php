@@ -36,7 +36,7 @@ if ( empty($geo) )
 if ( empty($stacked_rows) )
     $stacked_rows = get_field('stacked_section');
 
-    if( isset($geo) && ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) {
+    if( !isset($geo) || ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) {
 
 if( $stacked_rows ) :
     $row_count = count($stacked_rows); // Not user, but just in case
