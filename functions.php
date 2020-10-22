@@ -865,3 +865,25 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 	<?php
 	}
 }
+
+// Whitelist specific blocks for the Marketing Landing Page template
+add_filter('allowed_block_types', function($block_types, $post) {
+	$allowed_marketing = [
+		'acf/action-bar',
+		'acf/call-out',
+		'acf/cta',
+		//'acf/hero',
+		'acf/link-list',
+		'acf/uams-news',
+		'acf/text-overlay',
+		'acf/image-side',
+		'acf/text-stacked',
+		'acf/livewhale-calendar',
+		'acf/uams-gallery',
+		'acf/uams-content'
+	];
+	if (get_page_template_slug( $post ) == 'templates/marketing.php') {
+		return $allowed_marketing;
+	}
+	return $block_types;
+}, 10, 2);
