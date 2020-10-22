@@ -38,9 +38,24 @@ if ( empty($background_color) )
 if ( empty($geo) )
     $geo = get_field('call_out_geo');
 
-echo '<!-- '; print_r($geo); echo ' -->';
-echo '<!-- ' . do_shortcode( '[geot_debug]' ) . ' -->';
-if( !isset($geo) || ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) :?>
+// echo '<!-- '; print_r($geo); echo ' -->';
+// echo '<!-- ' . do_shortcode( '[geot_debug]' ) . ' -->';
+// GEO Logic
+$geo_display = false;
+if (!isset($geo)){
+    $geo_display = true;
+} else {
+    if( $geo['geot_condition'] == 'include' ) {
+        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }  else {
+        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }
+}
+if ($geo_display) :?>
     <section class="uams-module extra-padding call-out<?php echo $className; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
         <?php if ( $use_image && function_exists( 'fly_add_image_size' ) ) { ?>
         <style>
