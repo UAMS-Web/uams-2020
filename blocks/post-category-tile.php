@@ -31,10 +31,14 @@ if ( empty( $hide_heading ) )
     $hide_heading = get_field('post_tile_hide_heading');
 if ( empty( $background_color ) )
     $background_color = get_field('post_tile_background_color');
+if ( empty($geo) )
+    $geo = get_field('post_tile_geo');
 
 // The item's selected category.
 if ( empty( $category ) )
     $category = get_field('post_tile_category');
+
+    if( isset($geo) && ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) {
 
 $args = array(
     'post_type' => 'post',
@@ -130,4 +134,5 @@ if ( empty( $cat_button_text ) )
         </div>
     </div>
 </section>
-<?php endwhile; endif; ?>
+<?php endwhile; endif; 
+}?>

@@ -81,7 +81,10 @@ if ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) {
 } else {
     $btn_color = 'white';
 }
+if ( empty($geo) )
+    $geo = get_field('cta_bar_geo');
 
+    if( isset($geo) && ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ) :
 ?>
 <section class="uams-module cta-bar <?php echo $className; ?> <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?><?php echo $size == 'small' ? ' cta-bar-sm' : ''; ?><?php echo $size == 'large' ? ' extra-padding cta-bar-lg' : ''; ?><?php echo $action_type == 'none' ? ' no-link' : ''; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
 <?php if ( $use_image && function_exists( 'fly_add_image_size' ) ) { ?>
@@ -222,3 +225,4 @@ if ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) {
         </div>
     </div>
 </section>
+<?php endif;
