@@ -210,7 +210,22 @@ function uamswp_module( $module = array(), $i = false ) {
                 // echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
                 // echo '<!-- '; print_r($geo); echo ' -->';
                 // echo '<!-- ' . do_shortcode( '[geot_debug]' ) . ' -->';
-				if( !isset($geo) || ((( $geo['geot_condition'] == 'include' ) && ( geot_target_city( '', $geo['geot_city_regions'] ) )) || ( ! geot_target_city( '', '', '', $geo['geot_city_regions'] ) )) ){
+				// GEO Logic
+                $geo_display = false;
+                if (!isset($geo)){
+	                $geo_display = true;
+                } else {
+	                if( $geo['geot_condition'] == 'include' ) {
+						if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+							$geo_display = true;
+						}
+					}  else {
+						if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+							$geo_display = true;
+						}
+					}
+				}
+				if ($geo_display) {
 					echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
 				}
 /*
