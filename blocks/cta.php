@@ -6,6 +6,9 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
+if (empty( $id )) {
+	$id = '';
+}
 $id = $id ? ( $id + 1 ) : '';
 $i = 0;
 if ( empty( $id ) && isset($block) ) {

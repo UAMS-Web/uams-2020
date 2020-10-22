@@ -5,7 +5,9 @@
  * 
  */
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+if (empty( $id )) {
+	$id = '';
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -49,6 +51,8 @@ if ( empty($list_more) )
 if ( empty($cta) ) 
     $cta = get_field('side_cta') ?: '';
 $cta_text = $cta['side_cta_text'] ?: '';
+$cta_link = '';
+$cta_target = '';
 if ( $cta['side_cta_url'] ) {
     $cta_link = $cta['side_cta_url']['url'] ?: '';
     $cta_target = $cta['side_cta_url']['target'] ?: '';
