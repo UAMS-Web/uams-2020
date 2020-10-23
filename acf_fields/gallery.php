@@ -47,7 +47,7 @@ return array(
         'label' => 'Hide Heading',
         'name' => 'gallery_hide_heading',
         'type' => 'true_false',
-        'instructions' => 'The heading is necessary for page hierarchy. But it can be hidden from all but screen readers and search engines. This is <em>strongly</em> not recommended in most cases, as the visible heading provides a jumping-in point for users as they scan your page.',
+        'instructions' => 'The heading is necessary for page hierarchy. But it can be hidden from all but screen readers and search engines. This is <strong>strongly</strong> not recommended in most cases, as the visible heading provides a jumping-in point for users as they scan your page.',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
@@ -67,7 +67,7 @@ return array(
         'label' => 'Description',
         'name' => 'gallery_description',
         'type' => 'wysiwyg',
-        'instructions' => 'Optional description. It is <em>strongly</em> recommended that it be kept to a single short paragraph.',
+        'instructions' => 'Optional description. It is <strong>strongly</strong> recommended that it be kept to a single short paragraph.',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
