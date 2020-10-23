@@ -68,6 +68,7 @@ if( $stacked_rows ) :
                 </h2>
                 <?php echo $description ? '<div class="module-description">'. $description .'</div>' : ''; ?>
             </div>
+            <div class="card-list card-list-left col-12">
             <?php 
                 foreach($stacked_rows as $stacked_row) {
                 // Load values.
@@ -117,6 +118,7 @@ if( $stacked_rows ) :
             <?php
                 }
             ?>
+            </div>
             <?php if ( $more ) { ?>
                 <div class="col-12 more">
                     <p class="lead"><?php echo $more_text; ?></p>
