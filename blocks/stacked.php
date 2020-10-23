@@ -66,7 +66,7 @@ if( $stacked_rows ) :
                 <h2 class="module-title<?php echo ($hide_heading && $description) ? " sr-only" : ""; ?>">
                     <span class="title"><?php echo $heading; ?></span>
                 </h2>
-                <?php echo $description ? '<div class="module-description">'. $description .'</div>' : ''; ?>
+                <?php echo $description ? '<div class="module-description"><p>'. $description .'</p></div>' : ''; ?>
             </div>
             <div class="card-list card-list-left col-12">
             <?php 
