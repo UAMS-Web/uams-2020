@@ -161,8 +161,14 @@ function uamswp_module( $module = array(), $i = false ) {
             $id = $i;
             $heading = $module['stacked_heading'];
             $hide_heading = $module['stacked_hide_heading'];
+            $description = $module['stacked_description'];
             $background_color = $module['stacked_background_color'];
             $stacked_rows = $module['stacked_section'];
+            $more = $module['stacked_more'];
+            $more_text = $module['stacked_more_text'];
+            $more_button_text = $module['stacked_more_button_text'];
+            $more_button_url = $module['stacked_more_button_url'];
+            $more_button_description = $module['stacked_more_button_description'];
 
             include( get_stylesheet_directory() .'/blocks/stacked.php' );
 
