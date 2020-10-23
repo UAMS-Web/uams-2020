@@ -33,6 +33,25 @@ if ( empty($description) )
     $description = get_field('stacked_description');
 if ( empty($background_color) )
     $background_color = get_field('stacked_background_color');
+if ( empty($more) )
+    $more = get_field('stacked_more');
+if ( $more ) {
+    if ( empty($more_text) )
+        $more_text = get_field('stacked_more_text');
+    if ( empty($more_button_text) )
+        $more_button_text = get_field('stacked_more_button_text');
+    if ( empty($more_button_url) )
+        $more_button_url = get_field('stacked_more_button_url');
+    if ( empty($more_button_target) ) 
+        $more_button_target = $more_button_url['target'];
+    if ( empty($more_button_description) )
+        $more_button_description = get_field('stacked_more_button_description');
+    if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) ) {
+        $more_button_color = 'primary';
+    } else {
+        $more_button_color = 'white';
+    }
+}
 if ( empty($stacked_rows) )
     $stacked_rows = get_field('stacked_section');
 
@@ -98,6 +117,14 @@ if( $stacked_rows ) :
             <?php
                 }
             ?>
+            <?php if ( $more ) { ?>
+                <div class="col-12 more">
+                    <p class="lead"><?php echo $more_text; ?></p>
+                    <div class="cta-container">
+                        <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                    </div>
+                </div>
+            <?php } // endif ?>
         </div>
     </div>
 </section>
