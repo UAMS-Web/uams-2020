@@ -29,8 +29,29 @@ if ( empty($heading) )
     $heading = get_field('stacked_heading');
 if ( empty($hide_heading) )
     $hide_heading = get_field('stacked_hide_heading');
+if ( empty($description) )
+    $description = get_field('stacked_description');
 if ( empty($background_color) )
     $background_color = get_field('stacked_background_color');
+if ( empty($more) )
+    $more = get_field('stacked_more');
+if ( $more ) {
+    if ( empty($more_text) )
+        $more_text = get_field('stacked_more_text');
+    if ( empty($more_button_text) )
+        $more_button_text = get_field('stacked_more_button_text');
+    if ( empty($more_button_url) )
+        $more_button_url = get_field('stacked_more_button_url');
+    if ( empty($more_button_target) ) 
+        $more_button_target = $more_button_url['target'];
+    if ( empty($more_button_description) )
+        $more_button_description = get_field('stacked_more_button_description');
+    if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) ) {
+        $more_button_color = 'primary';
+    } else {
+        $more_button_color = 'white';
+    }
+}
 if ( empty($geo) )
     $geo = get_field('stacked_geo');
 if ( empty($stacked_rows) )
@@ -61,9 +82,13 @@ if( $stacked_rows ) :
 <section class="uams-module stacked-image-text<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12<?php echo $hide_heading ? " sr-only" : ""; ?>">
-                <h2 class="module-title"><span class="title"><?php echo $heading; ?></span></h2>
+            <div class="col-12<?php echo ($hide_heading && empty($description)) ? " sr-only" : ""; ?>">
+                <h2 class="module-title<?php echo ($hide_heading && $description) ? " sr-only" : ""; ?>">
+                    <span class="title"><?php echo $heading; ?></span>
+                </h2>
+                <?php echo $description ? '<div class="module-description"><p>'. $description .'</p></div>' : ''; ?>
             </div>
+            <div class="card-list card-list-left col-12">
             <?php 
                 foreach($stacked_rows as $stacked_row) {
                 // Load values.
@@ -113,6 +138,15 @@ if( $stacked_rows ) :
             <?php
                 }
             ?>
+            </div>
+            <?php if ( $more ) { ?>
+                <div class="col-12 more">
+                    <p class="lead"><?php echo $more_text; ?></p>
+                    <div class="cta-container">
+                        <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                    </div>
+                </div>
+            <?php } // endif ?>
         </div>
     </div>
 </section>

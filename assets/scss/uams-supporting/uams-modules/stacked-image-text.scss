@@ -6,8 +6,14 @@
 
     .row {
         justify-content: center;
+        //margin-bottom: -$grid-gutter-width;
+    }
+
+    .card-list {
+        margin-top: 0;
         margin-bottom: -$grid-gutter-width;
     }
+
     .item {
         display: flex;
         justify-content: center;
@@ -44,13 +50,16 @@
             }
         }
     }
+
     .card {
         border: none;
         border-radius: 0;
         background-color: transparent;
         width: $stacked-tile-ideal-width;
         max-width: 100%;
+        margin: 0;
     }
+
     .card-img-top {
         border-radius: 0;
         overflow: hidden;
@@ -63,10 +72,6 @@
 
     .card-img-top + .card-body {
         padding-top: 1.25rem;
-    }
-    
-    .more {
-        margin-bottom: $grid-gutter-width;
     }
 }
 
