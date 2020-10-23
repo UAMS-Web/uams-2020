@@ -164,6 +164,12 @@ section.archive-description .entry-content {
             margin-top: auto;
         }
     }
+
+    &.card-list-left {
+        .card {
+            text-align: left;
+        }
+    }
 }
 
 .module-body {
