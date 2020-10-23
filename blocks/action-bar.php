@@ -32,6 +32,8 @@ if ( empty($background_color) )
     $background_color = get_field('action_bar_background_color');
 if ( empty($action_bar_rows) )
     $action_bar_rows = get_field('action_bar_section');
+if ( empty($geo) )
+    $geo = get_field('action_bar_geo');
 
 if( $action_bar_rows ) {
     // $rows = get_field('action_bar_section');
@@ -42,7 +44,22 @@ if ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) {
 } else {
     $btn_color = 'white';
 }
-
+// GEO Logic
+$geo_display = false;
+if (!isset($geo)){
+    $geo_display = true;
+} else {
+    if( $geo['geot_condition'] == 'include' ) {
+        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }  else {
+        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }
+}
+if ($geo_display) :
 ?>
 <section class="uams-module action-bar<?php echo $className; ?> count-<?php echo $row_count < 4 ? "3" : "4"; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <h2 class="sr-only"><?php echo $heading; ?></h2>
@@ -74,3 +91,4 @@ if ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) {
         </div>
     </div>
 </section>
+<?php endif;

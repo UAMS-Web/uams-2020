@@ -7,7 +7,8 @@ body.search,
 body.advert-template-default,
 body.blog,
 body.tshowcase-template-default,
-body.kb-template-default  {
+body.kb-template-default,
+body.sfwd-courses-template-default {
     .archive-description,
     .entry {
 
@@ -55,6 +56,12 @@ body.kb-template-default  {
                 right: 0;
             }
         }
+
+        .archive-title {
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
 }
 
@@ -79,7 +86,8 @@ body.error404,
 body.advert-template-default,
 body.blog,
 body.tshowcase-template-default,
-body.kb-template-default {
+body.kb-template-default,
+body.sfwd-courses-template-default {
 
     .entry,
     .entry-comments,

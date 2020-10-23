@@ -46,6 +46,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $heading = $module['action_bar_heading'];
             $background_color = $module['action_bar_background_color'];
             $action_bar_rows = $module['action_bar_section'];
+            $geo = $module['action_bar_geo'];
 
             include( get_stylesheet_directory() .'/blocks/action-bar.php' );
 
@@ -58,6 +59,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $use_image = $module['call_out_use_image'];
             $image = $module['call_out_image'];
             $background_color = $module['call_out_background_color'];
+            $geo = $module['call_out_geo'];
 
             include( get_stylesheet_directory() .'/blocks/call-out.php' );
 
@@ -76,6 +78,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $use_image = $module['cta_bar_use_image'];
             $image = $module['cta_bar_image'];
             $background_color = $module['cta_bar_background_color'];
+            $geo = $module['cta_bar_geo'];
 
             include( get_stylesheet_directory() .'/blocks/cta.php' );
 
@@ -84,6 +87,7 @@ function uamswp_module( $module = array(), $i = false ) {
         case 'modules_hero':
             $id = $i;
             $hero_rows = $module['hero'];
+            $geo = $module['hero_geo'];
 
             include( get_stylesheet_directory() .'/blocks/hero.php' );
 
@@ -97,6 +101,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $background_color = $module['link_list_background_color'];
             // $link_list_icons = $module['link_list_icons'];
             $link_list_rows = $module['link_list_section'];
+            $geo = $module['link_list_geo'];
 
             include( get_stylesheet_directory() .'/blocks/link-list.php' );
 
@@ -120,6 +125,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $image_postion = $module['side_image_position'] ?: 'left';
             $image_anchor = $module['side_image']['side_image_anchor'] ?: 'center';
             $background_color = $module['side_image_background_color'] ?: 'bg-white';
+            $geo = $module['side_image_geo'];
 
             include( get_stylesheet_directory() .'/blocks/image-side-by-side.php' );
 
@@ -128,6 +134,7 @@ function uamswp_module( $module = array(), $i = false ) {
         case 'modules_text_overlay':
             $id = $i;
             $overlay_rows = $module['overlay_section'];
+            $geo = $module['overlay_geo'];
 
             include( get_stylesheet_directory() .'/blocks/overlay.php' );
 
@@ -141,6 +148,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $category = $module['post_tile_category'];
             $post_button_text = $module['post_tile_post_button_text'] ?: 'Read the Story';
             $cat_button_text = $module['post_tile_category_button_text'] ?: 'View ' . $category->name . ' Archive';
+            $geo = $module['post_tile_geo'];
 
             include( get_stylesheet_directory() .'/blocks/post-category-tile.php' );
 
@@ -152,6 +160,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $hide_heading = $module['post_tiles_hide_heading'];
             $background_color = $module['post_tiles_background_color'];
             $post_tiles_rows = $module['post_tiles_section'];
+            $geo = $module['post_tiles_geo'];
 
             include( get_stylesheet_directory() .'/blocks/post-category-tiles.php' );
 
@@ -169,6 +178,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $more_button_text = $module['stacked_more_button_text'];
             $more_button_url = $module['stacked_more_button_url'];
             $more_button_description = $module['stacked_more_button_description'];
+            $geo = $module['stacked_geo'];
 
             include( get_stylesheet_directory() .'/blocks/stacked.php' );
 
@@ -190,6 +200,7 @@ function uamswp_module( $module = array(), $i = false ) {
                 $link = $module['news_include_link'];
                 $position = $module['news_position'];
                 $articleID = $module['news_article_id'];
+                $geo = $module['news_geo'];
                 $className = '';
 
                 if ( 'grid' == $output ) {
@@ -202,10 +213,33 @@ function uamswp_module( $module = array(), $i = false ) {
                     $count = '1';
                 }
                 uamswp_module_header( $module );
+                // echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
+                // echo '<!-- '; print_r($geo); echo ' -->';
+                // echo '<!-- ' . do_shortcode( '[geot_debug]' ) . ' -->';
+				// GEO Logic
+                $geo_display = false;
+                if (!isset($geo)){
+	                $geo_display = true;
+                } else {
+	                if( $geo['geot_condition'] == 'include' ) {
+						if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+							$geo_display = true;
+						}
+					}  else {
+						if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+							$geo_display = true;
+						}
+					}
+				}
+				if ($geo_display) {
+					echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
+				}
+/*
                 echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
                 echo '<div class="entry-content">';
                 echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
                 echo '</div>';
+*/
             }
             break;
 
@@ -217,6 +251,7 @@ function uamswp_module( $module = array(), $i = false ) {
                 $gallery_columns = $module['gallery_columns'];
                 $gallery_images = $module['gallery_images'];
                 $background_color = $module['gallery_background_color'];
+                $geo = $module['gallery_geo'];
     
                 include( get_stylesheet_directory() .'/blocks/gallery.php' );
     
@@ -228,6 +263,7 @@ function uamswp_module( $module = array(), $i = false ) {
                     $hide_heading = $module['content_hide_heading'];
                     $content_block = $module['content_content'];
                     $background_color = $module['content_background_color'];
+                    $geo = $module['content_geo'];
         
                     include( get_stylesheet_directory() .'/blocks/content.php' );
         
@@ -238,6 +274,7 @@ function uamswp_module( $module = array(), $i = false ) {
                     $heading = $module['livewhale_heading'];
                     $livewhale = $module['livewhale_id'];
                     $background_color = $module['livewhale_background_color'];
+                    $geo = $module['livewhale_geo'];
         
                     include( get_stylesheet_directory() .'/blocks/livewhale.php' );
         
@@ -307,3 +344,8 @@ function uamswp_has_module( $module_to_find = '', $post_id = false ) {
 	}
 	return $has_module;
 }
+
+function display_call_out ($id, $className, $heading, $body, $use_image, $image, $background_color) {
+    ?>
+    
+    <?php }
