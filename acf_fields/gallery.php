@@ -67,7 +67,7 @@ return array(
         'label' => 'Description',
         'name' => 'gallery_description',
         'type' => 'wysiwyg',
-        'instructions' => 'Optional description. It is <strong>strongly</strong> recommended that it be kept to a single short paragraph.',
+        'instructions' => 'Optional description. It is <strong>strongly</strong> recommended that it be kept to a single short paragraph with a max of 290 characters.',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
