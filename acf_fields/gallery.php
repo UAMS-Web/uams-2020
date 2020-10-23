@@ -67,7 +67,7 @@ return array(
         'label' => 'Description',
         'name' => 'gallery_description',
         'type' => 'wysiwyg',
-        'instructions' => '(optional)',
+        'instructions' => 'Optional description. It is <em>strongly</em> recommended that it be kept to a single short paragraph.',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
