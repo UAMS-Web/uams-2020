@@ -29,15 +29,16 @@
         }
     }
 
-    .module-title {
+    .module-title,
+    .module-description {
         &:last-child {
             margin-bottom: 0;
         }
     }
 
-    .module-body {
-        text-align: center;
-    }
+    // .module-body {
+    //     text-align: center;
+    // }
     
     .image-container {
         .row {
