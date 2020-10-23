@@ -33,6 +33,9 @@ remove_action( 'genesis_after_header', 'custom_nav_menu', 5 );
 remove_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
 remove_action( 'genesis_after_header', 'sp_breadcrumb_after_header' );
 
+// Remove subpages/child menu
+remove_action('genesis_after_entry', 'uamswp_list_child_pages');
+
 // Add Page Header Options
 remove_action( 'genesis_after_header', 'page_options', 5 ); // remove default template action
 add_action( 'genesis_after_header', 'mlp_header_options', 5 );
