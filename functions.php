@@ -865,3 +865,28 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 	<?php
 	}
 }
+// ACF for GEO
+add_filter('acf/load_field/name=geo_valid', 'uamswp_set_geo');
+add_filter('acf/update_value/name=geo_valid', 'uamswp_force_geo', 10, 3);
+
+function uamswp_force_geo($value, $post_id, $field)
+{
+	if (class_exists('Geot')) {
+		$value = 'true';
+	} else {
+		$value = 'false';
+	}
+    return $value;
+}
+function uamswp_set_geo($field)
+{
+	if (class_exists('Geot')) {
+		$value = 'true';
+	} else {
+		$value = 'false';
+	}
+	if (array_key_exists('value', $field)) {
+        $field['value'] = $value;
+    }
+    return $field;
+}
