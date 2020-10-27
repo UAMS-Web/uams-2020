@@ -6,7 +6,9 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+if (empty( $id )) {
+	$id = '';
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -27,7 +29,7 @@ if( !empty($block['align']) ) {
 // Load values.
 if ( empty($heading) )
     $heading = get_field('content_heading');
-if ( empty($heading) )
+if ( empty($hide_heading) )
     $hide_heading = get_field('content_hide_heading');
 if ( empty($content_block) )
     $content_block = get_field('content_content');

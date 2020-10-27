@@ -263,6 +263,7 @@ function uamswp_footer_creds_text() {
             } elseif ( 'otolaryngology' == $department) {
                 $social_fb = 'https://www.facebook.com/pg/uamsotolaryngology/';
                 $social_tw = 'https://twitter.com/UAMSENT';
+                $social_ig = 'https://www.instagram.com/uams.ent/';
             } elseif ( 'family-medicine' == $department) {
                 $social_fb = 'https://www.facebook.com/UAMSFamilyMedicineResidency/';
             } elseif ( 'orthopaedic-surgery' == $department) {
