@@ -865,7 +865,6 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 	<?php
 	}
 }
-
 // Whitelist specific blocks for the Marketing Landing Page template
 add_filter('allowed_block_types', function($block_types, $post) {
 	$allowed_marketing = [
@@ -889,3 +888,28 @@ add_filter('allowed_block_types', function($block_types, $post) {
 	}
 	return $block_types;
 }, 10, 2);
+// ACF for GEO
+add_filter('acf/load_field/name=geo_valid', 'uamswp_set_geo');
+add_filter('acf/update_value/name=geo_valid', 'uamswp_force_geo', 10, 3);
+
+function uamswp_force_geo($value, $post_id, $field)
+{
+	if (class_exists('Geot')) {
+		$value = 'true';
+	} else {
+		$value = 'false';
+	}
+    return $value;
+}
+function uamswp_set_geo($field)
+{
+	if (class_exists('Geot')) {
+		$value = 'true';
+	} else {
+		$value = 'false';
+	}
+	if (array_key_exists('value', $field)) {
+        $field['value'] = $value;
+    }
+    return $field;
+}

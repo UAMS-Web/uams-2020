@@ -437,13 +437,45 @@ return array(
         'maxlength' => '',
     ),
     array(
+        'key' => 'field_action_bar_geo_valid'. $suffix,
+        'label' => 'GeoTargetingWP Installed?',
+        'name' => 'geo_valid',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+            'width' => '',
+            'class' => 'hidden',
+            'id' => '',
+        ),
+        'acfe_permissions' => '',
+        'choices' => array(
+            'false' => 'False',
+            'true' => 'True',
+        ),
+        'allow_null' => 0,
+        'other_choice' => 0,
+        'default_value' => 'false',
+        'layout' => 'horizontal',
+        'return_format' => 'value',
+    ),
+    array(
         'key' => 'field_stacked_regions'. $suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
         'instructions' => '',
         'required' => 0,
-        'conditional_logic' => 0,
+        'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_stacked_geo_valid'. $suffix,
+                    'operator' => '==',
+                    'value' => 'true',
+                ),
+            ),
+        ),
         'wrapper' => array(
             'width' => '',
             'class' => '',
@@ -460,7 +492,15 @@ return array(
 		'type' => 'geot_field',
 		'instructions' => '',
 		'required' => 0,
-		'conditional_logic' => 0,
+		'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_stacked_geo_valid'. $suffix,
+                    'operator' => '==',
+                    'value' => 'true',
+                ),
+            ),
+        ),
 		'wrapper' => array(
 			'width' => '',
 			'class' => '',
