@@ -26,7 +26,7 @@
             width: auto;
         }
 
-        &:nth-child(even) {
+        &:nth-child(odd) {
             @include media-breakpoint-up(sm) {
                 justify-content: flex-end;
             }
@@ -35,7 +35,7 @@
             }
         }
 
-        &:nth-child(odd) {
+        &:nth-child(even) {
             @include media-breakpoint-up(sm) {
                 justify-content: flex-start;
             }
