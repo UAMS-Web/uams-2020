@@ -44,7 +44,7 @@
             }
         }
         
-        &:nth-child(even):last-child {
+        &:nth-child(odd):last-child {
             @include media-breakpoint-up(sm) {
                 justify-content: center;
             }
