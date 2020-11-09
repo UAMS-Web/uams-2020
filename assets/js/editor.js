@@ -58,7 +58,7 @@ wp.domReady( () => {
 	wp.blocks.unregisterBlockType( 'core-embed/cloudup' );
 	wp.blocks.unregisterBlockType( 'core-embed/collegehumor' );
 	wp.blocks.unregisterBlockType( 'core-embed/dailymotion' );
-	wp.blocks.unregisterBlockType( 'core-embed/hulu' );
+//	wp.blocks.unregisterBlockType( 'core-embed/hulu' );
 	wp.blocks.unregisterBlockType( 'core-embed/imgur' );
 // 	wp.blocks.unregisterBlockType( 'core-embed/issuu' );
 	wp.blocks.unregisterBlockType( 'core-embed/kickstarter' );
