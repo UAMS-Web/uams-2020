@@ -480,7 +480,7 @@ $h5-font-size: $font-size-base * $h5-font-size-multiplier;
 $h6-font-size: $font-size-base * $h6-font-size-multiplier;
 
 $headings-margin-top: 1em;
-$headings-margin-bottom: 1.125rem;
+$headings-margin-bottom: $font-size-base;
 $headings-font-family: null;
 $headings-font-weight: 500;
 $headings-line-height: 1.2;

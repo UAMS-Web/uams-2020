@@ -94,7 +94,7 @@
         .news-item-byline {
             color: $secondary;
             font-size: 1rem;
-            margin-bottom: 1.125rem;
+            margin-bottom: $font-size-base;
             font-weight: inherit;
 
             .more, small, span {

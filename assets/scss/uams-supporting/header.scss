@@ -416,7 +416,7 @@ $header-health-logo-clear-space: $header-logo-clear-space;
                 > .nav-link {
                     @include media-breakpoint-up(sm) {
                         white-space: nowrap;
-                        padding: 1.125rem 0.75rem;
+                        padding: $font-size-base 0.75rem;
                     }
 
                     &.has-submenu {

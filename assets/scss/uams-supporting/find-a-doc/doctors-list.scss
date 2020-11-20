@@ -356,7 +356,7 @@
                             @media
                             (min-width: $breakpoint-lg) and (max-width: (1784px - 1)),
                             (min-width: (1784px + 270)) { // 18px font-size
-                                @include font-size(1.125rem);
+                                @include font-size($font-size-base);
                             }
                         
                             @media
@@ -368,7 +368,7 @@
                             }
 
                             .rating {
-                                margin-bottom: 1.125rem;
+                                margin-bottom: $font-size-base;
                             }
 
                             p {
