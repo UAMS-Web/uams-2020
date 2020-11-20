@@ -447,8 +447,8 @@ $font-family-base: $font-family-sans-serif;
 // stylelint-enable value-keyword-case
 
 $onerem: 16px;
-$font-size-base: 1.125rem; // 18px
-$font-size-base-px: 1.125 * 16px; // 18px
+$font-size-base: 1.15625rem; // 18.5px
+$font-size-base-px: 1.15625 * 16px; // 18.5px
 $font-size-lg: $font-size-base * 1.25;
 $font-size-sm: $font-size-base * .75;
 
