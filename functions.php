@@ -894,7 +894,7 @@ add_filter('acf/update_value/name=geo_valid', 'uamswp_force_geo', 10, 3);
 
 function uamswp_force_geo($value, $post_id, $field)
 {
-	if (class_exists('Geot')) {
+	if (function_exists('geoip_detect2_get_external_ip_adress')) {
 		$value = 'true';
 	} else {
 		$value = 'false';
@@ -903,7 +903,7 @@ function uamswp_force_geo($value, $post_id, $field)
 }
 function uamswp_set_geo($field)
 {
-	if (class_exists('Geot')) {
+	if (function_exists('geoip_detect2_get_external_ip_adress')) {
 		$value = 'true';
 	} else {
 		$value = 'false';

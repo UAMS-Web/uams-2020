@@ -29,26 +29,33 @@ if( !empty($block['className']) ) {
 if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
 }
-if ( empty($geo) )
-    $geo = get_field('hero_geo');
 
 if ( empty($hero_rows) )
     $hero_rows = get_field('hero');
 
+if ( empty($geo) )
+    $geo = get_field('hero_geo');
+if ( empty($geo_region) )
+    $geo_region = get_field('hero_geo_region');
+
 // GEO Logic
 $geo_display = false;
-if (!isset($geo)){
+if (!isset($geo) || empty($geo_region)){
     $geo_display = true;
 } else {
-    if( $geo['geot_condition'] == 'include' ) {
-        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+    if( $geo == 'include' && !empty($geo_region) ) {
+        if( is_in_region($geo_region) ){
             $geo_display = true;
         }
-    }  else {
-        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+    } elseif( $geo == 'exclude' && !empty($geo_region) ) {
+        if ( is_not_in_region($geo_region) ){
             $geo_display = true;
         }
     }
+}
+if (is_admin() && !empty($geo) && !empty($geo_region)) {
+    $geo_display = true;
+    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
 }
 if ($geo_display) {
 
