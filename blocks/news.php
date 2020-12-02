@@ -49,6 +49,8 @@ if ( empty($position) )
     $position = get_field('news_position');
 if ( empty($geo) )
     $geo = get_field('news_geo');
+if ( empty($geo_region) )
+    $geo_region = get_field('news_geo_region');
 
 if ( 'grid' == $output ) {
     $count = '3';
@@ -64,18 +66,22 @@ if ( 'grid' == $output ) {
 // echo '<!-- '; print_r($geo); echo ' -->';
 // GEO Logic
 $geo_display = false;
-if (!isset($geo)){
+if (!isset($geo) || empty($geo_region)){
     $geo_display = true;
 } else {
-    if( $geo['geot_condition'] == 'include' ) {
-        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+    if( $geo == 'include' && !empty($geo_region) ) {
+        if( is_in_region($geo_region) ){
             $geo_display = true;
         }
-    }  else {
-        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+    } elseif( $geo == 'exclude' && !empty($geo_region) ) {
+        if ( is_not_in_region($geo_region) ){
             $geo_display = true;
         }
     }
+}
+if (is_admin() && !empty($geo) && !empty($geo_region)) {
+    $geo_display = true;
+    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
 }
 if ($geo_display) {
 	echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
