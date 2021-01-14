@@ -346,7 +346,7 @@ function uamswp_do_search_loop() {
                         $post_title = get_the_title( $wp_query->post->ID );
                         $post_link = get_the_permalink( $wp_query->post->ID );
                         $title = '<h3 class="h4" data-id="'. $wp_query->post->ID .'"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
-                        if ( has_excerpt( $wp_query->post->blog_id ) ) {
+                        if ( has_excerpt( $wp_query->post->ID ) ) {
                         	$content = get_the_excerpt( $wp_query->post->ID );
                         } else {
 	                        $content = wp_trim_excerpt( "", $wp_query->post->ID );
