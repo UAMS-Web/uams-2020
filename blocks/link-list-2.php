@@ -6,7 +6,9 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+if (empty( $id )) {
+	$id = '';
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -34,11 +36,29 @@ if ( empty($description) )
     $description = get_field('link_list_description');
 if ( empty($background_color) )
     $background_color = get_field('link_list_background_color');
+if ( empty($geo) )
+    $geo = get_field('link_list_geo');
 if ( empty($link_list_icons) )
     $link_list_icons = get_field('link_list_icons');
 if ( empty($link_list_rows) )
     $link_list_rows = get_field('link_list_section');
 
+// GEO Logic
+$geo_display = false;
+if (!isset($geo)){
+    $geo_display = true;
+} else {
+    if( $geo['geot_condition'] == 'include' ) {
+        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }  else {
+        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }
+}
+if ($geo_display) :
 ?>
 <section class="uams-module link-list<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
@@ -76,3 +96,4 @@ if ( empty($link_list_rows) )
         </div>
     </div>
 </section>
+<?php endif;

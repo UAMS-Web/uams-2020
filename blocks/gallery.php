@@ -6,7 +6,9 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+if (empty( $id )) {
+	$id = '';
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -42,6 +44,8 @@ if ( $gallery_crop == 'none' || $gallery_crop[0] == 'none' )
     $gallery_crop = -1;
 if ( empty($background_color) )
     $background_color = get_field('gallery_background_color');
+if ( empty($geo) )
+    $geo = get_field('gallery_geo');
 if ( empty($modal) )
     $modal = get_field('gallery_modal');
 if ( empty($more) )
@@ -82,16 +86,31 @@ if ($gallery_columns == '2') {
     $lg = 2;
 } 
 
-
+// GEO Logic
+$geo_display = false;
+if (!isset($geo)){
+    $geo_display = true;
+} else {
+    if( $geo['geot_condition'] == 'include' ) {
+        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }  else {
+        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }
+}
+if ($geo_display) :
 ?>
 <section class="uams-module gallery-block<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
-                <h2 class="module-title<?php echo $hide_heading ? " sr-only" : ""; ?>">
+            <div class="col-12<?php echo ($hide_heading && empty($description)) ? " sr-only" : ""; ?>">
+                <h2 class="module-title<?php echo ($hide_heading && $description) ? " sr-only" : ""; ?>">
                     <span class="title"><?php echo $heading; ?></span>
                 </h2>
-                <?php echo $description ? '<div class="module-body">'. $description .'</div>' : ''; ?>
+                <?php echo $description ? '<div class="module-description">'. $description .'</div>' : ''; ?>
             </div>
             <div class="col-12 image-container padded-grid">
                 <div class="row">
@@ -184,3 +203,4 @@ if ($gallery_columns == '2') {
         </div>
     </div>
 </section>
+<?php endif;

@@ -5,7 +5,8 @@ a {
     cursor: default;
   }
 
-  &[href^="tel:"] {
+  &[href^="tel:"],
+  &[href^="mailto:"] {
     white-space: nowrap;
   }
 }

@@ -1717,12 +1717,208 @@ acf_add_local_field_group(array(
 				'operator' => '==',
 				'value' => 'page',
 			),
+			array(
+				'param' => 'post_template',
+				'operator' => '!=',
+				'value' => 'templates/marketing.php',
+			),
 		),
+	),
+	'menu_order' => 0,
+	'position' => 'acf_after_title',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+));
+
+/*
+ *
+ * Add Marketing Landing Page Header Options
+ * 
+ */
+acf_add_local_field_group(array(
+	'key' => 'group_page_header_options_mlp',
+	'title' => 'Marketing Landing Page Header Options',
+	'fields' => array(
+		array(
+			'key' => 'field_page_title_options_mlp',
+			'label' => 'Title Options',
+			'name' => 'page_title_options',
+			'type' => 'button_group',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'landingpage' => '<i class="dashicons dashicons-format-image"></i> Marketing Landing Page',
+				'hero' => '<i class="dashicons dashicons-slides"></i> Hero',
+			),
+			'allow_null' => 0,
+			'default_value' => 'none',
+			'layout' => 'horizontal',
+			'return_format' => 'value',
+		),
+		array(
+			'key' => 'field_page_landing_page_cover_image_mlp',
+			'label' => 'Marketing Landing Page Cover Image (Desktop)',
+			'name' => 'page_landing_page_cover_image',
+			'type' => 'image',
+			'instructions' => 'Recommended dimensions: 5120x1600 or larger. Minimum dimensions: 1920x600. The image will be automatically cropped to a 16:5 aspect ratio.',
+			'required' => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options_mlp',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'id',
+			'preview_size' => 'medium',
+			'library' => 'all',
+			'min_width' => 1920,
+			'min_height' => 600,
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+		),
+		array(
+			'key' => 'field_page_landing_page_cover_image_mobile_mlp',
+			'label' => 'Marketing Landing Page Cover Image (Mobile)',
+			'name' => 'page_landing_page_cover_image_mobile',
+			'type' => 'image',
+			'instructions' => 'This image is optional. Add an image here if you do not want the mobile image to be automatically cropped from the desktop image.<br />Recommended dimensions: 1984x1612 or larger. Minimum dimensions: 992x806. The image will be automatically cropped to a 16:13 aspect ratio.',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options_mlp',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'id',
+			'preview_size' => 'medium',
+			'library' => 'all',
+			'min_width' => 992,
+			'min_height' => 806,
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+		),
+		array(
+			'key' => 'field_page_landing_page_heading_mlp',
+			'label' => 'Marketing Landing Page Title Heading',
+			'name' => 'page_landing_page_heading',
+			'type' => 'text',
+			'instructions' => 'Override for page title for the purposes of this header. The normal page title will still be used for meta title, search results, etc. There is a 62 character limit. You can reuse your normal page title here if it fits in the character limit.',
+			'required' => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options_mlp',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'maxlength' => 62,
+			'rows' => '',
+			'new_lines' => '',
+		),
+		array(
+			'key' => 'field_page_landing_page_description_mlp',
+			'label' => 'Marketing Landing Page Title Lead Paragraph',
+			'name' => 'page_landing_page_description',
+			'type' => 'textarea',
+			'instructions' => 'Appears below the page title. Basic description of the page. There is a 117 character limit.',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options_mlp',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'maxlength' => 117,
+			'rows' => '',
+			'new_lines' => '',
+		),
+		array(
+			'key' => 'field_page_hero_mlp',
+			'label' => 'Hero',
+			'name' => 'page_hero',
+			'type' => 'group',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options_mlp',
+						'operator' => '==',
+						'value' => 'hero',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'layout' => 'block',
+			'sub_fields' => $hero,
+		),
+	),
+	'location' => array(
 		array(
 			array(
 				'param' => 'post_type',
 				'operator' => '==',
-				'value' => 'services',
+				'value' => 'page',
+			),
+			array(
+				'param' => 'post_template',
+				'operator' => '==',
+				'value' => 'templates/marketing.php',
 			),
 		),
 	),

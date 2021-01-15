@@ -31,9 +31,28 @@ if ( empty( $hide_heading ) )
     $hide_heading = get_field('post_tiles_hide_heading');
 if ( empty( $background_color ) )
     $background_color = get_field('post_tiles_background_color');
+if ( empty($geo) )
+    $geo = get_field('post_tiles_geo');
 
 if ( empty( $post_tiles_rows ) )
     $post_tiles_rows = get_field('post_tiles_section');
+
+// GEO Logic
+$geo_display = false;
+if (!isset($geo)){
+    $geo_display = true;
+} else {
+    if( $geo['geot_condition'] == 'include' ) {
+        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }  else {
+        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }
+}
+if ($geo_display) {
 
 if( $post_tiles_rows ) :
     $row_count = count($post_tiles_rows); 
@@ -140,3 +159,4 @@ if( $post_tiles_rows ) :
     </div>
 </section>
 <?php endif;
+}
