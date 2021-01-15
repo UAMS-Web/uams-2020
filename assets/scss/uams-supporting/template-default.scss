@@ -460,7 +460,7 @@ figure[class="wp-block-image size-large"],
     }
 }
 
-.alignleft
+.alignleft,
 .wp-block-image .alignleft {
     @include media-breakpoint-up(xs) {
         margin-right: $page-title-margin-bottom-mobile;
