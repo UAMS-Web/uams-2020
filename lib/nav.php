@@ -89,8 +89,8 @@ function custom_nav_menu() {
         $nav = wp_nav_menu( $args );
 
         //* Do nothing if there is nothing to show
-        if ( ! $nav )
-            return;
+        // if ( ! $nav )
+        //     return;
         
         function uamswp_wp_list_child_pages( $id ){
             $excluded_pages = array();
@@ -137,7 +137,7 @@ function custom_nav_menu() {
         $wrapper_open .= '<ul id="menu-dropdowns" class="nav navbar-nav align-self-end mr-auto">';
 
         $wrapper_close  = '</ul>'; // ul
-        $wrapper_close  = '</div>'; // wrap
+        $wrapper_close .= '</div>'; // wrap
         $wrapper_close .= '</nav>'; // navbar
 
         // Wrap the list items in an unordered list and navbar
@@ -200,7 +200,7 @@ function custom_nav_menu() {
         $wrapper_open .= '<ul id="menu-dropdowns" class="nav navbar-nav align-self-end mr-auto">';
 
         $wrapper_close  = '</ul>'; // ul
-        $wrapper_close  = '</div>'; // wrap
+        $wrapper_close .= '</div>'; // wrap
         $wrapper_close .= '</nav>'; // navbar
 
         // Wrap the list items in an unordered list and navbar
