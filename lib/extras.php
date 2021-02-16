@@ -198,24 +198,25 @@ function uamswp_title($html) {
     // }
 
     //Re-org based onn breadcrumbs
+    $page_title_404 = 'Page Not Found';
     if ( 'uamshealth' == uams_get_site_info()['site'] ) {
 		if ( ( 'main' == uams_get_site_info()['subsite']) ) {
             if ( is_home() || is_front_page() ) {
                 $html = 'UAMS Health';
             } else { 
-                $html = $pagetitle . ' | UAMS Health';
+                $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | UAMS Health';
             }
         } elseif( ( 'dept' == uams_get_site_info()['subsite']) ) {
             if ( is_home() || is_front_page() ) {
                 $html = $sitename . ' | UAMS Health';
             } else {
-                $html = $pagetitle . ' | ' . $uams_sitename;
+                $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | ' . $uams_sitename;
             }
 		} else {
             if ( is_home() || is_front_page() ) {
                 $html = $sitename . ' | UAMS Health';
             } else {
-                $html = $pagetitle . ' | UAMS Health';
+                $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | UAMS Health';
             }
 		}
 	} elseif ( ('inside' == uams_get_site_info()['site'] ) ) {
@@ -223,19 +224,19 @@ function uamswp_title($html) {
 			if ( is_home() || is_front_page() ) {
                 $html = 'Inside UAMS';
             } else { 
-                $html = $pagetitle . ' | Inside UAMS';
+                $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | Inside UAMS';
             }
         } elseif( ( 'none' != uams_get_site_info()['subsite']) ) {
             if ( is_home() || is_front_page() ) {
                 $html = $sitename . ' | Inside UAMS';
             } else {
-                $html = $pagetitle . ' | ' . $uams_sitename;
+                $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | ' . $uams_sitename;
             }
 		} else {
 			if ( is_home() || is_front_page() ) {
                 $html = $sitename . ' | Inside UAMS';
             } else {
-                $html = $pagetitle . ' | Inside UAMS';
+                $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | Inside UAMS';
             }
 		}
 	} elseif ( ('institute' == uams_get_site_info()['site'] ) ) {
@@ -243,19 +244,19 @@ function uamswp_title($html) {
 			if ( is_home() || is_front_page() ) {
                 $html = $uams_sitename;
             } else {
-                $html = $pagetitle . ' | ' . $uams_sitename;
+                $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | ' . $uams_sitename;
             }
         } elseif( ( 'dept' == uams_get_site_info()['department']) ) { // Dept / org unit
             if ( is_home() || is_front_page() ) {
                 $html = $sitename . ' | ' . $uams_sitehome;
             } else {
-                $html = $pagetitle . ' | ' . $uams_sitename;
+                $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | ' . $uams_sitename;
             }
 		} else { // Not an org unit
 			if ( is_home() || is_front_page() ) {
                 $html = $sitename . ' | ' . $uams_sitehome;
             } else {
-                $html = $pagetitle . ' | ' . $uams_sitehome;
+                $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | ' . $uams_sitehome;
             }
 		}
     } else { // Site == uams
@@ -264,52 +265,52 @@ function uamswp_title($html) {
                 if ( is_home() || is_front_page() ) {
                     $html = $uams_sitename;
                 } else {
-                    $html = $pagetitle . ' | ' . $uams_sitename;
+                    $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | ' . $uams_sitename;
                 }
             } elseif( ( 'none' != uams_get_site_info()['department'] ) ) { // Dept / org unit
                 if ( is_home() || is_front_page() ) {
                     $html = $sitename . ' | ' . $uams_sitehome;
                 } else {
-                    $html = $pagetitle . ' | ' . $uams_sitename;
+                    $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | ' . $uams_sitename;
                 }
             } else { // Not an org unit
                 if ( is_home() || is_front_page() ) {
                     $html = $sitename . ' | ' . $uams_sitehome;
                 } else {
-                    $html = $pagetitle . ' | ' . $uams_sitehome;
+                    $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | ' . $uams_sitehome;
                 }
             }
         } elseif ( 'main' == uams_get_site_info()['subsite'] ) {
             if ( is_home() || is_front_page() ) {
                 $html = 'University of Arkansas for Medical Sciences (UAMS)';
             } else {
-                $html = $pagetitle . ' | UAMS';
+                $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | UAMS';
             }
         // } elseif ('none' == uams_get_site_info()['subsite'] ) { // Option if needed in the future
         //         if ( is_home() || is_front_page() ) {
         //             $html = $sitename . ' | UAMS';
         //         } else {
-        //             $html = $pagetitle . ' | UAMS';
+        //             $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | UAMS';
         //         }
         } elseif ('main' != uams_get_site_info()['department'] && '' != uams_get_site_info()['department'] && 'uams' != uams_get_site_info()['department'] ) {
             if( ( 'none' != uams_get_site_info()['department']) ) { // Dept / org unit
                 if ( is_home() || is_front_page() ) {
                     $html = $sitename . ' | ' . $uams_sitehome;
                 } else {
-                    $html = $pagetitle . ' | ' . $sitename;
+                    $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | ' . $sitename;
                 }
             } else { // Not an org unit
                 if ( is_home() || is_front_page() ) {
                     $html = $sitename . ' | ' . $uams_sitehome;
                 } else {
-                    $html = $pagetitle . ' | ' . $uams_sitehome;
+                    $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | ' . $uams_sitehome;
                 }
             }
         } else { // Default Fallback
             if ( is_home() || is_front_page() ) {
                 $html = $sitename;
             } else {
-                $html = $pagetitle . ' | ' . $sitename;
+                $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | ' . $sitename;
             } 
         }
 	}
