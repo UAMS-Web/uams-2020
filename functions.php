@@ -283,46 +283,46 @@ function sp_pro_breadcrumbs_crumbs($crumbs) {
 		}
 	} elseif ( ('institute' == uams_get_site_info()['site'] ) ) {
 		if ( ( 'main' == uams_get_site_info()['department']) ) {
-			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
+			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
 			array_unshift($crumbs, $home);
-			// $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
+			// $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
 		} else {
 			// if ('dept' == uams_get_site_info()['department']) {
 			$sitehome = array(get_blog_details(1)->blogname, network_home_url());
 			array_unshift($crumbs, $sitehome);
 			// }
-			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
+			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
 			array_unshift($crumbs, $home);
 		}
 	} else { // Site == uams
 
 		if ( 'other' == uams_get_site_info()['subsite'] ) {
 			if ( ( 'main' == uams_get_site_info()['department']) ) {
-				$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
+				$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
 				array_unshift($crumbs, $home);
-				// $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
+				// $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
 			} else {
 				// if ('dept' == uams_get_site_info()['department']) {
 				$sitehome = array(get_blog_details(1)->blogname, network_home_url());
 				array_unshift($crumbs, $sitehome);
 				// }
-				$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
+				$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
 				array_unshift($crumbs, $home);
 			}
 		} elseif ( ( 'main' == uams_get_site_info()['subsite']) && !is_front_page() ) {
 			// Set www.uams.edu as home
-			$crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
+			$crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
 		
 		} elseif ( 'main' != uams_get_site_info()['subsite'] && 'main' != uams_get_site_info()['department'] && '' != uams_get_site_info()['department'] && 'uams' != uams_get_site_info()['department'] ) {
 			// Multisite Home
 			$sitehome = array(get_blog_details(1)->blogname, network_home_url());
 			array_unshift($crumbs, $sitehome);
 			// UAMS Home
-			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
+			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
 			array_unshift($crumbs, $home);
 		} else {
 			// UAMS Home
-			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu');
+			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu');
 			array_unshift($crumbs, $home);
 		}
 	}
@@ -504,11 +504,11 @@ if ( !function_exists('uams_get_home_link')):
     function uams_get_home_link()
     {
 		if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site'])) {
-			$homelink = 'http://www.uams.edu';
+			$homelink = 'https://www.uams.edu';
 		} elseif ('uamshealth' == uams_get_site_info()['site']) {
 			$homelink = 'https://uamshealth.com';
 		} elseif ('inside' == uams_get_site_info()['site']) {
-			$homelink = 'http://inside.uams.edu';
+			$homelink = 'https://inside.uams.edu';
 		}
 		return $homelink;
     }
