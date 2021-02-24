@@ -39,3 +39,56 @@ function custom_admin_menu() {
         unset($submenu['themes.php'][15]);
     }
 }
+
+/*
+ * Capture user login and add it as timestamp in user meta data
+ *
+ */
+ 
+function uamswp_user_last_login( $user_login, $user ) {
+    update_user_meta( $user->ID, 'last_login', time() );
+}
+add_action( 'wp_login', 'uamswp_user_last_login', 10, 2 );
+ 
+/*
+ * Display last login time
+ *
+ */
+  
+function uamswp_lastlogin() { 
+    $last_login = get_the_author_meta('last_login');
+    $the_login_date = human_time_diff($last_login);
+    return $the_login_date; 
+} 
+ 
+/*
+ * Add Shortcode lastlogin 
+ *
+ */
+  
+add_shortcode('lastlogin','uamswp_lastlogin');
+
+/*
+ * Add user column 
+ *
+ */
+
+function uamswp_modify_user_table( $column ) {
+    $column['last_login'] = 'Last Login';
+    return $column;
+}
+add_filter( 'manage_users_columns', 'uamswp_modify_user_table' );
+
+function uamswp_modify_user_table_row( $val, $column_name, $user_id ) {
+    switch ($column_name) {
+        case 'last_login' :
+            $the_login_date = __( 'Never', 'uamswp' );
+            $last_login = get_the_author_meta('last_login', $user_id );
+            if ($last_login)
+                $the_login_date = human_time_diff($last_login);
+            return $the_login_date; 
+        default:
+    }
+    return $val;
+}
+add_filter( 'manage_users_custom_column', 'uamswp_modify_user_table_row', 10, 3 );
