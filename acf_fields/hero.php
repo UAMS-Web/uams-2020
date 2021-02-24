@@ -137,7 +137,7 @@ return array(
                 'name' => 'hero_button_text',
                 'type' => 'text',
                 'instructions' => '29 character limit.',
-                'required' => 0,
+                'required' => 1,
                 'conditional_logic' => 0,
                 'wrapper' => array(
                     'width' => '',
