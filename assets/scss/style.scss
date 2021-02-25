@@ -66,12 +66,12 @@
 //@import "uams-supporting/variables";
 //@import "uams-supporting/mixins";
 //@import "uams-supporting/root";
-//@import "uams-supporting/reboot";
+@import "uams-supporting/reboot";
 @import "uams-supporting/type";
 //@import "uams-supporting/images";
 //@import "uams-supporting/code";
 @import "uams-supporting/grid";
-//@import "uams-supporting/tables";
+@import "uams-supporting/tables";
 @import "uams-supporting/forms";
 @import "uams-supporting/buttons";
 //@import "uams-supporting/transitions";
@@ -86,7 +86,7 @@
 @import "uams-supporting/pagination";
 //@import "uams-supporting/badge";
 //@import "uams-supporting/jumbotron";
-//@import "uams-supporting/alert";
+@import "uams-supporting/alert";
 //@import "uams-supporting/progress";
 //@import "uams-supporting/media";
 //@import "uams-supporting/list-group";
@@ -95,7 +95,7 @@
 //@import "uams-supporting/modal";
 //@import "uams-supporting/tooltip";
 //@import "uams-supporting/popover";
-//@import "uams-supporting/carousel";
+@import "uams-supporting/carousel";
 //@import "uams-supporting/spinners";
 @import "uams-supporting/utilities";
 //@import "uams-supporting/print";
@@ -121,7 +121,7 @@
 @import "supporting/wordpress-images";
 
 // Table
-@import "supporting/table";
+// @import "supporting/table";
 
 // Widgets
 @import "supporting/widgets";
@@ -179,20 +179,21 @@
 // Hero
 @import "uams-supporting/hero";
 
-// Ratings
-@import "uams-supporting/ratings";
+// // Ratings
+// @import "uams-supporting/find-a-doc/ratings";
 
-// Doctors
-@import "uams-supporting/doctors-list";
-@import "uams-supporting/doctors-item";
-@import "uams-supporting/doctors-cards";
+// // Doctors
+// @import "uams-supporting/find-a-doc/doctors-list";
+// @import "uams-supporting/find-a-doc/doctors-item";
+// @import "uams-supporting/find-a-doc/doctors-cards";
 
-// Conditions and/or Treatments
-@import "uams-supporting/conditions-treatments";
+// // Conditions and/or Treatments
+// @import "uams-supporting/find-a-doc/conditions-treatments";
 
-// Locations
-@import "uams-supporting/locations-list";
-@import "uams-supporting/locations-item";
+// // Locations
+// @import "uams-supporting/find-a-doc/locations-list";
+// @import "uams-supporting/find-a-doc/locations-item";
+// @import "uams-supporting/find-a-doc/location-alert";
 
 // CTA Bars
 @import "uams-supporting/cta-bar";
@@ -224,3 +225,6 @@
 
 // Responsive Embedded Videos
 @import "uams-supporting/embed-video";
+
+// Team Showcase Plugin
+@import "uams-supporting/team-showcase";

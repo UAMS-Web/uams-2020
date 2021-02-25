@@ -6,7 +6,9 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+if (empty( $id )) {
+	$id = '';
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -27,17 +29,42 @@ if( !empty($block['align']) ) {
 // Load values.
 if ( empty($heading) )
     $heading = get_field('content_heading');
-if ( empty($heading) )
+if ( empty($hide_heading) )
     $hide_heading = get_field('content_hide_heading');
 if ( empty($content_block) )
     $content_block = get_field('content_content');
 if ( empty($background_color) )
     $background_color = get_field('content_background_color');
-
+if ( empty($geo) )
+    $geo = get_field('content_geo');
+    
+    // GEO Logic
+$geo_display = false;
+if (!isset($geo)){
+    $geo_display = true;
+} else {
+    if( $geo['geot_condition'] == 'include' ) {
+        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }  else {
+        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }
+}
+if ($geo_display) :
 ?>
 <section class="uams-module content-block<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
-    <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
-        <span class="title"><?php echo $heading; ?></span>
-    </h2>
-    <?php echo $content_block ? '<div class="entry-content">'. $content_block .'</div>' : ''; ?>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
+                    <span class="title"><?php echo $heading; ?></span>
+                </h2>
+                <?php echo $content_block ? '<div class="module-body">'. $content_block .'</div>' : ''; ?>
+            </div>
+        </div>
+    </div>
 </section>
+<?php endif;

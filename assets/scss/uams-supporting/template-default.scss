@@ -5,7 +5,10 @@ body.archive,
 body.error404,
 body.search,
 body.advert-template-default,
-body.blog  {
+body.blog,
+body.tshowcase-template-default,
+body.kb-template-default,
+body.sfwd-courses-template-default {
     .archive-description,
     .entry {
 
@@ -53,6 +56,12 @@ body.blog  {
                 right: 0;
             }
         }
+
+        .archive-title {
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
 }
 
@@ -75,7 +84,10 @@ body.post-template-default,
 body.archive,
 body.error404,
 body.advert-template-default,
-body.blog {
+body.blog,
+body.tshowcase-template-default,
+body.kb-template-default,
+body.sfwd-courses-template-default {
 
     .entry,
     .entry-comments,
@@ -84,6 +96,7 @@ body.blog {
     .archive-pagination {
         padding: $uams-module-padding-mobile;
         margin-bottom: 0;
+        line-height: inherit;
     
         @include media-breakpoint-up(sm) {
             padding: $uams-module-padding;
@@ -301,12 +314,21 @@ body.search {
 }
 
 .alignnone,
-figure[class="wp-block-image"],
 .aligncenter,
 .alignleft,
 .alignright,
 .alignwide,
-.alignfull {
+.alignfull,
+figure[class="wp-block-image"],
+figure[class="wp-block-image size-large"],
+.wp-block-image .alignnone,
+.wp-block-image .aligncenter,
+.wp-block-image .alignleft,
+.wp-block-image .alignright,
+.wp-block-image .alignwide,
+.wp-block-image .alignfull,
+.wp-block-image figure[class="wp-block-image"],
+.wp-block-image figure[class="wp-block-image size-large"] {
     .wp-caption-text,
     figcaption {
         display: block;
@@ -319,10 +341,17 @@ figure[class="wp-block-image"],
 }
 
 .alignnone,
-figure[class="wp-block-image"]
 .aligncenter,
 .alignwide,
-.alignfull {
+.alignfull,
+figure[class="wp-block-image"],
+figure[class="wp-block-image size-large"],
+.wp-block-image .alignnone,
+.wp-block-image .aligncenter,
+.wp-block-image .alignwide,
+.wp-block-image .alignfull,
+.wp-block-image figure[class="wp-block-image"],
+.wp-block-image figure[class="wp-block-image size-large"]  {
     margin: $page-title-margin-bottom-mobile 0;
 
     &:last-child {
@@ -331,9 +360,15 @@ figure[class="wp-block-image"]
 }
 
 .alignnone,
-figure[class="wp-block-image"],
 .alignleft,
-.alignright {
+.alignright,
+figure[class="wp-block-image"],
+figure[class="wp-block-image size-large"],
+.wp-block-image .alignnone,
+.wp-block-image .alignleft,
+.wp-block-image .alignright,
+.wp-block-image figure[class="wp-block-image"],
+.wp-block-image figure[class="wp-block-image size-large"] {
     .wp-caption-text,
     figcaption {
         text-align: left;
@@ -342,7 +377,12 @@ figure[class="wp-block-image"],
 
 .aligncenter,
 .alignwide,
-.alignfull {
+.alignfull,
+figure[class="wp-block-image size-large"],
+.wp-block-image .aligncenter,
+.wp-block-image .alignwide,
+.wp-block-image .alignfull,
+.wp-block-image figure[class="wp-block-image size-large"] {
     .wp-caption-text,
     figcaption {
         text-align: center;
@@ -351,20 +391,25 @@ figure[class="wp-block-image"],
     }
 }
 
-.aligncenter {
+.aligncenter,
+.wp-block-image .aligncenter,
+figure[class="wp-block-image size-large"],
+.wp-block-image figure[class="wp-block-image size-large"] {
     width: 100% !important;
 }
 
-.alignwide {
+.alignwide,
+.wp-block-image .alignwide {
     @include media-breakpoint-up(md) {
-        @include alignwide(1.309);
+        @include alignwide($alignwide-ratio-md);
     }
     @include media-breakpoint-up(lg) {
-        @include alignwide(1.618);
+        @include alignwide($alignwide-ratio-lg);
     }
 }
 
-.alignfull {
+.alignfull,
+.wp-block-image .alignfull {
     width: 100vw;
     max-width: 100vw;
     margin-left: calc( 50% - 50vw );
@@ -372,7 +417,9 @@ figure[class="wp-block-image"],
 }
 
 .alignleft,
-.alignright {
+.alignright,
+.wp-block-image .alignleft,
+.wp-block-image .alignright {
     display: block;
     //width: 100% !important;
     margin: $page-title-margin-bottom-mobile auto;
@@ -413,14 +460,16 @@ figure[class="wp-block-image"],
     }
 }
 
-.alignleft {
+.alignleft,
+.wp-block-image .alignleft {
     @include media-breakpoint-up(xs) {
         margin-right: $page-title-margin-bottom-mobile;
         float: left;
     }
 }
 
-.alignright {
+.alignright,
+.wp-block-image .alignright {
     @include media-breakpoint-up(xs) {
         margin-left: $page-title-margin-bottom-mobile;
         float: right;

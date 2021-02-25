@@ -6,6 +6,23 @@
  */
 return array(
     array(
+        'key' => 'field_content_intro'. $suffix,
+        'label' => '',
+        'name' => '',
+        'type' => 'message',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'message' => '<h2>UAMS Content Block</h2>',
+        'new_lines' => '',
+        'esc_html' => 0,
+    ),
+    array(
         'key' => 'field_content_heading'. $suffix,
         'label' => 'Heading',
         'name' => 'content_heading',
@@ -30,7 +47,7 @@ return array(
         'label' => 'Hide Heading',
         'name' => 'content_hide_heading',
         'type' => 'true_false',
-        'instructions' => '',
+        'instructions' => 'The heading is necessary for page hierarchy. But it can be hidden from all but screen readers and search engines. This is <strong>strongly</strong> not recommended in most cases, as the visible heading provides a jumping-in point for users as they scan your page.',
         'required' => 0,
         'conditional_logic' => 0,
         'wrapper' => array(
@@ -50,8 +67,8 @@ return array(
         'label' => 'Content / Text',
         'name' => 'content_content',
         'type' => 'wysiwyg',
-        'instructions' => '(optional)',
-        'required' => 0,
+        'instructions' => '',
+        'required' => 1,
         'conditional_logic' => 0,
         'wrapper' => array(
             'width' => '',
@@ -100,4 +117,80 @@ return array(
         'ajax' => 0,
         'placeholder' => '',
     ),
+    array(
+        'key' => 'field_content_geo_valid'. $suffix,
+        'label' => 'GeoTargetingWP Installed?',
+        'name' => 'geo_valid',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+            'width' => '',
+            'class' => 'hidden',
+            'id' => '',
+        ),
+        'acfe_permissions' => '',
+        'choices' => array(
+            'false' => 'False',
+            'true' => 'True',
+        ),
+        'allow_null' => 0,
+        'other_choice' => 0,
+        'default_value' => 'false',
+        'layout' => 'horizontal',
+        'return_format' => 'value',
+    ),
+    array(
+        'key' => 'field_content_regions'. $suffix,
+        'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
+        'name' => '',
+        'type' => 'accordion',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_content_geo_valid'. $suffix,
+                    'operator' => '==',
+                    'value' => 'true',
+                ),
+            ),
+        ),
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'open' => 0,
+        'multi_expand' => 0,
+        'endpoint' => 0,
+    ),
+    array(
+		'key' => 'field_content_geo'. $suffix,
+		'label' => 'Regions',
+		'name' => 'content_geo',
+		'type' => 'geot_field',
+		'instructions' => '',
+		'required' => 0,
+		'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_content_geo_valid'. $suffix,
+                    'operator' => '==',
+                    'value' => 'true',
+                ),
+            ),
+        ),
+		'wrapper' => array(
+			'width' => '',
+			'class' => '',
+			'id' => '',
+		),
+		'acfe_permissions' => '',
+		'geot_show' => 'city-regions',
+		'geot_condition' => 'include',
+		'geot_regions' => '',
+		'geot_countries' => '',
+	),
 );

@@ -91,28 +91,28 @@ function uams_register_blocks() {
             'align'             => 'full',
             'render_template'   => 'blocks/overlay.php',
         ));
-        acf_register_block_type(array(
-            'name'              => 'post-category-tile',
-            'title'             => __('UAMS Post Category Tile (Single)'),
-            'description'       => __('One tile displaying a post from an individual post category.'),
-            'category'          => 'common',
-            'icon'              => 'screenoptions',
-            'keywords'          => array('uams', 'news', 'posts', 'post', 'articles', 'article', 'link', 'links', 'intranet', 'inside', 'tile', 'tiles', 'sidebar', 'side bar'),
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'render_template'   => 'blocks/post-category-tile.php',
-        ));
-        acf_register_block_type(array(
-            'name'              => 'post-category-tiles',
-            'title'             => __('UAMS Post Category Tile (Double)'),
-            'description'       => __('Two tiles displaying posts from individual post categories.'),
-            'category'          => 'common',
-            'icon'              => 'screenoptions',
-            'keywords'          => array('uams', 'news', 'posts', 'post', 'articles', 'article', 'link', 'links', 'intranet', 'inside', 'tile', 'tiles', 'sidebar', 'side bar'),
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'render_template'   => 'blocks/post-category-tiles.php',
-        ));
+        // acf_register_block_type(array(
+        //     'name'              => 'post-category-tile',
+        //     'title'             => __('UAMS Post Category Tile (Single)'),
+        //     'description'       => __('One tile displaying a post from an individual post category. This block is only intended to be used on the sidebar layout.'),
+        //     'category'          => 'common',
+        //     'icon'              => 'screenoptions',
+        //     'keywords'          => array('uams', 'news', 'posts', 'post', 'articles', 'article', 'link', 'links', 'intranet', 'inside', 'tile', 'tiles', 'sidebar', 'side bar'),
+        //     'mode'              => 'auto',
+        //     'align'             => 'full',
+        //     'render_template'   => 'blocks/post-category-tile.php',
+        // ));
+        // acf_register_block_type(array(
+        //     'name'              => 'post-category-tiles',
+        //     'title'             => __('UAMS Post Category Tile (Double)'),
+        //     'description'       => __('Two tiles displaying posts from individual post categories. This block is only intended to be used on the sidebar layout.'),
+        //     'category'          => 'common',
+        //     'icon'              => 'screenoptions',
+        //     'keywords'          => array('uams', 'news', 'posts', 'post', 'articles', 'article', 'link', 'links', 'intranet', 'inside', 'tile', 'tiles', 'sidebar', 'side bar'),
+        //     'mode'              => 'auto',
+        //     'align'             => 'full',
+        //     'render_template'   => 'blocks/post-category-tiles.php',
+        // ));
         acf_register_block_type(array(
             'name'              => 'image-side',
             'title'             => __('UAMS Side-by-Side Image & Text'),
@@ -193,8 +193,8 @@ if( function_exists('acf_add_local_field_group') ):
     $link_list = require( get_stylesheet_directory() .'/acf_fields/link-list.php' );
     $news = require( get_stylesheet_directory() .'/acf_fields/news.php' );
     $overlay = require( get_stylesheet_directory() .'/acf_fields/overlay.php' );
-    $post_tile = require( get_stylesheet_directory() .'/acf_fields/post-category-tile.php' );
-    $post_tiles = require( get_stylesheet_directory() .'/acf_fields/post-category-tiles.php' );
+    // $post_tile = require( get_stylesheet_directory() .'/acf_fields/post-category-tile.php' );
+    // $post_tiles = require( get_stylesheet_directory() .'/acf_fields/post-category-tiles.php' );
     $side_by_side = require( get_stylesheet_directory() .'/acf_fields/image-side-by-side.php' );
     $stacked = require( get_stylesheet_directory() .'/acf_fields/stacked.php' );
     $livewhale = require( get_stylesheet_directory() .'/acf_fields/livewhale.php' );
@@ -385,52 +385,52 @@ if( function_exists('acf_add_local_field_group') ):
     ));
 
     // Add local field group for UAMS Post Category Tile Block
-    acf_add_local_field_group(array(
-        'key' => 'group_5d03e9584d86d',
-        'title' => 'Block: Post Category Tile Single',
-        'fields' => $post_tile,
-        'location' => array(
-            array(
-                array(
-                    'param' => 'block',
-                    'operator' => '==',
-                    'value' => 'acf/post-category-tile',
-                ),
-            ),
-        ),
-        'menu_order' => 0,
-        'position' => 'normal',
-        'style' => 'default',
-        'label_placement' => 'top',
-        'instruction_placement' => 'label',
-        'hide_on_screen' => '',
-        'active' => true,
-        'description' => '',
-    ));
+    // acf_add_local_field_group(array(
+    //     'key' => 'group_5d03e9584d86d',
+    //     'title' => 'Block: Post Category Tile Single',
+    //     'fields' => $post_tile,
+    //     'location' => array(
+    //         array(
+    //             array(
+    //                 'param' => 'block',
+    //                 'operator' => '==',
+    //                 'value' => 'acf/post-category-tile',
+    //             ),
+    //         ),
+    //     ),
+    //     'menu_order' => 0,
+    //     'position' => 'normal',
+    //     'style' => 'default',
+    //     'label_placement' => 'top',
+    //     'instruction_placement' => 'label',
+    //     'hide_on_screen' => '',
+    //     'active' => true,
+    //     'description' => '',
+    // ));
 
     // Add local field group for UAMS Post Category Tiles Block
-    acf_add_local_field_group(array(
-        'key' => 'group_5d03aeab567b9',
-        'title' => 'Block: Post Category Tiles',
-        'fields' => $post_tiles,
-        'location' => array(
-            array(
-                array(
-                    'param' => 'block',
-                    'operator' => '==',
-                    'value' => 'acf/post-category-tiles',
-                ),
-            ),
-        ),
-        'menu_order' => 0,
-        'position' => 'normal',
-        'style' => 'default',
-        'label_placement' => 'top',
-        'instruction_placement' => 'label',
-        'hide_on_screen' => '',
-        'active' => true,
-        'description' => '',
-    ));
+    // acf_add_local_field_group(array(
+    //     'key' => 'group_5d03aeab567b9',
+    //     'title' => 'Block: Post Category Tiles',
+    //     'fields' => $post_tiles,
+    //     'location' => array(
+    //         array(
+    //             array(
+    //                 'param' => 'block',
+    //                 'operator' => '==',
+    //                 'value' => 'acf/post-category-tiles',
+    //             ),
+    //         ),
+    //     ),
+    //     'menu_order' => 0,
+    //     'position' => 'normal',
+    //     'style' => 'default',
+    //     'label_placement' => 'top',
+    //     'instruction_placement' => 'label',
+    //     'hide_on_screen' => '',
+    //     'active' => true,
+    //     'description' => '',
+    // ));
 
     // Add local field group for UAMS Side-by-Side Image & Text Block
     acf_add_local_field_group(array(
@@ -504,7 +504,7 @@ if( function_exists('acf_add_local_field_group') ):
         'description' => '',
     ));
 
-    // Add local field group for UAMS LiveWhale Calendar Block
+    // Add local field group for UAMS Gallery Block
     acf_add_local_field_group(array(
         'key' => 'group_uams_gallery',
         'title' => 'Block: UAMS Gallery',

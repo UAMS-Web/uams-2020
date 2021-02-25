@@ -2,20 +2,20 @@
 /*
  *
  * UAMS News Block
- * 
+ *
  */
 $className = '';
 // Create id attribute allowing for custom "anchor" value.
 $id = '';
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
-} 
+}
 if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
 
-$id = 'uams-news-' .  $id;  
-    
+$id = 'uams-news-' .  $id;
+
 if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
 }
@@ -49,6 +49,8 @@ if ( empty($link) )
     $link = get_field('news_include_link');
 if ( empty($position) )
     $position = get_field('news_position');
+if ( empty($geo) )
+    $geo = get_field('news_geo');
 
 if ( 'grid' == $output ) {
     $count = '3';
@@ -60,6 +62,24 @@ if ( 'grid' == $output ) {
     $count = '1';
 }
 
-echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" local_only="'. $local_only .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
-echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" local_only="'. $local_only .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
+// echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
+// echo '<!-- '; print_r($geo); echo ' -->';
+// GEO Logic
+$geo_display = false;
+if (!isset($geo)){
+    $geo_display = true;
+} else {
+    if( $geo['geot_condition'] == 'include' ) {
+        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }  else {
+        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }
+}
+if ($geo_display) {
+	echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
+}
 ?>

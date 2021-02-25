@@ -21,10 +21,10 @@ add_action( 'genesis_after_loop', 'uamswp_search_page_after_entry', 10 );
  */
 function uamswp_do_search_loop() {
     // get the search term entered by user.
-    $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
+    $s = isset( $_GET["s"] ) ? esc_html($_GET["s"]) : "";
 
     // store the post type from the URL string.
-    $post_type = isset( $_GET["type"] ) ? $_GET["type"] : "";
+    $post_type = isset( $_GET["type"] ) ? esc_html($_GET["type"]) : "";
 
     if ( $post_type ) {
         // $post_type = $_GET['post_type'];
@@ -46,7 +46,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-            echo '<h2 class="module-title">Providers</h2>';
+            echo '<h2 class="module-title"><span class="title">Providers</span></h2>';
 
             if ( have_posts() ) :
 
@@ -89,7 +89,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-            echo '<h2 class="module-title">Locations</h2>';
+            echo '<h2 class="module-title"><span class="title">Locations</span></h2>';
 
             if ( have_posts() ) :
 
@@ -131,7 +131,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-            echo '<h2 class="module-title">Services</h2>';
+            echo '<h2 class="module-title"><span class="title">Services</span></h2>';
 
             if ( have_posts() ) :
 
@@ -159,7 +159,7 @@ function uamswp_do_search_loop() {
         } elseif('condition' == $post_type) {
 
             $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
-            $taxonomy = 'condition';
+            $post_type = 'condition';
 
             // accepts any wp_query args.
             $args = (array(
@@ -175,7 +175,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-            echo '<h2 class="module-title">Conditions</h2>';
+            echo '<h2 class="module-title"><span class="title">Conditions</span></h2>';
             echo '<div class="module-body">';
 
             if ( have_posts() ) :
@@ -186,17 +186,17 @@ function uamswp_do_search_loop() {
 
             	$post_title = get_the_title();
                 $post_link = get_the_permalink();
-                $tax = get_term_by("name", $post_title, $taxonomy);
+                $tax = get_term_by("name", $post_title, $post_type);
                 $post_id = $tax->term_id;
                 $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
-                $content = get_field($taxonomy.'_content', $taxonomy.'_'.$post_id);
+                $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
 
-                echo '<article class="'. $taxonomy .'-'. $post_id .' entry">';
+                echo '<article class="'. $post_type .'-'. $post_id .' entry">';
                 echo '<header class="entry-header">';
                 echo $title;
                 echo '</header>';
                 echo '<div class="entry-content clearfix">';
-                // echo $taxonomy.'_'.$post_id;
+                // echo $post_type.'_'.$post_id;
                 echo $content ? '<p>'. wp_trim_words($content, 30) .'... <a class="more-link" href="' . $post_link . '">Continue Reading</a><p>' : '';
                 echo '</div>';
                 echo '</article>';
@@ -218,7 +218,7 @@ function uamswp_do_search_loop() {
         } elseif('treatment' == $post_type) {
 
             $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
-            $taxonomy = 'treatment';
+            $post_type = 'treatment';
 
             // accepts any wp_query args.
             $args = (array(
@@ -234,7 +234,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-            echo '<h2 class="module-title">Treatments &amp; Procedures</h2>';
+            echo '<h2 class="module-title"><span class="title">Treatments &amp; Procedures</span></h2>';
             echo '<div class="module-body">';
 
             if ( have_posts() ) :
@@ -245,17 +245,17 @@ function uamswp_do_search_loop() {
 
             	$post_title = get_the_title();
                 $post_link = get_the_permalink();
-                $tax = get_term_by("name", $post_title, $taxonomy);
+                $tax = get_term_by("name", $post_title, $post_type);
                 $post_id = $tax->term_id;
                 $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
-                $content = get_field($taxonomy.'_content', $taxonomy.'_'.$post_id);
+                $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
 
-                echo '<article class="'. $taxonomy .'-'. $post_id .' entry">';
+                echo '<article class="'. $post_type .'-'. $post_id .' entry">';
                 echo '<header class="entry-header">';
                 echo $title;
                 echo '</header>';
                 echo '<div class="entry-content clearfix">';
-                // echo $taxonomy.'_'.$post_id;
+                // echo $post_type.'_'.$post_id;
                 echo $content ? '<p>'. wp_trim_words($content, 30) .'... <a class="more-link" href="' . $post_link . '">Continue Reading</a><p>' : '';
                 echo '</div>';
                 echo '</article>';
@@ -293,7 +293,7 @@ function uamswp_do_search_loop() {
             echo '<div class="container-fluid">';
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
-                echo '<h2 class="module-title">' . $post_type_text . '</h2>';
+                echo '<h2 class="module-title"><span class="title">' . $post_type_text . '</span></h2>';
                 echo '<div class="module-body">';
                     // Loop actions.
                     uamswp_loop_layout();
@@ -318,7 +318,7 @@ function uamswp_do_search_loop() {
 
             foreach ( $post_types as $post_type ) {
                 // get the search term entered by user.
-                $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
+                $s = isset( $_GET["s"] ) ? esc_html($_GET["s"]) : "";
 
                 // accepts any wp_query args.
                 $args = (array(
@@ -334,7 +334,7 @@ function uamswp_do_search_loop() {
                     $post_type_text = $post_type_text . "s";
                 }
 
-                echo '<div class="col-12 col-md-6 post-type ' . $post_type . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $post_type_text . '</h2>';
+                echo '<div class="col-12 col-md-6 post-type ' . $post_type . '"><div class="inner-container content-width"><h2 class="module-title post-type-heading"><span class="title">' . $post_type_text . '</span></h2>';
                 if ( have_posts() ) {
 
                     while ( have_posts() ) : the_post();
@@ -346,13 +346,13 @@ function uamswp_do_search_loop() {
                         $post_title = get_the_title( $wp_query->post->ID );
                         $post_link = get_the_permalink( $wp_query->post->ID );
                         $title = '<h3 class="h4" data-id="'. $wp_query->post->ID .'"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
-                        if ( has_excerpt( $wp_query->post->blog_id ) ) {
+                        if ( has_excerpt( $wp_query->post->ID ) ) {
                         	$content = get_the_excerpt( $wp_query->post->ID );
                         } else {
 	                        $content = wp_trim_excerpt( "", $wp_query->post->ID );
                         }
                         echo $title ? $title : '';
-                        // echo $taxonomy.'_'.$post_id;
+                        // echo $post_type.'_'.$post_id;
                         echo $content ? '<p>'. $content . '</p>' : '';
 
                         restore_current_blog();
@@ -378,7 +378,7 @@ function uamswp_do_search_loop() {
 
         // Begin Providers
 
-            $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
+            $s = isset( $_GET["s"] ) ? esc_html($_GET["s"]) : "";
 
 
             /* Providers */
@@ -402,7 +402,7 @@ function uamswp_do_search_loop() {
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
 
-            echo '<h2 class="module-title">Providers</h2>';
+            echo '<h2 class="module-title"><span class="title">Providers</span></h2>';
 
                 echo '<div class="card-list-container"><div class="card-list card-list-doctors card-list-doctors-count-6 facetwp-template">';
 
@@ -444,28 +444,29 @@ function uamswp_do_search_loop() {
         $conditions_treatments .= '<div class="container-fluid">';
         $conditions_treatments .= '<div class="search-content row">';
 
-            $taxonomies = array();
+            //$post_types = array( 'condition', 'treatment' );
+            $post_types = array();
 
-                array_push($taxonomies, 'condition', 'treatment' );
+                array_push($post_types, 'condition', 'treatment' );
 
-                foreach ( $taxonomies as $taxonomy ) {
+                foreach ( $post_types as $post_type ) {
                     // get the search term entered by user.
-                    $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
+                    $s = isset( $_GET["s"] ) ? esc_html($_GET["s"]) : "";
 
                     // accepts any wp_query args.
                     $args = (array(
                         's' => $s,
-                        'post_type' => $taxonomy,
+                        'post_type' => $post_type,
                         'posts_per_page' => 5,
                     ));
 
                     // $term_query = new WP_Term_Query( $args );
-                    $taxonomy_text = get_taxonomy($taxonomy)->labels->name;
-                    // if (substr($taxonomy_text, -1) !== 's') {
-                    //     $taxonomy_text = $taxonomy_text . "s";
-                    // }
+                    $post_type_text = ucfirst($post_type);
+                    if (substr($post_type_text, -1) !== 's') {
+                        $post_type_text = $post_type_text . "s";
+                    }
 
-                    // echo '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
+                    // echo '<div class="col-12 col-md-6 post-type ' . $post_type . '"><div class="inner-container content-width"><h2 class="module-title post-type-heading"><span class="title">' . $post_type_text . '</span></h2>';
                     //     // Loop actions.
                     //     uamswp_loop_layout();
 
@@ -477,49 +478,49 @@ function uamswp_do_search_loop() {
                     //     uamswp_custom_loop( $args );
 
                     //     // More results link.
-                    //     printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $taxonomy );
+                    //     printf( '<a href="%s" class="btn btn-outline-primary">More results</a>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type );
                     // echo '</div></div>';
 
                     uamswp_custom_loop_base($args);
 
                     if ( have_posts() ) :
 						$show_conditions_treatments = true;
-                        $conditions_treatments .= '<div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
+                        $conditions_treatments .= '<div class="col-12 col-md-6 post-type ' . $post_type . '"><div class="inner-container content-width"><h2 class="module-title post-type-heading"><span class="title">' . $post_type_text . '</span></h2>';
 
                         while ( have_posts() ) : the_post();
 
                             $post_count = $wp_query->found_posts;
                             $post_title = get_the_title();
                             $post_link = get_the_permalink();
-                            $tax = get_term_by("name", $post_title, $taxonomy);
+                            $tax = get_term_by("name", $post_title, $post_type);
                             $post_id = $tax->term_id;
                             $title = '<h3 class="h4" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
-                            $content = get_field($taxonomy.'_content', $taxonomy.'_'.$post_id);
-                            if ('treatment' == $taxonomy) {
-	                            $content = get_field('treatment_procedure_content', $taxonomy.'_'.$post_id); // Fix for naming convention
+                            $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
+                            if ('treatment' == $post_type) {
+	                            $content = get_field('treatment_procedure_content', $post_type.'_'.$post_id); // Fix for naming convention
                             }
 
                             $conditions_treatments .= $title;
-                            // echo $taxonomy.'_'.$post_id;
+                            // echo $post_type.'_'.$post_id;
                             $conditions_treatments .= $content ? '<p>'. wp_trim_words($content, 30) .'<p>' : '';
 
                         endwhile;
                         if ($post_count > 5) {
                             // More results link.
-                            $conditions_treatments .= sprintf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $taxonomy );
+                            $conditions_treatments .= sprintf( '<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div></div>', trailingslashit( home_url() ) . '?s=' . $s . '&type=' . $post_type );
                         } else {
                             $conditions_treatments .= '</div>';
                         }
                         $conditions_treatments .= '</div>';
                     else :
-                        $conditions_treatments .=' <div class="col-12 col-md-6 post-type ' . $taxonomy . '"><div class="inner-container content-width"><h2 class="post-type-heading">' . $taxonomy_text . '</h2>';
+                        $conditions_treatments .=' <div class="col-12 col-md-6 post-type ' . $post_type . '"><div class="inner-container content-width"><h2 class="module-title post-type-heading"><span class="title">' . $post_type_text . '</span></h2>';
                         $conditions_treatments .= '<p>Sorry, no content matched your criteria.</p>';
                         $conditions_treatments .= '</div></div>';
                     endif;
                     // foreach ( $term_query->terms as $term ) {
-                    //     echo '<article class="'. $taxonomy .'-'. $term->slug .' entry">';
-                    //     echo '    <header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="'. get_term_link( $term->term_id , $taxonomy ) .'">'. $term->name .'</a></h2></header>';
-                    //     echo '   <div class="entry-content clearfix"><p>'. wp_trim_words( $term->description , 20, '... <a class="more-link" href="' . get_term_link( $term->term_id , $taxonomy ) . '">Continue Reading</a>' ) .'</p></div>';
+                    //     echo '<article class="'. $post_type .'-'. $term->slug .' entry">';
+                    //     echo '    <header class="entry-header"><h2 class="entry-title" itemprop="headline"><a class="entry-title-link" rel="bookmark" href="'. get_term_link( $term->term_id , $post_type ) .'">'. $term->name .'</a></h2></header>';
+                    //     echo '   <div class="entry-content clearfix"><p>'. wp_trim_words( $term->description , 20, '... <a class="more-link" href="' . get_term_link( $term->term_id , $post_type ) . '">Continue Reading</a>' ) .'</p></div>';
                     //     echo '</article>';
                     // }
                     wp_reset_query();
@@ -557,7 +558,7 @@ function uamswp_do_search_loop() {
             echo '<div class="search-content row">';
             echo '<div class="col-12">';
 
-            echo '<h2 class="module-title">Locations</h2>';
+            echo '<h2 class="module-title"><span class="title">Locations</span></h2>';
 
                 echo '<div class="card-list-container location-card-list-container"><div class="card-list facetwp-template">';
 
@@ -614,7 +615,7 @@ function uamswp_do_search_loop() {
 	            echo '<div class="search-content row">';
 	            echo '<div class="col-12">';
 
-            	echo '<h2 class="module-title">Areas of Expertise</h2>';
+            	echo '<h2 class="module-title"><span class="title">Areas of Expertise</span></h2>';
                 echo '<div class="card-list-container"><div class="card-list card-list-expertise facetwp-template">';
 
                 while ( have_posts() ) : the_post();
@@ -652,7 +653,7 @@ function uamswp_do_search_loop() {
             <div class="container-fluid">
                 <div class="row">
                     <div class="widget_search col-12">
-                            <h2 class="module-title">Search All UAMS Sites</h2>
+                            <h2 class="module-title"><span class="title">Search All UAMS Sites</span></h2>
                             <p class="content note">Search UAMS websites on the UAMS.edu and UAMShealth.com&nbsp;domains:</p>
                         <div class="inner-container content-width">
                             <script async src="https://cse.google.com/cse.js?cx=014806496997774146681:pyl1jhwi-bo"></script>
@@ -729,7 +730,7 @@ function uamswp_search_page_before_entry () {
 }
 
 function uamswp_search_page_heading () {
-    $s = isset( $_GET["s"] ) ? $_GET["s"] : "";
+    $s = isset( $_GET["s"] ) ? esc_html($_GET["s"]) : "";
     echo '<header class="entry-header"><h1 class="entry-title" itemprop="headline">Search results for: '. $s .'</h1></header>';
 }
 

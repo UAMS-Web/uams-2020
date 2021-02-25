@@ -5,7 +5,9 @@
  * 
  */
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+if (empty( $id )) {
+	$id = '';
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -27,9 +29,28 @@ if( !empty($block['className']) ) {
 if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
 }
+if ( empty($geo) )
+    $geo = get_field('hero_geo');
 
 if ( empty($hero_rows) )
     $hero_rows = get_field('hero');
+
+// GEO Logic
+$geo_display = false;
+if (!isset($geo)){
+    $geo_display = true;
+} else {
+    if( $geo['geot_condition'] == 'include' ) {
+        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }  else {
+        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }
+}
+if ($geo_display) {
 
 if( $hero_rows ) :
     $row_count = count($hero_rows);
@@ -45,9 +66,8 @@ $wps = $wpm / 60; // words per second
 $read_time = $word_est / $wps; // Time to read total words
 $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + time to read + 1 second to interact (in milliseconds)
 
-
 ?>
-    <section class="hero carousel slide<?php echo $row_count > 1 ? " multiple-slides" : ""; ?>" id="carousel-<?php echo esc_attr($id); ?>" aria-label="Hero banner"<?php echo $row_count > 1 ? ' data-ride="carousel" data-interval="' . $slide_time . '" data-keyboard="true"' : ''; ?>>
+    <section class="hero carousel <?php echo esc_attr($className); ?> slide<?php echo $row_count > 1 ? " multiple-slides" : ""; ?>" id="carousel-<?php echo esc_attr($id); ?>" aria-label="Hero banner"<?php echo $row_count > 1 ? ' data-ride="carousel" data-interval="' . $slide_time . '" data-keyboard="true"' : ''; ?>>
 <?php
         // $page_template = get_page_template_slug( $post_id );
         // echo $page_template;
@@ -63,17 +83,19 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
                 <?php } ?>
             </ol>
 <?php   }  ?>
-    <div class="carousel-inner <?php echo esc_attr($className); ?>">
+    <div class="carousel-inner">
 <?php 
     $index = 1;
     foreach($hero_rows as $hero_row) {
 // Load values and adding defaults.
+    // if ( empty($disable) )
+        $disable = $hero_row['hero_disable'] ?: '';
     // if ( empty($heading) )
-        $heading = $hero_row['hero_heading'] ?: 'Heading goes here...';
+        $heading = $hero_row['hero_heading'] ?: 'Heading goes here...'; // Required
     // if ( empty($body) )
-        $body = $hero_row['hero_body'] ?: 'This is where the description goes';
+        $body = $hero_row['hero_body'] ?: 'This is where the description goes'; // Required
     // if ( empty($button_text) )
-        $button_text = $hero_row['hero_button_text'] ?: 'Learn More';
+        $button_text = $hero_row['hero_button_text'] ?: '';
     // if ( empty($button_url) )
         $button_url = $hero_row['hero_button_url']['url'] ?: '';
     // if ( empty($button_target) )
@@ -107,6 +129,7 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
     if ( empty($image_mobile) ) {
         $image_mobile = $image_desktop;
     }
+    if ( !$disable ) {
 ?>
         <div class="carousel-item <?php 
         if ($background_color == 'auto') {
@@ -155,11 +178,13 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
                 <div class="inner-container">
                     <h2><?php echo $heading; ?></h2>
                     <p><?php echo $body; ?></p>
-                    <a class="btn btn-white" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?> data-itemtitle="<?php echo $heading; ?>"><?php echo $button_text; ?></a>
+                    <?php if ($button_text) { ?>
+                        <a class="btn btn-white" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?> data-itemtitle="<?php echo $heading; ?>"><?php echo $button_text; ?></a>
+                    <?php } // endif ?>
                 </div>
             </div>
         </div>
-<?php
+<?php } // endif
             $index++;
         } // end foreach
 ?>
@@ -178,3 +203,4 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
   </section>
 <?php
 endif;
+}

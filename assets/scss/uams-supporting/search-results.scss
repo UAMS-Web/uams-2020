@@ -25,6 +25,21 @@ body.search {
                 }
             }
 
+            .module-title {
+                @include media-breakpoint-up(md) {
+                    text-align: left;
+                    margin-right: 0;
+                    margin-left: 0;
+                }
+
+                .title:after {
+                    @include media-breakpoint-up(md) {
+                        left: 0;
+                        right: 38.2%; // 100% - 61.8% (golden mean)
+                    }
+                }
+            }
+
             &:nth-child(n+2) {
                 .inner-container {
                     @include media-breakpoint-down(sm) {

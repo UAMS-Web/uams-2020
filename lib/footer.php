@@ -16,7 +16,7 @@ add_filter( 'genesis_footer_creds_text', 'uamswp_footer_creds_text' );
 function uamswp_footer_creds_text() {
 
     // Render this by default, in whatever structure is best.
-    // If the site is an EDU site, replace the href value with "http://www.uams.edu".
+    // If the site is an EDU site, replace the href value with "https://www.uams.edu".
     // If an SVG asset is uploaded/defined in the custom field, replace the href value with the home URL of the current site.
     // If an SVG asset is uploaded/defined in the custom field, replace the image path with the uploaded SVG asset.
     // The height of the image is controlled by CSS.
@@ -28,7 +28,7 @@ function uamswp_footer_creds_text() {
     /**
      * Start Image
      */
-    $footer_image_url = 'http://www.uams.edu';
+    $footer_image_url = 'https://www.uams.edu';
     $footer_image_title = 'University of Arkansas for Medical Sciences';
     $footer_image_site = 'main-qualifier';
 
@@ -263,6 +263,7 @@ function uamswp_footer_creds_text() {
             } elseif ( 'otolaryngology' == $department) {
                 $social_fb = 'https://www.facebook.com/pg/uamsotolaryngology/';
                 $social_tw = 'https://twitter.com/UAMSENT';
+                $social_ig = 'https://www.instagram.com/uams.ent/';
             } elseif ( 'family-medicine' == $department) {
                 $social_fb = 'https://www.facebook.com/UAMSFamilyMedicineResidency/';
             } elseif ( 'orthopaedic-surgery' == $department) {
@@ -293,7 +294,8 @@ function uamswp_footer_creds_text() {
             $social_fb = 'https://www.facebook.com/GetHealthyUAMS/';
             $social_ig = 'https://www.instagram.com/GetHealthyUAMS/';
         } elseif ( 'cda' == $subsite ) {
-           $social_fb = 'https://www.facebook.com/pages/UAMS-Center-for-Diversity-Affairs/';
+           $social_fb = 'https://www.facebook.com/UAMSDDEI/';
+           $social_tw = 'https://twitter.com/uams_ddei';
         } elseif ( 'gsa' == $subsite) {
             $social_fb = 'https://www.facebook.com/UAMSgsa/';
         } elseif ( 'continuing-ed' == $subsite) {

@@ -13,6 +13,7 @@ var gulp = require('gulp'),
     cssnano = require('cssnano'),
     // cmq = require('css-mqpacker'),
     autoprefixer = require('autoprefixer'),
+    zip = require('gulp-zip'),
     comments = require('postcss-discard-comments');
     // critical = require('critical');
 
@@ -30,8 +31,12 @@ var paths = {
         src: 'assets/scss/style.scss',
         dest: 'assets/css'
     },
-    criticalcss: {
-        src: 'assets/scss/inline.scss',
+    // criticalcss: {
+    //     src: 'assets/scss/inline.scss',
+    //     dest: 'assets/css'
+    // },
+    admincss: {
+        src: 'assets/scss/admin.scss',
         dest: 'assets/css'
     },
     uamsalert: {
@@ -44,14 +49,14 @@ var paths = {
             // 'node_modules/popper.js/dist/umd/popper.js',
             // 'node_modules/bootstrap/dist/js/bootstrap.js',
             'node_modules/bootstrap/dist/js/bootstrap.bundle.js', // Includes popper
-            'node_modules/bootstrap/js/dist/alert.js',
-            'node_modules/bootstrap/js/dist/button.js',
-            'node_modules/bootstrap/js/dist/carousel.js',
-            'node_modules/bootstrap/js/dist/dropdown.js',
-            'node_modules/bootstrap/js/dist/modal.js',
-            'node_modules/bootstrap/js/dist/scrollspy.js',
-            'node_modules/bootstrap/js/dist/tab.js',
-            'node_modules/bootstrap/js/dist/util.js',
+            // 'node_modules/bootstrap/js/dist/alert.js',
+            // 'node_modules/bootstrap/js/dist/button.js',
+            // 'node_modules/bootstrap/js/dist/carousel.js',
+            // 'node_modules/bootstrap/js/dist/dropdown.js',
+            // 'node_modules/bootstrap/js/dist/modal.js',
+            // 'node_modules/bootstrap/js/dist/scrollspy.js',
+            // 'node_modules/bootstrap/js/dist/tab.js',
+            // 'node_modules/bootstrap/js/dist/util.js',
             'node_modules/smartmenus/dist/jquery.smartmenus.js',
             'node_modules/smartmenus-bootstrap-4/jquery.smartmenus.bootstrap-4.js',
             'assets/js/source/overflowing-navbar.min.js',
@@ -78,6 +83,10 @@ var paths = {
     languages: {
         src: '**/*.php',
         dest: 'languages/uams-2020.pot'
+    },
+    zip: {
+        src: 'html/html_template/*',
+        dest: 'html'
     },
     site: {
         url: 'http://uamshealthmu.local'
@@ -108,16 +117,28 @@ function style() {
         .pipe(notify({ message: 'Styles task complete' }));
 }
 
-function criticalstyle() {
-    return gulp.src(paths.criticalcss.src)
-        .pipe(changed(paths.criticalcss.dest))
+// function criticalstyle() {
+//     return gulp.src(paths.criticalcss.src)
+//         .pipe(changed(paths.criticalcss.dest))
+//         .pipe(sass.sync().on('error', sass.logError))
+//         .pipe(concat('inline.scss'))
+//         .pipe(postcss(plugins))
+//         .pipe(rename('inline.css'))
+//         .pipe(gulp.dest(paths.styles.dest))
+//         // .pipe(browserSync.stream())
+//         .pipe(notify({ message: 'Critical Styles task complete' }));
+// }
+
+function adminstyle() {
+    return gulp.src(paths.admincss.src)
+        .pipe(changed(paths.admincss.dest))
         .pipe(sass.sync().on('error', sass.logError))
-        .pipe(concat('inline.scss'))
+        .pipe(concat('admin.scss'))
         .pipe(postcss(plugins))
-        .pipe(rename('inline.css'))
+        .pipe(rename('admin.css'))
         .pipe(gulp.dest(paths.styles.dest))
         // .pipe(browserSync.stream())
-        .pipe(notify({ message: 'Critical Styles task complete' }));
+        .pipe(notify({ message: 'Admin Styles task complete' }));
 }
 
 function uamsalert() {
@@ -162,6 +183,12 @@ function js() {
         .pipe(notify({ message: 'Scripts task complete' }));
 }
 
+function template() {
+    return gulp.src(paths.zip.src)
+        .pipe(zip('html_template.zip'))
+        .pipe(gulp.dest(paths.zip.dest));
+}
+
 // function browserSyncServe(done) {
 //     browserSync.init({
 //         injectChanges: true,
@@ -176,7 +203,7 @@ function js() {
 // }
 
 function watch() {
-    gulp.watch(['assets/scss/*.scss', 'assets/scss/**/*.scss'], style).on('change', gulp.parallel(style, uamsalert, criticalstyle, js))
+    gulp.watch(['assets/scss/*.scss', 'assets/scss/**/*.scss'], style).on('change', gulp.parallel(style, uamsalert, adminstyle, js))
     gulp.watch(paths.scripts.src, gulp.series(scriptsLint, js))
     gulp.watch([
             '*.php',
@@ -192,7 +219,9 @@ gulp.task('translation', translation);
 
 gulp.task('fa', fa);
 
-gulp.task('default', gulp.parallel(style, uamsalert, criticalstyle, js, watch));
+gulp.task('zip', template);
+
+gulp.task('default', gulp.parallel(style, uamsalert, adminstyle, js, watch));
 
 /* 
 var dimensionSettings = [{

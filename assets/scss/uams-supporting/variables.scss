@@ -98,14 +98,14 @@ $maroon-light: #800026;
 $maroon-lighter: #93002c;
 $maroon-lightest: #a70031;
 
-$orange: #CA4C1D;
-$orange-darkest: #973916;
-$orange-darker: #a83f18;
-$orange-dark: #b9461b;
-$orange-light: #db521f;
-$orange-lighter: #e15e2d;
-$orange-lightest: #e36b3e;
-$orange-special: #ec7330;
+$orange: #CA4C1D; // 4.6 contrast ratio relative to white
+$orange-darkest: #973916; // 7.2 contrast ratio relative to white
+$orange-darker: #a83f18; // 6.19 contrast ratio relative to white
+$orange-dark: #b9461b; // 5.31 contrast ratio relative to white
+$orange-light: #db521f; // 4.0 contrast ratio relative to white
+$orange-lighter: #e15e2d; // 3.59 contrast ratio relative to white
+$orange-lightest: #e36b3e; // 3.26 contrast ratio relative to white
+$orange-special: #eb712f; // 3.02 contrast ratio relative to white
 $bg-orange: $orange;
 
 $yellow: #ffb81c;
@@ -212,7 +212,7 @@ $theme-colors-text: (
   "secondary": $white,
   "success": $white,
   "info": $white,
-  "warning": $gray-800,
+  "warning": $white,
   "danger": $white,
   "light": $body-color,
   "dark": $white,
@@ -234,7 +234,7 @@ $yiq-text-light: $white;
 //
 // Quickly modify global styling by enabling or disabling optional features.
 
-$enable-caret: true;
+$enable-caret: false; // bootstrap default was true
 $enable-rounded: true;
 $enable-shadows: true;
 $enable-gradients: false;
@@ -465,12 +465,19 @@ $font-weight-heavy: $font-weight-bolder;
 $font-weight-base: $font-weight-light;
 $line-height-base: 1.5;
 
-$h1-font-size: $font-size-base * 2.5;
-$h2-font-size: $font-size-base * 2;
-$h3-font-size: $font-size-base * 1.75;
-$h4-font-size: $font-size-base * 1.5;
-$h5-font-size: $font-size-base * 1.25;
-$h6-font-size: $font-size-base;
+$h1-font-size-multiplier: 2.5;
+$h2-font-size-multiplier: 2;
+$h3-font-size-multiplier: 1.75;
+$h4-font-size-multiplier: 1.5;
+$h5-font-size-multiplier: 1.25;
+$h6-font-size-multiplier: 1;
+
+$h1-font-size: $font-size-base * $h1-font-size-multiplier;
+$h2-font-size: $font-size-base * $h2-font-size-multiplier;
+$h3-font-size: $font-size-base * $h3-font-size-multiplier;
+$h4-font-size: $font-size-base * $h4-font-size-multiplier;
+$h5-font-size: $font-size-base * $h5-font-size-multiplier;
+$h6-font-size: $font-size-base * $h6-font-size-multiplier;
 
 $headings-margin-top: 1em;
 $headings-margin-bottom: 1.125rem;
@@ -501,7 +508,8 @@ $display3-weight: 300;
 $display4-weight: 300;
 $display-line-height: $headings-line-height;
 
-$lead-font-size: $font-size-base * 1.25;
+$lead-font-size-multiplier: 1.25;
+$lead-font-size: $font-size-base * $lead-font-size-multiplier;
 $lead-font-weight: 300;
 
 $small-font-size: 75%;
@@ -513,6 +521,8 @@ $blockquote-small-font-size: $small-font-size;
 $blockquote-font-size: $font-size-base;
 $blockquote-large-font-size: $lead-font-size;
 $blockquote-border-width: $font-size-base * 0.2;
+
+$cite-border-color: $gray-300;
 
 $hr-border-color: rgba($black, .1);
 $hr-border-width: $border-width;
@@ -873,6 +883,8 @@ $zindex-modal-backdrop: 1040;
 $zindex-modal: 1050;
 $zindex-popover: 1060;
 $zindex-tooltip: 1070;
+$zindex-carousel-indicators: 15;
+$zindex-carousel-arrows: 15;
 
 
 // Navs
@@ -1323,8 +1335,34 @@ $line-length-min: 19.6875; // 45 characters
 
 $content-width: $font-size-base * $line-length-max;
 
+$alignwide-ratio-md: 1.309;
+$alignwide-ratio-lg: 1.618;
+
+// Hero aspect ratio
+
+$hero-slide-padding-ratio-xs: 0.9313;
+$hero-slide-padding-ratio-sm: 0.4125;
+$hero-slide-padding-ratio-md: 0.3;
+$hero-slide-padding-ratio-lg: $hero-slide-padding-ratio-md;
+$hero-slide-padding-ratio-xl: $hero-slide-padding-ratio-md;
+$hero-slide-padding-ratio-xxl: $hero-slide-padding-ratio-md;
+
+// Landing page header aspect ratio
+//// Ratios based on breakdown of analytics for browser sizes from 1 May 2020 through 23 Jul 2020. Share of that breakpoint in parentheses.
+
+$lp-header-aspect-ratio-xxs: 0.8125; // 0.875 (5.59%), 0.9375 (11.56%), 1.0 (79.00%)
+$lp-header-aspect-ratio-xs: $lp-header-aspect-ratio-xxs; // 0.125 (4.22%), 0.3125 (4.29%), 0.625 (3.80%), 0.6875 (6.89%), 0.75 (3.40%), 0.875 (3.22%), 1.0 (60.02%)
+$lp-header-aspect-ratio-sm: $lp-header-aspect-ratio-xxs; // 0.375 (7.21%), 0.6875 (6.07%), 0.8125 (19.47%), 0.875 (14.63%), 1 (11.96%)
+$lp-header-aspect-ratio-md: 0.3125; // 0.125 (3.93%), 0.1875 (12.76%), 0.25 (6.94%), 0.3125 (13.34%), 0.375 (39.05%), 0.4375 (8.39%), 0.5 (4.90%)
+$lp-header-aspect-ratio-lg: $lp-header-aspect-ratio-md; // 0.25	(4.49%), 0.3125 (45.17%), 0.375 (22.02%), 0.4375 (11.80%), 0.5 (5.64%), 0.5625 (6.51%)
+$lp-header-aspect-ratio-xl: $lp-header-aspect-ratio-lg; // 0.3125 (28.72%), 0.375 (44.16%), 0.4375 (21.18%)
+$lp-header-aspect-ratio-xxl: $lp-header-aspect-ratio-xl; // 0.375 (71.60%), 0.4375 (22.37%)
+
 
 // SVG Graphics
 
 $triangles: url("../../assets/svg/triangles_seamless_white.svg");
 $triangles-black: url("../../assets/svg/triangles_seamless_black.svg");
+$triangles-header: url("../../assets/svg/triangles_multi_lp.svg");
+$triangles-header-mobile: url("../../assets/svg/triangles_multi_lp_16-13.svg"); // 16:13 (0.8125) aspect ratio
+$triangles-header-desktop: url("../../assets/svg/triangles_multi_lp_16-5.svg"); // 16:5 (0.3125) aspect ratio
