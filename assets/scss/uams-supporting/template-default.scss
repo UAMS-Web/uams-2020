@@ -5,7 +5,10 @@ body.archive,
 body.error404,
 body.search,
 body.advert-template-default,
-body.blog  {
+body.blog,
+body.tshowcase-template-default,
+body.kb-template-default,
+body.sfwd-courses-template-default {
     .archive-description,
     .entry {
 
@@ -53,6 +56,12 @@ body.blog  {
                 right: 0;
             }
         }
+
+        .archive-title {
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
 
     .alignfull {
@@ -82,7 +91,10 @@ body.post-template-default,
 body.archive,
 body.error404,
 body.advert-template-default,
-body.blog {
+body.blog,
+body.tshowcase-template-default,
+body.kb-template-default,
+body.sfwd-courses-template-default {
 
     .entry,
     .entry-comments,
@@ -91,6 +103,7 @@ body.blog {
     .archive-pagination {
         padding: $uams-module-padding-mobile;
         margin-bottom: 0;
+        line-height: inherit;
     
         @include media-breakpoint-up(sm) {
             padding: $uams-module-padding;

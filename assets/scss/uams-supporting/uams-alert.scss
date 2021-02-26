@@ -31,4 +31,8 @@
             color: $white;
         }
     }
+
+    h1 {
+        @extend .h4;
+    }
 }

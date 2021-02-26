@@ -1,0 +1,71 @@
+.entry,
+.mkb-content-main {
+    figure.wp-block-table {
+        table {
+            @extend .table;
+            @extend .table-bordered;
+        }
+
+        &.table-sm {
+            table {
+                @extend .table-sm;
+            }
+        }
+
+        // &.table-bordered {
+        //     border: none;
+            
+        //     table {
+        //         @extend .table-bordered;
+        //     }
+        // }
+
+        &.table-borderless {
+            table {
+                border: none;
+                @extend .table-borderless;
+            }
+        }
+
+        &.table-striped,
+        &.is-style-stripes {
+            table {
+                @extend .table-striped;
+            }
+        }
+
+        &.table-hover {
+            table {
+                @extend .table-hover;
+            }
+        }
+
+        &.table-dark {
+            color: inherit;
+            background-color: transparent;
+            
+            table {
+                @extend .table-dark;
+            }
+
+            &.table-bordered table {
+                border: 0;
+            }
+        
+            &.table-striped table {
+                tbody tr:nth-of-type(odd) {
+                    background-color: $table-dark-accent-bg;
+                }
+            }
+        
+            &.table-hover table {
+                tbody tr {
+                    @include hover {
+                        color: $table-dark-hover-color;
+                        background-color: $table-dark-hover-bg;
+                    }
+                }
+            }
+        }
+    }
+}

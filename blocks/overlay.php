@@ -23,14 +23,31 @@ if( !empty($block['className']) ) {
 if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
 }
-
+if ( empty($geo) )
+    $geo = get_field('overlay_geo');
 
 if( empty($overlay_rows) )
     $overlay_rows = get_field('overlay_section');
 
+// GEO Logic
+$geo_display = false;
+if (!isset($geo)){
+    $geo_display = true;
+} else {
+    if( $geo['geot_condition'] == 'include' ) {
+        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }  else {
+        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }
+}
+if ($geo_display) {
+
 if( $overlay_rows ) :
     $row_count = count($overlay_rows);
-
 
 ?>
 <div class="uams-module no-padding text-image-overlay<?php echo $className; ?>" id="<?php echo $id; ?>">
@@ -280,3 +297,4 @@ if( $overlay_rows ) :
     </div>
 </div>
 <?php endif;
+}

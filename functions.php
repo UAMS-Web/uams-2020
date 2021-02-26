@@ -283,40 +283,46 @@ function sp_pro_breadcrumbs_crumbs($crumbs) {
 		}
 	} elseif ( ('institute' == uams_get_site_info()['site'] ) ) {
 		if ( ( 'main' == uams_get_site_info()['department']) ) {
-			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
+			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
 			array_unshift($crumbs, $home);
-			// $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
+			// $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
 		} else {
 			// if ('dept' == uams_get_site_info()['department']) {
 			$sitehome = array(get_blog_details(1)->blogname, network_home_url());
 			array_unshift($crumbs, $sitehome);
 			// }
-			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
+			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
 			array_unshift($crumbs, $home);
 		}
 	} else { // Site == uams
 
-		if ( ( 'main' == uams_get_site_info()['subsite']) && !is_front_page() ) {
+		if ( 'other' == uams_get_site_info()['subsite'] ) {
+			if ( ( 'main' == uams_get_site_info()['department']) ) {
+				$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
+				array_unshift($crumbs, $home);
+				// $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
+			} else {
+				// if ('dept' == uams_get_site_info()['department']) {
+				$sitehome = array(get_blog_details(1)->blogname, network_home_url());
+				array_unshift($crumbs, $sitehome);
+				// }
+				$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
+				array_unshift($crumbs, $home);
+			}
+		} elseif ( ( 'main' == uams_get_site_info()['subsite']) && !is_front_page() ) {
 			// Set www.uams.edu as home
-			$crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
-		//  } elseif ( 'main' == uams_get_site_info()['subsite'] && is_front_page() ) {
-		// 	// UAMS Home	
-		// 	$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
-		// 	array_unshift($crumbs, $home); 
-		// 	} elseif ( ( 'main' != uams_get_site_info()['subsite']) && is_front_page() ) {
-		// 	// UAMS Home
-		// 	$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
-		// 	array_unshift($crumbs, $home);
+			$crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
+		
 		} elseif ( 'main' != uams_get_site_info()['subsite'] && 'main' != uams_get_site_info()['department'] && '' != uams_get_site_info()['department'] && 'uams' != uams_get_site_info()['department'] ) {
 			// Multisite Home
 			$sitehome = array(get_blog_details(1)->blogname, network_home_url());
 			array_unshift($crumbs, $sitehome);
 			// UAMS Home
-			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu/');
+			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
 			array_unshift($crumbs, $home);
 		} else {
 			// UAMS Home
-			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'http://www.uams.edu');
+			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu');
 			array_unshift($crumbs, $home);
 		}
 	}
@@ -373,6 +379,7 @@ if ( !function_exists('uams_get_site_info')):
 		$cop_dept = get_field( 'uamswp_uams_cop_dept', 'option' ); // college of pharmacy dept
 		$coph_dept = get_field( 'uamswp_uams_coph_dept', 'option' ); // college of public health dept
 		$grad_dept = get_field( 'uamswp_uams_grad-school_dept', 'option' ); // graduate school dept
+		$other_dept = get_field( 'uamswp_uams_other_dept' , 'option' ); // Other (Multisite)
 		$healthorganization = get_field( 'uamswp_uamshealth_subsite', 'option' ); // health 
 		$insideorganization = get_field( 'uamswp_inside_subsite', 'option' ); // inside 
 		if ('health' == $themestyle) {
@@ -436,6 +443,8 @@ if ( !function_exists('uams_get_site_info')):
 							$department = $coph_dept;
 						} elseif ($subsite == 'grad-school' && '' != $grad_dept) {
 							$department = $grad_dept;
+						} elseif ($subsite == 'other' && '' != $other_dept) {
+							$department = $other_dept;
 						} else {
 							$department = 'uams';
 						}
@@ -495,11 +504,11 @@ if ( !function_exists('uams_get_home_link')):
     function uams_get_home_link()
     {
 		if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site'])) {
-			$homelink = 'http://www.uams.edu';
+			$homelink = 'https://www.uams.edu';
 		} elseif ('uamshealth' == uams_get_site_info()['site']) {
 			$homelink = 'https://uamshealth.com';
 		} elseif ('inside' == uams_get_site_info()['site']) {
-			$homelink = 'http://inside.uams.edu';
+			$homelink = 'https://inside.uams.edu';
 		}
 		return $homelink;
     }
@@ -827,7 +836,8 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 		'post_status' => 'publish',
 		'post_parent' => $page_id,
 		'order' => 'ASC',
-		'orderby' => 'title',
+		'orderby' => 'menu_order title',
+		'posts_per_page' => -1, // We do not want to limit the post count
 		'meta_query' => array(
 			array(
 				'key' => 'page_hide_from_menu',
@@ -862,4 +872,52 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 		</section>
 	<?php
 	}
+}
+// Whitelist specific blocks for the Marketing Landing Page template
+add_filter('allowed_block_types', function($block_types, $post) {
+	$allowed_marketing = [
+		'acf/action-bar',
+		'acf/call-out',
+		'acf/cta',
+		//'acf/hero',
+		'acf/link-list',
+		'acf/uams-news',
+		'acf/text-overlay',
+		'acf/image-side',
+		'acf/text-stacked',
+		'acf/livewhale-calendar',
+		'acf/uams-gallery',
+		'acf/uams-content',
+		'acf/fad-providers',
+		'acf/fad-locations'
+	];
+	if (get_page_template_slug( $post ) == 'templates/marketing.php') {
+		return $allowed_marketing;
+	}
+	return $block_types;
+}, 10, 2);
+// ACF for GEO
+add_filter('acf/load_field/name=geo_valid', 'uamswp_set_geo');
+add_filter('acf/update_value/name=geo_valid', 'uamswp_force_geo', 10, 3);
+
+function uamswp_force_geo($value, $post_id, $field)
+{
+	if (class_exists('Geot')) {
+		$value = 'true';
+	} else {
+		$value = 'false';
+	}
+    return $value;
+}
+function uamswp_set_geo($field)
+{
+	if (class_exists('Geot')) {
+		$value = 'true';
+	} else {
+		$value = 'false';
+	}
+	if (array_key_exists('value', $field)) {
+        $field['value'] = $value;
+    }
+    return $field;
 }

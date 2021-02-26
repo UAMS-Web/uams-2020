@@ -107,6 +107,100 @@ ol {
     li {
         margin-bottom: 0.5em;
     }
+
+    ul, ol, ul:first-child, ol:first-child {
+        margin-top: 0.5em;
+    }
+}
+
+ol {
+    &.decimal {
+        list-style-type: decimal;
+
+        ol {
+            list-style-type: decimal;
+        }
+    }
+
+    &.upper-alpha {
+        list-style-type: upper-alpha;
+
+        ol {
+            list-style-type: upper-alpha;
+        }
+    }
+
+    &.lower-alpha {
+        list-style-type: lower-alpha;
+
+        ol {
+            list-style-type: lower-alpha;
+        }
+    }
+
+    &.upper-roman {
+        list-style-type: upper-roman;
+
+        ol {
+            list-style-type: upper-roman;
+        }
+    }
+
+    &.lower-roman {
+        list-style-type: lower-roman;
+
+        ol {
+            list-style-type: lower-roman;
+        }
+    }
+}
+
+ol {
+    &.outline {
+        list-style-type: upper-roman;
+
+        > li > ol {
+            list-style-type: upper-alpha;
+
+            > li > ol {
+                list-style-type: decimal;
+
+                > li > ol {
+                    list-style-type: lower-alpha;
+
+                    > li > ol {
+                        list-style-type: lower-roman;
+
+                        > li > ol {
+                            counter-reset: list;
+
+                            > li {
+                                list-style: none;
+
+                                &:before {
+                                    content:  "(" counter(list, decimal) ") ";
+                                    counter-increment: list;
+                                }
+
+                                > ol {
+                                    counter-reset: list;
+        
+                                    > li {
+                                        list-style: none;
+        
+                                        &:before {
+                                            content:  "(" counter(list, lower-alpha) ") ";
+                                            counter-increment: list;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 strong,
@@ -162,6 +256,20 @@ b {
 
 .page-title {
     font-weight: $font-weight-bolder;
+}
+
+.module-description {
+    @extend .line-length-max;
+    text-align: center;
+    margin-bottom: $uams-module-padding-mobile;
+    
+    @include media-breakpoint-up(xs) {
+        font-size: $lead-font-size;
+    }
+
+    @include media-breakpoint-up(sm) {
+        margin-bottom: $uams-module-padding;
+    }
 }
 
 // Blockquotes

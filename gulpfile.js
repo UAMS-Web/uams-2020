@@ -13,6 +13,7 @@ var gulp = require('gulp'),
     cssnano = require('cssnano'),
     // cmq = require('css-mqpacker'),
     autoprefixer = require('autoprefixer'),
+    zip = require('gulp-zip'),
     comments = require('postcss-discard-comments');
     // critical = require('critical');
 
@@ -82,6 +83,10 @@ var paths = {
     languages: {
         src: '**/*.php',
         dest: 'languages/uams-2020.pot'
+    },
+    zip: {
+        src: 'html/html_template/*',
+        dest: 'html'
     },
     site: {
         url: 'http://uamshealthmu.local'
@@ -178,6 +183,12 @@ function js() {
         .pipe(notify({ message: 'Scripts task complete' }));
 }
 
+function template() {
+    return gulp.src(paths.zip.src)
+        .pipe(zip('html_template.zip'))
+        .pipe(gulp.dest(paths.zip.dest));
+}
+
 // function browserSyncServe(done) {
 //     browserSync.init({
 //         injectChanges: true,
@@ -207,6 +218,8 @@ function watch() {
 gulp.task('translation', translation);
 
 gulp.task('fa', fa);
+
+gulp.task('zip', template);
 
 gulp.task('default', gulp.parallel(style, uamsalert, adminstyle, js, watch));
 

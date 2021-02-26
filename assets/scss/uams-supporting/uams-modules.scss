@@ -27,7 +27,10 @@
     }
 
     &.extra-padding {
-        padding: ($uams-module-padding-mobile * 2) $uams-module-padding-mobile;
+
+        @include media-breakpoint-up(xs) {
+            padding: ($uams-module-padding * 2) $uams-module-padding;
+        }
 
         @include media-breakpoint-up(sm) {
             padding: ($uams-module-padding * 2) $uams-module-padding;
@@ -351,8 +354,7 @@
     }
 }
 
-:not([class^="bg-"]),
-:not([class*=" bg-"]) {
+:not([class^="bg-"]):not([class*=" bg-"]) {
     &:not(.archive-description):not(.entry-header) {
         + .uams-module.bg-white {
             border-top: 2px solid $body-bg-border;
@@ -415,6 +417,19 @@ body.page-template-default {
     }
 }
 
+body.page-template-page_landing,
+body.page-template-marketing {
+    .entry-content {
+        .uams-module {
+            &.alignfull {
+                width: auto;
+                max-width: 100%;
+                margin: 0;
+            }
+        }
+    }
+}
+
 @import "uams-modules/side-by-side";
 @import "uams-modules/text-image-overlay";
 @import "uams-modules/stacked-image-text";
@@ -424,6 +439,7 @@ body.page-template-default {
 @import "uams-modules/post-category-tile";
 @import "uams-modules/syndication";
 @import "uams-modules/graphic-title";
+@import "uams-modules/landing-page-title";
 @import "uams-modules/link-list";
 @import "uams-modules/facetwp-blocks";
 @import "uams-modules/gallery";

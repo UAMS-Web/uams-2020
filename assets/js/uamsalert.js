@@ -10,7 +10,7 @@
  *  </head>
  *  <body>
  *
- *  <script type="text/javascript" src="//uamshealth.com/_alert/alert.js"></script>
+ *  <script type="text/javascript" src="//www.uams.edu/web/alert/uamsalert.js"></script>
  *  </body>
  *  </html>
  *
@@ -22,7 +22,7 @@
 // Thanks Dane!
 var strTestStatus = window.location.hash.indexOf('uamsalert') === -1 ? 'false' : 'true';
 // Allow for local testing
-var strDomain = (window.location.hostname == 'localhost') ? 'localhost' : 'uamshealth.com/_alert';
+var strDomain = (window.location.hostname == 'localhost') ? 'localhost' : 'www.uams.edu/web/alert';
 var strDataFeed = '/data/?c=displayAlert&test='+strTestStatus;
 var strBaseUrl = window.location.protocol + '//' + strDomain;
 // var strBaseUrl = 'http://' + strDomain; // Test
@@ -34,6 +34,8 @@ if (document.body.className.indexOf('uamshealth')!== -1) {
     strSiteStatus = 'insidenew';
 } else if (document.body.className.indexOf('inside')!== -1) {
     strSiteStatus = 'inside';
+} else if (document.body.className.indexOf('nw-campus')!== -1) {
+    strSiteStatus = 'northwest';
 } else {
     strSiteStatus = 'uams';
 }
@@ -101,8 +103,8 @@ function displayAlert(objAlertData)
             addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent); // Removed strAlertMessage
             // Code contributed by Dustin Brewer
             var strCSS = document.createElement('link');
-            //strCSS.setAttribute('href', strBaseUrl + '/uamsalert.css');
-            // strCSS.setAttribute('href', './uamsalert.css');
+            strCSS.setAttribute('href', strBaseUrl + '/uamsalert.css');
+//             strCSS.setAttribute('href', './uamsalert.css');
             strCSS.setAttribute('rel','stylesheet');
             strCSS.setAttribute('type','text/css');
             document.getElementsByTagName('head')[0].appendChild(strCSS);
@@ -218,7 +220,7 @@ function addElement(strAlertTitle,strAlertLink,strAlertColor,strAlertContent) //
     // Standard/Base Link - Inclement Weather
     var alertLinkBase = document.createElement('a');
     alertLinkBase.setAttribute('class', 'btn btn-outline-white');
-    alertLinkBase.setAttribute('href', 'https://uamshealth.com/weather/');
+    alertLinkBase.setAttribute('href', 'https://news.uams.edu/weather/');
     alertLinkBase.setAttribute('title', 'UAMS Inclement Weather');
     var alertLinkTextBase = document.createTextNode('All Updates');
     alertLinkBase.appendChild(alertLinkTextBase);

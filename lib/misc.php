@@ -144,7 +144,9 @@ function uamswp_allowed_block_types( $allowed_blocks ) {
 		'core/list',
 		'core/quote',
 		'core/file',
-		'core/gallery',
+		// 'core/gallery', // UAMS version
+		// 'core/audio',
+		// 'core/cover', 
 		// 'core/video', // Use embeds??
 		// Formatting
 		'core/table',
@@ -170,6 +172,16 @@ function uamswp_allowed_block_types( $allowed_blocks ) {
 		'core-embed/scribd',
 		'core-embed/slideshare',
 		'core-embed/ted',
+		// Widgets
+		'core/shortcode',
+		// 'core/archives',
+		// 'core/categories',
+		// 'core/latest-comments',
+		// 'core/latest-posts',
+		// 'core/calendar',
+		// 'core/rss',
+		// 'core/search',
+		// 'core/tag-cloud',
 	), $registered_blocks );
  
 }
