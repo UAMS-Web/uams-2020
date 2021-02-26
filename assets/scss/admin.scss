@@ -37,6 +37,227 @@ body {
     &:not(#tinymce) {
         margin: 0; // 1
     }
+
+    &.block-editor-page {
+        .editor-post-title__block .editor-post-title__input {
+            font-family: $font-family-base;
+            font-weight: $headings-font-weight;
+            line-height: $headings-line-height;
+        }
+        .edit-post-visual-editor .editor-block-list__layout {
+            .acf-block-preview,
+            .block-editor-block-list__block-edit [data-block] {
+                @import "../../node_modules/bootstrap/scss/reboot";
+                @import "../../node_modules/bootstrap/scss/grid";
+                @import "../../node_modules/bootstrap/scss/type";
+                @import "../../node_modules/bootstrap/scss/images";
+                @import "../../node_modules/bootstrap/scss/code";
+                @import "../../node_modules/bootstrap/scss/tables";
+                @import "../../node_modules/bootstrap/scss/forms";
+                @import "../../node_modules/bootstrap/scss/buttons";
+                //@import "../../node_modules/bootstrap/scss/transitions";
+                //@import "../../node_modules/bootstrap/scss/dropdown";
+                //@import "../../node_modules/bootstrap/scss/button-group";
+                //@import "../../node_modules/bootstrap/scss/input-group";
+                //@import "../../node_modules/bootstrap/scss/custom-forms";
+                //@import "../../node_modules/bootstrap/scss/nav";
+                //@import "../../node_modules/bootstrap/scss/navbar";
+                @import "../../node_modules/bootstrap/scss/card";
+                //@import "../../node_modules/bootstrap/scss/breadcrumb";
+                //@import "../../node_modules/bootstrap/scss/pagination";
+                //@import "../../node_modules/bootstrap/scss/badge";  // hidden in main theme stylesheet
+                //@import "../../node_modules/bootstrap/scss/jumbotron";  // hidden in main theme stylesheet
+                @import "../../node_modules/bootstrap/scss/alert";
+                //@import "../../node_modules/bootstrap/scss/progress";  // hidden in main theme stylesheet
+                //@import "../../node_modules/bootstrap/scss/media";  // hidden in main theme stylesheet
+                //@import "../../node_modules/bootstrap/scss/list-group";  // hidden in main theme stylesheet
+                //@import "../../node_modules/bootstrap/scss/close";
+                //@import "../../node_modules/bootstrap/scss/toasts";  // hidden in main theme stylesheet
+                //@import "../../node_modules/bootstrap/scss/modal";
+                //@import "../../node_modules/bootstrap/scss/tooltip";  // hidden in main theme stylesheet
+                //@import "../../node_modules/bootstrap/scss/popover";  // hidden in main theme stylesheet
+                @import "../../node_modules/bootstrap/scss/carousel";
+                //@import "../../node_modules/bootstrap/scss/spinners";  // hidden in main theme stylesheet
+                @import "../../node_modules/bootstrap/scss/utilities";
+                //@import "../../node_modules/bootstrap/scss/print";
+            
+                // UAMS Bootstrap Core Override
+                //@import "uams-supporting/functions";  // hidden in main theme stylesheet
+                //@import "uams-supporting/variables";  // hidden in main theme stylesheet
+                //@import "uams-supporting/mixins";  // hidden in main theme stylesheet
+                //@import "uams-supporting/root";  // hidden in main theme stylesheet
+                //@import "uams-supporting/reboot";  // hidden in main theme stylesheet
+                @import "uams-supporting/type";
+                //@import "uams-supporting/images";  // hidden in main theme stylesheet
+                //@import "uams-supporting/code";  // hidden in main theme stylesheet
+                @import "uams-supporting/grid";
+                //@import "uams-supporting/tables";  // hidden in main theme stylesheet
+                @import "uams-supporting/forms";
+                @import "uams-supporting/buttons";
+                //@import "uams-supporting/transitions";  // hidden in main theme stylesheet
+                //@import "uams-supporting/dropdown";  // hidden in main theme stylesheet
+                //@import "uams-supporting/button-group";  // hidden in main theme stylesheet
+                //@import "uams-supporting/input-group";  // hidden in main theme stylesheet
+                //@import "uams-supporting/custom-forms";  // hidden in main theme stylesheet
+                //@import "uams-supporting/nav";
+                //@import "uams-supporting/navbar";
+                //@import "uams-supporting/card";  // hidden in main theme stylesheet
+                //@import "uams-supporting/breadcrumb";
+                //@import "uams-supporting/pagination";
+                //@import "uams-supporting/badge";  // hidden in main theme stylesheet
+                //@import "uams-supporting/jumbotron";  // hidden in main theme stylesheet
+                @import "uams-supporting/alert";
+                //@import "uams-supporting/progress";  // hidden in main theme stylesheet
+                //@import "uams-supporting/media";  // hidden in main theme stylesheet
+                //@import "uams-supporting/list-group";  // hidden in main theme stylesheet
+                //@import "uams-supporting/close";  // hidden in main theme stylesheet
+                //@import "uams-supporting/toasts";  // hidden in main theme stylesheet
+                //@import "uams-supporting/modal";  // hidden in main theme stylesheet
+                //@import "uams-supporting/tooltip";  // hidden in main theme stylesheet
+                //@import "uams-supporting/popover";  // hidden in main theme stylesheet
+                @import "uams-supporting/carousel";
+                //@import "uams-supporting/spinners";  // hidden in main theme stylesheet
+                //@import "uams-supporting/utilities";
+                //@import "uams-supporting/print";  // hidden in main theme stylesheet
+            
+                // New UAMS Supporting Styles
+                color: $body-color;
+                font-family: $font-family-base;
+                font-size: $font-size-base;
+                font-weight: $font-weight-base;
+                line-height: $line-height-base;
+            
+                @import "uams-supporting/page";
+                @import "uams-supporting/uams-alert";
+                @import "uams-supporting/layout";
+                @import "uams-supporting/links";
+                @import "uams-supporting/text-callouts";
+            
+                //@import "../../node_modules/smartmenus-bootstrap-4/jquery.smartmenus.bootstrap-4";
+            
+                // Screen Reader Classes
+                //@import "supporting/screen-reader-text";
+            
+                // Long nonbreaking path name support
+                //@import "supporting/long-nonbreaking-path-name-support";
+            
+                // Skip to Main Content - Accessibility Link
+                //@import "supporting/skip-to-main-content";
+            
+                // Comments
+                //@import "supporting/comments";
+            
+                // Images
+                @import "supporting/wordpress-images";
+            
+                // Table
+                @import "supporting/table";
+            
+                // Widgets
+                //@import "supporting/widgets";
+            
+                // Pagination
+                //@import "supporting/pagination";
+            
+                //@import "supporting/gallery";
+            
+                // Global Search
+                //@import "uams-supporting/search-tray";
+                //@import "uams-supporting/search-results";
+                //@import "uams-supporting/search-results-google-cse";
+            
+                // Site Wrapper
+                //@import "uams-supporting/site-wrapper";
+            
+                // Navigation
+                //@import "supporting/nav";
+            
+                // Header
+                //@import "supporting/header";
+                //@import "uams-supporting/header";
+                //@import "uams-supporting/header-2";  // hidden in main theme stylesheet
+            
+                // Quick Links
+                //@import "uams-supporting/quick-links";
+            
+                // Jumbotron
+                //@import "supporting/jumbotron";
+            
+                // Site Inner
+                //@import "supporting/site-inner";
+                //@import "uams-supporting/site-inner";
+            
+                // Archive/Blog
+                //@import "supporting/archive";
+            
+                // Single Post/Page
+                //@import "supporting/single";
+            
+                // Template, Default
+                //@import "uams-supporting/template-default";
+            
+                // Template, Landing Page
+                //@import "uams-supporting/template-landing-page";
+            
+                // Sidebar
+                //@import "supporting/sidebar";
+                //@import "uams-supporting/sidebar";
+            
+                // UAMS Modules
+                @import "uams-supporting/uams-modules";
+            
+                // Hero
+                @import "uams-supporting/hero";
+            
+                // // Ratings
+                // @import "uams-supporting/find-a-doc/ratings";
+            
+                // // Doctors
+                // @import "uams-supporting/find-a-doc/doctors-list";
+                // @import "uams-supporting/find-a-doc/doctors-item";
+                // @import "uams-supporting/find-a-doc/doctors-cards";
+            
+                // // Conditions and/or Treatments
+                // @import "uams-supporting/find-a-doc/conditions-treatments";
+            
+                // // Locations
+                // @import "uams-supporting/find-a-doc/locations-list";
+                // @import "uams-supporting/find-a-doc/locations-item";
+                // @import "uams-supporting/find-a-doc/location-alert";
+            
+                // CTA Bars
+                @import "uams-supporting/cta-bar";
+            
+                // Footer Widgets
+                //@import "supporting/footer-widgets";
+            
+                // Site Footer
+                //@import "supporting/footer";
+                //@import "uams-supporting/footer";
+            
+                // Intranet
+                //@import "uams-supporting/intranet";
+            
+                // Awesome Weather
+                //@import "uams-supporting/awesome-weather";
+            
+                // Gravity Forms
+                @import "uams-supporting/gravity-forms";
+            
+                // WP Adverts
+                //@import "uams-supporting/wp-adverts/wp-adverts";
+            
+                // Tablepress
+                @import "uams-supporting/tablepress";
+            
+                // Leaflet map
+                //@import "uams-supporting/leaflet-map";
+            
+                // Responsive Embedded Videos
+                @import "uams-supporting/embed-video";
+            }
+        }
+    }
 }
 
 // Main column width
