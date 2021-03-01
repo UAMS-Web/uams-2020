@@ -9,6 +9,9 @@ if ( empty( $id ) && isset($block) ) {
 if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+}
 
 $id = 'content-' . $id;  
     
@@ -45,7 +48,7 @@ $template = array(
 	// )),
 );
 ?>
-<section class="uams-module content-block<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module content-block<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
