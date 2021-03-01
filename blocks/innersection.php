@@ -9,11 +9,11 @@ if ( empty( $id ) && isset($block) ) {
 if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
+
+$id = 'content-' . $id;  
 if( !empty($block['anchor']) ) {
     $id = $block['anchor'];
 }
-
-$id = 'content-' . $id;  
     
 $className = '';
 if( !empty($block['className']) ) {
@@ -35,10 +35,6 @@ if ( empty($background_color) )
 //     $classes = array_merge( $classes, explode( ' ', $block['className'] ) );
 if( !empty( $block['align'] ) )
     $classes[] = 'align' . $block['align'];
-
-$anchor = '';
-if( !empty( $block['anchor'] ) )
-	$anchor = ' id="' . sanitize_title( $block['anchor'] ) . '"';
 
 $allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/embed' );
 
