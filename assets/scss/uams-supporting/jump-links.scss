@@ -1,0 +1,26 @@
+.jump-links {
+    justify-content: center;
+
+    .navbar-collapse {
+        flex-grow:0;
+    }
+
+    h2 {
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        margin: 0;
+        padding: 0;
+
+        &:after {
+            content: ": ";
+        }
+    }
+
+    ol, ul {
+        li {
+            margin-bottom: 0;
+            margin-left: 0.25em;
+        }
+    }
+}
