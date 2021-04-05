@@ -38,6 +38,9 @@ function uamswp_nav_subsection(){
         }
         
     }
+    if (is_search()) {
+        $subsection = false;
+    }
     if ($subsection) {
         return $id;
     } else {
@@ -86,8 +89,8 @@ function custom_nav_menu() {
         $nav = wp_nav_menu( $args );
 
         //* Do nothing if there is nothing to show
-        if ( ! $nav )
-            return;
+        // if ( ! $nav )
+        //     return;
         
         function uamswp_wp_list_child_pages( $id ){
             $excluded_pages = array();
@@ -134,7 +137,7 @@ function custom_nav_menu() {
         $wrapper_open .= '<ul id="menu-dropdowns" class="nav navbar-nav align-self-end mr-auto">';
 
         $wrapper_close  = '</ul>'; // ul
-        $wrapper_close  = '</div>'; // wrap
+        $wrapper_close .= '</div>'; // wrap
         $wrapper_close .= '</nav>'; // navbar
 
         // Wrap the list items in an unordered list and navbar
@@ -197,7 +200,7 @@ function custom_nav_menu() {
         $wrapper_open .= '<ul id="menu-dropdowns" class="nav navbar-nav align-self-end mr-auto">';
 
         $wrapper_close  = '</ul>'; // ul
-        $wrapper_close  = '</div>'; // wrap
+        $wrapper_close .= '</div>'; // wrap
         $wrapper_close .= '</nav>'; // navbar
 
         // Wrap the list items in an unordered list and navbar
@@ -312,4 +315,11 @@ function uamswp_override_do_nav($nav_output, $nav, $args) {
 }
 
 remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
-add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
+function sp_breadcrumb_after_header() { 
+	if(function_exists('seopress_display_breadcrumbs')) { 
+		seopress_display_breadcrumbs(); 
+	} else {
+        add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
+    }
+} 
+add_action('genesis_after_header', 'sp_breadcrumb_after_header');

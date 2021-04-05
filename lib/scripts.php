@@ -20,20 +20,22 @@ function uamswp_theme_scripts() {
 		wp_enqueue_style( 'app-css', UAMSWP_THEME_CSS . 'app.css' );
 
 		// Enqueue Google Fonts
-		wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i', array(), 'CHILD_THEME_VERSION' );
+		wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i&display=swap', array(), 'CHILD_THEME_VERSION' );
 
 		// Disable the superfish script
 		wp_deregister_script( 'superfish' );
 		wp_deregister_script( 'superfish-args' );
+		// Deregister Hover Intent
+		wp_deregister_script( 'hoverIntent' );
 
 		// Deregister jQuery and use Bootstrap supplied version
-		wp_deregister_script( 'jquery' );
-		// wp_register_script( 'jquery', UAMSWP_THEME_JS . 'jquery.slim.min.js', array(), $version, true );
+		// wp_deregister_script( 'jquery' );
+		// wp_register_script( 'jquery', UAMSWP_THEME_JS . 'jquery.min.js', array(), $version, false );
 		// wp_enqueue_script( 'jquery' );
 
 		// Register theme JS and enqueue it
-		wp_register_script( 'jquery', UAMSWP_THEME_JS . 'all.min.js', array( ), $version, true ); // Renamed for dependencies
-		wp_enqueue_script( 'jquery' );
+		wp_register_script( 'app-js', UAMSWP_THEME_JS . 'uams.min.js', array( 'jquery' ), $version, true ); // Renamed for dependencies
+		wp_enqueue_script( 'app-js' );
 
 		// // Register Popper JS and enqueue it
 		// wp_register_script( 'app-popper-js', UAMSWP_THEME_JS . 'popper.min.js', array( 'jquery' ), $version, true );
@@ -71,9 +73,16 @@ function uamswp_theme_scripts() {
 		// wp_register_script( 'app-js', UAMSWP_THEME_JS . 'app.min.js', array( 'jquery' ), $version, true );
 		// wp_enqueue_script( 'app-js' );
 
+		// // Register Font Awesome JS and enqueue it
+		wp_register_script( 'fa-js', UAMSWP_THEME_JS . 'fa.min.js', array( ), $version, true );
+		wp_enqueue_script( 'fa-js' );
+
 		// Alert system based on uams-2016
-		wp_enqueue_script( 'uams-alert', get_stylesheet_directory_uri() . '/assets/js/alert.js', array(), '1.0.0', true );
+		wp_enqueue_script( 'uams-alert', get_stylesheet_directory_uri() . '/assets/js/uamsalert.js', array(), '2.5.0', true );
 		// wp_enqueue_style( 'uams-alert-style', get_stylesheet_directory_uri() . '/assets/css/uams.alert.css', array(), '1.0.0', 'all' );
+
+		// Deregister shourtcode-ui styles
+		wp_deregister_style( 'shortcodes_styles' );
 		
 	}
 }
@@ -83,3 +92,86 @@ add_action( 'init', 'uamswp_custom_editor_css' );
 function uamswp_custom_editor_css() {
 	add_editor_style( get_stylesheet_uri() );
 }
+
+
+// CORS header fix
+add_filter('allowed_http_origins', 'add_allowed_origins');
+
+function add_allowed_origins($origins) {
+    $origins[] = 'https://www.uams.edu';
+    $origins[] = 'http://www.uams.edu';
+	$origins[] = 'https://public-api.wordpress.com';
+	$origins[] = 'https://uamshealth.com';
+	$origins[] = 'https://news.uams.edu';
+    return $origins;
+}
+
+// function defer_parsing_of_js( $url ) {
+//     if ( is_user_logged_in() ) return $url; //don't break WP Admin
+//     if ( FALSE === strpos( $url, '.js' ) ) return $url;
+//     if ( strpos( $url, 'jquery' ) ) return $url; // Skip jquery file(s)
+//     return str_replace( ' src', ' defer src', $url );
+// }
+// add_filter( 'script_loader_tag', 'defer_parsing_of_js', 10 );
+
+// function add_rel_preload($html, $handle, $href, $media) {
+    
+//     if (is_admin())
+//         return $html;
+
+//      $html = <<<EOT
+// <link rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'" id='$handle' href='$href' type='text/css' media='all' />
+// EOT;
+//     return $html;
+// }
+// add_filter( 'style_loader_tag', 'add_rel_preload', 10, 4 );
+
+// function hook_css() {
+//     include get_theme_file_path( '/assets/css/critical.css');
+// }
+// add_action('wp_head', 'hook_css');
+
+/**
+ * Gutenberg scripts and styles
+ *
+ */
+function uamswp_gutenberg_scripts() {
+	wp_enqueue_style( 'theme-fonts', uamswp_theme_fonts_url() );
+	wp_enqueue_script( 'theme-editor', get_stylesheet_directory_uri() . '/assets/js/editor.js', array( 'wp-blocks', 'wp-dom' ), filemtime( get_stylesheet_directory() . '/assets/js/editor.js' ), true );
+}
+add_action( 'enqueue_block_editor_assets', 'uamswp_gutenberg_scripts' );
+
+/**
+ * Theme Fonts URL
+ *
+ */
+function uamswp_theme_fonts_url() {
+	return 'https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap';
+}
+/**
+ * Remove Gutenberg Block Directory
+ *
+ */
+add_action( 'admin_init', function() {
+	remove_action( 'enqueue_block_editor_assets', 'wp_enqueue_editor_block_directory_assets' );
+ } );
+ /**
+ * Remove Gutenberg Block Patterns
+ *
+ */
+remove_theme_support( 'core-block-patterns' );
+
+function uamswp_gutenberg_disable_all_colors_fonts() {
+	/**
+	 * Disable colors
+	 */
+	add_theme_support( 'editor-color-palette', [] );
+	add_theme_support( 'disable-custom-colors' );
+
+	/**
+	 * Disable font sizes.
+	 */
+	add_theme_support( 'editor-font-sizes'  );
+	add_theme_support( 'disable-custom-font-sizes' );
+}
+add_action( 'after_setup_theme', 'uamswp_gutenberg_disable_all_colors_fonts' );

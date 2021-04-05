@@ -7,6 +7,23 @@
 if (class_exists('UAMS_Syndicate_News_Base')) {
     return array(
 		array(
+			'key' => 'field_news_intro'. $suffix,
+			'label' => '',
+			'name' => '',
+			'type' => 'message',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => '<h2>UAMS News Block</h2>',
+			'new_lines' => 'wpautop',
+			'esc_html' => 0,
+		),
+		array(
 			'key' => 'field_news_base'. $suffix,
 			'label' => '<i class="dashicons dashicons-feedback"></i> Base',
 			'name' => '',
@@ -94,7 +111,7 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			'label' => 'Hide Section Title',
 			'name' => 'news_hide_title',
 			'type' => 'true_false',
-			'instructions' => '',
+			'instructions' => 'The heading is necessary for page hierarchy. But it can be hidden from all but screen readers and search engines. This is not recommended in most cases.',
 			'required' => 0,
 			'conditional_logic' => array(
 				array(
@@ -426,6 +443,82 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			'prepend' => '',
 			'append' => '',
 			'maxlength' => '',
+		),
+		array(
+			'key' => 'field_news_geo_valid'. $suffix,
+			'label' => 'GeoTargetingWP Installed?',
+			'name' => 'geo_valid',
+			'type' => 'radio',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => 'hidden',
+				'id' => '',
+			),
+			'acfe_permissions' => '',
+			'choices' => array(
+				'false' => 'False',
+				'true' => 'True',
+			),
+			'allow_null' => 0,
+			'other_choice' => 0,
+			'default_value' => 'false',
+			'layout' => 'horizontal',
+			'return_format' => 'value',
+		),
+		array(
+			'key' => 'field_news_regions'. $suffix,
+			'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
+			'name' => '',
+			'type' => 'accordion',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_geo_valid'. $suffix,
+						'operator' => '==',
+						'value' => 'true',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'open' => 0,
+			'multi_expand' => 0,
+			'endpoint' => 0,
+		),
+		array(
+			'key' => 'field_news_geo'. $suffix,
+			'label' => 'Regions',
+			'name' => 'news_geo',
+			'type' => 'geot_field',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_geo_valid'. $suffix,
+						'operator' => '==',
+						'value' => 'true',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_permissions' => '',
+			'geot_show' => 'city-regions',
+			'geot_condition' => 'include',
+			'geot_regions' => '',
+			'geot_countries' => '',
 		),
     );
 } else {

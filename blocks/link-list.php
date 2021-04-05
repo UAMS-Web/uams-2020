@@ -6,7 +6,9 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+if (empty( $id )) {
+	$id = '';
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -28,15 +30,31 @@ if( !empty($block['align']) ) {
 // Load values.
 if ( empty($heading) )
     $heading = get_field('link_list_heading');
-if ( empty($hide_heading) )
-    $hide_heading = get_field('link_list_hide_heading');
 if ( empty($description) )
     $description = get_field('link_list_description');
 if ( empty($background_color) )
     $background_color = get_field('link_list_background_color');
+if ( empty($geo) )
+    $geo = get_field('link_list_geo');
 if ( empty($link_list_rows) )
     $link_list_rows = get_field('link_list_section');
 
+// GEO Logic
+$geo_display = false;
+if (!isset($geo)){
+    $geo_display = true;
+} else {
+    if( $geo['geot_condition'] == 'include' ) {
+        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }  else {
+        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+            $geo_display = true;
+        }
+    }
+}
+if ($geo_display) :
 ?>
 <section class="uams-module link-list link-list-layout-split<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
 
@@ -44,7 +62,7 @@ if ( empty($link_list_rows) )
         <div class="row">
             <div class="col-12 col-md-6 heading">
                 <div class="text-container">
-                    <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
+                    <h2 class="module-title">
                         <span class="title"><?php echo $heading; ?></span>
                     </h2>
                     <?php echo $description ? '<p class="note">'. $description . '</p>' : ''; ?>
@@ -80,3 +98,4 @@ if ( empty($link_list_rows) )
         </div>
     </div>
 </section>
+<?php endif;

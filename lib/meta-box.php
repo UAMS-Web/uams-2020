@@ -35,6 +35,7 @@ acf_add_local_field_group(array(
 	'key' => 'group_uams_theme_settings',
 	'title' => 'Theme Settings',
 	'fields' => array(
+		// Theme Styles
 		array(
 			'key' => 'field_template',
 			'label' => 'Theme Style',
@@ -64,6 +65,7 @@ acf_add_local_field_group(array(
 			'return_format' => 'value',
 			'placeholder' => '',
 		),
+		// Site Locations
 		array(
 			'key' => 'field_location',
 			'label' => 'Site Location',
@@ -88,14 +90,8 @@ acf_add_local_field_group(array(
 			'choices' => array(
 				'uams' => 'Main Campus',
 				'nw-campus' => 'Northwest Campus',
-				'regional-campus-e' => 'Regional Campus - East',
-				'regional-campus-ne' => 'Regional Campus - Northeast',
-				'regional-campus-nw' => 'Regional Campus - Northwest',
-				'regional-campus-nc' => 'Regional Campus - North Central',
-				'regional-campus-s' => 'Regional Campus - South',
-				'regional-campus-sw' => 'Regional Campus - Southwest',
-				'regional-campus-sc' => 'Regional Campus - South Central',
-				'regional-campus-w' => 'Regional Campus - West',
+				'regional-campus' => 'Regional Campus',
+				
 			),
 			'default_value' => array(
 				0 => 'uams',
@@ -107,6 +103,51 @@ acf_add_local_field_group(array(
 			'ajax' => 0,
 			'placeholder' => '',
 		),
+		// Regional Campus
+		array(
+			'key' => 'field_regional_campus',
+			'label' => 'Regional Campus',
+			'name' => 'uamswp_regional_campus',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_location',
+						'operator' => '==',
+						'value' => 'regional-campus',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'regional-campus-e' => 'Regional Campus - East',
+				'regional-campus-ne' => 'Regional Campus - Northeast',
+				'regional-campus-nw' => 'Regional Campus - Northwest',
+				'regional-campus-nc' => 'Regional Campus - North Central',
+				'regional-campus-s' => 'Regional Campus - South',
+				'regional-campus-sw' => 'Regional Campus - Southwest',
+				'regional-campus-sc' => 'Regional Campus - South Central',
+				'regional-campus-w' => 'Regional Campus - West',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Institutes
 		array(
 			'key' => 'field_institute',
 			'label' => 'UAMS Institute',
@@ -146,6 +187,266 @@ acf_add_local_field_group(array(
 			'ajax' => 0,
 			'placeholder' => '',
 		),
+		// Institute on Aging Departments
+		array(
+			'key' => 'field_institute_aging_dept',
+			'label' => 'Institute on Aging Department',
+			'name' => 'uamswp_institute_aging_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_aging',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Eye Institute Departments
+		array(
+			'key' => 'field_institute_eye_dept',
+			'label' => 'Eye Institute Department',
+			'name' => 'uamswp_institute_eye_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_eye',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Spine & Neurosciences Institute Departments
+		array(
+			'key' => 'field_institute_spine_dept',
+			'label' => 'Spine & Neurosciences Institute Department',
+			'name' => 'uamswp_institute_spine_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_spine',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Institute for Digital Health & Innovation Departments
+		array(
+			'key' => 'field_institute_digi-health_dept',
+			'label' => 'Institute for Digital Health & Innovation Department',
+			'name' => 'uamswp_institute_digi-health_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_digi-health',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Psychiatric Research Institute Departments
+		array(
+			'key' => 'field_institute_pri_dept',
+			'label' => 'Psychiatric Research Institute Department',
+			'name' => 'uamswp_institute_pri_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_pri',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Translational Research Institute Departments
+		array(
+			'key' => 'field_institute_tri_dept',
+			'label' => 'Translational Research Institute Department',
+			'name' => 'uamswp_institute_tri_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_tri',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Cancer Institute Departments
+		array(
+			'key' => 'field_institute_cancer_dept',
+			'label' => 'Cancer Institute Department',
+			'name' => 'uamswp_institute_cancer_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_cancer',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// UAMS.edu Main Campus Organizations
 		array(
 			'key' => 'field_uams_subsite',
 			'label' => 'Organization',
@@ -170,17 +471,9 @@ acf_add_local_field_group(array(
 			'choices' => array(
 				'health-prof' => 'College of Health Professions',
 				'medicine' => 'College of Medicine',
-				'medicine_emergency-medicine' => 'College of Medicine -	Emergency Medicine',
-				'medicine_pediatrics' => 'College of Medicine - Pediatrics',
-				'medicine_otolaryngology' => 'College of Medicine - ENT',
-				'medicine_family-medicine' => 'College of Medicine - Family Medicine',
-				'medicine_orthopaedic-surgery' => 'College of Medicine - Orthopaedics',
-				'medicine_pathology' => 'College of Medicine - Pathology',
-				'medicine_urology' => 'College of Medicine - Urology',
 				'nursing' => 'College of Nursing',
 				'pharmacy' => 'College of Pharmacy',
-				'pharmacy_arpoison' => 'College of Pharmacy - Arkansas Poison and Drug Information Center',
-				'public-health' => 'College of Publice Health',
+				'public-health' => 'College of Public Health',
 				'grad-school' => 'Graduate school',
 				'12th-st' => '12th St. Health & Wellness Center',
 				'cda' => 'Center for Diversity Affairs',
@@ -191,6 +484,7 @@ acf_add_local_field_group(array(
 				'ipe' => 'Office of Interprofessional Education',
 				'library' => 'Library',
 				'employee_nurses' => 'Nurses (Employee)',
+				'other' => 'Other Site (Multisite)',
 				'main' => 'Main UAMS site',
 				'none' => 'None of the above',
 			),
@@ -204,6 +498,274 @@ acf_add_local_field_group(array(
 			'return_format' => 'value',
 			'placeholder' => '',
 		),
+		// College of Health Professions Departments
+		array(
+			'key' => 'field_uams_cohp_dept',
+			'label' => 'College of Health Professions Department',
+			'name' => 'uamswp_uams_cohp_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'health-prof',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// College of Medicine Departments
+		array(
+			'key' => 'field_uams_com_dept',
+			'label' => 'College of Medicine Department',
+			'name' => 'uamswp_uams_com_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'medicine',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'emergency-medicine' => 'Emergency Medicine',
+				'family-medicine' => 'Family Medicine',
+				'orthopaedic-surgery' => 'Orthopaedics',
+				'otolaryngology' => 'Otolaryngology (ENT)',
+				'pathology' => 'Pathology',
+				'pediatrics' => 'Pediatrics',
+				'urology' => 'Urology',
+				'dept' => 'Other Department or Organization Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// College of Nursing Departments
+		array(
+			'key' => 'field_uams_con_dept',
+			'label' => 'College of Nursing Department',
+			'name' => 'uamswp_uams_con_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'nursing',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// College of Pharmacy Departments
+		array(
+			'key' => 'field_uams_cop_dept',
+			'label' => 'College of Pharmacy Department',
+			'name' => 'uamswp_uams_cop_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'pharmacy',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'arpoison' => 'Arkansas Poison and Drug Information Center',
+				'dept' => 'Other Department or Organization Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// College of Public Health Departments
+		array(
+			'key' => 'field_uams_coph_dept',
+			'label' => 'College of Public Health Department',
+			'name' => 'uamswp_uams_coph_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'public-health',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Graduate School Departments
+		array(
+			'key' => 'field_uams_grad-school_dept',
+			'label' => 'Grad School Department',
+			'name' => 'uamswp_uams_grad-school_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'grad-school',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Other 
+		array(
+			'key' => 'field_uams_other_dept',
+			'label' => 'Other (Multisite)',
+			'name' => 'uamswp_uams_other_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_uams_subsite',
+						'operator' => '==',
+						'value' => 'other',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// UAMS Health Organizations
 		array(
 			'key' => 'field_uamshealth_subsite',
 			'label' => 'Organization',
@@ -226,8 +788,9 @@ acf_add_local_field_group(array(
 				'id' => '',
 			),
 			'choices' => array(
-				'uams-aux' => 'UAMS Auxiliary',
 				'main' => 'Main UAMS Health site',
+				'uams-aux' => 'UAMS Auxiliary',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -240,6 +803,7 @@ acf_add_local_field_group(array(
 			'ajax' => 0,
 			'placeholder' => '',
 		),
+		// Inside UAMS Organizations
 		array(
 			'key' => 'field_inside_subsite',
 			'label' => 'Organization',
@@ -264,6 +828,7 @@ acf_add_local_field_group(array(
 			'choices' => array(
 				'fitness-center' => 'Fitness Center',
 				'main' => 'Main Site',
+				'dept' => 'Department or Organizational Unit',
 				'none' => 'None of the above',
 			),
 			'default_value' => array(
@@ -275,6 +840,7 @@ acf_add_local_field_group(array(
 			'ajax' => 0,
 			'placeholder' => '',
 		),
+		// Custom Addresses
 		array(
 			'key' => 'field_address_accordion',
 			'label' => 'Custom Addresses',
@@ -366,7 +932,7 @@ acf_add_local_field_group(array(
 					),
 					'acfe_validate' => '',
 					'acfe_update' => '',
-							'default_value' => '',
+					'default_value' => '',
 					'placeholder' => 'Mailing Address',
 					'prepend' => '',
 					'append' => '',
@@ -408,7 +974,7 @@ acf_add_local_field_group(array(
 					),
 					'acfe_validate' => '',
 					'acfe_update' => '',
-							'default_value' => '',
+					'default_value' => '',
 					'placeholder' => '',
 					'prepend' => '',
 					'append' => '',
@@ -429,7 +995,7 @@ acf_add_local_field_group(array(
 					),
 					'acfe_validate' => '',
 					'acfe_update' => '',
-							'default_value' => '',
+					'default_value' => '',
 					'placeholder' => '',
 					'prepend' => '',
 					'append' => '',
@@ -528,7 +1094,7 @@ acf_add_local_field_group(array(
 					),
 					'acfe_validate' => '',
 					'acfe_update' => '',
-							'default_value' => '',
+					'default_value' => '',
 					'placeholder' => '',
 					'prepend' => '',
 					'append' => '',
@@ -907,6 +1473,7 @@ acf_add_local_field_group(array(
 				'none' => '<i class="dashicons dashicons-yes"></i> Normal',
 				'hidden' => '<i class="dashicons dashicons-no"></i> Hidden',
 				'graphic' => '<i class="dashicons dashicons-format-image"></i> Graphic',
+				'landingpage' => '<i class="dashicons dashicons-format-image"></i> Marketing Landing Page',
 				'hero' => '<i class="dashicons dashicons-slides"></i> Hero',
 			),
 			'allow_null' => 0,
@@ -916,7 +1483,7 @@ acf_add_local_field_group(array(
 		),
 		array(
 			'key' => 'field_page_cover_image',
-			'label' => 'Cover Image',
+			'label' => 'Graphic Title Cover Image',
 			'name' => 'page_cover_image',
 			'type' => 'image',
 			'instructions' => 'Recommended dimensions: 5120x1920 or larger. Minimum dimensions: 1920x720. The image will be automatically cropped to a 8:3 aspect ratio.',
@@ -948,7 +1515,7 @@ acf_add_local_field_group(array(
 		),
 		array(
 			'key' => 'field_page_description',
-			'label' => 'Lead Paragraph',
+			'label' => 'Graphic Title Lead Paragraph',
 			'name' => 'page_description',
 			'type' => 'textarea',
 			'instructions' => 'Appears below the page title. Basic description of the page. 500 character limit.',
@@ -970,6 +1537,151 @@ acf_add_local_field_group(array(
 			'default_value' => '',
 			'placeholder' => '',
 			'maxlength' => 500,
+			'rows' => '',
+			'new_lines' => '',
+		),
+		array(
+			'key' => 'field_page_landing_page_message',
+			'label' => '',
+			'name' => 'page_landing_page_message',
+			'type' => 'message',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_permissions' => '',
+			'message' => '<h3>Stop</h3>
+				<p>The Marketing Landing Page Title option should only be used for Marketing Landing Pages.</p>',
+			'new_lines' => '',
+			'esc_html' => 0,
+		),
+		array(
+			'key' => 'field_page_landing_page_cover_image',
+			'label' => 'Marketing Landing Page Cover Image (Desktop)',
+			'name' => 'page_landing_page_cover_image',
+			'type' => 'image',
+			'instructions' => 'Recommended dimensions: 5120x1600 or larger. Minimum dimensions: 1920x600. The image will be automatically cropped to a 16:5 aspect ratio.',
+			'required' => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'id',
+			'preview_size' => 'medium',
+			'library' => 'all',
+			'min_width' => 1920,
+			'min_height' => 600,
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+		),
+		array(
+			'key' => 'field_page_landing_page_cover_image_mobile',
+			'label' => 'Marketing Landing Page Cover Image (Mobile)',
+			'name' => 'page_landing_page_cover_image_mobile',
+			'type' => 'image',
+			'instructions' => 'This image is optional. Add an image here if you do not want the mobile image to be automatically cropped from the desktop image.<br />Recommended dimensions: 1984x1612 or larger. Minimum dimensions: 992x806. The image will be automatically cropped to a 16:13 aspect ratio.',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'id',
+			'preview_size' => 'medium',
+			'library' => 'all',
+			'min_width' => 992,
+			'min_height' => 806,
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+		),
+		array(
+			'key' => 'field_page_landing_page_heading',
+			'label' => 'Marketing Landing Page Title Heading',
+			'name' => 'page_landing_page_heading',
+			'type' => 'text',
+			'instructions' => 'Override for page title for the purposes of this header. The normal page title will still be used for meta title, search results, etc. There is a 62 character limit. You can reuse your normal page title here if it fits in the character limit.',
+			'required' => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'maxlength' => 62,
+			'rows' => '',
+			'new_lines' => '',
+		),
+		array(
+			'key' => 'field_page_landing_page_description',
+			'label' => 'Marketing Landing Page Title Lead Paragraph',
+			'name' => 'page_landing_page_description',
+			'type' => 'textarea',
+			'instructions' => 'Appears below the page title. Basic description of the page. There is a 117 character limit.',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'maxlength' => 117,
 			'rows' => '',
 			'new_lines' => '',
 		),
@@ -1005,12 +1717,208 @@ acf_add_local_field_group(array(
 				'operator' => '==',
 				'value' => 'page',
 			),
+			array(
+				'param' => 'post_template',
+				'operator' => '!=',
+				'value' => 'templates/marketing.php',
+			),
 		),
+	),
+	'menu_order' => 0,
+	'position' => 'acf_after_title',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+));
+
+/*
+ *
+ * Add Marketing Landing Page Header Options
+ * 
+ */
+acf_add_local_field_group(array(
+	'key' => 'group_page_header_options_mlp',
+	'title' => 'Marketing Landing Page Header Options',
+	'fields' => array(
+		array(
+			'key' => 'field_page_title_options_mlp',
+			'label' => 'Title Options',
+			'name' => 'page_title_options',
+			'type' => 'button_group',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'landingpage' => '<i class="dashicons dashicons-format-image"></i> Marketing Landing Page',
+				'hero' => '<i class="dashicons dashicons-slides"></i> Hero',
+			),
+			'allow_null' => 0,
+			'default_value' => 'none',
+			'layout' => 'horizontal',
+			'return_format' => 'value',
+		),
+		array(
+			'key' => 'field_page_landing_page_cover_image_mlp',
+			'label' => 'Marketing Landing Page Cover Image (Desktop)',
+			'name' => 'page_landing_page_cover_image',
+			'type' => 'image',
+			'instructions' => 'Recommended dimensions: 5120x1600 or larger. Minimum dimensions: 1920x600. The image will be automatically cropped to a 16:5 aspect ratio.',
+			'required' => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options_mlp',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'id',
+			'preview_size' => 'medium',
+			'library' => 'all',
+			'min_width' => 1920,
+			'min_height' => 600,
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+		),
+		array(
+			'key' => 'field_page_landing_page_cover_image_mobile_mlp',
+			'label' => 'Marketing Landing Page Cover Image (Mobile)',
+			'name' => 'page_landing_page_cover_image_mobile',
+			'type' => 'image',
+			'instructions' => 'This image is optional. Add an image here if you do not want the mobile image to be automatically cropped from the desktop image.<br />Recommended dimensions: 1984x1612 or larger. Minimum dimensions: 992x806. The image will be automatically cropped to a 16:13 aspect ratio.',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options_mlp',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'return_format' => 'id',
+			'preview_size' => 'medium',
+			'library' => 'all',
+			'min_width' => 992,
+			'min_height' => 806,
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+		),
+		array(
+			'key' => 'field_page_landing_page_heading_mlp',
+			'label' => 'Marketing Landing Page Title Heading',
+			'name' => 'page_landing_page_heading',
+			'type' => 'text',
+			'instructions' => 'Override for page title for the purposes of this header. The normal page title will still be used for meta title, search results, etc. There is a 62 character limit. You can reuse your normal page title here if it fits in the character limit.',
+			'required' => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options_mlp',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'maxlength' => 62,
+			'rows' => '',
+			'new_lines' => '',
+		),
+		array(
+			'key' => 'field_page_landing_page_description_mlp',
+			'label' => 'Marketing Landing Page Title Lead Paragraph',
+			'name' => 'page_landing_page_description',
+			'type' => 'textarea',
+			'instructions' => 'Appears below the page title. Basic description of the page. There is a 117 character limit.',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options_mlp',
+						'operator' => '==',
+						'value' => 'landingpage',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'maxlength' => 117,
+			'rows' => '',
+			'new_lines' => '',
+		),
+		array(
+			'key' => 'field_page_hero_mlp',
+			'label' => 'Hero',
+			'name' => 'page_hero',
+			'type' => 'group',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_page_title_options_mlp',
+						'operator' => '==',
+						'value' => 'hero',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'layout' => 'block',
+			'sub_fields' => $hero,
+		),
+	),
+	'location' => array(
 		array(
 			array(
 				'param' => 'post_type',
 				'operator' => '==',
-				'value' => 'services',
+				'value' => 'page',
+			),
+			array(
+				'param' => 'post_template',
+				'operator' => '==',
+				'value' => 'templates/marketing.php',
 			),
 		),
 	),
@@ -1311,6 +2219,9 @@ $post_tiles = include( get_stylesheet_directory() .'/acf_fields/post-category-ti
 $side_by_side = include( get_stylesheet_directory() .'/acf_fields/image-side-by-side.php' );
 $stacked = include( get_stylesheet_directory() .'/acf_fields/stacked.php' );
 $news = include( get_stylesheet_directory() .'/acf_fields/news.php' );
+$gallery = include( get_stylesheet_directory() .'/acf_fields/gallery.php' );
+$content = include( get_stylesheet_directory() .'/acf_fields/content.php' );
+$livewhale = include( get_stylesheet_directory() .'/acf_fields/livewhale.php' );
 
 $modules = require( get_stylesheet_directory() .'/acf_fields/modules.php' );
 acf_add_local_field_group(array(

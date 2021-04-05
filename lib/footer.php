@@ -16,18 +16,19 @@ add_filter( 'genesis_footer_creds_text', 'uamswp_footer_creds_text' );
 function uamswp_footer_creds_text() {
 
     // Render this by default, in whatever structure is best.
-    // If the site is an EDU site, replace the href value with "http://www.uams.edu".
+    // If the site is an EDU site, replace the href value with "https://www.uams.edu".
     // If an SVG asset is uploaded/defined in the custom field, replace the href value with the home URL of the current site.
     // If an SVG asset is uploaded/defined in the custom field, replace the image path with the uploaded SVG asset.
     // The height of the image is controlled by CSS.
     /* Set the defaults */
     $site = uams_get_site_info()['site'];
     $subsite = uams_get_site_info()['subsite'];
+    $department = uams_get_site_info()['department'];
 
     /**
      * Start Image
      */
-    $footer_image_url = 'http://www.uams.edu';
+    $footer_image_url = 'https://www.uams.edu';
     $footer_image_title = 'University of Arkansas for Medical Sciences';
     $footer_image_site = 'main-qualifier';
 
@@ -80,7 +81,7 @@ function uamswp_footer_creds_text() {
             $footer_image_site = $subsite;
         } elseif ( startsWith($subsite, 'public-health') ) {
             $footer_image_url = 'https://publichealth.uams.edu/';
-            $footer_image_title = 'UAMS College of Publice Health';
+            $footer_image_title = 'UAMS College of Public Health';
             $footer_image_site = $subsite;
         } elseif ( startsWith($subsite, 'grad-school') ) {
             $footer_image_url = 'https://gradschool.uams.edu/';
@@ -111,7 +112,7 @@ function uamswp_footer_creds_text() {
         $footer_image_title = 'Inside UAMS';
         $footer_image_site = 'main';
     }
-    $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_'.$footer_image_site.'_horizontal_white.svg" alt="'. $footer_image_title .' Logo" itemprop="logo" />';
+    $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_'.$footer_image_site.'_horizontal_white.svg" alt="'. $footer_image_title .' Logo" itemprop="image" />';
     
     // printf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
     
@@ -134,7 +135,7 @@ function uamswp_footer_creds_text() {
     // Overrides, if available
     if( ! empty( $custom_addresses ) && ( ('institute' == $site) || ('nw-campus' == $subsite) || ( startsWith($subsite, 'regional-') ) ) ) {
         $address = '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
-        $address .= sprintf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
+        $address .= sprintf( '<a href="%s" class="logo" itemprop="url">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
         $address .= '<span itemprop="name" class="sr-only">'.$footer_image_title .'</span>';
         foreach ( $custom_addresses as $custom_address ) {
             $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">';
@@ -253,11 +254,34 @@ function uamswp_footer_creds_text() {
             $social_ig = 'https://www.instagram.com/uamschp';
         } elseif ( startsWith($subsite, 'medicine') ) {
             $social_fb = 'https://www.facebook.com/UAMSCOM/';
+
+            if ( 'emergency-medicine' == $department) {
+                $social_fb = 'https://www.facebook.com/UAMSEmergencyMedicine';
+            } elseif ( 'pediatrics' == $department) {
+                $social_fb = 'https://www.facebook.com/pages/UAMS-Department-of-Pediatrics/';
+                $social_tw = 'https://twitter.com/UAMSPeds';
+            } elseif ( 'otolaryngology' == $department) {
+                $social_fb = 'https://www.facebook.com/pg/uamsotolaryngology/';
+                $social_tw = 'https://twitter.com/UAMSENT';
+                $social_ig = 'https://www.instagram.com/uams.ent/';
+            } elseif ( 'family-medicine' == $department) {
+                $social_fb = 'https://www.facebook.com/UAMSFamilyMedicineResidency/';
+            } elseif ( 'orthopaedic-surgery' == $department) {
+                $social_fb = 'https://www.facebook.com/UAMSOrtho/';
+            } elseif ( 'pathology' == $department) {
+                $social_fb = 'https://www.facebook.com/pathologyuams/';
+            } elseif ( 'urology' == $department) {
+                $social_fb = 'https://www.facebook.com/UAMSUrology/';
+            }
         } elseif ( startsWith($subsite, 'nursing') ) {
             $social_fb = 'https://www.facebook.com/pages/UAMS-College-of-Nursing/';
         } elseif ( startsWith($subsite, 'pharmacy') ) {
             $social_fb = 'https://www.facebook.com/UAMSPharm';
             $social_ig = 'https://www.instagram.com/uamspharmacy/';
+
+            if ('arpoison' == $department) {
+                $social_fb = 'https://www.facebook.com/ArkDrugHelp/';
+            }
         } elseif ( startsWith($subsite, 'public-health') ) {
             $social_fb = 'https://www.facebook.com/uamscoph/';
         } elseif ( startsWith($subsite, 'grad-school') ) {
@@ -266,29 +290,12 @@ function uamswp_footer_creds_text() {
             $social_fb = 'https://www.facebook.com/UAMSNW/';
         // } elseif ( startsWith($subsite, 'regional-') ) {
         //     $social_fb = '';
-        } elseif ( 'pharmacy_arpoison' == $subsite ) {
-             $social_fb = 'https://www.facebook.com/ArkDrugHelp/';
         } elseif ( 'get-healthy' == $subsite ) {
             $social_fb = 'https://www.facebook.com/GetHealthyUAMS/';
             $social_ig = 'https://www.instagram.com/GetHealthyUAMS/';
         } elseif ( 'cda' == $subsite ) {
-           $social_fb = 'https://www.facebook.com/pages/UAMS-Center-for-Diversity-Affairs/';
-        } elseif ( 'medicine_emergency-medicine' == $subsite) {
-            $social_fb = 'https://www.facebook.com/UAMSEmergencyMedicine';
-        } elseif ( 'medicine_pediatrics' == $subsite) {
-            $social_fb = 'https://www.facebook.com/pages/UAMS-Department-of-Pediatrics/';
-            $social_tw = 'https://twitter.com/UAMSPeds';
-        } elseif ( 'medicine_otolaryngology' == $subsite) {
-            $social_fb = 'https://www.facebook.com/pg/uamsotolaryngology/';
-            $social_tw = 'https://twitter.com/UAMSENT';
-        } elseif ( 'medicine_family-medicine' == $subsite) {
-            $social_fb = 'https://www.facebook.com/UAMSFamilyMedicineResidency/';
-        } elseif ( 'medicine_orthopaedic-surgery' == $subsite) {
-            $social_fb = 'https://www.facebook.com/UAMSOrtho/';
-        } elseif ( 'medicine_pathology' == $subsite) {
-            $social_fb = 'https://www.facebook.com/pathologyuams/';
-        } elseif ( 'medicine_urology' == $subsite) {
-            $social_fb = 'https://www.facebook.com/UAMSUrology/';
+           $social_fb = 'https://www.facebook.com/UAMSDDEI/';
+           $social_tw = 'https://twitter.com/uams_ddei';
         } elseif ( 'gsa' == $subsite) {
             $social_fb = 'https://www.facebook.com/UAMSgsa/';
         } elseif ( 'continuing-ed' == $subsite) {

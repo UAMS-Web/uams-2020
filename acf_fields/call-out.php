@@ -1,8 +1,8 @@
 <?php
 /*
  *
- * Call-Out Block Fields 
- * 
+ * Call-Out Block Fields
+ *
  */
 return array(
     array(
@@ -18,7 +18,7 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'message' => '<h2>Call-Out</h2>',
+        'message' => '<h2>UAMS Call-Out Block</h2>',
         'new_lines' => '',
         'esc_html' => 0,
     ),
@@ -145,4 +145,80 @@ return array(
         'max_size' => '',
         'mime_types' => '',
     ),
+    array(
+        'key' => 'field_call_out_geo_valid'. $suffix,
+        'label' => 'GeoTargetingWP Installed?',
+        'name' => 'geo_valid',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+            'width' => '',
+            'class' => 'hidden',
+            'id' => '',
+        ),
+        'acfe_permissions' => '',
+        'choices' => array(
+            'false' => 'False',
+            'true' => 'True',
+        ),
+        'allow_null' => 0,
+        'other_choice' => 0,
+        'default_value' => 'false',
+        'layout' => 'horizontal',
+        'return_format' => 'value',
+    ),
+    array(
+        'key' => 'field_call_out_regions'. $suffix,
+        'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
+        'name' => '',
+        'type' => 'accordion',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_call_out_geo_valid'. $suffix,
+                    'operator' => '==',
+                    'value' => 'true',
+                ),
+            ),
+        ),
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'open' => 0,
+        'multi_expand' => 0,
+        'endpoint' => 0,
+    ),
+    array(
+		'key' => 'field_call_out_geo'. $suffix,
+		'label' => 'Regions',
+		'name' => 'call_out_geo',
+		'type' => 'geot_field',
+		'instructions' => '',
+		'required' => 0,
+		'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_call_out_geo_valid'. $suffix,
+                    'operator' => '==',
+                    'value' => 'true',
+                ),
+            ),
+        ),
+		'wrapper' => array(
+			'width' => '',
+			'class' => '',
+			'id' => '',
+		),
+		'acfe_permissions' => '',
+		'geot_show' => 'city-regions',
+		'geot_condition' => 'include',
+		'geot_regions' => '',
+		'geot_countries' => '',
+	),
 );

@@ -6,8 +6,14 @@
 
     .row {
         justify-content: center;
+        //margin-bottom: -$grid-gutter-width;
+    }
+
+    .card-list {
+        margin-top: 0;
         margin-bottom: -$grid-gutter-width;
     }
+
     .item {
         display: flex;
         justify-content: center;
@@ -20,37 +26,40 @@
             width: auto;
         }
 
-        &:nth-child(even) {
-            @include media-breakpoint-only(sm) {
+        &:nth-child(odd) {
+            @include media-breakpoint-up(sm) {
                 justify-content: flex-end;
             }
-            @include media-breakpoint-only(md) {
-                justify-content: flex-end;
-            }
-            @include media-breakpoint-only(lg) {
-                justify-content: flex-end;
+            @include media-breakpoint-up(xl) {
+                justify-content: center;
             }
         }
 
-        &:nth-child(odd) {
-            @include media-breakpoint-only(sm) {
+        &:nth-child(even) {
+            @include media-breakpoint-up(sm) {
                 justify-content: flex-start;
             }
-            @include media-breakpoint-only(md) {
-                justify-content: flex-start;
+            @include media-breakpoint-up(xl) {
+                justify-content: center;
             }
-            @include media-breakpoint-only(lg) {
-                justify-content: flex-start;
+        }
+        
+        &:nth-child(odd):last-child {
+            @include media-breakpoint-up(sm) {
+                justify-content: center;
             }
         }
     }
+
     .card {
         border: none;
         border-radius: 0;
         background-color: transparent;
         width: $stacked-tile-ideal-width;
         max-width: 100%;
+        margin: 0;
     }
+
     .card-img-top {
         border-radius: 0;
         overflow: hidden;
@@ -63,10 +72,6 @@
 
     .card-img-top + .card-body {
         padding-top: 1.25rem;
-    }
-    
-    .more {
-        margin-bottom: $grid-gutter-width;
     }
 }
 

@@ -1,0 +1,27 @@
+UAMS 2020 template
+- - - - - - - 
+The UAMS 2020 template is based on Bootstrap 4. The necessary CSS and JS are included in the theme. The primary index.html file
+contains comments to help. The additional pages / sub-folders contain examples of layouts, breadcrumbs, and menu structure. The
+sub-pages do not contain the variables, but show an example for visual purpose.
+
+Variables
+- - - - - - - 
+Variables are marked as {{ variable name }}. These are dependant on your site, including site name, site url, meta description,
+page name, etc. These should be replaced with the appropriate tags/information.
+
+Included
+- - - - - - - 
+CSS, JS, SVG, and necessary jpg for the template. All the necessary files are contained in the assets folder.
+
+Custom Scripts / CSS 
+- - - - - - - 
+Locations where custom CSS and JS are marked in the header and footer. JS should be in the footer, unless necessary in the header.
+
+Uploads
+- - - - - - - 
+Contains images used in the example pages. Not required.
+
+Modules
+- - - - - - - 
+Layout modules specific to the template will included at a later date. A couple of examples are included in the sub-folder/pages.
+These include the image and text side-by-side, call-to-action, cover image, and hero slider.

@@ -285,6 +285,7 @@ $header-health-logo-clear-space: $header-logo-clear-space;
         .nav-link {
             @extend .p-1;
             @extend .text-reset;
+            white-space: nowrap;
         }
 
         .resource-nav {
@@ -305,6 +306,7 @@ $header-health-logo-clear-space: $header-logo-clear-space;
                 }
             }
         }
+        
         .toggle-search {
             .fa-search-minus {
                 opacity: 0;
@@ -442,7 +444,8 @@ $header-health-logo-clear-space: $header-logo-clear-space;
                         color: $body-color;
                     }
 
-                    .nav-link.has-submenu {
+                    .nav-link.has-submenu,
+                    .dropdown-item.has-submenu {
                         @include media-breakpoint-up(sm) {
                             padding-right: (1.25 + 0.6 + 0.75)+rem;
                             position: relative;
@@ -451,11 +454,13 @@ $header-health-logo-clear-space: $header-logo-clear-space;
                             color: $link-color;
 
                             @include media-breakpoint-up(sm) {
+                                @include caret-right;
                                 position: absolute;
                                 right: 0;
                                 top: 50%;
                                 transform: translateY(-50%);
                                 margin-right: 1.25rem;
+                                margin-top: 0;
                             }
                         }
                     }
@@ -502,7 +507,9 @@ $header-health-logo-clear-space: $header-logo-clear-space;
                 }
 
                 &.has-submenu {
-                    padding-right: 0.5em + 2em + 1em;
+                    @include media-breakpoint-down(xs) {
+                        padding-right: 0.5em + 2em + 1em;
+                    }
                 }
             }
 

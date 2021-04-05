@@ -232,13 +232,19 @@ function uamswp_add_aria( $attributes ) {
 add_filter ( 'genesis_home_crumb', 'uams_breadcrumb_home_icon' );
 function uams_breadcrumb_home_icon( $crumb ) {
 		if (('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite']) || ('uamshealth' == uams_get_site_info()['site'] && is_front_page() ) ) {
-			$crumb = '<a href="'.uams_get_home_link().'" title="UAMS Health"><span class="fas fa-home"></span><span class="sr-only">UAMS Health</span></a>';
-		} elseif ( ('uams' == uams_get_site_info()['site'] && is_front_page() ) ) {
-			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span></a>';
+			$crumb = '<a href="'.uams_get_home_link().'" title="UAMS Health"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">UAMS Health</span></a><meta itemprop="position" content="1">';
 		} elseif ( ('inside' == uams_get_site_info()['site'] && is_front_page() ) ) {
-			$crumb = '<a href="'.uams_get_home_link().'" title="Inside UAMS"><span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span></a>';
+			$crumb = '<a href="'.uams_get_home_link().'" title="Inside UAMS"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1">';
 		} else {
-			$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span></a></li><li class="breadcrumb-item"><a href="' . home_url() . '/" title="' . uams_site_title() . '">'.uams_site_title().'</a>';
+			if ( is_front_page() && 'main' != uams_get_site_info()['department'] && 'none' != uams_get_site_info()['department'] ) {
+				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . network_home_url() . '" title="' . get_blog_details(1)->blogname . '"><span itemprop="name">'.get_blog_details(1)->blogname.'</span></a><meta itemprop="position" content="2">';
+			} elseif ( 'main' != uams_get_site_info()['department'] && 'none' != uams_get_site_info()['department'] ) {
+				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . network_home_url() . '" title="' . get_blog_details(1)->blogname . '"><span itemprop="name">'.get_blog_details(1)->blogname.'</span></a><meta itemprop="position" content="2"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . home_url() . '/" title="' . uams_site_title() . '"><span itemprop="name">'.uams_site_title().'</span></a><meta itemprop="position" content="3">';
+			} elseif ( is_front_page() ) {
+				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1">';
+			} else {
+				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . home_url() . '/" title="' . uams_site_title() . '"><span itemprop="name">'.uams_site_title().'</span></a><meta itemprop="position" content="2">';
+			}
 		}
      return $crumb;
 }
@@ -246,11 +252,98 @@ function uams_breadcrumb_home_icon( $crumb ) {
 add_filter ( 'genesis_page_crumb', 'uams_breadcrumb_home' );
 add_filter ( 'genesis_single_crumb', 'uams_breadcrumb_home' );
 function uams_breadcrumb_home( $crumb ) {
-	if ( ! is_front_page() )
-		return $crumb;
-
-	return uams_site_title();
+	if ( is_front_page() ) {
+		$crumb = uams_site_title();
+	}
+	
+	return $crumb;
+	
 }
+
+add_filter('seopress_pro_breadcrumbs_crumbs', 'sp_pro_breadcrumbs_crumbs');
+function sp_pro_breadcrumbs_crumbs($crumbs) {
+	//$crumbs is a multidimensional array.
+	//First array: key=position, second array: 0=>page title, 1=>URL
+	//do your stuff
+	// Change "Home" to site title
+	$crumbs[0][0] = uams_site_title();
+	if ( 'uamshealth' == uams_get_site_info()['site'] ) {
+		if ( ( 'main' == uams_get_site_info()['subsite']) ) {
+		$crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">UAMS Health</span>', uams_get_home_link().'/');
+		} else {
+			$home = array('<span class="fas fa-home"></span><span class="sr-only">UAMS Health</span>', uams_get_home_link().'/');
+			array_unshift($crumbs, $home);
+		}
+	} elseif ( ('inside' == uams_get_site_info()['site'] ) ) {
+		if ( ( 'main' == uams_get_site_info()['subsite']) ) {
+			$crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">Inside UAMS</span>', uams_get_home_link().'/');
+		} else {
+			$home = array('<span class="fas fa-home"></span><span class="sr-only">Inside UAMS</span>', uams_get_home_link().'/');
+			array_unshift($crumbs, $home);
+		}
+	} elseif ( ('institute' == uams_get_site_info()['site'] ) ) {
+		if ( ( 'main' == uams_get_site_info()['department']) ) {
+			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
+			array_unshift($crumbs, $home);
+			// $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
+		} else {
+			// if ('dept' == uams_get_site_info()['department']) {
+			$sitehome = array(get_blog_details(1)->blogname, network_home_url());
+			array_unshift($crumbs, $sitehome);
+			// }
+			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
+			array_unshift($crumbs, $home);
+		}
+	} else { // Site == uams
+
+		if ( 'other' == uams_get_site_info()['subsite'] ) {
+			if ( ( 'main' == uams_get_site_info()['department']) ) {
+				$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
+				array_unshift($crumbs, $home);
+				// $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
+			} else {
+				// if ('dept' == uams_get_site_info()['department']) {
+				$sitehome = array(get_blog_details(1)->blogname, network_home_url());
+				array_unshift($crumbs, $sitehome);
+				// }
+				$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
+				array_unshift($crumbs, $home);
+			}
+		} elseif ( ( 'main' == uams_get_site_info()['subsite']) && !is_front_page() ) {
+			// Set www.uams.edu as home
+			$crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
+		
+		} elseif ( 'main' != uams_get_site_info()['subsite'] && 'main' != uams_get_site_info()['department'] && '' != uams_get_site_info()['department'] && 'uams' != uams_get_site_info()['department'] ) {
+			// Multisite Home
+			$sitehome = array(get_blog_details(1)->blogname, network_home_url());
+			array_unshift($crumbs, $sitehome);
+			// UAMS Home
+			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
+			array_unshift($crumbs, $home);
+		} else {
+			// UAMS Home
+			$home = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu');
+			array_unshift($crumbs, $home);
+		}
+	}
+	// var_dump(uams_get_site_info());
+	// var_dump($crumbs);
+	return $crumbs;
+}
+function sp_pro_breadcrumbs_css() { 
+	//Disable breadcrumbs inline CSS 
+	return false; 
+} 
+add_action('seopress_pro_breadcrumbs_css', 'sp_pro_breadcrumbs_css');
+/* Disabled for latest version of SEOPress Pro > 3.8.5 Included as default in plugin
+add_filter('seopress_pro_breadcrumbs_html', 'sp_pro_breadcrumbs_html');
+function sp_pro_breadcrumbs_html($html) {
+	//$html = <nav aria-label="breadcrumb"><ol class="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList"><li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemtype="http://schema.org/Thing" itemprop="item" href="https://www.seopress.org/"><span itemprop="name">Home</span></a><meta itemprop="position" content="1"></li>...
+	//Remove last link
+	$html = preg_replace('#^(.*)<a[^>]*?>(.*?)</a>(.*?)#im', '$1$2$3', $html);
+	return $html;
+}
+*/
 
 /** Returns site & subsite info **/
 if ( !function_exists('uams_get_site_info')):
@@ -259,18 +352,34 @@ if ( !function_exists('uams_get_site_info')):
     {
 		$site = '';
 		$subsite = '';
+		$department = '';
 		$option_name = 'uamswp_options'; // Settings page
 		$siteinfo = array();
 		if ( ! class_exists( 'acf' ) ) {
 			// Set base defaults if no ACF
-			$siteinfo = array('site' => 'uams', 'subsite' => 'uams');
+			$siteinfo = array('site' => 'uams', 'subsite' => 'uams', 'department' => 'uams');
 			return $siteinfo;
 			return;
 		}
 		$themestyle = get_field( 'uamswp_template', 'option' ); // uams, inside, health
 		$themelocation = get_field( 'uamswp_location', 'option' ); // campus, regional
 		$themeinstitute = get_field( 'uamswp_institute', 'option' ); // institute name
+		$regional_campus = get_field( 'uamswp_regional_campus', 'option' ); // regional location
+		$aging_dept = get_field( 'uamswp_institute_aging_dept', 'option' ); // Institute on Aging Departments
+		$eye_dept = get_field( 'uamswp_institute_eye_dept', 'option' ); // Eye Institute Departments
+		$spine_dept = get_field( 'uamswp_institute_spine_dept', 'option' ); // Spine & Neurosciences Institute Departments
+		$digihealth_dept = get_field( 'uamswp_institute_digi-health_dept', 'option' ); // Institute for Digital Health & Innovation Departments
+		$pri_dept = get_field( 'uamswp_institute_pri_dept', 'option' ); // Psychiatric Research Institute Departments
+		$tri_dept = get_field( 'uamswp_institute_tri_dept', 'option' ); // Translational Research Institute Departments
+		$cancer_dept = get_field( 'uamswp_institute_cancer_dept', 'option' ); // Cancer Institute Departments
 		$uamsorganization = get_field( 'uamswp_uams_subsite', 'option' ); // college 
+		$cohp_dept = get_field( 'uamswp_uams_cohp_dept', 'option' ); // college of health prof dept
+		$com_dept = get_field( 'uamswp_uams_com_dept', 'option' ); // college of medicine dept
+		$con_dept = get_field( 'uamswp_uams_con_dept', 'option' ); // college of nursing dept
+		$cop_dept = get_field( 'uamswp_uams_cop_dept', 'option' ); // college of pharmacy dept
+		$coph_dept = get_field( 'uamswp_uams_coph_dept', 'option' ); // college of public health dept
+		$grad_dept = get_field( 'uamswp_uams_grad-school_dept', 'option' ); // graduate school dept
+		$other_dept = get_field( 'uamswp_uams_other_dept' , 'option' ); // Other (Multisite)
 		$healthorganization = get_field( 'uamswp_uamshealth_subsite', 'option' ); // health 
 		$insideorganization = get_field( 'uamswp_inside_subsite', 'option' ); // inside 
 		if ('health' == $themestyle) {
@@ -291,6 +400,23 @@ if ( !function_exists('uams_get_site_info')):
 			$site = 'institute';
 			if ('' != $themeinstitute) {
 				$subsite = $themeinstitute;
+				if ($subsite == 'institute_aging' && '' != $aging_dept) {
+					$department = $aging_dept;
+				} elseif ($subsite == 'institute_eye' && '' != $eye_dept) {
+					$department = $eye_dept;
+				} elseif ($subsite == 'institute_spine' && '' != $spine_dept) {
+					$department = $spine_dept;
+				} elseif ($subsite == 'institute_digi-health' && '' != $digihealth_dept) {
+					$department = $digihealth_dept;
+				} elseif ($subsite == 'institute_pri' && '' != $pri_dept) {
+					$department = $pri_dept;
+				} elseif ($subsite == 'institute_tri' && '' != $tri_dept) {
+					$department = $tri_dept;
+				} elseif ($subsite == 'institute_cancer' && '' != $cancer_dept) {
+					$department = $cancer_dept;
+				} else {
+					$department = 'uams';
+				}
 			} else {
 				$subsite = 'uams';
 			}
@@ -299,9 +425,29 @@ if ( !function_exists('uams_get_site_info')):
 			if ('' != $themelocation){
 				if ('uams' != $themelocation) {
 					$subsite = $themelocation;
+					if ($subsite == 'regional-campus' && '' != $regional_campus) {
+						$department = $regional_campus;
+					}
 				} else {
 					if ('' != $uamsorganization) {
 						$subsite = $uamsorganization;
+						if ($subsite == 'health-prof' && '' != $cohp_dept) {
+							$department = $cohp_dept;
+						} elseif ($subsite == 'medicine' && '' != $com_dept) {
+							$department = $com_dept;
+						} elseif ($subsite == 'nursing' && '' != $con_dept) {
+							$department = $con_dept;
+						} elseif ($subsite == 'pharmacy' && '' != $cop_dept) {
+							$department = $cop_dept;
+						} elseif ($subsite == 'public-health' && '' != $coph_dept) {
+							$department = $coph_dept;
+						} elseif ($subsite == 'grad-school' && '' != $grad_dept) {
+							$department = $grad_dept;
+						} elseif ($subsite == 'other' && '' != $other_dept) {
+							$department = $other_dept;
+						} else {
+							$department = 'uams';
+						}
 					} else {
 						$subsite = 'uams';
 					}
@@ -310,7 +456,7 @@ if ( !function_exists('uams_get_site_info')):
 				$subsite = 'uams';
 			}
 		}
-		$siteinfo = array('site' => $site, 'subsite' => $subsite);
+		$siteinfo = array('site' => $site, 'subsite' => $subsite, 'department' => $department);
         return $siteinfo;
     }
 
@@ -358,11 +504,11 @@ if ( !function_exists('uams_get_home_link')):
     function uams_get_home_link()
     {
 		if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site'])) {
-			$homelink = 'http://www.uams.edu';
+			$homelink = 'https://www.uams.edu';
 		} elseif ('uamshealth' == uams_get_site_info()['site']) {
 			$homelink = 'https://uamshealth.com';
 		} elseif ('inside' == uams_get_site_info()['site']) {
-			$homelink = 'http://inside.uams.edu';
+			$homelink = 'https://inside.uams.edu';
 		}
 		return $homelink;
     }
@@ -461,8 +607,8 @@ if (!function_exists('apStyleDate')) {
  * Return sized image.
  *
  * @param integer  $id 			// id of image
- * @param integer  $prefwidth	// Preferred Output width
- * @param string   $prefheight	// Preferred Output height
+ * @param integer  $prefwidth	// Preferred Output width. Set as -1 to inherit width as native ratio of prefered height.
+ * @param string   $prefheight	// Preferred Output height. Set as -1 to inherit width as native ratio of prefered width.
  * @param string   $hcrop		// horizontal crop position (left, center, right)
  * @param string   $vcrop		// vertical crop position (top, center, bottom)
  * @return string				// image url
@@ -479,6 +625,12 @@ function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 
 	$image_height = wp_get_attachment_image_src($id, 'full')[2];
 	// Do the maths
 	$image_ratio = $image_width / $image_height;
+	if ($prefheight == -1) {
+		$prefheight = $prefwidth / $image_ratio;
+	}
+	if ($prefwidth == -1) {
+		$prefwidth = $prefheight * $image_ratio;
+	}
 	$pref_ratio = $prefwidth / $prefheight;
 	if( $image_width >= $prefwidth && $image_height >= $prefheight ) { // Bigger image => Crop
 		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
@@ -502,6 +654,53 @@ function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 
 		$image_url = wp_get_attachment_url( $id, 'full' );
 	}
 	return $image_url;
+}
+
+/**
+ * Return dimension for gallery image.
+ * For use inside image_sizer function.
+ *
+ * @param string	$breakpoint	// short name of breakpoint (xxs, xs, sm, md, lg, xl, xxl)
+ * @param integer 	$columns	// Number of columns displayed per row
+ * @param integer 	$density	// Pixel density (1 or 2)
+ * @param integer	$ratio		// Aspect ratio of the image to return height in decimal (16:9 = 1.7778). Leave as 0 if not returning height. Set to -1 if height should be set as native ratio of preferred width.
+ * @return integer				// image dimension
+ */
+function gallery_image_dimension( $breakpoint, $columns, $density = 1, $ratio = 0 ) {
+	if ( $breakpoint == 'xxs' || $breakpoint == 'xs' ) {
+		$viewportwidth = 768;
+		$modulepadding = 32;
+	} elseif ( $breakpoint == 'sm' ) {
+		$viewportwidth = 992;
+		$modulepadding = 48;
+	} elseif ( $breakpoint == 'md' ) {
+		$viewportwidth = 1200;
+		$modulepadding = 48;
+	} elseif ( $breakpoint == 'lg' ) {
+		$viewportwidth = 1500;
+		$modulepadding = 48;
+	} elseif ( $breakpoint == 'xl' ) {
+		$viewportwidth = 1921;
+		$modulepadding = 48;
+	} else {
+		$viewportwidth = 2560;
+		$modulepadding = 48;
+	}
+	if ( $ratio == -1 ) {
+		$dimension = -1;
+	} else {
+		$dimension = ( $viewportwidth - (2 * $modulepadding) - (($columns - 1) * 30) ) / $columns;
+
+		if ( $ratio != 0 ) {
+			$dimension = $dimension / $ratio;
+		}
+
+		if ( $density > 1 ) {
+			$dimension = $dimension * 2;
+		}
+	}
+	
+	return $dimension;
 }
 
 //
@@ -629,7 +828,8 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 		'post_status' => 'publish',
 		'post_parent' => $page_id,
 		'order' => 'ASC',
-		'orderby' => 'title',
+		'orderby' => 'menu_order title',
+		'posts_per_page' => -1, // We do not want to limit the post count
 		'meta_query' => array(
 			array(
 				'key' => 'page_hide_from_menu',
@@ -664,4 +864,52 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 		</section>
 	<?php
 	}
+}
+// Whitelist specific blocks for the Marketing Landing Page template
+add_filter('allowed_block_types', function($block_types, $post) {
+	$allowed_marketing = [
+		'acf/action-bar',
+		'acf/call-out',
+		'acf/cta',
+		//'acf/hero',
+		'acf/link-list',
+		'acf/uams-news',
+		'acf/text-overlay',
+		'acf/image-side',
+		'acf/text-stacked',
+		'acf/livewhale-calendar',
+		'acf/uams-gallery',
+		'acf/uams-content',
+		'acf/fad-providers',
+		'acf/fad-locations'
+	];
+	if (get_page_template_slug( $post ) == 'templates/marketing.php') {
+		return $allowed_marketing;
+	}
+	return $block_types;
+}, 10, 2);
+// ACF for GEO
+add_filter('acf/load_field/name=geo_valid', 'uamswp_set_geo');
+add_filter('acf/update_value/name=geo_valid', 'uamswp_force_geo', 10, 3);
+
+function uamswp_force_geo($value, $post_id, $field)
+{
+	if (class_exists('Geot')) {
+		$value = 'true';
+	} else {
+		$value = 'false';
+	}
+    return $value;
+}
+function uamswp_set_geo($field)
+{
+	if (class_exists('Geot')) {
+		$value = 'true';
+	} else {
+		$value = 'false';
+	}
+	if (array_key_exists('value', $field)) {
+        $field['value'] = $value;
+    }
+    return $field;
 }
