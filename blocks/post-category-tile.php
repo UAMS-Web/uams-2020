@@ -33,6 +33,8 @@ if ( empty( $background_color ) )
     $background_color = get_field('post_tile_background_color');
 if ( empty($geo) )
     $geo = get_field('post_tile_geo');
+if ( empty($geo_region) )
+    $geo_region = get_field('post_tile_geo_region');
 
 // The item's selected category.
 if ( empty( $category ) )
@@ -40,18 +42,22 @@ if ( empty( $category ) )
 
 // GEO Logic
 $geo_display = false;
-if (!isset($geo)){
+if (!isset($geo) || empty($geo_region)){
     $geo_display = true;
 } else {
-    if( $geo['geot_condition'] == 'include' ) {
-        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+    if( $geo == 'include' && !empty($geo_region) ) {
+        if( is_in_region($geo_region) ){
             $geo_display = true;
         }
-    }  else {
-        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+    } elseif( $geo == 'exclude' && !empty($geo_region) ) {
+        if ( is_not_in_region($geo_region) ){
             $geo_display = true;
         }
     }
+}
+if (is_admin() && !empty($geo) && !empty($geo_region)) {
+    $geo_display = true;
+    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
 }
 if ($geo_display) {
 
