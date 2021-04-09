@@ -4,6 +4,10 @@
     //padding-bottom: $module-padding;
     position: relative;
 
+    &:focus {
+        outline: none;
+    }
+
     &:not(.no-padding) {
         padding: $uams-module-padding-mobile;
 
