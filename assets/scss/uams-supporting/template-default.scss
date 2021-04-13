@@ -354,6 +354,10 @@ figure[class="wp-block-image size-large"],
 .wp-block-image figure[class="wp-block-image size-large"]  {
     margin: $page-title-margin-bottom-mobile 0;
 
+    &:first-child {
+        margin-top: 0;
+    }
+
     &:last-child {
         margin-bottom: 0;
     }
@@ -434,6 +438,14 @@ figure[class="wp-block-image size-large"],
     @include media-breakpoint-up(sm) {
         max-width: 299px !important;
         max-width: calc((#{$content-width} - #{$page-title-margin-bottom-mobile}) / 2) !important;
+    }
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
     }
 
     &.small {
