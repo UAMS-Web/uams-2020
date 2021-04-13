@@ -43,7 +43,7 @@ if ( empty($articleID) )
     $articleID = get_field('news_article_id');
 if ( empty($local) )
     $local = get_field('news_local');
-if ( empty($link) )
+if ( !isset($link) )
     $link = get_field('news_include_link');
 if ( empty($position) )
     $position = get_field('news_position');
