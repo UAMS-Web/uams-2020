@@ -529,9 +529,9 @@ $lead-font-weight: 300;
 
 $small-font-size: 75%;
 
-$text-muted: $gray-600;
+$text-muted: $body-color-lightest;
 
-$blockquote-small-color: $gray-600;
+$blockquote-small-color: $body-color-lightest;
 $blockquote-small-font-size: $small-font-size;
 $blockquote-font-size: $font-size-base;
 $blockquote-large-font-size: $lead-font-size;
@@ -710,7 +710,7 @@ $input-focus-color: $input-color;
 $input-focus-width: $input-btn-focus-width;
 $input-focus-box-shadow: $input-btn-focus-box-shadow;
 
-$input-placeholder-color: $gray-600;
+$input-placeholder-color: $body-color-lightest;
 $input-plaintext-color: $body-color;
 
 $input-height-border: $input-border-width * 2;
@@ -755,7 +755,7 @@ $custom-control-indicator-border-color: $gray-500;
 $custom-control-indicator-border-width: $input-border-width;
 
 $custom-control-indicator-disabled-bg: $input-disabled-bg;
-$custom-control-label-disabled-color: $gray-600;
+$custom-control-label-disabled-color: $body-color-lightest;
 
 $custom-control-indicator-checked-color: $component-active-color;
 $custom-control-indicator-checked-bg: $component-active-bg;
@@ -796,7 +796,7 @@ $custom-select-indicator-padding: 1rem; // Extra padding to account for the pres
 $custom-select-font-weight: $input-font-weight;
 $custom-select-line-height: $input-line-height;
 $custom-select-color: $input-color;
-$custom-select-disabled-color: $gray-600;
+$custom-select-disabled-color: $body-color-lightest;
 $custom-select-bg: $input-bg;
 $custom-select-disabled-bg: $gray-200;
 $custom-select-bg-size: 8px 10px; // In pixels because image dimensions
@@ -917,7 +917,7 @@ $zindex-carousel-arrows: 15;
 
 $nav-link-padding-y: .5rem;
 $nav-link-padding-x: 1rem;
-$nav-link-disabled-color: $gray-600;
+$nav-link-disabled-color: $body-color-lightest;
 
 $nav-tabs-border-color: $gray-300;
 $nav-tabs-border-width: $border-width;
@@ -998,12 +998,12 @@ $dropdown-link-hover-bg: $gray-100;
 $dropdown-link-active-color: $component-active-color;
 $dropdown-link-active-bg: $component-active-bg;
 
-$dropdown-link-disabled-color: $gray-600;
+$dropdown-link-disabled-color: $body-color-lightest;
 
 $dropdown-item-padding-y: .25rem;
 $dropdown-item-padding-x: 1.5rem;
 
-$dropdown-header-color: $gray-600;
+$dropdown-header-color: $body-color-lightest;
 
 
 // Pagination
@@ -1032,7 +1032,7 @@ $pagination-active-color: $component-active-color;
 $pagination-active-bg: $component-active-bg;
 $pagination-active-border-color: $pagination-active-bg;
 
-$pagination-disabled-color: $gray-600;
+$pagination-disabled-color: $body-color-lightest;
 $pagination-disabled-bg: $white;
 $pagination-disabled-border-color: $gray-300;
 
@@ -1132,7 +1132,7 @@ $toast-border-color: rgba(0, 0, 0, .1);
 $toast-border-radius: .25rem;
 $toast-box-shadow: 0 .25rem .75rem rgba($black, .1);
 
-$toast-header-color: $gray-600;
+$toast-header-color: $body-color-lightest;
 $toast-header-background-color: rgba($white, .85);
 $toast-header-border-color: rgba(0, 0, 0, .05);
 
@@ -1237,7 +1237,7 @@ $list-group-active-color: $component-active-color;
 $list-group-active-bg: $component-active-bg;
 $list-group-active-border-color: $list-group-active-bg;
 
-$list-group-disabled-color: $gray-600;
+$list-group-disabled-color: $body-color-lightest;
 $list-group-disabled-bg: $list-group-bg;
 
 $list-group-action-color: $gray-700;
@@ -1260,7 +1260,7 @@ $thumbnail-box-shadow: 0 1px 2px rgba($black, .075);
 // Figures
 
 $figure-caption-font-size: $font-size-base * 0.75;
-$figure-caption-color: $gray-600;
+$figure-caption-color: $body-color-lightest;
 
 
 // Breadcrumbs
