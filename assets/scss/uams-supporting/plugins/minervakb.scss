@@ -2,4 +2,13 @@ body {
     .mkb-meta-label {
         color: $body-color-lightest;
     }
+
+    .mkb-article-item--detailed {
+        .mkb-article-item__meta {
+            color: $body-color-lightest;
+        }
+    }
+    .kb-search__tip {
+        color: $body-color-lightest !important;
+    }
 }
