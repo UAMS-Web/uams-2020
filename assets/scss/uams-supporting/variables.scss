@@ -190,7 +190,7 @@ $primary: $red;
 $secondary: $gray-600;
 $success: $green-darker;
 $info: $teal;
-$warning: $orange-special;
+$warning: $orange;
 $danger: $red-special;
 $light: $gray-100;
 $dark: $gray-800;
@@ -218,6 +218,9 @@ $theme-colors-text: (
   "dark": $white,
   "white": $body-color
 );
+
+// Define one rem for px variables
+$onerem: 16px;
 
 // Set a specific jump point for requesting color jumps
 $theme-color-interval: 8%;
@@ -407,8 +410,11 @@ $border-width: 1px;
 $border-color: $gray-300;
 
 $border-radius: .25rem;
+$border-radius-px: .25 * $onerem;
 $border-radius-lg: .3rem;
+$border-radius-lg-px: .3 * $onerem;
 $border-radius-sm: .2rem;
+$border-radius-sm-px: .2 * $onerem;
 
 $rounded-pill: 50rem;
 
@@ -446,11 +452,12 @@ $font-family-uni: "Uni sans", sans-serif;
 $font-family-base: $font-family-sans-serif;
 // stylelint-enable value-keyword-case
 
-$onerem: 16px;
 $font-size-base: 1.125rem; // 18px
 $font-size-base-px: 1.125 * 16px; // 18px
 $font-size-lg: $font-size-base * 1.25;
+$font-size-lg-px: $font-size-base-px * 1.25;
 $font-size-sm: $font-size-base * .75;
+$font-size-sm-px: $font-size-base-px * .75;
 
 $font-weight-thin: 100;
 $font-weight-lighter: 200;
@@ -479,8 +486,16 @@ $h4-font-size: $font-size-base * $h4-font-size-multiplier;
 $h5-font-size: $font-size-base * $h5-font-size-multiplier;
 $h6-font-size: $font-size-base * $h6-font-size-multiplier;
 
+$h1-font-size-px: $font-size-base-px * $h1-font-size-multiplier;
+$h2-font-size-px: $font-size-base-px * $h2-font-size-multiplier;
+$h3-font-size-px: $font-size-base-px * $h3-font-size-multiplier;
+$h4-font-size-px: $font-size-base-px * $h4-font-size-multiplier;
+$h5-font-size-px: $font-size-base-px * $h5-font-size-multiplier;
+$h6-font-size-px: $font-size-base-px * $h6-font-size-multiplier;
+
 $headings-margin-top: 1em;
 $headings-margin-bottom: 1.125rem;
+$headings-margin-bottom-px: 1.125 * $onerem;
 $headings-font-family: null;
 $headings-font-weight: 500;
 $headings-line-height: 1.2;
@@ -582,9 +597,12 @@ $table-border-level: -6;
 // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
 
 $input-btn-padding-y: .375rem;
+$input-btn-padding-y-px: .375 * $onerem;
 $input-btn-padding-x: .75rem;
+$input-btn-padding-x-px: .75 * $onerem;
 $input-btn-font-family: null;
 $input-btn-font-size: $font-size-base;
+$input-btn-font-size-px: $font-size-base-px;
 $input-btn-line-height: $line-height-base;
 
 $input-btn-focus-width: .2rem;
@@ -594,11 +612,13 @@ $input-btn-focus-box-shadow: 0 0 0 $input-btn-focus-width $input-btn-focus-color
 $input-btn-padding-y-sm: .25em; // formerly .25rem
 $input-btn-padding-x-sm: .5em; // formerly .5rem
 $input-btn-font-size-sm: $font-size-sm;
+$input-btn-font-size-sm-px: $font-size-sm-px;
 $input-btn-line-height-sm: $line-height-sm;
 
 $input-btn-padding-y-lg: .5em; // formerly .5rem
 $input-btn-padding-x-lg: 1em; // formerly 1rem
 $input-btn-font-size-lg: $font-size-lg;
+$input-btn-font-size-lg-px: $font-size-lg-px;
 $input-btn-line-height-lg: $line-height-lg;
 
 $input-btn-border-width: $border-width;
@@ -609,19 +629,24 @@ $input-btn-border-width: $border-width;
 // For each of Bootstrap's buttons, define text, background, and border color.
 
 $btn-padding-y: $input-btn-padding-y;
+$btn-padding-y-px: $input-btn-padding-y-px;
 $btn-padding-x: $input-btn-padding-x;
+$btn-padding-x-px: $input-btn-padding-x-px;
 $btn-font-family: $input-btn-font-family;
 $btn-font-size: $input-btn-font-size;
+$btn-font-size-px: $input-btn-font-size-px;
 $btn-line-height: $input-btn-line-height;
 
 $btn-padding-y-sm: $input-btn-padding-y-sm;
 $btn-padding-x-sm: $input-btn-padding-x-sm;
 $btn-font-size-sm: $input-btn-font-size-sm;
+$btn-font-size-sm-px: $input-btn-font-size-sm-px;
 $btn-line-height-sm: $input-btn-line-height-sm;
 
 $btn-padding-y-lg: $input-btn-padding-y-lg;
 $btn-padding-x-lg: $input-btn-padding-x-lg;
 $btn-font-size-lg: $input-btn-font-size-lg;
+$btn-font-size-lg-px: $input-btn-font-size-lg-px;
 $btn-line-height-lg: $input-btn-line-height-lg;
 
 $btn-border-width: $input-btn-border-width;
@@ -639,6 +664,7 @@ $btn-block-spacing-y: .5rem;
 
 // Allows for customizing button radius independently from global border radius
 $btn-border-radius: $border-radius;
+$btn-border-radius-px: $border-radius-px;
 $btn-border-radius-lg: $border-radius-lg;
 $btn-border-radius-sm: $border-radius-sm;
 
@@ -927,19 +953,19 @@ $navbar-toggler-padding-x: .75rem;
 $navbar-toggler-font-size: inherit; // originally $font-size-lg
 $navbar-toggler-border-radius: $btn-border-radius;
 
-$navbar-dark-color: rgba($white, .5);
-$navbar-dark-hover-color: rgba($white, .75);
+$navbar-dark-color: $white; // originally rgba($white, .5)
+$navbar-dark-hover-color: rgba($white, .85);
 $navbar-dark-active-color: $white;
 $navbar-dark-disabled-color: rgba($white, .25);
 $navbar-dark-toggler-icon-bg: str-replace(url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='#{$navbar-dark-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"), "#", "%23");
 $navbar-dark-toggler-border-color: rgba($white, .1);
 
-$navbar-light-color: rgba($black, .5);
-$navbar-light-hover-color: rgba($black, .7);
-$navbar-light-active-color: rgba($black, .9);
-$navbar-light-disabled-color: rgba($black, .3);
+$navbar-light-color: $primary; // originally rgba($black, .5)
+$navbar-light-hover-color: $link-hover-color; // originally rgba($black, .7)
+$navbar-light-active-color: $link-hover-color; // originally gba($black, .9)
+$navbar-light-disabled-color: rgba($primary, .3); // originally rgba($black, .3)
 $navbar-light-toggler-icon-bg: str-replace(url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='#{$navbar-light-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"), "#", "%23");
-$navbar-light-toggler-border-color: rgba($black, .1);
+$navbar-light-toggler-border-color: rgba($primary, .1); // originally rgba($black, .1)
 
 $navbar-light-brand-color: $navbar-light-active-color;
 $navbar-light-brand-hover-color: $navbar-light-active-color;
