@@ -9,6 +9,13 @@
         margin-bottom: 0;
     }
 
+    .gf_progressbar_wrapper {
+        h3.gf_progressbar_title {
+            color: $body-color-lightest;
+            opacity: 1;
+        }
+    }
+
     // Labels
     label.gfield_label,
     legend.gfield_label {
