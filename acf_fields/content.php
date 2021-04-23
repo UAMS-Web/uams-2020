@@ -78,7 +78,7 @@ return array(
         'acfe_permissions' => '',
         'default_value' => '',
         'tabs' => 'all',
-        'toolbar' => 'full',
+        'toolbar' => 'custom',
         'media_upload' => 1,
         'delay' => 0,
     ),
