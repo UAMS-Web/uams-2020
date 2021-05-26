@@ -400,13 +400,5 @@ hr {
 
 // Source Citation Container
 .cite {
-    margin: $font-size-base 0;
-    padding: 0 0 0 $font-size-base;
-    border-left: $blockquote-border-width solid $cite-border-color;
-    @include font-size($blockquote-small-font-size);
-    color: $blockquote-small-color;
-
-    &:last-child {
-        margin-bottom: 0;
-    }
+    @include cite();
 }
