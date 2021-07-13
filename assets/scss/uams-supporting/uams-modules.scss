@@ -15,7 +15,8 @@
             padding: $uams-module-padding;
         }
 
-        > .container-fluid {
+        > .container-fluid,
+        > .uamswp-news-syndication-cards > .container-fluid {
             padding: 0;
         }
 
