@@ -67,6 +67,7 @@ function uamswp_site_image() {
 			|| 'pharmacy' == uams_get_site_info()['subsite']
 			|| 'public-health' == uams_get_site_info()['subsite']
 			|| 'grad-school' == uams_get_site_info()['subsite']
+			|| 'regional-campus' == uams_get_site_info()['subsite']
 			|| 'other' == uams_get_site_info()['subsite']
 			) {
 			switch_to_blog(1);
