@@ -61,6 +61,7 @@ body .tshowcase {
                         }
 
                         img {
+                            width: auto;
                             max-height: 171px;
                             @include media-breakpoint-up(xs) {
                                 max-height: none;
