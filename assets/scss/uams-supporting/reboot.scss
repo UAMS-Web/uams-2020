@@ -1,3 +1,14 @@
+//
+// Links
+//
+
+a {
+    @include hover-focus() {
+      color: $link-hover-color;
+      text-decoration: $link-hover-decoration;
+    }
+}
+
 
 //
 // Figures
