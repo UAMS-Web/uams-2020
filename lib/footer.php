@@ -276,7 +276,7 @@ function uamswp_footer_creds_text() {
         } elseif ( startsWith($subsite, 'nursing') ) {
             $social_fb = 'https://www.facebook.com/UAMSCollegeofNursing/';
         } elseif ( startsWith($subsite, 'pharmacy') ) {
-            $social_fb = 'https://www.facebook.com/UAMSPharm';
+            $social_fb = 'https://www.facebook.com/UAMSPharmacy/';
             $social_ig = 'https://www.instagram.com/uamspharmacy/';
 
             if ('arpoison' == $department) {
