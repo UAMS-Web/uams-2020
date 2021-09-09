@@ -230,7 +230,7 @@ function uamswp_footer_creds_text() {
             if ( 'institute_aging' == $subsite ) {
                 $social_fb = 'https://www.facebook.com/UAMSaging/';
             } elseif ( 'institute_eye' == $subsite ) {
-                $social_fb = 'https://www.facebook.com/pages/Harvey-Bernice-Jones-Eye-Institute/';
+                $social_fb = 'https://www.facebook.com/UAMSJonesEye/';
             } elseif ( 'institute_digi-health' == $subsite ) {
                 $social_fb = 'https://www.facebook.com/UAMSDigitalHealth/';
             } elseif ( 'institute_pri'  == $subsite ) {
@@ -239,9 +239,9 @@ function uamswp_footer_creds_text() {
                 $social_fb = 'https://www.facebook.com/uamstri/';
                 $social_tw = 'https://twitter.com/TRI_UAMS';
             } elseif ( 'institute_cancer' == $subsite ) {
-                $social_fb = 'http://www.facebook.com/uamscancerinstitute';
                 $social_tw = 'https://twitter.com/uamscancer';
                 $social_ig = 'https://instagram.com/uamscancer';
+                $social_fb = 'https://www.facebook.com/uamscancer/';
                 $social_li = 'https://www.linkedin.com/company/the-winthrop-p-cancer-institute/';
                 $social_yt = 'http://www.youtube.com/watch?v=Y_w5HFmzgCo&list=PLDDEFFC8B6412D823';
             }
@@ -258,10 +258,10 @@ function uamswp_footer_creds_text() {
             if ( 'emergency-medicine' == $department) {
                 $social_fb = 'https://www.facebook.com/UAMSEmergencyMedicine';
             } elseif ( 'pediatrics' == $department) {
-                $social_fb = 'https://www.facebook.com/pages/UAMS-Department-of-Pediatrics/';
+                $social_fb = 'https://www.facebook.com/UAMSPeds/';
                 $social_tw = 'https://twitter.com/UAMSPeds';
             } elseif ( 'otolaryngology' == $department) {
-                $social_fb = 'https://www.facebook.com/pg/uamsotolaryngology/';
+                $social_fb = 'https://www.facebook.com/uamsotolaryngology/';
                 $social_tw = 'https://twitter.com/UAMSENT';
                 $social_ig = 'https://www.instagram.com/uams.ent/';
             } elseif ( 'family-medicine' == $department) {
@@ -274,7 +274,7 @@ function uamswp_footer_creds_text() {
                 $social_fb = 'https://www.facebook.com/UAMSUrology/';
             }
         } elseif ( startsWith($subsite, 'nursing') ) {
-            $social_fb = 'https://www.facebook.com/pages/UAMS-College-of-Nursing/';
+            $social_fb = 'https://www.facebook.com/UAMSCollegeofNursing/';
         } elseif ( startsWith($subsite, 'pharmacy') ) {
             $social_fb = 'https://www.facebook.com/UAMSPharm';
             $social_ig = 'https://www.instagram.com/uamspharmacy/';
@@ -285,7 +285,7 @@ function uamswp_footer_creds_text() {
         } elseif ( startsWith($subsite, 'public-health') ) {
             $social_fb = 'https://www.facebook.com/uamscoph/';
         } elseif ( startsWith($subsite, 'grad-school') ) {
-            $social_fb = 'https://www.facebook.com/pages/UAMS-Graduate-School/';
+            $social_fb = 'https://www.facebook.com/UAMSGradSchool/';
         } elseif ( 'nw-campus' == $subsite ) {
             $social_fb = 'https://www.facebook.com/UAMSNW/';
         // } elseif ( startsWith($subsite, 'regional-') ) {
@@ -307,8 +307,8 @@ function uamswp_footer_creds_text() {
         } elseif ( 'ipe' == $subsite) {
             $social_fb = 'https://www.facebook.com/uamsipe/';
         } elseif ( 'library' == $subsite) {
-            $social_fb = 'http://www.facebook.com/uamslibrary';
             $social_tw = 'https://twitter.com/UAMSlibrary';
+            $social_fb = 'https://www.facebook.com/uamslibrary/';
         } elseif ( 'employee_nurses' == $subsite) {
             $social_fb = 'https://www.facebook.com/UAMSnurses';
         }
