@@ -47,6 +47,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $background_color = $module['action_bar_background_color'];
             $action_bar_rows = $module['action_bar_section'];
             $geo = $module['action_bar_geo'];
+            $geo_region = $module['action_bar_geo_region'];
 
             include( get_stylesheet_directory() .'/blocks/action-bar.php' );
 
@@ -60,6 +61,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $image = $module['call_out_image'];
             $background_color = $module['call_out_background_color'];
             $geo = $module['call_out_geo'];
+            $geo_region = $module['call_out_geo_region'];
 
             include( get_stylesheet_directory() .'/blocks/call-out.php' );
 
@@ -79,6 +81,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $image = $module['cta_bar_image'];
             $background_color = $module['cta_bar_background_color'];
             $geo = $module['cta_bar_geo'];
+            $geo_region = $module['cta_bar_geo_region'];
 
             include( get_stylesheet_directory() .'/blocks/cta.php' );
 
@@ -88,6 +91,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $id = $i;
             $hero_rows = $module['hero'];
             $geo = $module['hero_geo'];
+            $geo_region = $module['hero_geo_region'];
 
             include( get_stylesheet_directory() .'/blocks/hero.php' );
 
@@ -102,6 +106,7 @@ function uamswp_module( $module = array(), $i = false ) {
             // $link_list_icons = $module['link_list_icons'];
             $link_list_rows = $module['link_list_section'];
             $geo = $module['link_list_geo'];
+            $geo_region = $module['link_list_geo_region'];
 
             include( get_stylesheet_directory() .'/blocks/link-list.php' );
 
@@ -126,6 +131,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $image_anchor = $module['side_image']['side_image_anchor'] ?: 'center';
             $background_color = $module['side_image_background_color'] ?: 'bg-white';
             $geo = $module['side_image_geo'];
+            $geo_region = $module['side_image_geo_region'];
 
             include( get_stylesheet_directory() .'/blocks/image-side-by-side.php' );
 
@@ -135,6 +141,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $id = $i;
             $overlay_rows = $module['overlay_section'];
             $geo = $module['overlay_geo'];
+            $geo_region = $module['overlay_geo_region'];
 
             include( get_stylesheet_directory() .'/blocks/overlay.php' );
 
@@ -149,6 +156,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $post_button_text = $module['post_tile_post_button_text'] ?: 'Read the Story';
             $cat_button_text = $module['post_tile_category_button_text'] ?: 'View ' . $category->name . ' Archive';
             $geo = $module['post_tile_geo'];
+            $geo_region = $module['post_tile_geo_region'];
 
             include( get_stylesheet_directory() .'/blocks/post-category-tile.php' );
 
@@ -161,6 +169,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $background_color = $module['post_tiles_background_color'];
             $post_tiles_rows = $module['post_tiles_section'];
             $geo = $module['post_tiles_geo'];
+            $geo_region = $module['post_tiles_geo_region'];
 
             include( get_stylesheet_directory() .'/blocks/post-category-tiles.php' );
 
@@ -179,6 +188,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $more_button_url = $module['stacked_more_button_url'];
             $more_button_description = $module['stacked_more_button_description'];
             $geo = $module['stacked_geo'];
+            $geo_region = $module['stacked_geo_region'];
 
             include( get_stylesheet_directory() .'/blocks/stacked.php' );
 
@@ -252,6 +262,7 @@ function uamswp_module( $module = array(), $i = false ) {
                 $gallery_images = $module['gallery_images'];
                 $background_color = $module['gallery_background_color'];
                 $geo = $module['gallery_geo'];
+                $geo_region = $module['gallery_geo_region'];
     
                 include( get_stylesheet_directory() .'/blocks/gallery.php' );
     
@@ -264,6 +275,7 @@ function uamswp_module( $module = array(), $i = false ) {
                     $content_block = $module['content_content'];
                     $background_color = $module['content_background_color'];
                     $geo = $module['content_geo'];
+                    $geo_region = $module['content_geo_region'];
         
                     include( get_stylesheet_directory() .'/blocks/content.php' );
         
@@ -275,6 +287,7 @@ function uamswp_module( $module = array(), $i = false ) {
                     $livewhale = $module['livewhale_id'];
                     $background_color = $module['livewhale_background_color'];
                     $geo = $module['livewhale_geo'];
+                    $geo_region = $module['livewhale_geo_region'];
         
                     include( get_stylesheet_directory() .'/blocks/livewhale.php' );
         
