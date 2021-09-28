@@ -190,6 +190,22 @@ function uams_register_blocks() {
         //     'align'             => 'full',
         //     'render_template'   => 'blocks/block.php',
 		// ));
+        acf_register_block_type(array(
+            'name'              => 'uams-section',
+            'title'             => __('UAMS Section'),
+            'description'       => __('Section - Inner block.'),
+            'category'          => 'common',
+            'icon'              => '',
+            'keywords'          => array('uams', 'inner', 'block'),
+            'mode'              => 'preview',
+            'supports'          => [
+                'align'         => true,
+                'anchor'        => true,
+                'customClassName'   => true,
+                'jsx'           => true,
+            ],
+            'render_template'   => 'blocks/section.php',
+		));
     }
 }
 
@@ -211,6 +227,7 @@ if( function_exists('acf_add_local_field_group') ):
     $livewhale = require( get_stylesheet_directory() .'/acf_fields/livewhale.php' );
     $gallery = require( get_stylesheet_directory() .'/acf_fields/gallery.php' );
     $content = require( get_stylesheet_directory() .'/acf_fields/content.php' );
+    $section = require( get_stylesheet_directory() .'/acf_fields/section.php' );
     $counter_list = require( get_stylesheet_directory() .'/acf_fields/counter.php' );
     
 
@@ -575,6 +592,30 @@ if( function_exists('acf_add_local_field_group') ):
                     'param' => 'block',
                     'operator' => '==',
                     'value' => 'acf/counter-list',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+    ));
+
+    // Add local field group for UAMS Section Block
+    acf_add_local_field_group(array(
+        'key' => 'group_uams_section',
+        'title' => 'Block: UAMS Section',
+        'fields' => $section,
+        'location' => array(
+            array(
+                array(
+                    'param' => 'block',
+                    'operator' => '==',
+                    'value' => 'acf/uams-section',
                 ),
             ),
         ),
