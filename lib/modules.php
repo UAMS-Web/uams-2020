@@ -290,6 +290,53 @@ function uamswp_module( $module = array(), $i = false ) {
                     include( get_stylesheet_directory() .'/blocks/livewhale.php' );
         
                     break;
+
+        case 'modules_uams_section':
+                    $id = $i;
+                    $heading = $module['modules_uams_section_heading'];
+                    $hide_heading = $module['modules_uams_section_hide_heading'];
+                    $background_color = $module['modules_uams_section_bg_color'];
+                    $module_rows = $module['modules_uams_section_flexible_layout'];
+        
+                    if ( empty ($id) ) {
+                        $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
+                    }   
+                    ?>
+                    <section class="uams-module section-block <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
+                                        <span class="title"><?php echo $heading; ?></span>
+                                    </h2>
+                                    <?php
+                                    if( $module_rows ):
+                                        //print_r($module_rows);
+                                        echo '<div class="module-body">';
+                                        foreach($module_rows as $module_row){
+                                            if( $module_row['acf_fc_layout'] == 'uams_section_wysiwyg' ):
+                                                echo $module_row['section_wysiwyg_html'];
+                                            elseif($module_row['acf_fc_layout'] == 'modules_uams_section_youtube'):
+                                                if(function_exists('lyte_preparse')) {
+                                                    echo '<div class="'. $module_row['section_youtube_width'] .'">';
+                                                    echo lyte_parse( str_replace( 'https', 'httpv', $module_row['section_youtube_url'] ) ); 
+                                                    echo '</div>';
+                                                } else {
+                                                    echo '<div class="'. $module_row['section_youtube_width'] .' wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
+                                                    echo wp_oembed_get( $module_row['section_youtube_url'] ); 
+                                                    echo '</div>';
+                                                }
+                                            endif;
+                                        }
+                                        echo '</div>';
+                                    endif; 
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <?php
+                    break;
  
 		// More modules go here
 	}
