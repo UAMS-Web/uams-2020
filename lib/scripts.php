@@ -171,7 +171,7 @@ function uamswp_gutenberg_disable_all_colors_fonts() {
 	/**
 	 * Disable font sizes.
 	 */
-	add_theme_support( 'editor-font-sizes'  );
+	add_theme_support( 'editor-font-sizes', [] );
 	add_theme_support( 'disable-custom-font-sizes' );
 }
 add_action( 'after_setup_theme', 'uamswp_gutenberg_disable_all_colors_fonts' );
