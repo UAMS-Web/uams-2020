@@ -84,8 +84,10 @@ if ($geo_display) :
                         // Load values.
                         $link_title = $link_list_row['link_list_section_title'];
                         $body = $link_list_row['link_list_section_body'];
-                        $link_url = $link_list_row['link_list_section_url']['url'];
-                        $link_target = $link_list_row['link_list_section_url']['target'];
+                        if ($link_list_row['link_list_section_url']){
+                            $link_url = $link_list_row['link_list_section_url']['url'];
+                            $link_target = $link_list_row['link_list_section_url']['target'];
+                        }
                         $link_desc = $link_list_row['link_list_section_description'];
 
                     ?>
