@@ -16,7 +16,10 @@ if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
 
-$id = 'action-bar-' . $id;  
+$id = 'action-bar-' . $id;
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+}  
     
 $className = '';
 if( !empty($block['className']) ) {

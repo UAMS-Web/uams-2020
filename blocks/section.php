@@ -7,15 +7,16 @@
 if (empty( $id )) {
 	$id = '';
 }
-if( !empty( $block['anchor'] ) )
-	$id = sanitize_title( $block['anchor'] );
-
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
 if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 } 
+$id = 'uams-section-' . $id;
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+}
 
 if ( empty($heading) )
     $heading = get_field('section_heading');

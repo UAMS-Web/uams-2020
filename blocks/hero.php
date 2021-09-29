@@ -16,7 +16,6 @@ if ( empty ($id) ) {
 }
 
 $id = 'hero-' . $id;
-
 if( !empty($block['anchor']) ) {
     $id = $block['anchor'];
 }

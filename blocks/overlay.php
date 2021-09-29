@@ -6,15 +6,20 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+if (empty( $id )) {
+	$id = '';
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
 if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
-}
+} 
     
 $id = 'text-image-overlay-' . $id;
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+}
 
 $className = '';
 if( !empty($block['className']) ) {

@@ -24,6 +24,9 @@ if (!empty($id)) {
 // }
     
 $id = 'cta-bar-' . $id;
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+}
 
 $className = '';
 if( !empty($block['className']) ) {
