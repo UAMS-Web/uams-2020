@@ -304,12 +304,12 @@ function uamswp_module( $module = array(), $i = false ) {
                                             if( $module_row['acf_fc_layout'] == 'uams_section_wysiwyg' ):
                                                 echo $module_row['section_wysiwyg_html'];
                                             elseif($module_row['acf_fc_layout'] == 'modules_uams_section_youtube'):
-                                                if(function_exists('lyte_preparse')) {
+                                                if( function_exists('lyte_preparse') && strpos($module_row['section_youtube_url'],"youtu") !== false ) {
                                                     echo '<div class="'. $module_row['section_youtube_width'] .'">';
                                                     echo lyte_parse( str_replace( 'https', 'httpv', $module_row['section_youtube_url'] ) ); 
                                                     echo '</div>';
                                                 } else {
-                                                    echo '<div class="'. $module_row['section_youtube_width'] .' wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
+                                                    echo '<div class="'. $module_row['section_youtube_width'] .' wp-block-embed is-type-video embed-responsive wp-has-aspect-ratio embed-responsive-16by9">';
                                                     echo wp_oembed_get( $module_row['section_youtube_url'] ); 
                                                     echo '</div>';
                                                 }
