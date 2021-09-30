@@ -334,7 +334,7 @@ return array (
                             'layout_modules_uams_section_youtube' => array(
                                 'key' => 'layout_modules_uams_section_youtube',
                                 'name' => 'modules_uams_section_youtube',
-                                'label' => 'YouTube',
+                                'label' => 'Embed / YouTube',
                                 'display' => 'block',
                                 'sub_fields' => array(
                                     array(
@@ -365,7 +365,7 @@ return array (
                                     ),
                                     array(
                                         'key' => 'field_section_youtube_url',
-                                        'label' => 'YouTube URL',
+                                        'label' => 'Embed URL / YouTube URL',
                                         'name' => 'section_youtube_url',
                                         'type' => 'url',
                                         'instructions' => '',
