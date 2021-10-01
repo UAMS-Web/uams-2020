@@ -233,9 +233,9 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 			'step' => '',
 		),
 		array(
-			'key' => 'field_news_bgcolor'. $suffix,
+			'key' => 'field_news_background_color'. $suffix,
 			'label' => 'Background Color',
-			'name' => 'news_bgcolor',
+			'name' => 'news_background_color',
 			'type' => 'button_group',
 			'instructions' => '',
 			'required' => 0,
@@ -246,11 +246,14 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 				'id' => '',
 			),
 			'choices' => array(
-				'bg-white' => 'White (default)',
+				'bg-auto' => 'Auto',
+				'bg-white' => 'White',
 				'bg-gray' => 'Gray',
 			),
 			'allow_null' => 0,
-			'default_value' => '',
+			'default_value' => array(
+				0 => 'bg-auto',
+			),
 			'layout' => 'horizontal',
 			'return_format' => 'value',
 		),
