@@ -35,7 +35,7 @@ $allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/embed', 'core/l
 $template = array(
 );
 ?>  
-<section class="uams-module section-block<?php echo join( ' ', $className ); ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module section-block<?php echo join( ' ', $className ); ?><?php echo $block ? ' ' . $background_color : ''; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12<?php echo $hide_heading ? " sr-only" : ""; ?>">

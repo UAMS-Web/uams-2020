@@ -109,7 +109,7 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
 }
 if ($geo_display) :
 ?>
-<section class="uams-module no-padding side-by-side <?php echo $className; ?> image-on-<?php echo $image_postion; ?> image-background-<?php echo $image_anchor; ?> <?php echo $background_color; ?>" id="side-by-side-<?php echo esc_attr($id); ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module no-padding side-by-side <?php echo $className; ?> image-on-<?php echo $image_postion; ?> image-background-<?php echo $image_anchor; ?><?php echo $block ? ' ' . $background_color : ''; ?>" id="side-by-side-<?php echo esc_attr($id); ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 image-container" aria-label="<?php echo $image_alt ?>" role="img">
