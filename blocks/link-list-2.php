@@ -69,7 +69,7 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
 }
 if ($geo_display) :
 ?>
-<section class="uams-module link-list<?php echo $className; ?> <?php echo $$background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module link-list<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
         <span class="title"><?php echo $heading; ?></span>
     </h2>

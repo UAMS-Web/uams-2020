@@ -48,7 +48,7 @@ if ( empty($counter_list_rows) )
 
 $row = 0;
 ?>
-<section class="uams-module link-list counter-list link-list-layout-split<?php echo $className; ?> <?php echo $$background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module link-list counter-list link-list-layout-split<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 heading">
