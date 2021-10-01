@@ -41,7 +41,7 @@ if ( empty($offset) )
 if ( empty($advancedCat) )
     $advancedCat = get_field('news_advanced_cat');
 if ( empty($background_color) )
-    $background_color = get_field('news_bgcolor');
+    $background_color = get_field('news_background_color');
 if ( empty($hide_img) )
     $hide_img = get_field('news_hide_img');
 if ( empty($articleID) )

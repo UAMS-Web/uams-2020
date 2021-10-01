@@ -65,7 +65,7 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
 }
 if ($geo_display) :
 ?>
-<section class="uams-module link-list link-list-layout-split<?php echo $className; ?><?php echo $block ? ' ' . $background_color : ''; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module link-list link-list-layout-split<?php echo $className; ?> <?php echo $$background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
 
     <div class="container-fluid">
         <div class="row">

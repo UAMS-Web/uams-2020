@@ -64,7 +64,7 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
 }
 if ($geo_display) :
 ?>
-<section class="uams-module link-list link-list-layout-split livewhale<?php echo $className; ?><?php echo $block ? ' ' . $background_color : ''; ?>" id="<?php echo $livewhale; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module link-list link-list-layout-split livewhale<?php echo $className; ?> <?php echo $$background_color; ?>" id="<?php echo $livewhale; ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 heading">

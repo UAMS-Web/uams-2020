@@ -68,7 +68,7 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
 }
 if ($geo_display) : 
 ?>
-    <section class="uams-module extra-padding call-out<?php echo $className; ?><?php echo $block ? ' '. $background_color : ''; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+    <section class="uams-module extra-padding call-out<?php echo $className; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
         <?php if ( $use_image && function_exists( 'fly_add_image_size' ) ) { ?>
         <style>
             #<?php echo $id; ?>:before {
