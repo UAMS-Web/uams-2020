@@ -336,19 +336,20 @@ function uamswp_module( $module = array(), $i = false ) {
 function uamswp_module_open( $module, $i ) {
 	if( uamswp_module_disable( $module ) )
 		return;
-	$classes = array( 'module' );
-	$classes[] = 'type-' . str_replace( '_', '-', $module['acf_fc_layout'] );
-    foreach ($module as $key => $value) {
-        if (strpos($key, 'background_color') !== false) {
-            $classes[] = $value;
-            break;
-        }
-    }
-	if( !empty( $module['bg_color'] ) )
-		$classes[] = 'bg-' . $module['bg_color'];
-	$id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
-	echo '<section class="' . join( ' ', $classes ) . '" id="' . $id . '">';
-	echo '<div class="wrap">';
+	// $classes = array( 'module' );
+	// $classes[] = 'type-' . str_replace( '_', '-', $module['acf_fc_layout'] );
+    // foreach ($module as $key => $value) {
+    //     if (strpos($key, 'background_color') !== false) {
+    //         $classes[] = $value;
+    //         break;
+    //     }
+    // }
+	// if( !empty( $module['bg_color'] ) )
+	// 	$classes[] = 'bg-' . $module['bg_color'];
+	// $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
+	// echo '<section class="' . join( ' ', $classes ) . '" id="' . $id . '">';
+	// echo '<div class="wrap">';
+    echo '<!-- // Begin Module - '. $module['acf_fc_layout'] . '// -->';
 }
 /**
  * Module Header
@@ -366,8 +367,9 @@ function uamswp_module_header( $module ) {
 function uamswp_module_close( $module, $i ) {
 	if( uamswp_module_disable( $module ) )
 		return;
-	echo '</div>';
-	echo '</section>';
+	// echo '</div>';
+	// echo '</section>';
+    echo '<!-- // End Module - '. $module['acf_fc_layout'] .'// -->';
 }
 /**
  * Module Disable
