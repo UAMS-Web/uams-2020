@@ -224,9 +224,9 @@ return array (
                         'ui_off_text' => '',
                     ),
                     array(
-                        'key' => 'field_modules_uams_section_bg_color',
+                        'key' => 'field_modules_uams_section_background_color',
                         'label' => 'Background Color',
-                        'name' => 'modules_uams_section_bg_color',
+                        'name' => 'modules_uams_section_background_color',
                         'type' => 'select',
                         'instructions' => '',
                         'required' => 0,
