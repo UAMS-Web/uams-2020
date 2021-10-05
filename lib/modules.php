@@ -282,12 +282,13 @@ function uamswp_module( $module = array(), $i = false ) {
                     $id = $i;
                     $heading = $module['modules_uams_section_heading'];
                     $hide_heading = $module['modules_uams_section_hide_heading'];
-                    $background_color = $module['modules_uams_section_bg_color'];
+                    $background_color = $module['modules_uams_section_background_color'];
                     $module_rows = $module['modules_uams_section_flexible_layout'];
         
                     if ( empty ($id) ) {
                         $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
-                    }   
+                    } 
+                    $id = 'uams-section-' . $id;  
                     ?>
                     <section class="uams-module section-block <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
                         <div class="container-fluid">
