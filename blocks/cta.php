@@ -82,7 +82,7 @@ if ( empty($image) )
     $image = get_field('cta_bar_image');
 if ( empty($background_color) ) 
     $background_color = get_field('cta_bar_background_color');
-if ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) {
+if ( $background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto' ) {
     $btn_color = 'primary';
 } else {
     $btn_color = 'white';
