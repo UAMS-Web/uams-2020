@@ -212,10 +212,10 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'inner', 'block'),
             'mode'              => 'preview',
             'supports'          => [
-                'align'         => true,
-                'anchor'        => true,
+                'align'             => true,
+                'anchor'            => true,
                 'customClassName'   => true,
-                'jsx'           => true,
+                'jsx'               => true,
             ],
             'render_template'   => 'blocks/section.php',
 		));
