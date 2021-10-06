@@ -80,6 +80,7 @@ if ($geo_display) :
             <div class="col-12 col-md-6 list">
                     <ul>
                     <?php 
+                    if ($link_list_rows):
                         foreach($link_list_rows as $link_list_row) {
                         // Load values.
                         $link_title = $link_list_row['link_list_section_title'];
@@ -89,7 +90,6 @@ if ($geo_display) :
                             $link_target = $link_list_row['link_list_section_url']['target'];
                         }
                         $link_desc = $link_list_row['link_list_section_description'];
-
                     ?>
                         <li class="item">
                             <div class="text-container">
@@ -98,7 +98,8 @@ if ($geo_display) :
                             </div>
                         </li>
                     <?php
-                    }
+                        }
+                    endif;
                     ?>
                 </ul>
             </div>
