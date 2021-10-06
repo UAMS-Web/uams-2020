@@ -295,12 +295,13 @@ function uamswp_module( $module = array(), $i = false ) {
                     $id = $i;
                     $heading = $module['modules_uams_section_heading'];
                     $hide_heading = $module['modules_uams_section_hide_heading'];
-                    $background_color = $module['modules_uams_section_bg_color'];
+                    $background_color = $module['modules_uams_section_background_color'];
                     $module_rows = $module['modules_uams_section_flexible_layout'];
         
                     if ( empty ($id) ) {
                         $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
-                    }   
+                    } 
+                    $id = 'uams-section-' . $id;  
                     ?>
                     <section class="uams-module section-block <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
                         <div class="container-fluid">
@@ -317,12 +318,12 @@ function uamswp_module( $module = array(), $i = false ) {
                                             if( $module_row['acf_fc_layout'] == 'uams_section_wysiwyg' ):
                                                 echo $module_row['section_wysiwyg_html'];
                                             elseif($module_row['acf_fc_layout'] == 'modules_uams_section_youtube'):
-                                                if(function_exists('lyte_preparse')) {
+                                                if( function_exists('lyte_preparse') && strpos($module_row['section_youtube_url'],"youtu") !== false ) {
                                                     echo '<div class="'. $module_row['section_youtube_width'] .'">';
                                                     echo lyte_parse( str_replace( 'https', 'httpv', $module_row['section_youtube_url'] ) ); 
                                                     echo '</div>';
                                                 } else {
-                                                    echo '<div class="'. $module_row['section_youtube_width'] .' wp-block-embed is-type-video embed-responsive embed-responsive-16by9">';
+                                                    echo '<div class="'. $module_row['section_youtube_width'] .' wp-block-embed is-type-video embed-responsive wp-has-aspect-ratio embed-responsive-16by9">';
                                                     echo wp_oembed_get( $module_row['section_youtube_url'] ); 
                                                     echo '</div>';
                                                 }
@@ -349,13 +350,20 @@ function uamswp_module( $module = array(), $i = false ) {
 function uamswp_module_open( $module, $i ) {
 	if( uamswp_module_disable( $module ) )
 		return;
-	$classes = array( 'module' );
-	$classes[] = 'type-' . str_replace( '_', '-', $module['acf_fc_layout'] );
-	if( !empty( $module['bg_color'] ) )
-		$classes[] = 'bg-' . $module['bg_color'];
-	$id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
-	echo '<section class="' . join( ' ', $classes ) . '" id="' . $id . '">';
-	echo '<div class="wrap">';
+	// $classes = array( 'module' );
+	// $classes[] = 'type-' . str_replace( '_', '-', $module['acf_fc_layout'] );
+    // foreach ($module as $key => $value) {
+    //     if (strpos($key, 'background_color') !== false) {
+    //         $classes[] = $value;
+    //         break;
+    //     }
+    // }
+	// if( !empty( $module['bg_color'] ) )
+	// 	$classes[] = 'bg-' . $module['bg_color'];
+	// $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
+	// echo '<section class="' . join( ' ', $classes ) . '" id="' . $id . '">';
+	// echo '<div class="wrap">';
+    echo '<!-- // Begin Module - '. $module['acf_fc_layout'] . '// -->';
 }
 /**
  * Module Header
@@ -373,8 +381,9 @@ function uamswp_module_header( $module ) {
 function uamswp_module_close( $module, $i ) {
 	if( uamswp_module_disable( $module ) )
 		return;
-	echo '</div>';
-	echo '</section>';
+	// echo '</div>';
+	// echo '</section>';
+    echo '<!-- // End Module - '. $module['acf_fc_layout'] .'// -->';
 }
 /**
  * Module Disable

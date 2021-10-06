@@ -6,7 +6,9 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+if (empty( $id )) {
+	$id = '';
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 }
@@ -15,6 +17,9 @@ if ( empty ($id) ) {
 }
 
 $id = 'call-out-' . $id;
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+}
 
 $className = '';
 if( !empty($block['className']) ) {

@@ -21,6 +21,7 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'action bar', 'links'),
             'mode'              => 'auto',
             'align'             => 'full',
+            'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/action-bar.php',
         ));
         acf_register_block_type(array(
@@ -32,6 +33,7 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'callout', 'call-out', 'text'),
             'mode'              => 'auto',
             'align'             => 'full',
+            'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/call-out.php',
         ));
         acf_register_block_type(array(
@@ -43,6 +45,7 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'cta', 'call-to-action', 'call to action', 'button'),
             'mode'              => 'auto',
             'align'             => 'full',
+            'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/cta.php',
         ));
         acf_register_block_type(array(
@@ -54,6 +57,7 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'slides', 'slideshow', 'hero'),
             'mode'              => 'auto',
             'align'             => 'full',
+            'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/hero.php',
         ));
         acf_register_block_type(array(
@@ -65,6 +69,7 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'link', 'links', 'list'),
             'mode'              => 'auto',
             'align'             => 'full',
+            'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/link-list.php',
         ));
         if (class_exists('UAMS_Syndicate_News_Base')) { // Add block if news syndication plugin is active
@@ -77,6 +82,7 @@ function uams_register_blocks() {
                 'keywords'          => array('uams', 'news', 'syndication'),
                 'mode'              => 'auto',
                 'align'             => 'full',
+                'supports'          => array( 'anchor' => true ),
                 'render_template'   => 'blocks/news.php',
             ));
         }
@@ -89,6 +95,7 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'text', 'image', 'overlay'),
             'mode'              => 'auto',
             'align'             => 'full',
+            'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/overlay.php',
         ));
         // acf_register_block_type(array(
@@ -122,6 +129,7 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'text', 'image', 'side'),
             'mode'              => 'auto',
             'align'             => 'full',
+            'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/image-side-by-side.php',
         ));
         acf_register_block_type(array(
@@ -133,6 +141,7 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'text', 'image', 'stack', 'stacked'),
             'mode'              => 'auto',
             'align'             => 'full',
+            'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/stacked.php',
         ));
         acf_register_block_type(array(
@@ -144,6 +153,7 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'calendar', 'livewhale'),
             'mode'              => 'auto',
             'align'             => 'full',
+            'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/livewhale.php',
         ));
         acf_register_block_type(array(
@@ -155,6 +165,7 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'gallery'),
             'mode'              => 'auto',
             'align'             => 'full',
+            'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/gallery.php',
         ));
         acf_register_block_type(array(
@@ -166,6 +177,7 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'content'),
             'mode'              => 'auto',
             'align'             => 'full',
+            'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/content.php',
 		));
         acf_register_block_type(array(
@@ -177,6 +189,7 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'counter', 'list'),
             'mode'              => 'auto',
             'align'             => 'full',
+            'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/counter.php',
         ));
         // acf_register_block_type(array(
@@ -199,10 +212,10 @@ function uams_register_blocks() {
             'keywords'          => array('uams', 'inner', 'block'),
             'mode'              => 'preview',
             'supports'          => [
-                'align'         => true,
-                'anchor'        => true,
+                'align'             => true,
+                'anchor'            => true,
                 'customClassName'   => true,
-                'jsx'           => true,
+                'jsx'               => true,
             ],
             'render_template'   => 'blocks/section.php',
 		));

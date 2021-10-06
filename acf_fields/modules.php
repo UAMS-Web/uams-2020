@@ -224,9 +224,9 @@ return array (
                         'ui_off_text' => '',
                     ),
                     array(
-                        'key' => 'field_modules_uams_section_bg_color',
+                        'key' => 'field_modules_uams_section_background_color',
                         'label' => 'Background Color',
-                        'name' => 'modules_uams_section_bg_color',
+                        'name' => 'modules_uams_section_background_color',
                         'type' => 'select',
                         'instructions' => '',
                         'required' => 0,
@@ -302,7 +302,7 @@ return array (
                                 'sub_fields' => array(
                                     array(
                                         'key' => 'field_section_wysiwyg_html',
-                                        'label' => 'HTML',
+                                        'label' => 'Content / HTML',
                                         'name' => 'section_wysiwyg_html',
                                         'type' => 'wysiwyg',
                                         'instructions' => '',
@@ -334,12 +334,12 @@ return array (
                             'layout_modules_uams_section_youtube' => array(
                                 'key' => 'layout_modules_uams_section_youtube',
                                 'name' => 'modules_uams_section_youtube',
-                                'label' => 'YouTube',
+                                'label' => 'Embed / YouTube',
                                 'display' => 'block',
                                 'sub_fields' => array(
                                     array(
                                         'key' => 'field_section_youtube_width',
-                                        'label' => 'Background Color',
+                                        'label' => 'Width',
                                         'name' => 'section_youtube_width',
                                         'type' => 'select',
                                         'instructions' => '',
@@ -365,7 +365,7 @@ return array (
                                     ),
                                     array(
                                         'key' => 'field_section_youtube_url',
-                                        'label' => 'YouTube URL',
+                                        'label' => 'Embed URL / YouTube URL',
                                         'name' => 'section_youtube_url',
                                         'type' => 'url',
                                         'instructions' => '',

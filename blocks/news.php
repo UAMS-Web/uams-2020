@@ -6,7 +6,9 @@
  */
 $className = '';
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+if (empty( $id )) {
+	$id = '';
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 }
@@ -15,6 +17,9 @@ if ( empty ($id) ) {
 }
 
 $id = 'uams-news-' .  $id;
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+}
 
 if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
@@ -36,7 +41,7 @@ if ( empty($offset) )
 if ( empty($advancedCat) )
     $advancedCat = get_field('news_advanced_cat');
 if ( empty($background_color) )
-    $background_color = get_field('news_bgcolor');
+    $background_color = get_field('news_background_color');
 if ( empty($hide_img) )
     $hide_img = get_field('news_hide_img');
 if ( empty($articleID) )
