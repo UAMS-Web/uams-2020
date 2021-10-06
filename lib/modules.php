@@ -196,6 +196,8 @@ function uamswp_module( $module = array(), $i = false ) {
                 $advancedCat = $module['news_advanced_cat'];
                 $background_color = $module['news_bgcolor'];
                 $hide_img = $module['news_hide_img'];
+                $hide_author = $module['news_hide_author'];
+                $hide_date = $module['news_hide_date'];
                 $local = $module['news_local'];
                 $link = $module['news_include_link'];
                 $position = $module['news_position'];
@@ -217,7 +219,7 @@ function uamswp_module( $module = array(), $i = false ) {
                 include( get_stylesheet_directory() .'/blocks/news.php' );
 
                 // uamswp_module_header( $module );
-                // // echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
+                // // echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" hide_author="'. $hide_author.'" hide_date="'. $hide_date .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
                 // // echo '<!-- '; print_r($geo); echo ' -->';
                 // // echo '<!-- ' . do_shortcode( '[geot_debug]' ) . ' -->';
 				// // GEO Logic
