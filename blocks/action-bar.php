@@ -82,8 +82,10 @@ if ($geo_display) :
     $section_heading = $action_bar_row['action_bar_section_heading'];
     $body = $action_bar_row['action_bar_section_body'];
     $button_text = $action_bar_row['action_bar_section_button_text'];
-    $button_url = $action_bar_row['action_bar_section_button_url']['url'];
-    $button_target = $action_bar_row['action_bar_section_button_url']['target'];
+    if ( $action_bar_row['action_bar_section_button_url'] ){
+        $button_url = $action_bar_row['action_bar_section_button_url']['url'];
+        $button_target = $action_bar_row['action_bar_section_button_url']['target'];
+    }
     $button_desc = $action_bar_row['action_bar_section_button_description'];
 
 ?>
