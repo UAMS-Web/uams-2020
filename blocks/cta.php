@@ -48,8 +48,11 @@ if ( empty($button_text) )
     $button_text = get_field('cta_bar_button_text');
 if ( empty($button_url) ) 
     $button_url = get_field('cta_bar_button_url');
-if ( $button_url && empty($button_target) ) 
-    $button_target = get_field('cta_bar_button_url')['target'];
+if ( $button_url && empty($button_target) ) {
+    if( get_field('cta_bar_button_url') ) {
+        $button_target = get_field('cta_bar_button_url')['target'];
+    }
+}
 if ( empty($button_desc) ) 
     $button_desc = get_field('cta_bar_button_description');
 if ( empty($action_type) && $button_text ) // If still empty (meaning page hasn't been updated since code changed)

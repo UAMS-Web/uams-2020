@@ -109,8 +109,10 @@ if( $stacked_rows ) :
                 $item_heading = $stacked_row['stacked_section_heading'];
                 $body = $stacked_row['stacked_section_body'];
                 $button_text = $stacked_row['stacked_section_button_text'];
-                $button_url = $stacked_row['stacked_section_button_url']['url'];
-                $button_target = $stacked_row['stacked_section_button_url']['target'];
+                if ( $stacked_row['stacked_section_button_url'] ) {
+                    $button_url = $stacked_row['stacked_section_button_url']['url'];
+                    $button_target = $stacked_row['stacked_section_button_url']['target'];
+                }
                 $button_desc = $stacked_row['stacked_section_button_description'];
 
             ?>

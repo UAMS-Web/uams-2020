@@ -102,10 +102,12 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
         $body = $hero_row['hero_body'] ?: 'This is where the description goes'; // Required
     // if ( empty($button_text) )
         $button_text = $hero_row['hero_button_text'] ?: '';
-    // if ( empty($button_url) )
-        $button_url = $hero_row['hero_button_url']['url'] ?: '';
-    // if ( empty($button_target) )
-        $button_target = $hero_row['hero_button_url']['target'] ?: '';
+        if( $hero_row['hero_button_url'] ) {
+        // if ( empty($button_url) )
+            $button_url = $hero_row['hero_button_url']['url'] ?: '';
+        // if ( empty($button_target) )
+            $button_target = $hero_row['hero_button_url']['target'] ?: '';
+        }
     // if ( empty($button_desc) )
         $button_desc = $hero_row['hero_button_description'] ?: '';
     // if ( empty($image_desktop) )

@@ -71,8 +71,10 @@ if( $overlay_rows ) :
         $heading = $overlay_row['overlay_section_heading'];
         $body = $overlay_row['overlay_section_body'];
         $button_text = $overlay_row['overlay_section_button_text'];
-        $button_url = $overlay_row['overlay_section_button_url']['url'];
-        $button_target = $overlay_row['overlay_section_button_url']['target'];
+        if ( $overlay_row['overlay_section_button_url'] ) {
+            $button_url = $overlay_row['overlay_section_button_url']['url'];
+            $button_target = $overlay_row['overlay_section_button_url']['target'];
+        }
         $button_desc = $overlay_row['overlay_section_button_description'];
         $background_color = $overlay_row['overlay_section_background_color'];
         $image = $overlay_row['overlay_section_image'];
