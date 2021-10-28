@@ -271,8 +271,65 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
 						'operator' => '!=',
 						'value' => 'side',
 					),
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'full',
+					),
 				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => '',
+			'default_value' => 0,
+			'ui' => 1,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
+		array(
+			'key' => 'field_news_hide_author'. $suffix,
+			'label' => 'Hide Author',
+			'name' => 'news_hide_author',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
 				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'side',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => '',
+			'default_value' => 0,
+			'ui' => 1,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
+		array(
+			'key' => 'field_news_hide_date'. $suffix,
+			'label' => 'Hide Date',
+			'name' => 'news_hide_date',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_news_format'. $suffix,
+						'operator' => '!=',
+						'value' => 'side',
+					),
 					array(
 						'field' => 'field_news_format'. $suffix,
 						'operator' => '!=',
