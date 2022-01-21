@@ -209,9 +209,9 @@ b {
 }
 
 .page-title,
-.module-title {
+.module-title,
+.module-inner-title {
     text-align: center;
-    margin-top: 0 !important;
     @extend .line-length-min;
     margin-bottom: $uams-module-padding-mobile;
 
@@ -235,6 +235,11 @@ b {
             margin-bottom: $uams-module-padding;
         }
     }
+}
+
+.page-title,
+.module-title {
+    margin-top: 0 !important;
 
     .title {
         position: relative;
@@ -256,6 +261,14 @@ b {
 
 .page-title {
     font-weight: $font-weight-bolder;
+}
+
+.module-inner-title {
+    margin-top: $uams-module-padding-mobile;
+
+    @include media-breakpoint-up(sm) {
+        margin-top: $uams-module-padding;
+    }
 }
 
 .module-description {
