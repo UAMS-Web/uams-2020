@@ -226,10 +226,6 @@ b {
         margin-top: (-$uams-module-padding-mobile / 2);
         margin-bottom: $uams-module-padding-mobile;
     
-        @include media-breakpoint-up(xs) {
-            font-size: $lead-font-size;
-        }
-    
         @include media-breakpoint-up(sm) {
             margin-top: (-$uams-module-padding / 2);
             margin-bottom: $uams-module-padding;
@@ -240,6 +236,12 @@ b {
 .page-title,
 .module-title {
     margin-top: 0 !important;
+
+    + .note {
+        @include media-breakpoint-up(xs) {
+            font-size: $lead-font-size;
+        }
+    }
 
     .title {
         position: relative;
