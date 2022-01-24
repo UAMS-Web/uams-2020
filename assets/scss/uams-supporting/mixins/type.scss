@@ -9,3 +9,17 @@
         margin-bottom: 0;
     }
 }
+
+@function line-length-value($name, $lengths: $line-lengths) {
+    $line-length-value: map-get($lengths, $name);
+    @return if($line-length-value != 0, $line-length-value, null);
+  }
+@mixin line-length-em($name, $lengths: $line-lengths) {
+    $line-length-value: line-length-value($name, $lengths);
+    @if $line-length-value {
+        width: $line-length-value+em;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  }
