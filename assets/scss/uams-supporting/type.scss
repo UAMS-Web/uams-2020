@@ -222,7 +222,6 @@ b {
     + .note {
         @include line-length-em(max);
         text-align: center;
-        font-weight: $lead-font-weight;
         margin-top: (-$uams-module-padding-mobile / 2);
         margin-bottom: $uams-module-padding-mobile;
     
@@ -240,6 +239,7 @@ b {
     + .note {
         @include media-breakpoint-up(xs) {
             font-size: $lead-font-size;
+            font-weight: $lead-font-weight;
         }
     }
 
