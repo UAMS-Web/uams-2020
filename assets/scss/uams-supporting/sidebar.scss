@@ -59,7 +59,7 @@
 
         &#search-2 {
             .uams-search {
-                @extend .line-length-max;
+                @include line-length-em(max);
 
                 .form-group {
                     margin-bottom: 0;

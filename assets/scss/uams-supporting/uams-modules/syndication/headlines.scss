@@ -1,5 +1,5 @@
 .uamswp-news-syndication-headlines {
     .inner-container {
-        @extend .line-length-max;
+        @include line-length-em(max);
     }
 }

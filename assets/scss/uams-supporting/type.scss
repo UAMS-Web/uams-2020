@@ -212,7 +212,7 @@ b {
 .module-title,
 .module-inner-title {
     text-align: center;
-    @extend .line-length-min;
+    @include line-length-em(min);
     margin-bottom: $uams-module-padding-mobile;
 
     @include media-breakpoint-up(sm) {
@@ -220,7 +220,7 @@ b {
     }
 
     + .note {
-        @extend .line-length-max;
+        @include line-length-em(max);
         text-align: center;
         font-weight: $lead-font-weight;
         margin-top: (-$uams-module-padding-mobile / 2);
@@ -274,7 +274,7 @@ b {
 }
 
 .module-description {
-    @extend .line-length-max;
+    @include line-length-em(max);
     text-align: center;
     margin-bottom: $uams-module-padding-mobile;
     
