@@ -230,6 +230,14 @@ b {
             margin-bottom: $uams-module-padding;
         }
     }
+
+    &.sr-only + .note {
+        margin-top: 0;
+    
+        @include media-breakpoint-up(sm) {
+            margin-top: 0;
+        }
+    }
 }
 
 .page-title,
