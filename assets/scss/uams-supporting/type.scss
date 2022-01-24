@@ -212,7 +212,7 @@ b {
 .module-title,
 .module-inner-title {
     text-align: center;
-    @extend .line-length-min;
+    @include line-length-em(min);
     margin-bottom: $uams-module-padding-mobile;
 
     @include media-breakpoint-up(sm) {
@@ -220,15 +220,22 @@ b {
     }
 
     + .note {
-        @extend .line-length-max;
+        @include line-length-em(max);
         text-align: center;
-        font-weight: $lead-font-weight;
         margin-top: (-$uams-module-padding-mobile / 2);
         margin-bottom: $uams-module-padding-mobile;
     
         @include media-breakpoint-up(sm) {
             margin-top: (-$uams-module-padding / 2);
             margin-bottom: $uams-module-padding;
+        }
+    }
+
+    &.sr-only + .note {
+        margin-top: 0;
+    
+        @include media-breakpoint-up(sm) {
+            margin-top: 0;
         }
     }
 }
@@ -240,6 +247,7 @@ b {
     + .note {
         @include media-breakpoint-up(xs) {
             font-size: $lead-font-size;
+            font-weight: $lead-font-weight;
         }
     }
 
@@ -274,7 +282,7 @@ b {
 }
 
 .module-description {
-    @extend .line-length-max;
+    @include line-length-em(max);
     text-align: center;
     margin-bottom: $uams-module-padding-mobile;
     

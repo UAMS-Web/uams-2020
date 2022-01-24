@@ -1361,9 +1361,18 @@ $print-body-min-width: map-get($grid-breakpoints, "lg");
 
 // Line Lengths
 
+$line-lengths: (
+  max: 35,
+  ideal: 28.4375,
+  min: 19.6875
+);
+
 $line-length-max: 35; // 80 characters
+$line-length-max: map-get($line-lengths, "max");
 $line-length-ideal: 28.4375; // 65 characters
+$line-length-ideal: map-get($line-lengths, "ideal");
 $line-length-min: 19.6875; // 45 characters
+$line-length-min: map-get($line-lengths, "min");
 
 $content-width: $font-size-base * $line-length-max;
 
