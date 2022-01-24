@@ -85,12 +85,16 @@ article {
     background-color: $body-bg-banded;
 }
 
-.line-length-min,
-.line-length-ideal,
+.line-length-min {
+    @include line-length-em(min);
+}
+
+.line-length-ideal {
+    @include line-length-em(ideal);
+}
+
 .line-length-max {
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    @include line-length-em(max);
 }
 
 .line-length-min,
@@ -116,18 +120,6 @@ section.archive-description .entry-content {
             //margin-left: -20%;
         }
     }
-}
-
-.line-length-min {
-    width: $line-length-min + em;
-}
-
-.line-length-ideal {
-    width: $line-length-ideal + em;
-}
-
-.line-length-max {
-    width: $line-length-max + em;
 }
 
 .no-break {
@@ -181,7 +173,7 @@ section.archive-description .entry-content {
 }
 
 .module-body {
-    @extend .line-length-max;
+    @include line-length-em(max);
 
     + .sr-only + .card-list-container,
     + .card-list-container {
