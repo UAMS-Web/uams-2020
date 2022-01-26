@@ -103,7 +103,7 @@
             }
 
             h1 {
-                @extend .line-length-min;
+                @include line-length-em(min);
                 text-transform: uppercase;
                 letter-spacing: 0.05em;
                 margin-bottom: 0.5em;
@@ -135,7 +135,7 @@
                 font-size: 0.875em;
                 font-weight: $font-weight-medium;
                 line-height: $nav-line-height;
-                @extend .line-length-ideal;
+                @include line-length-em(ideal);
 
                 @include media-breakpoint-up(xs) {
                     font-size: $lead-font-size-multiplier + em;

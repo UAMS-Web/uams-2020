@@ -209,10 +209,10 @@ b {
 }
 
 .page-title,
-.module-title {
+.module-title,
+.module-inner-title {
     text-align: center;
-    margin-top: 0 !important;
-    @extend .line-length-min;
+    @include line-length-em(min);
     margin-bottom: $uams-module-padding-mobile;
 
     @include media-breakpoint-up(sm) {
@@ -220,19 +220,34 @@ b {
     }
 
     + .note {
-        @extend .line-length-max;
+        @include line-length-em(max);
         text-align: center;
-        font-weight: $lead-font-weight;
         margin-top: (-$uams-module-padding-mobile / 2);
         margin-bottom: $uams-module-padding-mobile;
-    
-        @include media-breakpoint-up(xs) {
-            font-size: $lead-font-size;
-        }
     
         @include media-breakpoint-up(sm) {
             margin-top: (-$uams-module-padding / 2);
             margin-bottom: $uams-module-padding;
+        }
+    }
+
+    &.sr-only + .note {
+        margin-top: 0;
+    
+        @include media-breakpoint-up(sm) {
+            margin-top: 0;
+        }
+    }
+}
+
+.page-title,
+.module-title {
+    margin-top: 0 !important;
+
+    + .note {
+        @include media-breakpoint-up(xs) {
+            font-size: $lead-font-size;
+            font-weight: $lead-font-weight;
         }
     }
 
@@ -258,8 +273,16 @@ b {
     font-weight: $font-weight-bolder;
 }
 
+.module-inner-title {
+    margin-top: $uams-module-padding-mobile;
+
+    @include media-breakpoint-up(sm) {
+        margin-top: $uams-module-padding;
+    }
+}
+
 .module-description {
-    @extend .line-length-max;
+    @include line-length-em(max);
     text-align: center;
     margin-bottom: $uams-module-padding-mobile;
     

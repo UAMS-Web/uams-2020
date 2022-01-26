@@ -251,6 +251,7 @@ function uamswp_footer_creds_text() {
     if ('uams' == $site) {
         if ( startsWith($subsite, 'health-prof') ) {
             $social_fb = 'https://www.facebook.com/uamschp';
+            $social_tw = 'https://twitter.com/uamschp';
             $social_ig = 'https://www.instagram.com/uamschp';
         } elseif ( startsWith($subsite, 'medicine') ) {
             $social_fb = 'https://www.facebook.com/UAMSCOM/';
