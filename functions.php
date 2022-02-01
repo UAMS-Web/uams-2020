@@ -536,7 +536,7 @@ function format_phone($country, $phone) {
 
 function format_phone_us($phone) {
 	// note: making sure we have something
-	if(!isset($phone{3})) { return ''; }
+	if(!isset($phone[3])) { return ''; }
 	// note: strip out everything but numbers 
 	$phone = preg_replace('/[^0-9]/', '', $phone);
 	$length = strlen($phone);
@@ -564,7 +564,7 @@ function format_phone_us($phone) {
    
 function format_phone_dash($phone) {
 	// note: making sure we have something
-	if(!isset($phone{3})) { return ''; }
+	if(!isset($phone[3])) { return ''; }
 	// note: strip out everything but numbers 
 	$phone = preg_replace('/[^0-9]/', '', $phone);
 	$length = strlen($phone);
