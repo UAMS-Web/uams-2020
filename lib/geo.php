@@ -2,8 +2,6 @@
 /*
  * Custom Geo Functions
  * 
- * 
- * 
  */
 // Define region cities
 global $region_northwest, $region_northeast, $region_southwest, $region_southeast, $region_central;
@@ -24,6 +22,10 @@ $region_central = array(
 );
 // Function include
 function is_in_region( array $regions ) {
+    // Check if geoip is installed / activated
+    if (!function_exists('geoip_detect2_get_info_from_current_ip'))
+		return;
+
     global $region_northwest, $region_northeast, $region_southwest, $region_southeast, $region_central;
     $geo = geoip_detect2_get_info_from_current_ip();
     $city = $geo->city->name;
@@ -62,6 +64,10 @@ function is_in_region( array $regions ) {
 }
 // Function exclude
 function is_not_in_region( array $regions ) {
+    // Check if geoip is installed / activated
+    if (!function_exists('geoip_detect2_get_info_from_current_ip'))
+		return;
+
     global $region_northwest, $region_northeast, $region_southwest, $region_southeast, $region_central;
 
     $geo = geoip_detect2_get_info_from_current_ip();

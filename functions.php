@@ -536,7 +536,7 @@ function format_phone($country, $phone) {
 
 function format_phone_us($phone) {
 	// note: making sure we have something
-	if(!isset($phone{3})) { return ''; }
+	if(!isset($phone[3])) { return ''; }
 	// note: strip out everything but numbers 
 	$phone = preg_replace('/[^0-9]/', '', $phone);
 	$length = strlen($phone);
@@ -564,7 +564,7 @@ function format_phone_us($phone) {
    
 function format_phone_dash($phone) {
 	// note: making sure we have something
-	if(!isset($phone{3})) { return ''; }
+	if(!isset($phone[3])) { return ''; }
 	// note: strip out everything but numbers 
 	$phone = preg_replace('/[^0-9]/', '', $phone);
 	$length = strlen($phone);
@@ -889,7 +889,8 @@ add_filter('allowed_block_types', function($block_types, $post) {
 	return $block_types;
 }, 10, 2);
 // ACF for GEO
-add_filter('acf/load_field/name=geo_valid', 'uamswp_set_geo');
+// add_filter('acf/load_field/name=geo_valid', 'uamswp_set_geo');
+add_filter('acf/prepare_field/name=geo_valid', 'uamswp_set_geo');
 add_filter('acf/update_value/name=geo_valid', 'uamswp_force_geo', 10, 3);
 
 function uamswp_force_geo($value, $post_id, $field)

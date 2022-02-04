@@ -6,7 +6,9 @@
  */
 $className = '';
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+if (empty( $id )) {
+	$id = '';
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 }
@@ -15,6 +17,9 @@ if ( empty ($id) ) {
 }
 
 $id = 'uams-news-' .  $id;
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+}
 
 if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
@@ -36,9 +41,13 @@ if ( empty($offset) )
 if ( empty($advancedCat) )
     $advancedCat = get_field('news_advanced_cat');
 if ( empty($background_color) )
-    $background_color = get_field('news_bgcolor');
+    $background_color = get_field('news_background_color');
 if ( empty($hide_img) )
     $hide_img = get_field('news_hide_img');
+if ( empty($hide_author) )
+    $hide_author = get_field('news_hide_author');
+if ( empty($hide_date) )
+    $hide_date = get_field('news_hide_date');
 if ( empty($articleID) )
     $articleID = get_field('news_article_id');
 if ( empty($local) )
@@ -62,7 +71,7 @@ if ( 'grid' == $output ) {
     $count = '1';
 }
 
-// echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
+// echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" hide_author="'. $hide_author.'" hide_date="'. $hide_date .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
 // echo '<!-- '; print_r($geo); echo ' -->';
 // GEO Logic
 $geo_display = false;
@@ -84,6 +93,6 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
     echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
 }
 if ($geo_display) {
-	echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
+	echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" hide_author="'. $hide_author.'" hide_date="'. $hide_date .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
 }
 ?>

@@ -97,6 +97,7 @@ return array(
         ),
         'acfe_permissions' => '',
         'choices' => array(
+            'bg-auto' => 'Auto',
             'bg-white' => 'White',
             'bg-gray' => 'Gray',
             'bg-red' => 'Red',
@@ -108,7 +109,7 @@ return array(
             'bg-orange' => 'Orange',
         ),
         'default_value' => array(
-            0 => 'bg-white',
+            0 => 'bg-auto',
         ),
         'allow_null' => 0,
         'multiple' => 0,

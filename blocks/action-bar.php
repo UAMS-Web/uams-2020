@@ -16,7 +16,10 @@ if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
 
-$id = 'action-bar-' . $id;  
+$id = 'action-bar-' . $id;
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+}  
     
 $className = '';
 if( !empty($block['className']) ) {
@@ -43,7 +46,7 @@ if( $action_bar_rows ) {
     // $rows = get_field('action_bar_section');
     $row_count = count($action_bar_rows);
 } 
-if ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) {
+if ( $background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto' ) {
     $btn_color = 'primary';
 } else {
     $btn_color = 'white';
@@ -79,8 +82,10 @@ if ($geo_display) :
     $section_heading = $action_bar_row['action_bar_section_heading'];
     $body = $action_bar_row['action_bar_section_body'];
     $button_text = $action_bar_row['action_bar_section_button_text'];
-    $button_url = $action_bar_row['action_bar_section_button_url']['url'];
-    $button_target = $action_bar_row['action_bar_section_button_url']['target'];
+    if ( $action_bar_row['action_bar_section_button_url'] ){
+        $button_url = $action_bar_row['action_bar_section_button_url']['url'];
+        $button_target = $action_bar_row['action_bar_section_button_url']['target'];
+    }
     $button_desc = $action_bar_row['action_bar_section_button_description'];
 
 ?>

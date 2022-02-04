@@ -1,0 +1,54 @@
+{
+    "version":1,
+    "settings": {
+        "color": {
+			"palette": []
+		},
+        "typography": {
+            "fontFamilies": [
+                {
+					"fontFamily": "-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif",
+					"slug": "system-fonts",
+					"name": "System Fonts"
+				},
+                {
+                    "fontFamily": "\"Fira Sans\", sans-serif",
+                    "slug": "fira-sans",
+                    "name": "Fira Sans"
+                },
+                {
+                    "fontFamily": "SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+                    "slug": "monospace"
+                },
+                {
+                    "fontFamily": "\"Uni sans\", sans-serif",
+                    "slug": "uni"
+                }
+            ],
+            "dropCap": false,
+            "fontSizes": []
+        },
+        "layout": {
+			"contentSize": "630px",
+			"wideSize": "1020px"
+		}
+    },
+    "styles": {
+		"color": {
+			"background": "#fff",
+			"text": "#212121"
+		},
+		"elements": {
+			"link" :{
+				"color": {
+					"text": "#9d2235"
+				}
+			}
+		},
+		"typography": {
+            "fontSize": "18px",
+			"fontFamily": "var(--wp--preset--font-family--system-fonts)",
+			"lineHeight": "1.5"
+		}
+	}
+}
