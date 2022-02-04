@@ -6,15 +6,20 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+if (empty( $id )) {
+	$id = '';
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
 if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
-}
+} 
 
 $id = 'stacked-image-text-' .  $id;
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+}
 
 $className = '';
 if( !empty($block['className']) ) {
@@ -94,6 +99,7 @@ if( $stacked_rows ) :
                 <?php echo $description ? '<div class="module-description"><p>'. $description .'</p></div>' : ''; ?>
             </div>
             <div class="card-list card-list-left col-12">
+            <div class="row">
             <?php 
                 foreach($stacked_rows as $stacked_row) {
                 // Load values.
@@ -103,8 +109,10 @@ if( $stacked_rows ) :
                 $item_heading = $stacked_row['stacked_section_heading'];
                 $body = $stacked_row['stacked_section_body'];
                 $button_text = $stacked_row['stacked_section_button_text'];
-                $button_url = $stacked_row['stacked_section_button_url']['url'];
-                $button_target = $stacked_row['stacked_section_button_url']['target'];
+                if ( $stacked_row['stacked_section_button_url'] ) {
+                    $button_url = $stacked_row['stacked_section_button_url']['url'];
+                    $button_target = $stacked_row['stacked_section_button_url']['target'];
+                }
                 $button_desc = $stacked_row['stacked_section_button_description'];
 
             ?>
@@ -143,6 +151,7 @@ if( $stacked_rows ) :
             <?php
                 }
             ?>
+            </div>
             </div>
             <?php if ( $more ) { ?>
                 <div class="col-12 more">

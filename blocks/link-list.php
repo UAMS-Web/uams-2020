@@ -16,7 +16,10 @@ if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
 
-$id = 'link-list-' .  $id;  
+$id = 'link-list-' .  $id; 
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+} 
     
 $className = '';
 if( !empty($block['className']) ) {
@@ -77,14 +80,16 @@ if ($geo_display) :
             <div class="col-12 col-md-6 list">
                     <ul>
                     <?php 
+                    if ($link_list_rows):
                         foreach($link_list_rows as $link_list_row) {
                         // Load values.
                         $link_title = $link_list_row['link_list_section_title'];
                         $body = $link_list_row['link_list_section_body'];
-                        $link_url = $link_list_row['link_list_section_url']['url'];
-                        $link_target = $link_list_row['link_list_section_url']['target'];
+                        if ($link_list_row['link_list_section_url']){
+                            $link_url = $link_list_row['link_list_section_url']['url'];
+                            $link_target = $link_list_row['link_list_section_url']['target'];
+                        }
                         $link_desc = $link_list_row['link_list_section_description'];
-
                     ?>
                         <li class="item">
                             <div class="text-container">
@@ -93,7 +98,8 @@ if ($geo_display) :
                             </div>
                         </li>
                     <?php
-                    }
+                        }
+                    endif;
                     ?>
                 </ul>
             </div>
