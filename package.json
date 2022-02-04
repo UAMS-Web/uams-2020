@@ -1,6 +1,6 @@
 {
   "name": "uams-2020",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "description": "WordPress Genesis Child Theme using Bootstrap 4 for UAMS",
   "main": "gulpfile.js",
   "repository": "git@github.com:uams-web/uams-2020.git",
