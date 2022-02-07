@@ -23,3 +23,14 @@
         margin-right: auto;
     }
   }
+
+  @mixin anchor-default() {
+    color: $link-color;
+    text-decoration: $link-decoration;
+    background-color: transparent; // Remove the gray background on active links in IE 10.
+  
+    @include hover-focus() {
+      color: $link-hover-color;
+      text-decoration: $link-hover-decoration;
+    }
+  }
