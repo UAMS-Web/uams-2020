@@ -440,6 +440,7 @@ $transition-fade: opacity .15s linear;
 $transition-collapse: height .35s ease;
 
 $embed-responsive-aspect-ratios: (
+    (1920 714), // Waymack and Crew's "cinematic" aspect ratio
     (21 9), // Ultrawide Cinema
     (16 9), // High-definition
     (4 3), // Standard definition
