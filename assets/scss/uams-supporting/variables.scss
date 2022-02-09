@@ -440,10 +440,10 @@ $transition-fade: opacity .15s linear;
 $transition-collapse: height .35s ease;
 
 $embed-responsive-aspect-ratios: (
-    (21 9),
-    (16 9),
-    (4 3),
-    (1 1)
+    (21 9), // Ultrawide Cinema
+    (16 9), // High-definition
+    (4 3), // Standard definition
+    (1 1) // Square
 );
 
 
