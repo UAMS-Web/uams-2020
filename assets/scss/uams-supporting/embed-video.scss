@@ -6,6 +6,17 @@
         iframe {
             @extend .embed-responsive-item;
         }
+
+        figcaption {
+             // figcaption doesn't jive well with the Bootstrap method for responsive video embeds.
+             // It winds up behind the embed/iframe and extends the height of the embed/iframe.
+             // Setting styles to visually hide the element.
+            @extend .sr-only;
+    
+            &:empty {
+                display: none;
+            }
+        }
     }
 }
 
