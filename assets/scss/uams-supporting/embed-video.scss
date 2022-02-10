@@ -12,11 +12,13 @@
 // Embed styles specific to the YouTube Lyte plugin
 .embed-responsive {
     .lyte-wrapper {
+        // Override inline styles to allow player to resize relative to div.embed-responsive
         width: 100% !important;
         max-width: none !important;
         margin: 0 !important;
 
         .lyte {
+            // Override plugin styles to allow thumbnail and iframe to position relative to div.embed-responsive
             position: static;
             padding-bottom: 0;
 
