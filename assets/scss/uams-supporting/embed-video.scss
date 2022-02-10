@@ -8,3 +8,24 @@
         }
     }
 }
+
+// Embed styles specific to the YouTube Lyte plugin
+.embed-responsive {
+    .lyte-wrapper {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+
+        .lyte {
+            position: static;
+            padding-bottom: 0;
+
+            .pL {
+                background-size: 100.3%;
+            }
+        }
+    }
+    div.img-fluid:empty {
+        display: none;
+    }
+}
