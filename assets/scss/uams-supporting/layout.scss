@@ -111,9 +111,9 @@ section.archive-description .entry-content {
             //margin-top: $uams-module-padding;
         }
 
-        &:last-child {
-            //@extend .mb-0;
-        }
+        // &:last-child {
+        //     @extend .mb-0;
+        // }
 
         @include media-breakpoint-up(md) {
             //margin-right: -20%;
