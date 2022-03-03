@@ -322,7 +322,7 @@ $body-color-lightest: $bg-gray-color-lightest; // accessibility
 $link-color: theme-color("primary");
 $link-decoration: underline;
 $link-hover-color: darken($link-color, 15%);
-$link-hover-decoration: $link-decoration; // Bootstrap's default was none
+$link-hover-decoration: none;
 $link-visited-color: darken($link-color, 20%);
 // Darken percentage for links with `.text-*` class (e.g. `.text-success`)
 $emphasized-link-hover-darken-percentage: 15%;
@@ -440,10 +440,11 @@ $transition-fade: opacity .15s linear;
 $transition-collapse: height .35s ease;
 
 $embed-responsive-aspect-ratios: (
-    (21 9),
-    (16 9),
-    (4 3),
-    (1 1)
+    (1920 714), // Waymack and Crew's "cinematic" aspect ratio
+    (21 9), // Ultrawide Cinema
+    (16 9), // High-definition
+    (4 3), // Standard definition
+    (1 1) // Square
 );
 
 

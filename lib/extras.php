@@ -147,8 +147,18 @@ function uamswp_title($html) {
     if ( is_search() ) {
         $pagetitle = 'Search Results';
     }
-    if ( is_category() && is_archive() ) {
-        $pagetitle = single_cat_title("", false);
+    if ( is_archive() ) {
+        $post_type = get_post_type( get_the_id() );
+        $post_type_object = get_post_type_object( $post_type );
+        $pagetitle = $post_type_object->label;
+    }
+    if ( is_archive() && (is_category() || is_tag() || is_tax()) ) {
+        $pagetitle = single_term_title("", false);
+    }
+    // Check if seopress title is set and use it for page title
+    $seopress_title = get_post_meta( get_the_id(), '_seopress_titles_title', true ) ?: "";
+    if (!empty($seopress_title) ) {
+        $pagetitle = $seopress_title;
     }
     // Replace three spaces in sitename with one
     $sitename = str_replace('   ', ' ', get_bloginfo( "name" ));

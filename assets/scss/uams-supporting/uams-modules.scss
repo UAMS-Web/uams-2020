@@ -93,6 +93,10 @@
             left: ($grid-gutter-width / 2);
         }
 
+        p {
+            @include line-length-em(max);
+        }
+
         .cta-container,
         .pagination {
             font-style: normal;
