@@ -154,14 +154,14 @@ section.archive-description .entry-content {
         > picture {
             flex-shrink: 0; // added so the picture element doesn't take up space in IE11
         }
-
-        .card-body {
-            > :last-child {
-                margin-bottom: 0;
-            }
-        }
         .btn {
             margin-top: auto;
+        }
+    }
+
+    .card-body {
+        > :last-child {
+            margin-bottom: 0;
         }
     }
 
