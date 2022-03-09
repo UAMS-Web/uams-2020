@@ -98,8 +98,8 @@ if( $stacked_rows ) :
                 </h2>
                 <?php echo $description ? '<div class="module-description"><p>'. $description .'</p></div>' : ''; ?>
             </div>
-            <div class="card-list card-list-left col-12">
-            <div class="row">
+            <div class="col-12">
+            <div class="card-list card-list-left">
             <?php 
                 foreach($stacked_rows as $stacked_row) {
                 // Load values.
