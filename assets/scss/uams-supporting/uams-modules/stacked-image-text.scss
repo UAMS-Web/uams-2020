@@ -4,20 +4,6 @@
     $stacked-tile-ideal-width: 1rem * $line-length-ideal;
     $stacked-tile-max-width: 1rem * $line-length-max;
 
-    .row {
-        justify-content: center;
-        //margin-bottom: -$grid-gutter-width;
-    }
-
-    .card-list {
-        margin-top: 0;
-        margin-bottom: -$grid-gutter-width;
-
-        @include media-breakpoint-down(xs) {
-            display: block;
-        }
-    }
-
     .item {
         display: flex;
         justify-content: center;
