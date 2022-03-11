@@ -116,7 +116,7 @@ if( $stacked_rows ) :
                         $button_desc = $stacked_row['stacked_section_button_description'];
 
                     ?>
-                        <div class="col-12 col-sm-6 col-xl-3 item">
+                        <div class="item">
                             <div class="card">
                                 <div class="card-img-top">
                                     <picture>
