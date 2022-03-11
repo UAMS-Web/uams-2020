@@ -148,9 +148,7 @@ if( $stacked_rows ) :
                     </div>
                 </div>
             </div>
-            <?php
-                }
-            ?>
+            <?php } // end foreach ?>
             </div>
             </div>
             <?php if ( $more ) { ?>
