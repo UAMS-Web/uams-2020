@@ -20,7 +20,7 @@ function uamswp_theme_scripts() {
 		wp_enqueue_style( 'app-css', UAMSWP_THEME_CSS . 'app.css', array(), CHILD_THEME_VERSION, 'all');
 
 		// Enqueue Google Fonts
-		wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i&display=swap', array(), 'CHILD_THEME_VERSION' );
+		wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i&display=swap', array(), CHILD_THEME_VERSION );
 
 		// Disable the superfish script
 		wp_deregister_script( 'superfish' );
