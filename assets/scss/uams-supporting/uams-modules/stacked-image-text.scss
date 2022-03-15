@@ -4,38 +4,25 @@
     $stacked-tile-ideal-width: 1rem * $line-length-ideal;
     $stacked-tile-max-width: 1rem * $line-length-max;
 
-    .row {
-        justify-content: center;
-        //margin-bottom: -$grid-gutter-width;
-    }
-
-    .card-list {
-        margin-top: 0;
-        margin-bottom: -$grid-gutter-width;
-
-        @include media-breakpoint-down(xs) {
-            display: block;
-        }
-    }
-
     .item {
+        width: 100%;
+        padding: $card-list-gap;
         display: flex;
         justify-content: center;
-        padding-bottom: $grid-gutter-width;
+
+        @include media-breakpoint-up(sm) {
+            @include make-col(6);
+        }
 
         @include media-breakpoint-up(xl) {
-            flex-grow: 0;
-            flex-shrink: 1;
-            flex-basis: auto;
+            flex: 0 1 auto;
+            max-width: percentage(3 / $grid-columns);
             width: auto;
         }
 
-        &:nth-child(odd) {
+        &:nth-child(odd):not(:last-child) {
             @include media-breakpoint-up(sm) {
                 justify-content: flex-end;
-            }
-            @include media-breakpoint-up(xl) {
-                justify-content: center;
             }
         }
 
@@ -43,13 +30,11 @@
             @include media-breakpoint-up(sm) {
                 justify-content: flex-start;
             }
-            @include media-breakpoint-up(xl) {
-                justify-content: center;
-            }
         }
-        
-        &:nth-child(odd):last-child {
-            @include media-breakpoint-up(sm) {
+
+        &:nth-child(odd),
+        &:nth-child(even) {
+            @include media-breakpoint-up(xl) {
                 justify-content: center;
             }
         }
@@ -67,6 +52,10 @@
     .card-img-top {
         border-radius: 0;
         overflow: hidden;
+
+        img {
+            width: 100%;
+        }
     }
 
     .card-body {
