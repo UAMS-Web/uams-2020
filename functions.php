@@ -11,6 +11,10 @@
  *
 */
 
+if ( ! defined( 'CHILD_THEME_VERSION' ) ) {
+    define( 'CHILD_THEME_VERSION', wp_get_theme()->get( 'Version' ) );
+}
+
 add_action( 'genesis_setup', 'uamswp_childtheme_setup', 15 );
 
 function uamswp_childtheme_setup() {
