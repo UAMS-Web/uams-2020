@@ -441,6 +441,7 @@ function uamswp_landing_page_title_wrap_close()
 function uamswp_page_hero() {
     //$id = 'header';
     $hero_rows = get_field('page_hero', get_the_id())['hero'];
+    $i = 0; // Set $i for blocks since it is outside of block editor
     echo '<div class="col-12">';
     include( get_stylesheet_directory() .'/blocks/hero.php' );
     echo '</div>';
