@@ -243,7 +243,7 @@ $yiq-text-light: $white;
 //
 // Quickly modify global styling by enabling or disabling optional features.
 
-$enable-caret: false; // bootstrap default was true
+$enable-caret: true; // bootstrap default was true
 $enable-rounded: true;
 $enable-shadows: true;
 $enable-gradients: false;
@@ -432,7 +432,7 @@ $component-active-color: $white;
 $component-active-bg: theme-color("primary");
 
 $caret-width: .3em;
-$caret-vertical-align: $caret-width * .85;
+$caret-vertical-align: middle; // originally "$caret-width * .85"
 $caret-spacing: $caret-width * .85;
 
 $transition-base: all .2s ease-in-out;
