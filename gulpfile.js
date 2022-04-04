@@ -1,21 +1,21 @@
-var gulp = require('gulp'),
-    sass = require('gulp-sass'),
-    postcss = require('gulp-postcss'),
-    jshint = require('gulp-jshint'),
-    uglify = require('gulp-uglify'),
-    rename = require('gulp-rename'),
-    concat = require('gulp-concat'),
-    notify = require('gulp-notify'),
-    foreach = require('gulp-flatmap'),
-    changed = require('gulp-changed'),
-    // browserSync = require('browser-sync').create(),
-    wpPot = require('gulp-wp-pot'),
-    cssnano = require('cssnano'),
-    // cmq = require('css-mqpacker'),
-    autoprefixer = require('autoprefixer'),
-    zip = require('gulp-zip'),
-    comments = require('postcss-discard-comments');
-    // critical = require('critical');
+const gulp = require('gulp');
+const sass = require('gulp-sass')(require('sass'));
+const postcss = require('gulp-postcss');
+const jshint = require('gulp-jshint');
+const uglify = require('gulp-uglify');
+const rename = require('gulp-rename');
+const concat = require('gulp-concat');
+const notify = require('gulp-notify');
+const foreach = require('gulp-flatmap');
+const changed = require('gulp-changed');
+// const browserSync = require('browser-sync').create();
+const wpPot = require('gulp-wp-pot');
+const cssnano = require('cssnano');
+// const cmq = require('css-mqpacker');
+const autoprefixer = require('autoprefixer');
+const zip = require('gulp-zip');
+const comments = require('postcss-discard-comments');
+// const critical = require('critical');
 
 var plugins = [
     autoprefixer,
@@ -108,7 +108,7 @@ function scriptsLint() {
 function style() {
     return gulp.src(paths.styles.src)
         .pipe(changed(paths.styles.dest))
-        .pipe(sass.sync().on('error', sass.logError))
+        .pipe(sass().on('error', sass.logError))
         .pipe(concat('app.scss'))
         .pipe(postcss(plugins))
         .pipe(rename('app.css'))
@@ -120,7 +120,7 @@ function style() {
 // function criticalstyle() {
 //     return gulp.src(paths.criticalcss.src)
 //         .pipe(changed(paths.criticalcss.dest))
-//         .pipe(sass.sync().on('error', sass.logError))
+//         .pipe(sass().on('error', sass.logError))
 //         .pipe(concat('inline.scss'))
 //         .pipe(postcss(plugins))
 //         .pipe(rename('inline.css'))
@@ -132,7 +132,7 @@ function style() {
 function adminstyle() {
     return gulp.src(paths.admincss.src)
         .pipe(changed(paths.admincss.dest))
-        .pipe(sass.sync().on('error', sass.logError))
+        .pipe(sass().on('error', sass.logError))
         .pipe(concat('admin.scss'))
         .pipe(postcss(plugins))
         .pipe(rename('admin.css'))
@@ -144,7 +144,7 @@ function adminstyle() {
 function uamsalert() {
     return gulp.src(paths.uamsalert.src)
         .pipe(changed(paths.uamsalert.dest))
-        .pipe(sass.sync().on('error', sass.logError))
+        .pipe(sass().on('error', sass.logError))
         .pipe(concat('uamsalert.scss'))
         .pipe(postcss(plugins))
         .pipe(rename('uamsalert.css'))
