@@ -683,7 +683,9 @@ function uamswp_do_searchwp_loop() {
     echo '<div class="search-content row">';
     echo '<div class="col-12">';
     echo '<div class="inner-container content-width">';
+    echo '<div class="pb-4">';
     get_search_form();
+    echo '</div>';
     // echo facetwp_display( 'facet', 'filter_by_type' );
     if ( have_posts() ) {
         while ( have_posts() ) {
