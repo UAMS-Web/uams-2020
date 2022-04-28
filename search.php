@@ -6,7 +6,7 @@
  */
 
 remove_action( 'genesis_loop', 'genesis_do_loop' );
-add_action( 'genesis_loop', 'uamswp_do_search_loop' );
+add_action( 'genesis_loop', 'uamswp_do_searchwp_loop' );
 
 // Remove search results page from google search results
 function sp_titles_robots($html) { 
@@ -674,6 +674,58 @@ function uamswp_do_search_loop() {
     }
 
 }
+
+function uamswp_do_searchwp_loop() {
+    global $post;
+    $current_blog_id = get_current_blog_id();
+    echo '<div class="uams-module bg-auto">';
+    echo '<div class="container-fluid">';
+    echo '<div class="search-content row">';
+    echo '<div class="col-12">';
+    echo '<div class="inner-container content-width">';
+    get_search_form();
+    // echo facetwp_display( 'facet', 'filter_by_type' );
+    if ( have_posts() ) {
+        while ( have_posts() ) {
+            the_post();
+            // Search Results may be formatted as SearchWP results
+            // because we're searching cross-site on the main site.
+            if ( 1 === $current_blog_id ) {
+                if ( $current_blog_id !== $post->site ) {
+                    switch_to_blog( $post->site );
+                    $post = get_post( $post->id );
+                    get_template_part( 'templates/parts/results', $post->post_type );
+                    // echo '<h3 class="h4">'. get_post_type_object($post->post_type)->labels->singular_name .': <a href="' . get_permalink($post->ID) . '">'. $post->post_title .'</a></h3>';
+                    // echo '<p>'. get_permalink($post->ID) .'</p>';
+                    // echo '<p>'. ($post->post_excerpt ? $post->post_excerpt : $post->post_content_filtered) .'</p>';
+                    restore_current_blog();
+                } else {
+                    $post = get_post( $post->id );
+                    get_template_part( 'templates/parts/results', $post->post_type );
+                    // echo '<h3 class="h4">'. get_post_type_object($post->post_type)->labels->singular_name .': <a href="' . get_permalink($post->ID) . '">'. $post->post_title .'</a></h3>';
+                    // echo '<p>'. get_permalink($post->ID) .'</p>';
+                    // echo '<p>'. ($post->post_excerpt ? $post->post_excerpt : $post->post_content_filtered) .'</p>';
+                }
+            } else {
+                get_template_part( 'templates/parts/results', $post->post_type );
+                // echo '<h3 class="h4"><a href="' . get_permalink() . '">'. get_the_title() .'</a></h3>';
+                // echo '<p>'. get_permalink() .'</p>';
+                // echo '<p>'. ($post->post_excerpt ? $post->post_excerpt : $post->post_content_filtered) .'</p>';
+            }
+        }
+    } else {
+        // get_template_part( 'template-parts/content/content-none' );
+        echo "<p>Sorry, no content matched your criteria.</p>";
+    }
+    echo '</div>'; // .inner-container
+    echo '</div>'; // .col-12
+    echo '</div>'; // .search-content
+    genesis_posts_nav();
+    echo '</div>'; // .container-fluid
+    echo '</div>'; // .uams-module
+}
+
+
 
 /**
  * Arrange elements in the loop.
