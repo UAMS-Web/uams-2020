@@ -37,7 +37,6 @@ if ( has_excerpt( $post_id ) ) {
         <p><?php echo $post_link; ?></p>
         <p><?php echo $excerpt; ?></p>
         <p><?php echo $post_type_name; ?></p>
-        <p><?php echo __FILE__; ?></p>
     </div>
 </div>
 </article>
