@@ -7,19 +7,32 @@
  * @since        1.0.0
  * @license      GPL-2.0+
 **/
-$post_id = $post->ID;
-$post_title = $post->post_title;
+/* From data from template_part function */
+$post_id = $data['post_id'];
+$blog_id = $data['blog_id'];
+
+/* Needed to handle the blog switching */
+if ($blog_id !== get_current_blog_id()) {
+    switch_to_blog( $blog_id );
+}
+$post = get_post( $post_id );
+$post_title = get_the_title( $post_id );
 $post_link = get_permalink($post_id);
+$post_thumb = '';
+$excerpt = '';
 if(has_post_thumbnail( $post_id )) {
     $post_thumb = get_the_post_thumbnail( $post_id );
 }
-$excerpt = '';
-if ( has_excerpt( $post_id ) ) {
-    $excerpt = get_the_excerpt( $post_id );
+if ( has_excerpt( $post->ID ) && !empty( trim($post->post_excerpt) ) ) {
+    $excerpt = get_the_excerpt( $post->ID );
 } else {
-    $excerpt = wp_trim_excerpt( "", $post_id );
+    $text = strip_shortcodes( $post->post_content );
+    $text = apply_filters( 'the_content', $text );
+    $text = str_replace(']]>', ']]&gt;', $text);
+    $excerpt = wp_trim_words( $text, 20, '... <a class="more-link" href="' . $post_link . '">Continue Reading</a>' );
 } 
 ?>
+<!-- <p><?php echo 'Post ID: ' .$post->ID . ' Blog ID: ' . $blog_id; ?></p> -->
 <article class="post-summary type-page">
 <h3 class="h4"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></h3>
 <div class="row">
@@ -35,6 +48,7 @@ if ( has_excerpt( $post_id ) ) {
         <p><?php echo $post_link; ?></p>
         <p><?php echo $excerpt; ?></p>
         <p>Page</p>
+        <p><?php echo $post->post_excerpt; ?></p>
     </div>
 </div>
 </article>

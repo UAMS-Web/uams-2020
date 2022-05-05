@@ -7,11 +7,18 @@
  * @since        1.0.0
  * @license      GPL-2.0+
 **/
-$post_id = $post->ID;
+// From get_template_part function
+$post_id = $data['post_id'];
+$blog_id = $data['blog_id'];
+
+if ($blog_id !== get_current_blog_id()) {
+switch_to_blog( $blog_id );
+}
+$post = get_post( $post_id );
+$post_title = get_the_title( $post_id );
+$post_link = get_permalink($post_id);
 $post_type = $post->post_type;
 $post_type_name = get_post_type_object($post_type)->labels->singular_name;
-$post_title = $post->post_title;
-$post_link = get_permalink($post_id);
 if(has_post_thumbnail( $post_id )) {
     $post_thumb = get_the_post_thumbnail( $post_id );
 }
