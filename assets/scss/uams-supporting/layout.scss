@@ -126,6 +126,30 @@ section.archive-description .entry-content {
     white-space: nowrap;
 }
 
+.clearnone {
+    clear: none;
+}
+
+.clearleft {
+    clear: left;
+}
+
+.clearright {
+    clear: right;
+}
+
+.clearboth {
+    clear: both;
+}
+
+.clearinitial {
+    clear: initial;
+}
+
+.clearinherit {
+    clear: inherit;
+}
+
 // .card-list-container {
 //     padding: ($grid-gutter-width / 2);
 // }
