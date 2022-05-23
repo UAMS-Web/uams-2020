@@ -294,6 +294,9 @@ figure[class="wp-block-image size-large"],
 .wp-block-image .alignfull,
 .wp-block-image figure[class="wp-block-image"],
 .wp-block-image figure[class="wp-block-image size-large"] {
+    margin-top: $page-title-margin-bottom-mobile;
+    margin-bottom: $page-title-margin-bottom-mobile;
+
     .wp-caption-text,
     figcaption {
         display: block;
@@ -317,15 +320,16 @@ figure[class="wp-block-image size-large"],
 .wp-block-image .alignfull,
 .wp-block-image figure[class="wp-block-image"],
 .wp-block-image figure[class="wp-block-image size-large"] {
-    margin: $page-title-margin-bottom-mobile 0;
+    margin-right: 0;
+    margin-left: 0;
 
-    &:first-child {
-        margin-top: 0;
-    }
+    // &:first-child {
+    //     margin-top: 0;
+    // }
 
-    &:last-child {
-        margin-bottom: 0;
-    }
+    // &:last-child {
+    //     margin-bottom: 0;
+    // }
 }
 
 .alignnone,
@@ -391,7 +395,8 @@ figure[class="wp-block-image size-large"],
 .wp-block-image .alignright {
     display: block;
     //width: 100% !important;
-    margin: $page-title-margin-bottom-mobile auto;
+    margin-right: auto;
+    margin-left: auto;
     float: none;
 
     @include media-breakpoint-up(xs) {
@@ -405,13 +410,13 @@ figure[class="wp-block-image size-large"],
         max-width: calc((#{$content-width} - #{$page-title-margin-bottom-mobile}) / 2) !important;
     }
 
-    &:first-child {
-        margin-top: 0;
-    }
+    // &:first-child {
+    //     margin-top: 0;
+    // }
 
-    &:last-child {
-        margin-bottom: 0;
-    }
+    // &:last-child {
+    //     margin-bottom: 0;
+    // }
 
     &.small {
         @include media-breakpoint-up(md) {
@@ -459,5 +464,50 @@ figure[class="wp-block-image size-large"],
     }
     .alignright {
         clear: right;
+    }
+}
+
+.wp-block-image {
+    &:first-child {
+        > .alignnone,
+        > .aligncenter,
+        > .alignleft,
+        > .alignright,
+        > .alignwide,
+        > .alignfull,
+        > figure[class="wp-block-image"],
+        > figure[class="wp-block-image size-large"] {
+            margin-top: 0;
+        }
+    }
+    &:last-child {
+        > .alignnone,
+        > .aligncenter,
+        > .alignleft,
+        > .alignright,
+        > .alignwide,
+        > .alignfull,
+        > figure[class="wp-block-image"],
+        > figure[class="wp-block-image size-large"] {
+            margin-bottom: 0;
+        }
+    }
+}
+
+:not(.wp-block-image) {
+    > .alignnone,
+    > .aligncenter,
+    > .alignleft,
+    > .alignright,
+    > .alignwide,
+    > .alignfull,
+    > figure[class="wp-block-image"],
+    > figure[class="wp-block-image size-large"] {
+        &:first-child {
+            margin-bottom: 0;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 }
