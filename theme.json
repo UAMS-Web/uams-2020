@@ -1,8 +1,19 @@
 {
-    "version":1,
+    "version": 2,
     "settings": {
+        "appearanceTools": false,
         "color": {
-			"palette": []
+			"background": false,
+            "custom": false,
+            "customDuotone": false,
+            "customGradient": false,
+            "defaultGradients": false,
+            "defaultPalette": false,
+            "duotone": [],
+            "gradients": [],
+            "link": false,
+            "palette": [],
+            "text": false
 		},
         "typography": {
             "fontFamilies": [
@@ -26,7 +37,14 @@
                 }
             ],
             "dropCap": false,
-            "fontSizes": []
+            "customFontSize": false,
+            "fontSizes": [],
+            "fontStyle": false,
+            "fontWeight": false,
+            "letterSpacing": false,
+            "lineHeight": false,
+            "textDecoration": false,
+            "textTransform": false
         },
         "layout": {
 			"contentSize": "630px",
