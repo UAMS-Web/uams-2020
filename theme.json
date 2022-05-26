@@ -1,9 +1,15 @@
 {
-    "version": 2,
+    "version": "2",
     "settings": {
         "appearanceTools": false,
+        "border": {
+            "color": false,
+            "radius": false,
+            "style": false,
+            "width": false
+        },
         "color": {
-			"background": false,
+            "background": false,
             "custom": false,
             "customDuotone": false,
             "customGradient": false,
@@ -14,14 +20,33 @@
             "link": false,
             "palette": [],
             "text": false
-		},
+        },
+        "custom": {
+            "spacing": {},
+            "typography": {
+                "fontSize": {},
+                "lineHeight": {}
+            }
+        },
+        "layout": {
+            "contentSize": "630px",
+            "wideSize": "1020px"
+        },
+        "spacing": {
+            "blockGap": null,
+            "margin": false,
+            "padding": false,
+            "units": []
+        },
         "typography": {
+            "customFontSize": false,
+            "dropCap": false,
             "fontFamilies": [
                 {
-					"fontFamily": "-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif",
-					"slug": "system-fonts",
-					"name": "System Fonts"
-				},
+                    "fontFamily": "-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif",
+                    "slug": "system-fonts",
+                    "name": "System Fonts"
+                },
                 {
                     "fontFamily": "\"Fira Sans\", sans-serif",
                     "slug": "fira-sans",
@@ -36,8 +61,6 @@
                     "slug": "uni"
                 }
             ],
-            "dropCap": false,
-            "customFontSize": false,
             "fontSizes": [],
             "fontStyle": false,
             "fontWeight": false,
@@ -45,28 +68,56 @@
             "lineHeight": false,
             "textDecoration": false,
             "textTransform": false
-        },
-        "layout": {
-			"contentSize": "630px",
-			"wideSize": "1020px"
-		}
+        }
     },
     "styles": {
-		"color": {
-			"background": "#fff",
-			"text": "#212121"
-		},
-		"elements": {
-			"link" :{
-				"color": {
-					"text": "#9d2235"
-				}
-			}
-		},
-		"typography": {
+        "border": {
+            "color": "",
+            "radius": "",
+            "style": "",
+            "width": ""
+        },
+        "color": {
+            "background": "#fff",
+            "text": "#212121"
+        },
+        "filter": {
+            "duotone": ""
+        },
+        "spacing": {
+            "blockGap": "",
+            "margin": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            },
+            "padding": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
+        },
+        "typography": {
             "fontSize": "18px",
-			"fontFamily": "var(--wp--preset--font-family--system-fonts)",
-			"lineHeight": "1.5"
-		}
-	}
+            "fontFamily": "var(--wp--preset--font-family--system-fonts)",
+            "lineHeight": "1.5"
+        },
+        "elements": {
+            "link" :{
+                "color": {
+                    "text": "#9d2235"
+                }
+            },
+            "h1": {},
+            "h2": {},
+            "h3": {},
+            "h4": {},
+            "h5": {},
+            "h6": {}
+        }
+    },
+    "customTemplates": [],
+    "templateParts": []
 }
