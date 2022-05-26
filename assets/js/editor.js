@@ -31,7 +31,6 @@ wp.domReady( () => {
 	wp.blocks.unregisterBlockType( 'core/pullquote' );
 // 	wp.blocks.unregisterBlockType( 'core/quote' );
 // 	wp.blocks.unregisterBlockType( 'core/rss' );
-	// wp.blocks.unregisterBlockType( 'core/search' );
 // 	wp.blocks.unregisterBlockType( 'core/separator' );
 // 	wp.blocks.unregisterBlockType( 'core/shortcode' );
 	wp.blocks.unregisterBlockType( 'core/social-link' );
@@ -104,7 +103,7 @@ wp.domReady( () => {
 	// wp.blocks.unregisterBlockType( 'core/navigation-link' );
 	// wp.blocks.unregisterBlockType( 'core/embed' );
 	// wp.blocks.unregisterBlockType( 'core/file' );
-	// wp.blocks.unregisterBlockType( 'core/gallery' );
+	wp.blocks.unregisterBlockType( 'core/gallery' );
 	// wp.blocks.unregisterBlockType( 'core/group' );
 	// wp.blocks.unregisterBlockType( 'core/heading' );
 	wp.blocks.unregisterBlockType( 'core/home-link' );
@@ -144,7 +143,7 @@ wp.domReady( () => {
 	// wp.blocks.unregisterBlockType( 'core/preformatted' );
 	wp.blocks.unregisterBlockType( 'core/query-pagination-previous' );
 	wp.blocks.unregisterBlockType( 'core/comments-pagination-previous' );
-	// wp.blocks.unregisterBlockType( 'core/pullquote' );
+	wp.blocks.unregisterBlockType( 'core/pullquote' );
 	wp.blocks.unregisterBlockType( 'core/query' );
 	wp.blocks.unregisterBlockType( 'core/query-title' );
 	// wp.blocks.unregisterBlockType( 'core/quote' );
@@ -166,6 +165,9 @@ wp.domReady( () => {
 	// wp.blocks.unregisterBlockType( 'core/term-description' );
 	wp.blocks.unregisterBlockType( 'core/verse' );
 	wp.blocks.unregisterBlockType( 'core/video' );
+    // Deprecated
+    wp.blocks.unregisterBlockType( 'core/text-columns' );
+    wp.blocks.unregisterBlockType( 'core/post-comment' );
 	// Embeds
 	// wp.blocks.unregisterBlockType( 'core-embed/twitter' );
 	// wp.blocks.unregisterBlockType( 'core-embed/youtube' );
