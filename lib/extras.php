@@ -145,7 +145,8 @@ function uamswp_title($html) {
 
     $pagetitle = get_the_title();
     if ( is_search() ) {
-        $pagetitle = 'Search Results';
+        $s = isset( $_GET["s"] ) ? ' for ' . esc_html($_GET["s"]) : '';
+        $pagetitle = 'Search Results' . $s;
     }
     if ( is_archive() ) {
         $post_type = get_post_type( get_the_id() );
