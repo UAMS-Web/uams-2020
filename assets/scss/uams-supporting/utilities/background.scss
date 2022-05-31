@@ -1,5 +1,5 @@
 
 @each $color, $value in $theme-colors {
-    @include bg-variant(".bg-#{$color}", $value);
-    @include bg-variant-uams(".bg-#{$color}", $color);
+    @include bg-variant(".bg-#{$color}", $value, true);
+    @include bg-variant-uams(".bg-#{$color}", $color, true);
 }
