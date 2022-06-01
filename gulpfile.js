@@ -204,13 +204,13 @@ function template() {
 
 function watch() {
     gulp.watch(['assets/scss/*.scss', 'assets/scss/**/*.scss'], style).on('change', gulp.parallel(style, uamsalert, adminstyle));
-    gulp.watch(paths.scripts.src, gulp.series(scriptsLint, js))
+    gulp.watch(paths.scripts.src, gulp.series(scriptsLint, js)).on("error", notify.onError("Error: <%= error.message %>"))
     gulp.watch([
             '*.php',
             'lib/*',
             '**/**/*.php'
-        ])
-    notify({ "message": "Watching" }).write('');
+        ]).on("error", notify.onError("Error: <%= error.message %>"))
+    // notify({ "message": "Watching" }).write('');
 }
 
 gulp.task('translation', translation);
