@@ -114,7 +114,7 @@ function style() {
         .pipe(rename('app.css'))
         .pipe(gulp.dest(paths.styles.dest))
         // .pipe(browserSync.stream())
-        .pipe(notify({ message: 'Styles task complete' }));
+        .pipe(notify({ "message": "Styles task complete" }));
 }
 
 // function criticalstyle() {
@@ -126,7 +126,7 @@ function style() {
 //         .pipe(rename('inline.css'))
 //         .pipe(gulp.dest(paths.styles.dest))
 //         // .pipe(browserSync.stream())
-//         .pipe(notify({ message: 'Critical Styles task complete' }));
+//         .pipe(notify({ "message": "Critical Styles task complete" }));
 // }
 
 function adminstyle() {
@@ -138,7 +138,7 @@ function adminstyle() {
         .pipe(rename('admin.css'))
         .pipe(gulp.dest(paths.styles.dest))
         // .pipe(browserSync.stream())
-        .pipe(notify({ message: 'Admin Styles task complete' }));
+        .pipe(notify({ "message": "Admin Styles task complete" }));
 }
 
 function uamsalert() {
@@ -150,7 +150,7 @@ function uamsalert() {
         .pipe(rename('uamsalert.css'))
         .pipe(gulp.dest(paths.styles.dest))
         // .pipe(browserSync.stream())
-        .pipe(notify({ message: 'UAMS Alert Styles task complete' }));
+        .pipe(notify({ "message": "UAMS Alert Styles task complete" }));
 }
 
 async function fa() {
@@ -160,13 +160,13 @@ async function fa() {
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(paths.fontawesome.dest))
-        .pipe(notify({ message: 'FontAwesome task complete' }));
+        .pipe(notify({ "message": "FontAwesome task complete" }));
 }
 
 // async function jquery() {
 //     return gulp.src(paths.jquery.src)
 //     .pipe(gulp.dest(paths.jquery.dest))
-//     .pipe(notify({ message: 'JQuery task complete' }));
+//     .pipe(notify({ "message": "JQuery task complete" }));
 // }
 
 function js() {
@@ -180,7 +180,7 @@ function js() {
         // }))
         .pipe(gulp.dest(paths.scripts.dest))
         // .pipe(browserSync.stream({match: '**/*.js'}))
-        .pipe(notify({ message: 'Scripts task complete' }));
+        .pipe(notify({ "message": "Scripts task complete" }));
 }
 
 function template() {
@@ -203,16 +203,14 @@ function template() {
 // }
 
 function watch() {
-    gulp.watch(['assets/scss/*.scss', 'assets/scss/**/*.scss'], style).on('change', gulp.parallel(style, uamsalert, adminstyle, js))
-    gulp.watch(paths.scripts.src, gulp.series(scriptsLint, js))
+    gulp.watch(['assets/scss/*.scss', 'assets/scss/**/*.scss'], style).on('change', gulp.parallel(style, uamsalert, adminstyle));
+    gulp.watch(paths.scripts.src, gulp.series(scriptsLint, js)).on("error", notify.onError("Error: <%= error.message %>"))
     gulp.watch([
             '*.php',
             'lib/*',
             '**/**/*.php'
-        ],
-        notify({ message: 'Watching' })
-        // gulp.series(browserSyncReload)
-    )
+        ]).on("error", notify.onError("Error: <%= error.message %>"))
+    // notify({ "message": "Watching" }).write('');
 }
 
 gulp.task('translation', translation);
