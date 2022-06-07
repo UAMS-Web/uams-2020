@@ -108,7 +108,7 @@ function scriptsLint() {
 function style() {
     return gulp.src(paths.styles.src)
         .pipe(changed(paths.styles.dest))
-        .pipe(sass.sync().on('error', sass.logError))
+        .pipe(sass().on('error', sass.logError))
         .pipe(concat('app.scss'))
         .pipe(postcss(plugins))
         .pipe(rename('app.css'))
@@ -120,7 +120,7 @@ function style() {
 // function criticalstyle() {
 //     return gulp.src(paths.criticalcss.src)
 //         .pipe(changed(paths.criticalcss.dest))
-//         .pipe(sass.sync().on('error', sass.logError))
+//         .pipe(sass().on('error', sass.logError))
 //         .pipe(concat('inline.scss'))
 //         .pipe(postcss(plugins))
 //         .pipe(rename('inline.css'))
