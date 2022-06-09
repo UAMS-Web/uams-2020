@@ -51,7 +51,7 @@ if ( $more ) {
         $more_button_target = $more_button_url['target'];
     if ( empty($more_button_description) )
         $more_button_description = get_field('stacked_more_button_description');
-    if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) ) {
+    if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto' ) ) {
         $more_button_color = 'primary';
     } else {
         $more_button_color = 'white';
