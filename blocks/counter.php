@@ -86,10 +86,10 @@ $row = 0;
                                 $counter_item_start_custom = $counter_item_start_custom;
                             }
                         }
-                        $date_day = date('Y-m-d') . ' 0:00:00';
-                        $date_week = date('Y-m-d', strtotime('last sunday')) . ' 0:00:00';
-                        $date_month = date('Y-m') . '-01 0:00:00';
-                        $date_year = date('Y') . '-01-01 0:00:00';
+                        $date_day = date('Y-m-d') . ' 00:00:00';
+                        $date_week = date('Y-m-d', strtotime('last sunday')) . 'T00:00:00';
+                        $date_month = date('Y-m') . '-01T00:00:00';
+                        $date_year = date('Y') . '-01-01T00:00:00';
                         $date_custom = $counter_item_start_custom;
                         //$date_user = date('Y-m-d H:i:s'); // Replace with user input date picker value
 
