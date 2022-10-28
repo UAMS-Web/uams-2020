@@ -14,6 +14,11 @@ function sp_titles_robots($html) {
 	$html .= '<meta name="google" content="noimageindex">';
 	return $html;
 }
+add_filter('seopress_titles_robots', 'sp_titles_robots', 8);
+
+remove_all_actions( 'wp_robots');
+
+remove_action( 'genesis_meta', 'genesis_robots_meta' );
 
 remove_action( 'genesis_after_header', 'page_options', 5 );
 
