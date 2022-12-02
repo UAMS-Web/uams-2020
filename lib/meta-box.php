@@ -2131,7 +2131,7 @@ acf_add_local_field_group(array(
 			'label' => 'Menu Title',
 			'name' => 'page_nav_alt_name',
 			'type' => 'text',
-			'instructions' => 'Override the menu title </br>(Leave Blank for Page Title)',
+			'instructions' => 'Enter a value here to set an alternate title to be used for this page/post on the automatically-generated primary navigation menu. Leave it blank to use the page/post title.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
