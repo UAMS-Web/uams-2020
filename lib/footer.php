@@ -349,8 +349,12 @@ function uamswp_footer_creds_text() {
     echo '<div role="navigation" aria-label="Footer Navigation"><ul class="nav legal">';
     echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/disclaimer/">Disclaimer</a></li>';
     echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/terms-of-use/">Terms of Use</a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/privacy/">Privacy</a></li>';
+    echo '<li class="nav-item"><a class="nav-link" href="https://web.uams.edu/privacy/">Privacy Statement</a></li>';
+    if ('health' == $site) { // If UAMS Health site, add additional links
+        echo '<li class="nav-item"><a class="nav-link" href="https://hipaa.uams.edu/forms/notice-of-privacy-practices-information/">Notice of Privacy Practices</a></li>';
+    }
     //echo '<li class="nav-item"><a class="nav-link" href="/sitemap">Site Map</a></li>';
+
     echo '</ul></div>';
     echo '<p class="copyright">&copy; '. date('Y') . ' University of Arkansas for Medical Sciences</p>';
 }
