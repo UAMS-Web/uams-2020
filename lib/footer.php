@@ -318,13 +318,8 @@ function uamswp_footer_creds_text() {
     if ('health' == $site) {
         if ( 'uams-aux' == uams_get_site_info()['subsite'] ) { // Example
             $social_fb = 'https://www.facebook.com/UAMSAuxiliary';
-        } else {
-            $social_fb = 'https://www.facebook.com/UAMShealth/';
         }
-        $social_tw = 'https://twitter.com/uamshealth';
-        $social_ig = 'https://www.instagram.com/uamshealth/';
         $social_li = 'https://www.linkedin.com/company/uams/';
-        $social_pn = 'https://www.pinterest.com/uamshealth/';
     }
 
     if ('inside' == $site) {
