@@ -315,7 +315,7 @@ function uamswp_footer_creds_text() {
         }
     }
 
-    if ('health' == $site) {
+    if ('uamshealth' == $site) {
         if ( 'uams-aux' == uams_get_site_info()['subsite'] ) { // Example
             $social_fb = 'https://www.facebook.com/UAMSAuxiliary';
         }
@@ -347,7 +347,7 @@ function uamswp_footer_creds_text() {
         echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/disclaimer/">Disclaimer</a></li>';
         echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/terms-of-use/">Terms of Use</a></li>';
         echo '<li class="nav-item"><a class="nav-link" href="https://web.uams.edu/privacy/">Privacy Statement</a></li>';
-        if ('health' == $site) { // If UAMS Health site, add additional links
+        if ('uamshealth' == $site) { // If UAMS Health site, add additional links
             echo '<li class="nav-item"><a class="nav-link" href="https://hipaa.uams.edu/forms/notice-of-privacy-practices-information/">Notice of Privacy Practices</a></li>';
         }
         //echo '<li class="nav-item"><a class="nav-link" href="/sitemap">Site Map</a></li>';
