@@ -239,9 +239,9 @@ function uamswp_footer_creds_text() {
                 $social_fb = 'https://www.facebook.com/uamstri';
                 $social_tw = 'https://twitter.com/TRI_UAMS';
             } elseif ( 'institute_cancer' == $subsite ) {
-                $social_ig = 'https://instagram.com/uamscancer/';
                 $social_fb = 'https://www.facebook.com/uamscancer';
                 $social_tw = 'https://twitter.com/uamscancer';
+                $social_ig = 'https://www.instagram.com/uamscancer/';
                 $social_li = 'https://www.linkedin.com/company/the-winthrop-p-cancer-institute/';
                 $social_yt = 'https://www.youtube.com/watch?v=Y_w5HFmzgCo&list=PLDDEFFC8B6412D823';
             }
@@ -321,8 +321,8 @@ function uamswp_footer_creds_text() {
         } else {
             $social_fb = 'https://www.facebook.com/UAMShealth/';
         }
-        $social_ig = 'https://instagram.com/uamshealth/';
         $social_tw = 'https://twitter.com/uamshealth';
+        $social_ig = 'https://www.instagram.com/uamshealth/';
         $social_li = 'https://www.linkedin.com/company/uams/';
         $social_pn = 'https://www.pinterest.com/uamshealth/';
     }
