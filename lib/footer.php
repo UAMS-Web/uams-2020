@@ -217,10 +217,10 @@ function uamswp_footer_creds_text() {
      */
     
     // Set Defaults 
-    $social_fb = 'https://www.facebook.com/UAMShealth/';
+    $social_fb = 'https://www.facebook.com/UAMShealth';
     $social_tw = 'https://twitter.com/uamshealth';
     $social_ig = 'https://www.instagram.com/uamshealth/';
-    $social_yt = 'https://www.youtube.com/user/UAMSHealth';
+    $social_yt = 'https://www.youtube.com/UAMSHealth';
     $social_li = 'https://www.linkedin.com/school/university-of-arkansas-for-medical-sciences/'; // or 'https://www.linkedin.com/company/uams/'
     $social_pn = 'https://www.pinterest.com/uamshealth/';
 
@@ -228,20 +228,20 @@ function uamswp_footer_creds_text() {
     if ('institute' == $site) {
         if (('' != $subsite) && ('uams' !== $subsite)) {
             if ( 'institute_aging' == $subsite ) {
-                $social_fb = 'https://www.facebook.com/UAMSaging/';
+                $social_fb = 'https://www.facebook.com/UAMSaging';
             } elseif ( 'institute_eye' == $subsite ) {
-                $social_fb = 'https://www.facebook.com/UAMSJonesEye/';
+                $social_fb = 'https://www.facebook.com/UAMSJonesEye';
             } elseif ( 'institute_digi-health' == $subsite ) {
-                $social_fb = 'https://www.facebook.com/UAMSDigitalHealth/';
+                $social_fb = 'https://www.facebook.com/UAMSDigitalHealth';
             } elseif ( 'institute_pri'  == $subsite ) {
                 $social_fb = 'https://www.facebook.com/PRI.UAMS';
             } elseif ( 'institute_tri' == $subsite ) {
-                $social_fb = 'https://www.facebook.com/uamstri/';
+                $social_fb = 'https://www.facebook.com/uamstri';
                 $social_tw = 'https://twitter.com/TRI_UAMS';
             } elseif ( 'institute_cancer' == $subsite ) {
-                $social_fb = 'https://www.facebook.com/uamscancer/';
-                $social_tw = 'https://twitter.com/uamscancer/';
-                $social_ig = 'https://instagram.com/uamscancer/';
+                $social_fb = 'https://www.facebook.com/uamscancer';
+                $social_tw = 'https://twitter.com/uamscancer';
+                $social_ig = 'https://www.instagram.com/uamscancer/';
                 $social_li = 'https://www.linkedin.com/company/the-winthrop-p-cancer-institute/';
                 $social_yt = 'https://www.youtube.com/watch?v=Y_w5HFmzgCo&list=PLDDEFFC8B6412D823';
             }
@@ -254,103 +254,106 @@ function uamswp_footer_creds_text() {
             $social_tw = 'https://twitter.com/uamschp';
             $social_ig = 'https://www.instagram.com/uamschp';
         } elseif ( startsWith($subsite, 'medicine') ) {
-            $social_fb = 'https://www.facebook.com/UAMSCOM/';
+            $social_fb = 'https://www.facebook.com/UAMSCOM';
 
             if ( 'emergency-medicine' == $department) {
                 $social_fb = 'https://www.facebook.com/UAMSEmergencyMedicine';
             } elseif ( 'pediatrics' == $department) {
-                $social_fb = 'https://www.facebook.com/UAMSPeds/';
+                $social_fb = 'https://www.facebook.com/UAMSPeds';
                 $social_tw = 'https://twitter.com/UAMSPeds';
             } elseif ( 'otolaryngology' == $department) {
-                $social_fb = 'https://www.facebook.com/uamsotolaryngology/';
+                $social_fb = 'https://www.facebook.com/uamsotolaryngology';
                 $social_tw = 'https://twitter.com/UAMSENT';
                 $social_ig = 'https://www.instagram.com/uams.ent/';
             } elseif ( 'family-medicine' == $department) {
-                $social_fb = 'https://www.facebook.com/UAMSFamilyMedicineResidency/';
+                $social_fb = 'https://www.facebook.com/UAMSFamilyMedicineResidency';
             } elseif ( 'orthopaedic-surgery' == $department) {
-                $social_fb = 'https://www.facebook.com/UAMSOrtho/';
+                $social_fb = 'https://www.facebook.com/UAMSOrtho';
             } elseif ( 'pathology' == $department) {
-                $social_fb = 'https://www.facebook.com/pathologyuams/';
+                $social_fb = 'https://www.facebook.com/pathologyuams';
             } elseif ( 'urology' == $department) {
-                $social_fb = 'https://www.facebook.com/UAMSUrology/';
+                $social_fb = 'https://www.facebook.com/UAMSUrology';
             }
         } elseif ( startsWith($subsite, 'nursing') ) {
-            $social_fb = 'https://www.facebook.com/UAMSCollegeofNursing/';
+            $social_fb = 'https://www.facebook.com/UAMSCollegeofNursing';
         } elseif ( startsWith($subsite, 'pharmacy') ) {
-            $social_fb = 'https://www.facebook.com/UAMSPharmacy/';
+            $social_fb = 'https://www.facebook.com/UAMSPharmacy';
             $social_ig = 'https://www.instagram.com/uamspharmacy/';
 
             if ('arpoison' == $department) {
-                $social_fb = 'https://www.facebook.com/ArkDrugHelp/';
+                $social_fb = 'https://www.facebook.com/ArkDrugHelp';
             }
         } elseif ( startsWith($subsite, 'public-health') ) {
-            $social_fb = 'https://www.facebook.com/uamscoph/';
+            $social_fb = 'https://www.facebook.com/uamscoph';
         } elseif ( startsWith($subsite, 'grad-school') ) {
-            $social_fb = 'https://www.facebook.com/UAMSGradSchool/';
+            $social_fb = 'https://www.facebook.com/UAMSGradSchool';
         } elseif ( 'nw-campus' == $subsite ) {
-            $social_fb = 'https://www.facebook.com/UAMSNW/';
+            $social_fb = 'https://www.facebook.com/UAMSNW';
         // } elseif ( startsWith($subsite, 'regional-') ) {
         //     $social_fb = '';
         } elseif ( 'get-healthy' == $subsite ) {
-            $social_fb = 'https://www.facebook.com/GetHealthyUAMS/';
+            $social_fb = 'https://www.facebook.com/GetHealthyUAMS';
             $social_ig = 'https://www.instagram.com/GetHealthyUAMS/';
         } elseif ( 'cda' == $subsite ) {
-           $social_fb = 'https://www.facebook.com/UAMSDDEI/';
-           $social_tw = 'https://twitter.com/uams_ddei/';
+           $social_fb = 'https://www.facebook.com/UAMSDDEI';
+           $social_tw = 'https://twitter.com/uams_ddei';
         } elseif ( 'gsa' == $subsite) {
-            $social_fb = 'https://www.facebook.com/UAMSgsa/';
+            $social_fb = 'https://www.facebook.com/UAMSgsa';
         } elseif ( 'continuing-ed' == $subsite) {
-            $social_fb = 'https://www.facebook.com/UAMSOCE/';
+            $social_fb = 'https://www.facebook.com/UAMSOCE';
         } elseif ( 'health-literacy' == $subsite) {
             $social_fb = 'https://www.facebook.com/uamscenterforhealthliteracy';
-            $social_tw = 'https://twitter.com/UAMS_CHL/';
+            $social_tw = 'https://twitter.com/UAMS_CHL';
             $social_ig = 'https://www.instagram.com/uams_chl/';
         } elseif ( 'ipe' == $subsite) {
-            $social_fb = 'https://www.facebook.com/uamsipe/';
+            $social_fb = 'https://www.facebook.com/uamsipe';
         } elseif ( 'library' == $subsite) {
-            $social_fb = 'https://www.facebook.com/uamslibrary/';
-            $social_tw = 'https://twitter.com/UAMSlibrary/';
+            $social_fb = 'https://www.facebook.com/uamslibrary';
+            $social_tw = 'https://twitter.com/UAMSlibrary';
         } elseif ( 'employee_nurses' == $subsite) {
-            $social_fb = 'https://www.facebook.com/UAMSnurses/';
+            $social_fb = 'https://www.facebook.com/UAMSnurses';
         }
     }
 
-    if ('health' == $site) {
+    if ('uamshealth' == $site) {
         if ( 'uams-aux' == uams_get_site_info()['subsite'] ) { // Example
-            $social_fb = 'https://www.facebook.com/UAMSAuxiliary/';
-        } else {
-            $social_fb = 'https://www.facebook.com/UAMShealth/';
+            $social_fb = 'https://www.facebook.com/UAMSAuxiliary';
         }
-        $social_tw = 'https://twitter.com/uamshealth/';
-        $social_ig = 'https://instagram.com/uamshealth/';
         $social_li = 'https://www.linkedin.com/company/uams/';
-        $social_pn = 'https://www.pinterest.com/uamshealth/';
     }
 
     if ('inside' == $site) {
         if ( 'fitness-center' == uams_get_site_info()['subsite'] ) { // Example
-            $social_fb = 'https://www.facebook.com/uamsfitnesscenter/';
+            $social_fb = 'https://www.facebook.com/uamsfitnesscenter';
             $social_tw = 'https://twitter.com/UAMSfitness';
         }
     }
 
+    // Social Media Links
     // Render this by default.
     // Replace social URLs if the relevant custom fields have values.
     echo '<div role="navigation" aria-label="Social media"><ul class="nav social">';
-    echo '<li class="nav-item"><a class="nav-link" href="'.$social_fb.'" target="_blank" title="Facebook"><span class="fab fa-facebook"></span><span class="sr-only">Facebook</span></a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="'.$social_tw.'" target="_blank" title="Twitter"><span class="fab fa-twitter"></span><span class="sr-only">Twitter</span></a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="'.$social_ig.'" target="_blank" title="Instagram"><span class="fab fa-instagram"></span><span class="sr-only">Instagram</span></a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="'.$social_yt.'" target="_blank" title="YouTube"><span class="fab fa-youtube"></span><span class="sr-only">YouTube</span></a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="'.$social_li.'" target="_blank" title="LinkedIn"><span class="fab fa-linkedin"></span><span class="sr-only">LinkedIn</span></a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="'.$social_pn.'" target="_blank" title="Pinterest"><span class="fab fa-pinterest"></span><span class="sr-only">Pinterest</span></a></li>';
+        echo '<li class="nav-item"><a class="nav-link" href="'.$social_fb.'" target="_blank" title="Facebook"><span class="fab fa-facebook"></span><span class="sr-only">Facebook</span></a></li>';
+        echo '<li class="nav-item"><a class="nav-link" href="'.$social_tw.'" target="_blank" title="Twitter"><span class="fab fa-twitter"></span><span class="sr-only">Twitter</span></a></li>';
+        echo '<li class="nav-item"><a class="nav-link" href="'.$social_ig.'" target="_blank" title="Instagram"><span class="fab fa-instagram"></span><span class="sr-only">Instagram</span></a></li>';
+        echo '<li class="nav-item"><a class="nav-link" href="'.$social_yt.'" target="_blank" title="YouTube"><span class="fab fa-youtube"></span><span class="sr-only">YouTube</span></a></li>';
+        echo '<li class="nav-item"><a class="nav-link" href="'.$social_li.'" target="_blank" title="LinkedIn"><span class="fab fa-linkedin"></span><span class="sr-only">LinkedIn</span></a></li>';
+        echo '<li class="nav-item"><a class="nav-link" href="'.$social_pn.'" target="_blank" title="Pinterest"><span class="fab fa-pinterest"></span><span class="sr-only">Pinterest</span></a></li>';
     echo '</ul></div>';
 
+    // Text Links
     // Render this by default
     echo '<div role="navigation" aria-label="Footer Navigation"><ul class="nav legal">';
-    echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/disclaimer/">Disclaimer</a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/terms-of-use/">Terms of Use</a></li>';
-    echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/privacy/">Privacy</a></li>';
-    //echo '<li class="nav-item"><a class="nav-link" href="/sitemap">Site Map</a></li>';
+        echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/disclaimer/" target="_blank">Disclaimer</a></li>';
+        echo '<li class="nav-item"><a class="nav-link" href="https://web.uams.edu/terms-of-use/" target="_blank">Terms of Use</a></li>';
+        echo '<li class="nav-item"><a class="nav-link" href="https://web.uams.edu/privacy/" target="_blank">Privacy Statement</a></li>';
+        if ('uamshealth' == $site) { // If UAMS Health site, add additional links
+            echo '<li class="nav-item"><a class="nav-link" href="https://hipaa.uams.edu/forms/notice-of-privacy-practices-information/" target="_blank">Notice of Privacy Practices</a></li>';
+        }
+        //echo '<li class="nav-item"><a class="nav-link" href="/sitemap">Site Map</a></li>';
     echo '</ul></div>';
+
+    // Copyright Information
+    // Render this by default.
     echo '<p class="copyright">&copy; '. date('Y') . ' University of Arkansas for Medical Sciences</p>';
 }
