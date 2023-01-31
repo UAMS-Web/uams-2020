@@ -2126,6 +2126,27 @@ acf_add_local_field_group(array(
 			'ui_on_text' => '',
 			'ui_off_text' => '',
 		),
+		array(
+			'key' => 'field_page_nav_alt_name',
+			'label' => 'Menu Title',
+			'name' => 'page_nav_alt_name',
+			'type' => 'text',
+			'instructions' => 'Enter a value here to set an alternate title to be used for this page/post on the automatically-generated primary navigation menu. Leave it blank to use the page/post title.',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'acfe_validate' => '',
+			'acfe_update' => '',
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		),
 	),
 	'location' => array(
 		array(
