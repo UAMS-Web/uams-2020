@@ -886,7 +886,9 @@ add_filter('allowed_block_types', function($block_types, $post) {
 		'acf/uams-content',
 		'acf/fad-providers',
 		'acf/fad-locations',
-		'acf/logo-list'
+		'acf/logo-list',
+		'acf/uams-section',
+		'core/heading', 'core/paragraph', 'core/embed', 'core/list', 'core/quote', 'core/image', 'core/shortcode', 'core/table', 'core/file'
 	];
 	if (get_page_template_slug( $post ) == 'templates/marketing.php') {
 		return $allowed_marketing;
@@ -943,4 +945,12 @@ function my_retrieve_password_message( $message, $key, $user_login, $user_data )
     // $message .= '<http://yoursite.com/wp-login.php?action=rp&key=' . $key . '&login=' . rawurlencode( $user_login ) . ">\r\n";
     // Return the filtered message.
     return $message;
+}
+
+// INNERBLOCKS Fix
+add_action('admin_enqueue_scripts', 'enqueue_admin_scripts_guten') ;
+function enqueue_admin_scripts_guten() {
+	if ( get_page_template_slug() == 'templates/marketing.php' ) {
+    	wp_enqueue_script('gutenberg-filters', get_stylesheet_directory_uri() . '/assets/js/filter-gutenberg-blocks.js', ['wp-edit-post']);
+	}
 }
