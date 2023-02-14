@@ -59,7 +59,12 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
 if ($geo_display) {
 
 if( $hero_rows ) :
-    $row_count = count($hero_rows);
+    $row_count = 0;
+    foreach($hero_rows as $hero_row) {
+        if (!$hero_row['hero_disable']) {
+            $row_count++;
+        }
+    }
 
 $char_per_word = 5.9; // Average calculated using blindtextgenerator.com
 $char_heading = 79; // Character limit of slide heading
@@ -93,9 +98,9 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
 <?php 
     $index = 1;
     foreach($hero_rows as $hero_row) {
-// Load values and adding defaults.
+    // Load values and adding defaults.
     // if ( empty($disable) )
-        $disable = $hero_row['hero_disable'] ?: '';
+        $disable = $hero_row['hero_disable'] ?: false;
     // if ( empty($heading) )
         $heading = $hero_row['hero_heading'] ?: 'Heading goes here...'; // Required
     // if ( empty($body) )
@@ -192,8 +197,8 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
                 </div>
             </div>
         </div>
+        <?php $index++; ?>
 <?php } // endif
-            $index++;
         } // end foreach
 ?>
             </div><!-- .carousel-inner -->
