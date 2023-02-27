@@ -16,7 +16,6 @@ if ( empty ($id) ) {
 }
 
 $id = 'hero-' . $id;
-
 if( !empty($block['anchor']) ) {
     $id = $block['anchor'];
 }
@@ -29,26 +28,33 @@ if( !empty($block['className']) ) {
 if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
 }
-if ( empty($geo) )
-    $geo = get_field('hero_geo');
 
 if ( empty($hero_rows) )
     $hero_rows = get_field('hero');
 
+if ( empty($geo) )
+    $geo = get_field('hero_geo');
+if ( empty($geo_region) )
+    $geo_region = get_field('hero_geo_region');
+
 // GEO Logic
 $geo_display = false;
-if (!isset($geo)){
+if (!isset($geo) || empty($geo_region)){
     $geo_display = true;
 } else {
-    if( $geo['geot_condition'] == 'include' ) {
-        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+    if( $geo == 'include' && !empty($geo_region) ) {
+        if( is_in_region($geo_region) ){
             $geo_display = true;
         }
-    }  else {
-        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+    } elseif( $geo == 'exclude' && !empty($geo_region) ) {
+        if ( is_not_in_region($geo_region) ){
             $geo_display = true;
         }
     }
+}
+if (is_admin() && !empty($geo) && !empty($geo_region)) {
+    $geo_display = true;
+    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
 }
 if ($geo_display) {
 
@@ -96,10 +102,12 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
         $body = $hero_row['hero_body'] ?: 'This is where the description goes'; // Required
     // if ( empty($button_text) )
         $button_text = $hero_row['hero_button_text'] ?: '';
-    // if ( empty($button_url) )
-        $button_url = $hero_row['hero_button_url']['url'] ?: '';
-    // if ( empty($button_target) )
-        $button_target = $hero_row['hero_button_url']['target'] ?: '';
+        if( $hero_row['hero_button_url'] ) {
+        // if ( empty($button_url) )
+            $button_url = $hero_row['hero_button_url']['url'] ?: '';
+        // if ( empty($button_target) )
+            $button_target = $hero_row['hero_button_url']['target'] ?: '';
+        }
     // if ( empty($button_desc) )
         $button_desc = $hero_row['hero_button_description'] ?: '';
     // if ( empty($image_desktop) )

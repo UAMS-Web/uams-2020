@@ -6,7 +6,9 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+if (empty( $id )) {
+	$id = '';
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 }
@@ -15,6 +17,9 @@ if ( empty ($id) ) {
 }
 
 $id = 'call-out-' . $id;
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+}
 
 $className = '';
 if( !empty($block['className']) ) {
@@ -37,25 +42,32 @@ if ( empty($background_color) )
     $background_color = get_field('call_out_background_color');
 if ( empty($geo) )
     $geo = get_field('call_out_geo');
+if ( empty($geo_region) )
+    $geo_region = get_field('call_out_geo_region');
 
 // echo '<!-- '; print_r($geo); echo ' -->';
 // echo '<!-- ' . do_shortcode( '[geot_debug]' ) . ' -->';
 // GEO Logic
 $geo_display = false;
-if (!isset($geo)){
+if (!isset($geo) || empty($geo_region)){
     $geo_display = true;
 } else {
-    if( $geo['geot_condition'] == 'include' ) {
-        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+    if( $geo == 'include' && !empty($geo_region) ) {
+        if( is_in_region($geo_region) ){
             $geo_display = true;
         }
-    }  else {
-        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+    } elseif( $geo == 'exclude' && !empty($geo_region) ) {
+        if ( is_not_in_region($geo_region) ){
             $geo_display = true;
         }
     }
 }
-if ($geo_display) :?>
+if (is_admin() && !empty($geo) && !empty($geo_region)) {
+    $geo_display = true;
+    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
+}
+if ($geo_display) : 
+?>
     <section class="uams-module extra-padding call-out<?php echo $className; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
         <?php if ( $use_image && function_exists( 'fly_add_image_size' ) ) { ?>
         <style>

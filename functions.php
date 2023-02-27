@@ -11,6 +11,10 @@
  *
 */
 
+if ( ! defined( 'CHILD_THEME_VERSION' ) ) {
+    define( 'CHILD_THEME_VERSION', wp_get_theme()->get( 'Version' ) );
+}
+
 add_action( 'genesis_setup', 'uamswp_childtheme_setup', 15 );
 
 function uamswp_childtheme_setup() {
@@ -536,7 +540,7 @@ function format_phone($country, $phone) {
 
 function format_phone_us($phone) {
 	// note: making sure we have something
-	if(!isset($phone{3})) { return ''; }
+	if(!isset($phone[3])) { return ''; }
 	// note: strip out everything but numbers 
 	$phone = preg_replace('/[^0-9]/', '', $phone);
 	$length = strlen($phone);
@@ -564,7 +568,7 @@ function format_phone_us($phone) {
    
 function format_phone_dash($phone) {
 	// note: making sure we have something
-	if(!isset($phone{3})) { return ''; }
+	if(!isset($phone[3])) { return ''; }
 	// note: strip out everything but numbers 
 	$phone = preg_replace('/[^0-9]/', '', $phone);
 	$length = strlen($phone);
@@ -889,7 +893,8 @@ add_filter('allowed_block_types', function($block_types, $post) {
 		'acf/uams-gallery',
 		'acf/uams-content',
 		'acf/fad-providers',
-		'acf/fad-locations'
+		'acf/fad-locations',
+		'acf/logo-list'
 	];
 	if (get_page_template_slug( $post ) == 'templates/marketing.php') {
 		return $allowed_marketing;
@@ -897,12 +902,13 @@ add_filter('allowed_block_types', function($block_types, $post) {
 	return $block_types;
 }, 10, 2);
 // ACF for GEO
-add_filter('acf/load_field/name=geo_valid', 'uamswp_set_geo');
+// add_filter('acf/load_field/name=geo_valid', 'uamswp_set_geo');
+add_filter('acf/prepare_field/name=geo_valid', 'uamswp_set_geo');
 add_filter('acf/update_value/name=geo_valid', 'uamswp_force_geo', 10, 3);
 
 function uamswp_force_geo($value, $post_id, $field)
 {
-	if (class_exists('Geot')) {
+	if (function_exists('geoip_detect2_get_external_ip_adress')) {
 		$value = 'true';
 	} else {
 		$value = 'false';
@@ -911,7 +917,7 @@ function uamswp_force_geo($value, $post_id, $field)
 }
 function uamswp_set_geo($field)
 {
-	if (class_exists('Geot')) {
+	if (function_exists('geoip_detect2_get_external_ip_adress')) {
 		$value = 'true';
 	} else {
 		$value = 'false';
@@ -920,4 +926,29 @@ function uamswp_set_geo($field)
         $field['value'] = $value;
     }
     return $field;
+}
+
+// Password reset to include /uams-login/ 
+add_filter( 'retrieve_password_message', 'my_retrieve_password_message', 10, 4 );
+function my_retrieve_password_message( $message, $key, $user_login, $user_data ) {
+    // Start with the default content.
+    $site_name = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+    $message = __( 'Someone has requested a password reset for the following account:' ) . "\r\n\r\n";
+    /* translators: %s: site name */
+    $message .= sprintf( __( 'Site Name: %s' ), $site_name ) . "\r\n\r\n";
+    /* translators: %s: user login */
+    $message .= sprintf( __( 'Username: %s' ), $user_login ) . "\r\n\r\n";
+    $message .= __( 'If this was a mistake, just ignore this email and nothing will happen.' ) . "\r\n\r\n";
+    $message .= __( 'To reset your password, visit the following address:' ) . "\r\n\r\n";
+    $message .= '<' . network_site_url( "/uams-login/?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' ) . ">\r\n";
+    /*
+     * If the problem persists with this filter, remove
+     * the last line above and use the line below by
+     * removing "//" (which comments it out) and hard
+     * coding the domain to your site, thus avoiding
+     * the network_site_url() function.
+     */
+    // $message .= '<http://yoursite.com/wp-login.php?action=rp&key=' . $key . '&login=' . rawurlencode( $user_login ) . ">\r\n";
+    // Return the filtered message.
+    return $message;
 }

@@ -17,10 +17,10 @@ function uamswp_theme_scripts() {
 	$version = wp_get_theme()->Version;
 	if ( !is_admin() ) {
 		// Enqueue Bootstrap CSS
-		wp_enqueue_style( 'app-css', UAMSWP_THEME_CSS . 'app.css' );
+		wp_enqueue_style( 'app-css', UAMSWP_THEME_CSS . 'app.css', array(), CHILD_THEME_VERSION, 'all');
 
 		// Enqueue Google Fonts
-		wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i&display=swap', array(), 'CHILD_THEME_VERSION' );
+		wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i&display=swap', array(), CHILD_THEME_VERSION );
 
 		// Disable the superfish script
 		wp_deregister_script( 'superfish' );
@@ -171,7 +171,7 @@ function uamswp_gutenberg_disable_all_colors_fonts() {
 	/**
 	 * Disable font sizes.
 	 */
-	add_theme_support( 'editor-font-sizes'  );
+	add_theme_support( 'editor-font-sizes', [] );
 	add_theme_support( 'disable-custom-font-sizes' );
 }
 add_action( 'after_setup_theme', 'uamswp_gutenberg_disable_all_colors_fonts' );

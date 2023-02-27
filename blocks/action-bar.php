@@ -16,7 +16,10 @@ if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
 
-$id = 'action-bar-' . $id;  
+$id = 'action-bar-' . $id;
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+}  
     
 $className = '';
 if( !empty($block['className']) ) {
@@ -36,30 +39,36 @@ if ( empty($action_bar_rows) )
     $action_bar_rows = get_field('action_bar_section');
 if ( empty($geo) )
     $geo = get_field('action_bar_geo');
+if ( empty($geo_region) )
+    $geo_region = get_field('action_bar_geo_region');
 
 if( $action_bar_rows ) {
     // $rows = get_field('action_bar_section');
     $row_count = count($action_bar_rows);
 } 
-if ( $background_color == 'bg-white' || $background_color == 'bg-gray' ) {
+if ( $background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto' ) {
     $btn_color = 'primary';
 } else {
     $btn_color = 'white';
 }
 // GEO Logic
 $geo_display = false;
-if (!isset($geo)){
+if (!isset($geo) || empty($geo_region)){
     $geo_display = true;
 } else {
-    if( $geo['geot_condition'] == 'include' ) {
-        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+    if( $geo == 'include' && !empty($geo_region) ) {
+        if( is_in_region($geo_region) ){
             $geo_display = true;
         }
-    }  else {
-        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+    } elseif( $geo == 'exclude' && !empty($geo_region) ) {
+        if ( is_not_in_region($geo_region) ){
             $geo_display = true;
         }
     }
+}
+if (is_admin() && !empty($geo) && !empty($geo_region)) {
+    $geo_display = true;
+    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
 }
 if ($geo_display) :
 ?>
@@ -73,8 +82,10 @@ if ($geo_display) :
     $section_heading = $action_bar_row['action_bar_section_heading'];
     $body = $action_bar_row['action_bar_section_body'];
     $button_text = $action_bar_row['action_bar_section_button_text'];
-    $button_url = $action_bar_row['action_bar_section_button_url']['url'];
-    $button_target = $action_bar_row['action_bar_section_button_url']['target'];
+    if ( $action_bar_row['action_bar_section_button_url'] ){
+        $button_url = $action_bar_row['action_bar_section_button_url']['url'];
+        $button_target = $action_bar_row['action_bar_section_button_url']['target'];
+    }
     $button_desc = $action_bar_row['action_bar_section_button_description'];
 
 ?>

@@ -85,12 +85,16 @@ article {
     background-color: $body-bg-banded;
 }
 
-.line-length-min,
-.line-length-ideal,
+.line-length-min {
+    @include line-length-em(min);
+}
+
+.line-length-ideal {
+    @include line-length-em(ideal);
+}
+
 .line-length-max {
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    @include line-length-em(max);
 }
 
 .line-length-min,
@@ -107,9 +111,9 @@ section.archive-description .entry-content {
             //margin-top: $uams-module-padding;
         }
 
-        &:last-child {
-            //@extend .mb-0;
-        }
+        // &:last-child {
+        //     @extend .mb-0;
+        // }
 
         @include media-breakpoint-up(md) {
             //margin-right: -20%;
@@ -118,20 +122,32 @@ section.archive-description .entry-content {
     }
 }
 
-.line-length-min {
-    width: $line-length-min + em;
-}
-
-.line-length-ideal {
-    width: $line-length-ideal + em;
-}
-
-.line-length-max {
-    width: $line-length-max + em;
-}
-
 .no-break {
     white-space: nowrap;
+}
+
+.clearnone {
+    clear: none;
+}
+
+.clearleft {
+    clear: left;
+}
+
+.clearright {
+    clear: right;
+}
+
+.clearboth {
+    clear: both;
+}
+
+.clearinitial {
+    clear: initial;
+}
+
+.clearinherit {
+    clear: inherit;
 }
 
 // .card-list-container {
@@ -162,14 +178,14 @@ section.archive-description .entry-content {
         > picture {
             flex-shrink: 0; // added so the picture element doesn't take up space in IE11
         }
-
-        .card-body {
-            > :last-child {
-                margin-bottom: 0;
-            }
-        }
         .btn {
             margin-top: auto;
+        }
+    }
+
+    .card-body {
+        > :last-child {
+            margin-bottom: 0;
         }
     }
 
@@ -181,7 +197,7 @@ section.archive-description .entry-content {
 }
 
 .module-body {
-    @extend .line-length-max;
+    @include line-length-em(max);
 
     + .sr-only + .card-list-container,
     + .card-list-container {

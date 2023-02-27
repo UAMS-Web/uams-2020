@@ -16,7 +16,10 @@ if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
 
-$id = 'link-list-' .  $id;  
+$id = 'link-list-' .  $id; 
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+} 
     
 $className = '';
 if( !empty($block['className']) ) {
@@ -34,25 +37,31 @@ if ( empty($description) )
     $description = get_field('link_list_description');
 if ( empty($background_color) )
     $background_color = get_field('link_list_background_color');
-if ( empty($geo) )
-    $geo = get_field('link_list_geo');
 if ( empty($link_list_rows) )
     $link_list_rows = get_field('link_list_section');
+if ( empty($geo) )
+    $geo = get_field('link_list_geo');
+if ( empty($geo_region) )
+    $geo_region = get_field('link_list_geo_region');
 
 // GEO Logic
 $geo_display = false;
-if (!isset($geo)){
+if (!isset($geo) || empty($geo_region)){
     $geo_display = true;
 } else {
-    if( $geo['geot_condition'] == 'include' ) {
-        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+    if( $geo == 'include' && !empty($geo_region) ) {
+        if( is_in_region($geo_region) ){
             $geo_display = true;
         }
-    }  else {
-        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+    } elseif( $geo == 'exclude' && !empty($geo_region) ) {
+        if ( is_not_in_region($geo_region) ){
             $geo_display = true;
         }
     }
+}
+if (is_admin() && !empty($geo) && !empty($geo_region)) {
+    $geo_display = true;
+    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
 }
 if ($geo_display) :
 ?>
@@ -71,14 +80,16 @@ if ($geo_display) :
             <div class="col-12 col-md-6 list">
                     <ul>
                     <?php 
+                    if ($link_list_rows):
                         foreach($link_list_rows as $link_list_row) {
                         // Load values.
                         $link_title = $link_list_row['link_list_section_title'];
                         $body = $link_list_row['link_list_section_body'];
-                        $link_url = $link_list_row['link_list_section_url']['url'];
-                        $link_target = $link_list_row['link_list_section_url']['target'];
+                        if ($link_list_row['link_list_section_url']){
+                            $link_url = $link_list_row['link_list_section_url']['url'];
+                            $link_target = $link_list_row['link_list_section_url']['target'];
+                        }
                         $link_desc = $link_list_row['link_list_section_description'];
-
                     ?>
                         <li class="item">
                             <div class="text-container">
@@ -87,7 +98,8 @@ if ($geo_display) :
                             </div>
                         </li>
                     <?php
-                    }
+                        }
+                    endif;
                     ?>
                 </ul>
             </div>

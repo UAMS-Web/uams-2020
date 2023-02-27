@@ -4,6 +4,10 @@
     //padding-bottom: $module-padding;
     position: relative;
 
+    &:focus {
+        outline: none;
+    }
+
     &:not(.no-padding) {
         padding: $uams-module-padding-mobile;
 
@@ -11,7 +15,8 @@
             padding: $uams-module-padding;
         }
 
-        > .container-fluid {
+        > .container-fluid,
+        > .uamswp-news-syndication-cards > .container-fluid {
             padding: 0;
         }
 
@@ -86,6 +91,10 @@
             top: 0;
             right: ($grid-gutter-width / 2);
             left: ($grid-gutter-width / 2);
+        }
+
+        p {
+            @include line-length-em(max);
         }
 
         .cta-container,

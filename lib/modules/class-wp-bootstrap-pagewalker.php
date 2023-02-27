@@ -108,14 +108,20 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			$output .= $indent . '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"' . $id . $css_class . '>';
 			$atts = array();
 
+			// Add alt name for $post_title
+			$alt_name = '';
+			$alt_name = get_post_meta($page->ID, 'page_nav_alt_name', true);
+
 			if ( '' === $page->post_title )
 				$page->post_title = sprintf( __( '#%d (no title)' ), $page->ID );
 
-
 			if ( ! empty( $page->post_title ) ) {
-				$atts['title']  = ! empty( $page->post_title )   ? strip_tags( $page->post_title ) : '';
+				$atts['title'] = ! empty( $page->post_title )   ? strip_tags( $page->post_title ) : '';
 			} else {
 				$atts['title'] = sprintf( __( '#%d (no title)' ), $page->ID );
+			}
+			if ( ! empty( $alt_name ) ) {
+				$atts['title'] = $alt_name . '; ' . $atts['title'];
 			}
 
 			// $atts['target'] = ! empty( $page->target )	? $page->target	: '';
@@ -154,6 +160,9 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			// initiate empty icon var then if we have a string containing icon classes...
 			$icon_html = '';
 			$icon_class_string = '';
+			if ( ! empty( $alt_name ) ) {
+				$page->post_title = $alt_name;
+			}
 			if ( ! empty( $icon_class_string ) ) {
 				// append an <i> with the icon classes to what is output before links.
 				$icon_html = '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> ';

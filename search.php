@@ -8,6 +8,18 @@
 remove_action( 'genesis_loop', 'genesis_do_loop' );
 add_action( 'genesis_loop', 'uamswp_do_search_loop' );
 
+// Remove search results page from google search results
+function sp_titles_robots($html) { 
+	$html = '<meta name="robots" content="noindex, noarchive, nosnippet"/>';
+	$html .= '<meta name="google" content="noimageindex">';
+	return $html;
+}
+add_filter('seopress_titles_robots', 'sp_titles_robots', 8);
+
+remove_all_actions( 'wp_robots');
+
+remove_action( 'genesis_meta', 'genesis_robots_meta' );
+
 remove_action( 'genesis_after_header', 'page_options', 5 );
 
 add_action( 'genesis_before_loop', 'uamswp_search_page_before_entry', 5 );

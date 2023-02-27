@@ -6,15 +6,20 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$id = '';
+if (empty( $id )) {
+	$id = '';
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
 if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
-}
+} 
     
 $id = 'text-image-overlay-' . $id;
+if( !empty($block['anchor']) ) {
+    $id = $block['anchor'];
+}
 
 $className = '';
 if( !empty($block['className']) ) {
@@ -25,24 +30,30 @@ if( !empty($block['align']) ) {
 }
 if ( empty($geo) )
     $geo = get_field('overlay_geo');
+if ( empty($geo_region) )
+    $geo_region = get_field('overlay_geo_region');
 
 if( empty($overlay_rows) )
     $overlay_rows = get_field('overlay_section');
 
 // GEO Logic
 $geo_display = false;
-if (!isset($geo)){
+if (!isset($geo) || empty($geo_region)){
     $geo_display = true;
 } else {
-    if( $geo['geot_condition'] == 'include' ) {
-        if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+    if( $geo == 'include' && !empty($geo_region) ) {
+        if( is_in_region($geo_region) ){
             $geo_display = true;
         }
-    }  else {
-        if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+    } elseif( $geo == 'exclude' && !empty($geo_region) ) {
+        if ( is_not_in_region($geo_region) ){
             $geo_display = true;
         }
     }
+}
+if (is_admin() && !empty($geo) && !empty($geo_region)) {
+    $geo_display = true;
+    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
 }
 if ($geo_display) {
 
@@ -60,8 +71,10 @@ if( $overlay_rows ) :
         $heading = $overlay_row['overlay_section_heading'];
         $body = $overlay_row['overlay_section_body'];
         $button_text = $overlay_row['overlay_section_button_text'];
-        $button_url = $overlay_row['overlay_section_button_url']['url'];
-        $button_target = $overlay_row['overlay_section_button_url']['target'];
+        if ( $overlay_row['overlay_section_button_url'] ) {
+            $button_url = $overlay_row['overlay_section_button_url']['url'];
+            $button_target = $overlay_row['overlay_section_button_url']['target'];
+        }
         $button_desc = $overlay_row['overlay_section_button_description'];
         $background_color = $overlay_row['overlay_section_background_color'];
         $image = $overlay_row['overlay_section_image'];

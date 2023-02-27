@@ -55,6 +55,7 @@ return array(
             'id' => '',
         ),
         'choices' => array(
+            'bg-auto' => 'Auto',
             'bg-white' => 'White',
             'bg-gray' => 'Gray',
             'bg-red' => 'Red',
@@ -66,7 +67,7 @@ return array(
             'bg-orange' => 'Orange',
         ),
         'default_value' => array(
-            0 => 'bg-white',
+            0 => 'bg-auto',
         ),
         'allow_null' => 0,
         'multiple' => 0,
@@ -259,7 +260,7 @@ return array(
 		'key' => 'field_action_bar_geo'. $suffix,
 		'label' => 'Regions',
 		'name' => 'action_bar_geo',
-		'type' => 'geot_field',
+		'type' => 'radio',
 		'instructions' => '',
 		'required' => 0,
 		'conditional_logic' => array(
@@ -276,11 +277,56 @@ return array(
 			'class' => '',
 			'id' => '',
 		),
-		'acfe_permissions' => '',
-		'geot_show' => 'city-regions',
-		'geot_condition' => 'include',
-		'geot_regions' => '',
-		'geot_countries' => '',
+        'acfe_permissions' => '',
+        'choices' => array(
+            'include' => 'Include',
+            'exclude' => 'Exclude',
+        ),
+        'allow_null' => 0,
+        'other_choice' => 0,
+        'default_value' => '',
+        'layout' => 'horizontal',
+        'return_format' => 'value'
+    ),
+    array(
+		'key' => 'field_action_bar_geo_region'. $suffix,
+		'label' => 'Regions',
+		'name' => 'action_bar_geo_region',
+		'type' => 'select',
+		'instructions' => '',
+		'required' => 0,
+		'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_action_bar_geo_valid'. $suffix,
+                    'operator' => '==',
+                    'value' => 'true',
+                ),
+            ),
+        ),
+		'wrapper' => array(
+			'width' => '',
+			'class' => '',
+			'id' => '',
+		),
+        'acfe_permissions' => '',
+        'choices' => array(
+            'central' => 'Central',
+            'northeast' => 'Northeast',
+            'northwest' => 'Northwest',
+            'southeast' => 'Southeast',
+            'southwest' => 'Southwest',
+        ),
+        'default_value' => array(
+        ),
+        'allow_null' => 0,
+        'multiple' => 1,
+        'ui' => 1,
+        'ajax' => 0,
+        'return_format' => 'value',
+        'allow_custom' => 0,
+        'placeholder' => '',
+        'search_placeholder' => '',
     ),
     array(
         'key' => 'field_action_bar_regions_end'. $suffix,
