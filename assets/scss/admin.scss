@@ -1,3 +1,11 @@
 .acf-field.hide-label .acf-label {
     display: none;
 }
+/* Override for preview */
+#poststuff h2, #poststuff h3{
+    color: inherit
+}
+/* Inject Styles inside Previews */
+#poststuff .-preview {
+    @import "../../assets/scss/style.scss";
+}
