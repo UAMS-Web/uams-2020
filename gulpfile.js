@@ -43,6 +43,10 @@ var paths = {
         src: 'assets/scss/uamsalert.scss',
         dest: 'assets/css'
     },
+    layoutcontent: {
+        src: 'layouts/content/admin.scss',
+        dest: 'layouts/content'
+    },
     scripts: {
         src: [
             // 'node_modules/jquery/dist/jquery.js', // Changed from jquery.slim.js for AJAX
@@ -153,6 +157,18 @@ function uamsalert() {
         .pipe(notify({ "message": "UAMS Alert Styles task complete" }));
 }
 
+function layoutcontent() {
+    return gulp.src(paths.layoutcontent.src)
+        // .pipe(changed(paths.layoutcontent.dest))
+        // .pipe(sass.sync().on('error', sass.logError))
+        .pipe(concat('admin.scss'))
+        .pipe(postcss(plugins))
+        .pipe(rename('admin.css'))
+        .pipe(gulp.dest(paths.layoutcontent.dest))
+        // .pipe(browserSync.stream())
+        .pipe(notify({ "message": "Content Layout Styles task complete" }));
+}
+
 async function fa() {
     return gulp.src(paths.fontawesome.src)
         .pipe(changed(paths.fontawesome.dest))
@@ -220,6 +236,8 @@ gulp.task('fa', fa);
 gulp.task('zip', template);
 
 gulp.task('default', gulp.parallel(style, uamsalert, adminstyle, js, watch));
+
+gulp.task('layoutcontent', gulp.parallel(layoutcontent));
 
 /* 
 var dimensionSettings = [{
