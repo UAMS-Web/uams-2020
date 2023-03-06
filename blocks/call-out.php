@@ -9,6 +9,9 @@
 if (empty( $id )) {
 	$id = '';
 }
+if (empty( $i )) {
+	$i = 0;
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 }
@@ -30,16 +33,33 @@ if( !empty($block['align']) ) {
 }
 
 // Load values.
-if ( empty($heading) )
+if ( empty($heading) && get_field('call_out_heading') ) {
     $heading = get_field('call_out_heading');
-if ( empty($body) )
+} elseif ( empty($heading) && get_sub_field('call_out_heading') ) {
+    $heading = get_sub_field('call_out_heading');
+}
+if ( empty($body) && get_field('call_out_body') ) {
     $body = get_field('call_out_body');
-if ( empty($use_image) )
+} elseif ( empty($body) && get_sub_field('call_out_body') ) {
+    $body = get_sub_field('call_out_body');
+}
+if ( empty($use_image) && get_field('call_out_use_image') ) {
     $use_image = get_field('call_out_use_image');
-if ( empty($image) )
+} elseif ( empty($use_image) && get_sub_field('call_out_use_image') ) {
+    $use_image = get_sub_field('call_out_use_image');
+} else {
+    $use_image = false;
+}
+if ( empty($image) && get_field('call_out_image') ) {
     $image = get_field('call_out_image');
-if ( empty($background_color) )
+} elseif ( empty($image) && get_sub_field('call_out_image') ) {
+    $image = get_sub_field('call_out_image');
+}
+if ( empty($background_color) && get_field('call_out_background_color') ) {
     $background_color = get_field('call_out_background_color');
+} elseif ( empty($background_color) && get_sub_field('call_out_background_color') ) {
+    $background_color = get_sub_field('call_out_background_color');
+}
 if ( empty($geo) )
     $geo = get_field('call_out_geo');
 if ( empty($geo_region) )

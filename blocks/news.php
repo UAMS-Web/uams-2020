@@ -9,6 +9,9 @@ $className = '';
 if (empty( $id )) {
 	$id = '';
 }
+if (empty( $i )) {
+	$i = 0;
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 }
@@ -26,36 +29,81 @@ if( !empty($block['align']) ) {
 }
 
 // Load values.
-if ( empty($title) )
+if ( empty($title) && get_field('news_title') ) {
     $title = get_field('news_title');
-if ( empty($hide_title) )
+} elseif ( empty($title) && get_sub_field('news_title') ) {
+    $title = get_sub_field('news_title');
+}
+if ( empty($hide_title) && get_field('news_hide_title') ) {
     $hide_title = get_field('news_hide_title');
-if ( empty($output) )
+} elseif ( empty($hide_title) && get_sub_field('news_hide_title') ) {
+    $hide_title = get_sub_field('news_hide_title');
+}
+if ( empty($output) && get_field('news_format') ) {
     $output = get_field('news_format');
-if ( empty($category) )
+} elseif ( empty($output) && get_sub_field('news_format') ) {
+    $output = get_sub_field('news_format');
+}
+if ( empty($category) && get_field('news_category') ) {
     $category = get_field('news_category');
-if ( empty($count) )
+} elseif ( empty($category) && get_sub_field('news_category') ) {
+    $category = get_sub_field('news_category');
+}
+if ( empty($count) && get_field('news_count') ) {
     $count = get_field('news_count');
-if ( empty($offset) )
+} elseif ( empty($count) && get_sub_field('news_count') ) {
+    $count = get_sub_field('news_count');
+}
+if ( empty($offset) && get_field('news_offset') ) {
     $offset = get_field('news_offset');
-if ( empty($advancedCat) )
+} elseif ( empty($offset) && get_sub_field('news_offset') ) {
+    $offset = get_sub_field('news_offset');
+}
+if ( empty($advancedCat) && get_field('news_advanced_cat') ) {
     $advancedCat = get_field('news_advanced_cat');
-if ( empty($background_color) )
+} elseif ( empty($advancedCat) && get_sub_field('news_advanced_cat') ) {
+    $advancedCat = get_sub_field('news_advanced_cat');
+}
+if ( empty($background_color) && get_field('news_background_color') ) {
     $background_color = get_field('news_background_color');
-if ( empty($hide_img) )
+} elseif ( empty($background_color) && get_sub_field('news_background_color') ) {
+    $background_color = get_sub_field('news_background_color');
+}
+if ( empty($hide_img) && get_field('news_hide_img') ) {
     $hide_img = get_field('news_hide_img');
-if ( empty($hide_author) )
+} elseif ( empty($hide_img) && get_sub_field('news_hide_img') ) {
+    $hide_img = get_sub_field('news_hide_img');
+}
+if ( empty($hide_author) && get_field('news_hide_author') ) {
     $hide_author = get_field('news_hide_author');
-if ( empty($hide_date) )
+} elseif ( empty($hide_author) && get_sub_field('news_hide_author') ) {
+    $hide_author = get_sub_field('news_hide_author');
+}
+if ( empty($hide_date) && get_field('news_hide_date') ) {
     $hide_date = get_field('news_hide_date');
-if ( empty($articleID) )
+} elseif ( empty($hide_date) && get_sub_field('news_hide_date') ) {
+    $hide_date = get_sub_field('news_hide_date');
+}
+if ( empty($articleID) && get_field('news_article_id') ) {
     $articleID = get_field('news_article_id');
-if ( empty($local) )
+} elseif ( empty($articleID) && get_sub_field('news_article_id') ) {
+    $articleID = get_sub_field('news_article_id');
+}
+if ( empty($local) && get_field('news_local') ) {
     $local = get_field('news_local');
-if ( !isset($link) )
+} elseif ( empty($local) && get_sub_field('news_local') ) {
+    $local = get_sub_field('news_local');
+}
+if ( !isset($link) && get_field('news_include_link') ) {
     $link = get_field('news_include_link');
-if ( empty($position) )
+} elseif ( !isset($link) && get_sub_field('news_include_link') ) {
+    $link = get_sub_field('news_include_link');
+}
+if ( empty($position) && get_field('news_position') ) {
     $position = get_field('news_position');
+} elseif ( empty($position) && get_sub_field('news_position') ) {
+    $position = get_sub_field('news_position');
+}
 if ( empty($geo) )
     $geo = get_field('news_geo');
 if ( empty($geo_region) )

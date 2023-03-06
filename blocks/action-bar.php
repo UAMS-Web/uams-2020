@@ -12,6 +12,9 @@ if (empty( $id )) {
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
+if (empty( $i )) {
+	$i = 0;
+}
 if ( empty ($id) ) {
     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 }
@@ -31,12 +34,22 @@ if( !empty($block['align']) ) {
     
 
 // Load values.
-if ( empty($heading) )
+if ( empty($heading) && get_field('action_bar_heading') ) {
     $heading = get_field('action_bar_heading');
-if ( empty($background_color) )
+} elseif ( empty($heading) && get_sub_field('action_bar_heading') ) {
+    $heading = get_sub_field('action_bar_heading');
+}
+if ( empty($background_color) && get_field('action_bar_background_color') ) {
     $background_color = get_field('action_bar_background_color');
-if ( empty($action_bar_rows) )
+} elseif ( empty($background_color) && get_sub_field('action_bar_background_color') ) {
+    $background_color = get_sub_field('action_bar_background_color');
+}
+if ( empty($action_bar_rows) && get_field('action_bar_section') ) {
     $action_bar_rows = get_field('action_bar_section');
+} elseif ( empty($action_bar_rows) && get_sub_field('action_bar_section') ) {
+    $action_bar_rows = get_sub_field('action_bar_section');
+}
+
 if ( empty($geo) )
     $geo = get_field('action_bar_geo');
 if ( empty($geo_region) )

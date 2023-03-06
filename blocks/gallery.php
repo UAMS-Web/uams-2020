@@ -9,6 +9,9 @@
 if (empty( $id )) {
 	$id = '';
 }
+if (empty( $i )) {
+	$i = 0;
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -31,30 +34,57 @@ if( !empty($block['align']) ) {
     
 
 // Load values.
-if ( empty($heading) )
+if ( empty($heading) && get_field('gallery_heading') ) {
     $heading = get_field('gallery_heading');
-if ( empty($hide_heading) )
+} elseif ( empty($heading) && get_sub_field('gallery_heading') ) {
+    $heading = get_sub_field('gallery_heading');
+}
+if ( empty($hide_heading) && get_field('gallery_hide_heading') ) {
     $hide_heading = get_field('gallery_hide_heading');
-if ( empty($description) )
+} elseif ( empty($hide_heading) && get_sub_field('gallery_hide_heading') ) {
+    $hide_heading = get_sub_field('gallery_hide_heading');
+}
+if ( empty($description) && get_field('gallery_description') ) {
     $description = get_field('gallery_description');
-if ( empty($gallery_columns) )
+} elseif ( empty($description) && get_sub_field('gallery_description') ) {
+    $description = get_sub_field('gallery_description');
+}
+if ( empty($gallery_columns) && get_field('gallery_columns') ) {
     $gallery_columns = get_field('gallery_columns');
-if ( empty($gallery_images) )
+} elseif ( empty($gallery_columns) && get_sub_field('gallery_columns') ) {
+    $gallery_columns = get_sub_field('gallery_columns');
+}
+if ( empty($gallery_images) && get_field('gallery_images') ) {
     $gallery_images = get_field('gallery_images');
-if ( empty($gallery_crop) )
+} elseif ( empty($gallery_images) && get_sub_field('gallery_images') ) {
+    $gallery_images = get_sub_field('gallery_images');
+}
+if ( empty($gallery_crop) && get_field('gallery_crop') ) {
     $gallery_crop = get_field('gallery_crop');
+} elseif ( empty($gallery_crop) && get_sub_field('gallery_crop') ) {
+    $gallery_crop = get_sub_field('gallery_crop');
+}
 if ( $gallery_crop == 'none' || $gallery_crop[0] == 'none' )
     $gallery_crop = -1;
-if ( empty($background_color) )
+if ( empty($background_color) && get_field('gallery_background_color') ) {
     $background_color = get_field('gallery_background_color');
+} elseif ( empty($background_color) && get_sub_field('gallery_background_color') ) {
+    $background_color = get_sub_field('gallery_background_color');
+}
 if ( empty($geo) )
     $geo = get_field('gallery_geo');
 if ( empty($geo_region) )
     $geo_region = get_field('gallery_geo_region');
-if ( empty($modal) )
+if ( empty($modal) && get_field('gallery_modal') ) {
     $modal = get_field('gallery_modal');
-if ( empty($more) )
+} elseif ( empty($modal) && get_sub_field('gallery_modal') ) {
+    $modal = get_sub_field('gallery_modal');
+}
+if ( empty($more) && get_field('gallery_more') ) {
     $more = get_field('gallery_more');
+} elseif ( empty($more) && get_sub_field('gallery_more') ) {
+    $more = get_sub_field('gallery_more');
+}
 if ( $more ) {
     if ( empty($more_text) )
         $more_text = get_field('gallery_more_text');

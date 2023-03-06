@@ -8,6 +8,9 @@
 if (empty( $id )) {
 	$id = '';
 }
+if (empty( $i )) {
+	$i = 0;
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -29,8 +32,11 @@ if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
 }
 
-if ( empty($hero_rows) )
+if ( empty($hero_rows) && get_field('hero') ) {
     $hero_rows = get_field('hero');
+} elseif ( empty($hero_rows) && get_sub_field('hero') ) {
+    $hero_rows = get_sub_field('hero');
+}
 
 if ( empty($geo) )
     $geo = get_field('hero_geo');

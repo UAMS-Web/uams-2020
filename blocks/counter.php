@@ -10,6 +10,9 @@
 if (empty( $id )) {
 	$id = '';
 }
+if (empty( $i )) {
+	$i = 0;
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -31,20 +34,43 @@ if( !empty($block['align']) ) {
 }   
 
 // Load values.
-if ( empty($heading) ) 
+if ( empty($heading) && get_field('counter_list_heading') ) {
     $heading = get_field('counter_list_heading');
-if ( empty($hide_heading) ) 
+} elseif ( empty($heading) && get_sub_field('counter_list_heading') ) {
+    $heading = get_sub_field('counter_list_heading');
+}
+if ( empty($hide_heading) && get_field('counter_list_hide_heading') ) {
     $hide_heading = get_field('counter_list_hide_heading');
-if ( empty($description) ) 
+} elseif ( empty($hide_heading) && get_sub_field('counter_list_hide_heading') ) {
+    $hide_heading = get_sub_field('counter_list_hide_heading');
+} else {
+    $hide_heading = false;
+}
+if ( empty($description) && get_field('counter_list_description') ) {
     $description = get_field('counter_list_description');
-if ( empty($start) ) 
+} elseif ( empty($description) && get_sub_field('counter_list_description') ) {
+    $description = get_sub_field('counter_list_description');
+}
+if ( empty($start) && get_field('counter_list_start') ) {
     $start = get_field('counter_list_start');
-if ( empty($start_custom) ) 
+} elseif ( empty($start) && get_sub_field('counter_list_start') ) {
+    $start = get_sub_field('counter_list_start');
+}
+if ( empty($start_custom) && get_field('counter_list_start_custom') ) {
     $start_custom = get_field('counter_list_start_custom');
-if ( empty($background_color) ) 
+} elseif ( empty($start_custom) && get_sub_field('counter_list_start_custom') ) {
+    $start_custom = get_sub_field('counter_list_start_custom');
+}
+if ( empty($background_color) && get_field('counter_list_background_color') ) {
     $background_color = get_field('counter_list_background_color');
-if ( empty($counter_list_rows) ) 
+} elseif ( empty($background_color) && get_sub_field('counter_list_background_color') ) {
+    $background_color = get_sub_field('counter_list_background_color');
+}
+if ( empty($counter_list_rows) && get_field('counter_list_section') ) {
     $counter_list_rows = get_field('counter_list_section');
+} elseif ( empty($counter_list_rows) && get_sub_field('counter_list_section') ) {
+    $counter_list_rows = get_sub_field('counter_list_section');
+}
 
 $row = 0;
 ?>

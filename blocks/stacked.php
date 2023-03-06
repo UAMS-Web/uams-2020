@@ -9,6 +9,9 @@
 if (empty( $id )) {
 	$id = '';
 }
+if (empty( $i )) {
+	$i = 0;
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -30,27 +33,55 @@ if( !empty($block['align']) ) {
 }   
 
 // Load values.
-if ( empty($heading) )
+if ( empty($heading) && get_field('stacked_heading') ) {
     $heading = get_field('stacked_heading');
-if ( empty($hide_heading) )
+} elseif ( empty($heading) && get_sub_field('stacked_heading') ) {
+    $heading = get_sub_field('stacked_heading');
+}
+if ( empty($hide_heading) && get_field('stacked_hide_heading') ) {
     $hide_heading = get_field('stacked_hide_heading');
-if ( empty($description) )
+} elseif ( empty($hide_heading) && get_sub_field('stacked_hide_heading') ) {
+    $hide_heading = get_sub_field('stacked_hide_heading');
+}
+if ( empty($description) && get_field('stacked_description')) {
     $description = get_field('stacked_description');
-if ( empty($background_color) )
+} elseif ( empty($description) && get_sub_field('stacked_description')) {
+    $description = get_sub_field('stacked_description');
+}
+if ( empty($background_color) && get_field('stacked_background_color') ) {
     $background_color = get_field('stacked_background_color');
-if ( empty($more) )
+} elseif ( empty($background_color) && get_sub_field('stacked_background_color') ) {
+    $background_color = get_sub_field('stacked_background_color');
+}
+if ( empty($more) && get_field('stacked_more') ) {
     $more = get_field('stacked_more');
+} elseif ( empty($more) && get_sub_field('stacked_more') ) {
+    $more = get_sub_field('stacked_more');
+}
 if ( $more ) {
-    if ( empty($more_text) )
+    if ( empty($more_text) && get_field('stacked_more_text') ) {
         $more_text = get_field('stacked_more_text');
-    if ( empty($more_button_text) )
+    } elseif ( empty($more_text) && get_sub_field('stacked_more_text') ) {
+        $more_text = get_sub_field('stacked_more_text');
+    }
+    if ( empty($more_button_text) && get_field('stacked_more_button_text') ) {
         $more_button_text = get_field('stacked_more_button_text');
-    if ( empty($more_button_url) )
+    } elseif ( empty($more_button_text) && get_sub_field('stacked_more_button_text') ) {
+        $more_button_text = get_sub_field('stacked_more_button_text');
+    }
+    if ( empty($more_button_url) && get_field('stacked_more_button_url') ) {
         $more_button_url = get_field('stacked_more_button_url');
-    if ( empty($more_button_target) ) 
+    } elseif ( empty($more_button_url) && get_sub_field('stacked_more_button_url') ) {
+        $more_button_url = get_sub_field('stacked_more_button_url');
+    }
+    if ( empty($more_button_target) ) {
         $more_button_target = $more_button_url['target'];
-    if ( empty($more_button_description) )
+    }
+    if ( empty($more_button_description) && get_field('stacked_more_button_description') ) {
         $more_button_description = get_field('stacked_more_button_description');
+    } elseif ( empty($more_button_description) && get_sub_field('stacked_more_button_description') ) {
+        $more_button_description = get_sub_field('stacked_more_button_description');
+    }
     if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto' ) ) {
         $more_button_color = 'primary';
     } else {
@@ -61,8 +92,11 @@ if ( empty($geo) )
     $geo = get_field('stacked_geo');
 if ( empty($geo_region) )
     $geo_region = get_field('stacked_geo_region');
-if ( empty($stacked_rows) )
+if ( empty($stacked_rows) && get_field('stacked_section') ) {
     $stacked_rows = get_field('stacked_section');
+} elseif ( empty($stacked_rows) && get_sub_field('stacked_section') ) {
+    $stacked_rows = get_sub_field('stacked_section');
+}
 
 // GEO Logic
 $geo_display = false;

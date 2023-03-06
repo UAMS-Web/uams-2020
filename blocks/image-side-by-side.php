@@ -8,6 +8,9 @@
 if (empty( $id )) {
 	$id = '';
 }
+if (empty( $i )) {
+	$i = 0;
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -31,25 +34,61 @@ if( !empty($block['align']) ) {
 
 // Load values and setting defaults.
 // If values are empty => used for modules & widgets
-if ( empty($layout) ) 
-    $layout = get_field('side_text_layout') ?: 'link-list';
-if ( empty($heading) ) 
-    $heading = get_field('side_heading') ?: 'Heading goes here...';
-
+if ( empty($layout) && get_field('side_text_layout') ) {
+    $layout = get_field('side_text_layout');
+} elseif ( empty($layout) && get_sub_field('side_text_layout') ) {
+    $layout = get_sub_field('side_text_layout');
+} else {
+    $layout = 'link-list';
+}
+if ( empty($heading) && get_field('side_heading') ) {
+    $heading = get_field('side_heading');
+} elseif ( empty($heading) && get_sub_field('side_heading') ) {
+    $heading = get_sub_field('side_heading');
+} else {
+    $heading = 'Heading goes here...';
+}
 if ( empty($body) ){
     if ( $layout == 'body-only' ) {
-        $body = get_field('side_layout_body_text') ?: 'This is where the body-only description goes';
+        if ( get_field('side_layout_body_text') ) {
+            $body = get_field('side_layout_body_text');
+        } elseif ( get_sub_field('side_layout_body_text') ) {
+            $body = get_sub_field('side_layout_body_text');
+        } else {
+            $body = 'This is where the body-only description goes';
+        }
     } else {
-        $body = get_field('side_layout_link_text') ?: 'This is where the body + link list description goes';
+        if ( get_field('side_layout_link_text') ) {
+            $body = get_field('side_layout_link_text');
+        } elseif ( get_sub_field('side_layout_link_text') ) {
+            $body = get_sub_field('side_layout_link_text');
+        } else {
+            $body = 'This is where the body + link list description goes';
+        }
     }
 }
 
-if ( empty($link_list) ) 
-    $link_list = get_field('side_link_list') ?: '';
-if ( empty($list_more) ) 
+if ( empty($link_list) && get_field('side_link_list') ) {
+    $link_list = get_field('side_link_list');
+} elseif ( empty($link_list) && get_sub_field('side_link_list') ) {
+    $link_list = get_sub_field('side_link_list');
+} else {
+    $link_list = '';
+}
+if ( empty($list_more) && get_field('side_link_include_more') ) {
     $list_more = get_field('side_link_include_more') ?: '';
-if ( empty($cta) ) 
+} elseif ( empty($list_more) && get_sub_field('side_link_include_more') ) {
+    $list_more = get_sub_field('side_link_include_more');
+} else {
+    $list_more = '';
+}
+if ( empty($cta) && get_field('side_cta') ) {
     $cta = get_field('side_cta') ?: '';
+} elseif ( empty($cta) && get_sub_field('side_cta') ) {
+    $cta = get_sub_field('side_cta') ?: '';
+} else {
+    $cta = '';
+}
 $cta_text = $cta['side_cta_text'] ?: '';
 $cta_link = '';
 $cta_target = '';
@@ -64,10 +103,20 @@ $side_image = $image_group['side_image_image'] ?: '';
 $image_alt = $image_group['side_image_alt_text'] ?: '';
 $image_crop = $image_group['side_image_crop'] ?: '';
 $image_anchor = $image_group['side_image_anchor'] ?: 'center';
-if ( empty($image_postion) ) 
-    $image_postion = get_field('side_image_position') ?: 'left';
-if ( empty($background_color) ) 
-    $background_color = get_field('side_image_background_color') ?: 'bg-white';
+if ( empty($image_postion) && get_field('side_image_position') ) {
+    $image_postion = get_field('side_image_position');
+} elseif ( empty($image_postion) && get_sub_field('side_image_position') ) {
+    $image_postion = get_sub_field('side_image_position');
+} else {
+    $image_postion = 'left';
+}
+if ( empty($background_color) && get_field('side_image_background_color') ) {
+    $background_color = get_field('side_image_background_color');
+} elseif ( empty($background_color) && get_sub_field('side_image_background_color') ) {
+    $background_color = get_sub_field('side_image_background_color');
+} else {
+    $background_color = 'bg-white';
+}
 if ( empty($geo) )
     $geo = get_field('side_image_geo');
 if ( empty($geo_region) )

@@ -9,6 +9,9 @@
 if (empty( $id )) {
 	$id = '';
 }
+if (empty( $i )) {
+	$i = 0;
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -30,14 +33,28 @@ if( !empty($block['align']) ) {
 }  
 
 // Load values.
-if ( empty($heading) )
+if ( empty($heading) && get_field('content_heading') ) {
     $heading = get_field('content_heading');
-if ( empty($hide_heading) )
+} elseif ( empty($heading) && get_sub_field('content_heading') ) {
+    $heading = get_sub_field('content_heading');
+}
+if ( empty($hide_heading) && get_field('content_hide_heading') ) {
     $hide_heading = get_field('content_hide_heading');
-if ( empty($content_block) )
+} elseif ( empty($hide_heading) && get_sub_field('content_hide_heading') ) {
+    $hide_heading = get_sub_field('content_hide_heading');
+} else {
+    $hide_heading = '';
+}
+if ( empty($content_block) && get_field('content_content') ) {
     $content_block = get_field('content_content');
-if ( empty($background_color) )
+} elseif ( empty($content_block) && get_sub_field('content_content') ) {
+    $content_block = get_sub_field('content_content');
+}
+if ( empty($background_color) && get_field('content_background_color') ) {
     $background_color = get_field('content_background_color');
+} elseif ( empty($background_color) && get_sub_field('content_background_color') ) {
+    $background_color = get_sub_field('content_background_color');
+}
 if ( empty($geo) )
     $geo = get_field('content_geo');
 if ( empty($geo_region) )

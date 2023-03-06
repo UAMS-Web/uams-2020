@@ -9,6 +9,9 @@
 if (empty( $id )) {
 	$id = '';
 }
+if (empty( $i )) {
+	$i = 0;
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -32,12 +35,21 @@ if( !empty($block['align']) ) {
 }  
 
 // Load values.
-if ( empty($heading) )
+if ( empty($heading) && get_field('livewhale_heading') ) {
     $heading = get_field('livewhale_heading');
-if ( empty($livewhale) )
+} elseif ( empty($heading) && get_sub_field('livewhale_heading') ) {
+    $heading = get_sub_field('livewhale_heading');
+}   
+if ( empty($livewhale) && get_field('livewhale_id') ) {
     $livewhale = get_field('livewhale_id');
-if ( empty($background_color) )
+} elseif ( empty($livewhale) && get_sub_field('livewhale_id') ) {
+    $livewhale = get_sub_field('livewhale_id');
+}
+if ( empty($background_color) && get_field('livewhale_background_color') ) {
     $background_color = get_field('livewhale_background_color');
+} elseif ( empty($background_color) && get_sub_field('livewhale_background_color') ) {
+    $background_color = get_sub_field('livewhale_background_color');
+}
 if ( empty($geo) )
     $geo = get_field('livewhale_geo');
 if ( empty($geo_region) )

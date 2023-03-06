@@ -7,6 +7,9 @@
 if (empty( $id )) {
 	$id = '';
 }
+if (empty( $i )) {
+	$i = 0;
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -18,13 +21,21 @@ if( !empty($block['anchor']) ) {
     $id = $block['anchor'];
 }
 
-if ( empty($heading) )
+if ( empty($heading) && get_field('section_heading') ) {
     $heading = get_field('section_heading');
-if ( empty($hide_heading) )
+} elseif ( empty($heading) && get_sub_field('section_heading') ) {
+    $heading = get_sub_field('section_heading');
+}
+if ( empty($hide_heading) && get_field('section_hide_heading') ) {
     $hide_heading = get_field('section_hide_heading');
-if ( empty($background_color) )
+} elseif ( empty($hide_heading) && get_sub_field('section_hide_heading') ) {
+    $hide_heading = get_sub_field('section_hide_heading');
+}
+if ( empty($background_color) && get_field('section_background_color') ) {
     $background_color = get_field('section_background_color');
-    
+} elseif ( empty($background_color) && get_sub_field('section_background_color') ) {
+    $background_color = get_sub_field('section_background_color');
+}
 $className = ['block-section', 'alignfull'];
 if( !empty($block['className']) ) {
     $className = array_merge( $className, explode( ' ', $block['className'] ) );

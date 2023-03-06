@@ -9,6 +9,9 @@
 if (empty( $id )) {
 	$id = '';
 }
+if (empty( $i )) {
+	$i = 0;
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -33,8 +36,11 @@ if ( empty($geo) )
 if ( empty($geo_region) )
     $geo_region = get_field('overlay_geo_region');
 
-if( empty($overlay_rows) )
+if( empty($overlay_rows) && get_field('overlay_section') ) {
     $overlay_rows = get_field('overlay_section');
+} elseif( empty($overlay_rows) && get_sub_field('overlay_section') ) {
+    $overlay_rows = get_sub_field('overlay_section');
+}
 
 // GEO Logic
 $geo_display = false;

@@ -38,29 +38,55 @@ if( !empty($block['align']) ) {
 
 // Load values and assessing defaults.
 // if empty - allow values to be set for widgets
-if ( empty($heading) ) 
+if ( empty($heading) && get_field('cta_bar_heading') ) {
     $heading = get_field('cta_bar_heading');
-if ( empty($body) ) 
+} elseif ( empty($heading) && get_sub_field('cta_bar_heading') ) {
+    $heading = get_sub_field('cta_bar_heading');
+}
+if ( empty($body) && get_field('cta_bar_body') ) {
     $body = get_field('cta_bar_body');
-if ( empty($action_type) ) 
+} elseif ( empty($body) && get_sub_field('cta_bar_body') ) {
+    $body = get_sub_field('cta_bar_body');
+}
+if ( empty($action_type) && get_field('cta_bar_action_type') ) {
     $action_type = get_field('cta_bar_action_type');
-if ( empty($button_text) ) 
+} elseif ( empty($action_type) && get_sub_field('cta_bar_action_type') ) {
+    $action_type = get_sub_field('cta_bar_action_type');
+}
+if ( empty($button_text) && get_field('cta_bar_button_text') ) {
     $button_text = get_field('cta_bar_button_text');
-if ( empty($button_url) ) 
+} elseif ( empty($button_text) && get_sub_field('cta_bar_button_text') ) {
+    $button_text = get_sub_field('cta_bar_button_text');
+}
+if ( empty($button_url) && get_field('cta_bar_button_url') ) {
     $button_url = get_field('cta_bar_button_url');
+} elseif ( empty($button_url) && get_sub_field('cta_bar_button_url') ) {
+    $button_url = get_sub_field('cta_bar_button_url');
+}
 if ( $button_url && empty($button_target) ) {
     if( get_field('cta_bar_button_url') ) {
         $button_target = get_field('cta_bar_button_url')['target'];
     }
 }
-if ( empty($button_desc) ) 
+if ( empty($button_desc) && get_field('cta_bar_button_description') ) {
     $button_desc = get_field('cta_bar_button_description');
+} elseif ( empty($button_desc) && get_sub_field('cta_bar_button_description') ) {
+    $button_desc = get_sub_field('cta_bar_button_description');
+}
 if ( empty($action_type) && $button_text ) // If still empty (meaning page hasn't been updated since code changed)
     $action_type = 'url';
-if ( empty($phone_prepend) ) 
-    $phone_prepend = get_field('cta_bar_phone_prepend') ? get_field('cta_bar_phone_prepend') : 'Call';
-if ( empty($phone) ) 
+if ( empty($phone_prepend) && get_field('cta_bar_phone_prepend') ) {
+    $phone_prepend = get_field('cta_bar_phone_prepend');
+} elseif ( empty($phone_prepend) && get_sub_field('cta_bar_phone_prepend') ) {
+    $phone_prepend = get_sub_field('cta_bar_phone_prepend');
+} else {
+    $phone_prepend = 'Call';
+}
+if ( empty($phone) && get_field('cta_bar_phone') ) {
     $phone = get_field('cta_bar_phone');
+} elseif ( empty($phone) && get_sub_field('cta_bar_phone') ) {
+    $phone = get_sub_field('cta_bar_phone');
+}
 if ( empty($phone_link) ) 
     $phone_link = '<a href="tel:' . format_phone_dash( $phone ) . '">' . format_phone_us( $phone ) . '</a>';
 if (
@@ -75,16 +101,32 @@ if (
     )
 )
     $action_type = 'none';
-if ( empty($layout) ) 
+if ( empty($layout) && get_field('cta_bar_layout') ) {
     $layout = get_field('cta_bar_layout');
-if ( empty($size) ) 
+} elseif ( empty($layout) && get_sub_field('cta_bar_layout') ) {
+    $layout = get_sub_field('cta_bar_layout');
+}   
+if ( empty($size) && get_field('cta_bar_size') ) {
     $size = get_field('cta_bar_size');
-if ( empty($use_image) ) 
+} elseif ( empty($size) && get_sub_field('cta_bar_size') ) {
+    $size = get_sub_field('cta_bar_size');
+}   
+if ( empty($use_image) && get_field('cta_bar_use_image') ) {
     $use_image = get_field('cta_bar_use_image');
-if ( empty($image) ) 
+} elseif ( empty($use_image) && get_sub_field('cta_bar_use_image') ) {
+    $use_image = get_sub_field('cta_bar_use_image');
+}  
+if ( empty($image) && get_field('cta_bar_image') ) {
     $image = get_field('cta_bar_image');
-if ( empty($background_color) ) 
+} elseif ( empty($image) && get_sub_field('cta_bar_image') ) {
+    $image = get_sub_field('cta_bar_image');
+}
+if ( empty($background_color) && get_field('cta_bar_background_color') ) {
     $background_color = get_field('cta_bar_background_color');
+} elseif ( empty($background_color) && get_sub_field('cta_bar_background_color') ) {
+    $background_color = get_sub_field('cta_bar_background_color');
+}
+    
 if ( $background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto' ) {
     $btn_color = 'primary';
 } else {

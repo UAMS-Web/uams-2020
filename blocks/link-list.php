@@ -9,6 +9,9 @@
 if (empty( $id )) {
 	$id = '';
 }
+if (empty( $i )) {
+	$i = 0;
+}
 if ( empty( $id ) && isset($block) ) {
     $id = $block['id'];
 } 
@@ -31,14 +34,26 @@ if( !empty($block['align']) ) {
     
 
 // Load values.
-if ( empty($heading) )
+if ( empty($heading) && get_field('link_list_heading') ) {
     $heading = get_field('link_list_heading');
-if ( empty($description) )
+} elseif ( empty($heading) && get_sub_field('link_list_heading') ) {
+    $heading = get_sub_field('link_list_heading');
+}
+if ( empty($description) && get_field('link_list_description') ) {
     $description = get_field('link_list_description');
-if ( empty($background_color) )
+} elseif ( empty($description) && get_sub_field('link_list_description') ) {
+    $description = get_sub_field('link_list_description');
+}
+if ( empty($background_color) && get_field('link_list_background_color') ) {
     $background_color = get_field('link_list_background_color');
-if ( empty($link_list_rows) )
+} elseif ( empty($background_color) && get_sub_field('link_list_background_color') ) {
+    $background_color = get_sub_field('link_list_background_color');
+}
+if ( empty($link_list_rows) && get_field('link_list_section') ) {
     $link_list_rows = get_field('link_list_section');
+} elseif ( empty($link_list_rows) && get_sub_field('link_list_section') ) {
+    $link_list_rows = get_sub_field('link_list_section');
+}
 if ( empty($geo) )
     $geo = get_field('link_list_geo');
 if ( empty($geo_region) )
