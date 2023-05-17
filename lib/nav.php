@@ -101,14 +101,14 @@ function custom_nav_menu() {
                     $excluded_pages[] = $the_page->ID;
                 }
             }
-            $excluded_pages[] = get_option( 'page_on_front' );
+            // $excluded_pages[] = get_option( 'page_on_front' );
             // Build a menu listing top level parent's children
             $args = array(
                 'child_of' => $id,
                 'title_li' => '',
                 'echo'     => false,
                 'walker'   => new WP_Bootstrap_Pagewalker(), // !important! create Bootstrap style navigation
-                'exclude' => implode(',',$excluded_pages),
+                'exclude_tree' => implode(',',$excluded_pages),
             );
             //echo '<script>console.log('. print_r($args) .');</script>';
             return wp_list_pages( $args );
@@ -178,13 +178,13 @@ function custom_nav_menu() {
                     $excluded_pages[] = $the_page->ID;
                 }
             }
-            $excluded_pages[] = get_option( 'page_on_front' );
+            // $excluded_pages[] = get_option( 'page_on_front' );
             // Build a menu listing top level parent's children
             $args = array(
                 'title_li' => '',
                 'echo'     => false,
                 'walker'   => new WP_Bootstrap_Pagewalker(), // !important! create Bootstrap style navigation
-                'exclude' => implode(',',$excluded_pages),
+                'exclude_tree' => implode(',',$excluded_pages),
             );
             return wp_list_pages( $args );
         }        
