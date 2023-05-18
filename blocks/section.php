@@ -30,7 +30,7 @@ if( !empty($block['className']) ) {
     $className = array_merge( $className, explode( ' ', $block['className'] ) );
 }
 
-$allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/embed', 'core/list', 'core/quote' );
+$allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/embed', 'core/list', 'core/quote', 'core/image', 'core/shortcode', 'core/table', 'core/file', 'core/shortcode', 'gravityforms/form', 'formidable/simple-form' );
 
 $template = array(
 );

@@ -6,12 +6,12 @@ const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 const concat = require('gulp-concat');
 const notify = require('gulp-notify');
-const foreach = require('gulp-flatmap');
+// const foreach = require('gulp-flatmap');
 const changed = require('gulp-changed');
-// const browserSync = require('browser-sync').create();
+//const browserSync = require('browser-sync').create(),
 const wpPot = require('gulp-wp-pot');
 const cssnano = require('cssnano');
-// const cmq = require('css-mqpacker');
+//const cmq = require('css-mqpacker'),
 const autoprefixer = require('autoprefixer');
 const zip = require('gulp-zip');
 const comments = require('postcss-discard-comments');
@@ -114,7 +114,7 @@ function style() {
         .pipe(rename('app.css'))
         .pipe(gulp.dest(paths.styles.dest))
         // .pipe(browserSync.stream())
-        .pipe(notify({ message: 'Styles task complete' }));
+        .pipe(notify({ "message": "Styles task complete" }));
 }
 
 // function criticalstyle() {
@@ -126,31 +126,31 @@ function style() {
 //         .pipe(rename('inline.css'))
 //         .pipe(gulp.dest(paths.styles.dest))
 //         // .pipe(browserSync.stream())
-//         .pipe(notify({ message: 'Critical Styles task complete' }));
+//         .pipe(notify({ "message": "Critical Styles task complete" }));
 // }
 
 function adminstyle() {
     return gulp.src(paths.admincss.src)
         .pipe(changed(paths.admincss.dest))
-        .pipe(sass().on('error', sass.logError))
+        .pipe(sass.sync().on('error', sass.logError))
         .pipe(concat('admin.scss'))
         .pipe(postcss(plugins))
         .pipe(rename('admin.css'))
         .pipe(gulp.dest(paths.styles.dest))
         // .pipe(browserSync.stream())
-        .pipe(notify({ message: 'Admin Styles task complete' }));
+        .pipe(notify({ "message": "Admin Styles task complete" }));
 }
 
 function uamsalert() {
     return gulp.src(paths.uamsalert.src)
         .pipe(changed(paths.uamsalert.dest))
-        .pipe(sass().on('error', sass.logError))
+        .pipe(sass.sync().on('error', sass.logError))
         .pipe(concat('uamsalert.scss'))
         .pipe(postcss(plugins))
         .pipe(rename('uamsalert.css'))
         .pipe(gulp.dest(paths.styles.dest))
         // .pipe(browserSync.stream())
-        .pipe(notify({ message: 'UAMS Alert Styles task complete' }));
+        .pipe(notify({ "message": "UAMS Alert Styles task complete" }));
 }
 
 async function fa() {
@@ -160,13 +160,13 @@ async function fa() {
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(paths.fontawesome.dest))
-        .pipe(notify({ message: 'FontAwesome task complete' }));
+        .pipe(notify({ "message": "FontAwesome task complete" }));
 }
 
 // async function jquery() {
 //     return gulp.src(paths.jquery.src)
 //     .pipe(gulp.dest(paths.jquery.dest))
-//     .pipe(notify({ message: 'JQuery task complete' }));
+//     .pipe(notify({ "message": "JQuery task complete" }));
 // }
 
 function js() {
@@ -180,7 +180,7 @@ function js() {
         // }))
         .pipe(gulp.dest(paths.scripts.dest))
         // .pipe(browserSync.stream({match: '**/*.js'}))
-        .pipe(notify({ message: 'Scripts task complete' }));
+        .pipe(notify({ "message": "Scripts task complete" }));
 }
 
 function template() {
@@ -203,16 +203,14 @@ function template() {
 // }
 
 function watch() {
-    gulp.watch(['assets/scss/*.scss', 'assets/scss/**/*.scss'], style).on('change', gulp.parallel(style, uamsalert, adminstyle, js))
-    gulp.watch(paths.scripts.src, gulp.series(scriptsLint, js))
+    gulp.watch(['assets/scss/*.scss', 'assets/scss/**/*.scss'], style).on('change', gulp.parallel(style, uamsalert, adminstyle));
+    gulp.watch(paths.scripts.src, gulp.series(scriptsLint, js)).on("error", notify.onError("Error: <%= error.message %>"))
     gulp.watch([
             '*.php',
             'lib/*',
             '**/**/*.php'
-        ],
-        notify({ message: 'Watching' })
-        // gulp.series(browserSyncReload)
-    )
+        ]).on("error", notify.onError("Error: <%= error.message %>"))
+    // notify({ "message": "Watching" }).write('');
 }
 
 gulp.task('translation', translation);
