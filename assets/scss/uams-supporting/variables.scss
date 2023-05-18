@@ -432,7 +432,7 @@ $component-active-color: $white;
 $component-active-bg: theme-color("primary");
 
 $caret-width: .3em;
-$caret-vertical-align: middle; // originally "$caret-width * .85"
+$caret-vertical-align: $caret-width * .85; // originally "$caret-width * .85" // later "middle"
 $caret-spacing: $caret-width * .85;
 
 $transition-base: all .2s ease-in-out;

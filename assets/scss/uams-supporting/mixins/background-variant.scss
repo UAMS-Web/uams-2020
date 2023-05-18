@@ -24,8 +24,10 @@
   #{$parent} {
     color: map-get($theme-colors-text, $color);
 
-    a:not(.btn) {
-      color: map-get($theme-colors-link, $color);
+    a {
+      &:not([class^="btn-"]):not([class*=" btn-"]):not(.dropdown-item) {
+        color: map-get($theme-colors-link, $color);
+      }
     }
   }
 }

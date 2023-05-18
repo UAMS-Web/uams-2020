@@ -420,8 +420,11 @@ $header-health-logo-clear-space: $header-logo-clear-space;
                     }
 
                     &.has-submenu {
+                        @include caret();
+
                         > .sub-arrow {
-                            color: $gray-700;
+                            display: none;
+                            // color: $gray-700;
                         }
                     }
 
@@ -440,9 +443,9 @@ $header-health-logo-clear-space: $header-logo-clear-space;
                         border-top-left-radius: 0;
                     }
 
-                    a {
-                        color: $body-color;
-                    }
+                    // a {
+                    //     color: $body-color;
+                    // }
 
                     .nav-link.has-submenu,
                     .dropdown-item.has-submenu {
@@ -451,17 +454,18 @@ $header-health-logo-clear-space: $header-logo-clear-space;
                             position: relative;
                         }
                         > .sub-arrow {
-                            color: $link-color;
+                            display: none;
+                            // color: $link-color;
 
-                            @include media-breakpoint-up(sm) {
-                                @include caret-right;
-                                position: absolute;
-                                right: 0;
-                                top: 50%;
-                                transform: translateY(-50%);
-                                margin-right: 1.25rem;
-                                margin-top: 0;
-                            }
+                            // @include media-breakpoint-up(sm) {
+                            //     @include caret-right;
+                            //     position: absolute;
+                            //     right: 0;
+                            //     top: 50%;
+                            //     transform: translateY(-50%);
+                            //     margin-right: 1.25rem;
+                            //     margin-top: 0;
+                            // }
                         }
                     }
 
@@ -558,13 +562,23 @@ $header-health-logo-clear-space: $header-logo-clear-space;
             .nav-item {
                 .nav-link,
                 .dropdown-item {
+                    color: $dropdown-link-color;
+    
+                    @include hover-focus {
+                        color: $dropdown-link-hover-color;
+                        text-decoration: none;
+                        @include gradient-bg($dropdown-link-hover-bg);
+                    }
+
+                    @include active {
+                        color: $dropdown-link-active-color;
+                        text-decoration: none;
+                        @include gradient-bg($dropdown-link-active-bg);
+                    }
+
                     @include media-breakpoint-up(sm) {
                         padding: 0.75rem 1.25rem;
                         text-decoration: none;
-    
-                        @include hover-focus {
-                            text-decoration: none;
-                        }
                     }
                     display: block;
                 }
