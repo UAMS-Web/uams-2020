@@ -40,11 +40,35 @@
 
 	// Include this mixin in a "+ element" ruleset nested within the ruleset for the relevant heading
 	// The mixin has optional parameters for font-size and font-weight.
-	@mixin header-note( $note-font-size: null, $note-font-weight: null ) {
+	@mixin intro-note( $note-font-size: null, $note-font-weight: null ) {
+		@include line-length-em(max);
+		text-align: center;
+		margin-bottom: $uams-module-padding-mobile;
+
+		&:last-child,
+		:last-child {
+			margin-bottom: 0;
+		}
+
+		@include media-breakpoint-up(sm) {
+			margin-bottom: $uams-module-padding;
+			font-size: $note-font-size;
+			font-weight: $note-font-weight;
+		}
+	}
+
+	// Include this mixin in a "+ element" ruleset nested within the ruleset for the relevant heading
+	// The mixin has optional parameters for font-size and font-weight.
+	@mixin intro-note-after-heading( $note-font-size: null, $note-font-weight: null ) {
 		@include line-length-em(max);
 		text-align: center;
 		margin-top: (-$uams-module-padding-mobile / 2);
 		margin-bottom: $uams-module-padding-mobile;
+
+		&:last-child,
+		:last-child {
+			margin-bottom: 0;
+		}
 
 		@include media-breakpoint-up(sm) {
 			margin-top: (-$uams-module-padding / 2);
@@ -55,7 +79,7 @@
 	}
 
 	// Include this mixin in a "&.sr-only + element" ruleset nested within the ruleset for the relevant heading
-	@mixin header-note-after-sr-only() {
+	@mixin intro-note-after-sr-only-heading() {
 		margin-top: 0;
 
 		@include media-breakpoint-up(sm) {

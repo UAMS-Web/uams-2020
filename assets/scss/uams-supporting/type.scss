@@ -226,7 +226,7 @@ b {
 	}
 
 	&.sr-only + .note {
-		@include header-note-after-sr-only();
+		@include intro-note-after-sr-only-heading();
 	}
 }
 
@@ -235,7 +235,7 @@ b {
 	margin-top: 0 !important;
 	
 	+ .note {
-		@include header-note($lead-font-size, $lead-font-weight);
+		@include intro-note-after-heading($lead-font-size, $lead-font-weight);
 	}
 
 	.title {
@@ -268,7 +268,7 @@ b {
 	}
 	
 	+ .note {
-		@include header-note();
+		@include intro-note-after-heading();
 	}
 }
 
