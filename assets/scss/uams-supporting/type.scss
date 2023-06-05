@@ -224,38 +224,13 @@ b {
 	@include media-breakpoint-up(sm) {
 		margin-bottom: $uams-module-padding;
 	}
-
-	+ .note {
-		@include line-length-em(max);
-		text-align: center;
-		margin-top: (-$uams-module-padding-mobile / 2);
-		margin-bottom: $uams-module-padding-mobile;
-	
-		@include media-breakpoint-up(sm) {
-			margin-top: (-$uams-module-padding / 2);
-			margin-bottom: $uams-module-padding;
-		}
-	}
-
-	&.sr-only + .note {
-		margin-top: 0;
-	
-		@include media-breakpoint-up(sm) {
-			margin-top: 0;
-		}
-	}
 }
 
 .page-title,
 .module-title {
 	margin-top: 0 !important;
-
-	+ .note {
-		@include media-breakpoint-up(xs) {
-			font-size: $lead-font-size;
-			font-weight: $lead-font-weight;
-		}
-	}
+	
+	@include header-note($lead-font-size, $lead-font-weight);
 
 	.title {
 		position: relative;
@@ -285,6 +260,8 @@ b {
 	@include media-breakpoint-up(sm) {
 		margin-top: $uams-module-padding;
 	}
+
+	@include header-note();
 }
 
 .module-description {

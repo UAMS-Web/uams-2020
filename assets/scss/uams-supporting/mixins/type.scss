@@ -35,3 +35,30 @@
 		text-decoration: $link-hover-decoration;
 	}
 }
+
+// Intro text following a heading (e.g., page title, module title, module inner title)
+// Include this mixin as a child of the ruleset for the relevant heading
+@mixin header-note( $note-font-size: null, $note-font-weight: null ) {
+	+ .note {
+		@include line-length-em(max);
+		text-align: center;
+		margin-top: (-$uams-module-padding-mobile / 2);
+		margin-bottom: $uams-module-padding-mobile;
+	
+		@include media-breakpoint-up(sm) {
+			margin-top: (-$uams-module-padding / 2);
+			margin-bottom: $uams-module-padding;
+			font-size: $note-font-size;
+			font-weight: $note-font-weight;
+		}
+	}
+
+	// When the note follows a heading that has been set to screen reader only
+	&.sr-only + .note {
+		margin-top: 0;
+	
+		@include media-breakpoint-up(sm) {
+			margin-top: 0;
+		}
+	}
+}
