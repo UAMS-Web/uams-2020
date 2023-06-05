@@ -224,13 +224,19 @@ b {
 	@include media-breakpoint-up(sm) {
 		margin-bottom: $uams-module-padding;
 	}
+
+	&.sr-only + .note {
+		@include header-note-after-sr-only();
+	}
 }
 
 .page-title,
 .module-title {
 	margin-top: 0 !important;
 	
-	@include header-note($lead-font-size, $lead-font-weight);
+	+ .note {
+		@include header-note($lead-font-size, $lead-font-weight);
+	}
 
 	.title {
 		position: relative;
@@ -260,8 +266,10 @@ b {
 	@include media-breakpoint-up(sm) {
 		margin-top: $uams-module-padding;
 	}
-
-	@include header-note();
+	
+	+ .note {
+		@include header-note();
+	}
 }
 
 .module-description {

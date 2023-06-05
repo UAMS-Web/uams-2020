@@ -36,15 +36,16 @@
 	}
 }
 
-// Intro text following a heading (e.g., page title, module title, module inner title)
-// Include this mixin as a child of the ruleset for the relevant heading
-@mixin header-note( $note-font-size: null, $note-font-weight: null ) {
-	+ .note {
+// Intro text following a major heading (e.g., page title, module title, module inner title)
+
+	// Include this mixin in a "+ element" ruleset nested within the ruleset for the relevant heading
+	// The mixin has optional parameters for font-size and font-weight.
+	@mixin header-note( $note-font-size: null, $note-font-weight: null ) {
 		@include line-length-em(max);
 		text-align: center;
 		margin-top: (-$uams-module-padding-mobile / 2);
 		margin-bottom: $uams-module-padding-mobile;
-	
+
 		@include media-breakpoint-up(sm) {
 			margin-top: (-$uams-module-padding / 2);
 			margin-bottom: $uams-module-padding;
@@ -53,12 +54,11 @@
 		}
 	}
 
-	// When the note follows a heading that has been set to screen reader only
-	&.sr-only + .note {
+	// Include this mixin in a "&.sr-only + element" ruleset nested within the ruleset for the relevant heading
+	@mixin header-note-after-sr-only() {
 		margin-top: 0;
-	
+
 		@include media-breakpoint-up(sm) {
 			margin-top: 0;
 		}
 	}
-}
