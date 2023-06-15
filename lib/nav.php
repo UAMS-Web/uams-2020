@@ -101,7 +101,7 @@ function custom_nav_menu() {
                     $excluded_pages[] = $the_page->ID;
                 }
             }
-            // $excluded_pages[] = get_option( 'page_on_front' );
+            $excluded_pages[] = get_option( 'page_on_front' );
             // Build a menu listing top level parent's children
             $args = array(
                 'child_of' => $id,
@@ -178,7 +178,7 @@ function custom_nav_menu() {
                     $excluded_pages[] = $the_page->ID;
                 }
             }
-            // $excluded_pages[] = get_option( 'page_on_front' );
+            $excluded_pages[] = get_option( 'page_on_front' );
             // Build a menu listing top level parent's children
             $args = array(
                 'title_li' => '',
