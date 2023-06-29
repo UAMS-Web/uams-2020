@@ -8,8 +8,13 @@
         background-color: #9d2235;
         color: white;
         min-height: 441px;
-        height: 100vw / 4 * 3;
-        max-height: 100vh;
+        // height: 100vw / 4 * 3;
+        // max-height: 100vh;
+
+        @include media-breakpoint-up(xs) {
+            height: 100vw / 8 * 3;
+            max-height: 100vh;
+        }
 
         @include media-breakpoint-up(sm) {
             min-height: 496px;
