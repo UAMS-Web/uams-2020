@@ -46,7 +46,7 @@ return array(
                 'label' => 'Heading',
                 'name' => 'overlay_section_heading',
                 'type' => 'text',
-                'instructions' => '32 character limit.',
+                'instructions' => '65 character limit.',
                 'required' => 1,
                 'conditional_logic' => 0,
                 'wrapper' => array(
@@ -58,7 +58,7 @@ return array(
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
-                'maxlength' => 32,
+                'maxlength' => 65,
             ),
             array(
                 'key' => 'field_overlay_section_body'. $suffix,
