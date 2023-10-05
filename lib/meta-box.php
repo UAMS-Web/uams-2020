@@ -1438,7 +1438,15 @@ acf_add_local_field_group(array(
 			'type' => 'text',
 			'instructions' => 'Leave Blank for Default',
 			'required' => 0,
-			'conditional_logic' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_google_tag_manager_disable',
+						'operator' => '!=',
+						'value' => 1,
+					),
+				),
+			),
 			'wrapper' => array(
 				'width' => '',
 				'class' => '',
