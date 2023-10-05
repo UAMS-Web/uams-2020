@@ -795,7 +795,9 @@ function rlv_search_all_blogs($query) {
 add_action( 'wp_head', 'uamswp_gtm_1' );
 function uamswp_gtm_1() {
 	$gtm = get_option( 'options_google_tag_manager_id' );
+	$gtm_disable = get_option( 'options_google_tag_manager_disable' );
 	$gtmvalue = (!empty($gtm) ? $gtm : 'GTM-NGG4P7F' );
+	if ($gtm_disable !== '1') {
 	?>
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -804,18 +806,23 @@ function uamswp_gtm_1() {
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','<?php echo $gtmvalue; ?>');</script>
 	<!-- End Google Tag Manager -->
-<?php }
+<?php } else {
+	echo '<!-- Google Tag Manager is disabled -->';
+}
+ 	}
 // Add Google Tag Manager code immediately below opening <body> tag
 add_action( 'genesis_before', 'uamswp_gtm_2' );
 function uamswp_gtm_2( ) { 
 	$gtm = get_option( 'options_google_tag_manager_id' );
+	$gtm_disable = get_option( 'options_google_tag_manager_disable' );
 	$gtmvalue = (!empty($gtm) ? $gtm : 'GTM-NGG4P7F' );
+	if ($gtm_disable !== '1') {
 	?>
 	<!-- Google Tag Manager (noscript) -->
 	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $gtmvalue; ?>"
 	height="0" width="0" aria-hidden="true" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
-<?php }
+<?php } }
 
 add_filter( 'big_image_size_threshold', '__return_false' );
 
