@@ -349,6 +349,7 @@ function uamswp_footer_creds_text() {
         echo '<li class="nav-item"><a class="nav-link" href="https://web.uams.edu/privacy/" target="_blank">Privacy Statement</a></li>';
         if ('uamshealth' == $site) { // If UAMS Health site, add additional links
             echo '<li class="nav-item"><a class="nav-link" href="https://hipaa.uams.edu/forms/notice-of-privacy-practices-information/" target="_blank">Notice of Privacy Practices</a></li>';
+            echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/patients-and-guests/patient-support/billing/price-transparency/" target="_blank">Price Transparency</a></li>';
         }
         //echo '<li class="nav-item"><a class="nav-link" href="/sitemap">Site Map</a></li>';
     echo '</ul></div>';
