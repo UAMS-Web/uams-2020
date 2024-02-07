@@ -1,1 +1,7 @@
 // WordPress File block
+
+.wp-block-file {
+	&:not(.wp-element-button) {
+		font-size: 1em;
+	}
+}
