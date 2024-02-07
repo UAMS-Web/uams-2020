@@ -16,9 +16,11 @@
 		font-size: 1em;
 	}
 
-	// * + .wp-block-file__button {
-	// 	margin-left: .75em
-	// }
+	* + .wp-block-file__button {
+		margin-top: -0.2222em;
+		margin-bottom: -0.1481em;
+		// margin-left: .75em;
+	}
 
 	// a.wp-block-file__button {
 	// }
