@@ -893,7 +893,8 @@ add_filter('allowed_block_types', function($block_types, $post) {
 		'acf/uams-content',
 		'acf/fad-providers',
 		'acf/fad-locations',
-		'acf/logo-list'
+		'acf/logo-list',
+		'acf/uams-section'
 	];
 	if (get_page_template_slug( $post ) == 'templates/marketing.php') {
 		return $allowed_marketing;
