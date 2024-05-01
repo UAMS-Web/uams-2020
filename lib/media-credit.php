@@ -138,21 +138,38 @@ function uamswp_add_media_credit( $id ) {
     
 }
 
-function uamswp_core_image_block_render( $attributes, $content ) {
-	$photo_credit = uamswp_add_media_credit( $attributes['id'] );
-	if ( $photo_credit ) {
-		if ( strpos( $content, '<figcaption>' ) !== false ) {
-			$content = str_replace( '</figcaption>', ' <span class="photo-credit">(' . esc_html__( 'Image credit:' ) . ' ' . esc_html( $photo_credit ) . ')</span></figcaption>', $content );
+// function uamswp_core_image_block_render( $attributes, $content ) {
+// 	$photo_credit = uamswp_add_media_credit( $attributes['id'] );
+// 	if ( $photo_credit ) {
+// 		if ( strpos( $content, '<figcaption>' ) !== false ) {
+// 			$content = str_replace( '</figcaption>', ' <span class="photo-credit">(' . esc_html__( 'Image credit:' ) . ' ' . esc_html( $photo_credit ) . ')</span></figcaption>', $content );
+// 		} else {
+// 			$content = str_replace( '</figure>', '<figcaption><span class="photo-credit">(' . esc_html__( 'Image credit:' ). ' ' . esc_html( $photo_credit ) . ')</span></figcaption></figure>', $content );
+// 		}
+// 	}
+
+// 	return $content;
+// }
+// function uamswp_register_core_image_block() {
+// 	register_block_type( 'core/image', array(
+// 		'render_callback' => 'uamswp_core_image_block_render',
+// 	) );
+// }
+// add_action( 'init', 'uamswp_register_core_image_block' );
+
+/* Append photo credit to image block with render_block filter
+ * Replaces incorrect register block call 
+ */
+function uamswp_core_image_add_credits($block_content, $block, $instance) {
+	$photo_credit = wp_get_attachment_metadata($block['attrs']['id'])['image_meta']['credit'];
+	if( $photo_credit && $block['blockName'] == 'core/image' ) {
+		if ( strpos( $block_content, '<figcaption>' ) !== false ) {
+			$block_content = str_replace( '</figcaption>', ' <span class="photo-credit">(' . esc_html__( 'Image credit:' ) . ' ' . esc_html( $photo_credit ) . ')</span></figcaption>', $block_content );
 		} else {
-			$content = str_replace( '</figure>', '<figcaption><span class="photo-credit">(' . esc_html__( 'Image credit:' ). ' ' . esc_html( $photo_credit ) . ')</span></figcaption></figure>', $content );
+			$block_content = str_replace( '</figure>', '<figcaption><span class="photo-credit">(' . esc_html__( 'Image credit:' ). ' ' . esc_html( $photo_credit ) . ')</span></figcaption></figure>', $block_content );
 		}
 	}
 
-	return $content;
+	return $block_content;
 }
-function uamswp_register_core_image_block() {
-	register_block_type( 'core/image', array(
-		'render_callback' => 'uamswp_core_image_block_render',
-	) );
-}
-add_action( 'init', 'uamswp_register_core_image_block' );
+add_filter('render_block', 'uamswp_core_image_add_credits', 10, 3);
