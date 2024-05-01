@@ -77,4 +77,5 @@ wp.domReady( () => {
 //	wp.blocks.unregisterBlockType( 'core-embed/videopress' );
 //	wp.blocks.unregisterBlockType( 'core-embed/wordpress-tv' );
 //	wp.blocks.unregisterBlockType( 'core-embed/amazon-kindle' );
+	wp.plugins.unregisterPlugin('genesis-sidebar');
 } );
