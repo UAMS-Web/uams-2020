@@ -245,4 +245,5 @@ wp.domReady( () => {
 	wp.blocks.unregisterBlockType( 'core/social-link-vk' );
 	wp.blocks.unregisterBlockType( 'core/social-link-yelp' );
 	// wp.blocks.unregisterBlockType( 'core/social-link-youtube' );
+  wp.plugins.unregisterPlugin('genesis-sidebar');
 } );
