@@ -175,6 +175,6 @@ function uamswp_core_image_add_credits($block_content, $block, $instance) {
 		}
 	}
 
-	return $block_content; // . ' [id: ' . json_encode(get_post_meta( $block['attrs']['id'], '_media_credit', true )) . ']';
+	return $block_content;
 }
 add_filter('render_block', 'uamswp_core_image_add_credits', 10, 3);
