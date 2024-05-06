@@ -74,95 +74,185 @@
 
 	}
 
-/*
-add_filter( 'img_caption_shortcode', 'ac_add_sources_captioned', 10, 3 );
-function ac_add_sources_captioned( $empty, $attr, $content ) {
-	$atts = shortcode_atts( array(
-		'id'	  => '',
-		'align'	  => '',
-		'width'	  => '',
-		'caption' => '',
-		'class'   => '',
-	), $attr, 'caption' );
-	$post_id = explode( '_', esc_attr( $atts['id'] ) );
-	$media_credit = get_post_meta( $post_id[1], '_media_credit', true );
-	// We have a source
-	if ( ! empty( $media_credit ) ) {
-		// Code from /wp-includes/media.php
-		$atts['width'] = (int) $atts['width'];
-		if ( $atts['width'] < 1 || empty( $atts['caption'] ) ) {
-			return $content;
-		}
-		if ( ! empty( $atts['id'] ) ) {
-			$atts['id'] = 'id="' . esc_attr( $atts['id'] ) . '" ';
-		}
-		
-		$class = trim( 'wp-caption ' . $atts['align'] . ' ' . $atts['class'] );
-		// Return output along with source
-		return '<figure ' . $atts['id'] . 'style="width: ' . (int) $atts['width'] . 'px;" class="' . esc_attr( $class ) . '"><span class="image-wrap">' . do_shortcode( $content ) . '</span><figcaption class="wp-caption-text">' . $atts['caption'] . ' <span class="wp-media-credit">(' . $media_credit . ')</span></figcaption></figure>';
-	}
-	// No source
-	else {
-		return '';
-	}
-}
+// Filter images to include source link
 
-add_filter( 'the_content', 'ac_add_sources_non_captioned', 11 );
-function ac_add_sources_non_captioned( $content ) {
-	if ( is_singular( array( 'post', ) ) ) {
-		$search = $replace = array();
-		// Match non-captioned images
-		if ( preg_match_all( '/(<p[^>]*?>\s*)((?:<a [^>]+>\s*)?<img [^>]+)wp-image-(\d+)([^>]+>(?:\s*<\/a>)?)/', $content, $matches, PREG_SET_ORDER ) ) {
-			foreach ( $matches as $match ) {
-				$source_url = get_post_meta( $match[3], '_wp_attachment_source_url', true );
-				// We have a source
-				if ( ! empty( $source_url ) ) {
-					// Source name
-					$source_name = get_post_meta( $match[3], '_wp_attachment_source_name', true );
-					if ( empty( $source_name ) ) {
-						$parsed_url = parse_url( $source_url );
-						$source_name = str_replace( 'www.', '', $parsed_url['host'] );
+	// Filter captioned images to include source link
+
+		/**
+		 * Source: https://gist.github.com/adamcapriola/34d497f83e4436b20eaa35964ba1f800
+		 */
+
+		/*
+		add_filter( 'img_caption_shortcode', 'ac_add_sources_captioned', 10, 3 );
+
+		function ac_add_sources_captioned( $empty, $attr, $content ) {
+
+			$atts = shortcode_atts( array(
+				'id'	  => '',
+				'align'	  => '',
+				'width'	  => '',
+				'caption' => '',
+				'class'   => '',
+			), $attr, 'caption' );
+			$post_id = explode( '_', esc_attr( $atts['id'] ) );
+			$media_credit = get_post_meta( $post_id[1], '_media_credit', true );
+
+			// We have a source
+
+				if ( ! empty( $media_credit ) ) {
+
+					// Code from /wp-includes/media.php
+
+						$atts['width'] = (int) $atts['width'];
+
+					if ( $atts['width'] < 1 || empty( $atts['caption'] ) ) {
+
+						return $content;
+
 					}
-					// Alignment
-					if ( false !== ( strpos( $match[2], 'alignnone' ) || strpos( $match[4], 'alignnone' ) ) ) {
-						$alignment = 'none';
-						$style = '';
+
+					if ( ! empty( $atts['id'] ) ) {
+
+						$atts['id'] = 'id="' . esc_attr( $atts['id'] ) . '" ';
+
 					}
-					elseif ( false !== ( strpos( $match[2], 'alignright' ) || strpos( $match[4], 'alignright' ) ) ) {
-						$alignment = 'right';
-						$style = '';
-					}
-					elseif ( false !== ( strpos( $match[2], 'alignleft' ) || strpos( $match[4], 'alignleft' ) ) ) {
-						$alignment = 'left';
-						$style = '';
-					}
-					elseif ( false !== ( strpos( $match[2], 'aligncenter' ) || strpos( $match[4], 'aligncenter' ) ) ) {
-						$alignment = 'center';
-						// get width!
-						if ( preg_match( '/width="(\d+)"/', $match[4], $width ) ) {
-							$style = ' style="width:' . $width[1] . 'px;"';	
-						}
-						else {
-							$style = '';
-						}
-					}
-					else {
-						continue;
-					}
-					// Build search and replace arrays
-					$search[] = '%' . preg_quote( $match[1] . $match[2] . 'wp-image-' . $match[3] . $match[4], '%' ) . '%';
-					$replace[] = $match[1] . '<span class="image-wrap image-wrap-' . $alignment . '"' . $style . '>' . $match[2] . 'wp-image-' . $match[3] . $match[4] . '<span class="source"><a href="' . esc_url( $source_url ) . '" target="_blank">' . $source_name . '</a></span></span>';
+
+					$class = trim( 'wp-caption ' . $atts['align'] . ' ' . $atts['class'] );
+
+					// Return output along with source
+
+						return '<figure ' . $atts['id'] . 'style="width: ' . (int) $atts['width'] . 'px;" class="' . esc_attr( $class ) . '"><span class="image-wrap">' . do_shortcode( $content ) . '</span><figcaption class="wp-caption-text">' . $atts['caption'] . ' <span class="wp-media-credit">(' . $media_credit . ')</span></figcaption></figure>';
+
 				}
+
+			// No source
+
+				else {
+
+					return '';
+
+				}
+
+		}
+		*/
+
+	// Filter non-captioned images to include source link
+
+		/**
+		 * Source: https://gist.github.com/adamcapriola/ce1562700e148e7c9afbadc00afc09f3
+		 */
+
+		/*
+		add_filter( 'the_content', 'ac_add_sources_non_captioned', 11 );
+
+		function ac_add_sources_non_captioned( $content ) {
+
+			if ( is_singular( array( 'post', ) ) ) {
+
+				$search = $replace = array();
+
+				// Match non-captioned images
+
+					if (
+						preg_match_all(
+							'/(<p[^>]*?>\s*)((?:<a [^>]+>\s*)?<img [^>]+)wp-image-(\d+)([^>]+>(?:\s*<\/a>)?)/',
+							$content,
+							$matches,
+							PREG_SET_ORDER
+						)
+					) {
+
+						foreach ( $matches as $match ) {
+
+							$source_url = get_post_meta( $match[3], '_wp_attachment_source_url', true );
+
+							// We have a source
+
+								if ( ! empty( $source_url ) ) {
+
+									// Source name
+
+									$source_name = get_post_meta( $match[3], '_wp_attachment_source_name', true );
+
+									if ( empty( $source_name ) ) {
+
+										$parsed_url = parse_url( $source_url );
+										$source_name = str_replace( 'www.', '', $parsed_url['host'] );
+
+									}
+
+									// Alignment
+
+									if ( false !== ( strpos( $match[2], 'alignnone' ) || strpos( $match[4], 'alignnone' ) ) ) {
+
+										$alignment = 'none';
+										$style = '';
+
+									}
+
+									elseif ( false !== ( strpos( $match[2], 'alignright' ) || strpos( $match[4], 'alignright' ) ) ) {
+
+										$alignment = 'right';
+										$style = '';
+
+									}
+
+									elseif ( false !== ( strpos( $match[2], 'alignleft' ) || strpos( $match[4], 'alignleft' ) ) ) {
+
+										$alignment = 'left';
+										$style = '';
+
+									}
+
+									elseif ( false !== ( strpos( $match[2], 'aligncenter' ) || strpos( $match[4], 'aligncenter' ) ) ) {
+
+										$alignment = 'center';
+
+										// get width!
+
+											if ( preg_match( '/width="(\d+)"/', $match[4], $width ) ) {
+
+												$style = ' style="width:' . $width[1] . 'px;"';
+
+											}
+
+											else {
+
+												$style = '';
+
+											}
+
+									}
+
+									else {
+
+										continue;
+
+									}
+
+									// Build search and replace arrays
+
+										$search[] = '%' . preg_quote( $match[1] . $match[2] . 'wp-image-' . $match[3] . $match[4], '%' ) . '%';
+										$replace[] = $match[1] . '<span class="image-wrap image-wrap-' . $alignment . '"' . $style . '>' . $match[2] . 'wp-image-' . $match[3] . $match[4] . '<span class="source"><a href="' . esc_url( $source_url ) . '" target="_blank">' . $source_name . '</a></span></span>';
+								}
+						}
+					}
+
+				// preg_replace
+
+					if ( ! empty ( $search ) ) {
+
+						$content = preg_replace( $search, $replace, $content );
+
+					}
+
 			}
+
+			return $content;
+
 		}
-		// preg_replace
-		if ( ! empty ( $search ) ) {
-			$content = preg_replace( $search, $replace, $content );
-		}
-	}
-	return $content;
-}
-*/
+		*/
+
 function uamswp_add_media_credit( $id ) {
     $media_credit = get_post_meta( $id, '_media_credit', true );
     if ( ! empty( $media_credit ) ) {
