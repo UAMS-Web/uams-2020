@@ -186,7 +186,7 @@ function uamswp_request_quicklinks() {
 
 		}
 
-		add_action( 'init', 'register_quicklinks_menu' );
+		// add_action( 'init', 'register_quicklinks_menu' );
 
 	if ( site_custom_quicklinks() ) {
 
@@ -196,23 +196,23 @@ function uamswp_request_quicklinks() {
 
 		// Register function to run at rest_api_init hook
 
-			add_action( 'rest_api_init', function () {
-
-				// Setup siteurl/wp-json/menus/v2/header
-
-					register_rest_route( 'menus/v2', '/quicklinks', array(
-						'methods' => 'GET',
-						'callback' => 'quicklinks_menu',
-						'args' => array(
-							'id' => array(
-								'validate_callback' => function($param, $request, $key) {
-									return is_numeric( $param );
-								}
-							),
-						)
-					));
-
-			});
+			// add_action( 'rest_api_init', function () {
+			//
+			// 	// Setup siteurl/wp-json/menus/v2/header
+			//
+			// 		register_rest_route( 'menus/v2', '/quicklinks', array(
+			// 			'methods' => 'GET',
+			// 			'callback' => 'quicklinks_menu',
+			// 			'args' => array(
+			// 				'id' => array(
+			// 					'validate_callback' => function($param, $request, $key) {
+			// 						return is_numeric( $param );
+			// 					}
+			// 				),
+			// 			)
+			// 		));
+			//
+			// });
 
 		// Callback function to generate quick links for REST API
 
