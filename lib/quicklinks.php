@@ -27,7 +27,11 @@ function uamswp_quicklinks() {
 
 		if ( site_custom_quicklinks() ) {
 
-			if (($locations = get_nav_menu_locations()) && isset($locations[ 'quick-links' ])) {
+			if (
+				( $locations = get_nav_menu_locations() )
+				&&
+				isset($locations[ 'quick-links' ])
+			) {
 
 				// Read quick links menu from this site
 				
@@ -93,7 +97,7 @@ function uamswp_request_quicklinks() {
 
 	$remote_url = 'http://acf.local/wp-json/menus/v2/quicklinks/';  // Base URL - Currently Dev URL
 
-	if( 'uamshealth' == uams_get_site_info()['site'] ) {
+	if ( 'uamshealth' == uams_get_site_info()['site'] ) {
 
 		$remote_url = 'http://acf.local/wp-json/menus/v2/quicklinks/'; // UAMS Health URL
 
@@ -105,7 +109,7 @@ function uamswp_request_quicklinks() {
 
 	$request = wp_remote_get( $remote_url );  // Dev URL
 
-	if( is_wp_error( $request ) ) {
+	if ( is_wp_error( $request ) ) {
 
 		return false; // Bail early
 
@@ -114,7 +118,7 @@ function uamswp_request_quicklinks() {
 	$body = wp_remote_retrieve_body( $request );
 	$data = json_decode( $body );
 
-	if( ! empty( $data ) ) {
+	if ( ! empty( $data ) ) {
 
 		echo '<ul class="list-unstyled links links-large">';
 
@@ -138,10 +142,27 @@ function uamswp_request_quicklinks() {
 
 	function site_custom_quicklinks() {
 
-		if ( ('institute' == uams_get_site_info()['site']) ||
-		( 'uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] ) ||
-		( 'inside' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] ) ||
-		( 'uams' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] ) ) {
+		if (
+			( 'institute' == uams_get_site_info()['site'] )
+			||
+			(
+				'uamshealth' == uams_get_site_info()['site']
+				&&
+				'main' == uams_get_site_info()['subsite']
+			)
+			||
+			(
+				'inside' == uams_get_site_info()['site']
+				&&
+				'main' == uams_get_site_info()['subsite']
+			)
+			||
+			(
+				'uams' == uams_get_site_info()['site']
+				&&
+				'main' == uams_get_site_info()['subsite']
+			)
+		) {
 
 			return true;
 
@@ -197,7 +218,11 @@ if ( site_custom_quicklinks() ) {
 
 			// Verify that menu locations are available in your WordPress site
 
-				if (($locations = get_nav_menu_locations()) && isset($locations[ 'quick-links' ])) {
+				if (
+					( $locations = get_nav_menu_locations() )
+					&&
+					isset($locations[ 'quick-links' ])
+				) {
 
 					// Retrieve the menu in location quick-links
 					
@@ -209,7 +234,7 @@ if ( site_custom_quicklinks() ) {
 
 					// If the menu isn't empty, start process of building an array, otherwise return a 404 error
 					
-					if (!empty($menu)) {
+					if ( !empty($menu) ) {
 
 						// Assign array of navigation items to $menu_items variable
 
@@ -217,13 +242,13 @@ if ( site_custom_quicklinks() ) {
 
 						// If $menu_items isn't empty...
 
-							if ($menu_items) {
+							if ( $menu_items ) {
 
 								// For each menu item, verify the menu item has no parent and then push the menu item to the $menuItems array
 
-									foreach ($menu_items as $key => $menu_item) {
+									foreach ( $menu_items as $key => $menu_item ) {
 
-										if ($menu_item->menu_item_parent == 0) {
+										if ( $menu_item->menu_item_parent == 0 ) {
 
 											array_push(
 													$menuItems, array(
