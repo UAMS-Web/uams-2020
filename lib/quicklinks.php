@@ -253,14 +253,14 @@ function uamswp_request_quicklinks() {
 												if ( $menu_item->menu_item_parent == 0 ) {
 
 													array_push(
-															$menuItems, array(
-																	'id' => $menu_item->ID,
-																	'title' => $menu_item->title,
-																	'url' => $menu_item->url,
-																	'classes' => $menu_item->classes,
-																	'target' => $menu_item->target,
-																	'link_title' => $menu_item->attr_title,
-															)
+														$menuItems, array(
+																'id' => $menu_item->ID,
+																'title' => $menu_item->title,
+																'url' => $menu_item->url,
+																'classes' => $menu_item->classes,
+																'target' => $menu_item->target,
+																'link_title' => $menu_item->attr_title,
+														)
 													);
 
 												}
