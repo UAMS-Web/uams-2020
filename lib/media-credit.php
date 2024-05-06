@@ -263,24 +263,26 @@
 		
 	}
 
-	// function uamswp_core_image_block_render( $attributes, $content ) {
-	// 	$photo_credit = uamswp_add_media_credit( $attributes['id'] );
-	// 	if ( $photo_credit ) {
-	// 		if ( strpos( $content, '<figcaption>' ) !== false ) {
-	// 			$content = str_replace( '</figcaption>', ' <span class="photo-credit">(' . esc_html__( 'Image credit:' ) . ' ' . esc_html( $photo_credit ) . ')</span></figcaption>', $content );
-	// 		} else {
-	// 			$content = str_replace( '</figure>', '<figcaption><span class="photo-credit">(' . esc_html__( 'Image credit:' ). ' ' . esc_html( $photo_credit ) . ')</span></figcaption></figure>', $content );
-	// 		}
-	// 	}
+	// Append photo credit to image block by registering core/image + render_callback
 
-	// 	return $content;
-	// }
-	// function uamswp_register_core_image_block() {
-	// 	register_block_type( 'core/image', array(
-	// 		'render_callback' => 'uamswp_core_image_block_render',
-	// 	) );
-	// }
-	// add_action( 'init', 'uamswp_register_core_image_block' );
+		// function uamswp_core_image_block_render( $attributes, $content ) {
+		// 	$photo_credit = uamswp_add_media_credit( $attributes['id'] );
+		// 	if ( $photo_credit ) {
+		// 		if ( strpos( $content, '<figcaption>' ) !== false ) {
+		// 			$content = str_replace( '</figcaption>', ' <span class="photo-credit">(' . esc_html__( 'Image credit:' ) . ' ' . esc_html( $photo_credit ) . ')</span></figcaption>', $content );
+		// 		} else {
+		// 			$content = str_replace( '</figure>', '<figcaption><span class="photo-credit">(' . esc_html__( 'Image credit:' ). ' ' . esc_html( $photo_credit ) . ')</span></figcaption></figure>', $content );
+		// 		}
+		// 	}
+
+		// 	return $content;
+		// }
+		// function uamswp_register_core_image_block() {
+		// 	register_block_type( 'core/image', array(
+		// 		'render_callback' => 'uamswp_core_image_block_render',
+		// 	) );
+		// }
+		// add_action( 'init', 'uamswp_register_core_image_block' );
 
 	/* Append photo credit to image block with render_block filter
 	* Replaces incorrect register block call 
