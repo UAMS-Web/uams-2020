@@ -322,21 +322,62 @@
 
 		/* Replaces incorrect register block call */
 
-		function uamswp_core_image_add_credits($block_content, $block, $instance) {
-			if ($block['blockName'] == 'core/image') {
-				$photo_credit = get_post_meta( $block['attrs']['id'], '_media_credit', true );
-				if (empty($photo_credit)) {
-					$photo_credit = wp_get_attachment_metadata($block['attrs']['id'])['image_meta']['credit'];
-				}
-				if( $photo_credit ) {
-					if ( strpos( $block_content, '<figcaption>' ) !== false ) {
-						$block_content = str_replace( '</figcaption>', ' <span class="photo-credit">(' . esc_html__( 'Image credit:' ) . ' ' . esc_html( $photo_credit ) . ')</span></figcaption>', $block_content );
-					} else {
-						$block_content = str_replace( '</figure>', '<figcaption><span class="photo-credit">(' . esc_html__( 'Image credit:' ). ' ' . esc_html( $photo_credit ) . ')</span></figcaption></figure>', $block_content );
+		function uamswp_core_image_add_credits( $block_content, $block, $instance ) {
+
+			if ( $block['blockName'] == 'core/image' ) {
+
+				// Get the media credit meta key value from the asset in the media library
+
+					$photo_credit = get_post_meta(
+						$block['attrs']['id'], // int // required // Post ID
+						'_media_credit', // string // optional // The meta key to retrieve. By default, returns data for all keys. (Default: '')
+						true // bool // optional // Whether to return a single value. This parameter has no effect if the meta key is not specified. (Default: false)
+					);
+
+				// Fallback: Retrieve the credit value from the asset file's image metadata
+
+					if ( empty($photo_credit) ) {
+
+						$photo_credit = wp_get_attachment_metadata(
+							$block['attrs']['id'] // int // required // Attachment post ID. Defaults to global $post.
+						)['image_meta']['credit'];
+
 					}
-				}
+
+				// Add the photo credit to the HTML
+
+					if ( $photo_credit ) {
+
+						// If figcaption is already used, append the photo credit to the figcaption
+
+							if ( strpos( $block_content, '<figcaption>' ) !== false ) {
+
+								$block_content = str_replace(
+									'</figcaption>',
+									' <span class="photo-credit">(' . esc_html__( 'Image credit:' ) . ' ' . esc_html( $photo_credit ) . ')</span></figcaption>',
+									$block_content
+								);
+
+							}
+
+						// If figcaption is not already used, add the figcaption with the photo credit
+						
+							else {
+
+								$block_content = str_replace(
+									'</figure>',
+									'<figcaption><span class="photo-credit">(' . esc_html__( 'Image credit:' ). ' ' . esc_html( $photo_credit ) . ')</span></figcaption></figure>',
+									$block_content
+								);
+
+							}
+
+					}
+
 			}
 
 			return $block_content;
+
 		}
+
 		add_filter('render_block', 'uamswp_core_image_add_credits', 10, 3);
