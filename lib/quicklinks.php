@@ -73,7 +73,7 @@ function uamswp_quicklinks() {
 		} else {
 
 			uamswp_request_quicklinks();
-			
+
 		}
 
 		?>
