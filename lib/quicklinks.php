@@ -34,7 +34,7 @@ function uamswp_quicklinks() {
 			) {
 
 				// Read quick links menu from this site
-				
+
 					$menu = wp_get_nav_menu_object( $locations[ 'quick-links' ] );
 
 				$menu_items = wp_get_nav_menu_items($menu->term_id);
@@ -191,7 +191,7 @@ function uamswp_request_quicklinks() {
 	if ( site_custom_quicklinks() ) {
 
 		// Add quick links menu
-		
+
 			// add_action( 'init', 'register_quicklinks_menu' );
 
 		// Register function to run at rest_api_init hook
@@ -227,15 +227,15 @@ function uamswp_request_quicklinks() {
 					) {
 
 						// Retrieve the menu in location quick-links
-						
+
 							$menu = wp_get_nav_menu_object($locations['quick-links']);
 
 						// Create an empty array to store our JSON
-						
+
 							$menuItems = array();
 
 						// If the menu isn't empty, start process of building an array, otherwise return a 404 error
-						
+
 							if ( !empty($menu) ) {
 
 								// Assign array of navigation items to $menu_items variable
@@ -284,7 +284,7 @@ function uamswp_request_quicklinks() {
 					}
 
 				// Return array of list items with title and url properties
-				
+
 					return $menuItems;
 
 			}
