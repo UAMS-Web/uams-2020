@@ -199,27 +199,27 @@ if ( site_custom_quicklinks() ) {
 
 			if (($locations = get_nav_menu_locations()) && isset($locations[ 'quick-links' ])) {
 
-				/* Retrieve the menu in location quick-links */
+				// Retrieve the menu in location quick-links
 				
 					$menu = wp_get_nav_menu_object($locations['quick-links']);
 
-				/* Create an empty array to store our JSON */
+				// Create an empty array to store our JSON
 				
 					$menuItems = array();
 
-				/* If the menu isn't empty, start process of building an array, otherwise return a 404 error */
+				// If the menu isn't empty, start process of building an array, otherwise return a 404 error
 				
 				if (!empty($menu)) {
 
-					/* Assign array of navigation items to $menu_items variable */
+					// Assign array of navigation items to $menu_items variable
 
 						$menu_items = wp_get_nav_menu_items($menu->term_id);
 
-					/* if $menu_items isn't empty */
+					// If $menu_items isn't empty...
 
 						if ($menu_items) {
 
-							/* for each menu item, verify the menu item has no parent and then push the menu item to the $menuItems array */
+							// For each menu item, verify the menu item has no parent and then push the menu item to the $menuItems array
 
 								foreach ($menu_items as $key => $menu_item) {
 
@@ -256,7 +256,7 @@ if ( site_custom_quicklinks() ) {
 
 			}
 
-			/* Return array of list items with title and url properties */
+			// Return array of list items with title and url properties
 			
 				return $menuItems;
 
