@@ -306,10 +306,16 @@
 		// }
 
 		// function uamswp_register_core_image_block() {
-		// 	register_block_type( 'core/image', array(
-		// 		'render_callback' => 'uamswp_core_image_block_render',
-		// 	) );
+		//
+		// 	register_block_type(
+		// 		'core/image',
+		// 		array(
+		// 			'render_callback' => 'uamswp_core_image_block_render',
+		// 		)
+		// 	);
+		//
 		// }
+		//
 		// add_action( 'init', 'uamswp_register_core_image_block' );
 
 	// Append photo credit to image block with render_block filter
