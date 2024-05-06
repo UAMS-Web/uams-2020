@@ -255,26 +255,26 @@
 
 // Append photo credit to image block
 
-	// Get the media credit meta value from the asset in the media library
-
-		function uamswp_add_media_credit( $id ) {
-
-			$media_credit = get_post_meta(
-				$id, // int // required // Post ID
-				'_media_credit', // string // optional // The meta key to retrieve. By default, returns data for all keys. (Default: '')
-				true // bool // optional // Whether to return a single value. This parameter has no effect if the meta key is not specified. (Default: false)
-			);
-
-			if ( ! empty( $media_credit ) ) {
-
-				return $media_credit;
-
-			}
-
-		}
-
 	// Append photo credit to image block by registering core/image + render_callback
 
+		// // Get the media credit meta value from the asset in the media library
+		//
+		// 	function uamswp_add_media_credit( $id ) {
+		//
+		// 		$media_credit = get_post_meta(
+		// 			$id, // int // required // Post ID
+		// 			'_media_credit', // string // optional // The meta key to retrieve. By default, returns data for all keys. (Default: '')
+		// 			true // bool // optional // Whether to return a single value. This parameter has no effect if the meta key is not specified. (Default: false)
+		// 		);
+		//
+		// 		if ( ! empty( $media_credit ) ) {
+		//
+		// 			return $media_credit;
+		//
+		// 		}
+		//
+		// 	}
+		//
 		// function uamswp_core_image_block_render( $attributes, $content ) {
 		//
 		// 	$photo_credit = uamswp_add_media_credit( $attributes['id'] );
@@ -304,7 +304,7 @@
 		// 	return $content;
 		//
 		// }
-
+		//
 		// function uamswp_register_core_image_block() {
 		//
 		// 	register_block_type(
