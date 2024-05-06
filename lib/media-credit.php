@@ -1,46 +1,79 @@
-<?php 
+<?php
 /**
  * Adds a media credit to images in the media library
  */
+
 // Add fields
-add_filter( 'attachment_fields_to_edit', 'uamswp_attachment_fields_to_edit_source', 10, 2 );
-function uamswp_attachment_fields_to_edit_source( $form_fields, $post ) {
-    // Media Credit
-    $file = get_attached_file( $post->ID );
-    $media_meta = wp_read_image_metadata($file);
-    $media_credit = get_post_meta( $post->ID, '_media_credit', true );
-    if (empty($media_credit)) {
-    $media_credit = $media_meta["credit"];
-    }
-	$form_fields['media_credit'] = array(
-		'label' => esc_attr( 'Image Credit' ),
-		'input' => 'text',
-        'value' => esc_attr( $media_credit ),
-        'helps' => 'Original Credit: ' . esc_html( $media_meta["credit"] ),
-	);
-	return $form_fields;
-}
-// Save fields
-add_filter( 'attachment_fields_to_save', 'uamswp_attachment_fields_to_save_source_url_name', 10, 2 );
-function uamswp_attachment_fields_to_save_source_url_name( $post, $attachment ) {
-	// Source Name
-	if ( isset( $attachment['media_credit'] ) ) {
-		// Get previous value
-		$media_credit = get_post_meta( $post['ID'], '_media_credit', true );
-		// If there is a change
-		if ( $media_credit !== $attachment['media_credit'] ) {
-			// Delete
-			if ( empty( $attachment['media_credit'] ) ) {
-				delete_post_meta( $post['ID'], '_media_credit' );
+
+	add_filter( 'attachment_fields_to_edit', 'uamswp_attachment_fields_to_edit_source', 10, 2 );
+
+	function uamswp_attachment_fields_to_edit_source( $form_fields, $post ) {
+
+		// Media Credit
+
+			$file = get_attached_file( $post->ID );
+			$media_meta = wp_read_image_metadata($file);
+			$media_credit = get_post_meta( $post->ID, '_media_credit', true );
+
+			if ( empty($media_credit) ) {
+
+				$media_credit = $media_meta["credit"];
+
 			}
-			// Update
-			else {
-				update_post_meta( $post['ID'], '_media_credit', $attachment['media_credit'] );
-			}
-		}
+
+			$form_fields['media_credit'] = array(
+				'label' => esc_attr( 'Image Credit' ),
+				'input' => 'text',
+				'value' => esc_attr( $media_credit ),
+				'helps' => 'Original Credit: ' . esc_html( $media_meta["credit"] ),
+			);
+
+		return $form_fields;
+
 	}
-	return $post;
-}
+
+// Save fields
+
+	add_filter( 'attachment_fields_to_save', 'uamswp_attachment_fields_to_save_source_url_name', 10, 2 );
+
+	function uamswp_attachment_fields_to_save_source_url_name( $post, $attachment ) {
+
+		// Source Name
+
+			if ( isset( $attachment['media_credit'] ) ) {
+
+				// Get previous value
+
+					$media_credit = get_post_meta( $post['ID'], '_media_credit', true );
+
+				// If there is a change
+
+					if ( $media_credit !== $attachment['media_credit'] ) {
+
+						// Delete
+
+							if ( empty( $attachment['media_credit'] ) ) {
+
+								delete_post_meta( $post['ID'], '_media_credit' );
+
+							}
+
+						// Update
+
+							else {
+
+								update_post_meta( $post['ID'], '_media_credit', $attachment['media_credit'] );
+
+							}
+
+					}
+
+			}
+
+		return $post;
+
+	}
+
 /*
 add_filter( 'img_caption_shortcode', 'ac_add_sources_captioned', 10, 3 );
 function ac_add_sources_captioned( $empty, $attr, $content ) {
