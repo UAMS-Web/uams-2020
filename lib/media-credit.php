@@ -284,24 +284,25 @@
 		// }
 		// add_action( 'init', 'uamswp_register_core_image_block' );
 
-	/* Append photo credit to image block with render_block filter
-	* Replaces incorrect register block call 
-	*/
-	function uamswp_core_image_add_credits($block_content, $block, $instance) {
-		if ($block['blockName'] == 'core/image') {
-			$photo_credit = get_post_meta( $block['attrs']['id'], '_media_credit', true );
-			if (empty($photo_credit)) {
-				$photo_credit = wp_get_attachment_metadata($block['attrs']['id'])['image_meta']['credit'];
-			}
-			if( $photo_credit ) {
-				if ( strpos( $block_content, '<figcaption>' ) !== false ) {
-					$block_content = str_replace( '</figcaption>', ' <span class="photo-credit">(' . esc_html__( 'Image credit:' ) . ' ' . esc_html( $photo_credit ) . ')</span></figcaption>', $block_content );
-				} else {
-					$block_content = str_replace( '</figure>', '<figcaption><span class="photo-credit">(' . esc_html__( 'Image credit:' ). ' ' . esc_html( $photo_credit ) . ')</span></figcaption></figure>', $block_content );
+	// Append photo credit to image block with render_block filter
+
+		/* Replaces incorrect register block call */
+
+		function uamswp_core_image_add_credits($block_content, $block, $instance) {
+			if ($block['blockName'] == 'core/image') {
+				$photo_credit = get_post_meta( $block['attrs']['id'], '_media_credit', true );
+				if (empty($photo_credit)) {
+					$photo_credit = wp_get_attachment_metadata($block['attrs']['id'])['image_meta']['credit'];
+				}
+				if( $photo_credit ) {
+					if ( strpos( $block_content, '<figcaption>' ) !== false ) {
+						$block_content = str_replace( '</figcaption>', ' <span class="photo-credit">(' . esc_html__( 'Image credit:' ) . ' ' . esc_html( $photo_credit ) . ')</span></figcaption>', $block_content );
+					} else {
+						$block_content = str_replace( '</figure>', '<figcaption><span class="photo-credit">(' . esc_html__( 'Image credit:' ). ' ' . esc_html( $photo_credit ) . ')</span></figcaption></figure>', $block_content );
+					}
 				}
 			}
-		}
 
-		return $block_content;
-	}
-	add_filter('render_block', 'uamswp_core_image_add_credits', 10, 3);
+			return $block_content;
+		}
+		add_filter('render_block', 'uamswp_core_image_add_credits', 10, 3);
