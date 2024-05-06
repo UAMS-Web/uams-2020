@@ -174,17 +174,19 @@ function uamswp_request_quicklinks() {
 
 		}
 
-	function register_quicklinks_menu() {
+	// Register quick links menu
 
-		if ( site_custom_quicklinks() ) {
+		function register_quicklinks_menu() {
 
-			register_nav_menu( 'quick-links' ,__( 'Quick Links Menu' ));
+			if ( site_custom_quicklinks() ) {
+
+				register_nav_menu( 'quick-links' ,__( 'Quick Links Menu' ));
+
+			}
 
 		}
 
-	}
-
-	add_action( 'init', 'register_quicklinks_menu' );
+		add_action( 'init', 'register_quicklinks_menu' );
 
 	if ( site_custom_quicklinks() ) {
 
