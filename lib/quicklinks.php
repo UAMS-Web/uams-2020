@@ -140,154 +140,154 @@ function uamswp_request_quicklinks() {
 
 	// Site gets custom quick links
 
-	function site_custom_quicklinks() {
+		function site_custom_quicklinks() {
 
-		if (
-			( 'institute' == uams_get_site_info()['site'] )
-			||
-			(
-				'uamshealth' == uams_get_site_info()['site']
-				&&
-				'main' == uams_get_site_info()['subsite']
-			)
-			||
-			(
-				'inside' == uams_get_site_info()['site']
-				&&
-				'main' == uams_get_site_info()['subsite']
-			)
-			||
-			(
-				'uams' == uams_get_site_info()['site']
-				&&
-				'main' == uams_get_site_info()['subsite']
-			)
-		) {
+			if (
+				( 'institute' == uams_get_site_info()['site'] )
+				||
+				(
+					'uamshealth' == uams_get_site_info()['site']
+					&&
+					'main' == uams_get_site_info()['subsite']
+				)
+				||
+				(
+					'inside' == uams_get_site_info()['site']
+					&&
+					'main' == uams_get_site_info()['subsite']
+				)
+				||
+				(
+					'uams' == uams_get_site_info()['site']
+					&&
+					'main' == uams_get_site_info()['subsite']
+				)
+			) {
 
-			return true;
+				return true;
 
-		} else {
+			} else {
 
-			return false;
+				return false;
+
+			}
+
+		}
+
+	function register_quicklinks_menu() {
+
+		if ( site_custom_quicklinks() ) {
+
+			register_nav_menu( 'quick-links' ,__( 'Quick Links Menu' ));
 
 		}
 
 	}
 
-function register_quicklinks_menu() {
+	add_action( 'init', 'register_quicklinks_menu' );
 
 	if ( site_custom_quicklinks() ) {
 
-		register_nav_menu( 'quick-links' ,__( 'Quick Links Menu' ));
+		// Add quick links menu
+		
+			// add_action( 'init', 'register_quicklinks_menu' );
 
-	}
+		// Register function to run at rest_api_init hook
 
-}
+			add_action( 'rest_api_init', function () {
 
-add_action( 'init', 'register_quicklinks_menu' );
+				// Setup siteurl/wp-json/menus/v2/header
 
-if ( site_custom_quicklinks() ) {
+					register_rest_route( 'menus/v2', '/quicklinks', array(
+						'methods' => 'GET',
+						'callback' => 'quicklinks_menu',
+						'args' => array(
+							'id' => array(
+								'validate_callback' => function($param, $request, $key) {
+									return is_numeric( $param );
+								}
+							),
+						)
+					));
 
-	// Add quick links menu
-	
-		// add_action( 'init', 'register_quicklinks_menu' );
+			});
 
-	// Register function to run at rest_api_init hook
+		// Callback function to generate quick links for REST API
 
-		add_action( 'rest_api_init', function () {
+			function quicklinks_menu( $data ) {
 
-			// Setup siteurl/wp-json/menus/v2/header
+				// Verify that menu locations are available in your WordPress site
 
-				register_rest_route( 'menus/v2', '/quicklinks', array(
-					'methods' => 'GET',
-					'callback' => 'quicklinks_menu',
-					'args' => array(
-						'id' => array(
-							'validate_callback' => function($param, $request, $key) {
-								return is_numeric( $param );
-							}
-						),
-					)
-				));
+					if (
+						( $locations = get_nav_menu_locations() )
+						&&
+						isset($locations[ 'quick-links' ])
+					) {
 
-		});
+						// Retrieve the menu in location quick-links
+						
+							$menu = wp_get_nav_menu_object($locations['quick-links']);
 
-	// Callback function to generate quick links for REST API
+						// Create an empty array to store our JSON
+						
+							$menuItems = array();
 
-		function quicklinks_menu( $data ) {
+						// If the menu isn't empty, start process of building an array, otherwise return a 404 error
+						
+							if ( !empty($menu) ) {
 
-			// Verify that menu locations are available in your WordPress site
+								// Assign array of navigation items to $menu_items variable
 
-				if (
-					( $locations = get_nav_menu_locations() )
-					&&
-					isset($locations[ 'quick-links' ])
-				) {
+									$menu_items = wp_get_nav_menu_items($menu->term_id);
 
-					// Retrieve the menu in location quick-links
-					
-						$menu = wp_get_nav_menu_object($locations['quick-links']);
+								// If $menu_items isn't empty...
 
-					// Create an empty array to store our JSON
-					
-						$menuItems = array();
+									if ( $menu_items ) {
 
-					// If the menu isn't empty, start process of building an array, otherwise return a 404 error
-					
-					if ( !empty($menu) ) {
+										// For each menu item, verify the menu item has no parent and then push the menu item to the $menuItems array
 
-						// Assign array of navigation items to $menu_items variable
+											foreach ( $menu_items as $key => $menu_item ) {
 
-							$menu_items = wp_get_nav_menu_items($menu->term_id);
+												if ( $menu_item->menu_item_parent == 0 ) {
 
-						// If $menu_items isn't empty...
+													array_push(
+															$menuItems, array(
+																	'id' => $menu_item->ID,
+																	'title' => $menu_item->title,
+																	'url' => $menu_item->url,
+																	'classes' => $menu_item->classes,
+																	'target' => $menu_item->target,
+																	'link_title' => $menu_item->attr_title,
+															)
+													);
 
-							if ( $menu_items ) {
+												}
 
-								// For each menu item, verify the menu item has no parent and then push the menu item to the $menuItems array
-
-									foreach ( $menu_items as $key => $menu_item ) {
-
-										if ( $menu_item->menu_item_parent == 0 ) {
-
-											array_push(
-													$menuItems, array(
-															'id' => $menu_item->ID,
-															'title' => $menu_item->title,
-															'url' => $menu_item->url,
-															'classes' => $menu_item->classes,
-															'target' => $menu_item->target,
-															'link_title' => $menu_item->attr_title,
-													)
-											);
-
-										}
+											}
 
 									}
 
 							}
 
+					} else {
+
+						return new WP_Error(
+							'no_menus',
+							'Could not find any menus' . $locations[ 'primary' ],
+							array(
+									'status' => 404
+							)
+						);
+
 					}
 
-				} else {
+				// Return array of list items with title and url properties
+				
+					return $menuItems;
 
-					return new WP_Error(
-						'no_menus',
-						'Could not find any menus' . $locations[ 'primary' ],
-						array(
-								'status' => 404
-						)
-					);
+			}
 
-				}
-
-			// Return array of list items with title and url properties
-			
-				return $menuItems;
-
-		}
-
-}
+	}
 
 
 
