@@ -11,7 +11,7 @@
  *
 */
 
-// Removing Quick Links action via comments in case we decide to bring it back.
+/* Removing Quick Links action via comments in case we decide to bring it back. */
 // add_action( 'genesis_after', 'uamswp_quicklinks', 4 );
 
 function uamswp_quicklinks() {
@@ -29,7 +29,7 @@ function uamswp_quicklinks() {
 
 					if (($locations = get_nav_menu_locations()) && isset($locations[ 'quick-links' ])) {
 
-						// Read quicklinks menu from this site
+						// Read quick links menu from this site
 						$menu = wp_get_nav_menu_object( $locations[ 'quick-links' ] );
 
 						$menu_items = wp_get_nav_menu_items($menu->term_id);
@@ -126,9 +126,9 @@ function uamswp_request_quicklinks() {
 
 }
 
-//--- Quicklink Functions  ---//
+// Quick Link Functions
 
-// Site gets custom quicklinks
+// Site gets custom quick links
 
 function site_custom_quicklinks() {
 
@@ -161,13 +161,13 @@ add_action( 'init', 'register_quicklinks_menu' );
 
 if ( site_custom_quicklinks() ) {
 
-	// Add quicklinks menu
+	// Add quick links menu
 	// add_action( 'init', 'register_quicklinks_menu' );
 
-	/* Register function to run at rest_api_init hook */
+	// Register function to run at rest_api_init hook
 	add_action( 'rest_api_init', function () {
 
-		/* Setup siteurl/wp-json/menus/v2/header */
+		// Setup siteurl/wp-json/menus/v2/header
 
 		register_rest_route( 'menus/v2', '/quicklinks', array(
 			'methods' => 'GET',
@@ -183,11 +183,11 @@ if ( site_custom_quicklinks() ) {
 
 	});
 
-	/* Callback function to generate quicklinks for REST API */
+	// Callback function to generate quick links for REST API
 
 	function quicklinks_menu( $data ) {
 
-		/* Verify that menu locations are available in your WordPress site */
+		// Verify that menu locations are available in your WordPress site
 
 		if (($locations = get_nav_menu_locations()) && isset($locations[ 'quick-links' ])) {
 
