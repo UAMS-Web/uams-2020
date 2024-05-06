@@ -255,13 +255,15 @@
 
 // Append photo credit to image block
 
-	function uamswp_add_media_credit( $id ) {
-		$media_credit = get_post_meta( $id, '_media_credit', true );
-		if ( ! empty( $media_credit ) ) {
-			return $media_credit;
+	// Get the media credit meta value from the asset in the media library
+
+		function uamswp_add_media_credit( $id ) {
+			$media_credit = get_post_meta( $id, '_media_credit', true );
+			if ( ! empty( $media_credit ) ) {
+				return $media_credit;
+			}
+			
 		}
-		
-	}
 
 	// Append photo credit to image block by registering core/image + render_callback
 
