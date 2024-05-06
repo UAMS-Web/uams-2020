@@ -290,6 +290,3 @@ function uamswp_request_quicklinks() {
 			}
 
 	}
-
-
-
