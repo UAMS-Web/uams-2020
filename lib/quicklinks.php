@@ -95,15 +95,15 @@ function uamswp_quicklinks() {
 
 function uamswp_request_quicklinks() {
 
-	$remote_url = 'http://acf.local/wp-json/menus/v2/quicklinks/';  // Base URL - Currently Dev URL
+	$remote_url = 'https://web.uams.edu/wp-json/menus/v2/quicklinks/';  // Base URL - Currently Dev URL
 
 	if ( 'uamshealth' == uams_get_site_info()['site'] ) {
 
-		$remote_url = 'http://acf.local/wp-json/menus/v2/quicklinks/'; // UAMS Health URL
+		$remote_url = 'https://uamshealth.com/wp-json/menus/v2/quicklinks/'; // UAMS Health URL
 
 	} elseif ( 'inside' == uams_get_site_info()['site'] ) {
 
-		$remote_url = 'http://acf.local/wp-json/menus/v2/quicklinks/'; // Inside URL
+		$remote_url = 'https://inside.uams.edu/wp-json/menus/v2/quicklinks/'; // Inside URL
 
 	}
 
