@@ -386,7 +386,7 @@ if ( !function_exists('uams_get_site_info')):
 		$grad_dept = get_option( 'options_uamswp_uams_grad-school_dept' ); // get_field( 'uamswp_uams_grad-school_dept', 'option' ); // graduate school dept
 		$other_dept = get_option( 'options_uamswp_uams_other_dept' ); // get_field( 'uamswp_uams_other_dept' , 'option' ); // Other (Multisite)
 		$healthorganization = get_option( 'options_uamswp_uamshealth_subsite' ); // get_field( 'uamswp_uamshealth_subsite', 'option' ); // health 
-		$insideorganization = get_option( 'options_uamswp_inside_subsiten' ); // get_field( 'uamswp_inside_subsite', 'option' ); // inside 
+		$insideorganization = get_option( 'options_uamswp_inside_subsite' ); // get_field( 'uamswp_inside_subsite', 'option' ); // inside 
 		if ('health' == $themestyle) {
 			$site = 'uamshealth';
 			if ('' != $healthorganization) {
