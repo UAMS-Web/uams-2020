@@ -341,7 +341,7 @@ function uamswp_footer_creds_text() {
     // Replace social URLs if the relevant custom fields have values.
     echo '<div role="navigation" aria-label="Social media"><ul class="nav social">';
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_fb.'" target="_blank" title="Facebook"><span class="fab fa-facebook"></span><span class="sr-only">Facebook</span></a></li>';
-        echo '<li class="nav-item"><a class="nav-link" href="'.$social_tw.'" target="_blank" title="Twitter"><span class="fab fa-twitter"></span><span class="sr-only">Twitter</span></a></li>';
+        echo '<li class="nav-item"><a class="nav-link" href="'.$social_tw.'" target="_blank" title="Twitter"><span class="fab fa-square-x-twitter"></span><span class="sr-only">Twitter</span></a></li>';
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_ig.'" target="_blank" title="Instagram"><span class="fab fa-instagram"></span><span class="sr-only">Instagram</span></a></li>';
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_yt.'" target="_blank" title="YouTube"><span class="fab fa-youtube"></span><span class="sr-only">YouTube</span></a></li>';
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_li.'" target="_blank" title="LinkedIn"><span class="fab fa-linkedin"></span><span class="sr-only">LinkedIn</span></a></li>';
