@@ -100,7 +100,7 @@ add_filter( 'wp_link_pages_link', function( $link ) {
     return $link;
 } );
 
-add_filter( 'genesis_footer_creds_text', function( $creds ) {
+add_filter( 'genesis_pre_get_option_footer_text', function( $creds ) {
     if ( get_theme_mod( 'creds', false ) ) {
         $creds = get_theme_mod( 'creds' );
     }

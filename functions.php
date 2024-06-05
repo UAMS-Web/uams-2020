@@ -365,28 +365,31 @@ if ( !function_exists('uams_get_site_info')):
 			return $siteinfo;
 			return;
 		}
-		$themestyle = get_field( 'uamswp_template', 'option' ); // uams, inside, health
-		$themelocation = get_field( 'uamswp_location', 'option' ); // campus, regional
-		$themeinstitute = get_field( 'uamswp_institute', 'option' ); // institute name
-		$regional_campus = get_field( 'uamswp_regional_campus', 'option' ); // regional location
-		$aging_dept = get_field( 'uamswp_institute_aging_dept', 'option' ); // Institute on Aging Departments
-		$eye_dept = get_field( 'uamswp_institute_eye_dept', 'option' ); // Eye Institute Departments
-		$spine_dept = get_field( 'uamswp_institute_spine_dept', 'option' ); // Spine & Neurosciences Institute Departments
-		$digihealth_dept = get_field( 'uamswp_institute_digi-health_dept', 'option' ); // Institute for Digital Health & Innovation Departments
-		$pri_dept = get_field( 'uamswp_institute_pri_dept', 'option' ); // Psychiatric Research Institute Departments
-		$tri_dept = get_field( 'uamswp_institute_tri_dept', 'option' ); // Translational Research Institute Departments
-		$cancer_dept = get_field( 'uamswp_institute_cancer_dept', 'option' ); // Cancer Institute Departments
-		$ichi_dept = get_field( 'uamswp_institute_ichi_dept', 'option' ); // Institute for Community Health Innovation Departments
-		$uamsorganization = get_field( 'uamswp_uams_subsite', 'option' ); // college 
-		$cohp_dept = get_field( 'uamswp_uams_cohp_dept', 'option' ); // college of health prof dept
-		$com_dept = get_field( 'uamswp_uams_com_dept', 'option' ); // college of medicine dept
-		$con_dept = get_field( 'uamswp_uams_con_dept', 'option' ); // college of nursing dept
-		$cop_dept = get_field( 'uamswp_uams_cop_dept', 'option' ); // college of pharmacy dept
-		$coph_dept = get_field( 'uamswp_uams_coph_dept', 'option' ); // college of public health dept
-		$grad_dept = get_field( 'uamswp_uams_grad-school_dept', 'option' ); // graduate school dept
-		$other_dept = get_field( 'uamswp_uams_other_dept' , 'option' ); // Other (Multisite)
-		$healthorganization = get_field( 'uamswp_uamshealth_subsite', 'option' ); // health 
-		$insideorganization = get_field( 'uamswp_inside_subsite', 'option' ); // inside 
+
+		/* Replace get_field functions with get_option - Remove ACF called too early errors */
+		$themestyle = get_option( 'options_uamswp_template' ); // get_field( 'uamswp_template', 'option' ); // uams, inside, health
+		$themelocation = get_option( 'options_uamswp_location' ); // get_field( 'uamswp_location', 'option' ); // campus, regional
+		$themeinstitute = get_option( 'options_uamswp_institute' ); // get_field( 'uamswp_institute', 'option' ); // institute name
+		$regional_campus = get_option( 'options_uamswp_regional_campus' ); // get_field( 'uamswp_regional_campus', 'option' ); // regional location
+		$aging_dept = get_option( 'options_uamswp_institute_aging_dept' ); // get_field( 'uamswp_institute_aging_dept', 'option' ); // Institute on Aging Departments
+		$eye_dept = get_option( 'options_uamswp_institute_eye_dept' ); // get_field( 'uamswp_institute_eye_dept', 'option' ); // Eye Institute Departments
+		$spine_dept = get_option( 'options_uamswp_institute_spine_dept' ); // get_field( 'uamswp_institute_spine_dept', 'option' ); // Spine & Neurosciences Institute Departments
+		$digihealth_dept = get_option( 'options_uamswp_institute_digi-health_dept' ); // get_field( 'uamswp_institute_digi-health_dept', 'option' ); // Institute for Digital Health & Innovation Departments
+		$pri_dept = get_option( 'options_uamswp_institute_pri_dept' ); // get_field( 'uamswp_institute_pri_dept', 'option' ); // Psychiatric Research Institute Departments
+		$tri_dept = get_option( 'options_uamswp_institute_tri_dept' ); // get_field( 'uamswp_institute_tri_dept', 'option' ); // Translational Research Institute Departments
+		$cancer_dept = get_option( 'options_uamswp_institute_cancer_dept' ); // get_field( 'uamswp_institute_cancer_dept', 'option' ); // Cancer Institute Departments
+    		$ichi_dept = get_field( 'options_uamswp_institute_ichi_dept' ); // $ichi_dept = get_field( 'uamswp_institute_ichi_dept', 'option' ); // Institute for Community Health Innovation Departments
+		$uamsorganization = get_option( 'options_uamswp_uams_subsite' ); // get_field( 'uamswp_uams_subsite', 'option' ); // college 
+		$cohp_dept = get_option( 'options_uamswp_uams_cohp_dept' ); // get_field( 'uamswp_uams_cohp_dept', 'option' ); // college of health prof dept
+		$com_dept = get_option( 'options_uamswp_uams_com_dept' ); // get_field( 'uamswp_uams_com_dept', 'option' ); // college of medicine dept
+		$con_dept = get_option( 'options_uamswp_uams_con_dept' ); // get_field( 'uamswp_uams_con_dept', 'option' ); // college of nursing dept
+		$cop_dept = get_option( 'options_uamswp_uams_cop_dept' ); // get_field( 'uamswp_uams_cop_dept', 'option' ); // college of pharmacy dept
+		$coph_dept = get_option( 'options_uamswp_uams_coph_dept' ); // get_field( 'uamswp_uams_coph_dept', 'option' ); // college of public health dept
+		$grad_dept = get_option( 'options_uamswp_uams_grad-school_dept' ); // get_field( 'uamswp_uams_grad-school_dept', 'option' ); // graduate school dept
+		$other_dept = get_option( 'options_uamswp_uams_other_dept' ); // get_field( 'uamswp_uams_other_dept' , 'option' ); // Other (Multisite)
+		$healthorganization = get_option( 'options_uamswp_uamshealth_subsite' ); // get_field( 'uamswp_uamshealth_subsite', 'option' ); // health 
+		$insideorganization = get_option( 'options_uamswp_inside_subsite' ); // get_field( 'uamswp_inside_subsite', 'option' ); // inside 
+
 		if ('health' == $themestyle) {
 			$site = 'uamshealth';
 			if ('' != $healthorganization) {
@@ -466,7 +469,7 @@ if ( !function_exists('uams_get_site_info')):
 		$siteinfo = array('site' => $site, 'subsite' => $subsite, 'department' => $department);
         return $siteinfo;
     }
-
+	
 endif;
 
 if ( !function_exists('uams_get_permalink')):
@@ -896,7 +899,8 @@ add_filter('allowed_block_types', function($block_types, $post) {
 		'acf/uams-content',
 		'acf/fad-providers',
 		'acf/fad-locations',
-		'acf/logo-list'
+		'acf/logo-list',
+		'acf/uams-section'
 	];
 	if (get_page_template_slug( $post ) == 'templates/marketing.php') {
 		return $allowed_marketing;
