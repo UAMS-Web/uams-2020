@@ -225,7 +225,7 @@ function uamswp_footer_creds_text() {
     $social_ig = 'https://www.instagram.com/uamshealth/';
     $social_yt = 'https://www.youtube.com/UAMSHealth';
     $social_li = 'https://www.linkedin.com/school/university-of-arkansas-for-medical-sciences/'; // or 'https://www.linkedin.com/company/uams/'
-    $social_pn = 'https://www.pinterest.com/uamshealth/';
+    // $social_pn = 'https://www.pinterest.com/uamshealth/';
 
     // Change the exceptions
     if ('institute' == $site) {
@@ -345,7 +345,7 @@ function uamswp_footer_creds_text() {
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_ig.'" target="_blank" title="Instagram"><span class="fab fa-instagram"></span><span class="sr-only">Instagram</span></a></li>';
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_yt.'" target="_blank" title="YouTube"><span class="fab fa-youtube"></span><span class="sr-only">YouTube</span></a></li>';
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_li.'" target="_blank" title="LinkedIn"><span class="fab fa-linkedin"></span><span class="sr-only">LinkedIn</span></a></li>';
-        echo '<li class="nav-item"><a class="nav-link" href="'.$social_pn.'" target="_blank" title="Pinterest"><span class="fab fa-pinterest"></span><span class="sr-only">Pinterest</span></a></li>';
+        // echo '<li class="nav-item"><a class="nav-link" href="'.$social_pn.'" target="_blank" title="Pinterest"><span class="fab fa-pinterest"></span><span class="sr-only">Pinterest</span></a></li>';
     echo '</ul></div>';
 
     // Text Links
