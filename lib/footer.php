@@ -221,7 +221,7 @@ function uamswp_footer_creds_text() {
     
     // Set Defaults 
     $social_fb = 'https://www.facebook.com/UAMShealth';
-    $social_tw = 'https://twitter.com/uamshealth';
+    $social_tw = 'https://x.com/uamshealth';
     $social_ig = 'https://www.instagram.com/uamshealth/';
     $social_yt = 'https://www.youtube.com/UAMSHealth';
     $social_li = 'https://www.linkedin.com/school/university-of-arkansas-for-medical-sciences/'; // or 'https://www.linkedin.com/company/uams/'
@@ -240,10 +240,10 @@ function uamswp_footer_creds_text() {
                 $social_fb = 'https://www.facebook.com/PRI.UAMS';
             } elseif ( 'institute_tri' == $subsite ) {
                 $social_fb = 'https://www.facebook.com/uamstri';
-                $social_tw = 'https://twitter.com/TRI_UAMS';
+                $social_tw = 'https://x.com/TRI_UAMS';
             } elseif ( 'institute_cancer' == $subsite ) {
                 $social_fb = 'https://www.facebook.com/uamscancer';
-                $social_tw = 'https://twitter.com/uamscancer';
+                $social_tw = 'https://x.com/uamscancer';
                 $social_ig = 'https://www.instagram.com/uamscancer/';
                 $social_li = 'https://www.linkedin.com/company/the-winthrop-p-cancer-institute/';
                 $social_yt = 'https://www.youtube.com/watch?v=Y_w5HFmzgCo&list=PLDDEFFC8B6412D823';
@@ -258,7 +258,7 @@ function uamswp_footer_creds_text() {
     if ('uams' == $site) {
         if ( startsWith($subsite, 'health-prof') ) {
             $social_fb = 'https://www.facebook.com/uamschp';
-            $social_tw = 'https://twitter.com/uamschp';
+            $social_tw = 'https://x.com/uamschp';
             $social_ig = 'https://www.instagram.com/uamschp';
         } elseif ( startsWith($subsite, 'medicine') ) {
             $social_fb = 'https://www.facebook.com/UAMSCOM';
@@ -267,10 +267,10 @@ function uamswp_footer_creds_text() {
                 $social_fb = 'https://www.facebook.com/UAMSEmergencyMedicine';
             } elseif ( 'pediatrics' == $department) {
                 $social_fb = 'https://www.facebook.com/UAMSPeds';
-                $social_tw = 'https://twitter.com/UAMSPeds';
+                $social_tw = 'https://x.com/UAMSPeds';
             } elseif ( 'otolaryngology' == $department) {
                 $social_fb = 'https://www.facebook.com/uamsotolaryngology';
-                $social_tw = 'https://twitter.com/UAMSENT';
+                $social_tw = 'https://x.com/UAMSENT';
                 $social_ig = 'https://www.instagram.com/uams.ent/';
             } elseif ( 'family-medicine' == $department) {
                 $social_fb = 'https://www.facebook.com/UAMSFamilyMedicineResidency';
@@ -303,20 +303,20 @@ function uamswp_footer_creds_text() {
             $social_ig = 'https://www.instagram.com/GetHealthyUAMS/';
         } elseif ( 'cda' == $subsite ) {
            $social_fb = 'https://www.facebook.com/UAMSDDEI';
-           $social_tw = 'https://twitter.com/uams_ddei';
+           $social_tw = 'https://x.com/uams_ddei';
         } elseif ( 'gsa' == $subsite) {
             $social_fb = 'https://www.facebook.com/UAMSgsa';
         } elseif ( 'continuing-ed' == $subsite) {
             $social_fb = 'https://www.facebook.com/UAMSOCE';
         } elseif ( 'health-literacy' == $subsite) {
             $social_fb = 'https://www.facebook.com/uamscenterforhealthliteracy';
-            $social_tw = 'https://twitter.com/UAMS_CHL';
+            $social_tw = 'https://x.com/UAMS_CHL';
             $social_ig = 'https://www.instagram.com/uams_chl/';
         } elseif ( 'ipe' == $subsite) {
             $social_fb = 'https://www.facebook.com/uamsipe';
         } elseif ( 'library' == $subsite) {
             $social_fb = 'https://www.facebook.com/uamslibrary';
-            $social_tw = 'https://twitter.com/UAMSlibrary';
+            $social_tw = 'https://x.com/UAMSlibrary';
         } elseif ( 'employee_nurses' == $subsite) {
             $social_fb = 'https://www.facebook.com/UAMSnurses';
         }
@@ -332,7 +332,7 @@ function uamswp_footer_creds_text() {
     if ('inside' == $site) {
         if ( 'fitness-center' == uams_get_site_info()['subsite'] ) { // Example
             $social_fb = 'https://www.facebook.com/uamsfitnesscenter';
-            $social_tw = 'https://twitter.com/UAMSfitness';
+            $social_tw = 'https://x.com/UAMSfitness';
         }
     }
 
