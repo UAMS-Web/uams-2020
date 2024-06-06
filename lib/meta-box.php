@@ -177,6 +177,7 @@ acf_add_local_field_group(array(
 				'institute_pri' => 'Psychiatric Research Institute',
 				'institute_tri' => 'Translational Research Institute',
 				'institute_cancer' => 'Winthrop P. Rockefeller Cancer Institute',
+				'institute_ichi' => 'Institute for Community Health Innovation'
 			),
 			'default_value' => array(
 			),
@@ -423,6 +424,43 @@ acf_add_local_field_group(array(
 						'field' => 'field_institute',
 						'operator' => '==',
 						'value' => 'institute_cancer',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'main' => 'Main site',
+				'dept' => 'Department or Organizational Unit',
+				'none' => 'None of the above',
+			),
+			'default_value' => array(
+				0 => 'none',
+			),
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 1,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+		// Community Health Innovation Departments
+		array(
+			'key' => 'field_institute_ichi_dept',
+			'label' => 'Community Health Innovation Department',
+			'name' => 'uamswp_institute_ichi_dept',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_institute',
+						'operator' => '==',
+						'value' => 'institute_ichi',
 					),
 				),
 			),

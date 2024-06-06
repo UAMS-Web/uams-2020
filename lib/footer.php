@@ -58,6 +58,9 @@ function uamswp_footer_creds_text() {
             } elseif ( 'institute_cancer' == $subsite ) {
                 $footer_image_url = 'https://cancer.uams.edu/';
                 $footer_image_title = 'Winthrop P. Rockefeller Cancer Institute';
+            } elseif ( 'institute_ichi' == $subsite ) {
+                $footer_image_url = 'https://communityhealth.uams.edu/';
+                $footer_image_title = 'Institute for Community Health Innovation';
             }
         }
     }
@@ -244,6 +247,10 @@ function uamswp_footer_creds_text() {
                 $social_ig = 'https://www.instagram.com/uamscancer/';
                 $social_li = 'https://www.linkedin.com/company/the-winthrop-p-cancer-institute/';
                 $social_yt = 'https://www.youtube.com/watch?v=Y_w5HFmzgCo&list=PLDDEFFC8B6412D823';
+            } elseif ( 'institute_ichi' == $subsite ) {
+                $social_fb = 'https://www.facebook.com/UAMS.CommunityHealth/';
+                $social_ig = 'https://www.instagram.com/uams.communityhealth/';
+                $social_li = 'https://www.linkedin.com/showcase/uams-ichi/';
             }
         }
     }
