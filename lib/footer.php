@@ -12,7 +12,7 @@
 */
 
 //* Customize the credits
-add_filter( 'genesis_footer_creds_text', 'uamswp_footer_creds_text' );
+add_filter( 'genesis_pre_get_option_footer_text', 'uamswp_footer_creds_text' );
 function uamswp_footer_creds_text() {
 
     // Render this by default, in whatever structure is best.
