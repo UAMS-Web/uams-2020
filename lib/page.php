@@ -520,7 +520,7 @@ add_action( 'genesis_entry_footer', 'genesis_post_info', 9 );
 
 function uamswp_list_child_pages() {
 	$hidechildmenu = false;
-    if ((get_post_meta( get_the_id(), 'page_hide_child_menu', true) ) || ( 0 === count( get_pages('child_of=' . get_the_id())) ) ) { // If it's suppressed or none available, set to false
+    if ((get_post_meta( get_the_id(), 'page_hide_child_menu', true) ) || ( 0 === count( get_pages('child_of=' . get_the_id())) ) || is_search() ) { // If it's suppressed or none available, set to false
         $hidechildmenu = true;
     }
     if (!$hidechildmenu) {
