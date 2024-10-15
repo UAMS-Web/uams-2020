@@ -257,7 +257,7 @@ function uamswp_footer_creds_text() {
     /* UAMS Colleges, Regional Campuses & exceptions */
     if ('uams' == $site) {
         if ( startsWith($subsite, 'health-prof') ) {
-            $social_fb = 'https://www.facebook.com/uamschp';
+            $social_fb = 'https://www.facebook.com/UAMSCollegeofHealthProfessions';
             $social_tw = 'https://twitter.com/uamschp';
             $social_ig = 'https://www.instagram.com/uamschp';
         } elseif ( startsWith($subsite, 'medicine') ) {
