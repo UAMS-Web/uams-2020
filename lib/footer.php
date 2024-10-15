@@ -304,7 +304,6 @@ function uamswp_footer_creds_text() {
             $social_fb = 'https://www.facebook.com/UAMSOCE';
         } elseif ( 'health-literacy' == $subsite) {
             $social_fb = 'https://www.facebook.com/uamscenterforhealthliteracy';
-            $social_tw = 'https://twitter.com/UAMS_CHL';
             $social_ig = 'https://www.instagram.com/uams_chl/';
         } elseif ( 'ipe' == $subsite) {
             $social_fb = 'https://www.facebook.com/uamsipe';
