@@ -224,7 +224,7 @@ function uamswp_footer_creds_text() {
     $social_tw = 'https://twitter.com/uamshealth';
     $social_ig = 'https://www.instagram.com/uamshealth/';
     $social_yt = 'https://www.youtube.com/UAMSHealth';
-    $social_li = 'https://www.linkedin.com/school/university-of-arkansas-for-medical-sciences/'; // or 'https://www.linkedin.com/company/uams/'
+    $social_li = 'https://www.linkedin.com/school/uams/'; // or 'https://www.linkedin.com/company/uams/'
     $social_pn = 'https://www.pinterest.com/uamshealth/';
 
     // Change the exceptions
