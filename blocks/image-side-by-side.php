@@ -236,7 +236,7 @@ if ($geo_display) :
                     <ul>
                         <?php foreach( $link_list as $link ) {
                             $list_text = $link['side_link_list_text'];
-                            $list_url = $link['side_link_list_url']['url'];
+                            $list_url = $link['side_link_list_url']['url'] ?? null;
                             $list_desc = $link['side_link_list_description'];
                         ?>
                         <li>
