@@ -224,8 +224,8 @@ function uamswp_footer_creds_text() {
     $social_tw = 'https://x.com/uamshealth';
     $social_ig = 'https://www.instagram.com/uamshealth/';
     $social_yt = 'https://www.youtube.com/UAMSHealth';
-    $social_li = 'https://www.linkedin.com/school/university-of-arkansas-for-medical-sciences/'; // or 'https://www.linkedin.com/company/uams/'
-    // $social_pn = 'https://www.pinterest.com/uamshealth/';
+    $social_li = 'https://www.linkedin.com/school/uams/';
+    $social_pn = 'https://www.pinterest.com/uamshealth/';
 
     // Change the exceptions
     if ('institute' == $site) {
@@ -238,6 +238,9 @@ function uamswp_footer_creds_text() {
                 $social_fb = 'https://www.facebook.com/UAMSDigitalHealth';
             } elseif ( 'institute_pri'  == $subsite ) {
                 $social_fb = 'https://www.facebook.com/PRI.UAMS';
+                $social_ig = 'https://www.instagram.com/uamspri/';
+                $social_tw = 'https://x.com/UAMSPRI';
+                $social_yt = 'https://www.youtube.com/playlist?list=PLfLqnwwjUFQuQ59nedZaDEP1H8Wg-YhvA';
             } elseif ( 'institute_tri' == $subsite ) {
                 $social_fb = 'https://www.facebook.com/uamstri';
                 $social_tw = 'https://x.com/TRI_UAMS';
@@ -257,7 +260,7 @@ function uamswp_footer_creds_text() {
     /* UAMS Colleges, Regional Campuses & exceptions */
     if ('uams' == $site) {
         if ( startsWith($subsite, 'health-prof') ) {
-            $social_fb = 'https://www.facebook.com/uamschp';
+            $social_fb = 'https://www.facebook.com/UAMSCollegeofHealthProfessions';
             $social_tw = 'https://x.com/uamschp';
             $social_ig = 'https://www.instagram.com/uamschp';
         } elseif ( startsWith($subsite, 'medicine') ) {
@@ -273,7 +276,7 @@ function uamswp_footer_creds_text() {
                 $social_tw = 'https://x.com/UAMSENT';
                 $social_ig = 'https://www.instagram.com/uams.ent/';
             } elseif ( 'family-medicine' == $department) {
-                $social_fb = 'https://www.facebook.com/UAMSFamilyMedicineResidency';
+                $social_fb = 'https://www.facebook.com/UAMSFamilyMedicine';
             } elseif ( 'orthopaedic-surgery' == $department) {
                 $social_fb = 'https://www.facebook.com/UAMSOrtho';
             } elseif ( 'pathology' == $department) {
@@ -298,19 +301,12 @@ function uamswp_footer_creds_text() {
             $social_fb = 'https://www.facebook.com/UAMSNW';
         // } elseif ( startsWith($subsite, 'regional-') ) {
         //     $social_fb = '';
-        } elseif ( 'get-healthy' == $subsite ) {
-            $social_fb = 'https://www.facebook.com/GetHealthyUAMS';
-            $social_ig = 'https://www.instagram.com/GetHealthyUAMS/';
-        } elseif ( 'cda' == $subsite ) {
-           $social_fb = 'https://www.facebook.com/UAMSDDEI';
-           $social_tw = 'https://x.com/uams_ddei';
         } elseif ( 'gsa' == $subsite) {
             $social_fb = 'https://www.facebook.com/UAMSgsa';
         } elseif ( 'continuing-ed' == $subsite) {
             $social_fb = 'https://www.facebook.com/UAMSOCE';
         } elseif ( 'health-literacy' == $subsite) {
             $social_fb = 'https://www.facebook.com/uamscenterforhealthliteracy';
-            $social_tw = 'https://x.com/UAMS_CHL';
             $social_ig = 'https://www.instagram.com/uams_chl/';
         } elseif ( 'ipe' == $subsite) {
             $social_fb = 'https://www.facebook.com/uamsipe';
@@ -341,7 +337,7 @@ function uamswp_footer_creds_text() {
     // Replace social URLs if the relevant custom fields have values.
     echo '<div role="navigation" aria-label="Social media"><ul class="nav social">';
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_fb.'" target="_blank" title="Facebook"><span class="fab fa-facebook"></span><span class="sr-only">Facebook</span></a></li>';
-        echo '<li class="nav-item"><a class="nav-link" href="'.$social_tw.'" target="_blank" title="Twitter"><span class="fab fa-square-x-twitter"></span><span class="sr-only">Twitter</span></a></li>';
+        echo '<li class="nav-item"><a class="nav-link" href="'.$social_tw.'" target="_blank" title="X"><span class="fab fa-square-x-twitter"></span><span class="sr-only">X</span></a></li>';
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_ig.'" target="_blank" title="Instagram"><span class="fab fa-instagram"></span><span class="sr-only">Instagram</span></a></li>';
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_yt.'" target="_blank" title="YouTube"><span class="fab fa-youtube"></span><span class="sr-only">YouTube</span></a></li>';
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_li.'" target="_blank" title="LinkedIn"><span class="fab fa-linkedin"></span><span class="sr-only">LinkedIn</span></a></li>';

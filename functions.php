@@ -378,7 +378,7 @@ if ( !function_exists('uams_get_site_info')):
 		$pri_dept = get_option( 'options_uamswp_institute_pri_dept' ); // get_field( 'uamswp_institute_pri_dept', 'option' ); // Psychiatric Research Institute Departments
 		$tri_dept = get_option( 'options_uamswp_institute_tri_dept' ); // get_field( 'uamswp_institute_tri_dept', 'option' ); // Translational Research Institute Departments
 		$cancer_dept = get_option( 'options_uamswp_institute_cancer_dept' ); // get_field( 'uamswp_institute_cancer_dept', 'option' ); // Cancer Institute Departments
-    		$ichi_dept = get_field( 'options_uamswp_institute_ichi_dept' ); // $ichi_dept = get_field( 'uamswp_institute_ichi_dept', 'option' ); // Institute for Community Health Innovation Departments
+    	$ichi_dept = get_field( 'options_uamswp_institute_ichi_dept' ); // $ichi_dept = get_field( 'uamswp_institute_ichi_dept', 'option' ); // Institute for Community Health Innovation Departments
 		$uamsorganization = get_option( 'options_uamswp_uams_subsite' ); // get_field( 'uamswp_uams_subsite', 'option' ); // college 
 		$cohp_dept = get_option( 'options_uamswp_uams_cohp_dept' ); // get_field( 'uamswp_uams_cohp_dept', 'option' ); // college of health prof dept
 		$com_dept = get_option( 'options_uamswp_uams_com_dept' ); // get_field( 'uamswp_uams_com_dept', 'option' ); // college of medicine dept
