@@ -238,6 +238,9 @@ function uamswp_footer_creds_text() {
                 $social_fb = 'https://www.facebook.com/UAMSDigitalHealth';
             } elseif ( 'institute_pri'  == $subsite ) {
                 $social_fb = 'https://www.facebook.com/PRI.UAMS';
+                $social_ig = 'https://www.instagram.com/uamspri/';
+                $social_tw = 'https://x.com/UAMSPRI';
+                $social_yt = 'https://www.youtube.com/playlist?list=PLfLqnwwjUFQuQ59nedZaDEP1H8Wg-YhvA';
             } elseif ( 'institute_tri' == $subsite ) {
                 $social_fb = 'https://www.facebook.com/uamstri';
                 $social_tw = 'https://twitter.com/TRI_UAMS';
