@@ -21,11 +21,17 @@
 
 			}
 
+			if ( empty($media_credit) ) {
+
+				$media_credit = wp_get_attachment_metadata($post->ID)['image_meta']['credit'];
+
+			}
+
 			$form_fields['media_credit'] = array(
 				'label' => esc_attr( 'Image Credit' ),
 				'input' => 'text',
 				'value' => esc_attr( $media_credit ),
-				'helps' => 'Original Credit: ' . esc_html( $media_meta["credit"] ),
+				'helps' => 'Original Credit: ' . ( $media_meta["credit"] ? esc_html( $media_meta["credit"] ) : esc_html( wp_get_attachment_metadata($post->ID)['image_meta']['credit'] )),
 			);
 
 		return $form_fields;
