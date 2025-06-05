@@ -1007,6 +1007,11 @@ add_action( 'init', function() {
 	// if ( WP_Block_Type_Registry::get_instance()->is_registered( 'tablepress/table' ) ) {
 	// 	// unregister_block_type( 'tablepress/table' );
 	// }
+	// FacetWP Blocks
+	// if ( $registry->get_registered( 'acf/uamswp-fad-facetwp-cards' ) ) {
+	// 	unregister_block_type( 'acf/uamswp-fad-facetwp-cards' );
+	// 	unregister_block_type( 'acf/uamswp-fad-facetwp-blocks' );
+	// }
 	// unregister_block_type( '' );
 }, PHP_INT_MAX );
 
