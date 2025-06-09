@@ -963,6 +963,13 @@ add_action( 'init', function() {
 	if ( $registry->get_registered( 'wpseopress/sitemap' ) ) {
 		unregister_block_type( 'wpseopress/faq-block' );
 		unregister_block_type( 'wpseopress/sitemap' );
+		unregister_block_type( 'wpseopress/local-business-field' );
+		unregister_block_type( 'wpseopress/local-business' );
+		unregister_block_type( 'wpseopress/breadcrumbs' );
+		unregister_block_type( 'wpseopress/how-to-step' );
+		unregister_block_type( 'wpseopress/how-to' );
+		unregister_block_type( 'wpseopress/table-of-contents' );
+		unregister_block_type( 'wpseopress/how-to-step' );
 	}
 	// SearchWP
 	if ( $registry->get_registered( 'searchwp/search-form' ) ) {
@@ -999,6 +1006,11 @@ add_action( 'init', function() {
 	// TablePress
 	// if ( WP_Block_Type_Registry::get_instance()->is_registered( 'tablepress/table' ) ) {
 	// 	// unregister_block_type( 'tablepress/table' );
+	// }
+	// FacetWP Blocks
+	// if ( $registry->get_registered( 'acf/uamswp-fad-facetwp-cards' ) ) {
+	// 	unregister_block_type( 'acf/uamswp-fad-facetwp-cards' );
+	// 	unregister_block_type( 'acf/uamswp-fad-facetwp-blocks' );
 	// }
 	// unregister_block_type( '' );
 }, PHP_INT_MAX );
