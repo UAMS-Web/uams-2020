@@ -340,7 +340,7 @@
 
 						$photo_credit = wp_get_attachment_metadata(
 							$block['attrs']['id'] // int // required // Attachment post ID. Defaults to global $post.
-						)['image_meta']['credit'];
+						)['image_meta']['credit'] ?? null;
 
 					}
 
