@@ -626,7 +626,7 @@ function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 
 	if ( ! function_exists( 'fly_add_image_size' ) ) {
 		return;
 	}
-	if ( empty($id) ) {
+	if ( empty($id) || empty(wp_get_attachment_image_src($id))) {
 		return; // Make sure we have value
 	}
 	$image_width = wp_get_attachment_image_src($id, 'full')[1];
