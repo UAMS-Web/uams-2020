@@ -265,6 +265,8 @@ function uamswp_footer_creds_text() {
             $social_ig = 'https://www.instagram.com/uamschp';
         } elseif ( startsWith($subsite, 'medicine') ) {
             $social_fb = 'https://www.facebook.com/UAMSCOM';
+            $social_tw = 'https://x.com/UAMS_COM';
+            $social_ig = 'https://www.instagram.com/uams_com/';
 
             if ( 'emergency-medicine' == $department) {
                 $social_fb = 'https://www.facebook.com/UAMSEmergencyMedicine';
