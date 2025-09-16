@@ -1,13 +1,15 @@
 <?php
 
 /**
- * Author: Sridhar Katakam
- * Link: https://sridharkatakam.com/
+ * Author: Todd McKee
  */
 
 remove_action( 'genesis_loop', 'genesis_do_loop' );
-add_action( 'genesis_loop', 'uamswp_do_searchwp_loop' );
-
+if ( class_exists( '\\SearchWP\\Query' ) ) {
+    add_action( 'genesis_loop', 'uamswp_do_searchwp_loop' );
+} else {
+    add_action( 'genesis_loop', 'uamswp_do_search_loop' );
+}
 // Remove search results page from google search results
 function sp_titles_robots($html) { 
 	$html = '<meta name="robots" content="noindex, noarchive, nosnippet"/>';
@@ -677,16 +679,16 @@ function uamswp_do_search_loop() {
 function uamswp_do_searchwp_loop() {
     global $post;
 
-    $args = [
-       's'  => get_search_query(),
-       'engine' => 'default', // The Engine name.
-    ];
+    // $args = [
+    //    's'  => get_search_query(),
+    //    'engine' => 'default', // The Engine name.
+    // ];
 
-    if ( ! empty( $args['s'] ) ) {
-        $swp_query = new SWP_Query( $args );
-    } else {
-        $swp_query = new WP_Query( $args );
-    }
+    // if ( ! empty( $args['s'] ) ) {
+    //     $swp_query = new SWP_Query( $args );
+    // } else {
+    //     $swp_query = new WP_Query( $args );
+    // }
 
     $current_blog_id = get_current_blog_id();
     // Open Layout
@@ -700,23 +702,24 @@ function uamswp_do_searchwp_loop() {
     echo uamswp_search_post_type_links();
     echo '</div>';
 
-    // SWP_Query
-    if ( $swp_query->have_posts() ) :
-        while ( $swp_query->have_posts() ) : 
-            $swp_query->the_post();
+    // The Loop
+    if ( have_posts() ) :
+        while ( have_posts() ) :
+            the_post();
             // Track whether we switched sites for this result.
             $switched_site = false;
 
+            $post_site = $post->site;
+            $pid = $post->id;
             // Do we need to switch to the proper site for this result?
             if ( $current_blog_id !== $post->site ) {
                 switch_to_blog( $post->site );
                 $switched_site = true;
-                $post = get_post( $post->id );
-            } else {
-                $post = get_post( $post->id );
             }
-
-            uamswp_get_template_part( 'results', $post->post_type, ['post_id' => $post->id, 'blog_id' => $post->site], '', STYLESHEETPATH .'/templates/parts' );   
+            /* Get the post */
+            $post = get_post( $post->id );
+            
+            uamswp_get_template_part( 'results', $post->post_type, ['post_id' => $pid, 'blog_id' => $post_site], '', STYLESHEETPATH .'/templates/parts' );   
 
             // If we switched sites, switch back!
             if ( $switched_site ) {
@@ -734,6 +737,23 @@ function uamswp_do_searchwp_loop() {
     echo '</div>'; // .col-12
     echo '</div>'; // .search-content
     genesis_posts_nav();
+    echo '<style>
+        .search-link {
+            font-size: small;
+            color: blue;
+        }
+        .search-excerpt {
+            /* line-height: 1.25; */
+        }
+        .search-type {
+            border: 1px solid transparent;
+            border-radius: 3px;
+            padding: .125em .25em;
+            background-color: #DCDADB;
+            font-size: .85em;
+            text-align: center;
+        }
+    </style>';
     echo '</div>'; // .container-fluid
     echo '</div>'; // .uams-module
 }
