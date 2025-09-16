@@ -11,42 +11,80 @@
 $post_id = $data['post_id'];
 $blog_id = $data['blog_id'];
 
-/* Needed to handle the blog switching */
-if ($blog_id !== get_current_blog_id()) {
-    switch_to_blog( $blog_id );
-}
+/**
+ * Retrieves post data and generates a summary article for display.
+ * This includes title, link, thumbnail (or default icon), date, and excerpt.
+ */
+
+// Retrieve the full post object using the provided post ID
 $post = get_post( $post_id );
-$post_title = get_the_title( $post_id );
-$post_link = get_permalink($post_id);
+
+// Get the post title (uses global $post if $post_id not specified, but here it relies on context)
+$post_title = get_the_title( );
+
+// Get the permalink for the post
+$post_link = get_the_permalink();
+
+// Initialize thumbnail variable as empty string
 $post_thumb = '';
+
+// Check if the post has a featured image/thumbnail
+if(has_post_thumbnail( $post_id )) {
+    // If yes, retrieve the HTML for the thumbnail image
+    $post_thumb = get_the_post_thumbnail( $post_id );
+}
+
+// Initialize excerpt variable as empty string
 $excerpt = '';
-if ( has_excerpt( $post->ID ) && !empty( trim($post->post_excerpt) ) ) {
-    $excerpt = get_the_excerpt( $post->ID );
+
+// Check if the post has a manually set excerpt
+if ( has_excerpt( $post_id ) ) {
+    // If yes, use the manual excerpt
+    $excerpt = get_the_excerpt( $post_id );
 } else {
+    // Otherwise, generate an automatic excerpt from the post content
+    $excerpt = wp_trim_excerpt( "", $post_id );
+}
+
+// If the excerpt is still empty after the above, create a custom one
+if ( empty($excerpt) ) {
     /* Make a custom excerpt */
+    // Get the post content and remove shortcodes
     $text = strip_shortcodes( $post->post_content );
+    // Apply content filters (e.g., for paragraphs, etc.)
     $text = apply_filters( 'the_content', $text );
+    // Escape CDATA closing tags to prevent XML issues
     $text = str_replace(']]>', ']]&gt;', $text);
-    $excerpt = wp_trim_words( $text, 20, '... <a class="more-link" href="' . $post_link . '">Continue Reading</a>' );
+    // Trim to 20 words and append ellipsis
+    $excerpt = wp_trim_words( $text, 20, '... ' );
 } 
+
+// Commented-out debug line for post and blog IDs
+// echo 'Post ID: ' . $data['post_id'] . ' Blog ID: ' . $data['blog_id'];
 ?>
-<!-- <p><?php echo 'Post ID: ' .$post->ID . ' Blog ID: ' . $blog_id; ?></p> -->
-<article class="post-summary type-post entry">
-<h3 class="h4"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></h3>
-<div class="row">
-    <div class="col-2">
-    <?php if ($post_thumb) {
-            echo $post_thumb;
-        } else { ?>
-            <!-- News icon -->
-            <img src="data:image/png;base64,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"/>
+<!-- Display the post as a summary article with Bootstrap classes -->
+<article class="post-summary type-post entry pb-4">
+    <!-- Post title as a heading with link to full post -->
+    <h3 class="h4"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></h3>
+    
+    <!-- Row for thumbnail/icon and excerpt content -->
+    <div class="row">
+        <!-- Column for thumbnail or default icon (2/12 width) -->
+        <div class="col-2">
+        <?php if ($post_thumb) {
+                // If thumbnail exists, output it
+                echo $post_thumb;
+            } else { ?>
+                <!-- Fallback: News icon as a base64-encoded PNG image -->
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTIgNy41SDEzLjVNMTIgMTAuNUgxMy41TTYgMTMuNUgxMy41TTYgMTYuNUgxMy41TTE2LjUgNy41SDE5Ljg3NUMyMC40OTYzIDcuNSAyMSA4LjAwMzY4IDIxIDguNjI1VjE4QzIxIDE5LjI0MjYgMTkuOTkyNiAyMC4yNSAxOC43NSAyMC4yNU0xNi41IDcuNVYxOEMxNi41IDE5LjI0MjYgMTcuNTA3NCAyMC4yNSAxOC43NSAyMC4yNU0xNi41IDcuNVY0Ljg3NUMxNi41IDQuMjUzNjggMTUuOTk2MyAzLjc1IDE1LjM3NSAzLjc1SDQuMTI1QzMuNTAzNjggMy43NSAzIDQuMjUzNjggMyA0Ljg3NVYxOEMzIDE5LjI0MjYgNC4wMDczNiAyMC4yNSA1LjI1IDIwLjI1SDE4Ljc1TTYgNy41SDlWMTAuNUg2VjcuNVoiIHN0cm9rZT0iI0E5QTdBOCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K" alt="News Icon - No image available"/>
         <?php } ?>
+        <!-- Label indicating the post type -->
+        <div class="search-type">News</div>
+        </div>
+        <!-- Main content column (10/12 width) -->
+        <div class="col-10">
+            <!-- Date and excerpt display -->
+            <div class="search-excerpt"><em><?php echo get_the_date('F j, Y', $post_id); ?></em> &ndash; <?php echo $excerpt; ?></div>
+        </div>
     </div>
-    <div class="col-10">
-        <p><?php echo $post_link; ?></p>
-        <p><?php echo $excerpt; ?></p>
-        <p>Post</p>
-        <p><?php echo get_the_date('F j, Y', $post_id); ?></p>
-    </div>
-</div>
 </article>
