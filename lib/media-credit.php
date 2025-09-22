@@ -21,11 +21,11 @@
 
 			}
 
-			if ( !isset($media_credit) ) {
-
-				$media_credit = wp_get_attachment_metadata($post->ID)['image_meta']['credit'];
-
-			}
+			// if ( !isset($media_credit) ) {
+			//
+			// 	$media_credit = wp_get_attachment_metadata($post->ID)['image_meta']['credit'];
+			//
+			// }
 
 			$form_fields['media_credit'] = array(
 				'label' => esc_attr( 'Image Credit' ),
