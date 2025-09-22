@@ -961,7 +961,7 @@ add_action( 'init', function() {
 	// All extra blocks
 	// WP SEO
 	if ( $registry->get_registered( 'wpseopress/sitemap' ) ) {
-		unregister_block_type( 'wpseopress/faq-block' );
+		// unregister_block_type( 'wpseopress/faq-block' );
 		unregister_block_type( 'wpseopress/sitemap' );
 		unregister_block_type( 'wpseopress/local-business-field' );
 		unregister_block_type( 'wpseopress/local-business' );
@@ -980,10 +980,10 @@ add_action( 'init', function() {
 		unregister_block_type( 'minervakb/tip' );
 		unregister_block_type( 'minervakb/info' );
 		unregister_block_type( 'minervakb/warning' );
-		unregister_block_type( 'minervakb/faq' );
-		unregister_block_type( 'minervakb/topics' );
-		unregister_block_type( 'minervakb/topic' );
-		unregister_block_type( 'minervakb/search' );
+		// unregister_block_type( 'minervakb/faq' );
+		// unregister_block_type( 'minervakb/topics' );
+		// unregister_block_type( 'minervakb/topic' );
+		// unregister_block_type( 'minervakb/search' );
 		unregister_block_type( 'minervakb/related' );
 		unregister_block_type( 'minervakb/article-content' );
 		unregister_block_type( 'minervakb/guestpost' );
@@ -994,9 +994,9 @@ add_action( 'init', function() {
 	}
 	// Formidable
 	if ( $registry->get_registered( 'formidable/simple-form' ) ) {
-		unregister_block_type( 'formidable/simple-form' );
+		// unregister_block_type( 'formidable/simple-form' );
 		unregister_block_type( 'frm-charts/graph' );
-		unregister_block_type( 'formidable/simple-view' );
+		// unregister_block_type( 'formidable/simple-view' );
 		unregister_block_type( 'formidable/calculator' );
 	}
 	// Gravity Forms
@@ -1019,20 +1019,20 @@ add_filter( 'allowed_block_types_all', function( $allowed_blocks, $editor_contex
     $blocks = array_keys( WP_Block_Type_Registry::get_instance()->get_all_registered() );
 
     $removelist = [
-		'core/html',
+		// 'core/html',
 		'core/latest-comments',
 		'core/nextpage',
 		'core/page-list',
 		'core/page-list-item',
 		'core/pattern',
-		'core/preformatted',
-		'core/block',
-		'core/rss',
+		// 'core/preformatted',
+		// 'core/block',
+		// 'core/rss',
 		'core/search',
 		// 'core/separator',
 		// 'core/shortcode',
 		'core/spacer',
-		'core/table',
+		// 'core/table',
 		'core/footnotes',
 		'core/navigation',
 		'core/navigation-link',
