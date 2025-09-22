@@ -626,7 +626,7 @@ function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 
 	if ( ! function_exists( 'fly_add_image_size' ) ) {
 		return;
 	}
-	if ( ! $id ) {
+	if ( empty($id) || empty(wp_get_attachment_image_src($id))) {
 		return; // Make sure we have value
 	}
 	$image_width = wp_get_attachment_image_src($id, 'full')[1];
@@ -955,3 +955,133 @@ function my_retrieve_password_message( $message, $key, $user_login, $user_data )
     // Return the filtered message.
     return $message;
 }
+/* Unregister blocks */
+add_action( 'init', function() {
+	$registry = WP_Block_Type_Registry::get_instance();
+	// All extra blocks
+	// WP SEO
+	if ( $registry->get_registered( 'wpseopress/sitemap' ) ) {
+		// unregister_block_type( 'wpseopress/faq-block' );
+		unregister_block_type( 'wpseopress/sitemap' );
+		unregister_block_type( 'wpseopress/local-business-field' );
+		unregister_block_type( 'wpseopress/local-business' );
+		unregister_block_type( 'wpseopress/breadcrumbs' );
+		unregister_block_type( 'wpseopress/how-to-step' );
+		unregister_block_type( 'wpseopress/how-to' );
+		unregister_block_type( 'wpseopress/table-of-contents' );
+		unregister_block_type( 'wpseopress/how-to-step' );
+	}
+	// SearchWP
+	if ( $registry->get_registered( 'searchwp/search-form' ) ) {
+		unregister_block_type( 'searchwp/search-form' );
+	}
+	// Minerva KB
+	if ( $registry->get_registered( 'minervakb/faq' ) ) {
+		unregister_block_type( 'minervakb/tip' );
+		unregister_block_type( 'minervakb/info' );
+		unregister_block_type( 'minervakb/warning' );
+		// unregister_block_type( 'minervakb/faq' );
+		// unregister_block_type( 'minervakb/topics' );
+		// unregister_block_type( 'minervakb/topic' );
+		// unregister_block_type( 'minervakb/search' );
+		unregister_block_type( 'minervakb/related' );
+		unregister_block_type( 'minervakb/article-content' );
+		unregister_block_type( 'minervakb/guestpost' );
+	}
+	// Ajax Search Pro
+	if ( $registry->get_registered( 'ajax-search-pro/block-asp-main' ) ) {
+		unregister_block_type( 'ajax-search-pro/block-asp-main' );
+	}
+	// Formidable
+	if ( $registry->get_registered( 'formidable/simple-form' ) ) {
+		// unregister_block_type( 'formidable/simple-form' );
+		unregister_block_type( 'frm-charts/graph' );
+		// unregister_block_type( 'formidable/simple-view' );
+		unregister_block_type( 'formidable/calculator' );
+	}
+	// Gravity Forms
+	// if ( WP_Block_Type_Registry::get_instance()->is_registered( 'wpseopress/sitemap' ) ) {
+	// 	// unregister_block_type( 'gravityforms/form' );
+	// }
+	// TablePress
+	// if ( WP_Block_Type_Registry::get_instance()->is_registered( 'tablepress/table' ) ) {
+	// 	// unregister_block_type( 'tablepress/table' );
+	// }
+	// FacetWP Blocks
+	// if ( $registry->get_registered( 'acf/uamswp-fad-facetwp-cards' ) ) {
+	// 	unregister_block_type( 'acf/uamswp-fad-facetwp-cards' );
+	// 	unregister_block_type( 'acf/uamswp-fad-facetwp-blocks' );
+	// }
+	// unregister_block_type( '' );
+}, PHP_INT_MAX );
+
+add_filter( 'allowed_block_types_all', function( $allowed_blocks, $editor_context ) {
+    $blocks = array_keys( WP_Block_Type_Registry::get_instance()->get_all_registered() );
+
+    $removelist = [
+		// 'core/html',
+		'core/latest-comments',
+		'core/nextpage',
+		'core/page-list',
+		'core/page-list-item',
+		'core/pattern',
+		// 'core/preformatted',
+		// 'core/block',
+		// 'core/rss',
+		'core/search',
+		// 'core/separator',
+		// 'core/shortcode',
+		'core/spacer',
+		// 'core/table',
+		'core/footnotes',
+		'core/navigation',
+		'core/navigation-link',
+		'core/navigation-submenu',
+		'core/site-logo',
+		'core/site-title',
+		'core/site-tagline',
+		'core/query',
+		'core/template-part',
+		'core/avatar',
+		'core/post-title',
+		'core/post-excerpt',
+		'core/post-featured-image',
+		'core/post-content',
+		'core/post-author',
+		'core/post-author-name',
+		'core/post-date',
+		'core/post-terms',
+		'core/post-navigation-link',
+		'core/post-template',
+		'core/query-pagination',
+		'core/query-pagination-next"',
+		'core/query-pagination-numbers',
+		'core/query-pagination-previous',
+		'core/query-no-results',
+		'core/query-total',
+		'core/read-more',
+		'core/comments',
+		'core/comment-author-name',
+		'core/comment-content',
+		'core/comment-date',
+		'core/comment-edit-link',
+		'core/comment-reply-link',
+		'core/comment-template',
+		'core/comments-title',
+		'core/comments-pagination',
+		'core/comments-pagination-next',
+		'core/comments-pagination-numbers',
+		'core/comments-pagination-previous',
+		'core/post-comments-form',
+		'core/home-link',
+		'core/loginout',
+		'core/term-description',
+		'core/query-title',
+		'core/post-author-biography',
+		'core/freeform',
+		// 'core/legacy-widget',
+		'core/widget-group',
+    ];
+
+    return array_values( array_diff( $blocks, $removelist ) );
+}, 100, 2 );

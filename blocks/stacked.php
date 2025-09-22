@@ -29,6 +29,12 @@ if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
 }   
 
+// PHP variables
+$more_text = '';
+$more_button_text = '';
+$more_button_url = '';
+$more_button_target = '';
+
 // Load values.
 if ( empty($heading) )
     $heading = get_field('stacked_heading');
@@ -47,7 +53,7 @@ if ( $more ) {
         $more_button_text = get_field('stacked_more_button_text');
     if ( empty($more_button_url) )
         $more_button_url = get_field('stacked_more_button_url');
-    if ( empty($more_button_target) ) 
+    if ( empty($more_button_target) && is_array($more_button_url) )
         $more_button_target = $more_button_url['target'];
     if ( empty($more_button_description) )
         $more_button_description = get_field('stacked_more_button_description');
@@ -155,7 +161,7 @@ if( $stacked_rows ) :
                 <div class="col-12 more">
                     <p class="lead"><?php echo $more_text; ?></p>
                     <div class="cta-container">
-                        <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                        <a href="<?php echo $more_button_url['url'] ?? ''; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
                     </div>
                 </div>
             <?php } // endif ?>
