@@ -265,6 +265,8 @@ function uamswp_footer_creds_text() {
             $social_ig = 'https://www.instagram.com/uamschp';
         } elseif ( startsWith($subsite, 'medicine') ) {
             $social_fb = 'https://www.facebook.com/UAMSCOM';
+            $social_tw = 'https://x.com/UAMS_COM';
+            $social_ig = 'https://www.instagram.com/uams_com/';
 
             if ( 'emergency-medicine' == $department) {
                 $social_fb = 'https://www.facebook.com/UAMSEmergencyMedicine';
@@ -354,6 +356,7 @@ function uamswp_footer_creds_text() {
             echo '<li class="nav-item"><a class="nav-link" href="https://hipaa.uams.edu/forms/notice-of-privacy-practices-information/" target="_blank">Notice of Privacy Practices</a></li>';
             echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/patients-and-guests/patient-support/billing/price-transparency/" target="_blank">Price Transparency</a></li>';
         }
+        echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/legal-notices/" target="_blank">Legal Notices</a></li>';
         //echo '<li class="nav-item"><a class="nav-link" href="/sitemap">Site Map</a></li>';
     echo '</ul></div>';
 
