@@ -334,7 +334,7 @@
 			if ( $block['blockName'] == 'core/image' ) {
 
 				// Get the media credit meta key value from the asset in the media library
-				if (isset($block['attrs']['id'])) {
+				if (is_array($block['attrs']) && isset($block['attrs']['id'])) {
 					$photo_credit = get_post_meta(
 						$block['attrs']['id'], // int // required // Post ID
 						'_media_credit', // string // optional // The meta key to retrieve. By default, returns data for all keys. (Default: '')
