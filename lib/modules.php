@@ -262,9 +262,27 @@ function uamswp_module( $module = array(), $i = false ) {
                 $description = $module['gallery_description'];
                 $gallery_columns = $module['gallery_columns'];
                 $gallery_images = $module['gallery_images'];
+                $gallery_crop = $module['gallery_crop'];
+                if ( $gallery_crop == 'none' || $gallery_crop[0] == 'none' ) {
+                    $gallery_crop = -1;
+                }
                 $background_color = $module['gallery_background_color'];
                 $geo = $module['gallery_geo'];
                 $geo_region = $module['gallery_geo_region'];
+                $modal = $module['gallery_modal'];
+                $more = $module['gallery_more'];
+                if ($more) {
+                    $more_text = $module['gallery_more_text'] ?? '';
+                    $more_button_text = $module['gallery_more_button_text'] ?? '';
+                    $more_button_url = $module['gallery_more_button_url'] ?? '';
+                    $more_button_target = $more_button_url['target'] ?? '';
+                    $more_button_description = $module['gallery_more_button_description'] ?? '';
+                    if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto' ) ) {
+                        $more_button_color = 'primary';
+                    } else {
+                        $more_button_color = 'white';
+                    }
+                }
     
                 include( get_stylesheet_directory() .'/blocks/gallery.php' );
     
