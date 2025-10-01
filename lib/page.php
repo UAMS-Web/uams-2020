@@ -106,7 +106,7 @@ function uamswp_graphic_title_inner_1()
     if ( empty($page_cover_image) ) 
     $page_cover_image = get_field('page_cover_image', get_the_id());
     
-    if ($page_cover_image && function_exists( 'fly_add_image_size' ) ) {
+    if ($page_cover_image && function_exists( 'bis_get_attachment_image' ) ) {
         echo '<style>
         .entry-header:before {
             background-image: url("' . image_sizer($page_cover_image, 566, 216, 'center', 'center') . '");
@@ -281,7 +281,7 @@ function uamswp_landing_page_title_inner_1()
     if ( empty($page_landing_page_cover_image_mobile) ) 
     $page_landing_page_cover_image_mobile = $page_landing_page_cover_image; // fallback to desktop image
     
-    if ($page_landing_page_cover_image && function_exists( 'fly_add_image_size' ) ) {
+    if ($page_landing_page_cover_image && function_exists( 'bis_get_attachment_image' ) ) {
         echo '<style>
         .entry-header:before {
             background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 576, 468, 'center', 'center') . '");

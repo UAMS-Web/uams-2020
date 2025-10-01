@@ -126,7 +126,7 @@ if( $stacked_rows ) :
                             <div class="card">
                                 <div class="card-img-top">
                                     <picture>
-                                        <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
+                                        <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>  
                                             <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 910, 512, 'center', 'center'); ?> 2x" 
                                                 media="(min-width: 1921px)">
                                             <source srcset="<?php echo image_sizer($image, 433, 244, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 866, 487, 'center', 'center'); ?> 2x" 

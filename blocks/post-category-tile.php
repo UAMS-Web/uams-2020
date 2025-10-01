@@ -106,7 +106,7 @@ if ( empty( $cat_button_text ) )
                 <?php if ($image) { ?>
                     <div class="image-container">
                         <picture>
-                        <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>      
+                        <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>      
                             <!-- 1:1 Aspect Ratio -->
                             <source 
                                 media="(min-width: 1921px)" 
