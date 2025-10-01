@@ -63,6 +63,7 @@ class UAMSWP_Call_Out_Widget extends WP_Widget {
     * @param array $instance Previously saved values from database.
     */
     public function form( $instance ) {
+        $title = '';
         if ( isset($instance['title']) ) {
             $title = $instance['title'];
         }
@@ -147,13 +148,14 @@ class UAMSWP_CTA_Widget extends WP_Widget {
     * @param array $instance Previously saved values from database.
     */
     public function form( $instance ) {
+        $title = '';
         if ( isset($instance['title']) ) {
             $title = $instance['title'];
         }
     ?>
     <p>
       <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title (Not Displayed)' ); ?></label>
-      <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+      <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ) ?? ''; ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
     </p>
     <?php
     }
