@@ -83,7 +83,7 @@ if( $overlay_rows ) :
 
 ?>
             <section class="col-12<?php echo $row_count > 1 ? " col-sm-6" : ""; ?> item bg-image item-<?php echo $index; ?> <?php echo $background_color; ?>" aria-label="<?php echo $heading; ?>">
-                <?php if ( $row_count > 1 && function_exists( 'fly_add_image_size' ) ) { // Background styles for two tiles in one row with Fly plugin ?>
+                <?php if ( $row_count > 1 && function_exists( 'bis_get_attachment_image' ) ) { // Background styles for two tiles in one row with BIS plugin ?>
                 <style>
                     #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
                         background-image: url("<?php echo image_sizer($image, 576, 432, 'center', 'center'); ?>");
@@ -187,7 +187,7 @@ if( $overlay_rows ) :
                         }
                     }
                 </style>
-                <?php } elseif ( function_exists( 'fly_add_image_size' ) ) { // Background styles for one tile in one row with Fly plugin ?>
+                <?php } elseif ( function_exists( 'bis_get_attachment_image' ) ) { // Background styles for one tile in one row with BIS plugin ?>
                 <style>
                     #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
                         background-image: url("<?php echo image_sizer($image, 576, 432, 'center', 'center'); ?>");
@@ -291,7 +291,7 @@ if( $overlay_rows ) :
                         }
                     }
                 </style>
-                <?php } else { // Background styles for no Fly plugin ?>
+                <?php } else { // Background styles for no BIS plugin ?>
                 <style>
                     #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
                             background-image: url("<?php echo wp_get_attachment_image_url( $image, 'aspect-4-3' ); ?>");

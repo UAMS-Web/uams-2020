@@ -114,7 +114,7 @@ if ($geo_display) :
         <div class="row">
             <div class="col-12 col-md-6 image-container" aria-label="<?php echo $image_alt ?>" role="img">
 
-                <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+                <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
                 <style>
                     #side-by-side-<?php echo esc_attr($id); ?> .image-container {
                         background-image: url("<?php echo image_sizer($side_image, 576, 324, $image_anchor, $image_crop); ?>");

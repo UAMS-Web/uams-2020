@@ -117,7 +117,7 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
 if ($geo_display) :
 ?>
 <section class="uams-module cta-bar <?php echo $className; ?> <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?><?php echo $size == 'small' ? ' cta-bar-sm' : ''; ?><?php echo $size == 'large' ? ' extra-padding cta-bar-lg' : ''; ?><?php echo $action_type == 'none' ? ' no-link' : ''; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
-<?php if ( $use_image && function_exists( 'fly_add_image_size' ) ) { ?>
+<?php if ( $use_image && function_exists( 'bis_get_attachment_image' ) ) { ?>
     <style>
         #<?php echo $id; ?>:before {
             background-image: url("<?php echo image_sizer($image, 576, 288, 'center', 'center'); ?>");

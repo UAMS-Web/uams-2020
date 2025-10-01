@@ -139,7 +139,7 @@ if ($geo_display) :
                                             <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>" aria-label="Show larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': ' . $image_alt : ''; ?>">
                                         <?php } // endif ?>
                                         <picture>
-                                            <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
+                                            <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>  
                                                 <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xxl', 12 / $lg, 1), gallery_image_dimension('xxl', 12 / $lg, 1, $gallery_crop), 'center', 'center'); ?>" 
                                                     media="(min-width: 1921px)">
                                                 <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xl', 12 / $lg, 1), gallery_image_dimension('xl', 12 / $lg, 1, $gallery_crop), 'center', 'center'); ?>" 
@@ -174,7 +174,7 @@ if ($geo_display) :
                                                 </div>
                                                 <div class="modal-body">
                                                     <figure class="figure">
-                                                        <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+                                                        <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
                                                             <picture>
                                                                 <source srcset="<?php echo image_sizer($image_id, 1106, -1, 'center', 'center'); ?>" media="(min-width: 1200px)">
                                                                 <source srcset="<?php echo image_sizer($image_id, 1094, -1, 'center', 'center'); ?>" media="(min-width: 992px)">

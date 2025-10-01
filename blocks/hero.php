@@ -161,7 +161,7 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
         ?><?php echo (0 == ($index - 1) ? ' active' : ''); ?>" id="carousel-item-<?php echo ($index - 1); ?>">
             <div class="image-container">
                 <picture>
-                    <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+                    <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
                     <!-- Desktop Image, Aspect ratio 1.8685:1 -->
                     <source srcset="<?php echo image_sizer($image_desktop, 1435, 768, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_desktop, 2870, 1536, 'center', 'center'); ?> 2x"
                         media="(min-width: 1921px)">

@@ -107,7 +107,7 @@ if( $post_tiles_rows ) :
                     <?php if ($image) { ?>
                     <div class="card-img-top">
                         <picture>
-                            <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
+                            <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>  
                             <!-- 16:9 Aspect Ratio -->
                             <source 
                                 media="(min-width: 1500px)" 
