@@ -107,6 +107,8 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
         $body = $hero_row['hero_body'] ?: 'This is where the description goes'; // Required
     // if ( empty($button_text) )
         $button_text = $hero_row['hero_button_text'] ?: '';
+        $button_url = '';
+        $button_target = '';
         if( $hero_row['hero_button_url'] ) {
         // if ( empty($button_url) )
             $button_url = $hero_row['hero_button_url']['url'] ?: '';
