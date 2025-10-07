@@ -111,22 +111,22 @@ if( $post_tiles_rows ) :
                             <!-- 16:9 Aspect Ratio -->
                             <source 
                                 media="(min-width: 1500px)" 
-                                srcset="<?php echo image_sizer($image, 556, 313, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 1112, 626, 'center', 'center'); ?> 2x">
+                                srcset="<?php echo image_sizer($image, 556, 313, 'center', 'center'); ?> 1x">
                             <source 
                                 media="(min-width: 1200px)" 
-                                srcset="<?php echo image_sizer($image, 428, 241, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 856, 482, 'center', 'center'); ?> 2x">
+                                srcset="<?php echo image_sizer($image, 428, 241, 'center', 'center'); ?> 1x">
                             <source 
                                 media="(min-width: 992px)" 
-                                srcset="<?php echo image_sizer($image, 328, 185, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 656, 369, 'center', 'center'); ?> 2x">
+                                srcset="<?php echo image_sizer($image, 328, 185, 'center', 'center'); ?> 1x">
                             <source 
                                 media="(min-width: 768px)" 
-                                srcset="<?php echo image_sizer($image, 424, 239, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 848, 477, 'center', 'center'); ?> 2x">
+                                srcset="<?php echo image_sizer($image, 424, 239, 'center', 'center'); ?> 1x">
                             <source 
                                 media="(min-width: 576px)" 
-                                srcset="<?php echo image_sizer($image, 631, 355, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 1262, 710, 'center', 'center'); ?> 2x">
+                                srcset="<?php echo image_sizer($image, 631, 355, 'center', 'center'); ?> 1x">
                             <source 
                                 media="(min-width: 1px)" 
-                                srcset="<?php echo image_sizer($image, 512, 288, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 1024, 576, 'center', 'center'); ?> 2x">
+                                srcset="<?php echo image_sizer($image, 512, 288, 'center', 'center'); ?> 1x">
                             <!-- Fallback -->
                             <img src="<?php echo image_sizer($image, 556, 313, 'center', 'center'); ?>" alt="" />
                             <?php } else { ?>

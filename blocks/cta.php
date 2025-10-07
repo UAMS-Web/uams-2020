@@ -123,26 +123,10 @@ if ($geo_display) :
             background-image: url("<?php echo image_sizer($image, 576, 288, 'center', 'center'); ?>");
         }
 
-        /* XXS Breakpoint, retina */
-        @media (-webkit-min-device-pixel-ratio: 2),
-        (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1152, 576, 'center', 'center'); ?>");
-            }
-        }
-
         /* XS Breakpoint */
         @media (min-width: 576px) {
             #<?php echo $id; ?>:before {
                 background-image: url("<?php echo image_sizer($image, 768, 384, 'center', 'center'); ?>");
-            }
-        }
-
-        /* XS Breakpoint, retina */
-        @media (min-width: 576px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 576px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1536, 768, 'center', 'center'); ?>");
             }
         }
 
@@ -153,26 +137,10 @@ if ($geo_display) :
             }
         }
 
-        /* SM Breakpoint, retina */
-        @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 768px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1984, 992, 'center', 'center'); ?>");
-            }
-        }
-
         /* MD Breakpoint */
         @media (min-width: 992px) {
             #<?php echo $id; ?>:before {
                 background-image: url("<?php echo image_sizer($image, 1200, 600, 'center', 'center'); ?>");
-            }
-        }
-
-        /* MD Breakpoint, retina */
-        @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 992px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 2400, 1200, 'center', 'center'); ?>");
             }
         }
 
@@ -183,14 +151,6 @@ if ($geo_display) :
             }
         }
 
-        /* LG Breakpoint, retina */
-        @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1200px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 3000, 1500, 'center', 'center'); ?>");
-            }
-        }
-
         /* XL Breakpoint */
         @media (min-width: 1500px) {
             #<?php echo $id; ?>:before {
@@ -198,26 +158,10 @@ if ($geo_display) :
             }
         }
 
-        /* XL Breakpoint, retina */
-        @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1500px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 3842, 1921, 'center', 'center'); ?>");
-            }
-        }
-
         /* XXL Breakpoint */
         @media (min-width: 1921px) {
             #<?php echo $id; ?>:before {
                 background-image: url("<?php echo image_sizer($image, 2560, 1280, 'center', 'center'); ?>");
-            }
-        }
-
-        /* XXL Breakpoint, retina */
-        @media (min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1921px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 5120, 2560, 'center', 'center'); ?>");
             }
         }
     </style>
