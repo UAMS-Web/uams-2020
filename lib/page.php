@@ -274,7 +274,7 @@ function uamswp_landing_page_title_inner_1()
         }
     </style>';
     }
-    elseif ($page_cover_image) {
+    elseif ($page_landing_page_cover_image) {
         echo '<style>
             .entry-header:before {
                 background-image: url("' . wp_get_attachment_url( $page_landing_page_cover_image, 'full' ) . '");
