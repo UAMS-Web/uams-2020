@@ -647,17 +647,20 @@ class SlidingWindowRateLimiter {
 /**
  * Queues image resizing tasks to reduce server load.
  * Uses transients to store queue and WP_Cron to process tasks.
- * 
- * Return sized image url.
- *
- * @param integer  $id 			// id of image
- * @param integer  $prefwidth	// Preferred Output width. Set as -1 to inherit width as native ratio of prefered height.
- * @param string   $prefheight	// Preferred Output height. Set as -1 to inherit width as native ratio of prefered width.
- * @param string   $hcrop		// horizontal crop position (left, center, right)
- * @param string   $vcrop		// vertical crop position (top, center, bottom)
- * @return string				// image url
+ * Accepts a fallback image size name for use during queue processing.
  */
-function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center') {
+
+/**
+ * Modified image_sizer function to queue resizing tasks with specified fallback size
+ * @param int $id Attachment ID
+ * @param int $prefwidth Preferred width
+ * @param int $prefheight Preferred height
+ * @param string $hcrop Horizontal crop position (default: 'center')
+ * @param string $vcrop Vertical crop position (default: 'center')
+ * @param string $fallback_size WordPress image size name to use as fallback (default: 'full')
+ * @return string Image URL (cached, fallback, or original)
+ */
+function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center', $fallback_size = 'full') {
     if (!function_exists('bis_get_attachment_image') || empty($id) || empty(wp_get_attachment_image_src($id))) {
         return; // Validate input
     }
@@ -706,12 +709,20 @@ function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = '
         }
         $params = ['width' => $prefwidth, 'height' => $prefheight, 'hcrop' => $hcrop, 'vcrop' => $vcrop];
     } else {
-        // Perfect ratio => No crop, return original
-        return wp_get_attachment_url($id, 'full');
+        // Perfect ratio => No crop, return fallback size
+        return image_sizer_get_fallback($id, $fallback_size);
+    }
+
+    // Check for duplicate jobs in queue
+    $queue = get_option('image_sizer_queue', []);
+    $job_key = md5($id . serialize($params));
+    foreach ($queue as $job) {
+        if (md5($job['id'] . serialize($job['params'])) === $job_key) {
+            return image_sizer_get_fallback($id, $fallback_size); // Duplicate found, return fallback
+        }
     }
 
     // Add to queue
-    $queue = get_option('image_sizer_queue', []);
     $queue[] = [
         'id' => $id,
         'params' => $params,
@@ -721,20 +732,47 @@ function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = '
 
     // Schedule cron if not already scheduled
     if (!wp_next_scheduled('process_image_sizer_queue')) {
-        wp_schedule_event(time(), 'five_seconds', 'process_image_sizer_queue');
+        wp_schedule_event(time(), 'ten_seconds', 'process_image_sizer_queue');
     }
 
-    // Return original image as fallback until processed
-    return wp_get_attachment_url($id, 'full');
+    // Return fallback image size
+    return image_sizer_get_fallback($id, $fallback_size);
+}
+
+/**
+ * Helper function to get the specified WordPress image size as fallback
+ * @param int $id Attachment ID
+ * @param string $fallback_size WordPress image size name
+ * @return string Image URL
+ */
+function image_sizer_get_fallback($id, $fallback_size) {
+    // Allow overriding default fallback size via filter
+    $default_fallback = apply_filters('image_sizer_default_fallback', 'full');
+    $fallback_size = $fallback_size ?: $default_fallback;
+
+    // Check if the fallback size exists for the attachment
+    $image_src = wp_get_attachment_image_src($id, $fallback_size);
+    if ($image_src && !empty($image_src[0])) {
+        return $image_src[0]; // Return the specified size URL
+    }
+
+    // Debug: Log when fallback size is not found (only if WP_DEBUG is enabled)
+    if (defined('WP_DEBUG') && WP_DEBUG && $fallback_size !== $default_fallback) {
+        error_log("Image Sizer: Fallback size '$fallback_size' not found for attachment ID $id. Using '$default_fallback'.");
+    }
+
+    // Fall back to default size if specified size doesn't exist
+    $image_src = wp_get_attachment_image_src($id, $default_fallback);
+    return $image_src[0] ?: '';
 }
 
 /**
  * Register custom cron schedule
  */
 add_filter('cron_schedules', function ($schedules) {
-    $schedules['five_seconds'] = [
-        'interval' => 5, // 5 seconds
-        'display' => __('Every Five Seconds')
+    $schedules['ten_seconds'] = [
+        'interval' => 10, // 10 seconds
+        'display' => __('Every Ten Seconds')
     ];
     return $schedules;
 });
@@ -769,7 +807,7 @@ add_action('process_image_sizer_queue', function () {
         )['src'];
 
         // Cache result for 30 days
-        set_transient($transient_key, $image_url, 30 * DAY_IN_SECONDS);
+        set_transient($transient_key, $image_url, 5 * DAY_IN_SECONDS);
 
         // Remove from queue
         unset($queue[$index]);
@@ -783,6 +821,38 @@ add_action('process_image_sizer_queue', function () {
         wp_clear_scheduled_hook('process_image_sizer_queue');
     } else {
         update_option('image_sizer_queue', array_values($queue), false);
+    }
+});
+
+/**
+ * Add admin action to manually trigger queue processing
+ */
+add_action('admin_init', function () {
+    if (isset($_GET['process_image_queue']) && current_user_can('manage_options')) {
+        check_admin_referer('process_image_queue_nonce');
+        do_action('process_image_sizer_queue');
+        wp_redirect(admin_url('upload.php?queue_processed=1'));
+        exit;
+    }
+});
+
+/**
+ * Add manual trigger link to media library
+ */
+add_action('admin_notices', function () {
+    if (get_current_screen()->id !== 'upload' || !current_user_can('manage_options')) {
+        return;
+    }
+    $queue = get_option('image_sizer_queue', []);
+    if (!empty($queue)) {
+        $url = wp_nonce_url(admin_url('upload.php?process_image_queue=1'), 'process_image_queue_nonce');
+        echo '<div class="notice notice-info"><p>';
+        echo 'Image resizing queue has ' . count($queue) . ' pending jobs. ';
+        echo '<a href="' . esc_url($url) . '">Process now</a>';
+        echo '</p></div>';
+    }
+    if (isset($_GET['queue_processed'])) {
+        echo '<div class="notice notice-success is-dismissible"><p>Image queue processed successfully.</p></div>';
     }
 });
 
