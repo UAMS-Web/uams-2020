@@ -86,208 +86,96 @@ if( $overlay_rows ) :
                 <?php if ( $row_count > 1 && function_exists( 'bis_get_attachment_image' ) ) { // Background styles for two tiles in one row with BIS plugin ?>
                 <style>
                     #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                        background-image: url("<?php echo image_sizer($image, 576, 432, 'center', 'center'); ?>");
-                    }
-
-                    /* XXS Breakpoint, retina */
-                    @media (-webkit-min-device-pixel-ratio: 2),
-                    (min-resolution: 192dpi) {
-                        #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 1152, 864, 'center', 'center'); ?>");
-                        }
+                        background-image: url("<?php echo image_sizer($image, 576, 432, 'center', 'center', 'aspect-4-3-small'); ?>");
                     }
 
                     /* XS Breakpoint */
                     @media (min-width: 576px) {
                         #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 768, 576, 'center', 'center'); ?>");
-                        }
-                    }
-
-                    /* XS Breakpoint, retina */
-                    @media (min-width: 576px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 576px) and (min-resolution: 192dpi) {
-                        #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 1536, 1152, 'center', 'center'); ?>");
+                            background-image: url("<?php echo image_sizer($image, 768, 576, 'center', 'center', 'aspect-4-3'); ?>");
                         }
                     }
 
                     /* SM Breakpoint */
                     @media (min-width: 768px) {
                         #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 496, 372, 'center', 'center'); ?>");
-                        }
-                    }
-
-                    /* SM Breakpoint, retina */
-                    @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 768px) and (min-resolution: 192dpi) {
-                        #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 992, 744, 'center', 'center'); ?>");
+                            background-image: url("<?php echo image_sizer($image, 496, 372, 'center', 'center', 'aspect-4-3-small'); ?>");
                         }
                     }
 
                     /* MD Breakpoint */
                     @media (min-width: 992px) {
                         #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 600, 450, 'center', 'center'); ?>");
-                        }
-                    }
-
-                    /* MD Breakpoint, retina */
-                    @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 992px) and (min-resolution: 192dpi) {
-                        #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 1200, 900, 'center', 'center'); ?>");
+                            background-image: url("<?php echo image_sizer($image, 600, 450, 'center', 'center', 'aspect-4-3-samll'); ?>");
                         }
                     }
 
                     /* LG Breakpoint */
                     @media (min-width: 1200px) {
                         #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 750, 563, 'center', 'center'); ?>");
-                        }
-                    }
-
-                    /* LG Breakpoint, retina */
-                    @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 1200px) and (min-resolution: 192dpi) {
-                        #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 1500, 1125, 'center', 'center'); ?>");
+                            background-image: url("<?php echo image_sizer($image, 750, 563, 'center', 'center', 'aspect-4-3-samll'); ?>");
                         }
                     }
 
                     /* XL Breakpoint */
                     @media (min-width: 1500px) {
                         #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 961, 720, 'center', 'center'); ?>");
-                        }
-                    }
-
-                    /* XL Breakpoint, retina */
-                    @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 1500px) and (min-resolution: 192dpi) {
-                        #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 1921, 1441, 'center', 'center'); ?>");
+                            background-image: url("<?php echo image_sizer($image, 961, 720, 'center', 'center', 'aspect-4-3'); ?>");
                         }
                     }
 
                     /* XXL Breakpoint */
                     @media (min-width: 1921px) {
                         #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 1280, 960, 'center', 'center'); ?>");
-                        }
-                    }
-
-                    /* XXL Breakpoint, retina */
-                    @media (min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 1921px) and (min-resolution: 192dpi) {
-                        #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 2560, 1920, 'center', 'center'); ?>");
+                            background-image: url("<?php echo image_sizer($image, 1280, 960, 'center', 'center', 'aspect-4-3'); ?>");
                         }
                     }
                 </style>
                 <?php } elseif ( function_exists( 'bis_get_attachment_image' ) ) { // Background styles for one tile in one row with BIS plugin ?>
                 <style>
                     #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                        background-image: url("<?php echo image_sizer($image, 576, 432, 'center', 'center'); ?>");
-                    }
-
-                    /* XS Breakpoint, retina */
-                    @media (-webkit-min-device-pixel-ratio: 2),
-                    (min-resolution: 192dpi) {
-                        #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 1152, 864, 'center', 'center'); ?>");
-                        }
+                        background-image: url("<?php echo image_sizer($image, 576, 432, 'center', 'center', 'aspect-4-3-small'); ?>");
                     }
 
                     /* XS Breakpoint */
                     @media (min-width: 576px) {
                         #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 768, 576, 'center', 'center'); ?>");
-                        }
-                    }
-
-                    /* XS Breakpoint, retina */
-                    @media (min-width: 576px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 576px) and (min-resolution: 192dpi) {
-                        #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 1536, 1152, 'center', 'center'); ?>");
+                            background-image: url("<?php echo image_sizer($image, 768, 576, 'center', 'center', 'aspect-4-3-small'); ?>");
                         }
                     }
 
                     /* SM Breakpoint */
                     @media (min-width: 768px) {
                         #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 992, 744, 'center', 'center'); ?>");
-                        }
-                    }
-
-                    /* SM Breakpoint, retina */
-                    @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 768px) and (min-resolution: 192dpi) {
-                        #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 1984, 1488, 'center', 'center'); ?>");
+                            background-image: url("<?php echo image_sizer($image, 992, 744, 'center', 'center', 'aspect-4-3'); ?>");
                         }
                     }
 
                     /* MD Breakpoint */
                     @media (min-width: 992px) {
                         #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 1200, 900, 'center', 'center'); ?>");
-                        }
-                    }
-
-                    /* MD Breakpoint, retina */
-                    @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 992px) and (min-resolution: 192dpi) {
-                        #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 2400, 1800, 'center', 'center'); ?>");
+                            background-image: url("<?php echo image_sizer($image, 1200, 900, 'center', 'center', 'aspect-4-3'); ?>");
                         }
                     }
 
                     /* LG Breakpoint */
                     @media (min-width: 1200px) {
                         #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 1500, 1125, 'center', 'center'); ?>");
-                        }
-                    }
-
-                    /* LG Breakpoint, retina */
-                    @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 1200px) and (min-resolution: 192dpi) {
-                        #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 3000, 2250, 'center', 'center'); ?>");
+                            background-image: url("<?php echo image_sizer($image, 1500, 1125, 'center', 'center', 'aspect-4-3'); ?>");
                         }
                     }
 
                     /* XL Breakpoint */
                     @media (min-width: 1500px) {
                         #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 1921, 1441, 'center', 'center'); ?>");
-                        }
-                    }
-
-                    /* XL Breakpoint, retina */
-                    @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 1500px) and (min-resolution: 192dpi) {
-                        #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 3842, 2882, 'center', 'center'); ?>");
+                            background-image: url("<?php echo image_sizer($image, 1921, 1441, 'center', 'center', 'aspect-4-3'); ?>");
                         }
                     }
 
                     /* XXL Breakpoint */
                     @media (min-width: 1921px) {
                         #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 2560, 1920, 'center', 'center'); ?>");
-                        }
-                    }
-
-                    /* XXL Breakpoint, retina */
-                    @media (min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 1921px) and (min-resolution: 192dpi) {
-                        #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
-                            background-image: url("<?php echo image_sizer($image, 5120, 3840, 'center', 'center'); ?>");
+                            background-image: url("<?php echo image_sizer($image, 2560, 1920, 'center', 'center', 'aspect-4-3'); ?>");
                         }
                     }
                 </style>

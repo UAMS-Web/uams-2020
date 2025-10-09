@@ -165,24 +165,17 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
                 <picture>
                     <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
                     <!-- Desktop Image, Aspect ratio 1.8685:1 -->
-                    <source srcset="<?php echo image_sizer($image_desktop, 1435, 768, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_desktop, 2870, 1536, 'center', 'center'); ?> 2x"
-                        media="(min-width: 1921px)">
-                    <source srcset="<?php echo image_sizer($image_desktop, 1076, 576, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_desktop, 2152, 1152, 'center', 'center'); ?> 2x"
-                        media="(min-width: 1500px)">
-                    <source srcset="<?php echo image_sizer($image_desktop, 841, 450, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_desktop, 1682, 900, 'center', 'center'); ?> 2x"
-                        media="(min-width: 1200px)">
-                    <source srcset="<?php echo image_sizer($image_desktop, 673, 360, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_desktop, 1346, 720, 'center', 'center'); ?> 2x"
-                        media="(min-width: 992px)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 1435, 768, 'center', 'center', 'hero-desktop'); ?>" media="(min-width: 1921px)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 1076, 576, 'center', 'center', 'hero-desktop'); ?>" media="(min-width: 1500px)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 841, 450, 'center', 'center', 'hero-desktop'); ?>" media="(min-width: 1200px)">
+                    <source srcset="<?php echo image_sizer($image_desktop, 673, 360, 'center', 'center', 'hero-desktop'); ?>" media="(min-width: 992px)">
                     <!-- Tablet Image, Aspect ratio 1.4132:1 -->
-                    <source srcset="<?php echo image_sizer($image_tablet, 578, 409, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_tablet, 1156, 818, 'center', 'center'); ?> 2x"
-                        media="(min-width: 768px)">
+                    <source srcset="<?php echo image_sizer($image_tablet, 578, 409, 'center', 'center', 'aspect-4-3'); ?>" media="(min-width: 768px)">
                     <!-- Mobile Image, Aspect ratio 16:9 -->
-                    <source srcset="<?php echo image_sizer($image_mobile, 768, 432, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_mobile, 1536, 864, 'center', 'center'); ?> 2x"
-                        media="(min-width: 576px)">
-                    <source srcset="<?php echo image_sizer($image_mobile, 576, 324, 'center', 'center'); ?> 1x, <?php echo image_sizer($image_mobile, 1152, 648, 'center', 'center'); ?> 2x"
-                        media="(min-width: 1px)">
+                    <source srcset="<?php echo image_sizer($image_mobile, 768, 432, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 576px)">
+                    <source srcset="<?php echo image_sizer($image_mobile, 576, 324, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 1px)">
                     <!-- Fallback -->
-                    <img src="<?php echo image_sizer($image_tablet, 455, 256, 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
+                    <img src="<?php echo image_sizer($image_tablet, 455, 256, 'center', 'center', 'hero-tablet'); ?>" alt="<?php echo $image_alt; ?>" />
                     <?php } else { ?>
                     <!-- Fallback -->
                     <img src="<?php echo wp_get_attachment_image_url( $image_tablet, 'hero-tablet' ); ?>" alt="<?php echo $image_alt; ?>" />
