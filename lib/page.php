@@ -109,48 +109,48 @@ function uamswp_graphic_title_inner_1()
     if ($page_cover_image && function_exists( 'bis_get_attachment_image' ) ) {
         echo '<style>
         .entry-header:before {
-            background-image: url("' . image_sizer($page_cover_image, 576, 216, 'center', 'center') . '");
+            background-image: url("' . image_sizer($page_cover_image, 576, 216, 'center', 'center', 'aspect-8-3-small') . '");
         }
 
         /* XS Breakpoint */
         @media (min-width: 576px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 768, 288, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_cover_image, 768, 288, 'center', 'center', 'aspect-8-3-small') . '");
             }
         }
 
         /* SM Breakpoint */
         @media (min-width: 768px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 992, 372, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_cover_image, 992, 372, 'center', 'center', 'aspect-8-3') . '");
             }
         }
 
         /* MD Breakpoint */
         @media (min-width: 992px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 1200, 450, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_cover_image, 1200, 450, 'center', 'center', 'aspect-8-3') . '");
             }
         }
 
         /* LG Breakpoint */
         @media (min-width: 1200px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 1500, 563, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_cover_image, 1500, 563, 'center', 'center', 'aspect-8-3') . '");
             }
         }
 
         /* XL Breakpoint */
         @media (min-width: 1500px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 1921, 720, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_cover_image, 1921, 720, 'center', 'center', 'aspect-8-3') . '");
             }
         }
 
         /* XXL Breakpoint */
         @media (min-width: 1921px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 2560, 960, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_cover_image, 2560, 960, 'center', 'center', 'aspect-8-3') . '");
             }
         }
     </style>';
@@ -158,7 +158,7 @@ function uamswp_graphic_title_inner_1()
     elseif ($page_cover_image) {
         echo '<style>
             .entry-header:before {
-                background-image: url("' . wp_get_attachment_url( $page_cover_image, 'full' ) . '");
+                background-image: url("' . wp_get_attachment_url( $page_cover_image, 'aspect-8-3' ) . '");
             }
         </style>';
     }
@@ -228,48 +228,48 @@ function uamswp_landing_page_title_inner_1()
     if ($page_landing_page_cover_image && function_exists( 'bis_get_attachment_image' ) ) {
         echo '<style>
         .entry-header:before {
-            background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 576, 468, 'center', 'center') . '");
+            background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 576, 468, 'center', 'center', 'aspect-4-3-small') . '");
         }
 
         /* XS Breakpoint */
         @media (min-width: 576px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 768, 624, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 768, 624, 'center', 'center', 'aspect-4-3') . '");
             }
         }
 
         /* SM Breakpoint */
         @media (min-width: 768px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 992, 806, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 992, 806, 'center', 'center', 'aspect-4-3') . '");
             }
         }
 
         /* MD Breakpoint */
         @media (min-width: 992px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 1200, 375, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 1200, 375, 'center', 'center', 'aspect-8-3') . '");
             }
         }
 
         /* LG Breakpoint */
         @media (min-width: 1200px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 1500, 469, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 1500, 469, 'center', 'center', 'aspect-8-3') . '");
             }
         }
 
         /* XL Breakpoint */
         @media (min-width: 1500px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 1921, 601, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 1921, 601, 'center', 'center', 'aspect-8-3') . '");
             }
         }
 
         /* XXL Breakpoint */
         @media (min-width: 1921px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 2560, 800, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 2560, 800, 'center', 'center', 'aspect-8-3') . '");
             }
         }
     </style>';

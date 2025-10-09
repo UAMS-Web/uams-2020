@@ -117,48 +117,48 @@ if ($geo_display) :
                 <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
                 <style>
                     #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                        background-image: url("<?php echo image_sizer($side_image, 576, 324, $image_anchor, $image_crop); ?>");
+                        background-image: url("<?php echo image_sizer($side_image, 576, 324, $image_anchor, $image_crop, 'aspect-16-9-small'); ?>");
                     }
 
                     /* XS Breakpoint */
                     @media (min-width: 576px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 768, 432, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 768, 432, $image_anchor, $image_crop, 'aspect-16-9-small'); ?>");
                         }
                     }
 
                     /* SM Breakpoint */
                     @media (min-width: 768px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 992, 558, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 992, 558, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
 
                     /* MD Breakpoint */
                     @media (min-width: 992px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1200, 675, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 1200, 675, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
 
                     /* LG Breakpoint */
                     @media (min-width: 1200px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1500, 844, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 1500, 844, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
 
                     /* XL Breakpoint */
                     @media (min-width: 1500px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1921, 1081, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 1921, 1081, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
 
                     /* XXL Breakpoint */
                     @media (min-width: 1921px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 2560, 1440, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 2560, 1440, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
                 </style>

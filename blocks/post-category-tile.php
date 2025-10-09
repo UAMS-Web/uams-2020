@@ -110,27 +110,27 @@ if ( empty( $cat_button_text ) )
                             <!-- 1:1 Aspect Ratio -->
                             <source 
                                 media="(min-width: 1921px)" 
-                                srcset="<?php echo image_sizer($image, 496, 496, 'center', 'center'); ?> 1x">
+                                srcset="<?php echo image_sizer($image, 496, 496, 'center', 'center', 'aspect-1-1'); ?>">
                             <source 
                                 media="(min-width: 1500px)" 
-                                srcset="<?php echo image_sizer($image, 453, 453, 'center', 'center'); ?> 1x">
+                                srcset="<?php echo image_sizer($image, 453, 453, 'center', 'center', 'aspect-1-1'); ?>">
                             <source 
                                 media="(min-width: 1200px)" 
-                                srcset="<?php echo image_sizer($image, 348, 348, 'center', 'center'); ?> 1x">
+                                srcset="<?php echo image_sizer($image, 348, 348, 'center', 'center', 'thumbnail'); ?>">
                             <source 
                                 media="(min-width: 992px)" 
-                                srcset="<?php echo image_sizer($image, 273, 273, 'center', 'center'); ?> 1x">
+                                srcset="<?php echo image_sizer($image, 273, 273, 'center', 'center', 'thumbnail'); ?>">
                             <source 
                                 media="(min-width: 768px)" 
-                                srcset="<?php echo image_sizer($image, 221, 221, 'center', 'center'); ?> 1x">
+                                srcset="<?php echo image_sizer($image, 221, 221, 'center', 'center', 'thumbnail'); ?>">
                             <source 
                                 media="(min-width: 576px)" 
-                                srcset="<?php echo image_sizer($image, 173, 173, 'center', 'center'); ?> 1x">
+                                srcset="<?php echo image_sizer($image, 173, 173, 'center', 'center', 'thumbnail'); ?>">
                             <source 
                                 media="(min-width: 1px)" 
-                                srcset="<?php echo image_sizer($image, 497, 497, 'center', 'center'); ?> 1x">
+                                srcset="<?php echo image_sizer($image, 497, 497, 'center', 'center', 'aspect-1-1'); ?>">
                             <!-- Fallback -->
-                            <img src="<?php echo image_sizer($image, 496, 496, 'center', 'center'); ?>" alt="<?php echo $alt_text ? $alt_text : ''; ?>" />
+                            <img src="<?php echo image_sizer($image, 496, 496, 'center', 'center', 'aspect-1-1'); ?>" alt="<?php echo $alt_text ? $alt_text : ''; ?>" />
                             <?php } else { ?>
                             <!-- Fallback -->
                             <img src="<?php echo wp_get_attachment_image_url( $image, 'aspect-16-9' ); ?>" alt="<?php echo $alt_text ? $alt_text : ''; ?>" />

@@ -120,48 +120,48 @@ if ($geo_display) :
 <?php if ( $use_image && function_exists( 'bis_get_attachment_image' ) ) { ?>
     <style>
         #<?php echo $id; ?>:before {
-            background-image: url("<?php echo image_sizer($image, 576, 288, 'center', 'center'); ?>");
+            background-image: url("<?php echo image_sizer($image, 576, 288, 'center', 'center', 'aspect-2-1'); ?>");
         }
 
         /* XS Breakpoint */
         @media (min-width: 576px) {
             #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 768, 384, 'center', 'center'); ?>");
+                background-image: url("<?php echo image_sizer($image, 768, 384, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* SM Breakpoint */
         @media (min-width: 768px) {
             #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 992, 496, 'center', 'center'); ?>");
+                background-image: url("<?php echo image_sizer($image, 992, 496, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* MD Breakpoint */
         @media (min-width: 992px) {
             #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1200, 600, 'center', 'center'); ?>");
+                background-image: url("<?php echo image_sizer($image, 1200, 600, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* LG Breakpoint */
         @media (min-width: 1200px) {
             #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1500, 750, 'center', 'center'); ?>");
+                background-image: url("<?php echo image_sizer($image, 1500, 750, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* XL Breakpoint */
         @media (min-width: 1500px) {
             #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1921, 961, 'center', 'center'); ?>");
+                background-image: url("<?php echo image_sizer($image, 1921, 961, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* XXL Breakpoint */
         @media (min-width: 1921px) {
             #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 2560, 1280, 'center', 'center'); ?>");
+                background-image: url("<?php echo image_sizer($image, 2560, 1280, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
     </style>
