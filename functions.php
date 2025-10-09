@@ -648,9 +648,7 @@ class SlidingWindowRateLimiter {
  * Queues image resizing tasks to reduce server load.
  * Uses transients to store queue and WP_Cron to process tasks.
  * Accepts a fallback image size name for use during queue processing.
- */
-
-/**
+ * 
  * Modified image_sizer function to queue resizing tasks with specified fallback size
  * @param int $id Attachment ID
  * @param int $prefwidth Preferred width
