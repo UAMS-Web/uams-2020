@@ -77,7 +77,7 @@ if ( empty($image_alt) )
 $cta_target = $cta_target ? ' target="'. $cta_target .'"' : '';
 $cta_desc = $cta_desc ? ' aria-label="'.$cta_desc.'"' : '';
 $cta_link = $cta_link ? '<a class="btn btn-primary" href="'. $cta_link .'"' . $cta_desc . $cta_target . ' data-moduletitle="' . $heading . '">' : '';
-$side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
+$side_image_width = wp_get_attachment_image_src($side_image, 'full')[1] ?? '';
 // $side_image_height = wp_get_attachment_image_src($side_image, 'full')[2];
 
 // Break it if it isn't "Landing" template
