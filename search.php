@@ -152,7 +152,7 @@ function uamswp_do_search_loop() {
             while ( have_posts() ) : the_post();
 
             $id =get_the_ID();
-            include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/service-card.php' );
+            include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/expertise-card.php' );
 
             endwhile;
             echo '</div></div>';
