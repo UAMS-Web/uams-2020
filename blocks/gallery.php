@@ -135,6 +135,7 @@ if ($geo_display) :
             <div class="col-12 image-container padded-grid">
                 <div class="row">
                     <?php 
+                    if ( is_array($gallery_images) ){
                         $i=0;
                         foreach($gallery_images as $gallery_image) {
                         // Load values.
@@ -206,8 +207,9 @@ if ($geo_display) :
                                         </div>
                                     </div>
                                 <?php } // endif ?>
-                    <?php
+                            <?php
                         $i++;
+                        }
                     }
                     ?>
                 </div>

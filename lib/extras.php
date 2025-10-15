@@ -150,7 +150,7 @@ function uamswp_title($html) {
     if ( is_archive() ) {
         $post_type = get_post_type( get_the_id() );
         $post_type_object = get_post_type_object( $post_type );
-        $pagetitle = $post_type_object->label;
+        $pagetitle = $post_type_object->label ?? '';
     }
     if ( is_archive() && (is_category() || is_tag() || is_tax()) ) {
         $pagetitle = single_term_title("", false);
