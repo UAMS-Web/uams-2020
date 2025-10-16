@@ -91,6 +91,17 @@ if ($gallery_columns == '2') {
     $lg = 2;
 } 
 
+// Ratio for image_sizer fallback
+if ($gallery_crop == '1.7778') {
+    $gallery_ratio = 'aspect-16-9';
+} elseif ($gallery_crop == '1.3333') {
+    $gallery_ratio = 'aspect-4-3';
+} elseif ($gallery_crop == '1') {
+    $gallery_ratio = 'aspect-1-1';
+} else {
+    $gallery_ratio = 'full'; // Fallback to full if none or portait
+}
+
 // GEO Logic
 $geo_display = false;
 if (!isset($geo) || empty($geo_region)){
@@ -124,6 +135,7 @@ if ($geo_display) :
             <div class="col-12 image-container padded-grid">
                 <div class="row">
                     <?php 
+                    if ( is_array($gallery_images) ){
                         $i=0;
                         foreach($gallery_images as $gallery_image) {
                         // Load values.
@@ -139,18 +151,18 @@ if ($geo_display) :
                                             <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>" aria-label="Show larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': ' . $image_alt : ''; ?>">
                                         <?php } // endif ?>
                                         <picture>
-                                            <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xxl', 12 / $lg, 1), gallery_image_dimension('xxl', 12 / $lg, 1, $gallery_crop), 'center', 'center'); ?>" 
+                                            <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>  
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xxl', 12 / $lg, 1), gallery_image_dimension('xxl', 12 / $lg, 1, $gallery_crop), 'center', 'center' ); ?>" 
                                                     media="(min-width: 1921px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xl', 12 / $lg, 1), gallery_image_dimension('xl', 12 / $lg, 1, $gallery_crop), 'center', 'center'); ?>" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xl', 12 / $lg, 1), gallery_image_dimension('xl', 12 / $lg, 1, $gallery_crop), 'center', 'center', ); ?>" 
                                                     media="(min-width: 1500px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('lg', 12 / $lg, 1), gallery_image_dimension('lg', 12 / $lg, 1, $gallery_crop), 'center', 'center'); ?>" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('lg', 12 / $lg, 1), gallery_image_dimension('lg', 12 / $lg, 1, $gallery_crop), 'center', 'center', ); ?>" 
                                                     media="(min-width: 1200px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('md', 12 / $md, 1), gallery_image_dimension('md', 12 / $md, 1, $gallery_crop), 'center', 'center'); ?>" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('md', 12 / $md, 1), gallery_image_dimension('md', 12 / $md, 1, $gallery_crop), 'center', 'center', ); ?>" 
                                                     media="(min-width: 992px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('sm', 12 / $sm, 1), gallery_image_dimension('sm', 12 / $sm, 1, $gallery_crop), 'center', 'center'); ?>" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('sm', 12 / $sm, 1), gallery_image_dimension('sm', 12 / $sm, 1, $gallery_crop), 'center', 'center', ''); ?>" 
                                                     media="(min-width: 768px)">
-                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 1), gallery_image_dimension('xs', 1, 1, $gallery_crop), 'center', 'center'); ?>" 
+                                                <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 1), gallery_image_dimension('xs', 1, 1, $gallery_crop), 'center', 'center', 'aspect-1-1'); ?>" 
                                                     media="(min-width: 1px)">
                                                 <!-- Fallback -->
                                                 <img src="<?php echo image_sizer($image_id, gallery_image_dimension('xl', 2, 1), gallery_image_dimension('xl', 2, 1, $gallery_crop), 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
@@ -174,7 +186,7 @@ if ($geo_display) :
                                                 </div>
                                                 <div class="modal-body">
                                                     <figure class="figure">
-                                                        <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+                                                        <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
                                                             <picture>
                                                                 <source srcset="<?php echo image_sizer($image_id, 1106, -1, 'center', 'center'); ?>" media="(min-width: 1200px)">
                                                                 <source srcset="<?php echo image_sizer($image_id, 1094, -1, 'center', 'center'); ?>" media="(min-width: 992px)">
@@ -195,8 +207,9 @@ if ($geo_display) :
                                         </div>
                                     </div>
                                 <?php } // endif ?>
-                    <?php
+                            <?php
                         $i++;
+                        }
                     }
                     ?>
                 </div>

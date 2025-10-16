@@ -117,13 +117,13 @@ function uamswp_childtheme_setup() {
 	add_image_size( 'aspect-1-1', 1024, 1024, true );
 	//add_image_size( 'aspect-1-1-small', 512, 512, true ); // hidden until needed
 	add_image_size( 'hero-tablet', 455, 256, true );
+	add_image_size( 'portrait-3-4', 243, 324, true);
 	add_image_size( 'content-image-side', 299, 9999 );
 	add_image_size( 'content-image-center', 630, 9999 );
 	add_image_size( 'content-image-wide', 1020, 9999 );
 	add_image_size( 'content-image-full', 1920, 9999 );
 
 	// Add custom image sizes to post editor
-
 	add_filter( 'image_size_names_choose', 'uams_custom_add_image_size_names' );
 	function uams_custom_add_image_size_names( $sizes ) {
 	return array_merge( $sizes, array(
@@ -611,58 +611,257 @@ if (!function_exists('apStyleDate')) {
 	}
 }
 
-/**
- * Return sized image.
- *
- * @param integer  $id 			// id of image
- * @param integer  $prefwidth	// Preferred Output width. Set as -1 to inherit width as native ratio of prefered height.
- * @param string   $prefheight	// Preferred Output height. Set as -1 to inherit width as native ratio of prefered width.
- * @param string   $hcrop		// horizontal crop position (left, center, right)
- * @param string   $vcrop		// vertical crop position (top, center, bottom)
- * @return string				// image url
- */
-function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center' ) {
+class SlidingWindowRateLimiter {
+	private $limit;
+	private $timeWindow;
+	private $storage;
 
-	if ( ! function_exists( 'fly_add_image_size' ) ) {
-		return;
+	public function __construct($limit, $timeWindow) {
+		$this->limit = $limit;
+		$this->timeWindow = $timeWindow; // In seconds
+		$this->storage = [];
 	}
-	if ( empty($id) || empty(wp_get_attachment_image_src($id))) {
-		return; // Make sure we have value
-	}
-	$image_width = wp_get_attachment_image_src($id, 'full')[1];
-	$image_height = wp_get_attachment_image_src($id, 'full')[2];
-	// Do the maths
-	$image_ratio = $image_width / $image_height;
-	if ($prefheight == -1) {
-		$prefheight = $prefwidth / $image_ratio;
-	}
-	if ($prefwidth == -1) {
-		$prefwidth = $prefheight * $image_ratio;
-	}
-	$pref_ratio = $prefwidth / $prefheight;
-	if( $image_width >= $prefwidth && $image_height >= $prefheight ) { // Bigger image => Crop
-		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
-	} elseif ( $image_ratio > $pref_ratio ) { // wide image => figure out max crop
-		$prefwidth = $image_width;
-		$prefheight = $image_width / $pref_ratio;
-		if( $prefheight > $image_height ) {
-			$prefheight = $image_height;
-			$prefwidth = $prefheight * $pref_ratio;
+
+	public function isRequestAllowed($clientId) {
+		$currentTime = time();
+		$windowStart = $currentTime - $this->timeWindow;
+
+		if (!isset($this->storage[$clientId])) {
+			$this->storage[$clientId] = [];
 		}
-		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
-	} elseif ( $image_ratio < $pref_ratio ) { // tall image => figure out max crop
-		$prefwidth = $image_height * $pref_ratio;
-		$prefheight = $image_height;
-		if( $prefwidth > $image_width ) {
-			$prefwidth = $image_width;
-			$prefheight = $prefwidth / $pref_ratio;
+
+		// Remove outdated timestamps
+		$this->storage[$clientId] = array_filter(
+			$this->storage[$clientId],
+			fn($timestamp) => $timestamp > $windowStart
+		);
+
+		if (count($this->storage[$clientId]) < $this->limit) {
+			$this->storage[$clientId][] = $currentTime;
+			return true;
 		}
-		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
-	} else { // Perfect ratio => no crop, return orig
-		$image_url = wp_get_attachment_url( $id, 'full' );
+
+		return false; // Limit exceeded
 	}
-	return $image_url;
 }
+
+/**
+ * Queues image resizing tasks to reduce server load.
+ * Uses transients to store queue and WP_Cron to process tasks.
+ * Accepts a fallback image size name for use during queue processing.
+ * 
+ * Modified image_sizer function to queue resizing tasks with specified fallback size
+ * @param int $id Attachment ID
+ * @param int $prefwidth Preferred width
+ * @param int $prefheight Preferred height
+ * @param string $hcrop Horizontal crop position (default: 'center')
+ * @param string $vcrop Vertical crop position (default: 'center')
+ * @param string $fallback_size WordPress image size name to use as fallback (default: 'full')
+ * @return string Image URL (cached, fallback, or original)
+ */
+function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center', $fallback_size = 'full') {
+    if (!function_exists('bis_get_attachment_image') || empty($id) || empty(wp_get_attachment_image_src($id))) {
+        return; // Validate input
+    }
+
+    // Check if resized image already exists in queue cache
+    $transient_key = 'image_sizer_' . md5($id . $prefwidth . $prefheight . $hcrop . $vcrop);
+    $cached_image = get_transient($transient_key);
+    if ($cached_image !== false) {
+        return $cached_image; // Return cached URL if available
+    }
+
+    // Get original image dimensions
+    $image_width = wp_get_attachment_image_src($id, 'full')[1];
+    $image_height = wp_get_attachment_image_src($id, 'full')[2];
+    $image_ratio = $image_width / $image_height;
+
+    // Calculate preferred dimensions
+    if ($prefheight == -1) {
+        $prefheight = $prefwidth / $image_ratio;
+    }
+    if ($prefwidth == -1) {
+        $prefwidth = $prefheight * $image_ratio;
+    }
+    $pref_ratio = $prefwidth / $prefheight;
+
+    // Determine resizing parameters
+    if ($image_width >= $prefwidth && $image_height >= $prefheight) {
+        // Bigger image => Crop
+        $params = ['width' => $prefwidth, 'height' => $prefheight, 'hcrop' => $hcrop, 'vcrop' => $vcrop];
+    } elseif ($image_ratio > $pref_ratio) {
+        // Wide image => Max crop
+        $prefwidth = $image_width;
+        $prefheight = $image_width / $pref_ratio;
+        if ($prefheight > $image_height) {
+            $prefheight = $image_height;
+            $prefwidth = $prefheight * $pref_ratio;
+        }
+        $params = ['width' => $prefwidth, 'height' => $prefheight, 'hcrop' => $hcrop, 'vcrop' => $vcrop];
+    } elseif ($image_ratio < $pref_ratio) {
+        // Tall image => Max crop
+        $prefwidth = $image_height * $pref_ratio;
+        $prefheight = $image_height;
+        if ($prefwidth > $image_width) {
+            $prefwidth = $image_width;
+            $prefheight = $prefwidth / $pref_ratio;
+        }
+        $params = ['width' => $prefwidth, 'height' => $prefheight, 'hcrop' => $hcrop, 'vcrop' => $vcrop];
+    } else {
+        // Perfect ratio => No crop, return fallback size
+        return image_sizer_get_fallback($id, $fallback_size);
+    }
+
+    // Check for duplicate jobs in queue
+    $queue = get_option('image_sizer_queue', []);
+    $job_key = md5($id . serialize($params));
+    foreach ($queue as $job) {
+        if (md5($job['id'] . serialize($job['params'])) === $job_key) {
+            return image_sizer_get_fallback($id, $fallback_size); // Duplicate found, return fallback
+        }
+    }
+
+    // Add to queue
+    $queue[] = [
+        'id' => $id,
+        'params' => $params,
+        'transient_key' => $transient_key
+    ];
+    update_option('image_sizer_queue', $queue, false);
+
+    // Schedule cron if not already scheduled
+    if (!wp_next_scheduled('process_image_sizer_queue')) {
+        wp_schedule_event(time(), 'ten_seconds', 'process_image_sizer_queue');
+    }
+
+    // Return fallback image size
+    return image_sizer_get_fallback($id, $fallback_size);
+}
+
+/**
+ * Helper function to get the specified WordPress image size as fallback
+ * @param int $id Attachment ID
+ * @param string $fallback_size WordPress image size name
+ * @return string Image URL
+ */
+function image_sizer_get_fallback($id, $fallback_size) {
+    // Allow overriding default fallback size via filter
+    $default_fallback = apply_filters('image_sizer_default_fallback', 'full');
+    $fallback_size = $fallback_size ?: $default_fallback;
+
+    // Check if the fallback size exists for the attachment
+    $image_src = wp_get_attachment_image_src($id, $fallback_size);
+    if ($image_src && !empty($image_src[0])) {
+        return $image_src[0]; // Return the specified size URL
+    }
+
+    // Debug: Log when fallback size is not found (only if WP_DEBUG is enabled)
+    if (defined('WP_DEBUG') && WP_DEBUG && $fallback_size !== $default_fallback) {
+        error_log("Image Sizer: Fallback size '$fallback_size' not found for attachment ID $id. Using '$default_fallback'.");
+    }
+
+    // Fall back to default size if specified size doesn't exist
+    $image_src = wp_get_attachment_image_src($id, $default_fallback);
+    return $image_src[0] ?: '';
+}
+
+/**
+ * Register custom cron schedule
+ */
+add_filter('cron_schedules', function ($schedules) {
+    $schedules['ten_seconds'] = [
+        'interval' => 10, // 10 seconds
+        'display' => __('Every Ten Seconds')
+    ];
+    return $schedules;
+});
+
+/**
+ * Process the image resizing queue
+ */
+add_action('process_image_sizer_queue', function () {
+    $queue = get_option('image_sizer_queue', []);
+    if (empty($queue)) {
+        return;
+    }
+
+    // Process up to 10 images per cron run to avoid overloading
+    $batch_size = 10;
+    $processed = 0;
+
+    foreach ($queue as $index => $job) {
+        if ($processed >= $batch_size) {
+            break;
+        }
+
+        $id = $job['id'];
+        $params = $job['params'];
+        $transient_key = $job['transient_key'];
+
+        // Generate resized image
+        $image_url = bis_get_attachment_image_src(
+            $id,
+            [$params['width'], $params['height']],
+            [$params['hcrop'], $params['vcrop']]
+        )['src'];
+
+        // Cache result for 30 days
+        set_transient($transient_key, $image_url, 5 * DAY_IN_SECONDS);
+
+        // Remove from queue
+        unset($queue[$index]);
+        $processed++;
+    }
+
+    // Update queue
+    if (empty($queue)) {
+        delete_option('image_sizer_queue');
+        // Clear cron if queue is empty
+        wp_clear_scheduled_hook('process_image_sizer_queue');
+    } else {
+        update_option('image_sizer_queue', array_values($queue), false);
+    }
+});
+
+/**
+ * Add admin action to manually trigger queue processing
+ */
+add_action('admin_init', function () {
+    if (isset($_GET['process_image_queue']) && current_user_can('manage_options')) {
+        check_admin_referer('process_image_queue_nonce');
+        do_action('process_image_sizer_queue');
+        wp_redirect(admin_url('upload.php?queue_processed=1'));
+        exit;
+    }
+});
+
+/**
+ * Add manual trigger link to media library
+ */
+add_action('admin_notices', function () {
+    if (get_current_screen()->id !== 'upload' || !current_user_can('manage_options')) {
+        return;
+    }
+    $queue = get_option('image_sizer_queue', []);
+    if (!empty($queue)) {
+        $url = wp_nonce_url(admin_url('upload.php?process_image_queue=1'), 'process_image_queue_nonce');
+        echo '<div class="notice notice-info"><p>';
+        echo 'Image resizing queue has ' . count($queue) . ' pending jobs. ';
+        echo '<a href="' . esc_url($url) . '">Process now</a>';
+        echo '</p></div>';
+    }
+    if (isset($_GET['queue_processed'])) {
+        echo '<div class="notice notice-success is-dismissible"><p>Image queue processed successfully.</p></div>';
+    }
+});
+
+/**
+ * Clean up cron on plugin deactivation
+ */
+register_deactivation_hook(__FILE__, function () {
+    wp_clear_scheduled_hook('process_image_sizer_queue');
+    delete_option('image_sizer_queue');
+});
 
 /**
  * Return dimension for gallery image.

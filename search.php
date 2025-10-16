@@ -152,7 +152,7 @@ function uamswp_do_search_loop() {
             while ( have_posts() ) : the_post();
 
             $id =get_the_ID();
-            include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/service-card.php' );
+            include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/expertise-card.php' );
 
             endwhile;
             echo '</div></div>';
@@ -258,7 +258,7 @@ function uamswp_do_search_loop() {
             	$post_title = get_the_title();
                 $post_link = get_the_permalink();
                 $tax = get_term_by("name", $post_title, $post_type);
-                $post_id = $tax->term_id;
+                $post_id = $tax->term_id ?? '';
                 $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
                 $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
 
@@ -500,12 +500,13 @@ function uamswp_do_search_loop() {
                         $conditions_treatments .= '<div class="col-12 col-md-6 post-type ' . $post_type . '"><div class="inner-container content-width"><h2 class="module-title post-type-heading"><span class="title">' . $post_type_text . '</span></h2>';
 
                         while ( have_posts() ) : the_post();
-
+                            global $wp_query;
+                            
                             $post_count = $wp_query->found_posts;
                             $post_title = get_the_title();
                             $post_link = get_the_permalink();
                             $tax = get_term_by("name", $post_title, $post_type);
-                            $post_id = $tax->term_id;
+                            $post_id = $tax->term_id ?? '';
                             $title = '<h3 class="h4" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
                             $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
                             if ('treatment' == $post_type) {

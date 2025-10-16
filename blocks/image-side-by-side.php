@@ -77,7 +77,7 @@ if ( empty($image_alt) )
 $cta_target = $cta_target ? ' target="'. $cta_target .'"' : '';
 $cta_desc = $cta_desc ? ' aria-label="'.$cta_desc.'"' : '';
 $cta_link = $cta_link ? '<a class="btn btn-primary" href="'. $cta_link .'"' . $cta_desc . $cta_target . ' data-moduletitle="' . $heading . '">' : '';
-$side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
+$side_image_width = wp_get_attachment_image_src($side_image, 'full')[1] ?? '';
 // $side_image_height = wp_get_attachment_image_src($side_image, 'full')[2];
 
 // Break it if it isn't "Landing" template
@@ -114,107 +114,51 @@ if ($geo_display) :
         <div class="row">
             <div class="col-12 col-md-6 image-container" aria-label="<?php echo $image_alt ?>" role="img">
 
-                <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+                <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
                 <style>
                     #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                        background-image: url("<?php echo image_sizer($side_image, 576, 324, $image_anchor, $image_crop); ?>");
-                    }
-
-                    /* XXS Breakpoint, retina */
-                    @media (-webkit-min-device-pixel-ratio: 2),
-                    (min-resolution: 192dpi) {
-                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1152, 648, $image_anchor, $image_crop); ?>");
-                        }
+                        background-image: url("<?php echo image_sizer($side_image, 576, 324, $image_anchor, $image_crop, 'aspect-16-9-small'); ?>");
                     }
 
                     /* XS Breakpoint */
                     @media (min-width: 576px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 768, 432, $image_anchor, $image_crop); ?>");
-                        }
-                    }
-
-                    /* XS Breakpoint, retina */
-                    @media (min-width: 576px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 576px) and (min-resolution: 192dpi) {
-                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1536, 864, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 768, 432, $image_anchor, $image_crop, 'aspect-16-9-small'); ?>");
                         }
                     }
 
                     /* SM Breakpoint */
                     @media (min-width: 768px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 992, 558, $image_anchor, $image_crop); ?>");
-                        }
-                    }
-
-                    /* SM Breakpoint, retina */
-                    @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 768px) and (min-resolution: 192dpi) {
-                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1984, 1116, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 992, 558, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
 
                     /* MD Breakpoint */
                     @media (min-width: 992px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1200, 675, $image_anchor, $image_crop); ?>");
-                        }
-                    }
-
-                    /* MD Breakpoint, retina */
-                    @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 992px) and (min-resolution: 192dpi) {
-                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 2400, 1350, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 1200, 675, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
 
                     /* LG Breakpoint */
                     @media (min-width: 1200px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1500, 844, $image_anchor, $image_crop); ?>");
-                        }
-                    }
-
-                    /* LG Breakpoint, retina */
-                    @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 1200px) and (min-resolution: 192dpi) {
-                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 3000, 1688, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 1500, 844, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
 
                     /* XL Breakpoint */
                     @media (min-width: 1500px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1921, 1081, $image_anchor, $image_crop); ?>");
-                        }
-                    }
-
-                    /* XL Breakpoint, retina */
-                    @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 1500px) and (min-resolution: 192dpi) {
-                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 3842, 2161, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 1921, 1081, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
 
                     /* XXL Breakpoint */
                     @media (min-width: 1921px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 2560, 1440, $image_anchor, $image_crop); ?>");
-                        }
-                    }
-
-                    /* XXL Breakpoint, retina */
-                    @media (min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 1921px) and (min-resolution: 192dpi) {
-                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 5120, 2880, $image_anchor, $image_crop ); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 2560, 1440, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
                 </style>
