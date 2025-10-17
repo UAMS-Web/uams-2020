@@ -508,7 +508,7 @@ function uamswp_do_search_loop() {
                             $post_title = get_the_title();
                             $post_link = get_the_permalink();
                             $tax = get_term_by("name", $post_title, $post_type);
-                            $post_id = $tax->term_id;
+                            $post_id = $tax->term_id ?? '';
                             $title = '<h3 class="h4" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
                             $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
                             if ('treatment' == $post_type) {

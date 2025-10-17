@@ -106,107 +106,51 @@ function uamswp_graphic_title_inner_1()
     if ( empty($page_cover_image) ) 
     $page_cover_image = get_field('page_cover_image', get_the_id());
     
-    if ($page_cover_image && function_exists( 'fly_add_image_size' ) ) {
+    if ($page_cover_image && function_exists( 'bis_get_attachment_image' ) ) {
         echo '<style>
         .entry-header:before {
-            background-image: url("' . image_sizer($page_cover_image, 566, 216, 'center', 'center') . '");
-        }
-
-        /* XXS Breakpoint, retina */
-        @media (-webkit-min-device-pixel-ratio: 2),
-        (min-resolution: 192dpi) {
-            .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 1152, 432, 'center', 'center') . '");
-            }
+            background-image: url("' . image_sizer($page_cover_image, 576, 216, 'center', 'center', 'aspect-8-3-small') . '");
         }
 
         /* XS Breakpoint */
         @media (min-width: 576px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 768, 288, 'center', 'center') . '");
-            }
-        }
-
-        /* XS Breakpoint, retina */
-        @media (min-width: 576px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 576px) and (min-resolution: 192dpi) {
-            .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 1536, 576, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_cover_image, 768, 288, 'center', 'center', 'aspect-8-3-small') . '");
             }
         }
 
         /* SM Breakpoint */
         @media (min-width: 768px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 992, 372, 'center', 'center') . '");
-            }
-        }
-
-        /* SM Breakpoint, retina */
-        @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 768px) and (min-resolution: 192dpi) {
-            .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 1984, 744, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_cover_image, 992, 372, 'center', 'center', 'aspect-8-3') . '");
             }
         }
 
         /* MD Breakpoint */
         @media (min-width: 992px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 1200, 450, 'center', 'center') . '");
-            }
-        }
-
-        /* MD Breakpoint, retina */
-        @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 992px) and (min-resolution: 192dpi) {
-            .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 2400, 900, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_cover_image, 1200, 450, 'center', 'center', 'aspect-8-3') . '");
             }
         }
 
         /* LG Breakpoint */
         @media (min-width: 1200px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 1500, 563, 'center', 'center') . '");
-            }
-        }
-
-        /* LG Breakpoint, retina */
-        @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1200px) and (min-resolution: 192dpi) {
-            .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 3000, 1125, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_cover_image, 1500, 563, 'center', 'center', 'aspect-8-3') . '");
             }
         }
 
         /* XL Breakpoint */
         @media (min-width: 1500px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 1921, 720, 'center', 'center') . '");
-            }
-        }
-
-        /* XL Breakpoint, retina */
-        @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1500px) and (min-resolution: 192dpi) {
-            .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 3842, 1441, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_cover_image, 1921, 720, 'center', 'center', 'aspect-8-3') . '");
             }
         }
 
         /* XXL Breakpoint */
         @media (min-width: 1921px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 2560, 960, 'center', 'center') . '");
-            }
-        }
-
-        /* XXL Breakpoint, retina */
-        @media (min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1921px) and (min-resolution: 192dpi) {
-            .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 5120, 1920, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_cover_image, 2560, 960, 'center', 'center', 'aspect-8-3') . '");
             }
         }
     </style>';
@@ -214,7 +158,7 @@ function uamswp_graphic_title_inner_1()
     elseif ($page_cover_image) {
         echo '<style>
             .entry-header:before {
-                background-image: url("' . wp_get_attachment_url( $page_cover_image, 'full' ) . '");
+                background-image: url("' . wp_get_attachment_url( $page_cover_image, 'aspect-8-3' ) . '");
             }
         </style>';
     }
@@ -281,112 +225,56 @@ function uamswp_landing_page_title_inner_1()
     if ( empty($page_landing_page_cover_image_mobile) ) 
     $page_landing_page_cover_image_mobile = $page_landing_page_cover_image; // fallback to desktop image
     
-    if ($page_landing_page_cover_image && function_exists( 'fly_add_image_size' ) ) {
+    if ($page_landing_page_cover_image && function_exists( 'bis_get_attachment_image' ) ) {
         echo '<style>
         .entry-header:before {
-            background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 576, 468, 'center', 'center') . '");
-        }
-
-        /* XXS Breakpoint, retina */
-        @media (-webkit-min-device-pixel-ratio: 2),
-        (min-resolution: 192dpi) {
-            .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 1152, 936, 'center', 'center') . '");
-            }
+            background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 576, 468, 'center', 'center', 'aspect-4-3-small') . '");
         }
 
         /* XS Breakpoint */
         @media (min-width: 576px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 768, 624, 'center', 'center') . '");
-            }
-        }
-
-        /* XS Breakpoint, retina */
-        @media (min-width: 576px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 576px) and (min-resolution: 192dpi) {
-            .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 1536, 1248, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 768, 624, 'center', 'center', 'aspect-4-3') . '");
             }
         }
 
         /* SM Breakpoint */
         @media (min-width: 768px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 992, 806, 'center', 'center') . '");
-            }
-        }
-
-        /* SM Breakpoint, retina */
-        @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 768px) and (min-resolution: 192dpi) {
-            .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 1984, 1612, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 992, 806, 'center', 'center', 'aspect-4-3') . '");
             }
         }
 
         /* MD Breakpoint */
         @media (min-width: 992px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 1200, 375, 'center', 'center') . '");
-            }
-        }
-
-        /* MD Breakpoint, retina */
-        @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 992px) and (min-resolution: 192dpi) {
-            .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 2400, 750, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 1200, 375, 'center', 'center', 'aspect-8-3') . '");
             }
         }
 
         /* LG Breakpoint */
         @media (min-width: 1200px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 1500, 469, 'center', 'center') . '");
-            }
-        }
-
-        /* LG Breakpoint, retina */
-        @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1200px) and (min-resolution: 192dpi) {
-            .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 3000, 938, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 1500, 469, 'center', 'center', 'aspect-8-3') . '");
             }
         }
 
         /* XL Breakpoint */
         @media (min-width: 1500px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 1921, 601, 'center', 'center') . '");
-            }
-        }
-
-        /* XL Breakpoint, retina */
-        @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1500px) and (min-resolution: 192dpi) {
-            .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 3842, 1201, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 1921, 601, 'center', 'center', 'aspect-8-3') . '");
             }
         }
 
         /* XXL Breakpoint */
         @media (min-width: 1921px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 2560, 800, 'center', 'center') . '");
-            }
-        }
-
-        /* XXL Breakpoint, retina */
-        @media (min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1921px) and (min-resolution: 192dpi) {
-            .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 5120, 1600, 'center', 'center') . '");
+                background-image: url("' . image_sizer($page_landing_page_cover_image, 2560, 800, 'center', 'center', 'aspect-8-3') . '");
             }
         }
     </style>';
     }
-    elseif ($page_cover_image) {
+    elseif ($page_landing_page_cover_image) {
         echo '<style>
             .entry-header:before {
                 background-image: url("' . wp_get_attachment_url( $page_landing_page_cover_image, 'full' ) . '");
