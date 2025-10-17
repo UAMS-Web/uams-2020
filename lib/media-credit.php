@@ -333,6 +333,7 @@
 
 			if ( $block['blockName'] == 'core/image' ) {
 
+				$photo_credit = '';
 				// Get the media credit meta key value from the asset in the media library
 				if (isset($block['attrs']['id'])) {
 					$photo_credit = get_post_meta(
@@ -344,7 +345,7 @@
 
 				// Fallback: Retrieve the credit value from the asset file's image metadata
 
-					if ( !isset($photo_credit) && is_array($block['attrs']) ) {
+					if ( !isset($photo_credit) && is_array($block['attrs']) && isset($block['attrs']['id']) ) {
 
 					$photo_credit = wp_get_attachment_metadata(
 						$block['attrs']['id'] // int // required // Attachment post ID. Defaults to global $post.

@@ -199,19 +199,21 @@ function uamswp_do_search_loop() {
             	$post_title = get_the_title();
                 $post_link = get_the_permalink();
                 $tax = get_term_by("name", $post_title, $post_type);
-                $post_id = $tax->term_id;
-                $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
-                $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
+                if (is_object($tax)){
+                    $post_id = $tax->term_id;
+                    $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
+                    $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
 
-                echo '<article class="'. $post_type .'-'. $post_id .' entry">';
-                echo '<header class="entry-header">';
-                echo $title;
-                echo '</header>';
-                echo '<div class="entry-content clearfix">';
-                // echo $post_type.'_'.$post_id;
-                echo $content ? '<p>'. wp_trim_words($content, 30) .'... <a class="more-link" href="' . $post_link . '">Continue Reading</a><p>' : '';
-                echo '</div>';
-                echo '</article>';
+                    echo '<article class="'. $post_type .'-'. $post_id .' entry">';
+                    echo '<header class="entry-header">';
+                    echo $title;
+                    echo '</header>';
+                    echo '<div class="entry-content clearfix">';
+                    // echo $post_type.'_'.$post_id;
+                    echo $content ? '<p>'. wp_trim_words($content, 30) .'... <a class="more-link" href="' . $post_link . '">Continue Reading</a><p>' : '';
+                    echo '</div>';
+                    echo '</article>';
+                }
 
             endwhile;
 
