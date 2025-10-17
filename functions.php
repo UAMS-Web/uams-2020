@@ -785,8 +785,8 @@ add_action('process_image_sizer_queue', function () {
         return;
     }
 
-    // Process up to 10 images per cron run to avoid overloading
-    $batch_size = 10;
+    // Process up to 20 images per cron run to avoid overloading
+    $batch_size = 20;
     $processed = 0;
 
     foreach ($queue as $index => $job) {
