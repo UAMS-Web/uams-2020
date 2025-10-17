@@ -28,8 +28,8 @@ function uamswp_do_plugins_register() {
 		// ),
 
 		array(
-			'name'      => __( 'Fly Dynamic Image Resizer', 'uamswp-uams-2020' ),
-			'slug'      => 'fly-dynamic-image-resizer',
+			'name'      => __( 'Better Image Sizes', 'uamswp-uams-2020' ),
+			'slug'      => 'better-image-sizes',
 			'required'  => true,
 		),
 
