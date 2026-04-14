@@ -91,7 +91,7 @@ acf_add_local_field_group(array(
 				'uams' => 'Main Campus',
 				'nw-campus' => 'Northwest Campus',
 				'regional-campus' => 'Regional Campus',
-				
+				'advancement' => 'Institutional Advancement',
 			),
 			'default_value' => array(
 				0 => 'uams',
