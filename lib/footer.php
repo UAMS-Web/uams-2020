@@ -90,6 +90,10 @@ function uamswp_footer_creds_text() {
             $footer_image_url = 'https://gradschool.uams.edu/';
             $footer_image_title = 'UAMS Graduate School';
             $footer_image_site = $subsite;
+        } elseif ( 'advancement' == $subsite ) {
+            $footer_image_url = 'https://advancement.uams.edu/';    
+            $footer_image_title = 'UAMS Institutional Advancement';
+            $footer_image_site = $subsite;
         // } elseif ( 'nw-campus' == $subsite ) {
         //     $footer_image_url = 'https://northwestcampus.uams.edu/';    
         //     $footer_image_title = 'UAMS Northwest Regional Campus';
@@ -136,7 +140,7 @@ function uamswp_footer_creds_text() {
         $address_sr = ' class="sr-only"';
     } 
     // Overrides, if available
-    if( ! empty( $custom_addresses ) && ( ('institute' == $site) || ('nw-campus' == $subsite) || ( startsWith($subsite, 'regional-') ) ) ) {
+    if( ! empty( $custom_addresses ) && ( ('institute' == $site) || ('nw-campus' == $subsite) || ('advancement' == $subsite) || ( startsWith($subsite, 'regional-') ) ) ) {
         $address = '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
         $address .= sprintf( '<a href="%s" class="logo" itemprop="url">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
         $address .= '<span itemprop="name" class="sr-only">'.$footer_image_title .'</span>';
@@ -210,6 +214,10 @@ function uamswp_footer_creds_text() {
     } else { // None
         // Do nothing
     }
+    if ( 'advancement' == $subsite ) {
+        echo '<div class=""><p>Email: <a href="mailto:advancement@uams.edu">advancement@uams.edu</a></p>';
+        echo '<p>Tax ID: 71-6056674</p></div>';
+    }
 
     // Render this by default
     echo '</div>';
@@ -225,7 +233,7 @@ function uamswp_footer_creds_text() {
     $social_ig = 'https://www.instagram.com/uamshealth/';
     $social_yt = 'https://www.youtube.com/UAMSHealth';
     $social_li = 'https://www.linkedin.com/school/uams/'; // or 'https://www.linkedin.com/company/uams/'
-    $social_pn = 'https://www.pinterest.com/uamshealth/';
+    // $social_pn = 'https://www.pinterest.com/uamshealth/';
 
     // Change the exceptions
     if ('institute' == $site) {
@@ -303,6 +311,11 @@ function uamswp_footer_creds_text() {
             $social_fb = 'https://www.facebook.com/UAMSNW';
         // } elseif ( startsWith($subsite, 'regional-') ) {
         //     $social_fb = '';
+        } elseif ( 'advancement' == $subsite ) {
+            $social_fb = 'https://www.facebook.com/uamsgiving/';
+            $social_tw = 'https://x.com/uamsgiving';
+            $social_ig = 'https://www.instagram.com/uamsgiving/';
+            $social_li = 'https://www.linkedin.com/company/uamsgiving';
         } elseif ( 'gsa' == $subsite) {
             $social_fb = 'https://www.facebook.com/UAMSgsa';
         } elseif ( 'continuing-ed' == $subsite) {
@@ -343,7 +356,8 @@ function uamswp_footer_creds_text() {
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_ig.'" target="_blank" title="Instagram"><span class="fab fa-instagram"></span><span class="sr-only">Instagram</span></a></li>';
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_yt.'" target="_blank" title="YouTube"><span class="fab fa-youtube"></span><span class="sr-only">YouTube</span></a></li>';
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_li.'" target="_blank" title="LinkedIn"><span class="fab fa-linkedin"></span><span class="sr-only">LinkedIn</span></a></li>';
-        echo '<li class="nav-item"><a class="nav-link" href="'.$social_pn.'" target="_blank" title="Pinterest"><span class="fab fa-pinterest"></span><span class="sr-only">Pinterest</span></a></li>';
+        // echo '<li class="nav-item"><a class="nav-link" href="'.$social_pn.'" target="_blank" title="Pinterest"><span class="fab fa-pinterest"></span><span class="sr-only">Pinterest</span></a></li>';
+        echo ('advancement' == $subsite) ? '<li class="nav-item"><a class="nav-link" href="https://uams.info/give" target="_blank" title="Give Now"><span class="fas fa-donate"></span><span class="sr-only">Give Now</span></a></li>' : '';
     echo '</ul></div>';
 
     // Text Links
