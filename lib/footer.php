@@ -90,6 +90,10 @@ function uamswp_footer_creds_text() {
             $footer_image_url = 'https://gradschool.uams.edu/';
             $footer_image_title = 'UAMS Graduate School';
             $footer_image_site = $subsite;
+        } elseif ( 'advancement' == $subsite ) {
+            $footer_image_url = 'https://advancement.uams.edu/';    
+            $footer_image_title = 'UAMS Institutional Advancement';
+            $footer_image_site = $subsite;
         // } elseif ( 'nw-campus' == $subsite ) {
         //     $footer_image_url = 'https://northwestcampus.uams.edu/';    
         //     $footer_image_title = 'UAMS Northwest Regional Campus';
