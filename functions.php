@@ -1093,11 +1093,15 @@ add_filter('allowed_block_types', function($block_types, $post) {
 		'acf/text-stacked',
 		'acf/livewhale-calendar',
 		'acf/uams-gallery',
-		'acf/uams-content',
+		//'acf/uams-content',
 		'acf/fad-providers',
 		'acf/fad-locations',
 		'acf/logo-list'
 	];
+	if ( current_user_can( 'manage_options' ) ) {
+		$allowed_marketing[] = 'acf/uams-content';
+        //return $allowed_marketing;
+    }
 	if (get_page_template_slug( $post ) == 'templates/marketing.php') {
 		return $allowed_marketing;
 	}
@@ -1281,6 +1285,10 @@ add_filter( 'allowed_block_types_all', function( $allowed_blocks, $editor_contex
 		// 'core/legacy-widget',
 		'core/widget-group',
     ];
+
+	if ( ! current_user_can( 'manage_options' ) ) {
+    	$removelist[] = 'acf/uams-content';
+    }
 
     return array_values( array_diff( $blocks, $removelist ) );
 }, 100, 2 );
