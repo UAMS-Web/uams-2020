@@ -12,7 +12,7 @@
 <meta name="dc.language" content="en_US" />
 <!-- // Schema Data // -->
 <script
-	type="application/ld+json">{"@context" : "http://schema.org","@type" : "Organization","logo": "http:\/\/clean.local\/wp-content\/uploads\/2020\/06\/uams-logo_main_dark_189x50.png","name" : "University of Arkansas for Medical Sciences (UAMS)","url" : "http:\/\/clean.local","contactPoint": [{
+	type="application/ld+json">{"@context" : "https://schema.org","@type" : "Organization","logo": "http:\/\/clean.local\/wp-content\/uploads\/2020\/06\/uams-logo_main_dark_189x50.png","name" : "University of Arkansas for Medical Sciences (UAMS)","url" : "http:\/\/clean.local","contactPoint": [{
 					"@type": "ContactPoint",
 					"telephone": "+15016867000","contactOption": "None","contactType": "customer support"
                 }],"sameAs" : ["https:\/\/www.facebook.com\/UAMShealth\/", "https:\/\/twitter.com\/@uamshealth", "https:\/\/www.pinterest.com\/uamshealth\/", "https:\/\/www.instagram.com\/uamshealth\/", "https:\/\/www.youtube.com\/user\/UAMSHealth", "https:\/\/www.linkedin.com\/school\/university-of-arkansas-for-medical-sciences\/"]}</script>
