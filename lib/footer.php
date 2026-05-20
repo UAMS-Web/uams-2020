@@ -137,11 +137,11 @@ function uamswp_footer_creds_text() {
     } 
     // Overrides, if available
     if( ! empty( $custom_addresses ) && ( ('institute' == $site) || ('nw-campus' == $subsite) || ( startsWith($subsite, 'regional-') ) ) ) {
-        $address = '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
+        $address = '<div itemscope="" itemtype="https://schema.org/LocalBusiness" class="schema">';
         $address .= sprintf( '<a href="%s" class="logo" itemprop="url">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
         $address .= '<span itemprop="name" class="sr-only">'.$footer_image_title .'</span>';
         foreach ( $custom_addresses as $custom_address ) {
-            $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">';
+            $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="https://schema.org/PostalAddress">';
             $address .= '<strong'. (! empty($custom_address['address_title']) ? '>'. $custom_address['address_title'] : $address_sr .'>Mailing Address' ).':</strong> ';
             $address .= '<span itemprop="streetAddress">'. (! empty($custom_address['address_street_1']) ? $custom_address['address_street_1'] : '4301 West Markham Street' ) . (! empty($custom_address['address_street_2']) ? ' ' . $custom_address['address_street_2'] : '' ).'</span>, ';
             $address .= '<span itemprop="addressLocality">'. (! empty($custom_address['address_city']) ? $custom_address['address_city'] : 'Little Rock' ).'</span>, ';
@@ -151,10 +151,10 @@ function uamswp_footer_creds_text() {
         }
         echo $address;
     } else { //write default
-        $address = '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
+        $address = '<div itemscope="" itemtype="https://schema.org/LocalBusiness" class="schema">';
         $address .= sprintf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
         $address .= '<span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span>';
-        $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">';
+        $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="https://schema.org/PostalAddress">';
         $address .= '<strong class="sr-only">Mailing Address:</strong> ';
         $address .= '<span itemprop="streetAddress">4301 West Markham Street</span>, ';
         $address .= '<span itemprop="addressLocality">Little Rock</span>, ';
