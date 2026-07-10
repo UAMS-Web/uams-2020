@@ -281,6 +281,7 @@ b {
 
 .module-inner-title {
     margin-top: $uams-module-padding-mobile;
+    text-wrap: balance;
 
     @include media-breakpoint-up(sm) {
         margin-top: $uams-module-padding;
