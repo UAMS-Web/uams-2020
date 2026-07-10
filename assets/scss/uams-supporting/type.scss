@@ -430,11 +430,13 @@ cite,
 //
 // The visual of an <hr> — a hairline border with matching space around it —
 // applied to an element's own top and/or bottom edge, without the semantics of
-// an <hr>. Handy for separating in-flow content blocks. Use the .rule-top and
-// .rule-bottom utility classes together or separately.
-@mixin content-rule($side) {
-    margin-#{$side}: $hr-margin-y;
-    padding-#{$side}: $hr-margin-y;
+// an <hr>. Handy for separating in-flow content blocks. Use .rule-top /
+// .rule-bottom for hairline spacing, or the .rule-top-lg / .rule-bottom-lg
+// variants for larger, module-sized spacing that grows at the sm breakpoint.
+// Combine top and bottom freely.
+@mixin content-rule($side, $space: $hr-margin-y) {
+    margin-#{$side}: $space;
+    padding-#{$side}: $space;
     border-#{$side}: $hr-border-width solid $hr-border-color;
 }
 
@@ -444,6 +446,24 @@ cite,
 
 .rule-bottom {
     @include content-rule(bottom);
+}
+
+.rule-top-lg {
+    @include content-rule(top, $uams-module-padding-mobile);
+
+    @include media-breakpoint-up(sm) {
+        margin-top: $uams-module-padding;
+        padding-top: $uams-module-padding;
+    }
+}
+
+.rule-bottom-lg {
+    @include content-rule(bottom, $uams-module-padding-mobile);
+
+    @include media-breakpoint-up(sm) {
+        margin-bottom: $uams-module-padding;
+        padding-bottom: $uams-module-padding;
+    }
 }
 
 hr {
