@@ -46,6 +46,23 @@ dt {
     }
 }
 
+// A first-child floated image or figure (alignleft/alignright) immediately
+// followed by a heading: drop the heading's top margin so it lines up with the
+// top of the float instead of dropping below it.
+img.alignleft:first-child,
+img.alignright:first-child,
+figure.alignleft:first-child,
+figure.alignright:first-child {
+    + h1, + .h1,
+    + h2, + .h2,
+    + h3, + .h3,
+    + h4, + .h4,
+    + h5, + .h5,
+    + h6, + .h6 {
+        margin-top: 0;
+    }
+}
+
 h1,
 h2,
 h3,
