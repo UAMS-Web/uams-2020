@@ -426,6 +426,26 @@ cite,
     }
 }
 
+// Content rule
+//
+// The visual of an <hr> — a hairline border with matching space around it —
+// applied to an element's own top and/or bottom edge, without the semantics of
+// an <hr>. Handy for separating in-flow content blocks. Use the .rule-top and
+// .rule-bottom utility classes together or separately.
+@mixin content-rule($side) {
+    margin-#{$side}: $hr-margin-y;
+    padding-#{$side}: $hr-margin-y;
+    border-#{$side}: $hr-border-width solid $hr-border-color;
+}
+
+.rule-top {
+    @include content-rule(top);
+}
+
+.rule-bottom {
+    @include content-rule(bottom);
+}
+
 hr {
     margin-top: $uams-module-padding-mobile;
     margin-bottom: $uams-module-padding-mobile;

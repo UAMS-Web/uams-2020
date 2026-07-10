@@ -15,3 +15,11 @@
 //@import "utilities/spacing";
 @import "utilities/text";
 //@import "utilities/visibility";
+
+// Bootstrap 4 ships no flow-root display utility. Add one so an element can
+// establish a new block formatting context — containing floats and preventing
+// margin-collapse without a clearfix. Matches the !important weight of the
+// other .d-* display utilities.
+.d-flow-root {
+    display: flow-root !important;
+}
