@@ -216,7 +216,7 @@ function uamswp_footer_creds_text() {
     }
     if ( 'advancement' == $subsite ) {
         echo '<div class=""><p>Email: <a href="mailto:advancement@uams.edu">advancement@uams.edu</a></p>';
-        echo '<p>Tax ID: 71-6056674</p></div>';
+        echo '<p>Tax ID: 71-6056774</p></div>';
     }
 
     // Render this by default
