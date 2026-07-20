@@ -46,6 +46,23 @@ dt {
     }
 }
 
+// A first-child floated image or figure (alignleft/alignright) immediately
+// followed by a heading: drop the heading's top margin so it lines up with the
+// top of the float instead of dropping below it.
+img.alignleft:first-child,
+img.alignright:first-child,
+figure.alignleft:first-child,
+figure.alignright:first-child {
+    + h1, + .h1,
+    + h2, + .h2,
+    + h3, + .h3,
+    + h4, + .h4,
+    + h5, + .h5,
+    + h6, + .h6 {
+        margin-top: 0;
+    }
+}
+
 h1,
 h2,
 h3,
@@ -281,6 +298,7 @@ b {
 
 .module-inner-title {
     margin-top: $uams-module-padding-mobile;
+    text-wrap: balance;
 
     @include media-breakpoint-up(sm) {
         margin-top: $uams-module-padding;
@@ -405,6 +423,46 @@ cite,
             @include font-size($blockquote-small-font-size);
             font-style: italic;
         }
+    }
+}
+
+// Content rule
+//
+// The visual of an <hr> — a hairline border with matching space around it —
+// applied to an element's own top and/or bottom edge, without the semantics of
+// an <hr>. Handy for separating in-flow content blocks. Use .rule-top /
+// .rule-bottom for hairline spacing, or the .rule-top-lg / .rule-bottom-lg
+// variants for larger, module-sized spacing that grows at the sm breakpoint.
+// Combine top and bottom freely.
+@mixin content-rule($side, $space: $hr-margin-y) {
+    margin-#{$side}: $space;
+    padding-#{$side}: $space;
+    border-#{$side}: $hr-border-width solid $hr-border-color;
+}
+
+.rule-top {
+    @include content-rule(top);
+}
+
+.rule-bottom {
+    @include content-rule(bottom);
+}
+
+.rule-top-lg {
+    @include content-rule(top, $uams-module-padding-mobile);
+
+    @include media-breakpoint-up(sm) {
+        margin-top: $uams-module-padding;
+        padding-top: $uams-module-padding;
+    }
+}
+
+.rule-bottom-lg {
+    @include content-rule(bottom, $uams-module-padding-mobile);
+
+    @include media-breakpoint-up(sm) {
+        margin-bottom: $uams-module-padding;
+        padding-bottom: $uams-module-padding;
     }
 }
 
