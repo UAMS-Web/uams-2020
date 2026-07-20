@@ -354,7 +354,7 @@ function uamswp_do_search_loop() {
                     while ( have_posts() ) : the_post();
                         global $wp_query;
 
-                        if ($wp_query->post->blog_id) {
+                        if (isset($wp_query->post->blog_id)) {
                             switch_to_blog($wp_query->post->blog_id);
                         }
 
