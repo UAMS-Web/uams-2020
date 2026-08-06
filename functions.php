@@ -1009,7 +1009,25 @@ function uamswp_gtm_1() {
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','<?php echo $gtmvalue; ?>');</script>
 	<!-- End Google Tag Manager -->
-<?php } else {
+	<?php // add cjrw gtm code
+		if ('uamshealth' == uams_get_site_info()['site']) { // uamshealth ?>
+		<!-- Google Tag Manager -->
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-WXV9PML2');</script>
+		<!-- End Google Tag Manager -->
+	<?php } elseif (('inside' !== uams_get_site_info()['site'] ) && ('uamshealth' !== uams_get_site_info()['site']) ) { // uams.edu ?>
+		<!-- Google Tag Manager -->
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-K5LXTVLJ');</script>
+		<!-- End Google Tag Manager -->
+	<?php } // end cjrw gtm code
+	} else {
 	echo '<!-- Google Tag Manager is disabled -->';
 }
  	}
@@ -1025,7 +1043,20 @@ function uamswp_gtm_2( ) {
 	<noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=<?php echo $gtmvalue; ?>"
 	height="0" width="0" aria-hidden="true" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
-<?php } }
+	<?php // add cjrw gtm code
+		if ('uamshealth' == uams_get_site_info()['site']) { // uamshealth ?>
+			<!-- Google Tag Manager (noscript) -->
+			<noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=GTM-WXV9PML2"
+			height="0" width="0" aria-hidden="true" style="display:none;visibility:hidden"></iframe></noscript>
+			<!-- End Google Tag Manager (noscript) -->
+	<?php } elseif (('inside' !== uams_get_site_info()['site'] ) && ('uamshealth' !== uams_get_site_info()['site']) ) { // uams.edu ?>
+			<!-- Google Tag Manager (noscript) -->
+			<noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=GTM-K5LXTVLJ"
+			height="0" width="0" aria-hidden="true" style="display:none;visibility:hidden"></iframe></noscript>
+			<!-- End Google Tag Manager (noscript) -->
+	<?php } // end cjrw gtm code
+	} 
+}
 
 add_filter( 'big_image_size_threshold', '__return_false' );
 
