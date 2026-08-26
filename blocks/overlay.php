@@ -20,6 +20,7 @@ $id = 'text-image-overlay-' . $id;
 if( !empty($block['anchor']) ) {
     $id = $block['anchor'];
 }
+$id = sanitize_html_class( $id );
 
 $className = '';
 if( !empty($block['className']) ) {
@@ -82,7 +83,7 @@ if( $overlay_rows ) :
         $image = $overlay_row['overlay_section_image'];
 
 ?>
-            <section class="col-12<?php echo $row_count > 1 ? " col-sm-6" : ""; ?> item bg-image item-<?php echo $index; ?> <?php echo $background_color; ?>" aria-label="<?php echo $heading; ?>">
+            <section class="col-12<?php echo $row_count > 1 ? " col-sm-6" : ""; ?> item bg-image item-<?php echo $index; ?> <?php echo $background_color; ?>" aria-label="<?php echo esc_attr( $heading ); ?>">
                 <?php if ( $row_count > 1 && function_exists( 'bis_get_attachment_image' ) ) { // Background styles for two tiles in one row with BIS plugin ?>
                 <style>
                     #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
@@ -187,9 +188,9 @@ if( $overlay_rows ) :
                 </style>
                 <?php } //endif ?>
                 <div class="text-container">
-                    <h2><?php echo $heading; ?></h2>
-                    <p><?php echo $body; ?></p>
-                    <a href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>" class="btn btn-white"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?> data-itemtitle="<?php echo $heading; ?>"><?php echo $button_text; ?></a>
+                    <h2><?php echo esc_html( $heading ); ?></h2>
+                    <p><?php echo wp_kses_post( $body ); ?></p>
+                    <a href="<?php echo esc_url( $button_url ); ?>" aria-label="<?php echo esc_attr( $button_desc ); ?>" class="btn btn-white"<?php echo $button_target ? ' target="'. esc_attr( $button_target ) .'"' : ''; ?> data-itemtitle="<?php echo esc_attr( $heading ); ?>"><?php echo esc_html( $button_text ); ?></a>
                 </div>
             </section>
 <?php

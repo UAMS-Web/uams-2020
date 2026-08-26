@@ -68,58 +68,58 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
 }
 if ($geo_display) : 
 ?>
-    <section class="uams-module extra-padding call-out<?php echo $className; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+    <section class="uams-module extra-padding call-out<?php echo esc_attr($className); ?> <?php echo esc_attr($background_color); ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
         <?php if ( $use_image && function_exists( 'bis_get_attachment_image' ) ) { ?>
         <style>
-            #<?php echo $id; ?>:before {
+            #<?php echo esc_attr($id); ?>:before {
                 background-image: url("<?php echo image_sizer($image, 576, 216, 'center', 'center', 'aspect-8-3'); ?>");
             }
 
             /* XS Breakpoint */
             @media (min-width: 576px) {
-                #<?php echo $id; ?>:before {
+                #<?php echo esc_attr($id); ?>:before {
                     background-image: url("<?php echo image_sizer($image, 768, 288, 'center', 'center', 'aspect-8-3'); ?>");
                 }
             }
     
             /* SM Breakpoint */
             @media (min-width: 768px) {
-                #<?php echo $id; ?>:before {
+                #<?php echo esc_attr($id); ?>:before {
                     background-image: url("<?php echo image_sizer($image, 992, 372, 'center', 'center', 'aspect-8-3'); ?>");
                 }
             }
     
             /* MD Breakpoint */
             @media (min-width: 992px) {
-                #<?php echo $id; ?>:before {
+                #<?php echo esc_attr($id); ?>:before {
                     background-image: url("<?php echo image_sizer($image, 1200, 450, 'center', 'center', 'aspect-8-3'); ?>");
                 }
             }
     
             /* LG Breakpoint */
             @media (min-width: 1200px) {
-                #<?php echo $id; ?>:before {
+                #<?php echo esc_attr($id); ?>:before {
                     background-image: url("<?php echo image_sizer($image, 1500, 563, 'center', 'center', 'aspect-8-3'); ?>");
                 }
             }
     
             /* XL Breakpoint */
             @media (min-width: 1500px) {
-                #<?php echo $id; ?>:before {
+                #<?php echo esc_attr($id); ?>:before {
                     background-image: url("<?php echo image_sizer($image, 1921, 720, 'center', 'center', 'aspect-8-3'); ?>");
                 }
             }
     
             /* XXL Breakpoint */
             @media (min-width: 1921px) {
-                #<?php echo $id; ?>:before {
+                #<?php echo esc_attr($id); ?>:before {
                     background-image: url("<?php echo image_sizer($image, 2560, 960, 'center', 'center', 'aspect-8-3'); ?>");
                 }
             }
         </style>
         <?php } elseif ( $use_image ) { ?>
         <style>
-            #<?php echo $id; ?>:before {
+            #<?php echo esc_attr($id); ?>:before {
                 background-image: url("<?php echo wp_get_attachment_url( $image, 'aspect-8-3' ); ?>");
             }
         </style>
@@ -129,10 +129,10 @@ if ($geo_display) :
                 <div class="col-12">
                     <div class="text-container">
                         <div class="call-out-heading">
-                            <h2><?php echo $heading; ?></h2>
+                            <h2><?php echo esc_html($heading); ?></h2>
                         </div>
                         <div class="call-out-body">
-                            <p><?php echo $body; ?></p>
+                            <p><?php echo wp_kses_post($body); ?></p>
                         </div>
                     </div>
                 </div>

@@ -11,7 +11,7 @@ function uamswp_post_title_link( $title ) {
 
 add_filter( 'get_the_excerpt', 'uamswp_link_excerpt_more' );
 function uamswp_link_excerpt_more( $output ) {
-    $more = sprintf( '</p><p><a href="%s" class="btn btn-outline-primary" rel="bookmark" aria-label="' . get_the_title() . '">' . __( 'Read More' ) . '</a>', esc_url( get_the_permalink() ) );
+    $more = sprintf( '</p><p><a href="%1$s" class="btn btn-outline-primary" rel="bookmark" aria-label="%2$s">%3$s</a>', esc_url( get_the_permalink() ), esc_attr( get_the_title() ), esc_html__( 'Read More' ) );
     return $output . $more;
 }
 

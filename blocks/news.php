@@ -92,6 +92,13 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
     $geo_display = true;
     echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
 }
+// Sanitize editor-controlled values before they are concatenated into the shortcode string.
+$articleID = absint( $articleID );
+$count = absint( $count );
+$offset = absint( $offset );
+$category = str_replace( array( '[', ']', '"' ), '', sanitize_text_field( $category ) );
+$advancedCat = str_replace( array( '[', ']', '"' ), '', sanitize_text_field( $advancedCat ) );
+$title = str_replace( array( '[', ']', '"' ), '', sanitize_text_field( $title ) );
 if ($geo_display) {
 	echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" hide_author="'. $hide_author.'" hide_date="'. $hide_date .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
 }
