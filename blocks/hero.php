@@ -175,10 +175,10 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
                     <source srcset="<?php echo image_sizer($image_mobile, 768, 432, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 576px)">
                     <source srcset="<?php echo image_sizer($image_mobile, 576, 324, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 1px)">
                     <!-- Fallback -->
-                    <img src="<?php echo image_sizer($image_tablet, 455, 256, 'center', 'center', 'hero-tablet'); ?>" alt="<?php echo $image_alt; ?>" />
+                    <img src="<?php echo image_sizer($image_tablet, 455, 256, 'center', 'center', 'hero-tablet'); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" />
                     <?php } else { ?>
                     <!-- Fallback -->
-                    <img src="<?php echo wp_get_attachment_image_url( $image_tablet, 'hero-tablet' ); ?>" alt="<?php echo $image_alt; ?>" />
+                    <img src="<?php echo wp_get_attachment_image_url( $image_tablet, 'hero-tablet' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" />
                     <?php } //endif ?>
                 </picture>
             </div>
