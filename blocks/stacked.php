@@ -95,14 +95,14 @@ if( $stacked_rows ) :
     $row_count = count($stacked_rows); // Not user, but just in case
 
 ?>
-<section class="uams-module stacked-image-text<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module stacked-image-text<?php echo esc_attr($className); ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12<?php echo ($hide_heading && empty($description)) ? " sr-only" : ""; ?>">
                 <h2 class="module-title<?php echo ($hide_heading && $description) ? " sr-only" : ""; ?>">
-                    <span class="title"><?php echo $heading; ?></span>
+                    <span class="title"><?php echo esc_html($heading); ?></span>
                 </h2>
-                <?php echo $description ? '<div class="module-description"><p>'. $description .'</p></div>' : ''; ?>
+                <?php echo $description ? '<div class="module-description"><p>'. esc_html($description) .'</p></div>' : ''; ?>
             </div>
             <div class="col-12">
                 <div class="card-list card-list-left">
@@ -141,10 +141,10 @@ if( $stacked_rows ) :
                                     </picture>
                                 </div>
                                 <div class="card-body">
-                                    <h3 class="card-title h5"><?php echo $item_heading; ?></h3>
-                                    <p class="card-text"><?php echo $body; ?></p>
+                                    <h3 class="card-title h5"><?php echo esc_html($item_heading); ?></h3>
+                                    <p class="card-text"><?php echo esc_html($body); ?></p>
                                     <?php if ( $button_text ) { ?>  
-                                        <a href="<?php echo $button_url; ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?> data-moduletitle="<?php echo $heading; ?>" data-itemtitle="<?php echo $item_heading; ?>"><?php echo $button_text; ?></a>
+                                        <a href="<?php echo esc_url($button_url); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo esc_attr($button_desc); ?>"<?php echo $button_target ? ' target="'. esc_attr($button_target) .'"' : ''; ?> data-moduletitle="<?php echo esc_attr($heading); ?>" data-itemtitle="<?php echo esc_attr($item_heading); ?>"><?php echo esc_html($button_text); ?></a>
                                     <?php } //endif ?>
                                 </div>
                             </div>
