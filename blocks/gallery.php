@@ -165,10 +165,10 @@ if ($geo_display) :
                                                 <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 1), gallery_image_dimension('xs', 1, 1, $gallery_crop), 'center', 'center', 'aspect-1-1'); ?>" 
                                                     media="(min-width: 1px)">
                                                 <!-- Fallback -->
-                                                <img src="<?php echo image_sizer($image_id, gallery_image_dimension('xl', 2, 1), gallery_image_dimension('xl', 2, 1, $gallery_crop), 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
+                                                <img src="<?php echo image_sizer($image_id, gallery_image_dimension('xl', 2, 1), gallery_image_dimension('xl', 2, 1, $gallery_crop), 'center', 'center'); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" />
                                             <?php } else { ?>
                                                 <!-- Fallback -->
-                                                <img src="<?php echo wp_get_attachment_image_url( $image_id, 'aspect-16-9' ); ?>" alt="<?php echo $image_alt; ?>" />
+                                                <img src="<?php echo wp_get_attachment_image_url( $image_id, 'aspect-16-9' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" />
                                             <?php } //endif ?>
                                         </picture>
                                     <?php if ($modal) { ?>
@@ -193,10 +193,10 @@ if ($geo_display) :
                                                                 <source srcset="<?php echo image_sizer($image_id, 886, -1, 'center', 'center'); ?>" media="(min-width: 768px)">
                                                                 <source srcset="<?php echo image_sizer($image_id, 702, -1, 'center', 'center'); ?>" media="(min-width: 1px)">
                                                                 <!-- Fallback -->
-                                                                <img src="<?php echo image_sizer($image_id, 1106, -1, 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
+                                                                <img src="<?php echo image_sizer($image_id, 1106, -1, 'center', 'center'); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" />
                                                             </picture>
                                                         <?php } else { ?>
-                                                            <img src="<?php echo wp_get_attachment_image_url( $image_id, 'content-image-full' ); ?>" alt="<?php echo $image_alt; ?>">
+                                                            <img src="<?php echo wp_get_attachment_image_url( $image_id, 'content-image-full' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>">
                                                         <?php } //endif 
                                                         if ( $image_caption ) { ?>
                                                             <figcaption class="figure-caption"><?php echo wp_kses_post($image_caption); ?></figcaption>
