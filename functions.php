@@ -1022,7 +1022,7 @@ function uamswp_gtm_2( ) {
 	if ($gtm_disable !== '1') {
 	?>
 	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=<?php echo $gtmvalue; ?>"
+	<noscript><iframe title="Google Tag Manager" src="<?php echo esc_url( 'https://www.googletagmanager.com/ns.html?id=' . $gtmvalue ); ?>"
 	height="0" width="0" aria-hidden="true" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
 <?php } }
