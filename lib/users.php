@@ -41,6 +41,38 @@ function custom_admin_menu() {
 }
 
 /*
+ * Enforce the editor restriction that custom_admin_menu() only hides.
+ *
+ * Editors are granted edit_theme_options so they can reach Appearance > Menus
+ * and the Customizer, but hiding the Themes/Widgets menu entries is cosmetic
+ * only and does not stop a direct URL to themes.php/widgets.php. This backs the
+ * hidden menus with a real access-control check for those two screens, while
+ * leaving Menus (nav-menus.php) and the Customizer intact.
+ *
+ */
+add_action( 'admin_init', 'uamswp_restrict_editor_theme_screens' );
+function uamswp_restrict_editor_theme_screens() {
+    // Administrators (and super admins) always pass.
+    if ( current_user_can( 'manage_options' ) ) {
+        return;
+    }
+    // Only enforce against users who actually hold the editor role.
+    $user = wp_get_current_user();
+    if ( ! ( $user instanceof WP_User ) || ! in_array( 'editor', (array) $user->roles, true ) ) {
+        return;
+    }
+    // Deny direct access to exactly the screens custom_admin_menu() hides.
+    global $pagenow;
+    if ( in_array( $pagenow, array( 'themes.php', 'widgets.php' ), true ) ) {
+        wp_die(
+            __( 'Sorry, you are not allowed to access this page.' ),
+            '',
+            array( 'response' => 403 )
+        );
+    }
+}
+
+/*
  * Capture user login and add it as timestamp in user meta data
  *
  */
