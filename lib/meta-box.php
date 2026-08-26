@@ -20,7 +20,7 @@ if( function_exists('acf_add_options_page') ) {
 		'page_title' 	=> 'UAMS Settings',
 		'menu_title'	=> 'UAMS Settings',
 		'menu_slug' 	=> 'uamswp-settings',
-		'capability'	=> 'edit_posts',
+		'capability'	=> 'manage_options',
         'redirect'		=> false,
         'autoload'      => true,
         'update_button'		=> __('Save Settings', 'acf'),
