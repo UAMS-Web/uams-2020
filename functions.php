@@ -1007,7 +1007,7 @@ function uamswp_gtm_1() {
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','<?php echo $gtmvalue; ?>');</script>
+	})(window,document,'script','dataLayer','<?php echo esc_js( $gtmvalue ); ?>');</script>
 	<!-- End Google Tag Manager -->
 <?php } else {
 	echo '<!-- Google Tag Manager is disabled -->';
