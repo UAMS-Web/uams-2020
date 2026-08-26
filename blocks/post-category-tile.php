@@ -95,11 +95,11 @@ if ( empty( $cat_button_text ) )
 
 ?>
 
-<section class="uams-module post-category-tile<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading ?>">
+<section class="uams-module post-category-tile<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo esc_attr( $heading ); ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12<?php echo $hide_heading ? " sr-only" : ""; ?>">
-                <h2 class="module-title"><span class="title"><?php echo $heading ?></span></h2>
+                <h2 class="module-title"><span class="title"><?php echo esc_html( $heading ); ?></span></h2>
             </div>
             <div class="col-12">                
                 <div class="inner-container">
@@ -130,10 +130,10 @@ if ( empty( $cat_button_text ) )
                                 media="(min-width: 1px)" 
                                 srcset="<?php echo image_sizer($image, 497, 497, 'center', 'center', 'aspect-1-1'); ?>">
                             <!-- Fallback -->
-                            <img src="<?php echo image_sizer($image, 496, 496, 'center', 'center', 'aspect-1-1'); ?>" alt="<?php echo $alt_text ? $alt_text : ''; ?>" />
+                            <img src="<?php echo image_sizer($image, 496, 496, 'center', 'center', 'aspect-1-1'); ?>" alt="<?php echo esc_attr( $alt_text ? $alt_text : '' ); ?>" />
                             <?php } else { ?>
                             <!-- Fallback -->
-                            <img src="<?php echo wp_get_attachment_image_url( $image, 'aspect-16-9' ); ?>" alt="<?php echo $alt_text ? $alt_text : ''; ?>" />
+                            <img src="<?php echo wp_get_attachment_image_url( $image, 'aspect-16-9' ); ?>" alt="<?php echo esc_attr( $alt_text ? $alt_text : '' ); ?>" />
                             <?php } //endif ?>
                         </picture>
                     </div>
@@ -151,8 +151,8 @@ if ( empty( $cat_button_text ) )
                             // echo wp_trim_words(get_the_excerpt(), 25, ' ...');  // Words instead of character
                         }?></p>
                         <div class="cta-container">
-                            <a href="<?php the_permalink(); ?>" class="btn btn-primary" aria-label="Read <?php the_title(); ?>" data-moduletitle="<?php echo $heading; ?>" data-categorytitle="<?php echo $category->name; ?>"><?php echo $post_button_text; ?></a>
-                            <a href="<?php echo get_category_link( $category->term_id ); ?>" class="btn btn-outline-primary" aria-label="Full list of <?php echo $category->name; ?> stories" data-moduletitle="<?php echo $heading; ?>"  data-categorytitle="<?php echo $category->name; ?>"><?php echo $cat_button_text; ?></a>
+                            <a href="<?php the_permalink(); ?>" class="btn btn-primary" aria-label="Read <?php the_title(); ?>" data-moduletitle="<?php echo esc_attr( $heading ); ?>" data-categorytitle="<?php echo esc_attr( $category->name ); ?>"><?php echo esc_html( $post_button_text ); ?></a>
+                            <a href="<?php echo get_category_link( $category->term_id ); ?>" class="btn btn-outline-primary" aria-label="Full list of <?php echo esc_attr( $category->name ); ?> stories" data-moduletitle="<?php echo esc_attr( $heading ); ?>"  data-categorytitle="<?php echo esc_attr( $category->name ); ?>"><?php echo esc_html( $cat_button_text ); ?></a>
                         </div>
                     </div>
                 </div>
