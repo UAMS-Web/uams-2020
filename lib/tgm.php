@@ -37,6 +37,7 @@ function uamswp_do_plugins_register() {
 			'name'      => __( 'UAMSWP YouTube Lyte', 'uamswp-uams-2020' ),
 			'slug'      => 'uamswp-youtube-lyte',
 			'source'             => get_stylesheet_directory() . '/plugins/uamswp-youtube-lyte.zip', // The plugin source.
+			'version'            => '1.7.32', // Sites on an older build are prompted to update.
 			'required'  => true,
 		),
 
