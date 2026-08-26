@@ -158,7 +158,7 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
                 echo $background_color_4;
             }
         } else {
-            echo $background_color;
+            echo esc_attr($background_color);
         }
         ?><?php echo (0 == ($index - 1) ? ' active' : ''); ?>" id="carousel-item-<?php echo ($index - 1); ?>">
             <div class="image-container">
@@ -184,10 +184,10 @@ $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + tim
             </div>
             <div class="text-container">
                 <div class="inner-container">
-                    <h2><?php echo $heading; ?></h2>
-                    <p><?php echo $body; ?></p>
+                    <h2><?php echo esc_html($heading); ?></h2>
+                    <p><?php echo wp_kses_post($body); ?></p>
                     <?php if ($button_text) { ?>
-                        <a class="btn btn-white" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?> data-itemtitle="<?php echo $heading; ?>"><?php echo $button_text; ?></a>
+                        <a class="btn btn-white" href="<?php echo esc_url($button_url); ?>" aria-label="<?php echo esc_attr($button_desc); ?>"<?php echo $button_target ? ' target="'. esc_attr($button_target) .'"' : ''; ?> data-itemtitle="<?php echo esc_attr($heading); ?>"><?php echo esc_html($button_text); ?></a>
                     <?php } // endif ?>
                 </div>
             </div>
