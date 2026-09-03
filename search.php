@@ -699,7 +699,9 @@ function uamswp_do_searchwp_loop() {
     echo '<div class="inner-container content-width">';
     echo '<div class="pb-4">';
     get_search_form();
-    echo uamswp_search_post_type_links();
+    if ( function_exists('uamswp_search_post_type_links')){
+        echo uamswp_search_post_type_links();
+    }
     echo '</div>';
 
     // The Loop
@@ -716,10 +718,19 @@ function uamswp_do_searchwp_loop() {
                 switch_to_blog( $post->site );
                 $switched_site = true;
             }
-            /* Get the post */
-            $post = get_post( $post->id );
+// <<<<<<< Updated upstream
+//             /* Get the post */
+//             $post = get_post( $post->id );
             
-            uamswp_get_template_part( 'results', $post->post_type, ['post_id' => $pid, 'blog_id' => $post_site], '', STYLESHEETPATH .'/templates/parts' );   
+//             uamswp_get_template_part( 'results', $post->post_type, ['post_id' => $pid, 'blog_id' => $post_site], '', STYLESHEETPATH .'/templates/parts' );   
+// // =======
+            //     $post = get_post( $post->id );
+            // } else {
+                $post = get_post( $post->id );
+            // }
+
+            uamswp_get_template_part( 'results', $post->post_type, ['post_id' => $post->id, 'blog_id' => $post->site], '', STYLESHEETPATH .'/templates/parts' );   
+// >>>>>>> Stashed changes
 
             // If we switched sites, switch back!
             if ( $switched_site ) {
