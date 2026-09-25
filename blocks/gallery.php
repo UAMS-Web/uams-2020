@@ -123,14 +123,14 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
 }
 if ($geo_display) :
 ?>
-<section class="uams-module gallery-block<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module gallery-block<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo esc_attr($heading); ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12<?php echo ($hide_heading && empty($description)) ? " sr-only" : ""; ?>">
                 <h2 class="module-title<?php echo ($hide_heading && $description) ? " sr-only" : ""; ?>">
-                    <span class="title"><?php echo $heading; ?></span>
+                    <span class="title"><?php echo esc_html($heading); ?></span>
                 </h2>
-                <?php echo $description ? '<div class="module-description">'. $description .'</div>' : ''; ?>
+                <?php echo $description ? '<div class="module-description">'. wp_kses_post($description) .'</div>' : ''; ?>
             </div>
             <div class="col-12 image-container padded-grid">
                 <div class="row">
@@ -148,7 +148,7 @@ if ($geo_display) :
                         ?>
                                 <div class="col-12 col-sm-<?php echo $sm ?> col-md-<?php echo $md ?> col-lg-<?php echo $lg; ?>">
                                         <?php if ($modal) { ?>
-                                            <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>" aria-label="Show larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': ' . $image_alt : ''; ?>">
+                                            <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>" aria-label="Show larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': ' . esc_attr($image_alt) : ''; ?>">
                                         <?php } // endif ?>
                                         <picture>
                                             <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>  
@@ -165,10 +165,10 @@ if ($geo_display) :
                                                 <source srcset="<?php echo image_sizer($image_id, gallery_image_dimension('xs', 1, 1), gallery_image_dimension('xs', 1, 1, $gallery_crop), 'center', 'center', 'aspect-1-1'); ?>" 
                                                     media="(min-width: 1px)">
                                                 <!-- Fallback -->
-                                                <img src="<?php echo image_sizer($image_id, gallery_image_dimension('xl', 2, 1), gallery_image_dimension('xl', 2, 1, $gallery_crop), 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
+                                                <img src="<?php echo image_sizer($image_id, gallery_image_dimension('xl', 2, 1), gallery_image_dimension('xl', 2, 1, $gallery_crop), 'center', 'center'); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" />
                                             <?php } else { ?>
                                                 <!-- Fallback -->
-                                                <img src="<?php echo wp_get_attachment_image_url( $image_id, 'aspect-16-9' ); ?>" alt="<?php echo $image_alt; ?>" />
+                                                <img src="<?php echo wp_get_attachment_image_url( $image_id, 'aspect-16-9' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" />
                                             <?php } //endif ?>
                                         </picture>
                                     <?php if ($modal) { ?>
@@ -176,7 +176,7 @@ if ($geo_display) :
                                     <?php } //endif ?>
                                 </div>
                                 <?php if ($modal) { ?>
-                                    <div class="modal fade" id="modal_<?php echo $i; ?>_<?php echo $id; ?>" tabindex="-1" role="dialog" aria-label="Larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': ' . $image_alt : ''; ?>" aria-hidden="true">
+                                    <div class="modal fade" id="modal_<?php echo $i; ?>_<?php echo $id; ?>" tabindex="-1" role="dialog" aria-label="Larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': ' . esc_attr($image_alt) : ''; ?>" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -193,13 +193,13 @@ if ($geo_display) :
                                                                 <source srcset="<?php echo image_sizer($image_id, 886, -1, 'center', 'center'); ?>" media="(min-width: 768px)">
                                                                 <source srcset="<?php echo image_sizer($image_id, 702, -1, 'center', 'center'); ?>" media="(min-width: 1px)">
                                                                 <!-- Fallback -->
-                                                                <img src="<?php echo image_sizer($image_id, 1106, -1, 'center', 'center'); ?>" alt="<?php echo $image_alt; ?>" />
+                                                                <img src="<?php echo image_sizer($image_id, 1106, -1, 'center', 'center'); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" />
                                                             </picture>
                                                         <?php } else { ?>
-                                                            <img src="<?php echo wp_get_attachment_image_url( $image_id, 'content-image-full' ); ?>" alt="<?php echo $image_alt; ?>">
+                                                            <img src="<?php echo wp_get_attachment_image_url( $image_id, 'content-image-full' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>">
                                                         <?php } //endif 
                                                         if ( $image_caption ) { ?>
-                                                            <figcaption class="figure-caption"><?php echo $image_caption; ?></figcaption>
+                                                            <figcaption class="figure-caption"><?php echo wp_kses_post($image_caption); ?></figcaption>
                                                         <?php } // endif ?>
                                                     </figure>
                                                 </div>
@@ -218,7 +218,7 @@ if ($geo_display) :
                 <div class="col-12 more">
                     <p class="lead"><?php echo $more_text; ?></p>
                     <div class="cta-container">
-                        <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                        <a href="<?php echo esc_url($more_button_url['url']); ?>" class="btn btn-<?php echo $more_button_color; ?>" aria-label="<?php echo esc_attr($more_button_description); ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
                     </div>
                 </div>
             <?php } // endif ?>

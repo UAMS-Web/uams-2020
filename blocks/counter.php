@@ -48,15 +48,15 @@ if ( empty($counter_list_rows) )
 
 $row = 0;
 ?>
-<section class="uams-module link-list counter-list link-list-layout-split<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module link-list counter-list link-list-layout-split<?php echo esc_attr($className); ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 heading">
                 <div class="text-container">
                     <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
-                        <span class="title"><?php echo $heading; ?></span>
+                        <span class="title"><?php echo esc_html($heading); ?></span>
                     </h2>
-                    <?php echo $description ? '<p class="note">'. $description . '</p>' : ''; ?>
+                    <?php echo $description ? '<p class="note">'. wp_kses_post($description) . '</p>' : ''; ?>
                 </div>
             </div>
             <div class="col-12 col-md-6 list">
@@ -110,10 +110,10 @@ $row = 0;
                         }
 
                     ?>
-                        <li class="item" data-start-date="<?php echo $date_string; ?>" data-rate="<?php echo $counter_item_rate; ?>" data-unit-singular="<?php echo $counter_item_unit; ?>" data-unit-plural="<?php echo $counter_item_units; ?>" id="item-<?php echo $id . '-row-' . $row; ?>">
+                        <li class="item" data-start-date="<?php echo esc_attr($date_string); ?>" data-rate="<?php echo esc_attr($counter_item_rate); ?>" data-unit-singular="<?php echo esc_attr($counter_item_unit); ?>" data-unit-plural="<?php echo esc_attr($counter_item_units); ?>" id="item-<?php echo esc_attr($id . '-row-' . $row); ?>">
                             <div class="text-container">
-                                <h3 class="h5"><?php echo $counter_item_title; ?></h3>
-                                <p class="count"><span class="value"><?php echo $count_value_display; ?></span> <span class="append"><?php echo $append; ?></span></p>
+                                <h3 class="h5"><?php echo esc_html($counter_item_title); ?></h3>
+                                <p class="count"><span class="value"><?php echo $count_value_display; ?></span> <span class="append"><?php echo esc_html($append); ?></span></p>
                             </div>
                         </li>
                     <?php
