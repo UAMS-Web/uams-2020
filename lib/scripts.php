@@ -99,7 +99,6 @@ add_filter('allowed_http_origins', 'add_allowed_origins');
 
 function add_allowed_origins($origins) {
     $origins[] = 'https://www.uams.edu';
-    $origins[] = 'http://www.uams.edu';
 	$origins[] = 'https://public-api.wordpress.com';
 	$origins[] = 'https://uamshealth.com';
 	$origins[] = 'https://news.uams.edu';
