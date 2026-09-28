@@ -64,14 +64,14 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
 }
 if ($geo_display) :
 ?>
-<section class="uams-module content-block<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module content-block<?php echo esc_attr( $className ); ?> <?php echo esc_attr( $background_color ); ?>" id="<?php echo esc_attr( $id ); ?>" aria-label="<?php echo esc_attr( $heading ); ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
-                    <span class="title"><?php echo $heading; ?></span>
+                    <span class="title"><?php echo esc_html( $heading ); ?></span>
                 </h2>
-                <?php echo $content_block ? '<div class="module-body">'. $content_block .'</div>' : ''; ?>
+                <?php echo $content_block ? '<div class="module-body">'. wp_kses_post( $content_block ) .'</div>' : ''; ?>
             </div>
         </div>
     </div>
