@@ -56,6 +56,10 @@ add_action( 'wp_login', 'uamswp_user_last_login', 10, 2 );
  */
   
 function uamswp_lastlogin() { 
+    // Do not disclose author login activity to public visitors.
+    if ( ! is_user_logged_in() ) {
+        return '';
+    }
     $last_login = get_the_author_meta('last_login');
     $the_login_date = human_time_diff($last_login);
     return $the_login_date; 
