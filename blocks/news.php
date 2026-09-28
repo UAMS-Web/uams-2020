@@ -93,6 +93,6 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
     echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
 }
 if ($geo_display) {
-	echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" hide_author="'. $hide_author.'" hide_date="'. $hide_date .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
+	echo do_shortcode('[uamswp_news output="'. esc_attr( $output ) .'"  news_title="'. esc_attr( $title ) .'"  hide_title="'. esc_attr( $hide_title ) .'" category="'. esc_attr( $category ) .'" count="'. esc_attr( $count ) .'" offset="'. esc_attr( $offset ) .'" advanced_cat="'. esc_attr( $advancedCat ) .'" local="'. esc_attr( $local ) .'" style="'. esc_attr( $background_color . $className ) .'" hide_img="'. esc_attr( $hide_img ) .'" hide_author="'. esc_attr( $hide_author ) .'" hide_date="'. esc_attr( $hide_date ) .'" include_link="'. esc_attr( $link ) .'" news_position="'. esc_attr( $position ) .'" id="'. esc_attr( $articleID ) .'"]' );
 }
 ?>
