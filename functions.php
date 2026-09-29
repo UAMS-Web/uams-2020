@@ -1007,7 +1007,7 @@ function uamswp_gtm_1() {
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','<?php echo $gtmvalue; ?>');</script>
+	})(window,document,'script','dataLayer','<?php echo esc_js( $gtmvalue ); ?>');</script>
 	<!-- End Google Tag Manager -->
 <?php } else {
 	echo '<!-- Google Tag Manager is disabled -->';
@@ -1022,10 +1022,23 @@ function uamswp_gtm_2( ) {
 	if ($gtm_disable !== '1') {
 	?>
 	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=<?php echo $gtmvalue; ?>"
+	<noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=<?php echo esc_attr( $gtmvalue ); ?>"
 	height="0" width="0" aria-hidden="true" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
 <?php } }
+
+// Reject anything that is not a GTM container ID before it is stored, so the value
+// echoed into the inline GTM script and the noscript iframe can only be safe characters.
+add_filter( 'acf/validate_value/name=google_tag_manager_id', 'uamswp_validate_gtm_id', 10, 2 );
+function uamswp_validate_gtm_id( $valid, $value ) {
+	if ( $valid !== true ) {
+		return $valid;
+	}
+	if ( $value !== '' && ! preg_match( '/^GTM-[A-Z0-9]+$/', $value ) ) {
+		return 'Enter a valid Google Tag Manager container ID (GTM-XXXXXXX).';
+	}
+	return $valid;
+}
 
 add_filter( 'big_image_size_threshold', '__return_false' );
 
