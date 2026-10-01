@@ -1,0 +1,28 @@
+# Files excluded from the deployed theme build (wp dist-archive / rsync --exclude-from).
+# See docs/security-audit-2026-09/DEPLOY-EXCLUDE.md for rationale. Issue #580.
+.git
+.gitignore
+.gitattributes
+.github
+node_modules
+gulpfile.js
+package.json
+package-lock.json
+yarn.lock
+.jshintrc
+.editorconfig
+assets/scss
+assets/js/source
+*.map
+assets/js/all.min.js
+assets/js/jquery.min.js
+html
+README.md
+plugins
+docs
+.DS_Store
+Thumbs.db
+*.log
+*.orig
+*.bak
+*.swp
