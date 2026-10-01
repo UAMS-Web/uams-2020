@@ -858,10 +858,16 @@ add_action('admin_notices', function () {
 /**
  * Clean up cron on plugin deactivation
  */
-register_deactivation_hook(__FILE__, function () {
-    wp_clear_scheduled_hook('process_image_sizer_queue');
-    delete_option('image_sizer_queue');
-});
+// register_deactivation_hook does nothing for a theme, so the image queue cron and
+// option were never cleaned up. Clear them when this theme is switched away instead.
+// (Gating the queue so anonymous page views cannot enqueue work is a behaviour change
+// left for review: see #577.)
+add_action( 'switch_theme', function ( $new_name, $new_theme, $old_theme ) {
+    if ( $old_theme && $old_theme->get_stylesheet() === 'uams-2020' ) {
+        wp_clear_scheduled_hook('process_image_sizer_queue');
+        delete_option('image_sizer_queue');
+    }
+}, 10, 3 );
 
 /**
  * Return dimension for gallery image.
