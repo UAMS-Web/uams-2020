@@ -1033,6 +1033,19 @@ function uamswp_gtm_2( ) {
 	<!-- End Google Tag Manager (noscript) -->
 <?php } }
 
+// Reject anything that is not a GTM container ID before it is stored, so the value
+// echoed into the inline GTM script and the noscript iframe can only be safe characters.
+add_filter( 'acf/validate_value/name=google_tag_manager_id', 'uamswp_validate_gtm_id', 10, 2 );
+function uamswp_validate_gtm_id( $valid, $value ) {
+	if ( $valid !== true ) {
+		return $valid;
+	}
+	if ( $value !== '' && ! preg_match( '/^GTM-[A-Z0-9]+$/', $value ) ) {
+		return 'Enter a valid Google Tag Manager container ID (GTM-XXXXXXX).';
+	}
+	return $valid;
+}
+
 add_filter( 'big_image_size_threshold', '__return_false' );
 
 function uamswp_list_child_posts( $posttype, $posttitle ) {
