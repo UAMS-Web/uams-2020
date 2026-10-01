@@ -970,8 +970,6 @@ function rest_api_filter_add_filter_param( $args, $request ) {
 	}
 	global $wp;
 	$vars = apply_filters( 'rest_query_vars', $wp->public_query_vars );
-	// Allow valid meta query vars.
-	$vars = array_unique( array_merge( $vars, array( 'meta_query', 'meta_key', 'meta_value', 'meta_compare' ) ) );
 	foreach ( $vars as $var ) {
 		if ( isset( $filter[ $var ] ) ) {
 			$args[ $var ] = $filter[ $var ];
@@ -1022,7 +1020,7 @@ function uamswp_gtm_2( ) {
 	if ($gtm_disable !== '1') {
 	?>
 	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=<?php echo esc_attr( $gtmvalue ); ?>"
+	<noscript><iframe title="Google Tag Manager" src="<?php echo esc_url( 'https://www.googletagmanager.com/ns.html?id=' . $gtmvalue ); ?>"
 	height="0" width="0" aria-hidden="true" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
 <?php } }
