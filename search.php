@@ -36,7 +36,8 @@ function uamswp_do_search_loop() {
     $s = isset( $_GET["s"] ) ? esc_html($_GET["s"]) : "";
 
     // store the post type from the URL string.
-    $post_type = isset( $_GET["type"] ) ? esc_html($_GET["type"]) : "";
+    $search_allowed_types = array( 'provider', 'location', 'expertise', 'condition', 'treatment', 'page', 'post' );
+    $post_type = ( isset( $_GET["type"] ) && in_array( $_GET["type"], $search_allowed_types, true ) ) ? $_GET["type"] : "";
 
     if ( $post_type ) {
         // $post_type = $_GET['post_type'];
@@ -786,7 +787,7 @@ function uamswp_custom_loop( $args = array() ) {
     $wp_query = new WP_Query( $args ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Reset later.
 
     // added this based on http://www.relevanssi.com/knowledge-base/relevanssi_do_query/
-    relevanssi_do_query( $wp_query );
+    if ( function_exists( 'relevanssi_do_query' ) ) { relevanssi_do_query( $wp_query ); }
 
 	// Only set $more to 0 if we're on an archive.
 	$more = is_singular() ? $more : 0; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Handle archives.
@@ -809,7 +810,7 @@ function uamswp_custom_loop_base( $args = array() ) {
     $wp_query = new WP_Query( $args ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Reset later.
 
     // added this based on http://www.relevanssi.com/knowledge-base/relevanssi_do_query/
-	relevanssi_do_query( $wp_query );
+	if ( function_exists( 'relevanssi_do_query' ) ) { relevanssi_do_query( $wp_query ); }
 
 	// Only set $more to 0 if we're on an archive.
 	$more = is_singular() ? $more : 0; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Handle archives.
