@@ -31,7 +31,9 @@ if( !empty($block['className']) ) {
 }
 $className = array_filter( array_unique( $className ) );
 
-$allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/embed', 'core/list', 'core/quote', 'core/image', 'core/shortcode', 'core/table', 'core/file', 'core/shortcode', 'gravityforms/form', 'formidable/simple-form' );
+// NOTE: this allow-list only constrains the block editor UI (the InnerBlocks inserter).
+// It is not enforced when content is saved or created over REST. See #575.
+$allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/embed', 'core/list', 'core/quote', 'core/image', 'core/shortcode', 'core/table', 'core/file', 'gravityforms/form', 'formidable/simple-form' );
 
 $template = array(
 );
