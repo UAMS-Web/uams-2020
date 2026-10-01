@@ -146,11 +146,11 @@ function uamswp_footer_creds_text() {
         $address .= '<span itemprop="name" class="sr-only">'.$footer_image_title .'</span>';
         foreach ( $custom_addresses as $custom_address ) {
             $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="https://schema.org/PostalAddress">';
-            $address .= '<strong'. (! empty($custom_address['address_title']) ? '>'. $custom_address['address_title'] : $address_sr .'>Mailing Address' ).':</strong> ';
-            $address .= '<span itemprop="streetAddress">'. (! empty($custom_address['address_street_1']) ? $custom_address['address_street_1'] : '4301 West Markham Street' ) . (! empty($custom_address['address_street_2']) ? ' ' . $custom_address['address_street_2'] : '' ).'</span>, ';
-            $address .= '<span itemprop="addressLocality">'. (! empty($custom_address['address_city']) ? $custom_address['address_city'] : 'Little Rock' ).'</span>, ';
-            $address .= '<span itemprop="addressRegion">'. (! empty($custom_address['address_state']) ? $custom_address['address_state'] : 'AR' ).'</span> ';
-            $address .= '<span itemprop="postalCode">'. (! empty($custom_address['address_zip']) ? $custom_address['address_zip'] : '72205' ).'</span>'; 
+            $address .= '<strong'. (! empty($custom_address['address_title']) ? '>'. esc_html($custom_address['address_title']) : $address_sr .'>Mailing Address' ).':</strong> ';
+            $address .= '<span itemprop="streetAddress">'. (! empty($custom_address['address_street_1']) ? esc_html($custom_address['address_street_1']) : '4301 West Markham Street' ) . (! empty($custom_address['address_street_2']) ? ' ' . esc_html($custom_address['address_street_2']) : '' ).'</span>, ';
+            $address .= '<span itemprop="addressLocality">'. (! empty($custom_address['address_city']) ? esc_html($custom_address['address_city']) : 'Little Rock' ).'</span>, ';
+            $address .= '<span itemprop="addressRegion">'. (! empty($custom_address['address_state']) ? esc_html($custom_address['address_state']) : 'AR' ).'</span> ';
+            $address .= '<span itemprop="postalCode">'. (! empty($custom_address['address_zip']) ? esc_html($custom_address['address_zip']) : '72205' ).'</span>'; 
             $address .= '</div>';
         }
         echo $address;
@@ -193,7 +193,7 @@ function uamswp_footer_creds_text() {
 
     // Render this by default
     // Replace "Phone" with "Appoinments" if the relevant custom field ("Is Appointment Number" or something) is checked.
-    echo $primary_phone_text;
+    echo esc_html( $primary_phone_text );
 
     // Render this by default
     // Replace "span" with "strong" if any of the custom Parking Address fields DO have values.
@@ -207,10 +207,10 @@ function uamswp_footer_creds_text() {
 
     if ( 'link' == $secondary_type ) {
         // Render link.
-        echo $secondary_link_url ? '<br /><a class="more-phone" href="'. $secondary_link_url['url'] .'">'. $secondary_link_text .'</a>' : '';
+        echo $secondary_link_url ? '<br /><a class="more-phone" href="'. esc_url($secondary_link_url['url']) .'">'. esc_html($secondary_link_text) .'</a>' : '';
     } elseif ( 'phone' == $secondary_type ) { 
         // Render phone.
-        echo $secondary_phone_number ? '</div><div class="schema-phone"><'. ($custom_count < 2 ? 'span' : 'strong') .' id="footer-phone-label-2">'. $secondary_phone_text .':</'.($custom_count < 2 ? 'span' : 'strong') .'> <span itemprop="telephone"><a href="tel:'.format_phone('dash', $secondary_phone_number).'" aria-labelledby="footer-phone-label-2">'. format_phone('us', $secondary_phone_number) .'</a></span>' : '';
+        echo $secondary_phone_number ? '</div><div class="schema-phone"><'. ($custom_count < 2 ? 'span' : 'strong') .' id="footer-phone-label-2">'. esc_html($secondary_phone_text) .':</'.($custom_count < 2 ? 'span' : 'strong') .'> <span itemprop="telephone"><a href="tel:'.format_phone('dash', $secondary_phone_number).'" aria-labelledby="footer-phone-label-2">'. format_phone('us', $secondary_phone_number) .'</a></span>' : '';
     } else { // None
         // Do nothing
     }
