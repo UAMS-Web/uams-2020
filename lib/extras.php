@@ -212,7 +212,7 @@ function uamswp_title($html) {
     if ( 'uamshealth' == uams_get_site_info()['site'] ) {
 		if ( ( 'main' == uams_get_site_info()['subsite']) ) {
             if ( is_home() || is_front_page() ) {
-                $html = 'UAMS Health';
+                $html = 'UAMS Health | Arkansas\'s Leading Academic Medical Center';
             } else { 
                 $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | UAMS Health';
             }
