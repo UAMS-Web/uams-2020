@@ -974,9 +974,11 @@ function rest_api_filter_add_filter_param( $args, $request ) {
 	if ( isset( $filter['posts_per_page'] ) && ( (int) $filter['posts_per_page'] >= 1 && (int) $filter['posts_per_page'] <= 100 ) ) {
 		$args['posts_per_page'] = $filter['posts_per_page'];
 	}
-	global $wp;
-	$vars = apply_filters( 'rest_query_vars', $wp->public_query_vars );
-	foreach ( $vars as $var ) {
+	// Copy only a fixed, safe set of query vars from the request. meta_query, meta_key,
+	// meta_value, meta_compare and post_type are intentionally excluded: allowing them let
+	// an unauthenticated request run arbitrary post-meta queries and read across post types.
+	$allowed = array( 'orderby', 'order', 'offset', 'category_name', 'tag', 'author_name' );
+	foreach ( $allowed as $var ) {
 		if ( isset( $filter[ $var ] ) ) {
 			$args[ $var ] = $filter[ $var ];
 		}
