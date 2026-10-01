@@ -4,7 +4,10 @@
  * User functions
  * 
  */
-add_action( 'init', 'uamswp_editor_users', 0 );
+// Set these capabilities once when the theme is activated, not on every request.
+// (Removing them when the theme is switched away is deferred: see #574, because the
+// Gravity Forms access is intentional site policy and may be meant to persist.)
+add_action( 'after_switch_theme', 'uamswp_editor_users' );
 function uamswp_editor_users() {
     $role = get_role('editor');
     $role->add_cap('edit_theme_options');
