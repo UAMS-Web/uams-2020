@@ -19,6 +19,7 @@ $id = 'image-side-' . $id;
 if( !empty($block['anchor']) ) {
     $id = $block['anchor'];
 }
+$id = sanitize_html_class( $id );
 
 // Create class attribute allowing for custom "className" and "align" values.
 $className = 'uams-side-by-side-block';
@@ -74,9 +75,9 @@ if ( empty($geo_region) )
     $geo_region = get_field('side_image_geo_region');
 if ( empty($image_alt) ) 
     $image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachment_image_alt', true);
-$cta_target = $cta_target ? ' target="'. $cta_target .'"' : '';
-$cta_desc = $cta_desc ? ' aria-label="'.$cta_desc.'"' : '';
-$cta_link = $cta_link ? '<a class="btn btn-primary" href="'. $cta_link .'"' . $cta_desc . $cta_target . ' data-moduletitle="' . $heading . '">' : '';
+$cta_target = $cta_target ? ' target="'. esc_attr($cta_target) .'"' : '';
+$cta_desc = $cta_desc ? ' aria-label="'.esc_attr($cta_desc).'"' : '';
+$cta_link = $cta_link ? '<a class="btn btn-primary" href="'. esc_url($cta_link) .'"' . $cta_desc . $cta_target . ' data-moduletitle="' . esc_attr($heading) . '">' : '';
 $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1] ?? '';
 // $side_image_height = wp_get_attachment_image_src($side_image, 'full')[2];
 
@@ -105,14 +106,14 @@ if (!isset($geo) || empty($geo_region)){
 }
 if (is_admin() && !empty($geo) && !empty($geo_region)) {
     $geo_display = true;
-    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
+    echo esc_html( ucwords($geo) ) . ' region(s): ' . esc_html( implode(', ', $geo_region) ) . '<hr>';
 }
 if ($geo_display) :
 ?>
-<section class="uams-module no-padding side-by-side <?php echo $className; ?> image-on-<?php echo $image_postion; ?> image-background-<?php echo $image_anchor; ?> <?php echo $background_color; ?>" id="side-by-side-<?php echo esc_attr($id); ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module no-padding side-by-side <?php echo esc_attr($className); ?> image-on-<?php echo esc_attr($image_postion); ?> image-background-<?php echo esc_attr($image_anchor); ?> <?php echo esc_attr($background_color); ?>" id="side-by-side-<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 image-container" aria-label="<?php echo $image_alt ?>" role="img">
+            <div class="col-12 col-md-6 image-container" aria-label="<?php echo esc_attr($image_alt) ?>" role="img">
 
                 <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
                 <style>
@@ -174,8 +175,8 @@ if ($geo_display) :
             </div>
             <div class="col-12 col-md-6 text-container">
                 <div class="text-inner-container">
-                    <h2 class="h3"><?php echo $heading; ?></h2>
-                    <?php echo !empty($body) ? '<p>' . $body . '</p>' : ''; ?>
+                    <h2 class="h3"><?php echo esc_html($heading); ?></h2>
+                    <?php echo !empty($body) ? '<p>' . esc_html($body) . '</p>' : ''; ?>
                     <?php if ($layout == 'link-list' && $link_list): ?>
                     <ul>
                         <?php foreach( $link_list as $link ) {
@@ -185,10 +186,10 @@ if ($geo_display) :
                         ?>
                         <li>
                             <?php if( $list_url ): ?>
-                            <a href="<?php echo $list_url; ?>"<?php echo $list_desc ? ' aria-label="' . $list_desc . '"' : ''; ?> data-moduletitle="<?php echo $heading; ?>">
+                            <a href="<?php echo esc_url($list_url); ?>"<?php echo $list_desc ? ' aria-label="' . esc_attr($list_desc) . '"' : ''; ?> data-moduletitle="<?php echo esc_attr($heading); ?>">
                             <?php endif; ?>
                             <?php if( $list_text ): ?>
-                                <?php echo $list_text; ?>
+                                <?php echo esc_html($list_text); ?>
                             <?php endif; ?>
                             <?php if( $list_url ): ?>
                             </a>
@@ -200,7 +201,7 @@ if ($geo_display) :
                     <?php endif;
                         if( $cta_text ){
                             echo $cta_link;
-                            echo $cta_text ? $cta_text : 'Learn More'; 
+                            echo $cta_text ? esc_html($cta_text) : 'Learn More';
                             echo '</a>';
                         } ?>
                 </div>

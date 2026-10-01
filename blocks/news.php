@@ -92,6 +92,13 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
     $geo_display = true;
     echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
 }
+// Sanitize editor-controlled values before they are concatenated into the shortcode string.
+$articleID = absint( $articleID );
+$count = absint( $count );
+$offset = absint( $offset );
+$category = str_replace( array( '[', ']', '"' ), '', sanitize_text_field( $category ) );
+$advancedCat = str_replace( array( '[', ']', '"' ), '', sanitize_text_field( $advancedCat ) );
+$title = str_replace( array( '[', ']', '"' ), '', sanitize_text_field( $title ) );
 if ($geo_display) {
 	echo do_shortcode('[uamswp_news output="'. esc_attr( $output ) .'"  news_title="'. esc_attr( $title ) .'"  hide_title="'. esc_attr( $hide_title ) .'" category="'. esc_attr( $category ) .'" count="'. esc_attr( $count ) .'" offset="'. esc_attr( $offset ) .'" advanced_cat="'. esc_attr( $advancedCat ) .'" local="'. esc_attr( $local ) .'" style="'. esc_attr( $background_color . $className ) .'" hide_img="'. esc_attr( $hide_img ) .'" hide_author="'. esc_attr( $hide_author ) .'" hide_date="'. esc_attr( $hide_date ) .'" include_link="'. esc_attr( $link ) .'" news_position="'. esc_attr( $position ) .'" id="'. esc_attr( $articleID ) .'"]' );
 }

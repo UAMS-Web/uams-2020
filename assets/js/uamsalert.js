@@ -89,6 +89,10 @@ function displayAlert(objAlertData)
             {
                 var strAlertTitle    = objAlertData.posts[i].title;
                 var strAlertLink     = objAlertData.posts[i].URL;
+                // Only allow http/https alert links; neutralise javascript: and other schemes.
+                if (typeof strAlertLink !== 'string' || !/^https?:\/\//i.test(strAlertLink)) {
+                    strAlertLink = '#';
+                }
                 // var strAlertMessage  = objAlertData.posts[0].excerpt; // Not used
                 var strAlertContent  = objAlertData.posts[i].content;
                 var strAlertColor    = arrAlertTypes[objCategory.slug] ? arrAlertTypes[objCategory.slug] : objFakeCat.slug;

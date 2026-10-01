@@ -25,10 +25,11 @@ if ( empty($hide_heading) )
 if ( empty($background_color) )
     $background_color = get_field('section_background_color');
     
-$className = ['block-section', 'alignfull'];
+$className = ['uams-module', 'section-block', 'block-section', 'alignfull'];
 if( !empty($block['className']) ) {
     $className = array_merge( $className, explode( ' ', $block['className'] ) );
 }
+$className = array_filter( array_unique( $className ) );
 
 // NOTE: this allow-list only constrains the block editor UI (the InnerBlocks inserter).
 // It is not enforced when content is saved or created over REST. See #575.
@@ -37,7 +38,7 @@ $allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/embed', 'core/l
 $template = array(
 );
 ?>  
-<section class="uams-module section-block<?php echo join( ' ', $className ); ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="<?php echo join( ' ', $className ); ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12<?php echo $hide_heading ? " sr-only" : ""; ?>">

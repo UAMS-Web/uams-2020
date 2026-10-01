@@ -68,12 +68,12 @@ if (!isset($geo) || empty($geo_region)){
 }
 if (is_admin() && !empty($geo) && !empty($geo_region)) {
     $geo_display = true;
-    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
+    echo esc_html(ucwords($geo)) . ' region(s): ' . esc_html(implode(', ', $geo_region)) . '<hr>';
 }
 if ($geo_display) :
 ?>
-<section class="uams-module action-bar<?php echo $className; ?> count-<?php echo $row_count < 4 ? "3" : "4"; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
-    <h2 class="sr-only"><?php echo $heading; ?></h2>
+<section class="uams-module action-bar<?php echo esc_attr($className); ?> count-<?php echo $row_count < 4 ? "3" : "4"; ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
+    <h2 class="sr-only"><?php echo esc_html($heading); ?></h2>
     <div class="container-fluid">
         <div class="row">
 <?php 
@@ -94,10 +94,10 @@ if ($geo_display) :
             <div class="col-12 <?php echo $row_count < 4 ? 'col-sm-4' : 'col-md-3'; ?> item">
                 <div class="inner-container">
                     <div class="text-container">
-                        <h3 class="h5" data-moduletitle="<?php echo $heading; ?>"><?php echo $section_heading; ?></h3>
-                        <p><?php echo $body; ?></p>
+                        <h3 class="h5" data-moduletitle="<?php echo esc_attr($heading); ?>"><?php echo esc_html($section_heading); ?></h3>
+                        <p><?php echo esc_html($body); ?></p>
                     </div>
-                    <a class="btn btn-<?php echo $btn_color; ?>" href="<?php echo $button_url; ?>" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target . '"' : ''; ?> data-moduletitle="<?php echo $heading; ?>" data-itemtitle="<?php echo $section_heading; ?>"><?php echo $button_text; ?></a>
+                    <a class="btn btn-<?php echo esc_attr($btn_color); ?>" href="<?php echo esc_url($button_url); ?>" aria-label="<?php echo esc_attr($button_desc); ?>"<?php echo $button_target ? ' target="'. esc_attr($button_target) . '"' : ''; ?> data-moduletitle="<?php echo esc_attr($heading); ?>" data-itemtitle="<?php echo esc_attr($section_heading); ?>"><?php echo esc_html($button_text); ?></a>
                 </div>
             </div>
     <?php
