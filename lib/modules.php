@@ -121,9 +121,15 @@ function uamswp_module( $module = array(), $i = false ) {
 
             if ( $layout == 'body-only' ) {
                 $body = $module['side_layout_body_text'] ?: 'This is where the body-only description goes';
+            } elseif ( $layout == 'blockquote-citation' || $layout == 'blockquote-citation-link' ) {
+                $body = '';
             } else {
                 $body = $module['side_layout_link_text'] ?: 'This is where the body + link list description goes';
             }
+            // Set every time, so a quote never carries over to the next module on the page.
+            $quote_text = $module[ $layout == 'blockquote-citation-link' ? 'side_quote_text_link' : 'side_quote_text' ] ?? '';
+            $quote_name = $module['side_quote_speaker_name'] ?? '';
+            $quote_title = $module['side_quote_speaker_title'] ?? '';
 
             $link_list = $module['side_link_list'] ?: '';
             $list_more = $module['side_link_include_more'] ?: '';
