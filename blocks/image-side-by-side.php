@@ -65,6 +65,10 @@ if ( empty($list_more) )
     $list_more = get_field('side_link_include_more') ?: '';
 if ( empty($cta) ) 
     $cta = get_field('side_cta') ?: '';
+// A layout that hides the button (Blockquote with Citation) saves no button fields.
+if ( ! is_array($cta) )
+    $cta = array();
+$cta += array( 'side_cta_text' => '', 'side_cta_url' => '', 'side_cta_description' => '' );
 $cta_text = $cta['side_cta_text'] ?: '';
 $cta_link = '';
 $cta_target = '';
@@ -78,6 +82,9 @@ if ( $layout == 'blockquote-citation' ) {
 }
 if ( empty($image_group) ) 
     $image_group = get_field('side_image')?: '';
+if ( ! is_array($image_group) )
+    $image_group = array();
+$image_group += array( 'side_image_image' => '', 'side_image_alt_text' => '', 'side_image_crop' => '', 'side_image_anchor' => '' );
 $side_image = $image_group['side_image_image'] ?: '';
 $image_alt = $image_group['side_image_alt_text'] ?: '';
 $image_crop = $image_group['side_image_crop'] ?: '';
