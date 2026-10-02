@@ -15,17 +15,24 @@
 			$media_meta = wp_read_image_metadata($file);
 			$media_credit = get_post_meta( $post->ID, '_media_credit', true );
 
-			if ( empty($media_credit) ) {
+			if ( !isset($media_credit) ) {
 
 				$media_credit = $media_meta["credit"];
 
+			}
+
+			$image_credit = '';
+			if ( isset( wp_get_attachment_metadata($post->ID)['image_meta'] ) && is_array(wp_get_attachment_metadata($post->ID)['image_meta']) ) {
+			
+				$image_credit = wp_get_attachment_metadata($post->ID)['image_meta']['credit'];
+			
 			}
 
 			$form_fields['media_credit'] = array(
 				'label' => esc_attr( 'Image Credit' ),
 				'input' => 'text',
 				'value' => esc_attr( $media_credit ),
-				'helps' => 'Original Credit: ' . esc_html( $media_meta["credit"] ),
+				'helps' => 'Original Credit: ' . ( $media_meta["credit"] ? esc_html( $media_meta["credit"] ) : esc_html($image_credit) ),
 			);
 
 		return $form_fields;
@@ -326,23 +333,25 @@
 
 			if ( $block['blockName'] == 'core/image' ) {
 
+				$photo_credit = '';
 				// Get the media credit meta key value from the asset in the media library
-
+				if (isset($block['attrs']['id'])) {
 					$photo_credit = get_post_meta(
 						$block['attrs']['id'], // int // required // Post ID
 						'_media_credit', // string // optional // The meta key to retrieve. By default, returns data for all keys. (Default: '')
 						true // bool // optional // Whether to return a single value. This parameter has no effect if the meta key is not specified. (Default: false)
 					);
+				}
 
 				// Fallback: Retrieve the credit value from the asset file's image metadata
 
-					if ( empty($photo_credit) ) {
+					if ( !isset($photo_credit) && is_array($block['attrs']) && isset($block['attrs']['id']) ) {
 
-						$photo_credit = wp_get_attachment_metadata(
-							$block['attrs']['id'] // int // required // Attachment post ID. Defaults to global $post.
-						)['image_meta']['credit'];
+					$photo_credit = wp_get_attachment_metadata(
+						$block['attrs']['id'] // int // required // Attachment post ID. Defaults to global $post.
+					)['image_meta']['credit'] ?? null;
 
-					}
+				}
 
 				// Add the photo credit to the HTML
 

@@ -90,6 +90,10 @@ function uamswp_footer_creds_text() {
             $footer_image_url = 'https://gradschool.uams.edu/';
             $footer_image_title = 'UAMS Graduate School';
             $footer_image_site = $subsite;
+        } elseif ( 'advancement' == $subsite ) {
+            $footer_image_url = 'https://advancement.uams.edu/';    
+            $footer_image_title = 'UAMS Institutional Advancement';
+            $footer_image_site = $subsite;
         // } elseif ( 'nw-campus' == $subsite ) {
         //     $footer_image_url = 'https://northwestcampus.uams.edu/';    
         //     $footer_image_title = 'UAMS Northwest Regional Campus';
@@ -136,25 +140,25 @@ function uamswp_footer_creds_text() {
         $address_sr = ' class="sr-only"';
     } 
     // Overrides, if available
-    if( ! empty( $custom_addresses ) && ( ('institute' == $site) || ('nw-campus' == $subsite) || ( startsWith($subsite, 'regional-') ) ) ) {
-        $address = '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
+    if( ! empty( $custom_addresses ) && ( ('institute' == $site) || ('nw-campus' == $subsite) || ('advancement' == $subsite) || ( startsWith($subsite, 'regional-') ) ) ) {
+        $address = '<div itemscope="" itemtype="https://schema.org/LocalBusiness" class="schema">';
         $address .= sprintf( '<a href="%s" class="logo" itemprop="url">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
         $address .= '<span itemprop="name" class="sr-only">'.$footer_image_title .'</span>';
         foreach ( $custom_addresses as $custom_address ) {
-            $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">';
-            $address .= '<strong'. (! empty($custom_address['address_title']) ? '>'. $custom_address['address_title'] : $address_sr .'>Mailing Address' ).':</strong> ';
-            $address .= '<span itemprop="streetAddress">'. (! empty($custom_address['address_street_1']) ? $custom_address['address_street_1'] : '4301 West Markham Street' ) . (! empty($custom_address['address_street_2']) ? ' ' . $custom_address['address_street_2'] : '' ).'</span>, ';
-            $address .= '<span itemprop="addressLocality">'. (! empty($custom_address['address_city']) ? $custom_address['address_city'] : 'Little Rock' ).'</span>, ';
-            $address .= '<span itemprop="addressRegion">'. (! empty($custom_address['address_state']) ? $custom_address['address_state'] : 'AR' ).'</span> ';
-            $address .= '<span itemprop="postalCode">'. (! empty($custom_address['address_zip']) ? $custom_address['address_zip'] : '72205' ).'</span>'; 
+            $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="https://schema.org/PostalAddress">';
+            $address .= '<strong'. (! empty($custom_address['address_title']) ? '>'. esc_html($custom_address['address_title']) : $address_sr .'>Mailing Address' ).':</strong> ';
+            $address .= '<span itemprop="streetAddress">'. (! empty($custom_address['address_street_1']) ? esc_html($custom_address['address_street_1']) : '4301 West Markham Street' ) . (! empty($custom_address['address_street_2']) ? ' ' . esc_html($custom_address['address_street_2']) : '' ).'</span>, ';
+            $address .= '<span itemprop="addressLocality">'. (! empty($custom_address['address_city']) ? esc_html($custom_address['address_city']) : 'Little Rock' ).'</span>, ';
+            $address .= '<span itemprop="addressRegion">'. (! empty($custom_address['address_state']) ? esc_html($custom_address['address_state']) : 'AR' ).'</span> ';
+            $address .= '<span itemprop="postalCode">'. (! empty($custom_address['address_zip']) ? esc_html($custom_address['address_zip']) : '72205' ).'</span>'; 
             $address .= '</div>';
         }
         echo $address;
     } else { //write default
-        $address = '<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="schema">';
+        $address = '<div itemscope="" itemtype="https://schema.org/LocalBusiness" class="schema">';
         $address .= sprintf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
         $address .= '<span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span>';
-        $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">';
+        $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="https://schema.org/PostalAddress">';
         $address .= '<strong class="sr-only">Mailing Address:</strong> ';
         $address .= '<span itemprop="streetAddress">4301 West Markham Street</span>, ';
         $address .= '<span itemprop="addressLocality">Little Rock</span>, ';
@@ -189,7 +193,7 @@ function uamswp_footer_creds_text() {
 
     // Render this by default
     // Replace "Phone" with "Appoinments" if the relevant custom field ("Is Appointment Number" or something) is checked.
-    echo $primary_phone_text;
+    echo esc_html( $primary_phone_text );
 
     // Render this by default
     // Replace "span" with "strong" if any of the custom Parking Address fields DO have values.
@@ -203,12 +207,16 @@ function uamswp_footer_creds_text() {
 
     if ( 'link' == $secondary_type ) {
         // Render link.
-        echo $secondary_link_url ? '<br /><a class="more-phone" href="'. $secondary_link_url['url'] .'">'. $secondary_link_text .'</a>' : '';
+        echo $secondary_link_url ? '<br /><a class="more-phone" href="'. esc_url($secondary_link_url['url']) .'">'. esc_html($secondary_link_text) .'</a>' : '';
     } elseif ( 'phone' == $secondary_type ) { 
         // Render phone.
-        echo $secondary_phone_number ? '</div><div class="schema-phone"><'. ($custom_count < 2 ? 'span' : 'strong') .' id="footer-phone-label-2">'. $secondary_phone_text .':</'.($custom_count < 2 ? 'span' : 'strong') .'> <span itemprop="telephone"><a href="tel:'.format_phone('dash', $secondary_phone_number).'" aria-labelledby="footer-phone-label-2">'. format_phone('us', $secondary_phone_number) .'</a></span>' : '';
+        echo $secondary_phone_number ? '</div><div class="schema-phone"><'. ($custom_count < 2 ? 'span' : 'strong') .' id="footer-phone-label-2">'. esc_html($secondary_phone_text) .':</'.($custom_count < 2 ? 'span' : 'strong') .'> <span itemprop="telephone"><a href="tel:'.format_phone('dash', $secondary_phone_number).'" aria-labelledby="footer-phone-label-2">'. format_phone('us', $secondary_phone_number) .'</a></span>' : '';
     } else { // None
         // Do nothing
+    }
+    if ( 'advancement' == $subsite ) {
+        echo '<div class=""><p>Email: <a href="mailto:advancement@uams.edu">advancement@uams.edu</a></p>';
+        echo '<p>Tax ID: 71-6056774</p></div>';
     }
 
     // Render this by default
@@ -224,8 +232,8 @@ function uamswp_footer_creds_text() {
     $social_tw = 'https://x.com/uamshealth';
     $social_ig = 'https://www.instagram.com/uamshealth/';
     $social_yt = 'https://www.youtube.com/UAMSHealth';
-    $social_li = 'https://www.linkedin.com/school/uams/';
-    $social_pn = 'https://www.pinterest.com/uamshealth/';
+    $social_li = 'https://www.linkedin.com/school/uams/'; // or 'https://www.linkedin.com/company/uams/'
+    // $social_pn = 'https://www.pinterest.com/uamshealth/';
 
     // Change the exceptions
     if ('institute' == $site) {
@@ -265,6 +273,8 @@ function uamswp_footer_creds_text() {
             $social_ig = 'https://www.instagram.com/uamschp';
         } elseif ( startsWith($subsite, 'medicine') ) {
             $social_fb = 'https://www.facebook.com/UAMSCOM';
+            $social_tw = 'https://x.com/UAMS_COM';
+            $social_ig = 'https://www.instagram.com/uams_com/';
 
             if ( 'emergency-medicine' == $department) {
                 $social_fb = 'https://www.facebook.com/UAMSEmergencyMedicine';
@@ -301,6 +311,11 @@ function uamswp_footer_creds_text() {
             $social_fb = 'https://www.facebook.com/UAMSNW';
         // } elseif ( startsWith($subsite, 'regional-') ) {
         //     $social_fb = '';
+        } elseif ( 'advancement' == $subsite ) {
+            $social_fb = 'https://www.facebook.com/uamsgiving/';
+            $social_tw = 'https://x.com/uamsgiving';
+            $social_ig = 'https://www.instagram.com/uamsgiving/';
+            $social_li = 'https://www.linkedin.com/company/uamsgiving';
         } elseif ( 'gsa' == $subsite) {
             $social_fb = 'https://www.facebook.com/UAMSgsa';
         } elseif ( 'continuing-ed' == $subsite) {
@@ -342,6 +357,7 @@ function uamswp_footer_creds_text() {
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_yt.'" target="_blank" title="YouTube"><span class="fab fa-youtube"></span><span class="sr-only">YouTube</span></a></li>';
         echo '<li class="nav-item"><a class="nav-link" href="'.$social_li.'" target="_blank" title="LinkedIn"><span class="fab fa-linkedin"></span><span class="sr-only">LinkedIn</span></a></li>';
         // echo '<li class="nav-item"><a class="nav-link" href="'.$social_pn.'" target="_blank" title="Pinterest"><span class="fab fa-pinterest"></span><span class="sr-only">Pinterest</span></a></li>';
+        echo ('advancement' == $subsite) ? '<li class="nav-item"><a class="nav-link" href="https://uams.info/give" target="_blank" title="Give Now"><span class="fas fa-donate"></span><span class="sr-only">Give Now</span></a></li>' : '';
     echo '</ul></div>';
 
     // Text Links
@@ -354,6 +370,7 @@ function uamswp_footer_creds_text() {
             echo '<li class="nav-item"><a class="nav-link" href="https://hipaa.uams.edu/forms/notice-of-privacy-practices-information/" target="_blank">Notice of Privacy Practices</a></li>';
             echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/patients-and-guests/patient-support/billing/price-transparency/" target="_blank">Price Transparency</a></li>';
         }
+        echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/legal-notices/" target="_blank">Legal Notices</a></li>';
         //echo '<li class="nav-item"><a class="nav-link" href="/sitemap">Site Map</a></li>';
     echo '</ul></div>';
 

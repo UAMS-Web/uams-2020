@@ -116,114 +116,58 @@ if (is_admin() && !empty($geo) && !empty($geo_region)) {
 }
 if ($geo_display) :
 ?>
-<section class="uams-module cta-bar <?php echo $className; ?> <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?><?php echo $size == 'small' ? ' cta-bar-sm' : ''; ?><?php echo $size == 'large' ? ' extra-padding cta-bar-lg' : ''; ?><?php echo $action_type == 'none' ? ' no-link' : ''; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
-<?php if ( $use_image && function_exists( 'fly_add_image_size' ) ) { ?>
+<section class="uams-module cta-bar <?php echo esc_attr( $className ); ?> <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?><?php echo $size == 'small' ? ' cta-bar-sm' : ''; ?><?php echo $size == 'large' ? ' extra-padding cta-bar-lg' : ''; ?><?php echo $action_type == 'none' ? ' no-link' : ''; ?>" id="<?php echo esc_attr( $id ); ?>" aria-label="<?php echo esc_attr( $heading ); ?>">
+<?php if ( $use_image && function_exists( 'bis_get_attachment_image' ) ) { ?>
     <style>
-        #<?php echo $id; ?>:before {
-            background-image: url("<?php echo image_sizer($image, 576, 288, 'center', 'center'); ?>");
-        }
-
-        /* XXS Breakpoint, retina */
-        @media (-webkit-min-device-pixel-ratio: 2),
-        (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1152, 576, 'center', 'center'); ?>");
-            }
+        #<?php echo sanitize_html_class( $id ); ?>:before {
+            background-image: url("<?php echo image_sizer($image, 576, 288, 'center', 'center', 'aspect-2-1'); ?>");
         }
 
         /* XS Breakpoint */
         @media (min-width: 576px) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 768, 384, 'center', 'center'); ?>");
-            }
-        }
-
-        /* XS Breakpoint, retina */
-        @media (min-width: 576px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 576px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1536, 768, 'center', 'center'); ?>");
+            #<?php echo sanitize_html_class( $id ); ?>:before {
+                background-image: url("<?php echo image_sizer($image, 768, 384, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* SM Breakpoint */
         @media (min-width: 768px) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 992, 496, 'center', 'center'); ?>");
-            }
-        }
-
-        /* SM Breakpoint, retina */
-        @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 768px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1984, 992, 'center', 'center'); ?>");
+            #<?php echo sanitize_html_class( $id ); ?>:before {
+                background-image: url("<?php echo image_sizer($image, 992, 496, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* MD Breakpoint */
         @media (min-width: 992px) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1200, 600, 'center', 'center'); ?>");
-            }
-        }
-
-        /* MD Breakpoint, retina */
-        @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 992px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 2400, 1200, 'center', 'center'); ?>");
+            #<?php echo sanitize_html_class( $id ); ?>:before {
+                background-image: url("<?php echo image_sizer($image, 1200, 600, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* LG Breakpoint */
         @media (min-width: 1200px) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1500, 750, 'center', 'center'); ?>");
-            }
-        }
-
-        /* LG Breakpoint, retina */
-        @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1200px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 3000, 1500, 'center', 'center'); ?>");
+            #<?php echo sanitize_html_class( $id ); ?>:before {
+                background-image: url("<?php echo image_sizer($image, 1500, 750, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* XL Breakpoint */
         @media (min-width: 1500px) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 1921, 961, 'center', 'center'); ?>");
-            }
-        }
-
-        /* XL Breakpoint, retina */
-        @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1500px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 3842, 1921, 'center', 'center'); ?>");
+            #<?php echo sanitize_html_class( $id ); ?>:before {
+                background-image: url("<?php echo image_sizer($image, 1921, 961, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* XXL Breakpoint */
         @media (min-width: 1921px) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 2560, 1280, 'center', 'center'); ?>");
-            }
-        }
-
-        /* XXL Breakpoint, retina */
-        @media (min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2),
-        (min-width: 1921px) and (min-resolution: 192dpi) {
-            #<?php echo $id; ?>:before {
-                background-image: url("<?php echo image_sizer($image, 5120, 2560, 'center', 'center'); ?>");
+            #<?php echo sanitize_html_class( $id ); ?>:before {
+                background-image: url("<?php echo image_sizer($image, 2560, 1280, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
     </style>
     <?php } elseif ( $use_image ) { ?>
     <style>
-        #<?php echo $id; ?>:before {
+        #<?php echo sanitize_html_class( $id ); ?>:before {
             background-image: url("<?php echo wp_get_attachment_url( $image, 'aspect-2-1' ); ?>");
         }
     </style>
@@ -233,20 +177,20 @@ if ($geo_display) :
             <div class="col-12">
                 <div class="inner-container">
                     <div class="cta-heading">
-                        <h2><?php echo $heading; ?></h2>
+                        <h2><?php echo esc_html( $heading ); ?></h2>
                     </div>
                     <div class="cta-body">
                         <div class="text-container">
-                            <?php echo $body; ?>
+                            <?php echo wp_kses_post( $body ); ?>
                         </div>
                         <?php echo $action_type == 'url' ?
                         '<div class="btn-container">
-                            <a href="' . $button_url['url'] . '" aria-label="' . $button_desc . '" class=" btn btn-' . $btn_color . ( $size == 'large' ? ' btn-lg' : '' ) . '"' . ( $button_target ? ' target="'. $button_target . '"' : '' ) . ' data-moduletitle="' . $heading . '">' . $button_text . '</a>
+                            <a href="' . esc_url( $button_url['url'] ) . '" aria-label="' . esc_attr( $button_desc ) . '" class=" btn btn-' . $btn_color . ( $size == 'large' ? ' btn-lg' : '' ) . '"' . ( $button_target ? ' target="'. esc_attr( $button_target ) . '"' : '' ) . ' data-moduletitle="' . esc_attr( $heading ) . '">' . esc_html( $button_text ) . '</a>
                         </div>'
                         : ''; ?>
                         <?php echo $action_type == 'phone' ?
                         '<div class="btn-container">
-                            <a href="tel:' . $phone . '" data-moduletitle="' . $heading . '">' . $phone_prepend . ' <span class="no-break">' . $phone . '</span></a>
+                            <a href="' . esc_url( 'tel:' . $phone ) . '" data-moduletitle="' . esc_attr( $heading ) . '">' . esc_html( $phone_prepend ) . ' <span class="no-break">' . esc_html( $phone ) . '</span></a>
                         </div>'
                         : ''; ?>
                     </div>

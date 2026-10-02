@@ -38,6 +38,8 @@ return array(
         'choices' => array(
             'body-only' => 'Body only',
             'link-list' => 'Body and Link List',
+            'blockquote-citation' => 'Blockquote with Citation',
+            'blockquote-citation-link' => 'Blockquote with Citation and Link',
         ),
         'default_value' => array(
             0 => 'body-only',
@@ -232,13 +234,151 @@ return array(
         'ui_off_text' => '',
     ),
     array(
+        'key' => 'field_side_quote_text'. $suffix,
+        'label' => 'Quote',
+        'name' => 'side_quote_text',
+        'type' => 'textarea',
+        'instructions' => 'The words being quoted. Quotation marks are added automatically. 306 character limit.',
+        'required' => 1,
+        'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_side_layout'. $suffix,
+                    'operator' => '==',
+                    'value' => 'blockquote-citation',
+                ),
+            ),
+        ),
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'default_value' => '',
+        'placeholder' => '',
+        'maxlength' => 306,
+        'rows' => 4,
+        'new_lines' => '',
+    ),
+    array(
+        'key' => 'field_side_quote_text_link'. $suffix,
+        'label' => 'Quote',
+        'name' => 'side_quote_text_link',
+        'type' => 'textarea',
+        'instructions' => 'The words being quoted. Quotation marks are added automatically. 217 character limit.',
+        'required' => 1,
+        'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_side_layout'. $suffix,
+                    'operator' => '==',
+                    'value' => 'blockquote-citation-link',
+                ),
+            ),
+        ),
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'default_value' => '',
+        'placeholder' => '',
+        'maxlength' => 217,
+        'rows' => 4,
+        'new_lines' => '',
+    ),
+    array(
+        'key' => 'field_side_quote_speaker_name'. $suffix,
+        'label' => 'Speaker Name',
+        'name' => 'side_quote_speaker_name',
+        'type' => 'text',
+        'instructions' => 'Who said it, for example "Michael Miller, DC, MS". 58 character limit.',
+        'required' => 1,
+        'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_side_layout'. $suffix,
+                    'operator' => '==',
+                    'value' => 'blockquote-citation',
+                ),
+            ),
+            array(
+                array(
+                    'field' => 'field_side_layout'. $suffix,
+                    'operator' => '==',
+                    'value' => 'blockquote-citation-link',
+                ),
+            ),
+        ),
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'default_value' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'maxlength' => 58,
+    ),
+    array(
+        'key' => 'field_side_quote_speaker_title'. $suffix,
+        'label' => 'Speaker Title',
+        'name' => 'side_quote_speaker_title',
+        'type' => 'text',
+        'instructions' => 'Optional. For example "Chiropractor, UAMS Health Orthopaedics and Sports Medicine Clinic". 121 character limit.',
+        'required' => 0,
+        'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_side_layout'. $suffix,
+                    'operator' => '==',
+                    'value' => 'blockquote-citation',
+                ),
+                array(
+                    'field' => 'field_side_quote_speaker_name'. $suffix,
+                    'operator' => '!=empty',
+                ),
+            ),
+            array(
+                array(
+                    'field' => 'field_side_layout'. $suffix,
+                    'operator' => '==',
+                    'value' => 'blockquote-citation-link',
+                ),
+                array(
+                    'field' => 'field_side_quote_speaker_name'. $suffix,
+                    'operator' => '!=empty',
+                ),
+            ),
+        ),
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'default_value' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'maxlength' => 121,
+    ),
+    array(
         'key' => 'field_side_cta'. $suffix,
         'label' => 'Call to Action Button',
         'name' => 'side_cta',
         'type' => 'group',
         'instructions' => '',
         'required' => 0,
-        'conditional_logic' => 0,
+        'conditional_logic' => array(
+            array(
+                array(
+                    'field' => 'field_side_layout'. $suffix,
+                    'operator' => '!=',
+                    'value' => 'blockquote-citation',
+                ),
+            ),
+        ),
         'wrapper' => array(
             'width' => '',
             'class' => '',

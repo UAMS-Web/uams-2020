@@ -6,7 +6,7 @@
  */
 
 remove_action( 'genesis_loop', 'genesis_do_loop' );
-add_action( 'genesis_loop', 'uamswp_do_searchwp_loop' );
+add_action( 'genesis_loop', 'uamswp_do_search_loop' );
 
 // Remove search results page from google search results
 function sp_titles_robots($html) { 
@@ -36,7 +36,8 @@ function uamswp_do_search_loop() {
     $s = isset( $_GET["s"] ) ? esc_html($_GET["s"]) : "";
 
     // store the post type from the URL string.
-    $post_type = isset( $_GET["type"] ) ? esc_html($_GET["type"]) : "";
+    $search_allowed_types = array( 'provider', 'location', 'expertise', 'condition', 'treatment', 'page', 'post' );
+    $post_type = ( isset( $_GET["type"] ) && in_array( $_GET["type"], $search_allowed_types, true ) ) ? $_GET["type"] : "";
 
     if ( $post_type ) {
         // $post_type = $_GET['post_type'];
@@ -152,7 +153,7 @@ function uamswp_do_search_loop() {
             while ( have_posts() ) : the_post();
 
             $id =get_the_ID();
-            include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/service-card.php' );
+            include( WP_PLUGIN_DIR . '/UAMSWP-Find-a-Doc/templates/loops/expertise-card.php' );
 
             endwhile;
             echo '</div></div>';
@@ -199,19 +200,21 @@ function uamswp_do_search_loop() {
             	$post_title = get_the_title();
                 $post_link = get_the_permalink();
                 $tax = get_term_by("name", $post_title, $post_type);
-                $post_id = $tax->term_id;
-                $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
-                $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
+                if (is_object($tax)){
+                    $post_id = $tax->term_id;
+                    $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
+                    $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
 
-                echo '<article class="'. $post_type .'-'. $post_id .' entry">';
-                echo '<header class="entry-header">';
-                echo $title;
-                echo '</header>';
-                echo '<div class="entry-content clearfix">';
-                // echo $post_type.'_'.$post_id;
-                echo $content ? '<p>'. wp_trim_words($content, 30) .'... <a class="more-link" href="' . $post_link . '">Continue Reading</a><p>' : '';
-                echo '</div>';
-                echo '</article>';
+                    echo '<article class="'. $post_type .'-'. $post_id .' entry">';
+                    echo '<header class="entry-header">';
+                    echo $title;
+                    echo '</header>';
+                    echo '<div class="entry-content clearfix">';
+                    // echo $post_type.'_'.$post_id;
+                    echo $content ? '<p>'. wp_trim_words($content, 30) .'... <a class="more-link" href="' . $post_link . '">Continue Reading</a><p>' : '';
+                    echo '</div>';
+                    echo '</article>';
+                }
 
             endwhile;
 
@@ -258,7 +261,7 @@ function uamswp_do_search_loop() {
             	$post_title = get_the_title();
                 $post_link = get_the_permalink();
                 $tax = get_term_by("name", $post_title, $post_type);
-                $post_id = $tax->term_id;
+                $post_id = $tax->term_id ?? '';
                 $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
                 $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
 
@@ -352,7 +355,9 @@ function uamswp_do_search_loop() {
                     while ( have_posts() ) : the_post();
                         global $wp_query;
 
-                        switch_to_blog($wp_query->post->blog_id);
+                        if (isset($wp_query->post->blog_id)) {
+                            switch_to_blog($wp_query->post->blog_id);
+                        }
 
                         $post_count = $wp_query->found_posts;
                         $post_title = get_the_title( $wp_query->post->ID );
@@ -500,12 +505,13 @@ function uamswp_do_search_loop() {
                         $conditions_treatments .= '<div class="col-12 col-md-6 post-type ' . $post_type . '"><div class="inner-container content-width"><h2 class="module-title post-type-heading"><span class="title">' . $post_type_text . '</span></h2>';
 
                         while ( have_posts() ) : the_post();
-
+                            global $wp_query;
+                            
                             $post_count = $wp_query->found_posts;
                             $post_title = get_the_title();
                             $post_link = get_the_permalink();
                             $tax = get_term_by("name", $post_title, $post_type);
-                            $post_id = $tax->term_id;
+                            $post_id = $tax->term_id ?? '';
                             $title = '<h3 class="h4" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h3>';
                             $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
                             if ('treatment' == $post_type) {
@@ -679,105 +685,6 @@ function uamswp_do_search_loop() {
     }
 
 }
-function uamswp_do_searchwp_loop() {
-    $search_query = get_search_query();
-    $searchwp_query = new \SearchWP\Query( $search_query, [
-        'engine' => 'default', // The Engine name.
-    ] );
-    $search_results = $searchwp_query->get_results();
-
-    // global $post;
-    $current_blog_id = get_current_blog_id();
-    echo '<div class="uams-module bg-auto">';
-    echo '<div class="container-fluid">';
-    echo '<div class="search-content row">';
-    echo '<div class="col-12">';
-    echo '<div class="inner-container content-width">';
-    echo '<div class="pb-4">';
-    get_search_form();
-    echo uamswp_search_post_type_links();
-    echo '</div>';
-    // echo facetwp_display( 'facet', 'filter_by_type' );
-    if ( ! empty( $search_query ) && ! empty( $search_results ) ) :
-        foreach ( $search_results as $search_result ) :
-            // Track whether we switched sites for this result.
-            $switched_site = false;
-
-            // Do we need to switch to the proper site for this result?
-            if ( $current_blog_id !== $search_result->site ) {
-                switch_to_blog( $search_result->site );
-                $switched_site = true;
-            }
-
-            // print_r( $search_result );
-            // print_r(get_class( $search_result ));
-            // switch( get_class( $search_result ) ) {
-            //     case 'WP_Post':
-                    $post = get_post( $search_result->id );
-                    $post_id = $search_result->id;
-                    // print_r($post->ID);
-                    // echo $post_id . ' ';
-                    // echo $post->post_type;
-
-                    uamswp_get_template_part( 'results', $post->post_type, ['post_id' => $post_id, 'blog_id' => $search_result->site], '', STYLESHEETPATH .'/templates/parts' );
-
-                    //get_template_part( 'templates/parts/results', $post->post_type );
-
-                    // $post = '';
-                    // wp_reset_postdata();
-            //         break;
-            // }    
-
-            // If we switched sites, switch back!
-            if ( $switched_site ) {
-                restore_current_blog();
-            }
-        endforeach;
-        wp_reset_postdata();
-    else :
-        echo "<p>Sorry, no content matched your criteria.</p>";
-    endif;
-    // if ( have_posts() ) {
-    //     while ( have_posts() ) {
-    //         the_post();
-    //         // Search Results may be formatted as SearchWP results
-    //         // because we're searching cross-site on the main site.
-    //         if ( 1 === $current_blog_id && is_multisite() ) {
-    //             if ( $current_blog_id !== $post->site ) {
-    //                 switch_to_blog( $post->site );
-    //                 $post = get_post( $post->id );
-    //                 get_template_part( 'templates/parts/results', $post->post_type );
-    //                 // echo '<h3 class="h4">'. get_post_type_object($post->post_type)->labels->singular_name .': <a href="' . get_permalink($post->ID) . '">'. $post->post_title .'</a></h3>';
-    //                 // echo '<p>'. get_permalink($post->ID) .'</p>';
-    //                 // echo '<p>'. ($post->post_excerpt ? $post->post_excerpt : $post->post_content_filtered) .'</p>';
-    //                 restore_current_blog();
-    //             } else {
-    //                 $post = get_post( $post->id );
-    //                 get_template_part( 'templates/parts/results', $post->post_type );
-    //                 // echo '<h3 class="h4">'. get_post_type_object($post->post_type)->labels->singular_name .': <a href="' . get_permalink($post->ID) . '">'. $post->post_title .'</a></h3>';
-    //                 // echo '<p>'. get_permalink($post->ID) .'</p>';
-    //                 // echo '<p>'. ($post->post_excerpt ? $post->post_excerpt : $post->post_content_filtered) .'</p>';
-    //             }
-    //         } else {
-    //             get_template_part( 'templates/parts/results', $post->post_type );
-    //             // echo '<h3 class="h4"><a href="' . get_permalink() . '">'. get_the_title() .'</a></h3>';
-    //             // echo '<p>'. get_permalink() .'</p>';
-    //             // echo '<p>'. ($post->post_excerpt ? $post->post_excerpt : $post->post_content_filtered) .'</p>';
-    //         }
-    //     }
-    // } else {
-    //     // get_template_part( 'template-parts/content/content-none' );
-    //     echo "<p>Sorry, no content matched your criteria.</p>";
-    // }
-    echo '</div>'; // .inner-container
-    echo '</div>'; // .col-12
-    echo '</div>'; // .search-content
-    genesis_posts_nav();
-    echo '</div>'; // .container-fluid
-    echo '</div>'; // .uams-module
-}
-
-
 
 /**
  * Arrange elements in the loop.
@@ -880,7 +787,7 @@ function uamswp_custom_loop( $args = array() ) {
     $wp_query = new WP_Query( $args ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Reset later.
 
     // added this based on http://www.relevanssi.com/knowledge-base/relevanssi_do_query/
-    relevanssi_do_query( $wp_query );
+    if ( function_exists( 'relevanssi_do_query' ) ) { relevanssi_do_query( $wp_query ); }
 
 	// Only set $more to 0 if we're on an archive.
 	$more = is_singular() ? $more : 0; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Handle archives.
@@ -903,7 +810,7 @@ function uamswp_custom_loop_base( $args = array() ) {
     $wp_query = new WP_Query( $args ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Reset later.
 
     // added this based on http://www.relevanssi.com/knowledge-base/relevanssi_do_query/
-	relevanssi_do_query( $wp_query );
+	if ( function_exists( 'relevanssi_do_query' ) ) { relevanssi_do_query( $wp_query ); }
 
 	// Only set $more to 0 if we're on an archive.
 	$more = is_singular() ? $more : 0; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Handle archives.

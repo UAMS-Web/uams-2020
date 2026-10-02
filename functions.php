@@ -117,13 +117,13 @@ function uamswp_childtheme_setup() {
 	add_image_size( 'aspect-1-1', 1024, 1024, true );
 	//add_image_size( 'aspect-1-1-small', 512, 512, true ); // hidden until needed
 	add_image_size( 'hero-tablet', 455, 256, true );
+	add_image_size( 'portrait-3-4', 243, 324, true);
 	add_image_size( 'content-image-side', 299, 9999 );
 	add_image_size( 'content-image-center', 630, 9999 );
 	add_image_size( 'content-image-wide', 1020, 9999 );
 	add_image_size( 'content-image-full', 1920, 9999 );
 
 	// Add custom image sizes to post editor
-
 	add_filter( 'image_size_names_choose', 'uams_custom_add_image_size_names' );
 	function uams_custom_add_image_size_names( $sizes ) {
 	return array_merge( $sizes, array(
@@ -241,13 +241,13 @@ function uams_breadcrumb_home_icon( $crumb ) {
 			$crumb = '<a href="'.uams_get_home_link().'" title="Inside UAMS"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1">';
 		} else {
 			if ( is_front_page() && 'main' != uams_get_site_info()['department'] && 'none' != uams_get_site_info()['department'] ) {
-				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . network_home_url() . '" title="' . get_blog_details(1)->blogname . '"><span itemprop="name">'.get_blog_details(1)->blogname.'</span></a><meta itemprop="position" content="2">';
+				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="' . network_home_url() . '" title="' . get_blog_details(1)->blogname . '"><span itemprop="name">'.get_blog_details(1)->blogname.'</span></a><meta itemprop="position" content="2">';
 			} elseif ( 'main' != uams_get_site_info()['department'] && 'none' != uams_get_site_info()['department'] ) {
-				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . network_home_url() . '" title="' . get_blog_details(1)->blogname . '"><span itemprop="name">'.get_blog_details(1)->blogname.'</span></a><meta itemprop="position" content="2"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . home_url() . '/" title="' . uams_site_title() . '"><span itemprop="name">'.uams_site_title().'</span></a><meta itemprop="position" content="3">';
+				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="' . network_home_url() . '" title="' . get_blog_details(1)->blogname . '"><span itemprop="name">'.get_blog_details(1)->blogname.'</span></a><meta itemprop="position" content="2"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="' . home_url() . '/" title="' . uams_site_title() . '"><span itemprop="name">'.uams_site_title().'</span></a><meta itemprop="position" content="3">';
 			} elseif ( is_front_page() ) {
 				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1">';
 			} else {
-				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a href="' . home_url() . '/" title="' . uams_site_title() . '"><span itemprop="name">'.uams_site_title().'</span></a><meta itemprop="position" content="2">';
+				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="' . home_url() . '/" title="' . uams_site_title() . '"><span itemprop="name">'.uams_site_title().'</span></a><meta itemprop="position" content="2">';
 			}
 		}
      return $crumb;
@@ -342,7 +342,7 @@ add_action('seopress_pro_breadcrumbs_css', 'sp_pro_breadcrumbs_css');
 /* Disabled for latest version of SEOPress Pro > 3.8.5 Included as default in plugin
 add_filter('seopress_pro_breadcrumbs_html', 'sp_pro_breadcrumbs_html');
 function sp_pro_breadcrumbs_html($html) {
-	//$html = <nav aria-label="breadcrumb"><ol class="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList"><li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem"><a itemtype="http://schema.org/Thing" itemprop="item" href="https://www.seopress.org/"><span itemprop="name">Home</span></a><meta itemprop="position" content="1"></li>...
+	//$html = <nav aria-label="breadcrumb"><ol class="breadcrumb" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem"><a itemtype="https://schema.org/Thing" itemprop="item" href="https://www.seopress.org/"><span itemprop="name">Home</span></a><meta itemprop="position" content="1"></li>...
 	//Remove last link
 	$html = preg_replace('#^(.*)<a[^>]*?>(.*?)</a>(.*?)#im', '$1$2$3', $html);
 	return $html;
@@ -365,7 +365,6 @@ if ( !function_exists('uams_get_site_info')):
 			return $siteinfo;
 			return;
 		}
-
 		/* Replace get_field functions with get_option - Remove ACF called too early errors */
 		$themestyle = get_option( 'options_uamswp_template' ); // get_field( 'uamswp_template', 'option' ); // uams, inside, health
 		$themelocation = get_option( 'options_uamswp_location' ); // get_field( 'uamswp_location', 'option' ); // campus, regional
@@ -378,7 +377,7 @@ if ( !function_exists('uams_get_site_info')):
 		$pri_dept = get_option( 'options_uamswp_institute_pri_dept' ); // get_field( 'uamswp_institute_pri_dept', 'option' ); // Psychiatric Research Institute Departments
 		$tri_dept = get_option( 'options_uamswp_institute_tri_dept' ); // get_field( 'uamswp_institute_tri_dept', 'option' ); // Translational Research Institute Departments
 		$cancer_dept = get_option( 'options_uamswp_institute_cancer_dept' ); // get_field( 'uamswp_institute_cancer_dept', 'option' ); // Cancer Institute Departments
-    	$ichi_dept = get_field( 'options_uamswp_institute_ichi_dept' ); // $ichi_dept = get_field( 'uamswp_institute_ichi_dept', 'option' ); // Institute for Community Health Innovation Departments
+    $ichi_dept = get_option( 'options_uamswp_institute_ichi_dept' ); // $ichi_dept = get_field( 'uamswp_institute_ichi_dept', 'option' ); // Institute for Community Health Innovation Departments
 		$uamsorganization = get_option( 'options_uamswp_uams_subsite' ); // get_field( 'uamswp_uams_subsite', 'option' ); // college 
 		$cohp_dept = get_option( 'options_uamswp_uams_cohp_dept' ); // get_field( 'uamswp_uams_cohp_dept', 'option' ); // college of health prof dept
 		$com_dept = get_option( 'options_uamswp_uams_com_dept' ); // get_field( 'uamswp_uams_com_dept', 'option' ); // college of medicine dept
@@ -389,7 +388,6 @@ if ( !function_exists('uams_get_site_info')):
 		$other_dept = get_option( 'options_uamswp_uams_other_dept' ); // get_field( 'uamswp_uams_other_dept' , 'option' ); // Other (Multisite)
 		$healthorganization = get_option( 'options_uamswp_uamshealth_subsite' ); // get_field( 'uamswp_uamshealth_subsite', 'option' ); // health 
 		$insideorganization = get_option( 'options_uamswp_inside_subsite' ); // get_field( 'uamswp_inside_subsite', 'option' ); // inside 
-
 		if ('health' == $themestyle) {
 			$site = 'uamshealth';
 			if ('' != $healthorganization) {
@@ -613,58 +611,263 @@ if (!function_exists('apStyleDate')) {
 	}
 }
 
-/**
- * Return sized image.
- *
- * @param integer  $id 			// id of image
- * @param integer  $prefwidth	// Preferred Output width. Set as -1 to inherit width as native ratio of prefered height.
- * @param string   $prefheight	// Preferred Output height. Set as -1 to inherit width as native ratio of prefered width.
- * @param string   $hcrop		// horizontal crop position (left, center, right)
- * @param string   $vcrop		// vertical crop position (top, center, bottom)
- * @return string				// image url
- */
-function image_sizer( $id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center' ) {
+class SlidingWindowRateLimiter {
+	private $limit;
+	private $timeWindow;
+	private $storage;
 
-	if ( ! function_exists( 'fly_add_image_size' ) ) {
-		return;
+	public function __construct($limit, $timeWindow) {
+		$this->limit = $limit;
+		$this->timeWindow = $timeWindow; // In seconds
+		$this->storage = [];
 	}
-	if ( ! $id ) {
-		return; // Make sure we have value
-	}
-	$image_width = wp_get_attachment_image_src($id, 'full')[1];
-	$image_height = wp_get_attachment_image_src($id, 'full')[2];
-	// Do the maths
-	$image_ratio = $image_width / $image_height;
-	if ($prefheight == -1) {
-		$prefheight = $prefwidth / $image_ratio;
-	}
-	if ($prefwidth == -1) {
-		$prefwidth = $prefheight * $image_ratio;
-	}
-	$pref_ratio = $prefwidth / $prefheight;
-	if( $image_width >= $prefwidth && $image_height >= $prefheight ) { // Bigger image => Crop
-		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
-	} elseif ( $image_ratio > $pref_ratio ) { // wide image => figure out max crop
-		$prefwidth = $image_width;
-		$prefheight = $image_width / $pref_ratio;
-		if( $prefheight > $image_height ) {
-			$prefheight = $image_height;
-			$prefwidth = $prefheight * $pref_ratio;
+
+	public function isRequestAllowed($clientId) {
+		$currentTime = time();
+		$windowStart = $currentTime - $this->timeWindow;
+
+		if (!isset($this->storage[$clientId])) {
+			$this->storage[$clientId] = [];
 		}
-		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
-	} elseif ( $image_ratio < $pref_ratio ) { // tall image => figure out max crop
-		$prefwidth = $image_height * $pref_ratio;
-		$prefheight = $image_height;
-		if( $prefwidth > $image_width ) {
-			$prefwidth = $image_width;
-			$prefheight = $prefwidth / $pref_ratio;
+
+		// Remove outdated timestamps
+		$this->storage[$clientId] = array_filter(
+			$this->storage[$clientId],
+			fn($timestamp) => $timestamp > $windowStart
+		);
+
+		if (count($this->storage[$clientId]) < $this->limit) {
+			$this->storage[$clientId][] = $currentTime;
+			return true;
 		}
-		$image_url = fly_get_attachment_image_src( $id, array( $prefwidth, $prefheight ), array( $hcrop, $vcrop ) )['src'];
-	} else { // Perfect ratio => no crop, return orig
-		$image_url = wp_get_attachment_url( $id, 'full' );
+
+		return false; // Limit exceeded
 	}
-	return $image_url;
 }
+
+/**
+ * Queues image resizing tasks to reduce server load.
+ * Uses transients to store queue and WP_Cron to process tasks.
+ * Accepts a fallback image size name for use during queue processing.
+ * 
+ * Modified image_sizer function to queue resizing tasks with specified fallback size
+ * @param int $id Attachment ID
+ * @param int $prefwidth Preferred width
+ * @param int $prefheight Preferred height
+ * @param string $hcrop Horizontal crop position (default: 'center')
+ * @param string $vcrop Vertical crop position (default: 'center')
+ * @param string $fallback_size WordPress image size name to use as fallback (default: 'full')
+ * @return string Image URL (cached, fallback, or original)
+ */
+function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center', $fallback_size = 'full') {
+    if (!function_exists('bis_get_attachment_image') || empty($id) || empty(wp_get_attachment_image_src($id))) {
+        return; // Validate input
+    }
+
+    // Check if resized image already exists in queue cache
+    $transient_key = 'image_sizer_' . md5($id . $prefwidth . $prefheight . $hcrop . $vcrop);
+    $cached_image = get_transient($transient_key);
+    if ($cached_image !== false) {
+        return $cached_image; // Return cached URL if available
+    }
+
+    // Get original image dimensions
+    $image_width = wp_get_attachment_image_src($id, 'full')[1];
+    $image_height = wp_get_attachment_image_src($id, 'full')[2];
+    $image_ratio = $image_width / $image_height;
+
+    // Calculate preferred dimensions
+    if ($prefheight == -1) {
+        $prefheight = $prefwidth / $image_ratio;
+    }
+    if ($prefwidth == -1) {
+        $prefwidth = $prefheight * $image_ratio;
+    }
+    $pref_ratio = $prefwidth / $prefheight;
+
+    // Determine resizing parameters
+    if ($image_width >= $prefwidth && $image_height >= $prefheight) {
+        // Bigger image => Crop
+        $params = ['width' => $prefwidth, 'height' => $prefheight, 'hcrop' => $hcrop, 'vcrop' => $vcrop];
+    } elseif ($image_ratio > $pref_ratio) {
+        // Wide image => Max crop
+        $prefwidth = $image_width;
+        $prefheight = $image_width / $pref_ratio;
+        if ($prefheight > $image_height) {
+            $prefheight = $image_height;
+            $prefwidth = $prefheight * $pref_ratio;
+        }
+        $params = ['width' => $prefwidth, 'height' => $prefheight, 'hcrop' => $hcrop, 'vcrop' => $vcrop];
+    } elseif ($image_ratio < $pref_ratio) {
+        // Tall image => Max crop
+        $prefwidth = $image_height * $pref_ratio;
+        $prefheight = $image_height;
+        if ($prefwidth > $image_width) {
+            $prefwidth = $image_width;
+            $prefheight = $prefwidth / $pref_ratio;
+        }
+        $params = ['width' => $prefwidth, 'height' => $prefheight, 'hcrop' => $hcrop, 'vcrop' => $vcrop];
+    } else {
+        // Perfect ratio => No crop, return fallback size
+        return image_sizer_get_fallback($id, $fallback_size);
+    }
+
+    // Check for duplicate jobs in queue
+    $queue = get_option('image_sizer_queue', []);
+    $job_key = md5($id . serialize($params));
+    foreach ($queue as $job) {
+        if (md5($job['id'] . serialize($job['params'])) === $job_key) {
+            return image_sizer_get_fallback($id, $fallback_size); // Duplicate found, return fallback
+        }
+    }
+
+    // Add to queue
+    $queue[] = [
+        'id' => $id,
+        'params' => $params,
+        'transient_key' => $transient_key
+    ];
+    update_option('image_sizer_queue', $queue, false);
+
+    // Schedule cron if not already scheduled
+    if (!wp_next_scheduled('process_image_sizer_queue')) {
+        wp_schedule_event(time(), 'ten_seconds', 'process_image_sizer_queue');
+    }
+
+    // Return fallback image size
+    return image_sizer_get_fallback($id, $fallback_size);
+}
+
+/**
+ * Helper function to get the specified WordPress image size as fallback
+ * @param int $id Attachment ID
+ * @param string $fallback_size WordPress image size name
+ * @return string Image URL
+ */
+function image_sizer_get_fallback($id, $fallback_size) {
+    // Allow overriding default fallback size via filter
+    $default_fallback = apply_filters('image_sizer_default_fallback', 'full');
+    $fallback_size = $fallback_size ?: $default_fallback;
+
+    // Check if the fallback size exists for the attachment
+    $image_src = wp_get_attachment_image_src($id, $fallback_size);
+    if ($image_src && !empty($image_src[0])) {
+        return $image_src[0]; // Return the specified size URL
+    }
+
+    // Debug: Log when fallback size is not found (only if WP_DEBUG is enabled)
+    if (defined('WP_DEBUG') && WP_DEBUG && $fallback_size !== $default_fallback) {
+        error_log("Image Sizer: Fallback size '$fallback_size' not found for attachment ID $id. Using '$default_fallback'.");
+    }
+
+    // Fall back to default size if specified size doesn't exist
+    $image_src = wp_get_attachment_image_src($id, $default_fallback);
+    return $image_src[0] ?: '';
+}
+
+/**
+ * Register custom cron schedule
+ */
+add_filter('cron_schedules', function ($schedules) {
+    $schedules['ten_seconds'] = [
+        'interval' => 10, // 10 seconds
+        'display' => __('Every Ten Seconds')
+    ];
+    return $schedules;
+});
+
+/**
+ * Process the image resizing queue
+ */
+add_action('process_image_sizer_queue', function () {
+    $queue = get_option('image_sizer_queue', []);
+    if (empty($queue)) {
+        return;
+    }
+
+    // Process up to 20 images per cron run to avoid overloading
+    $batch_size = 20;
+    $processed = 0;
+
+    foreach ($queue as $index => $job) {
+        if ($processed >= $batch_size) {
+            break;
+        }
+
+        $id = $job['id'];
+        $params = $job['params'];
+        $transient_key = $job['transient_key'];
+
+        // Generate resized image
+        $image_url = bis_get_attachment_image_src(
+            $id,
+            [$params['width'], $params['height']],
+            [$params['hcrop'], $params['vcrop']]
+        )['src'];
+
+        // Cache result for 30 days
+        set_transient($transient_key, $image_url, 5 * DAY_IN_SECONDS);
+
+        // Remove from queue
+        unset($queue[$index]);
+        $processed++;
+    }
+
+    // Update queue
+    if (empty($queue)) {
+        delete_option('image_sizer_queue');
+        // Clear cron if queue is empty
+        wp_clear_scheduled_hook('process_image_sizer_queue');
+    } else {
+        update_option('image_sizer_queue', array_values($queue), false);
+    }
+});
+
+/**
+ * Add admin action to manually trigger queue processing
+ */
+add_action('admin_init', function () {
+    if (isset($_GET['process_image_queue']) && current_user_can('manage_options')) {
+        check_admin_referer('process_image_queue_nonce');
+        do_action('process_image_sizer_queue');
+        wp_redirect(admin_url('upload.php?queue_processed=1'));
+        exit;
+    }
+});
+
+/**
+ * Add manual trigger link to media library
+ */
+add_action('admin_notices', function () {
+    if (get_current_screen()->id !== 'upload' || !current_user_can('manage_options')) {
+        return;
+    }
+    $queue = get_option('image_sizer_queue', []);
+    if (!empty($queue)) {
+        $url = wp_nonce_url(admin_url('upload.php?process_image_queue=1'), 'process_image_queue_nonce');
+        echo '<div class="notice notice-info"><p>';
+        echo 'Image resizing queue has ' . count($queue) . ' pending jobs. ';
+        echo '<a href="' . esc_url($url) . '">Process now</a>';
+        echo '</p></div>';
+    }
+    if (isset($_GET['queue_processed'])) {
+        echo '<div class="notice notice-success is-dismissible"><p>Image queue processed successfully.</p></div>';
+    }
+});
+
+/**
+ * Clean up cron on plugin deactivation
+ */
+// register_deactivation_hook does nothing for a theme, so the image queue cron and
+// option were never cleaned up. Clear them when this theme is switched away instead.
+// (Gating the queue so anonymous page views cannot enqueue work is a behaviour change
+// left for review: see #577.)
+add_action( 'switch_theme', function ( $new_name, $new_theme, $old_theme ) {
+    if ( $old_theme && $old_theme->get_stylesheet() === 'uams-2020' ) {
+        wp_clear_scheduled_hook('process_image_sizer_queue');
+        delete_option('image_sizer_queue');
+    }
+}, 10, 3 );
 
 /**
  * Return dimension for gallery image.
@@ -771,11 +974,11 @@ function rest_api_filter_add_filter_param( $args, $request ) {
 	if ( isset( $filter['posts_per_page'] ) && ( (int) $filter['posts_per_page'] >= 1 && (int) $filter['posts_per_page'] <= 100 ) ) {
 		$args['posts_per_page'] = $filter['posts_per_page'];
 	}
-	global $wp;
-	$vars = apply_filters( 'rest_query_vars', $wp->public_query_vars );
-	// Allow valid meta query vars.
-	$vars = array_unique( array_merge( $vars, array( 'meta_query', 'meta_key', 'meta_value', 'meta_compare' ) ) );
-	foreach ( $vars as $var ) {
+	// Copy only a fixed, safe set of query vars from the request. meta_query, meta_key,
+	// meta_value, meta_compare and post_type are intentionally excluded: allowing them let
+	// an unauthenticated request run arbitrary post-meta queries and read across post types.
+	$allowed = array( 'orderby', 'order', 'offset', 'category_name', 'tag', 'author_name' );
+	foreach ( $allowed as $var ) {
 		if ( isset( $filter[ $var ] ) ) {
 			$args[ $var ] = $filter[ $var ];
 		}
@@ -810,7 +1013,7 @@ function uamswp_gtm_1() {
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','<?php echo $gtmvalue; ?>');</script>
+	})(window,document,'script','dataLayer','<?php echo esc_js( $gtmvalue ); ?>');</script>
 	<!-- End Google Tag Manager -->
 <?php } else {
 	echo '<!-- Google Tag Manager is disabled -->';
@@ -825,10 +1028,23 @@ function uamswp_gtm_2( ) {
 	if ($gtm_disable !== '1') {
 	?>
 	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $gtmvalue; ?>"
+	<noscript><iframe title="Google Tag Manager" src="<?php echo esc_url( 'https://www.googletagmanager.com/ns.html?id=' . $gtmvalue ); ?>"
 	height="0" width="0" aria-hidden="true" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
 <?php } }
+
+// Reject anything that is not a GTM container ID before it is stored, so the value
+// echoed into the inline GTM script and the noscript iframe can only be safe characters.
+add_filter( 'acf/validate_value/name=google_tag_manager_id', 'uamswp_validate_gtm_id', 10, 2 );
+function uamswp_validate_gtm_id( $valid, $value ) {
+	if ( $valid !== true ) {
+		return $valid;
+	}
+	if ( $value !== '' && ! preg_match( '/^GTM-[A-Z0-9]+$/', $value ) ) {
+		return 'Enter a valid Google Tag Manager container ID (GTM-XXXXXXX).';
+	}
+	return $valid;
+}
 
 add_filter( 'big_image_size_threshold', '__return_false' );
 
@@ -896,12 +1112,15 @@ add_filter('allowed_block_types', function($block_types, $post) {
 		'acf/text-stacked',
 		'acf/livewhale-calendar',
 		'acf/uams-gallery',
-		'acf/uams-content',
+		//'acf/uams-content',
 		'acf/fad-providers',
 		'acf/fad-locations',
-		'acf/logo-list',
-		'acf/uams-section'
+		'acf/logo-list'
 	];
+	if ( current_user_can( 'manage_options' ) ) {
+		$allowed_marketing[] = 'acf/uams-content';
+        //return $allowed_marketing;
+    }
 	if (get_page_template_slug( $post ) == 'templates/marketing.php') {
 		return $allowed_marketing;
 	}
@@ -958,3 +1177,137 @@ function my_retrieve_password_message( $message, $key, $user_login, $user_data )
     // Return the filtered message.
     return $message;
 }
+/* Unregister blocks */
+add_action( 'init', function() {
+	$registry = WP_Block_Type_Registry::get_instance();
+	// All extra blocks
+	// WP SEO
+	if ( $registry->get_registered( 'wpseopress/sitemap' ) ) {
+		// unregister_block_type( 'wpseopress/faq-block' );
+		unregister_block_type( 'wpseopress/sitemap' );
+		unregister_block_type( 'wpseopress/local-business-field' );
+		unregister_block_type( 'wpseopress/local-business' );
+		unregister_block_type( 'wpseopress/breadcrumbs' );
+		unregister_block_type( 'wpseopress/how-to-step' );
+		unregister_block_type( 'wpseopress/how-to' );
+		unregister_block_type( 'wpseopress/table-of-contents' );
+		unregister_block_type( 'wpseopress/how-to-step' );
+	}
+	// SearchWP
+	if ( $registry->get_registered( 'searchwp/search-form' ) ) {
+		unregister_block_type( 'searchwp/search-form' );
+	}
+	// Minerva KB
+	if ( $registry->get_registered( 'minervakb/faq' ) ) {
+		unregister_block_type( 'minervakb/tip' );
+		unregister_block_type( 'minervakb/info' );
+		unregister_block_type( 'minervakb/warning' );
+		// unregister_block_type( 'minervakb/faq' );
+		// unregister_block_type( 'minervakb/topics' );
+		// unregister_block_type( 'minervakb/topic' );
+		// unregister_block_type( 'minervakb/search' );
+		unregister_block_type( 'minervakb/related' );
+		unregister_block_type( 'minervakb/article-content' );
+		unregister_block_type( 'minervakb/guestpost' );
+	}
+	// Ajax Search Pro
+	if ( $registry->get_registered( 'ajax-search-pro/block-asp-main' ) ) {
+		unregister_block_type( 'ajax-search-pro/block-asp-main' );
+	}
+	// Formidable
+	if ( $registry->get_registered( 'formidable/simple-form' ) ) {
+		// unregister_block_type( 'formidable/simple-form' );
+		unregister_block_type( 'frm-charts/graph' );
+		// unregister_block_type( 'formidable/simple-view' );
+		unregister_block_type( 'formidable/calculator' );
+	}
+	// Gravity Forms
+	// if ( WP_Block_Type_Registry::get_instance()->is_registered( 'wpseopress/sitemap' ) ) {
+	// 	// unregister_block_type( 'gravityforms/form' );
+	// }
+	// TablePress
+	// if ( WP_Block_Type_Registry::get_instance()->is_registered( 'tablepress/table' ) ) {
+	// 	// unregister_block_type( 'tablepress/table' );
+	// }
+	// FacetWP Blocks
+	// if ( $registry->get_registered( 'acf/uamswp-fad-facetwp-cards' ) ) {
+	// 	unregister_block_type( 'acf/uamswp-fad-facetwp-cards' );
+	// 	unregister_block_type( 'acf/uamswp-fad-facetwp-blocks' );
+	// }
+	// unregister_block_type( '' );
+}, PHP_INT_MAX );
+
+add_filter( 'allowed_block_types_all', function( $allowed_blocks, $editor_context ) {
+    $blocks = array_keys( WP_Block_Type_Registry::get_instance()->get_all_registered() );
+
+    $removelist = [
+		// 'core/html',
+		'core/latest-comments',
+		'core/nextpage',
+		'core/page-list',
+		'core/page-list-item',
+		'core/pattern',
+		// 'core/preformatted',
+		// 'core/block',
+		// 'core/rss',
+		'core/search',
+		// 'core/separator',
+		// 'core/shortcode',
+		'core/spacer',
+		// 'core/table',
+		'core/footnotes',
+		'core/navigation',
+		'core/navigation-link',
+		'core/navigation-submenu',
+		'core/site-logo',
+		'core/site-title',
+		'core/site-tagline',
+		'core/query',
+		'core/template-part',
+		'core/avatar',
+		'core/post-title',
+		'core/post-excerpt',
+		'core/post-featured-image',
+		'core/post-content',
+		'core/post-author',
+		'core/post-author-name',
+		'core/post-date',
+		'core/post-terms',
+		'core/post-navigation-link',
+		'core/post-template',
+		'core/query-pagination',
+		'core/query-pagination-next"',
+		'core/query-pagination-numbers',
+		'core/query-pagination-previous',
+		'core/query-no-results',
+		'core/query-total',
+		'core/read-more',
+		'core/comments',
+		'core/comment-author-name',
+		'core/comment-content',
+		'core/comment-date',
+		'core/comment-edit-link',
+		'core/comment-reply-link',
+		'core/comment-template',
+		'core/comments-title',
+		'core/comments-pagination',
+		'core/comments-pagination-next',
+		'core/comments-pagination-numbers',
+		'core/comments-pagination-previous',
+		'core/post-comments-form',
+		'core/home-link',
+		'core/loginout',
+		'core/term-description',
+		'core/query-title',
+		'core/post-author-biography',
+		'core/freeform',
+		// 'core/legacy-widget',
+		'core/widget-group',
+    ];
+
+	if ( ! current_user_can( 'manage_options' ) ) {
+    	$removelist[] = 'acf/uams-content';
+    }
+
+    return array_values( array_diff( $blocks, $removelist ) );
+}, 100, 2 );

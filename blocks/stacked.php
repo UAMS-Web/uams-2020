@@ -29,6 +29,12 @@ if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
 }   
 
+// PHP variables
+$more_text = '';
+$more_button_text = '';
+$more_button_url = '';
+$more_button_target = '';
+
 // Load values.
 if ( empty($heading) )
     $heading = get_field('stacked_heading');
@@ -47,7 +53,7 @@ if ( $more ) {
         $more_button_text = get_field('stacked_more_button_text');
     if ( empty($more_button_url) )
         $more_button_url = get_field('stacked_more_button_url');
-    if ( empty($more_button_target) ) 
+    if ( empty($more_button_target) && is_array($more_button_url) )
         $more_button_target = $more_button_url['target'];
     if ( empty($more_button_description) )
         $more_button_description = get_field('stacked_more_button_description');
@@ -89,14 +95,14 @@ if( $stacked_rows ) :
     $row_count = count($stacked_rows); // Not user, but just in case
 
 ?>
-<section class="uams-module stacked-image-text<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module stacked-image-text<?php echo esc_attr($className); ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12<?php echo ($hide_heading && empty($description)) ? " sr-only" : ""; ?>">
                 <h2 class="module-title<?php echo ($hide_heading && $description) ? " sr-only" : ""; ?>">
-                    <span class="title"><?php echo $heading; ?></span>
+                    <span class="title"><?php echo esc_html($heading); ?></span>
                 </h2>
-                <?php echo $description ? '<div class="module-description"><p>'. $description .'</p></div>' : ''; ?>
+                <?php echo $description ? '<div class="module-description"><p>'. esc_html($description) .'</p></div>' : ''; ?>
             </div>
             <div class="col-12">
                 <div class="card-list card-list-left">
@@ -120,30 +126,25 @@ if( $stacked_rows ) :
                             <div class="card">
                                 <div class="card-img-top">
                                     <picture>
-                                        <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>  
-                                            <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 910, 512, 'center', 'center'); ?> 2x" 
-                                                media="(min-width: 1921px)">
-                                            <source srcset="<?php echo image_sizer($image, 433, 244, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 866, 487, 'center', 'center'); ?> 2x" 
-                                                media="(min-width: 1500px)">
-                                            <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 910, 512, 'center', 'center'); ?> 2x" 
-                                                media="(min-width: 992px)">
-                                            <source srcset="<?php echo image_sizer($image, 433, 244, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 866, 487, 'center', 'center'); ?> 2x" 
-                                                media="(min-width: 768px)">
-                                            <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center'); ?> 1x, <?php echo image_sizer($image, 910, 512, 'center', 'center'); ?> 2x" 
-                                                media="(min-width: 1px)">
+                                        <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>  
+                                            <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 1921px)">
+                                            <source srcset="<?php echo image_sizer($image, 433, 244, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 1500px)">
+                                            <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 992px)">
+                                            <source srcset="<?php echo image_sizer($image, 433, 244, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 768px)">
+                                            <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 1px)">
                                             <!-- Fallback -->
-                                            <img src="<?php echo image_sizer($image, 455, 256, 'center', 'center'); ?>" alt="<?php echo $image_alt_override ? $image_alt_override : $image_alt_native; ?>" />
+                                            <img src="<?php echo image_sizer($image, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" alt="<?php echo esc_attr( $image_alt_override ? $image_alt_override : $image_alt_native ); ?>" />
                                         <?php } else { ?>
                                             <!-- Fallback -->
-                                            <img src="<?php echo wp_get_attachment_image_url( $image, 'aspect-16-9' ); ?>" alt="<?php echo $image_alt_override ? $image_alt_override : $image_alt_native; ?>" />
+                                            <img src="<?php echo wp_get_attachment_image_url( $image, 'aspect-16-9-small' ); ?>" alt="<?php echo esc_attr( $image_alt_override ? $image_alt_override : $image_alt_native ); ?>" />
                                         <?php } //endif ?>
                                     </picture>
                                 </div>
                                 <div class="card-body">
-                                    <h3 class="card-title h5"><?php echo $item_heading; ?></h3>
-                                    <p class="card-text"><?php echo $body; ?></p>
+                                    <h3 class="card-title h5"><?php echo esc_html($item_heading); ?></h3>
+                                    <p class="card-text"><?php echo esc_html($body); ?></p>
                                     <?php if ( $button_text ) { ?>  
-                                        <a href="<?php echo $button_url; ?>" class="btn btn-primary stretched-link" aria-label="<?php echo $button_desc; ?>"<?php echo $button_target ? ' target="'. $button_target .'"' : ''; ?> data-moduletitle="<?php echo $heading; ?>" data-itemtitle="<?php echo $item_heading; ?>"><?php echo $button_text; ?></a>
+                                        <a href="<?php echo esc_url($button_url); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo esc_attr($button_desc); ?>"<?php echo $button_target ? ' target="'. esc_attr($button_target) .'"' : ''; ?> data-moduletitle="<?php echo esc_attr($heading); ?>" data-itemtitle="<?php echo esc_attr($item_heading); ?>"><?php echo esc_html($button_text); ?></a>
                                     <?php } //endif ?>
                                 </div>
                             </div>
@@ -155,7 +156,7 @@ if( $stacked_rows ) :
                 <div class="col-12 more">
                     <p class="lead"><?php echo $more_text; ?></p>
                     <div class="cta-container">
-                        <a href="<?php echo $more_button_url['url']; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                        <a href="<?php echo $more_button_url['url'] ?? ''; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
                     </div>
                 </div>
             <?php } // endif ?>

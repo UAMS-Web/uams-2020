@@ -144,7 +144,7 @@ function uamswp_site_image() {
 					<a class="nav-link" href="https://jobs.uams.edu/">Jobs</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="http://giving.uams.edu/">Giving</a>
+					<a class="nav-link" href="https://giving.uams.edu/">Giving</a>
 				</li>
 				<!-- End right nav -->
 				<?php } elseif ('uamshealth' == uams_get_site_info()['site']) { ?>
@@ -156,7 +156,7 @@ function uamswp_site_image() {
 					<a class="nav-link" href="https://mychart.uamshealth.com/">MyChart</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="http://giving.uams.edu/">Giving</a>
+					<a class="nav-link" href="https://giving.uams.edu/">Giving</a>
 				</li>
 				<!-- End right nav -->
 				<?php } elseif ('inside' == uams_get_site_info()['site']) { ?>

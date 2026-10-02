@@ -19,6 +19,7 @@ $id = 'image-side-' . $id;
 if( !empty($block['anchor']) ) {
     $id = $block['anchor'];
 }
+$id = sanitize_html_class( $id );
 
 // Create class attribute allowing for custom "className" and "align" values.
 $className = 'uams-side-by-side-block';
@@ -35,13 +36,27 @@ if ( empty($layout) )
     $layout = get_field('side_text_layout') ?: 'link-list';
 if ( empty($heading) ) 
     $heading = get_field('side_heading') ?: 'Heading goes here...';
+$is_quote = ( $layout == 'blockquote-citation' || $layout == 'blockquote-citation-link' );
 
 if ( empty($body) ){
     if ( $layout == 'body-only' ) {
         $body = get_field('side_layout_body_text') ?: 'This is where the body-only description goes';
+    } elseif ( $is_quote ) {
+        $body = ''; // The quote layouts show a quote and citation instead of a body.
     } else {
         $body = get_field('side_layout_link_text') ?: 'This is where the body + link list description goes';
     }
+}
+
+if ( $is_quote ) {
+    if ( empty($quote_text) )
+        $quote_text = get_field( $layout == 'blockquote-citation-link' ? 'side_quote_text_link' : 'side_quote_text' ) ?: 'This is where the quote goes';
+    // Strip quotation marks typed at the start or end. Curly quotes are added on output.
+    $quote_text = preg_replace( '/^[\s"\'“”‘’]+|[\s"\'“”‘’]+$/u', '', $quote_text ) ?? $quote_text;
+    if ( empty($quote_name) )
+        $quote_name = get_field('side_quote_speaker_name') ?: 'Speaker name';
+    if ( empty($quote_title) )
+        $quote_title = get_field('side_quote_speaker_title') ?: '';
 }
 
 if ( empty($link_list) ) 
@@ -50,6 +65,10 @@ if ( empty($list_more) )
     $list_more = get_field('side_link_include_more') ?: '';
 if ( empty($cta) ) 
     $cta = get_field('side_cta') ?: '';
+// A layout that hides the button (Blockquote with Citation) saves no button fields.
+if ( ! is_array($cta) )
+    $cta = array();
+$cta += array( 'side_cta_text' => '', 'side_cta_url' => '', 'side_cta_description' => '' );
 $cta_text = $cta['side_cta_text'] ?: '';
 $cta_link = '';
 $cta_target = '';
@@ -58,8 +77,14 @@ if ( $cta['side_cta_url'] ) {
     $cta_target = $cta['side_cta_url']['target'] ?: '';
 }
 $cta_desc = $cta['side_cta_description'] ?: '';
+if ( $layout == 'blockquote-citation' ) {
+    $cta_text = ''; // This layout has no button, even if one was saved under another layout.
+}
 if ( empty($image_group) ) 
     $image_group = get_field('side_image')?: '';
+if ( ! is_array($image_group) )
+    $image_group = array();
+$image_group += array( 'side_image_image' => '', 'side_image_alt_text' => '', 'side_image_crop' => '', 'side_image_anchor' => '' );
 $side_image = $image_group['side_image_image'] ?: '';
 $image_alt = $image_group['side_image_alt_text'] ?: '';
 $image_crop = $image_group['side_image_crop'] ?: '';
@@ -74,10 +99,10 @@ if ( empty($geo_region) )
     $geo_region = get_field('side_image_geo_region');
 if ( empty($image_alt) ) 
     $image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachment_image_alt', true);
-$cta_target = $cta_target ? ' target="'. $cta_target .'"' : '';
-$cta_desc = $cta_desc ? ' aria-label="'.$cta_desc.'"' : '';
-$cta_link = $cta_link ? '<a class="btn btn-primary" href="'. $cta_link .'"' . $cta_desc . $cta_target . ' data-moduletitle="' . $heading . '">' : '';
-$side_image_width = wp_get_attachment_image_src($side_image, 'full')[1];
+$cta_target = $cta_target ? ' target="'. esc_attr($cta_target) .'"' : '';
+$cta_desc = $cta_desc ? ' aria-label="'.esc_attr($cta_desc).'"' : '';
+$cta_link = $cta_link ? '<a class="btn btn-primary" href="'. esc_url($cta_link) .'"' . $cta_desc . $cta_target . ' data-moduletitle="' . esc_attr($heading) . '">' : '';
+$side_image_width = wp_get_attachment_image_src($side_image, 'full')[1] ?? '';
 // $side_image_height = wp_get_attachment_image_src($side_image, 'full')[2];
 
 // Break it if it isn't "Landing" template
@@ -105,116 +130,60 @@ if (!isset($geo) || empty($geo_region)){
 }
 if (is_admin() && !empty($geo) && !empty($geo_region)) {
     $geo_display = true;
-    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
+    echo esc_html( ucwords($geo) ) . ' region(s): ' . esc_html( implode(', ', $geo_region) ) . '<hr>';
 }
 if ($geo_display) :
 ?>
-<section class="uams-module no-padding side-by-side <?php echo $className; ?> image-on-<?php echo $image_postion; ?> image-background-<?php echo $image_anchor; ?> <?php echo $background_color; ?>" id="side-by-side-<?php echo esc_attr($id); ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module no-padding side-by-side <?php echo esc_attr($className); ?> image-on-<?php echo esc_attr($image_postion); ?> image-background-<?php echo esc_attr($image_anchor); ?> <?php echo esc_attr($background_color); ?>" id="side-by-side-<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 image-container" aria-label="<?php echo $image_alt ?>" role="img">
+            <div class="col-12 col-md-6 image-container" aria-label="<?php echo esc_attr($image_alt) ?>" role="img">
 
-                <?php if ( function_exists( 'fly_add_image_size' ) ) { ?>
+                <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
                 <style>
                     #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                        background-image: url("<?php echo image_sizer($side_image, 576, 324, $image_anchor, $image_crop); ?>");
-                    }
-
-                    /* XXS Breakpoint, retina */
-                    @media (-webkit-min-device-pixel-ratio: 2),
-                    (min-resolution: 192dpi) {
-                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1152, 648, $image_anchor, $image_crop); ?>");
-                        }
+                        background-image: url("<?php echo image_sizer($side_image, 576, 324, $image_anchor, $image_crop, 'aspect-16-9-small'); ?>");
                     }
 
                     /* XS Breakpoint */
                     @media (min-width: 576px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 768, 432, $image_anchor, $image_crop); ?>");
-                        }
-                    }
-
-                    /* XS Breakpoint, retina */
-                    @media (min-width: 576px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 576px) and (min-resolution: 192dpi) {
-                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1536, 864, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 768, 432, $image_anchor, $image_crop, 'aspect-16-9-small'); ?>");
                         }
                     }
 
                     /* SM Breakpoint */
                     @media (min-width: 768px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 992, 558, $image_anchor, $image_crop); ?>");
-                        }
-                    }
-
-                    /* SM Breakpoint, retina */
-                    @media (min-width: 768px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 768px) and (min-resolution: 192dpi) {
-                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1984, 1116, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 992, 558, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
 
                     /* MD Breakpoint */
                     @media (min-width: 992px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1200, 675, $image_anchor, $image_crop); ?>");
-                        }
-                    }
-
-                    /* MD Breakpoint, retina */
-                    @media (min-width: 992px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 992px) and (min-resolution: 192dpi) {
-                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 2400, 1350, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 1200, 675, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
 
                     /* LG Breakpoint */
                     @media (min-width: 1200px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1500, 844, $image_anchor, $image_crop); ?>");
-                        }
-                    }
-
-                    /* LG Breakpoint, retina */
-                    @media (min-width: 1200px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 1200px) and (min-resolution: 192dpi) {
-                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 3000, 1688, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 1500, 844, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
 
                     /* XL Breakpoint */
                     @media (min-width: 1500px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 1921, 1081, $image_anchor, $image_crop); ?>");
-                        }
-                    }
-
-                    /* XL Breakpoint, retina */
-                    @media (min-width: 1500px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 1500px) and (min-resolution: 192dpi) {
-                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 3842, 2161, $image_anchor, $image_crop); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 1921, 1081, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
 
                     /* XXL Breakpoint */
                     @media (min-width: 1921px) {
                         #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 2560, 1440, $image_anchor, $image_crop); ?>");
-                        }
-                    }
-
-                    /* XXL Breakpoint, retina */
-                    @media (min-width: 1921px) and (-webkit-min-device-pixel-ratio: 2),
-                    (min-width: 1921px) and (min-resolution: 192dpi) {
-                        #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                            background-image: url("<?php echo image_sizer($side_image, 5120, 2880, $image_anchor, $image_crop ); ?>");
+                            background-image: url("<?php echo image_sizer($side_image, 2560, 1440, $image_anchor, $image_crop, 'aspect-16-9'); ?>");
                         }
                     }
                 </style>
@@ -230,21 +199,33 @@ if ($geo_display) :
             </div>
             <div class="col-12 col-md-6 text-container">
                 <div class="text-inner-container">
-                    <h2 class="h3"><?php echo $heading; ?></h2>
-                    <?php echo !empty($body) ? '<p>' . $body . '</p>' : ''; ?>
+                    <h2 class="h3"><?php echo esc_html($heading); ?></h2>
+                    <?php echo !empty($body) ? '<p>' . esc_html($body) . '</p>' : ''; ?>
+                    <?php if ( $is_quote ) : ?>
+                    <figure>
+                        <blockquote>
+                            <p>“<?php echo esc_html( $quote_text ); ?>”</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            <?php echo esc_html( $quote_name ); ?><?php if ( $quote_title ) : ?><br>
+                            <?php echo esc_html( $quote_title ); ?><?php endif; ?>
+
+                        </figcaption>
+                    </figure>
+                    <?php endif; ?>
                     <?php if ($layout == 'link-list' && $link_list): ?>
                     <ul>
                         <?php foreach( $link_list as $link ) {
                             $list_text = $link['side_link_list_text'];
-                            $list_url = $link['side_link_list_url']['url'];
+                            $list_url = $link['side_link_list_url']['url'] ?? null;
                             $list_desc = $link['side_link_list_description'];
                         ?>
                         <li>
                             <?php if( $list_url ): ?>
-                            <a href="<?php echo $list_url; ?>"<?php echo $list_desc ? ' aria-label="' . $list_desc . '"' : ''; ?> data-moduletitle="<?php echo $heading; ?>">
+                            <a href="<?php echo esc_url($list_url); ?>"<?php echo $list_desc ? ' aria-label="' . esc_attr($list_desc) . '"' : ''; ?> data-moduletitle="<?php echo esc_attr($heading); ?>">
                             <?php endif; ?>
                             <?php if( $list_text ): ?>
-                                <?php echo $list_text; ?>
+                                <?php echo esc_html($list_text); ?>
                             <?php endif; ?>
                             <?php if( $list_url ): ?>
                             </a>
@@ -256,7 +237,7 @@ if ($geo_display) :
                     <?php endif;
                         if( $cta_text ){
                             echo $cta_link;
-                            echo $cta_text ? $cta_text : 'Learn More'; 
+                            echo $cta_text ? esc_html($cta_text) : 'Learn More';
                             echo '</a>';
                         } ?>
                 </div>

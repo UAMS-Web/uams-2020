@@ -35,7 +35,10 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'acfe_permissions' => '',
+        'acfe_permissions' => array(
+				0 => 'super_admin',
+				1 => 'administrator',
+			),
         'default_value' => '',
         'placeholder' => '',
         'prepend' => '',
@@ -55,7 +58,10 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'acfe_permissions' => '',
+        'acfe_permissions' => array(
+				0 => 'super_admin',
+				1 => 'administrator',
+			),
         'message' => '',
         'default_value' => 0,
         'ui' => 1,
@@ -75,7 +81,10 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'acfe_permissions' => '',
+        'acfe_permissions'=> array(
+				0 => 'super_admin',
+				1 => 'administrator',
+			),
         'default_value' => '',
         'tabs' => 'all',
         'toolbar' => 'full',
@@ -95,7 +104,10 @@ return array(
             'class' => '',
             'id' => '',
         ),
-        'acfe_permissions' => '',
+        'acfe_permissions' => array(
+				0 => 'super_admin',
+				1 => 'administrator',
+			),
         'choices' => array(
             'bg-auto' => 'Auto',
             'bg-white' => 'White',
@@ -119,6 +131,28 @@ return array(
         'placeholder' => '',
     ),
     array(
+        'key' => 'field_content_locked'. $suffix,
+        'label' => 'Locked Content',
+        'name' => '',
+        'aria-label' => '',
+        'type' => 'message',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ),
+        'message' => 'This content is locked. If you need something edited, please contact <a href="mailto:brent@uams.edu">Brent Passmore</a>.',
+        'new_lines' => 'wpautop',
+        'esc_html' => 0,
+        'acfe_settings' => '',
+        'acfe_permissions' => array(
+            0 => 'editor',
+        ),
+    ),
+    array(
         'key' => 'field_content_geo_valid'. $suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
@@ -131,7 +165,6 @@ return array(
             'class' => 'hidden',
             'id' => '',
         ),
-        'acfe_permissions' => '',
         'choices' => array(
             'false' => 'False',
             'true' => 'True',
@@ -163,6 +196,10 @@ return array(
             'class' => '',
             'id' => '',
         ),
+        'acfe_permissions'=> array(
+				0 => 'super_admin',
+				1 => 'administrator',
+			),
         'open' => 0,
         'multi_expand' => 0,
         'endpoint' => 0,
@@ -188,7 +225,10 @@ return array(
 			'class' => '',
 			'id' => '',
 		),
-        'acfe_permissions' => '',
+        'acfe_permissions'=> array(
+				0 => 'super_admin',
+				1 => 'administrator',
+			),
         'choices' => array(
             'include' => 'Include',
             'exclude' => 'Exclude',
@@ -212,7 +252,10 @@ return array(
 			'class' => '',
 			'id' => '',
 		),
-        'acfe_permissions' => '',
+        'acfe_permissions'=> array(
+				0 => 'super_admin',
+				1 => 'administrator',
+			),
         'choices' => array(
             'central' => 'Central',
             'northeast' => 'Northeast',

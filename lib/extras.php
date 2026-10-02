@@ -150,7 +150,7 @@ function uamswp_title($html) {
     if ( is_archive() ) {
         $post_type = get_post_type( get_the_id() );
         $post_type_object = get_post_type_object( $post_type );
-        $pagetitle = $post_type_object->label;
+        $pagetitle = $post_type_object->label ?? '';
     }
     if ( is_archive() && (is_category() || is_tag() || is_tax()) ) {
         $pagetitle = single_term_title("", false);
@@ -212,7 +212,7 @@ function uamswp_title($html) {
     if ( 'uamshealth' == uams_get_site_info()['site'] ) {
 		if ( ( 'main' == uams_get_site_info()['subsite']) ) {
             if ( is_home() || is_front_page() ) {
-                $html = 'UAMS Health';
+                $html = 'UAMS Health | Arkansas\'s Leading Academic Medical Center';
             } else { 
                 $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | UAMS Health';
             }

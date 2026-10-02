@@ -61,20 +61,20 @@ if (!isset($geo) || empty($geo_region)){
 }
 if (is_admin() && !empty($geo) && !empty($geo_region)) {
     $geo_display = true;
-    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
+    echo esc_html( ucwords($geo) ) . ' region(s): ' . esc_html( implode(', ', $geo_region) ) . '<hr>';
 }
 if ($geo_display) :
 ?>
-<section class="uams-module link-list link-list-layout-split<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module link-list link-list-layout-split<?php echo esc_attr($className); ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
 
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 heading">
                 <div class="text-container">
                     <h2 class="module-title">
-                        <span class="title"><?php echo $heading; ?></span>
+                        <span class="title"><?php echo esc_html($heading); ?></span>
                     </h2>
-                    <?php echo $description ? '<p class="note">'. $description . '</p>' : ''; ?>
+                    <?php echo $description ? '<p class="note">'. esc_html($description) . '</p>' : ''; ?>
                 </div>
             </div>
             <div class="col-12 col-md-6 list">
@@ -85,6 +85,8 @@ if ($geo_display) :
                         // Load values.
                         $link_title = $link_list_row['link_list_section_title'];
                         $body = $link_list_row['link_list_section_body'];
+                        $link_url = "";
+                        $link_target = "";
                         if ($link_list_row['link_list_section_url']){
                             $link_url = $link_list_row['link_list_section_url']['url'];
                             $link_target = $link_list_row['link_list_section_url']['target'];
@@ -93,8 +95,8 @@ if ($geo_display) :
                     ?>
                         <li class="item">
                             <div class="text-container">
-                                <h3 class="h5"><a class="stretched-link" href="<?php echo $link_url; ?>"<?php echo $link_target ? ' target="'. $link_target . '"' : ''; ?> aria-label="<?php echo $link_desc; ?>" data-moduletitle="<?php echo $heading; ?>"><?php echo $link_title; ?></a></h3>
-                                <?php echo $body ? '<p>'. $body . '</p>' : ''; ?>
+                                <h3 class="h5"><a class="stretched-link" href="<?php echo esc_url($link_url); ?>"<?php echo $link_target ? ' target="'. esc_attr($link_target) . '"' : ''; ?> aria-label="<?php echo esc_attr($link_desc); ?>" data-moduletitle="<?php echo esc_attr($heading); ?>"><?php echo esc_html($link_title); ?></a></h3>
+                                <?php echo $body ? '<p>'. esc_html($body) . '</p>' : ''; ?>
                             </div>
                         </li>
                     <?php

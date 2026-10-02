@@ -4,7 +4,10 @@
  * User functions
  * 
  */
-add_action( 'init', 'uamswp_editor_users', 0 );
+// Set these capabilities once when the theme is activated, not on every request.
+// (Removing them when the theme is switched away is deferred: see #574, because the
+// Gravity Forms access is intentional site policy and may be meant to persist.)
+add_action( 'after_switch_theme', 'uamswp_editor_users' );
 function uamswp_editor_users() {
     $role = get_role('editor');
     $role->add_cap('edit_theme_options');
@@ -41,6 +44,38 @@ function custom_admin_menu() {
 }
 
 /*
+ * Enforce the editor restriction that custom_admin_menu() only hides.
+ *
+ * Editors are granted edit_theme_options so they can reach Appearance > Menus
+ * and the Customizer, but hiding the Themes/Widgets menu entries is cosmetic
+ * only and does not stop a direct URL to themes.php/widgets.php. This backs the
+ * hidden menus with a real access-control check for those two screens, while
+ * leaving Menus (nav-menus.php) and the Customizer intact.
+ *
+ */
+add_action( 'admin_init', 'uamswp_restrict_editor_theme_screens' );
+function uamswp_restrict_editor_theme_screens() {
+    // Administrators (and super admins) always pass.
+    if ( current_user_can( 'manage_options' ) ) {
+        return;
+    }
+    // Only enforce against users who actually hold the editor role.
+    $user = wp_get_current_user();
+    if ( ! ( $user instanceof WP_User ) || ! in_array( 'editor', (array) $user->roles, true ) ) {
+        return;
+    }
+    // Deny direct access to exactly the screens custom_admin_menu() hides.
+    global $pagenow;
+    if ( in_array( $pagenow, array( 'themes.php', 'widgets.php' ), true ) ) {
+        wp_die(
+            __( 'Sorry, you are not allowed to access this page.' ),
+            '',
+            array( 'response' => 403 )
+        );
+    }
+}
+
+/*
  * Capture user login and add it as timestamp in user meta data
  *
  */
@@ -56,6 +91,10 @@ add_action( 'wp_login', 'uamswp_user_last_login', 10, 2 );
  */
   
 function uamswp_lastlogin() { 
+    // Do not disclose author login activity to public visitors.
+    if ( ! is_user_logged_in() ) {
+        return '';
+    }
     $last_login = get_the_author_meta('last_login');
     $the_login_date = human_time_diff($last_login);
     return $the_login_date; 

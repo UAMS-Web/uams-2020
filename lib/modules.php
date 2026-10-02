@@ -121,9 +121,15 @@ function uamswp_module( $module = array(), $i = false ) {
 
             if ( $layout == 'body-only' ) {
                 $body = $module['side_layout_body_text'] ?: 'This is where the body-only description goes';
+            } elseif ( $layout == 'blockquote-citation' || $layout == 'blockquote-citation-link' ) {
+                $body = '';
             } else {
                 $body = $module['side_layout_link_text'] ?: 'This is where the body + link list description goes';
             }
+            // Set every time, so a quote never carries over to the next module on the page.
+            $quote_text = $module[ $layout == 'blockquote-citation-link' ? 'side_quote_text_link' : 'side_quote_text' ] ?? '';
+            $quote_name = $module['side_quote_speaker_name'] ?? '';
+            $quote_title = $module['side_quote_speaker_title'] ?? '';
 
             $link_list = $module['side_link_list'] ?: '';
             $list_more = $module['side_link_include_more'] ?: '';
@@ -262,9 +268,27 @@ function uamswp_module( $module = array(), $i = false ) {
                 $description = $module['gallery_description'];
                 $gallery_columns = $module['gallery_columns'];
                 $gallery_images = $module['gallery_images'];
+                $gallery_crop = $module['gallery_crop'];
+                if ( $gallery_crop == 'none' || $gallery_crop[0] == 'none' ) {
+                    $gallery_crop = -1;
+                }
                 $background_color = $module['gallery_background_color'];
                 $geo = $module['gallery_geo'];
                 $geo_region = $module['gallery_geo_region'];
+                $modal = $module['gallery_modal'];
+                $more = $module['gallery_more'];
+                if ($more) {
+                    $more_text = $module['gallery_more_text'] ?? '';
+                    $more_button_text = $module['gallery_more_button_text'] ?? '';
+                    $more_button_url = $module['gallery_more_button_url'] ?? '';
+                    $more_button_target = $more_button_url['target'] ?? '';
+                    $more_button_description = $module['gallery_more_button_description'] ?? '';
+                    if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto' ) ) {
+                        $more_button_color = 'primary';
+                    } else {
+                        $more_button_color = 'white';
+                    }
+                }
     
                 include( get_stylesheet_directory() .'/blocks/gallery.php' );
     
@@ -307,12 +331,12 @@ function uamswp_module( $module = array(), $i = false ) {
                     } 
                     $id = 'uams-section-' . $id;  
                     ?>
-                    <section class="uams-module section-block <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+                    <section class="uams-module section-block <?php echo esc_attr( $background_color ); ?>" id="<?php echo $id; ?>" aria-label="<?php echo esc_attr( $heading ); ?>">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12">
                                     <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
-                                        <span class="title"><?php echo $heading; ?></span>
+                                        <span class="title"><?php echo esc_html( $heading ); ?></span>
                                     </h2>
                                     <?php
                                     if( $module_rows ):
