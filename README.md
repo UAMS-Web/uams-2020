@@ -49,3 +49,12 @@ Without these projects, this theme wouldn't be where it is today.
 * [Bootstrap Genesis](https://github.com/salcode/bootstrap-genesis)
 * [Bones for Genesis 2.0 with Bootstrap integration](https://github.com/jer0dh/bones-for-genesis-2-0-bootstrap)
 * [SmartMenus Bootstrap Addon](http://www.smartmenus.org/)
+
+## Tests
+
+```bash
+composer install
+composer test:unit
+```
+
+The supported PHP floor is 7.4, so this repository uses PHPUnit 9 from the shared `tests` skill templates (Pest requires PHP 8.2+).
