@@ -47,17 +47,14 @@ if ( empty($background_color) )
 if ( empty($more) )
     $more = get_field('stacked_more');
 if ( $more ) {
-    if ( empty($more_text) )
-        $more_text = get_field('stacked_more_text');
-    if ( empty($more_button_text) )
-        $more_button_text = get_field('stacked_more_button_text');
-    if ( empty($more_button_url) )
-        $more_button_url = get_field('stacked_more_button_url');
-    if ( empty($more_button_target) && is_array($more_button_url) )
+    $more_text = get_field('stacked_more_text');
+    $more_button_text = get_field('stacked_more_button_text');
+    $more_button_url = get_field('stacked_more_button_url');
+    if ( is_array($more_button_url) )
         $more_button_target = $more_button_url['target'];
     if ( empty($more_button_description) )
         $more_button_description = get_field('stacked_more_button_description');
-    if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto' ) ) {
+    if ( empty($more_button_color) && ( in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto']) ) ) {
         $more_button_color = 'primary';
     } else {
         $more_button_color = 'white';
@@ -133,10 +130,10 @@ if( $stacked_rows ) :
                                             <source srcset="<?php echo image_sizer($image, 433, 244, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 768px)">
                                             <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 1px)">
                                             <!-- Fallback -->
-                                            <img src="<?php echo image_sizer($image, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" alt="<?php echo esc_attr( $image_alt_override ? $image_alt_override : $image_alt_native ); ?>" />
+                                            <img src="<?php echo image_sizer($image, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" alt="<?php echo esc_attr( $image_alt_override ?: $image_alt_native ); ?>" />
                                         <?php } else { ?>
                                             <!-- Fallback -->
-                                            <img src="<?php echo wp_get_attachment_image_url( $image, 'aspect-16-9-small' ); ?>" alt="<?php echo esc_attr( $image_alt_override ? $image_alt_override : $image_alt_native ); ?>" />
+                                            <img src="<?php echo wp_get_attachment_image_url( $image, 'aspect-16-9-small' ); ?>" alt="<?php echo esc_attr( $image_alt_override ?: $image_alt_native ); ?>" />
                                         <?php } //endif ?>
                                     </picture>
                                 </div>

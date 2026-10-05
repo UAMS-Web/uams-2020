@@ -19,7 +19,7 @@ remove_action( 'genesis_header', 'genesis_do_header' );
 // Here goes the logo in Header -- need to update this with SVG magic?
 add_action( 'genesis_header', 'uamswp_site_image', 5 );
  
-function uamswp_site_image() {
+function uamswp_site_image(): void {
 	if ('uamshealth' == uams_get_site_info()['site']) {
 		$header_image = '<picture>
 		<source srcset="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark.svg" media="(min-width: 576px)">

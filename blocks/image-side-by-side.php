@@ -67,8 +67,8 @@ if ( empty($cta) )
     $cta = get_field('side_cta') ?: '';
 // A layout that hides the button (Blockquote with Citation) saves no button fields.
 if ( ! is_array($cta) )
-    $cta = array();
-$cta += array( 'side_cta_text' => '', 'side_cta_url' => '', 'side_cta_description' => '' );
+    $cta = [];
+$cta += [ 'side_cta_text' => '', 'side_cta_url' => '', 'side_cta_description' => '' ];
 $cta_text = $cta['side_cta_text'] ?: '';
 $cta_link = '';
 $cta_target = '';
@@ -83,8 +83,8 @@ if ( $layout == 'blockquote-citation' ) {
 if ( empty($image_group) ) 
     $image_group = get_field('side_image')?: '';
 if ( ! is_array($image_group) )
-    $image_group = array();
-$image_group += array( 'side_image_image' => '', 'side_image_alt_text' => '', 'side_image_crop' => '', 'side_image_anchor' => '' );
+    $image_group = [];
+$image_group += [ 'side_image_image' => '', 'side_image_alt_text' => '', 'side_image_crop' => '', 'side_image_anchor' => '' ];
 $side_image = $image_group['side_image_image'] ?: '';
 $image_alt = $image_group['side_image_alt_text'] ?: '';
 $image_crop = $image_group['side_image_crop'] ?: '';
@@ -98,7 +98,7 @@ if ( empty($geo) )
 if ( empty($geo_region) )
     $geo_region = get_field('side_image_geo_region');
 if ( empty($image_alt) ) 
-    $image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachment_image_alt', true);
+    $image_alt = $image_alt ?: get_post_meta($side_image, '_wp_attachment_image_alt', true);
 $cta_target = $cta_target ? ' target="'. esc_attr($cta_target) .'"' : '';
 $cta_desc = $cta_desc ? ' aria-label="'.esc_attr($cta_desc).'"' : '';
 $cta_link = $cta_link ? '<a class="btn btn-primary" href="'. esc_url($cta_link) .'"' . $cta_desc . $cta_target . ' data-moduletitle="' . esc_attr($heading) . '">' : '';

@@ -33,12 +33,12 @@ $className = array_filter( array_unique( $className ) );
 
 // NOTE: this allow-list only constrains the block editor UI (the InnerBlocks inserter).
 // It is not enforced when content is saved or created over REST. See #575.
-$allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/embed', 'core/list', 'core/quote', 'core/image', 'core/shortcode', 'core/table', 'core/file', 'gravityforms/form', 'formidable/simple-form' );
+$allowed_blocks = [ 'core/heading', 'core/paragraph', 'core/embed', 'core/list', 'core/quote', 'core/image', 'core/shortcode', 'core/table', 'core/file', 'gravityforms/form', 'formidable/simple-form' ];
 
-$template = array(
-);
+$template = [
+];
 ?>  
-<section class="<?php echo join( ' ', $className ); ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="<?php echo implode( ' ', $className ); ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12<?php echo $hide_heading ? " sr-only" : ""; ?>">

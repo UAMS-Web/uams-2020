@@ -81,10 +81,6 @@ $row = 0;
                             }
                         } else {
                             $counter_item_start = $counter_item_start_override;
-
-                            if ($counter_item_start == 'custom') {
-                                $counter_item_start_custom = $counter_item_start_custom;
-                            }
                         }
                         $date_day = date('Y-m-d') . ' 00:00:00';
                         $date_week = date('Y-m-d', strtotime('last sunday')) . 'T00:00:00';

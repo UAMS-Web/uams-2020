@@ -14,13 +14,13 @@
 add_action( 'genesis_before', 'uamswp_sitecontainerouteropen', 5 );
 add_action( 'genesis_after', 'uamswp_sitecontainerouterclose', 5 );
 
-function uamswp_sitecontainerouteropen() {
+function uamswp_sitecontainerouteropen(): void {
     ?>
         <div id="site-container-outer">
     <?php 
 }
 
-function uamswp_sitecontainerouterclose() {
+function uamswp_sitecontainerouterclose(): void {
     ?>
         </div>
     <?php 

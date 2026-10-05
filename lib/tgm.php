@@ -13,33 +13,33 @@
 
 // TGM Plugin Activation
 add_action( 'tgmpa_register', 'uamswp_do_plugins_register' );
-function uamswp_do_plugins_register() {
+function uamswp_do_plugins_register(): void {
 
-	$plugins = array(
-		array(
+	$plugins = [
+		[
 			'name'      => __( 'Widget CSS Classes', 'uams-2020' ),
 			'slug'      => 'widget-css-classes',
 			'required'  => false,
-		),
+		],
 		// array(
 		// 	'name'      => __( 'ACF Blocks', 'uamswp-uams-2020' ),
 		// 	'slug'      => 'acf-blocks',
 		// 	'required'  => true,
 		// ),
 
-		array(
+		[
 			'name'      => __( 'Better Image Sizes', 'uamswp-uams-2020' ),
 			'slug'      => 'better-image-sizes',
 			'required'  => true,
-		),
+		],
 
-		array(
+		[
 			'name'      => __( 'UAMSWP YouTube Lyte', 'uamswp-uams-2020' ),
 			'slug'      => 'uamswp-youtube-lyte',
 			'source'             => get_stylesheet_directory() . '/plugins/uamswp-youtube-lyte.zip', // The plugin source.
 			'version'            => '1.7.32', // Sites on an older build are prompted to update.
 			'required'  => true,
-		),
+		],
 
 		// array(
 		// 	'name'      => __( 'Meta Box Text Limiter', 'uamswp-uams-2020' ),
@@ -47,18 +47,18 @@ function uamswp_do_plugins_register() {
 		// 	'required'  => false,
 		// ),
 		// Begin ACF extensions.
-		array(
+		[
 			'name'               => __( 'Advanced Custom Fields PRO', 'uamswp-uams-2020' ), // The plugin name.
 			'slug'               => 'advanced-custom-fields-pro', // The plugin slug (typically the folder name).
 			'source'             => get_stylesheet_directory() . '/plugins/advanced-custom-fields-pro.zip', // The plugin source.
 			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		),
-		array(
+		],
+		[
 			'name'               => __( 'Advanced Custom Fields: Mask Field', 'uamswp-uams-2020' ), // The plugin name.
 			'slug'               => 'acf-maskfield', // The plugin slug (typically the folder name).
 			'source'             => get_stylesheet_directory() . '/plugins/acf-maskfield.zip', // The plugin source.
 			'required'           => true, // If false, the plugin is only 'recommended' instead of required.
-		),
+		],
 
 		// array(
 		// 	'name'               => __( 'MB Admin Columns', 'uamswp-uams-2020' ), // The plugin name.
@@ -129,9 +129,9 @@ function uamswp_do_plugins_register() {
 		// 	'source'             => get_stylesheet_directory() . '/plugins/meta-box-includeexclude.zip', // The plugin source.
 		// 	'required'           => true, // If false, the plugin is only 'recommended' instead of required.
 		// ),
-	);
+	];
 
-	$config = array(
+	$config = [
 		'id'           => 'uamswp', 			   // Unique ID for hashing notices for multiple instances of TGMPA.
 		'default_path' => '',                      // Default absolute path to pre-packaged plugins.
 		'menu'         => 'tgmpa-install-plugins', // Menu slug.
@@ -140,7 +140,7 @@ function uamswp_do_plugins_register() {
 		'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
 		'is_automatic' => false,                   // Automatically activate plugins after installation or not.
 		'message'      => '',                      // Message to output right before the plugins table.
-		'strings'      => array(
+		'strings'      => [
 			'page_title'                      => __( 'Install Required Plugins', 'tgmpa' ),
 			'menu_title'                      => __( 'Install Plugins', 'tgmpa' ),
 			'installing'                      => __( 'Installing Plugin: %s', 'tgmpa' ), // %s = plugin name.
@@ -159,12 +159,13 @@ function uamswp_do_plugins_register() {
 			'plugin_activated'                => __( 'Plugin activated successfully.', 'tgmpa' ),
 			'complete'                        => __( 'All plugins installed and activated successfully. %s', 'tgmpa' ), // %s = dashboard link.
 			'nag_type'                        => 'updated' // Determines admin notice type - can only be 'updated', 'update-nag' or 'error'.
-		)
-	);
+		]
+	];
 
 	tgmpa( $plugins, $config );
 
 }
+
 // Disable Plugin Nags
 function disable_plugin_updates( $value ) {
 
@@ -180,6 +181,8 @@ function disable_plugin_updates( $value ) {
             }
         }
     }
+    
     return $value;
 }
+
 add_filter( 'site_transient_update_plugins', 'disable_plugin_updates' );

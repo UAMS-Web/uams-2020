@@ -1,11 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  *
  * Section Block Fields 
  * 
  */
-return array(
-    array(
+return [
+    [
         'key' => 'field_section_heading'. $suffix,
         'label' => 'Section Title',
         'name' => 'section_heading',
@@ -13,19 +16,19 @@ return array(
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'acfe_permissions' => '',
         'default_value' => 'Section Title - Please Replace',
         'placeholder' => 'Section Title - Please Replace',
         'prepend' => '',
         'append' => '',
         'maxlength' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_section_hide_heading'. $suffix,
         'label' => 'Hide Heading',
         'name' => 'section_hide_heading',
@@ -33,19 +36,19 @@ return array(
         'instructions' => 'The heading is necessary for page hierarchy. But it can be hidden from all but screen readers and search engines. This is <strong>strongly</strong> not recommended in most cases, as the visible heading provides a jumping-in point for users as they scan your page.',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'acfe_permissions' => '',
         'message' => '',
         'default_value' => 0,
         'ui' => 1,
         'ui_on_text' => '',
         'ui_off_text' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_section_background_color'. $suffix,
         'label' => 'Background Color',
         'name' => 'section_background_color',
@@ -53,13 +56,13 @@ return array(
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'bg-auto' => 'Auto',
             'bg-white' => 'White',
             'bg-gray' => 'Gray',
@@ -70,15 +73,15 @@ return array(
             'bg-teal' => 'Teal',
             'bg-eggplant' => 'Eggplant',
             'bg-orange' => 'Orange',
-        ),
-        'default_value' => array(
+        ],
+        'default_value' => [
             0 => 'bg-auto',
-        ),
+        ],
         'allow_null' => 0,
         'multiple' => 0,
         'ui' => 0,
         'return_format' => 'value',
         'ajax' => 0,
         'placeholder' => '',
-    ),
-);
+    ],
+];

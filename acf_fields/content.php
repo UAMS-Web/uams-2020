@@ -1,11 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  *
  * Content Block Fields 
  * 
  */
-return array(
-    array(
+return [
+    [
         'key' => 'field_content_intro'. $suffix,
         'label' => '',
         'name' => '',
@@ -13,16 +16,16 @@ return array(
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'message' => '<h2>UAMS Content Block</h2>',
         'new_lines' => '',
         'esc_html' => 0,
-    ),
-    array(
+    ],
+    [
         'key' => 'field_content_heading'. $suffix,
         'label' => 'Heading',
         'name' => 'content_heading',
@@ -30,22 +33,22 @@ return array(
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'acfe_permissions' => array(
+        ],
+        'acfe_permissions' => [
 				0 => 'super_admin',
 				1 => 'administrator',
-			),
+			],
         'default_value' => '',
         'placeholder' => '',
         'prepend' => '',
         'append' => '',
         'maxlength' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_content_hide_heading'. $suffix,
         'label' => 'Hide Heading',
         'name' => 'content_hide_heading',
@@ -53,22 +56,22 @@ return array(
         'instructions' => 'The heading is necessary for page hierarchy. But it can be hidden from all but screen readers and search engines. This is <strong>strongly</strong> not recommended in most cases, as the visible heading provides a jumping-in point for users as they scan your page.',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'acfe_permissions' => array(
+        ],
+        'acfe_permissions' => [
 				0 => 'super_admin',
 				1 => 'administrator',
-			),
+			],
         'message' => '',
         'default_value' => 0,
         'ui' => 1,
         'ui_on_text' => '',
         'ui_off_text' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_content_description'. $suffix,
         'label' => 'Content / Text',
         'name' => 'content_content',
@@ -76,22 +79,22 @@ return array(
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'acfe_permissions'=> array(
+        ],
+        'acfe_permissions'=> [
 				0 => 'super_admin',
 				1 => 'administrator',
-			),
+			],
         'default_value' => '',
         'tabs' => 'all',
         'toolbar' => 'full',
         'media_upload' => 1,
         'delay' => 0,
-    ),
-    array(
+    ],
+    [
         'key' => 'field_content_background_color'. $suffix,
         'label' => 'Background Color',
         'name' => 'content_background_color',
@@ -99,16 +102,16 @@ return array(
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'acfe_permissions' => array(
+        ],
+        'acfe_permissions' => [
 				0 => 'super_admin',
 				1 => 'administrator',
-			),
-        'choices' => array(
+			],
+        'choices' => [
             'bg-auto' => 'Auto',
             'bg-white' => 'White',
             'bg-gray' => 'Gray',
@@ -119,18 +122,18 @@ return array(
             'bg-teal' => 'Teal',
             'bg-eggplant' => 'Eggplant',
             'bg-orange' => 'Orange',
-        ),
-        'default_value' => array(
+        ],
+        'default_value' => [
             0 => 'bg-auto',
-        ),
+        ],
         'allow_null' => 0,
         'multiple' => 0,
         'ui' => 0,
         'return_format' => 'value',
         'ajax' => 0,
         'placeholder' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_content_locked'. $suffix,
         'label' => 'Locked Content',
         'name' => '',
@@ -139,20 +142,20 @@ return array(
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'message' => 'This content is locked. If you need something edited, please contact <a href="mailto:brent@uams.edu">Brent Passmore</a>.',
         'new_lines' => 'wpautop',
         'esc_html' => 0,
         'acfe_settings' => '',
-        'acfe_permissions' => array(
+        'acfe_permissions' => [
             0 => 'editor',
-        ),
-    ),
-    array(
+        ],
+    ],
+    [
         'key' => 'field_content_geo_valid'. $suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
@@ -160,86 +163,86 @@ return array(
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => 'hidden',
             'id' => '',
-        ),
-        'choices' => array(
+        ],
+        'choices' => [
             'false' => 'False',
             'true' => 'True',
-        ),
+        ],
         'allow_null' => 0,
         'other_choice' => 0,
         'default_value' => 'false',
         'layout' => 'horizontal',
         'return_format' => 'value',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_content_regions'. $suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
         'instructions' => '',
         'required' => 0,
-        'conditional_logic' => array(
-            array(
-                array(
+        'conditional_logic' => [
+            [
+                [
                     'field' => 'field_content_geo_valid'. $suffix,
                     'operator' => '==',
                     'value' => 'true',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'acfe_permissions'=> array(
+        ],
+        'acfe_permissions'=> [
 				0 => 'super_admin',
 				1 => 'administrator',
-			),
+			],
         'open' => 0,
         'multi_expand' => 0,
         'endpoint' => 0,
-    ),
-    array(
+    ],
+    [
 		'key' => 'field_content_geo'. $suffix,
 		'label' => 'Regions',
 		'name' => 'content_geo',
 		'type' => 'radio',
 		'instructions' => '',
 		'required' => 0,
-		'conditional_logic' => array(
-            array(
-                array(
+		'conditional_logic' => [
+            [
+                [
                     'field' => 'field_content_geo_valid'. $suffix,
                     'operator' => '==',
                     'value' => 'true',
-                ),
-            ),
-        ),
-		'wrapper' => array(
+                ],
+            ],
+        ],
+		'wrapper' => [
 			'width' => '',
 			'class' => '',
 			'id' => '',
-		),
-        'acfe_permissions'=> array(
+		],
+        'acfe_permissions'=> [
 				0 => 'super_admin',
 				1 => 'administrator',
-			),
-        'choices' => array(
+			],
+        'choices' => [
             'include' => 'Include',
             'exclude' => 'Exclude',
-        ),
+        ],
         'allow_null' => 0,
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
         'return_format' => 'value'
-    ),
-    array(
+    ],
+    [
 		'key' => 'field_content_geo_region'. $suffix,
 		'label' => 'Regions',
 		'name' => 'content_geo_region',
@@ -247,24 +250,24 @@ return array(
 		'instructions' => '',
 		'required' => 0,
 		'conditional_logic' => 0,
-		'wrapper' => array(
+		'wrapper' => [
 			'width' => '',
 			'class' => '',
 			'id' => '',
-		),
-        'acfe_permissions'=> array(
+		],
+        'acfe_permissions'=> [
 				0 => 'super_admin',
 				1 => 'administrator',
-			),
-        'choices' => array(
+			],
+        'choices' => [
             'central' => 'Central',
             'northeast' => 'Northeast',
             'northwest' => 'Northwest',
             'southeast' => 'Southeast',
             'southwest' => 'Southwest',
-        ),
-        'default_value' => array(
-        ),
+        ],
+        'default_value' => [
+        ],
         'allow_null' => 0,
         'multiple' => 1,
         'ui' => 1,
@@ -273,5 +276,5 @@ return array(
         'allow_custom' => 0,
         'placeholder' => '',
         'search_placeholder' => '',
-    ),
-);
+    ],
+];

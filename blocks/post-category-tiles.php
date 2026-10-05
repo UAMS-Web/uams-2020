@@ -85,12 +85,12 @@ if( $post_tiles_rows ) :
                 $post_button_text = $post_tiles_row['post_tiles_section_post_button_text'] ?: 'Read the Story';
                 $cat_button_text = $post_tiles_row['post_tiles_section_category_button_text'] ?: 'View ' . $category->name . ' Archive';
 
-                $args = array(
+                $args = [
                     'post_type' => 'post',
                     'post_status' => 'publish',
                     'category_name' => $category->slug,
                     'posts_per_page' => 1,
-                );
+                ];
 
                 $arr_posts = new WP_Query( $args );
 

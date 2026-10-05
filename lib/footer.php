@@ -13,7 +13,7 @@
 
 //* Customize the credits
 add_filter( 'genesis_pre_get_option_footer_text', 'uamswp_footer_creds_text' );
-function uamswp_footer_creds_text() {
+function uamswp_footer_creds_text(): void {
 
     // Render this by default, in whatever structure is best.
     // If the site is an EDU site, replace the href value with "https://www.uams.edu".
@@ -64,6 +64,7 @@ function uamswp_footer_creds_text() {
             }
         }
     }
+    
     /* UAMS Colleges, Regional Campuses & exceptions */
     if ('uams' == $site) {
         if ( startsWith($subsite, 'health-prof') ) {
@@ -109,6 +110,7 @@ function uamswp_footer_creds_text() {
         //     $footer_image_site = 'UAMS-Logo_' . uams_get_site_info()['subsite'];
         }
     }
+    
     /* UAMS Health */
     if ( 'uamshealth' == $site ){
         $footer_image_url = 'https://uamshealth.com/';
@@ -119,6 +121,7 @@ function uamswp_footer_creds_text() {
         $footer_image_title = 'Inside UAMS';
         $footer_image_site = 'main';
     }
+    
     $footer_image = '<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_'.$footer_image_site.'_horizontal_white.svg" alt="'. $footer_image_title .' Logo" itemprop="image" />';
     
     // printf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
@@ -136,9 +139,11 @@ function uamswp_footer_creds_text() {
     if ($custom_addresses) {
         $custom_count = count($custom_addresses);  
     }
+    
     if ($custom_count < 2) {
         $address_sr = ' class="sr-only"';
-    } 
+    }
+     
     // Overrides, if available
     if( ! empty( $custom_addresses ) && ( ('institute' == $site) || ('nw-campus' == $subsite) || ('advancement' == $subsite) || ( startsWith($subsite, 'regional-') ) ) ) {
         $address = '<div itemscope="" itemtype="https://schema.org/LocalBusiness" class="schema">';
@@ -153,6 +158,7 @@ function uamswp_footer_creds_text() {
             $address .= '<span itemprop="postalCode">'. (! empty($custom_address['address_zip']) ? esc_html($custom_address['address_zip']) : '72205' ).'</span>'; 
             $address .= '</div>';
         }
+        
         echo $address;
     } else { //write default
         $address = '<div itemscope="" itemtype="https://schema.org/LocalBusiness" class="schema">';
@@ -214,6 +220,7 @@ function uamswp_footer_creds_text() {
     } else { // None
         // Do nothing
     }
+    
     if ( 'advancement' == $subsite ) {
         echo '<div class=""><p>Email: <a href="mailto:advancement@uams.edu">advancement@uams.edu</a></p>';
         echo '<p>Tax ID: 71-6056774</p></div>';
@@ -265,6 +272,7 @@ function uamswp_footer_creds_text() {
             }
         }
     }
+    
     /* UAMS Colleges, Regional Campuses & exceptions */
     if ('uams' == $site) {
         if ( startsWith($subsite, 'health-prof') ) {
@@ -337,6 +345,7 @@ function uamswp_footer_creds_text() {
         if ( 'uams-aux' == uams_get_site_info()['subsite'] ) { // Example
             $social_fb = 'https://www.facebook.com/UAMSAuxiliary';
         }
+        
         $social_li = 'https://www.linkedin.com/company/uams/';
     }
 
@@ -370,6 +379,7 @@ function uamswp_footer_creds_text() {
             echo '<li class="nav-item"><a class="nav-link" href="https://hipaa.uams.edu/forms/notice-of-privacy-practices-information/" target="_blank">Notice of Privacy Practices</a></li>';
             echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/patients-and-guests/patient-support/billing/price-transparency/" target="_blank">Price Transparency</a></li>';
         }
+        
         echo '<li class="nav-item"><a class="nav-link" href="https://uamshealth.com/legal-notices/" target="_blank">Legal Notices</a></li>';
         //echo '<li class="nav-item"><a class="nav-link" href="/sitemap">Site Map</a></li>';
     echo '</ul></div>';

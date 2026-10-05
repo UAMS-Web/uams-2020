@@ -38,15 +38,18 @@ function uamswp_nav_subsection(){
         }
         
     }
+    
     if (is_search()) {
         $subsection = false;
     }
+    
     if ($subsection) {
         return $id;
-    } else {
-        return false;
     }
+
+    return false;
 }
+
 /**
  * 
  * Remove Primary Navigation if page or parent is subsection
@@ -55,11 +58,12 @@ function uamswp_nav_subsection(){
  * @author Todd McKee
  */
 add_action( 'genesis_before', 'remove_primary_nav' );
-function remove_primary_nav() {
+function remove_primary_nav(): void {
 	if ( uamswp_nav_subsection() || ! has_nav_menu( 'primary' ) ) {
 		remove_action( 'genesis_after_header', 'genesis_do_nav' );
 	}
 }
+
 /**
  * 
  * Add list_pages Primary Navigation if page or parent is subsection
@@ -68,23 +72,24 @@ function remove_primary_nav() {
  * @author Todd McKee
  */
 add_action( 'genesis_after_header', 'custom_nav_menu', 5 );
-function custom_nav_menu() {
+function custom_nav_menu(): void {
     $registered_nav_menus = get_registered_nav_menus();
 	if ( uamswp_nav_subsection() ) {
 
         require_once( UAMSWP_THEME_MODULES . 'class-wp-bootstrap-pagewalker.php' );
 
         // Only run on pages
-		if( ! is_page() )
+		if (! is_page()) {
             return;
+        }
 
-        $args = array(
+        $args = [
             'theme_location' => 'primary',
             'container'      => '',
             'menu'           => 'subsection-navigation', // !important! you need to give the name/slug of your menu
             // 'menu_class'     => $class,
             'echo'           => 0,
-        );
+        ];
 
         $nav = wp_nav_menu( $args );
 
@@ -93,23 +98,24 @@ function custom_nav_menu() {
         //     return;
         
         function uamswp_wp_list_child_pages( $id ){
-            $excluded_pages = array();
-            $all_pages = get_pages( array('child_of' => $id ) );
+            $excluded_pages = [];
+            $all_pages = get_pages( ['child_of' => $id ] );
             foreach ( $all_pages as $the_page ) {
                 $hide = get_post_meta($the_page->ID, 'page_hide_from_menu');
                 if ( isset($hide[0]) && '1' == $hide[0] ) {
                     $excluded_pages[] = $the_page->ID;
                 }
             }
+            
             $excluded_pages[] = get_option( 'page_on_front' );
             // Build a menu listing top level parent's children
-            $args = array(
+            $args = [
                 'child_of' => $id,
                 'title_li' => '',
                 'echo'     => false,
                 'walker'   => new WP_Bootstrap_Pagewalker(), // !important! create Bootstrap style navigation
                 'exclude_tree' => implode(',',$excluded_pages),
-            );
+            ];
             //echo '<script>console.log('. print_r($args) .');</script>';
             return wp_list_pages( $args );
         }
@@ -127,8 +133,9 @@ function custom_nav_menu() {
     
              $pagenav = wp_list_pages( $args );
     */
-		if( empty( $pagenav ) )
+		if (empty( $pagenav )) {
             return;
+        }
             
         // Add the appropriate navbar coding
         $wrapper_open  = '<nav class="site-nav navbar navbar-expand-sm">';
@@ -143,12 +150,12 @@ function custom_nav_menu() {
         // Wrap the list items in an unordered list and navbar
         $pagenav = $wrapper_open . $pagenav . $wrapper_close;
     
-        $pagenav_markup_open = genesis_markup( array(
+        $pagenav_markup_open = genesis_markup( [
             'html5'   => '<nav %s>',
             'xhtml'   => '<div id="pagenav">',
             'context' => 'genesis-nav-primary',
             'echo'    => false,
-        ) );
+        ] );
 
         echo $pagenav;
         
@@ -156,13 +163,13 @@ function custom_nav_menu() {
 
         require_once( UAMSWP_THEME_MODULES . 'class-wp-bootstrap-pagewalker.php' );
 
-        $args = array(
+        $args = [
             'theme_location' => 'primary',
             'container'      => '',
             'menu'           => 'page-navigation', // !important! you need to give the name/slug of your menu
             // 'menu_class'     => $class,
             'echo'           => false,
-        );
+        ];
 
         $nav = wp_nav_menu( $args );
 
@@ -170,7 +177,7 @@ function custom_nav_menu() {
         // if ( ! $nav )
         //     return;
         function uamswp_wp_list_pages(){
-            $excluded_pages = array();
+            $excluded_pages = [];
             $all_pages = get_pages();
             foreach ( $all_pages as $the_page ) {
                 $hide = get_post_meta($the_page->ID, 'page_hide_from_menu');
@@ -178,20 +185,22 @@ function custom_nav_menu() {
                     $excluded_pages[] = $the_page->ID;
                 }
             }
+            
             $excluded_pages[] = get_option( 'page_on_front' );
             // Build a menu listing top level parent's children
-            $args = array(
+            $args = [
                 'title_li' => '',
                 'echo'     => false,
                 'walker'   => new WP_Bootstrap_Pagewalker(), // !important! create Bootstrap style navigation
                 'exclude_tree' => implode(',',$excluded_pages),
-            );
+            ];
             return wp_list_pages( $args );
         }        
         
 		$pagenav = uamswp_wp_list_pages(); //wp_list_pages( $args );
-		if( empty( $pagenav ) )
+		if (empty( $pagenav )) {
             return;
+        }
             
         // Add the appropriate navbar coding
         $wrapper_open  = '<nav class="site-nav navbar navbar-expand-sm">';
@@ -206,12 +215,12 @@ function custom_nav_menu() {
         // Wrap the list items in an unordered list and navbar
         $pagenav = $wrapper_open . $pagenav . $wrapper_close;
     
-        $pagenav_markup_open = genesis_markup( array(
+        $pagenav_markup_open = genesis_markup( [
             'html5'   => '<nav %s>',
             'xhtml'   => '<div id="pagenav">',
             'context' => 'genesis-nav-primary',
             'echo'    => false,
-        ) );
+        ] );
 
         echo $pagenav;
     }
@@ -223,11 +232,11 @@ function uamswp_nav_menu_args_filter( $args ) {
 
     require_once( UAMSWP_THEME_MODULES . 'class-wp-bootstrap-navwalker.php' );
 
-    $menu_classes = array(
+    $menu_classes = [
         'nav',
         'navbar-nav',
         'align-self-end'
-    );
+    ];
 
     $navextra = get_theme_mod( 'navextra', false );
     if ( $navextra !== '' ) {
@@ -242,6 +251,7 @@ function uamswp_nav_menu_args_filter( $args ) {
         $args['fallback_cb'] = 'WP_Bootstrap_Navwalker::fallback';
         $args['walker'] = new WP_Bootstrap_Navwalker();
     }
+    
     return $args;
 }
 
@@ -277,7 +287,7 @@ function uamswp_nav_menu_markup_filter( $html, $args ) {
 }
 
 //* Navigation Extras
-function uamswp_navbar_content_markup() {
+function uamswp_navbar_content_markup(): string {
     $url = get_home_url();
     
     $choices = get_theme_mod( 'navextra', 'search' );
@@ -308,18 +318,19 @@ function uamswp_navbar_content_markup() {
 //* Filter primary navigation output to match Bootstrap markup
 // @link http://wordpress.stackexchange.com/questions/58377/using-a-filter-to-modify-genesis-wp-nav-menu/58394#58394
 add_filter( 'genesis_do_nav', 'uamswp_override_do_nav', 10, 3 );
-function uamswp_override_do_nav($nav_output, $nav, $args) {
+function uamswp_override_do_nav($nav_output, $nav, $args): string {
     // return the modified result
     return sprintf( '%1$s', $nav );
 
 }
 
 remove_action( 'genesis_before_loop', 'genesis_do_breadcrumbs' );
-function sp_breadcrumb_after_header() { 
+function sp_breadcrumb_after_header(): void { 
 	if(function_exists('seopress_display_breadcrumbs')) { 
 		seopress_display_breadcrumbs(); 
 	} else {
         add_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
     }
-} 
+}
+ 
 add_action('genesis_after_header', 'sp_breadcrumb_after_header');

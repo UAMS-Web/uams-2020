@@ -14,7 +14,7 @@
 /* Removing Quick Links action via comments in case we decide to bring it back. */
 // add_action( 'genesis_after', 'uamswp_quicklinks', 4 );
 
-function uamswp_quicklinks() {
+function uamswp_quicklinks(): void {
 
 	?>
 	<nav id="quick-links" class="closed" aria-label="Quick Links">
@@ -41,7 +41,7 @@ function uamswp_quicklinks() {
 
 				$menu_list = '<ul class="list-unstyled links links-large" id="menu-quick-links">';
 
-				foreach ( (array) $menu_items as $key => $menu_item ) {
+				foreach ( (array) $menu_items as $menu_item ) {
 
 					$title = $menu_item->title;
 					$url = $menu_item->url;
@@ -93,7 +93,7 @@ function uamswp_quicklinks() {
 
 }
 
-function uamswp_request_quicklinks() {
+function uamswp_request_quicklinks(): ?bool {
 
 	$remote_url = 'https://web.uams.edu/wp-json/menus/v2/quicklinks/';  // Base URL - Currently Dev URL
 
@@ -122,7 +122,7 @@ function uamswp_request_quicklinks() {
 
 		echo '<ul class="list-unstyled links links-large">';
 
-		foreach( $data as $key => $menu_item ) {
+		foreach( $data as $menu_item ) {
 
 			echo '<li>';
 				echo '<a href="' . esc_url( $menu_item->url ) . '"'. ( !empty($menu_item->target) ? ' target="'. $menu_item->target .'"' : '' ) .'>'. ( !empty($menu_item->classes) ? '<span class="'. implode( " ", $menu_item->classes ) .' fa-fw"></span>' : '' ) . $menu_item->title . '</a>';
@@ -133,6 +133,7 @@ function uamswp_request_quicklinks() {
 		echo '</ul>';
 
 	}
+    return null;
 
 }
 
@@ -140,10 +141,9 @@ function uamswp_request_quicklinks() {
 
 	// Site gets custom quick links
 
-		function site_custom_quicklinks() {
+		function site_custom_quicklinks(): bool {
 
-			if (
-				( 'institute' == uams_get_site_info()['site'] )
+			return ( 'institute' == uams_get_site_info()['site'] )
 				||
 				(
 					'uamshealth' == uams_get_site_info()['site']
@@ -161,22 +161,13 @@ function uamswp_request_quicklinks() {
 					'uams' == uams_get_site_info()['site']
 					&&
 					'main' == uams_get_site_info()['subsite']
-				)
-			) {
-
-				return true;
-
-			} else {
-
-				return false;
-
-			}
+				);
 
 		}
 
 	// Register quick links menu
 
-		function register_quicklinks_menu() {
+		function register_quicklinks_menu(): void {
 
 			if ( site_custom_quicklinks() ) {
 
@@ -232,7 +223,7 @@ function uamswp_request_quicklinks() {
 
 						// Create an empty array to store our JSON
 
-							$menuItems = array();
+							$menuItems = [];
 
 						// If the menu isn't empty, start process of building an array, otherwise return a 404 error
 
@@ -248,20 +239,18 @@ function uamswp_request_quicklinks() {
 
 										// For each menu item, verify the menu item has no parent and then push the menu item to the $menuItems array
 
-											foreach ( $menu_items as $key => $menu_item ) {
+											foreach ( $menu_items as $menu_item ) {
 
 												if ( $menu_item->menu_item_parent == 0 ) {
 
-													array_push(
-														$menuItems, array(
+													$menuItems[] = [
 																'id' => $menu_item->ID,
 																'title' => $menu_item->title,
 																'url' => $menu_item->url,
 																'classes' => $menu_item->classes,
 																'target' => $menu_item->target,
 																'link_title' => $menu_item->attr_title,
-														)
-													);
+														];
 
 												}
 
@@ -276,9 +265,9 @@ function uamswp_request_quicklinks() {
 						return new WP_Error(
 							'no_menus',
 							'Could not find any menus' . $locations[ 'primary' ],
-							array(
+							[
 									'status' => 404
-							)
+							]
 						);
 
 					}

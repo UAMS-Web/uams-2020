@@ -26,21 +26,19 @@ function uamswp_comment_form_args( $args ) {
 
 // @link http://www.codecheese.com/2013/11/wordpress-comment-form-with-twitter-bootstrap-3-supports/
 add_filter( 'comment_form_default_fields', 'uamswp_comment_form_fields' );
-function uamswp_comment_form_fields( $fields ) {
+function uamswp_comment_form_fields( $fields ): array {
     $commenter = wp_get_current_commenter();
     
     $req      = get_option( 'require_name_email' );
     $aria_req = ( $req ? " aria-required='true'" : '' );
     $html5    = current_theme_supports( 'html5', 'comment-form' ) ? 1 : 0;
     
-    $fields   =  array(
+    return [
         'author' => '<div class="form-group comment-form-author">' . '<label for="author">' . __( 'Name' ) . ( $req ? ' <span class="text-muted required">*</span>' : '' ) . '</label> ' .
                     '<input class="form-control" id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"' . $aria_req . ' /></div>',
         'email'  => '<div class="form-group comment-form-email"><label for="email">' . __( 'Email' ) . ( $req ? ' <span class="text-muted required">*</span>' : '' ) . '</label> ' .
                     '<input class="form-control" id="email" name="email" ' . ( $html5 ? 'type="email"' : 'type="text"' ) . ' value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"' . $aria_req . ' /></div>',
         'url'    => '<div class="form-group comment-form-url"><label for="url">' . __( 'Website' ) . '</label> ' .
                     '<input class="form-control" id="url" name="url" ' . ( $html5 ? 'type="url"' : 'type="text"' ) . ' value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" /></div>'        
-    );
-    
-    return $fields;
+    ];
 }

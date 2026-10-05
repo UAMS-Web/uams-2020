@@ -20,18 +20,17 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 	class WP_Bootstrap_Pagewalker extends Walker_Page {
 
 		/**
-		 * Start Level.
-		 *
-		 * @see Walker::start_lvl()
-		 * @since 3.0.0
-		 *
-		 * @access public
-		 * @param mixed $output Passed by reference. Used to append additional content.
-		 * @param int   $depth (default: 0) Depth of page. Used for padding.
-		 * @param array $args (default: array()) Arguments.
-		 * @return void
-		 */
-		public function start_lvl( &$output, $depth = 0, $args = array() ) {
+         * Start Level.
+         *
+         * @see Walker::start_lvl()
+         * @since 3.0.0
+         *
+         * @access public
+         * @param mixed $output Passed by reference. Used to append additional content.
+         * @param int   $depth (default: 0) Depth of page. Used for padding.
+         * @param array $args (default: array()) Arguments.
+         */
+        public function start_lvl( &$output, $depth = 0, $args = [] ): void {
 			$indent = str_repeat( "\t", $depth );
 			// find all links with an id in the output.
 			preg_match_all( '/(<a.*?id=\"|\')(.*?)\"|\'.*?>/im', $output, $matches );
@@ -45,37 +44,40 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 		}
 
 		/**
-		 * Start El.
-		 *
-		 * @see Walker::start_el()
-		 * @since 3.0.0
-		 *
-		 * @access public
-		 * @param mixed $output Passed by reference. Used to append additional content.
-		 * @param mixed $item Menu item data object.
-		 * @param int   $depth (default: 0) Depth of menu item. Used for padding.
-		 * @param array $args (default: array()) Arguments.
-		 * @param int   $id (default: 0) Menu item ID.
-		 * @return void
-		 */
-		public function start_el( &$output, $page, $depth = 0, $args = array(), $current_page = 0 ) {
+         * Start El.
+         *
+         * @see Walker::start_el()
+         * @since 3.0.0
+         *
+         * @access public
+         * @param mixed $output Passed by reference. Used to append additional content.
+         * @param mixed $item Menu item data object.
+         * @param int   $depth (default: 0) Depth of menu item. Used for padding.
+         * @param array $args (default: array()) Arguments.
+         * @param int   $id (default: 0) Menu item ID.
+         */
+        public function start_el( &$output, $page, $depth = 0, $args = [], $current_page = 0 ): void {
 			$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
-			$css_class = array('page-item-' . $page->ID);
+			$css_class = ['page-item-' . $page->ID];
 			// BSv4 classname - as of v4-alpha.
 			$css_class[] = 'nav-item';
 
-			if( isset( $args['pages_with_children'][ $page->ID ] ) )
-				$css_class[] = 'page-item-has-children dropdown';
+			if (isset( $args['pages_with_children'][ $page->ID ] )) {
+                $css_class[] = 'page-item-has-children dropdown';
+            }
 
 			if ( !empty($current_page) ) {
 				$_current_page = get_post( $current_page );
-			if ( in_array( $page->ID, $_current_page->ancestors ) )
-				$css_class[] = 'current-page-ancestor';
-			if ( $page->ID == $current_page )
-				$css_class[] = 'current-page-item';
-			elseif ( $_current_page && $page->ID == $_current_page->post_parent )
-				$css_class[] = 'current-page-parent';
+                if (in_array( $page->ID, $_current_page->ancestors )) {
+                    $css_class[] = 'current-page-ancestor';
+                }
+
+                if ($page->ID == $current_page) {
+                    $css_class[] = 'current-page-item';
+                } elseif ($_current_page && $page->ID == $_current_page->post_parent) {
+                    $css_class[] = 'current-page-parent';
+                }
 			} elseif ( $page->ID == get_option('page_for_posts') ) {
 				$css_class[] = 'current-page-parent';
 			}
@@ -106,20 +108,19 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 			
 			$output .= $indent . '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"' . $id . $css_class . '>';
-			$atts = array();
-
-			// Add alt name for $post_title
-			$alt_name = '';
+			$atts = [];
 			$alt_name = get_post_meta($page->ID, 'page_nav_alt_name', true);
 
-			if ( '' === $page->post_title )
-				$page->post_title = sprintf( __( '#%d (no title)' ), $page->ID );
+			if ('' === $page->post_title) {
+                $page->post_title = sprintf( __( '#%d (no title)' ), $page->ID );
+            }
 
 			if ( ! empty( $page->post_title ) ) {
 				$atts['title'] = ! empty( $page->post_title )   ? strip_tags( $page->post_title ) : '';
 			} else {
 				$atts['title'] = sprintf( __( '#%d (no title)' ), $page->ID );
 			}
+            
 			if ( ! empty( $alt_name ) ) {
 				$atts['title'] = $alt_name . '; ' . $atts['title'];
 			}
@@ -153,6 +154,7 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 					$attributes .= ' ' . $attr . '="' . $value . '"';
 				}
 			}
+            
 			// $item_output = $args->before; // Orig
 			$item_output = '';
 			$item_output .= '<a' . $attributes . '>';
@@ -163,10 +165,12 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			if ( ! empty( $alt_name ) ) {
 				$page->post_title = $alt_name;
 			}
+            
 			if ( ! empty( $icon_class_string ) ) {
 				// append an <i> with the icon classes to what is output before links.
 				$icon_html = '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> ';
 			}
+            
 			// $item_output .= $args->link_before . $icon_html . apply_filters( 'the_title', $page->post_title, $page->ID ) . $args->link_after; // Orig
 			$item_output .= $icon_html . apply_filters( 'the_title', $page->post_title, $page->ID );
 			$item_output .= '</a>';
@@ -206,13 +210,15 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 		 * @param mixed $output Passed by reference. Used to append additional content.
 		 * @return null Null on failure with no changes to parameters.
 		 */
-		public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
+		public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ): void {
 			if ( ! $element ) {
 				return; }
+            
 			$id_field = $this->db_fields['id'];
 			// Display this element.
 			if ( is_object( $args[0] ) ) {
 				$args[0]->has_children = ! empty( $children_elements[ $element->$id_field ] ); }
+            
 			parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
 		}
 

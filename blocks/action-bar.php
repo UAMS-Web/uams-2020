@@ -46,7 +46,7 @@ if( $action_bar_rows ) {
     // $rows = get_field('action_bar_section');
     $row_count = count($action_bar_rows);
 } 
-if ( $background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto' ) {
+if ( in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto']) ) {
     $btn_color = 'primary';
 } else {
     $btn_color = 'white';
