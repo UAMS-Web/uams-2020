@@ -5,11 +5,11 @@ declare(strict_types=1);
 /*
  *
  * Stacked Image & Text Block Fields
- * 
+ *
  */
 return [
     [
-        'key' => 'field_stacked_intro'. $suffix,
+        'key' => 'field_stacked_intro'.$suffix,
         'label' => '',
         'name' => 'stacked_intro',
         'type' => 'message',
@@ -26,7 +26,7 @@ return [
         'esc_html' => 0,
     ],
     [
-        'key' => 'field_stacked_heading'. $suffix,
+        'key' => 'field_stacked_heading'.$suffix,
         'label' => 'Module Heading',
         'name' => 'stacked_heading',
         'type' => 'text',
@@ -45,7 +45,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_stacked_hide_heading'. $suffix,
+        'key' => 'field_stacked_hide_heading'.$suffix,
         'label' => 'Hide the Module Heading?',
         'name' => 'stacked_hide_heading',
         'type' => 'true_false',
@@ -64,7 +64,7 @@ return [
         'ui_off_text' => '',
     ],
     [
-        'key' => 'field_stacked_description'. $suffix,
+        'key' => 'field_stacked_description'.$suffix,
         'label' => 'Description',
         'name' => 'stacked_description',
         'type' => 'textarea',
@@ -83,7 +83,7 @@ return [
         'new_lines' => '',
     ],
     [
-        'key' => 'field_stacked_background_color'. $suffix,
+        'key' => 'field_stacked_background_color'.$suffix,
         'label' => 'Background Color',
         'name' => 'stacked_background_color',
         'type' => 'select',
@@ -111,7 +111,7 @@ return [
         'placeholder' => '',
     ],
     [
-        'key' => 'field_stacked_section'. $suffix,
+        'key' => 'field_stacked_section'.$suffix,
         'label' => 'Items',
         'name' => 'stacked_section',
         'type' => 'repeater',
@@ -130,7 +130,7 @@ return [
         'button_label' => '',
         'sub_fields' => [
             [
-                'key' => 'stacked_section_intro'. $suffix,
+                'key' => 'stacked_section_intro'.$suffix,
                 'label' => '',
                 'name' => '',
                 'type' => 'message',
@@ -147,7 +147,7 @@ return [
                 'esc_html' => 0,
             ],
             [
-                'key' => 'field_stacked_section_heading'. $suffix,
+                'key' => 'field_stacked_section_heading'.$suffix,
                 'label' => 'Heading',
                 'name' => 'stacked_section_heading',
                 'type' => 'text',
@@ -166,7 +166,7 @@ return [
                 'maxlength' => 78,
             ],
             [
-                'key' => 'field_stacked_section_body'. $suffix,
+                'key' => 'field_stacked_section_body'.$suffix,
                 'label' => 'Body',
                 'name' => 'stacked_section_body',
                 'type' => 'textarea',
@@ -185,7 +185,7 @@ return [
                 'new_lines' => '',
             ],
             [
-                'key' => 'field_stacked_section_image'. $suffix,
+                'key' => 'field_stacked_section_image'.$suffix,
                 'label' => 'Image',
                 'name' => 'stacked_section_image',
                 'type' => 'image',
@@ -209,7 +209,7 @@ return [
                 'mime_types' => '',
             ],
             [
-                'key' => 'field_stacked_section_alt_override'. $suffix,
+                'key' => 'field_stacked_section_alt_override'.$suffix,
                 'label' => 'Image Alt Text Override',
                 'name' => 'stacked_section_alt_override',
                 'type' => 'text',
@@ -228,7 +228,7 @@ return [
                 'maxlength' => 125,
             ],
             [
-                'key' => 'field_stacked_section_button_text'. $suffix,
+                'key' => 'field_stacked_section_button_text'.$suffix,
                 'label' => 'Button Text',
                 'name' => 'stacked_section_button_text',
                 'type' => 'text',
@@ -247,7 +247,7 @@ return [
                 'maxlength' => '',
             ],
             [
-                'key' => 'field_stacked_section_button_url'. $suffix,
+                'key' => 'field_stacked_section_button_url'.$suffix,
                 'label' => 'Button URL',
                 'name' => 'stacked_section_button_url',
                 'type' => 'link',
@@ -256,7 +256,7 @@ return [
                 'conditional_logic' => [
                     [
                         [
-                            'field' => 'field_stacked_section_button_text'. $suffix,
+                            'field' => 'field_stacked_section_button_text'.$suffix,
                             'operator' => '!=empty',
                         ],
                     ],
@@ -288,7 +288,7 @@ return [
             //     'ui_off_text' => '',
             // ),
             [
-                'key' => 'field_stacked_section_button_description'. $suffix,
+                'key' => 'field_stacked_section_button_description'.$suffix,
                 'label' => 'Button Link Description',
                 'name' => 'stacked_section_button_description',
                 'type' => 'text',
@@ -297,7 +297,7 @@ return [
                 'conditional_logic' => [
                     [
                         [
-                            'field' => 'field_stacked_section_button_text'. $suffix,
+                            'field' => 'field_stacked_section_button_text'.$suffix,
                             'operator' => '!=empty',
                         ],
                     ],
@@ -316,7 +316,7 @@ return [
         ],
     ],
     [
-        'key' => 'field_stacked_more'. $suffix,
+        'key' => 'field_stacked_more'.$suffix,
         'label' => 'Include link to something?',
         'name' => 'stacked_more',
         'type' => 'true_false',
@@ -336,7 +336,7 @@ return [
         'ui_off_text' => '',
     ],
     [
-        'key' => 'field_stacked_more_text'. $suffix,
+        'key' => 'field_stacked_more_text'.$suffix,
         'label' => 'Heading',
         'name' => 'stacked_more_text',
         'type' => 'text',
@@ -345,7 +345,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_stacked_more'. $suffix,
+                    'field' => 'field_stacked_more'.$suffix,
                     'operator' => '==',
                     'value' => '1',
                 ],
@@ -364,7 +364,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_stacked_more_button_text'. $suffix,
+        'key' => 'field_stacked_more_button_text'.$suffix,
         'label' => 'Button Text',
         'name' => 'stacked_more_button_text',
         'type' => 'text',
@@ -373,7 +373,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_stacked_more'. $suffix,
+                    'field' => 'field_stacked_more'.$suffix,
                     'operator' => '==',
                     'value' => '1',
                 ],
@@ -391,7 +391,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_stacked_more_button_url'. $suffix,
+        'key' => 'field_stacked_more_button_url'.$suffix,
         'label' => 'Button URL',
         'name' => 'stacked_more_button_url',
         'type' => 'link',
@@ -400,7 +400,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_stacked_more'. $suffix,
+                    'field' => 'field_stacked_more'.$suffix,
                     'operator' => '==',
                     'value' => '1',
                 ],
@@ -414,7 +414,7 @@ return [
         'return_format' => 'array',
     ],
     [
-        'key' => 'field_stacked_more_button_description'. $suffix,
+        'key' => 'field_stacked_more_button_description'.$suffix,
         'label' => 'Button Link Description',
         'name' => 'stacked_more_button_description',
         'type' => 'text',
@@ -423,7 +423,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_stacked_more'. $suffix,
+                    'field' => 'field_stacked_more'.$suffix,
                     'operator' => '==',
                     'value' => '1',
                 ],
@@ -441,7 +441,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_action_bar_geo_valid'. $suffix,
+        'key' => 'field_action_bar_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
@@ -465,7 +465,7 @@ return [
         'return_format' => 'value',
     ],
     [
-        'key' => 'field_stacked_regions'. $suffix,
+        'key' => 'field_stacked_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
@@ -474,7 +474,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_stacked_geo_valid'. $suffix,
+                    'field' => 'field_stacked_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
@@ -490,26 +490,26 @@ return [
         'endpoint' => 0,
     ],
     [
-		'key' => 'field_stacked_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'stacked_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => [
+        'key' => 'field_stacked_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'stacked_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
             [
                 [
-                    'field' => 'field_stacked_geo_valid'. $suffix,
+                    'field' => 'field_stacked_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
             ],
         ],
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'include' => 'Include',
@@ -519,21 +519,21 @@ return [
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
+        'return_format' => 'value',
     ],
     [
-		'key' => 'field_stacked_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'stacked_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => 0,
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'key' => 'field_stacked_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'stacked_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'central' => 'Central',

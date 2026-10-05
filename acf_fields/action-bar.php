@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 /*
  *
- * Action Bar Block Fields 
- * 
+ * Action Bar Block Fields
+ *
  */
 return [
     [
-        'key' => 'field_action_bar_intro'. $suffix,
+        'key' => 'field_action_bar_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
@@ -26,7 +26,7 @@ return [
         'esc_html' => 0,
     ],
     [
-        'key' => 'field_action_bar_heading'. $suffix,
+        'key' => 'field_action_bar_heading'.$suffix,
         'label' => 'Heading',
         'name' => 'action_bar_heading',
         'type' => 'text',
@@ -45,7 +45,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_action_bar_background_color'. $suffix,
+        'key' => 'field_action_bar_background_color'.$suffix,
         'label' => 'Background Color',
         'name' => 'action_bar_background_color',
         'type' => 'select',
@@ -80,7 +80,7 @@ return [
         'placeholder' => '',
     ],
     [
-        'key' => 'field_action_bar_section'. $suffix,
+        'key' => 'field_action_bar_section'.$suffix,
         'label' => 'Sections',
         'name' => 'action_bar_section',
         'type' => 'repeater',
@@ -92,14 +92,14 @@ return [
             'class' => '',
             'id' => '',
         ],
-        'collapsed' => 'field_section_heading'. $suffix,
+        'collapsed' => 'field_section_heading'.$suffix,
         'min' => 3,
         'max' => 4,
         'layout' => 'block',
         'button_label' => 'Add Section',
         'sub_fields' => [
             [
-                'key' => 'field_action_bar_section_heading'. $suffix,
+                'key' => 'field_action_bar_section_heading'.$suffix,
                 'label' => 'Heading',
                 'name' => 'action_bar_section_heading',
                 'type' => 'text',
@@ -118,7 +118,7 @@ return [
                 'maxlength' => 46,
             ],
             [
-                'key' => 'field_action_bar_section_body'. $suffix,
+                'key' => 'field_action_bar_section_body'.$suffix,
                 'label' => 'Body',
                 'name' => 'action_bar_section_body',
                 'type' => 'text',
@@ -137,7 +137,7 @@ return [
                 'maxlength' => 67,
             ],
             [
-                'key' => 'field_action_bar_section_button_text'. $suffix,
+                'key' => 'field_action_bar_section_button_text'.$suffix,
                 'label' => 'Button Text',
                 'name' => 'action_bar_section_button_text',
                 'type' => 'text',
@@ -156,7 +156,7 @@ return [
                 'maxlength' => 31,
             ],
             [
-                'key' => 'field_action_bar_section_button_url'. $suffix,
+                'key' => 'field_action_bar_section_button_url'.$suffix,
                 'label' => 'Button URL',
                 'name' => 'action_bar_section_button_url',
                 'type' => 'link',
@@ -190,7 +190,7 @@ return [
             //     'ui_off_text' => '',
             // ),
             [
-                'key' => 'field_action_bar_section_button_description'. $suffix,
+                'key' => 'field_action_bar_section_button_description'.$suffix,
                 'label' => 'Button Link Description',
                 'name' => 'action_bar_section_button_description',
                 'type' => 'text',
@@ -211,7 +211,7 @@ return [
         ],
     ],
     [
-        'key' => 'field_action_bar_geo_valid'. $suffix,
+        'key' => 'field_action_bar_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
@@ -235,7 +235,7 @@ return [
         'return_format' => 'value',
     ],
     [
-        'key' => 'field_action_bar_regions'. $suffix,
+        'key' => 'field_action_bar_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
@@ -244,7 +244,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_action_bar_geo_valid'. $suffix,
+                    'field' => 'field_action_bar_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
@@ -260,26 +260,26 @@ return [
         'endpoint' => 0,
     ],
     [
-		'key' => 'field_action_bar_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'action_bar_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => [
+        'key' => 'field_action_bar_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'action_bar_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
             [
                 [
-                    'field' => 'field_action_bar_geo_valid'. $suffix,
+                    'field' => 'field_action_bar_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
             ],
         ],
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'include' => 'Include',
@@ -289,29 +289,29 @@ return [
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
+        'return_format' => 'value',
     ],
     [
-		'key' => 'field_action_bar_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'action_bar_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => [
+        'key' => 'field_action_bar_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'action_bar_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
             [
                 [
-                    'field' => 'field_action_bar_geo_valid'. $suffix,
+                    'field' => 'field_action_bar_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
             ],
         ],
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'central' => 'Central',
@@ -332,7 +332,7 @@ return [
         'search_placeholder' => '',
     ],
     [
-        'key' => 'field_action_bar_regions_end'. $suffix,
+        'key' => 'field_action_bar_regions_end'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'accordion',
@@ -341,7 +341,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_action_bar_geo_valid'. $suffix,
+                    'field' => 'field_action_bar_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],

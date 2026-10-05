@@ -5,34 +5,34 @@ declare(strict_types=1);
 /*
  *
  * Module Layout Fields
- * 
+ *
  */
-return  [
+return [
     [
         'acfe_flexible_advanced' => 1,
-		'acfe_flexible_stylised_button' => 0,
-		'acfe_flexible_hide_empty_message' => 0,
-		'acfe_flexible_empty_message' => '',
-		'acfe_flexible_disable_ajax_title' => 1,
-		'acfe_flexible_layouts_thumbnails' => 0,
-		'acfe_flexible_layouts_settings' => 0,
-		'acfe_flexible_layouts_ajax' => 1,
-		'acfe_flexible_layouts_templates' => 0,
-		'acfe_flexible_layouts_previews' => 0,
-		'acfe_flexible_layouts_placeholder' => 0,
-		'acfe_flexible_title_edition' => 1,
-		'acfe_flexible_clone' => 1,
-		'acfe_flexible_copy_paste' => 0,
-		'acfe_flexible_close_button' => 0,
-		'acfe_flexible_remove_add_button' => 0,
-		'acfe_flexible_remove_delete_button' => 0,
-		'acfe_flexible_lock' => 0,
-		'acfe_flexible_modal_edition' => 0,
-		'acfe_flexible_modal' => [
-			'acfe_flexible_modal_enabled' => '0',
-		],
-		'acfe_flexible_layouts_state' => '',
-		'acfe_flexible_layouts_remove_collapse' => 0,
+        'acfe_flexible_stylised_button' => 0,
+        'acfe_flexible_hide_empty_message' => 0,
+        'acfe_flexible_empty_message' => '',
+        'acfe_flexible_disable_ajax_title' => 1,
+        'acfe_flexible_layouts_thumbnails' => 0,
+        'acfe_flexible_layouts_settings' => 0,
+        'acfe_flexible_layouts_ajax' => 1,
+        'acfe_flexible_layouts_templates' => 0,
+        'acfe_flexible_layouts_previews' => 0,
+        'acfe_flexible_layouts_placeholder' => 0,
+        'acfe_flexible_title_edition' => 1,
+        'acfe_flexible_clone' => 1,
+        'acfe_flexible_copy_paste' => 0,
+        'acfe_flexible_close_button' => 0,
+        'acfe_flexible_remove_add_button' => 0,
+        'acfe_flexible_remove_delete_button' => 0,
+        'acfe_flexible_lock' => 0,
+        'acfe_flexible_modal_edition' => 0,
+        'acfe_flexible_modal' => [
+            'acfe_flexible_modal_enabled' => '0',
+        ],
+        'acfe_flexible_layouts_state' => '',
+        'acfe_flexible_layouts_remove_collapse' => 0,
         'key' => 'field_uamswp_modules',
         'label' => 'Modules',
         'name' => 'uamswp_modules',

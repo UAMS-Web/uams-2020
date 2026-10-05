@@ -2,201 +2,219 @@
 /*
  *
  * UAMS CTA Bar Block
- * 
+ *
  */
 
 // Create id attribute allowing for custom "anchor" value.
-if (empty( $id )) {
-	$id = '';
+if (empty($id)) {
+    $id = '';
 }
-$id = $id ? ( $id + 1 ) : '';
+$id = $id ? ($id + 1) : '';
 $i = 0;
-if ( empty( $id ) && isset($block) ) {
+if (empty($id) && isset($block)) {
     $id = $block['id'];
 }
-if (!empty($id)) {
-    $id = 'module-' . $id; 
+if (! empty($id)) {
+    $id = 'module-'.$id;
 } else {
     $id = $i + 1;
 }
 // if ( empty ($id) ) {
 //     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 // }
-    
-$id = 'cta-bar-' . $id;
-if( !empty($block['anchor']) ) {
+
+$id = 'cta-bar-'.$id;
+if (! empty($block['anchor'])) {
     $id = $block['anchor'];
 }
 
 $className = '';
-if( !empty($block['className']) ) {
-    $className .= ' ' . $block['className'];
+if (! empty($block['className'])) {
+    $className .= ' '.$block['className'];
 }
-if( !empty($block['align']) ) {
-    $className .= ' align' . $block['align'];
+if (! empty($block['align'])) {
+    $className .= ' align'.$block['align'];
 }
 
 // Load values and assessing defaults.
 // if empty - allow values to be set for widgets
-if ( empty($heading) ) 
+if (empty($heading)) {
     $heading = get_field('cta_bar_heading');
-if ( empty($body) ) 
+}
+if (empty($body)) {
     $body = get_field('cta_bar_body');
-if ( empty($action_type) ) 
+}
+if (empty($action_type)) {
     $action_type = get_field('cta_bar_action_type');
-if ( empty($button_text) ) 
+}
+if (empty($button_text)) {
     $button_text = get_field('cta_bar_button_text');
-if ( empty($button_url) ) 
+}
+if (empty($button_url)) {
     $button_url = get_field('cta_bar_button_url');
-if ( $button_url && empty($button_target) ) {
-    if( get_field('cta_bar_button_url') ) {
+}
+if ($button_url && empty($button_target)) {
+    if (get_field('cta_bar_button_url')) {
         $button_target = get_field('cta_bar_button_url')['target'];
     }
 }
-if ( empty($button_desc) ) 
+if (empty($button_desc)) {
     $button_desc = get_field('cta_bar_button_description');
-if ( empty($action_type) && $button_text ) // If still empty (meaning page hasn't been updated since code changed)
+}
+if (empty($action_type) && $button_text) { // If still empty (meaning page hasn't been updated since code changed)
     $action_type = 'url';
-if ( empty($phone_prepend) ) 
+}
+if (empty($phone_prepend)) {
     $phone_prepend = get_field('cta_bar_phone_prepend') ?: 'Call';
-if ( empty($phone) ) 
+}
+if (empty($phone)) {
     $phone = get_field('cta_bar_phone');
-if ( empty($phone_link) ) 
-    $phone_link = '<a href="tel:' . format_phone_dash( $phone ) . '">' . format_phone_us( $phone ) . '</a>';
+}
+if (empty($phone_link)) {
+    $phone_link = '<a href="tel:'.format_phone_dash($phone).'">'.format_phone_us($phone).'</a>';
+}
 if (
     empty($action_type) || // If still empty (meaning page hasn't been updated since code changed)
     (
-        $action_type == 'url' && 
-        ( !$button_text || !$button_url || !$button_desc ) // required fields aren't populated
+        $action_type == 'url' &&
+        (! $button_text || ! $button_url || ! $button_desc) // required fields aren't populated
     ) ||
     (
-        $action_type == 'phone' && 
-        ( !$phone_prepend || !$phone ) // required fields aren't populated
+        $action_type == 'phone' &&
+        (! $phone_prepend || ! $phone) // required fields aren't populated
     )
-)
+) {
     $action_type = 'none';
-if ( empty($layout) ) 
+}
+if (empty($layout)) {
     $layout = get_field('cta_bar_layout');
-if ( empty($size) ) 
+}
+if (empty($size)) {
     $size = get_field('cta_bar_size');
-if ( empty($use_image) ) 
+}
+if (empty($use_image)) {
     $use_image = get_field('cta_bar_use_image');
-if ( empty($image) ) 
+}
+if (empty($image)) {
     $image = get_field('cta_bar_image');
-if ( empty($background_color) ) 
+}
+if (empty($background_color)) {
     $background_color = get_field('cta_bar_background_color');
-if ( in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto']) ) {
+}
+if (in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto'])) {
     $btn_color = 'primary';
 } else {
     $btn_color = 'white';
 }
-if ( empty($geo) )
+if (empty($geo)) {
     $geo = get_field('cta_bar_geo');
-if ( empty($geo_region) )
+}
+if (empty($geo_region)) {
     $geo_region = get_field('cta_bar_geo_region');
+}
 
 // GEO Logic
 $geo_display = false;
-if (!isset($geo) || empty($geo_region)){
+if (! isset($geo) || empty($geo_region)) {
     $geo_display = true;
 } else {
-    if( $geo == 'include' && !empty($geo_region) ) {
-        if( is_in_region($geo_region) ){
+    if ($geo == 'include' && ! empty($geo_region)) {
+        if (is_in_region($geo_region)) {
             $geo_display = true;
         }
-    } elseif( $geo == 'exclude' && !empty($geo_region) ) {
-        if ( is_not_in_region($geo_region) ){
+    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
+        if (is_not_in_region($geo_region)) {
             $geo_display = true;
         }
     }
 }
-if (is_admin() && !empty($geo) && !empty($geo_region)) {
+if (is_admin() && ! empty($geo) && ! empty($geo_region)) {
     $geo_display = true;
-    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
+    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
 }
-if ($geo_display) :
-?>
-<section class="uams-module cta-bar <?php echo esc_attr( $className ); ?> <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?><?php echo $size == 'small' ? ' cta-bar-sm' : ''; ?><?php echo $size == 'large' ? ' extra-padding cta-bar-lg' : ''; ?><?php echo $action_type == 'none' ? ' no-link' : ''; ?>" id="<?php echo esc_attr( $id ); ?>" aria-label="<?php echo esc_attr( $heading ); ?>">
-<?php if ( $use_image && function_exists( 'bis_get_attachment_image' ) ) { ?>
+if ($geo_display) {
+    ?>
+<section class="uams-module cta-bar <?php echo esc_attr($className); ?> <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?><?php echo $size == 'small' ? ' cta-bar-sm' : ''; ?><?php echo $size == 'large' ? ' extra-padding cta-bar-lg' : ''; ?><?php echo $action_type == 'none' ? ' no-link' : ''; ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
+<?php if ($use_image && function_exists('bis_get_attachment_image')) { ?>
     <style>
-        #<?php echo sanitize_html_class( $id ); ?>:before {
+        #<?php echo sanitize_html_class($id); ?>:before {
             background-image: url("<?php echo image_sizer($image, 576, 288, 'center', 'center', 'aspect-2-1'); ?>");
         }
 
         /* XS Breakpoint */
         @media (min-width: 576px) {
-            #<?php echo sanitize_html_class( $id ); ?>:before {
+            #<?php echo sanitize_html_class($id); ?>:before {
                 background-image: url("<?php echo image_sizer($image, 768, 384, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* SM Breakpoint */
         @media (min-width: 768px) {
-            #<?php echo sanitize_html_class( $id ); ?>:before {
+            #<?php echo sanitize_html_class($id); ?>:before {
                 background-image: url("<?php echo image_sizer($image, 992, 496, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* MD Breakpoint */
         @media (min-width: 992px) {
-            #<?php echo sanitize_html_class( $id ); ?>:before {
+            #<?php echo sanitize_html_class($id); ?>:before {
                 background-image: url("<?php echo image_sizer($image, 1200, 600, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* LG Breakpoint */
         @media (min-width: 1200px) {
-            #<?php echo sanitize_html_class( $id ); ?>:before {
+            #<?php echo sanitize_html_class($id); ?>:before {
                 background-image: url("<?php echo image_sizer($image, 1500, 750, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* XL Breakpoint */
         @media (min-width: 1500px) {
-            #<?php echo sanitize_html_class( $id ); ?>:before {
+            #<?php echo sanitize_html_class($id); ?>:before {
                 background-image: url("<?php echo image_sizer($image, 1921, 961, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
 
         /* XXL Breakpoint */
         @media (min-width: 1921px) {
-            #<?php echo sanitize_html_class( $id ); ?>:before {
+            #<?php echo sanitize_html_class($id); ?>:before {
                 background-image: url("<?php echo image_sizer($image, 2560, 1280, 'center', 'center', 'aspect-2-1'); ?>");
             }
         }
     </style>
-    <?php } elseif ( $use_image ) { ?>
+    <?php } elseif ($use_image) { ?>
     <style>
-        #<?php echo sanitize_html_class( $id ); ?>:before {
-            background-image: url("<?php echo wp_get_attachment_url( $image, 'aspect-2-1' ); ?>");
+        #<?php echo sanitize_html_class($id); ?>:before {
+            background-image: url("<?php echo wp_get_attachment_url($image, 'aspect-2-1'); ?>");
         }
     </style>
-    <?php } //endif ?>
+    <?php } // endif?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="inner-container">
                     <div class="cta-heading">
-                        <h2><?php echo esc_html( $heading ); ?></h2>
+                        <h2><?php echo esc_html($heading); ?></h2>
                     </div>
                     <div class="cta-body">
                         <div class="text-container">
-                            <?php echo wp_kses_post( $body ); ?>
+                            <?php echo wp_kses_post($body); ?>
                         </div>
                         <?php echo $action_type == 'url' ?
-                        '<div class="btn-container">
-                            <a href="' . esc_url( $button_url['url'] ) . '" aria-label="' . esc_attr( $button_desc ) . '" class=" btn btn-' . $btn_color . ( $size == 'large' ? ' btn-lg' : '' ) . '"' . ( $button_target ? ' target="'. esc_attr( $button_target ) . '"' : '' ) . ' data-moduletitle="' . esc_attr( $heading ) . '">' . esc_html( $button_text ) . '</a>
+                            '<div class="btn-container">
+                            <a href="'.esc_url($button_url['url']).'" aria-label="'.esc_attr($button_desc).'" class=" btn btn-'.$btn_color.($size == 'large' ? ' btn-lg' : '').'"'.($button_target ? ' target="'.esc_attr($button_target).'"' : '').' data-moduletitle="'.esc_attr($heading).'">'.esc_html($button_text).'</a>
                         </div>'
-                        : ''; ?>
+                            : ''; ?>
                         <?php echo $action_type == 'phone' ?
-                        '<div class="btn-container">
-                            <a href="' . esc_url( 'tel:' . $phone ) . '" data-moduletitle="' . esc_attr( $heading ) . '">' . esc_html( $phone_prepend ) . ' <span class="no-break">' . esc_html( $phone ) . '</span></a>
+                            '<div class="btn-container">
+                            <a href="'.esc_url('tel:'.$phone).'" data-moduletitle="'.esc_attr($heading).'">'.esc_html($phone_prepend).' <span class="no-break">'.esc_html($phone).'</span></a>
                         </div>'
-                        : ''; ?>
+                            : ''; ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<?php endif;
+<?php }

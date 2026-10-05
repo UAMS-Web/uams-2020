@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 return [
     [
-        'key' => 'field_call_out_intro'. $suffix,
+        'key' => 'field_call_out_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
@@ -26,7 +26,7 @@ return [
         'esc_html' => 0,
     ],
     [
-        'key' => 'field_call_out_heading'. $suffix,
+        'key' => 'field_call_out_heading'.$suffix,
         'label' => 'Heading',
         'name' => 'call_out_heading',
         'type' => 'text',
@@ -45,7 +45,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_call_out_body'. $suffix,
+        'key' => 'field_call_out_body'.$suffix,
         'label' => 'Body',
         'name' => 'call_out_body',
         'type' => 'textarea',
@@ -64,7 +64,7 @@ return [
         'new_lines' => '',
     ],
     [
-        'key' => 'field_call_out_background_color'. $suffix,
+        'key' => 'field_call_out_background_color'.$suffix,
         'label' => 'Background Color',
         'name' => 'call_out_background_color',
         'type' => 'select',
@@ -99,7 +99,7 @@ return [
         'placeholder' => '',
     ],
     [
-        'key' => 'field_call_out_use_image'. $suffix,
+        'key' => 'field_call_out_use_image'.$suffix,
         'label' => 'Use Background Image?',
         'name' => 'call_out_use_image',
         'type' => 'true_false',
@@ -118,7 +118,7 @@ return [
         'ui_off_text' => '',
     ],
     [
-        'key' => 'field_call_out_image'. $suffix,
+        'key' => 'field_call_out_image'.$suffix,
         'label' => 'Image',
         'name' => 'call_out_image',
         'type' => 'image',
@@ -127,7 +127,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_call_out_use_image'. $suffix,
+                    'field' => 'field_call_out_use_image'.$suffix,
                     'operator' => '==',
                     'value' => '1',
                 ],
@@ -150,7 +150,7 @@ return [
         'mime_types' => '',
     ],
     [
-        'key' => 'field_call_out_geo_valid'. $suffix,
+        'key' => 'field_call_out_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
@@ -174,7 +174,7 @@ return [
         'return_format' => 'value',
     ],
     [
-        'key' => 'field_call_out_regions'. $suffix,
+        'key' => 'field_call_out_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
@@ -183,7 +183,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_call_out_geo_valid'. $suffix,
+                    'field' => 'field_call_out_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
@@ -199,26 +199,26 @@ return [
         'endpoint' => 0,
     ],
     [
-		'key' => 'field_call_out_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'call_out_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => [
+        'key' => 'field_call_out_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'call_out_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
             [
                 [
-                    'field' => 'field_call_out_geo_valid'. $suffix,
+                    'field' => 'field_call_out_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
             ],
         ],
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'include' => 'Include',
@@ -228,21 +228,21 @@ return [
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
+        'return_format' => 'value',
     ],
     [
-		'key' => 'field_call_out_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'call_out_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => 0,
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'key' => 'field_call_out_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'call_out_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'central' => 'Central',

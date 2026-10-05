@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 /*
  *
- * LiveWhale Calendar Block Fields 
- * 
+ * LiveWhale Calendar Block Fields
+ *
  */
 return [
     [
-        'key' => 'field_livewhale_intro'. $suffix,
+        'key' => 'field_livewhale_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
@@ -26,7 +26,7 @@ return [
         'esc_html' => 0,
     ],
     [
-        'key' => 'field_livewhale_heading'. $suffix,
+        'key' => 'field_livewhale_heading'.$suffix,
         'label' => 'Heading',
         'name' => 'livewhale_heading',
         'type' => 'text',
@@ -45,7 +45,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_livewhale_id'. $suffix,
+        'key' => 'field_livewhale_id'.$suffix,
         'label' => 'ID Number of Widget',
         'name' => 'livewhale_id',
         'type' => 'number',
@@ -67,7 +67,7 @@ return [
         'step' => 1,
     ],
     [
-        'key' => 'field_livewhale_background_color'. $suffix,
+        'key' => 'field_livewhale_background_color'.$suffix,
         'label' => 'Background Color',
         'name' => 'livewhale_background_color',
         'type' => 'select',
@@ -95,7 +95,7 @@ return [
         'placeholder' => '',
     ],
     [
-        'key' => 'field_livewhale_geo_valid'. $suffix,
+        'key' => 'field_livewhale_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
@@ -119,7 +119,7 @@ return [
         'return_format' => 'value',
     ],
     [
-        'key' => 'field_livewhale_regions'. $suffix,
+        'key' => 'field_livewhale_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
@@ -128,7 +128,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_livewhale_geo_valid'. $suffix,
+                    'field' => 'field_livewhale_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
@@ -144,26 +144,26 @@ return [
         'endpoint' => 0,
     ],
     [
-		'key' => 'field_livewhale_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'livewhale_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => [
+        'key' => 'field_livewhale_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'livewhale_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
             [
                 [
-                    'field' => 'field_livewhale_geo_valid'. $suffix,
+                    'field' => 'field_livewhale_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
             ],
         ],
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'include' => 'Include',
@@ -173,21 +173,21 @@ return [
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
+        'return_format' => 'value',
     ],
     [
-		'key' => 'field_livewhale_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'livewhale_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => 0,
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'key' => 'field_livewhale_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'livewhale_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'central' => 'Central',

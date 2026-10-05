@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 /*
  *
- * CTA Bar Block Fields 
- * 
+ * CTA Bar Block Fields
+ *
  */
 return [
     [
-        'key' => 'field_cta_bar_intro'. $suffix,
+        'key' => 'field_cta_bar_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
@@ -26,7 +26,7 @@ return [
         'esc_html' => 0,
     ],
     [
-        'key' => 'field_cta_bar_heading'. $suffix,
+        'key' => 'field_cta_bar_heading'.$suffix,
         'label' => 'Heading',
         'name' => 'cta_bar_heading',
         'type' => 'text',
@@ -45,7 +45,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_cta_bar_body'. $suffix,
+        'key' => 'field_cta_bar_body'.$suffix,
         'label' => 'Body',
         'name' => 'cta_bar_body',
         'type' => 'wysiwyg',
@@ -64,7 +64,7 @@ return [
         'delay' => 0,
     ],
     [
-        'key' => 'field_cta_bar_action_type'. $suffix,
+        'key' => 'field_cta_bar_action_type'.$suffix,
         'label' => 'Action Type',
         'name' => 'cta_bar_action_type',
         'type' => 'button_group',
@@ -87,7 +87,7 @@ return [
         'return_format' => 'value',
     ],
     [
-        'key' => 'field_cta_bar_action_url_open'. $suffix,
+        'key' => 'field_cta_bar_action_url_open'.$suffix,
         'label' => 'URL Action',
         'name' => '',
         'type' => 'accordion',
@@ -96,7 +96,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'field' => 'field_cta_bar_action_type'.$suffix,
                     'operator' => '==',
                     'value' => 'url',
                 ],
@@ -112,7 +112,7 @@ return [
         'endpoint' => 0,
     ],
     [
-        'key' => 'field_cta_bar_button_text'. $suffix,
+        'key' => 'field_cta_bar_button_text'.$suffix,
         'label' => 'Button Text',
         'name' => 'cta_bar_button_text',
         'type' => 'text',
@@ -121,7 +121,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'field' => 'field_cta_bar_action_type'.$suffix,
                     'operator' => '==',
                     'value' => 'url',
                 ],
@@ -139,7 +139,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_cta_bar_button_url'. $suffix,
+        'key' => 'field_cta_bar_button_url'.$suffix,
         'label' => 'Button URL',
         'name' => 'cta_bar_button_url',
         'type' => 'link',
@@ -148,7 +148,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'field' => 'field_cta_bar_action_type'.$suffix,
                     'operator' => '==',
                     'value' => 'url',
                 ],
@@ -162,7 +162,7 @@ return [
         'return_format' => 'array',
     ],
     [
-        'key' => 'field_cta_bar_button_description'. $suffix,
+        'key' => 'field_cta_bar_button_description'.$suffix,
         'label' => 'Button Link Description',
         'name' => 'cta_bar_button_description',
         'type' => 'text',
@@ -171,7 +171,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'field' => 'field_cta_bar_action_type'.$suffix,
                     'operator' => '==',
                     'value' => 'url',
                 ],
@@ -189,7 +189,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_cta_bar_action_url_close'. $suffix,
+        'key' => 'field_cta_bar_action_url_close'.$suffix,
         'label' => 'URL Action Close',
         'name' => '',
         'type' => 'accordion',
@@ -207,7 +207,7 @@ return [
         'endpoint' => 1,
     ],
     [
-        'key' => 'field_cta_bar_action_phone_open'. $suffix,
+        'key' => 'field_cta_bar_action_phone_open'.$suffix,
         'label' => 'Phone Action',
         'name' => '',
         'type' => 'accordion',
@@ -216,7 +216,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'field' => 'field_cta_bar_action_type'.$suffix,
                     'operator' => '==',
                     'value' => 'phone',
                 ],
@@ -232,7 +232,7 @@ return [
         'endpoint' => 0,
     ],
     [
-        'key' => 'field_cta_bar_phone_prepend'. $suffix,
+        'key' => 'field_cta_bar_phone_prepend'.$suffix,
         'label' => 'Text before phone number',
         'name' => 'cta_bar_phone_prepend',
         'type' => 'text',
@@ -241,7 +241,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'field' => 'field_cta_bar_action_type'.$suffix,
                     'operator' => '==',
                     'value' => 'phone',
                 ],
@@ -259,7 +259,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_cta_bar_phone'. $suffix,
+        'key' => 'field_cta_bar_phone'.$suffix,
         'label' => 'Phone Number',
         'name' => 'cta_bar_phone',
         'type' => 'text',
@@ -268,7 +268,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_cta_bar_action_type'. $suffix,
+                    'field' => 'field_cta_bar_action_type'.$suffix,
                     'operator' => '==',
                     'value' => 'phone',
                 ],
@@ -286,7 +286,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_cta_bar_action_URL_close'. $suffix,
+        'key' => 'field_cta_bar_action_URL_close'.$suffix,
         'label' => 'Accordion Close',
         'name' => '',
         'type' => 'accordion',
@@ -304,7 +304,7 @@ return [
         'endpoint' => 1,
     ],
     [
-        'key' => 'field_cta_bar_layout'. $suffix,
+        'key' => 'field_cta_bar_layout'.$suffix,
         'label' => 'Layout',
         'name' => 'cta_bar_layout',
         'type' => 'select',
@@ -331,7 +331,7 @@ return [
         'placeholder' => '',
     ],
     [
-        'key' => 'field_cta_bar_size'. $suffix,
+        'key' => 'field_cta_bar_size'.$suffix,
         'label' => 'Size',
         'name' => 'cta_bar_size',
         'type' => 'select',
@@ -359,7 +359,7 @@ return [
         'placeholder' => '',
     ],
     [
-        'key' => 'field_cta_bar_background_color'. $suffix,
+        'key' => 'field_cta_bar_background_color'.$suffix,
         'label' => 'Background Color',
         'name' => 'cta_bar_background_color',
         'type' => 'select',
@@ -394,7 +394,7 @@ return [
         'placeholder' => '',
     ],
     [
-        'key' => 'field_cta_bar_use_image'. $suffix,
+        'key' => 'field_cta_bar_use_image'.$suffix,
         'label' => 'Use Background Image?',
         'name' => 'cta_bar_use_image',
         'type' => 'true_false',
@@ -413,7 +413,7 @@ return [
         'ui_off_text' => '',
     ],
     [
-        'key' => 'field_cta_bar_image'. $suffix,
+        'key' => 'field_cta_bar_image'.$suffix,
         'label' => 'Image',
         'name' => 'cta_bar_image',
         'type' => 'image',
@@ -422,7 +422,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_cta_bar_use_image'. $suffix,
+                    'field' => 'field_cta_bar_use_image'.$suffix,
                     'operator' => '==',
                     'value' => '1',
                 ],
@@ -445,7 +445,7 @@ return [
         'mime_types' => '',
     ],
     [
-        'key' => 'field_cta_geo_valid'. $suffix,
+        'key' => 'field_cta_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
@@ -472,7 +472,7 @@ return [
         'save_other_choice' => 0,
     ],
     [
-        'key' => 'field_cta_regions'. $suffix,
+        'key' => 'field_cta_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
@@ -481,7 +481,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_cta_geo_valid'. $suffix,
+                    'field' => 'field_cta_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
@@ -497,26 +497,26 @@ return [
         'endpoint' => 0,
     ],
     [
-		'key' => 'field_cta_bar_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'cta_bar_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => [
+        'key' => 'field_cta_bar_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'cta_bar_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
             [
                 [
-                    'field' => 'field_cta_geo_valid'. $suffix,
+                    'field' => 'field_cta_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
             ],
         ],
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'include' => 'Include',
@@ -526,21 +526,21 @@ return [
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
+        'return_format' => 'value',
     ],
     [
-		'key' => 'field_cta_bar_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'cta_bar_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => 0,
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'key' => 'field_cta_bar_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'cta_bar_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'central' => 'Central',

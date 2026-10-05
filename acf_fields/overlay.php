@@ -5,11 +5,11 @@ declare(strict_types=1);
 /*
  *
  * Text & Image Overlay ACF Fields
- * 
+ *
  */
 return [
     [
-        'key' => 'field_overlay_intro'. $suffix,
+        'key' => 'field_overlay_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
@@ -26,7 +26,7 @@ return [
         'esc_html' => 0,
     ],
     [
-        'key' => 'field_overlay_section'. $suffix,
+        'key' => 'field_overlay_section'.$suffix,
         'label' => 'Sections',
         'name' => 'overlay_section',
         'type' => 'repeater',
@@ -38,14 +38,14 @@ return [
             'class' => '',
             'id' => '',
         ],
-        'collapsed' => 'field_overlay_section_heading'. $suffix,
+        'collapsed' => 'field_overlay_section_heading'.$suffix,
         'min' => 1,
         'max' => 2,
         'layout' => 'block',
         'button_label' => 'Add Section',
         'sub_fields' => [
             [
-                'key' => 'field_overlay_section_heading'. $suffix,
+                'key' => 'field_overlay_section_heading'.$suffix,
                 'label' => 'Heading',
                 'name' => 'overlay_section_heading',
                 'type' => 'text',
@@ -64,7 +64,7 @@ return [
                 'maxlength' => 32,
             ],
             [
-                'key' => 'field_overlay_section_body'. $suffix,
+                'key' => 'field_overlay_section_body'.$suffix,
                 'label' => 'Body',
                 'name' => 'overlay_section_body',
                 'type' => 'textarea',
@@ -83,7 +83,7 @@ return [
                 'maxlength' => 280,
             ],
             [
-                'key' => 'field_overlay_section_button_text'. $suffix,
+                'key' => 'field_overlay_section_button_text'.$suffix,
                 'label' => 'Button Text',
                 'name' => 'overlay_section_button_text',
                 'type' => 'text',
@@ -102,7 +102,7 @@ return [
                 'maxlength' => 26,
             ],
             [
-                'key' => 'field_overlay_section_button_url'. $suffix,
+                'key' => 'field_overlay_section_button_url'.$suffix,
                 'label' => 'Button URL',
                 'name' => 'overlay_section_button_url',
                 'type' => 'link',
@@ -136,7 +136,7 @@ return [
             //     'ui_off_text' => '',
             // ),
             [
-                'key' => 'field_overlay_section_button_description'. $suffix,
+                'key' => 'field_overlay_section_button_description'.$suffix,
                 'label' => 'Button Link Description',
                 'name' => 'overlay_section_button_description',
                 'type' => 'text',
@@ -155,7 +155,7 @@ return [
                 'maxlength' => '',
             ],
             [
-                'key' => 'field_overlay_section_background_color'. $suffix,
+                'key' => 'field_overlay_section_background_color'.$suffix,
                 'label' => 'Background Color',
                 'name' => 'overlay_section_background_color',
                 'type' => 'select',
@@ -187,7 +187,7 @@ return [
                 'placeholder' => '',
             ],
             [
-                'key' => 'field_overlay_section_image'. $suffix,
+                'key' => 'field_overlay_section_image'.$suffix,
                 'label' => 'Image',
                 'name' => 'overlay_section_image',
                 'type' => 'image',
@@ -213,7 +213,7 @@ return [
         ],
     ],
     [
-        'key' => 'field_overlay_geo_valid'. $suffix,
+        'key' => 'field_overlay_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
@@ -237,7 +237,7 @@ return [
         'return_format' => 'value',
     ],
     [
-        'key' => 'field_overlay_regions'. $suffix,
+        'key' => 'field_overlay_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
@@ -246,7 +246,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_overlay_geo_valid'. $suffix,
+                    'field' => 'field_overlay_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
@@ -262,26 +262,26 @@ return [
         'endpoint' => 0,
     ],
     [
-		'key' => 'field_overlay_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'overlay_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => [
+        'key' => 'field_overlay_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'overlay_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
             [
                 [
-                    'field' => 'field_overlay_geo_valid'. $suffix,
+                    'field' => 'field_overlay_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
             ],
         ],
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'include' => 'Include',
@@ -291,21 +291,21 @@ return [
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
+        'return_format' => 'value',
     ],
     [
-		'key' => 'field_overlay_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'overlay_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => 0,
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'key' => 'field_overlay_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'overlay_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'central' => 'Central',

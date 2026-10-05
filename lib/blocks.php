@@ -1,103 +1,106 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  *
  * Custom ACF Blocks
- * 
+ *
  */
 
 add_action('acf/init', 'uams_register_blocks');
-function uams_register_blocks(): void {
+function uams_register_blocks(): void
+{
 
     // check function exists.
-    if( function_exists('acf_register_block_type') ) {
+    if (function_exists('acf_register_block_type')) {
 
         acf_register_block_type([
-            'name'              => 'action-bar',
-            'title'             => __('UAMS Action Bar'),
-            'description'       => __('Action Bar.'),
-            'category'          => 'common',
-            'icon'              => 'admin-links',
-            'keywords'          => ['uams', 'action bar', 'links'],
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'supports'          => [ 'anchor' => true ],
-            'render_template'   => 'blocks/action-bar.php',
+            'name' => 'action-bar',
+            'title' => __('UAMS Action Bar'),
+            'description' => __('Action Bar.'),
+            'category' => 'common',
+            'icon' => 'admin-links',
+            'keywords' => ['uams', 'action bar', 'links'],
+            'mode' => 'auto',
+            'align' => 'full',
+            'supports' => ['anchor' => true],
+            'render_template' => 'blocks/action-bar.php',
         ]);
         acf_register_block_type([
-            'name'              => 'call-out',
-            'title'             => __('UAMS Call-Out'),
-            'description'       => __('Call-Out.'),
-            'category'          => 'common',
-            'icon'              => 'megaphone',
-            'keywords'          => ['uams', 'callout', 'call-out', 'text'],
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'supports'          => [ 'anchor' => true ],
-            'render_template'   => 'blocks/call-out.php',
+            'name' => 'call-out',
+            'title' => __('UAMS Call-Out'),
+            'description' => __('Call-Out.'),
+            'category' => 'common',
+            'icon' => 'megaphone',
+            'keywords' => ['uams', 'callout', 'call-out', 'text'],
+            'mode' => 'auto',
+            'align' => 'full',
+            'supports' => ['anchor' => true],
+            'render_template' => 'blocks/call-out.php',
         ]);
         acf_register_block_type([
-            'name'              => 'cta',
-            'title'             => __('UAMS CTA Bar'),
-            'description'       => __('Call-to-Action (CTA) Bar.'),
-            'category'          => 'common',
-            'icon'              => 'format-status',
-            'keywords'          => ['uams', 'cta', 'call-to-action', 'call to action', 'button'],
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'supports'          => [ 'anchor' => true ],
-            'render_template'   => 'blocks/cta.php',
+            'name' => 'cta',
+            'title' => __('UAMS CTA Bar'),
+            'description' => __('Call-to-Action (CTA) Bar.'),
+            'category' => 'common',
+            'icon' => 'format-status',
+            'keywords' => ['uams', 'cta', 'call-to-action', 'call to action', 'button'],
+            'mode' => 'auto',
+            'align' => 'full',
+            'supports' => ['anchor' => true],
+            'render_template' => 'blocks/cta.php',
         ]);
         acf_register_block_type([
-            'name'              => 'hero',
-            'title'             => __('UAMS Hero'),
-            'description'       => __('UAMS Hero / Slideshow.'),
-            'category'          => 'common',
-            'icon'              => 'images-alt2',
-            'keywords'          => ['uams', 'slides', 'slideshow', 'hero'],
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'supports'          => [ 'anchor' => true ],
-            'render_template'   => 'blocks/hero.php',
+            'name' => 'hero',
+            'title' => __('UAMS Hero'),
+            'description' => __('UAMS Hero / Slideshow.'),
+            'category' => 'common',
+            'icon' => 'images-alt2',
+            'keywords' => ['uams', 'slides', 'slideshow', 'hero'],
+            'mode' => 'auto',
+            'align' => 'full',
+            'supports' => ['anchor' => true],
+            'render_template' => 'blocks/hero.php',
         ]);
         acf_register_block_type([
-            'name'              => 'link-list',
-            'title'             => __('UAMS Link List'),
-            'description'       => __('A list of linked tiles.'),
-            'category'          => 'common',
-            'icon'              => 'admin-links',
-            'keywords'          => ['uams', 'link', 'links', 'list'],
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'supports'          => [ 'anchor' => true ],
-            'render_template'   => 'blocks/link-list.php',
+            'name' => 'link-list',
+            'title' => __('UAMS Link List'),
+            'description' => __('A list of linked tiles.'),
+            'category' => 'common',
+            'icon' => 'admin-links',
+            'keywords' => ['uams', 'link', 'links', 'list'],
+            'mode' => 'auto',
+            'align' => 'full',
+            'supports' => ['anchor' => true],
+            'render_template' => 'blocks/link-list.php',
         ]);
         if (class_exists('UAMS_Syndicate_News_Base')) { // Add block if news syndication plugin is active
             acf_register_block_type([
-                'name'              => 'uams-news',
-                'title'             => __('UAMS News'),
-                'description'       => __('UAMS News Syndication'),
-                'category'          => 'common',
-                'icon'              => 'rss',
-                'keywords'          => ['uams', 'news', 'syndication'],
-                'mode'              => 'auto',
-                'align'             => 'full',
-                'supports'          => [ 'anchor' => true ],
-                'render_template'   => 'blocks/news.php',
+                'name' => 'uams-news',
+                'title' => __('UAMS News'),
+                'description' => __('UAMS News Syndication'),
+                'category' => 'common',
+                'icon' => 'rss',
+                'keywords' => ['uams', 'news', 'syndication'],
+                'mode' => 'auto',
+                'align' => 'full',
+                'supports' => ['anchor' => true],
+                'render_template' => 'blocks/news.php',
             ]);
         }
-        
+
         acf_register_block_type([
-            'name'              => 'text-overlay',
-            'title'             => __('UAMS Text & Image Overlay'),
-            'description'       => __('Text and a button on top of an image.'),
-            'category'          => 'common',
-            'icon'              => 'format-image',
-            'keywords'          => ['uams', 'text', 'image', 'overlay'],
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'supports'          => [ 'anchor' => true ],
-            'render_template'   => 'blocks/overlay.php',
+            'name' => 'text-overlay',
+            'title' => __('UAMS Text & Image Overlay'),
+            'description' => __('Text and a button on top of an image.'),
+            'category' => 'common',
+            'icon' => 'format-image',
+            'keywords' => ['uams', 'text', 'image', 'overlay'],
+            'mode' => 'auto',
+            'align' => 'full',
+            'supports' => ['anchor' => true],
+            'render_template' => 'blocks/overlay.php',
         ]);
         // acf_register_block_type(array(
         //     'name'              => 'post-category-tile',
@@ -122,76 +125,76 @@ function uams_register_blocks(): void {
         //     'render_template'   => 'blocks/post-category-tiles.php',
         // ));
         acf_register_block_type([
-            'name'              => 'image-side',
-            'title'             => __('UAMS Side-by-Side Image & Text'),
-            'description'       => __('Image on one side, text on the other side.'),
-            'category'          => 'common',
-            'icon'              => 'id',
-            'keywords'          => ['uams', 'text', 'image', 'side'],
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'supports'          => [ 'anchor' => true ],
-            'render_template'   => 'blocks/image-side-by-side.php',
+            'name' => 'image-side',
+            'title' => __('UAMS Side-by-Side Image & Text'),
+            'description' => __('Image on one side, text on the other side.'),
+            'category' => 'common',
+            'icon' => 'id',
+            'keywords' => ['uams', 'text', 'image', 'side'],
+            'mode' => 'auto',
+            'align' => 'full',
+            'supports' => ['anchor' => true],
+            'render_template' => 'blocks/image-side-by-side.php',
         ]);
         acf_register_block_type([
-            'name'              => 'text-stacked',
-            'title'             => __('UAMS Stacked Image & Text'),
-            'description'       => __('Stacked Image & Text'),
-            'category'          => 'common',
-            'icon'              => 'screenoptions',
-            'keywords'          => ['uams', 'text', 'image', 'stack', 'stacked'],
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'supports'          => [ 'anchor' => true ],
-            'render_template'   => 'blocks/stacked.php',
+            'name' => 'text-stacked',
+            'title' => __('UAMS Stacked Image & Text'),
+            'description' => __('Stacked Image & Text'),
+            'category' => 'common',
+            'icon' => 'screenoptions',
+            'keywords' => ['uams', 'text', 'image', 'stack', 'stacked'],
+            'mode' => 'auto',
+            'align' => 'full',
+            'supports' => ['anchor' => true],
+            'render_template' => 'blocks/stacked.php',
         ]);
         acf_register_block_type([
-            'name'              => 'livewhale-calendar',
-            'title'             => __('UAMS LiveWhale Calendar'),
-            'description'       => __('LiveWhale widget'),
-            'category'          => 'common',
-            'icon'              => 'calendar-alt',
-            'keywords'          => ['uams', 'calendar', 'livewhale'],
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'supports'          => [ 'anchor' => true ],
-            'render_template'   => 'blocks/livewhale.php',
+            'name' => 'livewhale-calendar',
+            'title' => __('UAMS LiveWhale Calendar'),
+            'description' => __('LiveWhale widget'),
+            'category' => 'common',
+            'icon' => 'calendar-alt',
+            'keywords' => ['uams', 'calendar', 'livewhale'],
+            'mode' => 'auto',
+            'align' => 'full',
+            'supports' => ['anchor' => true],
+            'render_template' => 'blocks/livewhale.php',
         ]);
         acf_register_block_type([
-            'name'              => 'uams-gallery',
-            'title'             => __('UAMS Gallery'),
-            'description'       => __('Custom Gallery with lightbox'),
-            'category'          => 'common',
-            'icon'              => 'format-gallery',
-            'keywords'          => ['uams', 'gallery'],
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'supports'          => [ 'anchor' => true ],
-            'render_template'   => 'blocks/gallery.php',
+            'name' => 'uams-gallery',
+            'title' => __('UAMS Gallery'),
+            'description' => __('Custom Gallery with lightbox'),
+            'category' => 'common',
+            'icon' => 'format-gallery',
+            'keywords' => ['uams', 'gallery'],
+            'mode' => 'auto',
+            'align' => 'full',
+            'supports' => ['anchor' => true],
+            'render_template' => 'blocks/gallery.php',
         ]);
         acf_register_block_type([
-            'name'              => 'uams-content',
-            'title'             => __('UAMS Content Block'),
-            'description'       => __('Base content is a section block'),
-            'category'          => 'common',
-            'icon'              => 'analytics',
-            'keywords'          => ['uams', 'content'],
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'supports'          => [ 'anchor' => true ],
-            'render_template'   => 'blocks/content.php',
-		]);
+            'name' => 'uams-content',
+            'title' => __('UAMS Content Block'),
+            'description' => __('Base content is a section block'),
+            'category' => 'common',
+            'icon' => 'analytics',
+            'keywords' => ['uams', 'content'],
+            'mode' => 'auto',
+            'align' => 'full',
+            'supports' => ['anchor' => true],
+            'render_template' => 'blocks/content.php',
+        ]);
         acf_register_block_type([
-            'name'              => 'counter-list',
-            'title'             => __('UAMS Counter List'),
-            'description'       => __('Counter List'),
-            'category'          => 'common',
-            'icon'              => 'clock',
-            'keywords'          => ['uams', 'counter', 'list'],
-            'mode'              => 'auto',
-            'align'             => 'full',
-            'supports'          => [ 'anchor' => true ],
-            'render_template'   => 'blocks/counter.php',
+            'name' => 'counter-list',
+            'title' => __('UAMS Counter List'),
+            'description' => __('Counter List'),
+            'category' => 'common',
+            'icon' => 'clock',
+            'keywords' => ['uams', 'counter', 'list'],
+            'mode' => 'auto',
+            'align' => 'full',
+            'supports' => ['anchor' => true],
+            'render_template' => 'blocks/counter.php',
         ]);
         // acf_register_block_type(array(
         //     'name'              => 'block',
@@ -203,23 +206,23 @@ function uams_register_blocks(): void {
         //     'mode'              => 'auto',
         //     'align'             => 'full',
         //     'render_template'   => 'blocks/block.php',
-		// ));
+        // ));
         acf_register_block_type([
-            'name'              => 'uams-section',
-            'title'             => __('UAMS Section'),
-            'description'       => __('Section - Inner block.'),
-            'category'          => 'common',
-            'icon'              => '',
-            'keywords'          => ['uams', 'inner', 'block'],
-            'mode'              => 'preview',
-            'supports'          => [
-                'align'             => true,
-                'anchor'            => true,
-                'customClassName'   => true,
-                'jsx'               => true,
+            'name' => 'uams-section',
+            'title' => __('UAMS Section'),
+            'description' => __('Section - Inner block.'),
+            'category' => 'common',
+            'icon' => '',
+            'keywords' => ['uams', 'inner', 'block'],
+            'mode' => 'preview',
+            'supports' => [
+                'align' => true,
+                'anchor' => true,
+                'customClassName' => true,
+                'jsx' => true,
             ],
-            'render_template'   => 'blocks/section.php',
-		]);
+            'render_template' => 'blocks/section.php',
+        ]);
     }
 }
 
@@ -227,22 +230,22 @@ if (function_exists('acf_add_local_field_group')) {
     // Use single source
     $suffix = '_b';
     // Blocks
-    $action_bar = require( get_stylesheet_directory() .'/acf_fields/action-bar.php' );
-    $call_out = require( get_stylesheet_directory() .'/acf_fields/call-out.php' );
-    $cta = require( get_stylesheet_directory() .'/acf_fields/cta.php' );
-    $hero = require( get_stylesheet_directory() .'/acf_fields/hero.php' );
-    $link_list = require( get_stylesheet_directory() .'/acf_fields/link-list.php' );
-    $news = require( get_stylesheet_directory() .'/acf_fields/news.php' );
-    $overlay = require( get_stylesheet_directory() .'/acf_fields/overlay.php' );
+    $action_bar = require get_stylesheet_directory().'/acf_fields/action-bar.php';
+    $call_out = require get_stylesheet_directory().'/acf_fields/call-out.php';
+    $cta = require get_stylesheet_directory().'/acf_fields/cta.php';
+    $hero = require get_stylesheet_directory().'/acf_fields/hero.php';
+    $link_list = require get_stylesheet_directory().'/acf_fields/link-list.php';
+    $news = require get_stylesheet_directory().'/acf_fields/news.php';
+    $overlay = require get_stylesheet_directory().'/acf_fields/overlay.php';
     // $post_tile = require( get_stylesheet_directory() .'/acf_fields/post-category-tile.php' );
     // $post_tiles = require( get_stylesheet_directory() .'/acf_fields/post-category-tiles.php' );
-    $side_by_side = require( get_stylesheet_directory() .'/acf_fields/image-side-by-side.php' );
-    $stacked = require( get_stylesheet_directory() .'/acf_fields/stacked.php' );
-    $livewhale = require( get_stylesheet_directory() .'/acf_fields/livewhale.php' );
-    $gallery = require( get_stylesheet_directory() .'/acf_fields/gallery.php' );
-    $content = require( get_stylesheet_directory() .'/acf_fields/content.php' );
-    $section = require( get_stylesheet_directory() .'/acf_fields/section.php' );
-    $counter_list = require( get_stylesheet_directory() .'/acf_fields/counter.php' );
+    $side_by_side = require get_stylesheet_directory().'/acf_fields/image-side-by-side.php';
+    $stacked = require get_stylesheet_directory().'/acf_fields/stacked.php';
+    $livewhale = require get_stylesheet_directory().'/acf_fields/livewhale.php';
+    $gallery = require get_stylesheet_directory().'/acf_fields/gallery.php';
+    $content = require get_stylesheet_directory().'/acf_fields/content.php';
+    $section = require get_stylesheet_directory().'/acf_fields/section.php';
+    $counter_list = require get_stylesheet_directory().'/acf_fields/counter.php';
     // Add local field group for UAMS Action Bar Block
     acf_add_local_field_group([
         'key' => 'group_5cf9847426451',

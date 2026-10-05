@@ -5,11 +5,11 @@ declare(strict_types=1);
 /*
  *
  * Counter List Fields
- * 
+ *
  */
 return [
     [
-        'key' => 'field_counter_list_intro'. $suffix,
+        'key' => 'field_counter_list_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
@@ -26,7 +26,7 @@ return [
         'esc_html' => 0,
     ],
     [
-        'key' => 'field_counter_list_heading'. $suffix,
+        'key' => 'field_counter_list_heading'.$suffix,
         'label' => 'Heading',
         'name' => 'counter_list_heading',
         'type' => 'text',
@@ -45,7 +45,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_counter_list_hide_heading'. $suffix,
+        'key' => 'field_counter_list_hide_heading'.$suffix,
         'label' => 'Hide Heading?',
         'name' => 'counter_list_hide_heading',
         'type' => 'true_false',
@@ -64,7 +64,7 @@ return [
         'ui_off_text' => '',
     ],
     [
-        'key' => 'field_counter_list_description'. $suffix,
+        'key' => 'field_counter_list_description'.$suffix,
         'label' => 'Counter List Description',
         'name' => 'counter_list_description',
         'type' => 'textarea',
@@ -101,7 +101,7 @@ return [
             'month' => 'Beginning of this month',
             'year' => 'Beginning of this year',
             'custom' => 'Custom Date/Time',
-            //'user' => 'User Input Date/Time',
+            // 'user' => 'User Input Date/Time',
         ],
         'default_value' => [
             0 => 'day',
@@ -139,7 +139,7 @@ return [
         'first_day' => 0,
     ],
     [
-        'key' => 'field_counter_list_background_color'. $suffix,
+        'key' => 'field_counter_list_background_color'.$suffix,
         'label' => 'Background Color',
         'name' => 'counter_list_background_color',
         'type' => 'select',
@@ -193,7 +193,7 @@ return [
     //     'ui_off_text' => '',
     // ),
     [
-        'key' => 'field_counter_list_section'. $suffix,
+        'key' => 'field_counter_list_section'.$suffix,
         'label' => 'Counter Items',
         'name' => 'counter_list_section',
         'type' => 'repeater',
@@ -205,14 +205,14 @@ return [
             'class' => '',
             'id' => '',
         ],
-        'collapsed' => 'field_counter_list_section_title'. $suffix,
+        'collapsed' => 'field_counter_list_section_title'.$suffix,
         'min' => 1,
         'max' => 0,
         'layout' => 'block',
         'button_label' => 'Add Counter Item',
         'sub_fields' => [
             [
-                'key' => 'field_counter_list_section_title'. $suffix,
+                'key' => 'field_counter_list_section_title'.$suffix,
                 'label' => 'Counter Item Title',
                 'name' => 'counter_list_section_title',
                 'type' => 'text',
@@ -231,7 +231,7 @@ return [
                 'maxlength' => '',
             ],
             [
-                'key' => 'field_counter_list_section_unit'. $suffix,
+                'key' => 'field_counter_list_section_unit'.$suffix,
                 'label' => 'Counter Item Unit Singular',
                 'name' => 'counter_list_section_unit',
                 'type' => 'text',
@@ -250,7 +250,7 @@ return [
                 'maxlength' => 90,
             ],
             [
-                'key' => 'field_counter_list_section_units'. $suffix,
+                'key' => 'field_counter_list_section_units'.$suffix,
                 'label' => 'Counter Item Unit Plural',
                 'name' => 'counter_list_section_units',
                 'type' => 'text',
@@ -269,7 +269,7 @@ return [
                 'maxlength' => 90,
             ],
             [
-                'key' => 'field_counter_list_section_rate'. $suffix,
+                'key' => 'field_counter_list_section_rate'.$suffix,
                 'label' => 'Rate of Increase',
                 'name' => 'counter_list_section_rate',
                 'type' => 'number',

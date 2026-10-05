@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 /*
  *
- * Hero Block Fields 
- * 
+ * Hero Block Fields
+ *
  */
 return [
     [
-        'key' => 'field_hero_intro'. $suffix,
+        'key' => 'field_hero_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
@@ -26,7 +26,7 @@ return [
         'esc_html' => 0,
     ],
     [
-        'key' => 'field_hero_intro'. $suffix,
+        'key' => 'field_hero_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
@@ -43,7 +43,7 @@ return [
         'esc_html' => 0,
     ],
     [
-        'key' => 'field_hero_repeater'. $suffix,
+        'key' => 'field_hero_repeater'.$suffix,
         'label' => 'Hero Slide(s)',
         'name' => 'hero',
         'type' => 'repeater',
@@ -56,7 +56,7 @@ return [
             'id' => '',
         ],
         'acfe_permissions' => '',
-        'collapsed' => 'field_hero_heading'. $suffix,
+        'collapsed' => 'field_hero_heading'.$suffix,
         'min' => 1,
         'max' => 4,
         'layout' => 'block',
@@ -80,7 +80,7 @@ return [
                 'esc_html' => 0,
             ],
             [
-                'key' => 'field_hero_text_info'. $suffix,
+                'key' => 'field_hero_text_info'.$suffix,
                 'label' => 'Text Information',
                 'name' => '',
                 'type' => 'accordion',
@@ -97,7 +97,7 @@ return [
                 'endpoint' => 0,
             ],
             [
-                'key' => 'field_hero_heading'. $suffix,
+                'key' => 'field_hero_heading'.$suffix,
                 'label' => 'Heading',
                 'name' => 'hero_heading',
                 'type' => 'text',
@@ -116,7 +116,7 @@ return [
                 'maxlength' => 49,
             ],
             [
-                'key' => 'field_hero_body'. $suffix,
+                'key' => 'field_hero_body'.$suffix,
                 'label' => 'Body',
                 'name' => 'hero_body',
                 'type' => 'textarea',
@@ -135,7 +135,7 @@ return [
                 'new_lines' => '',
             ],
             [
-                'key' => 'field_hero_button_text'. $suffix,
+                'key' => 'field_hero_button_text'.$suffix,
                 'label' => 'Button Text',
                 'name' => 'hero_button_text',
                 'type' => 'text',
@@ -154,7 +154,7 @@ return [
                 'maxlength' => '29',
             ],
             [
-                'key' => 'field_hero_button_url'. $suffix,
+                'key' => 'field_hero_button_url'.$suffix,
                 'label' => 'Button Link',
                 'name' => 'hero_button_url',
                 'type' => 'link',
@@ -163,7 +163,7 @@ return [
                 'conditional_logic' => [
                     [
                         [
-                            'field' => 'field_hero_button_text'. $suffix,
+                            'field' => 'field_hero_button_text'.$suffix,
                             'operator' => '!=empty',
                         ],
                     ],
@@ -202,7 +202,7 @@ return [
             //     'ui_off_text' => '',
             // ),
             [
-                'key' => 'field_hero_button_description'. $suffix,
+                'key' => 'field_hero_button_description'.$suffix,
                 'label' => 'Button Link Description',
                 'name' => 'hero_button_description',
                 'type' => 'text',
@@ -211,7 +211,7 @@ return [
                 'conditional_logic' => [
                     [
                         [
-                            'field' => 'field_hero_button_text'. $suffix,
+                            'field' => 'field_hero_button_text'.$suffix,
                             'operator' => '!=empty',
                         ],
                     ],
@@ -228,7 +228,7 @@ return [
                 'maxlength' => '',
             ],
             [
-                'key' => 'field_hero_disable'. $suffix,
+                'key' => 'field_hero_disable'.$suffix,
                 'label' => 'Disable this slide?',
                 'name' => 'hero_disable',
                 'type' => 'true_false',
@@ -248,7 +248,7 @@ return [
                 'ui_off_text' => '',
             ],
             [
-                'key' => 'field_hero_image_info'. $suffix,
+                'key' => 'field_hero_image_info'.$suffix,
                 'label' => 'Image Information',
                 'name' => '',
                 'type' => 'accordion',
@@ -265,7 +265,7 @@ return [
                 'endpoint' => 0,
             ],
             [
-                'key' => 'field_hero_image_intro'. $suffix,
+                'key' => 'field_hero_image_intro'.$suffix,
                 'label' => '',
                 'name' => '',
                 'type' => 'message',
@@ -282,7 +282,7 @@ return [
                 'esc_html' => 0,
             ],
             [
-                'key' => 'field_hero_image_desktop'. $suffix,
+                'key' => 'field_hero_image_desktop'.$suffix,
                 'label' => 'Image Desktop',
                 'name' => 'hero_image_desktop',
                 'type' => 'image',
@@ -306,7 +306,7 @@ return [
                 'mime_types' => '',
             ],
             [
-                'key' => 'field_hero_image_tablet'. $suffix,
+                'key' => 'field_hero_image_tablet'.$suffix,
                 'label' => 'Image Tablet',
                 'name' => 'hero_image_tablet',
                 'type' => 'image',
@@ -330,7 +330,7 @@ return [
                 'mime_types' => '',
             ],
             [
-                'key' => 'field_hero_image_mobile'. $suffix,
+                'key' => 'field_hero_image_mobile'.$suffix,
                 'label' => 'Image Mobile',
                 'name' => 'hero_image_mobile',
                 'type' => 'image',
@@ -354,7 +354,7 @@ return [
                 'mime_types' => '',
             ],
             [
-                'key' => 'field_hero_image_alt_text'. $suffix,
+                'key' => 'field_hero_image_alt_text'.$suffix,
                 'label' => 'Image Alt Text Override',
                 'name' => 'hero_image_alt_text',
                 'type' => 'text',
@@ -373,7 +373,7 @@ return [
                 'maxlength' => 125,
             ],
             [
-                'key' => 'field_hero_color_info'. $suffix,
+                'key' => 'field_hero_color_info'.$suffix,
                 'label' => 'Color Option',
                 'name' => '',
                 'type' => 'accordion',
@@ -391,7 +391,7 @@ return [
                 'endpoint' => 0,
             ],
             [
-                'key' => 'field_hero_background_color'. $suffix,
+                'key' => 'field_hero_background_color'.$suffix,
                 'label' => 'Background Color',
                 'name' => 'hero_background_color',
                 'type' => 'select',
@@ -425,7 +425,7 @@ return [
         ],
     ],
     [
-        'key' => 'field_hero_geo_valid'. $suffix,
+        'key' => 'field_hero_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
@@ -449,7 +449,7 @@ return [
         'return_format' => 'value',
     ],
     [
-        'key' => 'field_hero_regions'. $suffix,
+        'key' => 'field_hero_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
@@ -458,7 +458,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_hero_geo_valid'. $suffix,
+                    'field' => 'field_hero_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
@@ -474,26 +474,26 @@ return [
         'endpoint' => 0,
     ],
     [
-		'key' => 'field_hero_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'hero_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => [
+        'key' => 'field_hero_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'hero_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
             [
                 [
-                    'field' => 'field_hero_geo_valid'. $suffix,
+                    'field' => 'field_hero_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
             ],
         ],
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'include' => 'Include',
@@ -503,21 +503,21 @@ return [
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
+        'return_format' => 'value',
     ],
     [
-		'key' => 'field_hero_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'hero_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => 0,
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'key' => 'field_hero_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'hero_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'central' => 'Central',
