@@ -29,17 +29,18 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 	class WP_Bootstrap_Navwalker extends Walker_Nav_Menu {
 
 		/**
-         * Start Level.
-         *
-         * @see Walker::start_lvl()
-         * @since 3.0.0
-         *
-         * @access public
-         * @param mixed $output Passed by reference. Used to append additional content.
-         * @param int   $depth (default: 0) Depth of page. Used for padding.
-         * @param array $args (default: array()) Arguments.
-         */
-        public function start_lvl( &$output, $depth = 0, $args = [] ): void {
+		 * Start Level.
+		 *
+		 * @see Walker::start_lvl()
+		 * @since 3.0.0
+		 *
+		 * @access public
+		 * @param mixed $output Passed by reference. Used to append additional content.
+		 * @param int   $depth (default: 0) Depth of page. Used for padding.
+		 * @param array $args (default: array()) Arguments.
+		 * @return void
+		 */
+		public function start_lvl( &$output, $depth = 0, $args = array() ) {
 			$indent = str_repeat( "\t", $depth );
 			// find all links with an id in the output.
 			preg_match_all( '/(<a.*?id=\"|\')(.*?)\"|\'.*?>/im', $output, $matches );
@@ -54,27 +55,28 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		}
 
 		/**
-         * Start El.
-         *
-         * @see Walker::start_el()
-         * @since 3.0.0
-         *
-         * @access public
-         * @param mixed $output Passed by reference. Used to append additional content.
-         * @param mixed $item Menu item data object.
-         * @param int   $depth (default: 0) Depth of menu item. Used for padding.
-         * @param array $args (default: array()) Arguments.
-         * @param int   $id (default: 0) Menu item ID.
-         */
-        public function start_el( &$output, $item, $depth = 0, $args = [], $id = 0 ): void {
+		 * Start El.
+		 *
+		 * @see Walker::start_el()
+		 * @since 3.0.0
+		 *
+		 * @access public
+		 * @param mixed $output Passed by reference. Used to append additional content.
+		 * @param mixed $item Menu item data object.
+		 * @param int   $depth (default: 0) Depth of menu item. Used for padding.
+		 * @param array $args (default: array()) Arguments.
+		 * @param int   $id (default: 0) Menu item ID.
+		 * @return void
+		 */
+		public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 			$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
 			$value = '';
 			$class_names = $value;
-			$classes = empty( $item->classes ) ? [] : (array) $item->classes;
+			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
 			// Loop through the array and pick out any special classes that need
 			// to be added to an element other than the main <li>.
-			$extra_link_classes = [];
+			$extra_link_classes = array();
 			$icon_class_string = '';
 			foreach ( $classes as $key => $class ) {
 				// test if this is a disabled link.
@@ -82,7 +84,6 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					$extra_link_classes[] = 'disabled';
 					unset( $classes[ $key ] );
 				}
-                
 				// test for icon classes - Supports Font Awesome and Glyphicons.
 				if ( 'fa' === $class || 'fa-' === substr( $class, 0, 3 ) ) {
 					// Because of the abiguity of just 'fa' at the start both
@@ -95,26 +96,23 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					unset( $classes[ $key ] );
 				}
 			}
-            
 			$classes[] = 'menu-item-' . $item->ID;
 			// BSv4 classname - as of v4-alpha.
 			$classes[] = 'nav-item';
 			// reasign any filtered classes back to the $classes array.
 			$classes = apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args );
-			$class_names = implode( ' ', $classes );
+			$class_names = join( ' ', $classes );
 			if ( $args->has_children ) {
 				$class_names .= ' dropdown';
 			}
-            
 			if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
 				$class_names .= ' active';
 			}
-            
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 			$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args );
 			$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 			$output .= $indent . '<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement"' . $id . $value . $class_names . '>';
-			$atts = [];
+			$atts = array();
 
 			if ( empty( $item->attr_title ) ) {
 				$atts['title']  = ! empty( $item->title )   ? strip_tags( $item->title ) : '';
@@ -142,17 +140,22 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					$atts['class']	= 'nav-link';
 				}
 			}
+			// Loop through the array of extra link classes plucked from the
+			// parent <li>s classes array.
+			if ( ! empty( $extra_link_classes ) ) {
+				foreach ( $extra_link_classes as $link_class ) {
+					if ( ! empty( $link_class ) ) {
+						// update $atts with the extra class link.
+						$atts['class'] .= ' ' . esc_attr( $link_class );
 
-            // Loop through the array of extra link classes plucked from the
-            // parent <li>s classes array.
-            foreach ($extra_link_classes as $link_class) {
-                // update $atts with the extra class link.
-                $atts['class'] .= ' ' . esc_attr( $link_class );
-                // if the modification is a disabled class...
-                // then # the link so it doesn't point anywhere.
-                $atts['href'] = '#';
-            }
-            
+						// if the modification is a disabled class...
+						if ( 'disabled' === $link_class ) {
+							// then # the link so it doesn't point anywhere.
+							$atts['href'] = '#';
+						}
+					}
+				}
+			}
 			// $atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args );
 			$attributes = '';
 			foreach ( $atts as $attr => $value ) {
@@ -161,7 +164,6 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					$attributes .= ' ' . $attr . '="' . $value . '"';
 				}
 			}
-            
 			$item_output = $args->before;
 			$item_output .= '<a' . $attributes . '>';
 
@@ -171,7 +173,6 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				// append an <i> with the icon classes to what is output before links.
 				$icon_html = '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> ';
 			}
-            
 			$item_output .= $args->link_before . $icon_html . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
 			$item_output .= '</a>';
 			$item_output .= $args->after;
@@ -200,15 +201,13 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @param mixed $output Passed by reference. Used to append additional content.
 		 * @return null Null on failure with no changes to parameters.
 		 */
-		public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ): void {
+		public function display_element( $element, &$children_elements, $max_depth, $depth, $args, &$output ) {
 			if ( ! $element ) {
 				return; }
-            
 			$id_field = $this->db_fields['id'];
 			// Display this element.
 			if ( is_object( $args[0] ) ) {
 				$args[0]->has_children = ! empty( $children_elements[ $element->$id_field ] ); }
-            
 			parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
 		}
 
@@ -240,21 +239,18 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					if ( $container_id ) {
 						$fallback_output = ' id="' . esc_attr( $container_id ) . '"';
 					}
-                    
 					if ( $container_class ) {
 						$fallback_output = ' class="' . sanitize_html_class( $container_class ) . '"';
 					}
-                    
 					$fallback_output = '>';
 				}
-                
 				$fallback_output = '<ul';
 				if ( $menu_id ) {
 					$fallback_output = ' id="' . esc_attr( $menu_id ) . '"'; }
-                
 				if ( $menu_class ) {
 					$fallback_output = ' class="' . esc_attr( $menu_class ) . '"'; }
-                
+				$fallback_output = '>';
+				$fallback_output = '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" title="">' . esc_attr( 'Add a menu', '' ) . '</a></li>';
 				$fallback_output = '</ul>';
 				if ( $container ) {
 					$fallback_output = '</' . esc_attr( $container ) . '>';
@@ -266,10 +262,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				} else {
 					return $fallback_output;
 				}
-			}
-
-             // End if().
-            return null;
+			} // End if().
 		}
 	}
 } // End if().
