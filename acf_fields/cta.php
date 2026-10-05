@@ -1,11 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  *
  * CTA Bar Block Fields 
  * 
  */
-return array(
-    array(
+return [
+    [
         'key' => 'field_cta_bar_intro'. $suffix,
         'label' => '',
         'name' => '',
@@ -13,16 +16,16 @@ return array(
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'message' => '<h2>UAMS Call-to-Action (CTA) Bar Block</h2>',
         'new_lines' => '',
         'esc_html' => 0,
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_heading'. $suffix,
         'label' => 'Heading',
         'name' => 'cta_bar_heading',
@@ -30,18 +33,18 @@ return array(
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'default_value' => '',
         'placeholder' => '',
         'prepend' => '',
         'append' => '',
         'maxlength' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_body'. $suffix,
         'label' => 'Body',
         'name' => 'cta_bar_body',
@@ -49,18 +52,18 @@ return array(
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'default_value' => '',
         'tabs' => 'all',
         'toolbar' => 'basic',
         'media_upload' => 0,
         'delay' => 0,
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_action_type'. $suffix,
         'label' => 'Action Type',
         'name' => 'cta_bar_action_type',
@@ -68,124 +71,124 @@ return array(
         'instructions' => 'Only choose None if your action is contained within your body text.',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'choices' => array(
+        ],
+        'choices' => [
             'url' => 'URL',
             'phone' => 'Phone Number',
             'none' => 'None',
-        ),
+        ],
         'allow_null' => 0,
         'default_value' => 'url',
         'layout' => 'vertical',
         'return_format' => 'value',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_action_url_open'. $suffix,
         'label' => 'URL Action',
         'name' => '',
         'type' => 'accordion',
         'instructions' => 'All fields must be populated or your link will not display.',
         'required' => 0,
-        'conditional_logic' => array(
-            array(
-                array(
+        'conditional_logic' => [
+            [
+                [
                     'field' => 'field_cta_bar_action_type'. $suffix,
                     'operator' => '==',
                     'value' => 'url',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'open' => 1,
         'multi_expand' => 0,
         'endpoint' => 0,
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_button_text'. $suffix,
         'label' => 'Button Text',
         'name' => 'cta_bar_button_text',
         'type' => 'text',
         'instructions' => '',
         'required' => 1,
-        'conditional_logic' => array(
-            array(
-                array(
+        'conditional_logic' => [
+            [
+                [
                     'field' => 'field_cta_bar_action_type'. $suffix,
                     'operator' => '==',
                     'value' => 'url',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'default_value' => '',
         'placeholder' => '',
         'prepend' => '',
         'append' => '',
         'maxlength' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_button_url'. $suffix,
         'label' => 'Button URL',
         'name' => 'cta_bar_button_url',
         'type' => 'link',
         'instructions' => '',
         'required' => 1,
-        'conditional_logic' => array(
-            array(
-                array(
+        'conditional_logic' => [
+            [
+                [
                     'field' => 'field_cta_bar_action_type'. $suffix,
                     'operator' => '==',
                     'value' => 'url',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'return_format' => 'array',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_button_description'. $suffix,
         'label' => 'Button Link Description',
         'name' => 'cta_bar_button_description',
         'type' => 'text',
         'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
         'required' => 1,
-        'conditional_logic' => array(
-            array(
-                array(
+        'conditional_logic' => [
+            [
+                [
                     'field' => 'field_cta_bar_action_type'. $suffix,
                     'operator' => '==',
                     'value' => 'url',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'default_value' => '',
         'placeholder' => '',
         'prepend' => '',
         'append' => '',
         'maxlength' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_action_url_close'. $suffix,
         'label' => 'URL Action Close',
         'name' => '',
@@ -193,96 +196,96 @@ return array(
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'acfe_permissions' => '',
         'open' => 1,
         'multi_expand' => 0,
         'endpoint' => 1,
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_action_phone_open'. $suffix,
         'label' => 'Phone Action',
         'name' => '',
         'type' => 'accordion',
         'instructions' => 'All fields must be populated or your telephone number will not display.',
         'required' => 0,
-        'conditional_logic' => array(
-            array(
-                array(
+        'conditional_logic' => [
+            [
+                [
                     'field' => 'field_cta_bar_action_type'. $suffix,
                     'operator' => '==',
                     'value' => 'phone',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'open' => 1,
         'multi_expand' => 0,
         'endpoint' => 0,
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_phone_prepend'. $suffix,
         'label' => 'Text before phone number',
         'name' => 'cta_bar_phone_prepend',
         'type' => 'text',
         'instructions' => 'This, combined with the phone number will generate a short action phrase. Keep this text very short. Do not include the phone number here. Examples: "Call", "Fax Referrals to"',
         'required' => 1,
-        'conditional_logic' => array(
-            array(
-                array(
+        'conditional_logic' => [
+            [
+                [
                     'field' => 'field_cta_bar_action_type'. $suffix,
                     'operator' => '==',
                     'value' => 'phone',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'default_value' => 'Call',
         'placeholder' => '',
         'prepend' => '',
         'append' => '',
         'maxlength' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_phone'. $suffix,
         'label' => 'Phone Number',
         'name' => 'cta_bar_phone',
         'type' => 'text',
         'instructions' => 'Format your phone number using dashes. Include the area code. Example: 999-999-9999',
         'required' => 1,
-        'conditional_logic' => array(
-            array(
-                array(
+        'conditional_logic' => [
+            [
+                [
                     'field' => 'field_cta_bar_action_type'. $suffix,
                     'operator' => '==',
                     'value' => 'phone',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'default_value' => '',
         'placeholder' => '',
         'prepend' => '',
         'append' => '',
         'maxlength' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_action_URL_close'. $suffix,
         'label' => 'Accordion Close',
         'name' => '',
@@ -290,17 +293,17 @@ return array(
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'acfe_permissions' => '',
         'open' => 1,
         'multi_expand' => 0,
         'endpoint' => 1,
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_layout'. $suffix,
         'label' => 'Layout',
         'name' => 'cta_bar_layout',
@@ -308,26 +311,26 @@ return array(
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'choices' => array(
+        ],
+        'choices' => [
             'cta-bar-centered' => 'Centered',
             'cta-bar-weighted' => 'Weighted',
-        ),
-        'default_value' => array(
+        ],
+        'default_value' => [
             0 => 'cta-bar-centered',
-        ),
+        ],
         'allow_null' => 0,
         'multiple' => 0,
         'ui' => 0,
         'return_format' => 'value',
         'ajax' => 0,
         'placeholder' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_size'. $suffix,
         'label' => 'Size',
         'name' => 'cta_bar_size',
@@ -335,27 +338,27 @@ return array(
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'choices' => array(
+        ],
+        'choices' => [
             'small' => 'Small',
             'normal' => 'Normal',
             'large' => 'Large',
-        ),
-        'default_value' => array(
+        ],
+        'default_value' => [
             0 => 'normal',
-        ),
+        ],
         'allow_null' => 0,
         'multiple' => 0,
         'ui' => 0,
         'return_format' => 'value',
         'ajax' => 0,
         'placeholder' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_background_color'. $suffix,
         'label' => 'Background Color',
         'name' => 'cta_bar_background_color',
@@ -363,12 +366,12 @@ return array(
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'choices' => array(
+        ],
+        'choices' => [
             'bg-auto' => 'Auto',
             'bg-white' => 'White',
             'bg-gray' => 'Gray',
@@ -379,18 +382,18 @@ return array(
             'bg-teal' => 'Teal',
             'bg-eggplant' => 'Eggplant',
             'bg-orange' => 'Orange',
-        ),
-        'default_value' => array(
+        ],
+        'default_value' => [
             0 => 'bg-auto',
-        ),
+        ],
         'allow_null' => 0,
         'multiple' => 0,
         'ui' => 0,
         'return_format' => 'value',
         'ajax' => 0,
         'placeholder' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_use_image'. $suffix,
         'label' => 'Use Background Image?',
         'name' => 'cta_bar_use_image',
@@ -398,38 +401,38 @@ return array(
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'message' => '',
         'default_value' => 0,
         'ui' => 1,
         'ui_on_text' => '',
         'ui_off_text' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_bar_image'. $suffix,
         'label' => 'Image',
         'name' => 'cta_bar_image',
         'type' => 'image',
         'instructions' => 'Recommended image dimensions: 5120x2560. Minimum image dimensions: 1920x960. The image will be automatically cropped to a 2:1 aspect ratio.',
         'required' => 1,
-        'conditional_logic' => array(
-            array(
-                array(
+        'conditional_logic' => [
+            [
+                [
                     'field' => 'field_cta_bar_use_image'. $suffix,
                     'operator' => '==',
                     'value' => '1',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'return_format' => 'id',
         'preview_size' => 'thumbnail',
         'library' => 'all',
@@ -440,8 +443,8 @@ return array(
         'max_height' => '',
         'max_size' => '',
         'mime_types' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_geo_valid'. $suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
@@ -449,16 +452,16 @@ return array(
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => 'hidden',
             'id' => '',
-        ),
+        ],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'false' => 'False',
             'true' => 'True',
-        ),
+        ],
         'allow_null' => 0,
         'other_choice' => 0,
         'default_value' => 'false',
@@ -467,65 +470,65 @@ return array(
         'acfe_settings' => '',
         'acfe_validate' => '',
         'save_other_choice' => 0,
-    ),
-    array(
+    ],
+    [
         'key' => 'field_cta_regions'. $suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
         'instructions' => '',
         'required' => 0,
-        'conditional_logic' => array(
-            array(
-                array(
+        'conditional_logic' => [
+            [
+                [
                     'field' => 'field_cta_geo_valid'. $suffix,
                     'operator' => '==',
                     'value' => 'true',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'open' => 0,
         'multi_expand' => 0,
         'endpoint' => 0,
-    ),
-    array(
+    ],
+    [
 		'key' => 'field_cta_bar_geo'. $suffix,
 		'label' => 'Regions',
 		'name' => 'cta_bar_geo',
 		'type' => 'radio',
 		'instructions' => '',
 		'required' => 0,
-		'conditional_logic' => array(
-            array(
-                array(
+		'conditional_logic' => [
+            [
+                [
                     'field' => 'field_cta_geo_valid'. $suffix,
                     'operator' => '==',
                     'value' => 'true',
-                ),
-            ),
-        ),
-		'wrapper' => array(
+                ],
+            ],
+        ],
+		'wrapper' => [
 			'width' => '',
 			'class' => '',
 			'id' => '',
-		),
+		],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'include' => 'Include',
             'exclude' => 'Exclude',
-        ),
+        ],
         'allow_null' => 0,
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
         'return_format' => 'value'
-    ),
-    array(
+    ],
+    [
 		'key' => 'field_cta_bar_geo_region'. $suffix,
 		'label' => 'Regions',
 		'name' => 'cta_bar_geo_region',
@@ -533,21 +536,21 @@ return array(
 		'instructions' => '',
 		'required' => 0,
 		'conditional_logic' => 0,
-		'wrapper' => array(
+		'wrapper' => [
 			'width' => '',
 			'class' => '',
 			'id' => '',
-		),
+		],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'central' => 'Central',
             'northeast' => 'Northeast',
             'northwest' => 'Northwest',
             'southeast' => 'Southeast',
             'southwest' => 'Southwest',
-        ),
-        'default_value' => array(
-        ),
+        ],
+        'default_value' => [
+        ],
         'allow_null' => 0,
         'multiple' => 1,
         'ui' => 1,
@@ -556,5 +559,5 @@ return array(
         'allow_custom' => 0,
         'placeholder' => '',
         'search_placeholder' => '',
-    ),
-);
+    ],
+];

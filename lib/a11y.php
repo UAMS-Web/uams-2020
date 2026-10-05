@@ -26,15 +26,14 @@ function filter_oembed_dataparse( $return, $data, $url ) {
     if ( $has_title_attr && ! empty( $matches[1] ) ) {
         $title = $matches[1];
     }
+
     // Add embed type as title prefix.
-    if ( $title && ! empty( $data->type ) ) {
-        switch ( $data->type ) {
-            // Capitalize first word.
-            case 'video':
-                $title = sprintf( __( '%s:', 'uamswp-network' ), ucfirst( $data->type ) ) . ' ' . $title;
-                break;
+    if ($title && ! empty( $data->type )) {
+        if ($data->type === 'video') {
+            $title = sprintf( __( '%s:', 'uamswp-network' ), ucfirst( $data->type ) ) . ' ' . $title;
         }
     }
+    
     $title = apply_filters( 'uamswp_oembed_title', $title, $return, $data, $url );
     /*
      * If the title attribute already
@@ -43,13 +42,9 @@ function filter_oembed_dataparse( $return, $data, $url ) {
      * Otherwise, add the title attribute.
      */
     if ( $has_title_attr ) {
-        $return = preg_replace_callback( $preg_match, function( $m ) use ( $title ) {
-            return 'title="' . esc_attr($title) . '"';
-        }, $return );
+        $return = preg_replace_callback( $preg_match, fn($m): string => 'title="' . esc_attr($title) . '"', $return );
     } else {
-        $return = preg_replace_callback( '/^\<iframe/i', function( $m ) use ( $title ) {
-            return '<iframe title="' . esc_attr($title) . '"';
-        }, $return );
+        $return = preg_replace_callback( '/^\<iframe/i', fn($m): string => '<iframe title="' . esc_attr($title) . '"', $return );
     }
 
     $return = str_replace( 'frameborder="0"', '', $return ); // Quick strip of frameborder

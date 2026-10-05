@@ -11,12 +11,12 @@
  *
 */
 
-add_action( 'customize_register', function( $wp_customize ) {
+add_action( 'customize_register', function( $wp_customize ): void {
     // Add Default Settings
-    $wp_customize->add_setting( 'uams-2020', array(
+    $wp_customize->add_setting( 'uams-2020', [
         'capability' => 'edit_theme_options',
         'type' => 'theme_mod'
-    ) );
+    ] );
 
     $wp_customize->remove_section( 'genesis_breadcrumbs' );
 

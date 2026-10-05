@@ -1,11 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  *
  * Module Layout Fields
  * 
  */
-return array (
-    array(
+return  [
+    [
         'acfe_flexible_advanced' => 1,
 		'acfe_flexible_stylised_button' => 0,
 		'acfe_flexible_hide_empty_message' => 0,
@@ -25,9 +28,9 @@ return array (
 		'acfe_flexible_remove_delete_button' => 0,
 		'acfe_flexible_lock' => 0,
 		'acfe_flexible_modal_edition' => 0,
-		'acfe_flexible_modal' => array(
+		'acfe_flexible_modal' => [
 			'acfe_flexible_modal_enabled' => '0',
-		),
+		],
 		'acfe_flexible_layouts_state' => '',
 		'acfe_flexible_layouts_remove_collapse' => 0,
         'key' => 'field_uamswp_modules',
@@ -37,13 +40,13 @@ return array (
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'acfe_permissions' => '',
-        'layouts' => array(
+        'layouts' => [
             // 'layout_5d126463e2192' => array(
             //     'key' => 'layout_5d126463e2192',
             //     'name' => 'modules_heading',
@@ -53,7 +56,7 @@ return array (
             //     'min' => '',
             //     'max' => '',
             // ),
-            'layout_content' => array(
+            'layout_content' => [
                 'key' => 'layout_content',
                 'name' => 'modules_uams_content',
                 'label' => 'Content',
@@ -61,8 +64,8 @@ return array (
                 'sub_fields' => $content,
                 'min' => '',
                 'max' => '',
-            ),
-            'layout_modules_action_bar' => array(
+            ],
+            'layout_modules_action_bar' => [
                 'key' => 'layout_modules_action_bar',
                 'name' => 'modules_action_bar',
                 'label' => 'Action Bar',
@@ -70,8 +73,8 @@ return array (
                 'sub_fields' => $action_bar,
                 'min' => '',
                 'max' => '',
-            ),
-            'layout_modules_call_out' => array(
+            ],
+            'layout_modules_call_out' => [
                 'key' => 'layout_modules_call_out',
                 'name' => 'modules_call_out',
                 'label' => 'Call-Out',
@@ -79,8 +82,8 @@ return array (
                 'sub_fields' => $call_out,
                 'min' => '',
                 'max' => '',
-            ),
-            'layout_modules_cta' => array(
+            ],
+            'layout_modules_cta' => [
                 'key' => 'layout_modules_cta',
                 'name' => 'modules_cta',
                 'label' => 'Call-to-Action (CTA) Bar',
@@ -88,8 +91,8 @@ return array (
                 'sub_fields' => $cta,
                 'min' => '',
                 'max' => '',
-            ),
-            'layout_modules_hero' => array(
+            ],
+            'layout_modules_hero' => [
                 'key' => 'layout_modules_hero',
                 'name' => 'modules_hero',
                 'label' => 'Hero',
@@ -97,8 +100,8 @@ return array (
                 'sub_fields' => $hero,
                 'min' => '',
                 'max' => '',
-            ),
-            'layout_modules_link_list' => array(
+            ],
+            'layout_modules_link_list' => [
                 'key' => 'layout_modules_link_list',
                 'name' => 'modules_link_list',
                 'label' => 'Link List',
@@ -106,8 +109,8 @@ return array (
                 'sub_fields' => $link_list,
                 'min' => '',
                 'max' => '',
-            ),
-            'layout_modules_news_grid' => array(
+            ],
+            'layout_modules_news_grid' => [
                 'key' => 'layout_modules_news_grid',
                 'name' => 'modules_news_grid',
                 'label' => 'UAMS News',
@@ -115,8 +118,8 @@ return array (
                 'sub_fields' => $news,
                 'min' => '',
                 'max' => '',
-            ),
-            'layout_modules_text_overlay' => array(
+            ],
+            'layout_modules_text_overlay' => [
                 'key' => 'layout_modules_text_overlay',
                 'name' => 'modules_text_overlay',
                 'label' => 'Text & Image Overlay',
@@ -124,8 +127,8 @@ return array (
                 'sub_fields' => $overlay,
                 'min' => '',
                 'max' => '',
-            ),
-            'layout_modules_post_tile' => array(
+            ],
+            'layout_modules_post_tile' => [
                 'key' => 'layout_modules_post_tile',
                 'name' => 'modules_post_tile',
                 'label' => 'Post Category Tile (Single)',
@@ -133,8 +136,8 @@ return array (
                 'sub_fields' => $post_tile,
                 'min' => '',
                 'max' => '',
-            ),
-            'layout_modules_post_tiles' => array(
+            ],
+            'layout_modules_post_tiles' => [
                 'key' => 'layout_modules_post_tiles',
                 'name' => 'modules_post_tiles',
                 'label' => 'Post Category Tile (Double)',
@@ -142,8 +145,8 @@ return array (
                 'sub_fields' => $post_tiles,
                 'min' => '',
                 'max' => '',
-            ),
-            'layout_modules_image_side' => array(
+            ],
+            'layout_modules_image_side' => [
                 'key' => 'layout_modules_image_side',
                 'name' => 'modules_image_side',
                 'label' => 'Side-by-side Image & Text',
@@ -151,8 +154,8 @@ return array (
                 'sub_fields' => $side_by_side,
                 'min' => '',
                 'max' => '',
-            ),
-            'layout_modules_text_stacked' => array(
+            ],
+            'layout_modules_text_stacked' => [
                 'key' => 'layout_modules_text_stacked',
                 'name' => 'modules_text_stacked',
                 'label' => 'Stacked Image & Text',
@@ -160,8 +163,8 @@ return array (
                 'sub_fields' => $stacked,
                 'min' => '',
                 'max' => '',
-            ),
-            'layout_modules_uams_livewhale' => array(
+            ],
+            'layout_modules_uams_livewhale' => [
                 'key' => 'layout_modules_uams_livewhale',
                 'name' => 'modules_uams_livewhale',
                 'label' => 'Livewhale Calendar',
@@ -169,8 +172,8 @@ return array (
                 'sub_fields' => $livewhale,
                 'min' => '',
                 'max' => '',
-            ),
-            'layout_modules_uams_gallery' => array(
+            ],
+            'layout_modules_uams_gallery' => [
                 'key' => 'layout_modules_uams_gallery',
                 'name' => 'modules_uams_gallery',
                 'label' => 'Gallery',
@@ -178,14 +181,14 @@ return array (
                 'sub_fields' => $gallery,
                 'min' => '',
                 'max' => '',
-            ),
-            'layout_modules_uams_section' => array(
+            ],
+            'layout_modules_uams_section' => [
                 'key' => 'layout_modules_uams_section',
                 'name' => 'modules_uams_section',
                 'label' => 'Section',
                 'display' => 'block',
-                'sub_fields' => array(
-                    array(
+                'sub_fields' => [
+                    [
                         'key' => 'field_modules_uams_section_heading',
                         'label' => 'Heading',
                         'name' => 'modules_uams_section_heading',
@@ -193,18 +196,18 @@ return array (
                         'instructions' => '',
                         'required' => 1,
                         'conditional_logic' => 0,
-                        'wrapper' => array(
+                        'wrapper' => [
                             'width' => '',
                             'class' => '',
                             'id' => '',
-                        ),
+                        ],
                         'default_value' => '',
                         'placeholder' => '',
                         'prepend' => '',
                         'append' => '',
                         'maxlength' => '',
-                    ),
-                    array(
+                    ],
+                    [
                         'key' => 'field_modules_uams_section_hide_heading',
                         'label' => 'Hide Heading',
                         'name' => 'modules_uams_section_hide_heading',
@@ -212,18 +215,18 @@ return array (
                         'instructions' => '',
                         'required' => 0,
                         'conditional_logic' => 0,
-                        'wrapper' => array(
+                        'wrapper' => [
                             'width' => '',
                             'class' => '',
                             'id' => '',
-                        ),
+                        ],
                         'message' => '',
                         'default_value' => 0,
                         'ui' => 1,
                         'ui_on_text' => '',
                         'ui_off_text' => '',
-                    ),
-                    array(
+                    ],
+                    [
                         'key' => 'field_modules_uams_section_background_color',
                         'label' => 'Background Color',
                         'name' => 'modules_uams_section_background_color',
@@ -231,12 +234,12 @@ return array (
                         'instructions' => '',
                         'required' => 0,
                         'conditional_logic' => 0,
-                        'wrapper' => array(
+                        'wrapper' => [
                             'width' => '',
                             'class' => '',
                             'id' => '',
-                        ),
-                        'choices' => array(
+                        ],
+                        'choices' => [
                             'bg-auto' => 'Auto',
                             'bg-white' => 'White',
                             'bg-gray' => 'Gray',
@@ -247,7 +250,7 @@ return array (
                             'bg-teal' => 'Teal',
                             'bg-eggplant' => 'Eggplant',
                             'bg-orange' => 'Orange',
-                        ),
+                        ],
                         'default_value' => 'bg-auto',
                         'allow_null' => 0,
                         'multiple' => 0,
@@ -255,8 +258,8 @@ return array (
                         'return_format' => 'value',
                         'ajax' => 0,
                         'placeholder' => '',
-                    ),
-                    array(
+                    ],
+                    [
                         'key' => 'field_modules_uams_section_flexible_layout',
                         'label' => 'Flexible Layout',
                         'name' => 'modules_uams_section_flexible_layout',
@@ -264,43 +267,43 @@ return array (
                         'instructions' => '',
                         'required' => 0,
                         'conditional_logic' => 0,
-                        'wrapper' => array(
+                        'wrapper' => [
                             'width' => '',
                             'class' => '',
                             'id' => '',
-                        ),
+                        ],
                         'acfe_flexible_advanced' => 1,
                         'acfe_flexible_stylised_button' => 1,
                         'acfe_flexible_layouts_templates' => 0,
                         'acfe_flexible_layouts_placeholder' => 0,
                         'acfe_flexible_layouts_thumbnails' => 0,
                         'acfe_flexible_layouts_settings' => 0,
-                        'acfe_flexible_async' => array(
-                        ),
-                        'acfe_flexible_add_actions' => array(
+                        'acfe_flexible_async' => [
+                        ],
+                        'acfe_flexible_add_actions' => [
                             0 => 'title',
-                        ),
-                        'acfe_flexible_remove_button' => array(
-                        ),
-                        'acfe_flexible_modal_edit' => array(
+                        ],
+                        'acfe_flexible_remove_button' => [
+                        ],
+                        'acfe_flexible_modal_edit' => [
                             'acfe_flexible_modal_edit_enabled' => '1',
                             'acfe_flexible_modal_edit_size' => 'xlarge',
-                        ),
-                        'acfe_flexible_modal' => array(
+                        ],
+                        'acfe_flexible_modal' => [
                             'acfe_flexible_modal_enabled' => '0',
                             'acfe_flexible_modal_title' => false,
                             'acfe_flexible_modal_size' => 'full',
                             'acfe_flexible_modal_col' => '4',
                             'acfe_flexible_modal_categories' => false,
-                        ),
-                        'layouts' => array(
-                            'layout_modules_uams_section_wysiwyg' => array(
+                        ],
+                        'layouts' => [
+                            'layout_modules_uams_section_wysiwyg' => [
                                 'key' => 'layout_modules_uams_section_wysiwyg',
                                 'name' => 'uams_section_wysiwyg',
                                 'label' => 'HTML',
                                 'display' => 'block',
-                                'sub_fields' => array(
-                                    array(
+                                'sub_fields' => [
+                                    [
                                         'key' => 'field_section_wysiwyg_html',
                                         'label' => 'Content / HTML',
                                         'name' => 'section_wysiwyg_html',
@@ -308,18 +311,18 @@ return array (
                                         'instructions' => '',
                                         'required' => 1,
                                         'conditional_logic' => 0,
-                                        'wrapper' => array(
+                                        'wrapper' => [
                                             'width' => '',
                                             'class' => '',
                                             'id' => '',
-                                        ),
+                                        ],
                                         'default_value' => '',
                                         'tabs' => 'all',
                                         'toolbar' => 'full',
                                         'media_upload' => 1,
                                         'delay' => 1,
-                                    ),
-                                ),
+                                    ],
+                                ],
                                 'min' => '',
                                 'max' => '',
                                 'acfe_flexible_render_template' => false,
@@ -330,14 +333,14 @@ return array (
                                 'acfe_flexible_settings_size' => 'medium',
                                 'acfe_flexible_modal_edit_size' => false,
                                 'acfe_flexible_category' => false,
-                            ),
-                            'layout_modules_uams_section_youtube' => array(
+                            ],
+                            'layout_modules_uams_section_youtube' => [
                                 'key' => 'layout_modules_uams_section_youtube',
                                 'name' => 'modules_uams_section_youtube',
                                 'label' => 'Embed / YouTube',
                                 'display' => 'block',
-                                'sub_fields' => array(
-                                    array(
+                                'sub_fields' => [
+                                    [
                                         'key' => 'field_section_youtube_width',
                                         'label' => 'Width',
                                         'name' => 'section_youtube_width',
@@ -345,16 +348,16 @@ return array (
                                         'instructions' => '',
                                         'required' => 0,
                                         'conditional_logic' => 0,
-                                        'wrapper' => array(
+                                        'wrapper' => [
                                             'width' => '',
                                             'class' => '',
                                             'id' => '',
-                                        ),
-                                        'choices' => array(
+                                        ],
+                                        'choices' => [
                                             'aligncenter' => 'Center (Content Width)',
                                             'alignwide' => 'Wide',
                                             'alignfull' => 'Full',
-                                        ),
+                                        ],
                                         'default_value' => 'aligncenter',
                                         'allow_null' => 0,
                                         'multiple' => 0,
@@ -362,8 +365,8 @@ return array (
                                         'return_format' => 'value',
                                         'ajax' => 0,
                                         'placeholder' => '',
-                                    ),
-                                    array(
+                                    ],
+                                    [
                                         'key' => 'field_section_youtube_url',
                                         'label' => 'Embed URL / YouTube URL',
                                         'name' => 'section_youtube_url',
@@ -371,15 +374,15 @@ return array (
                                         'instructions' => '',
                                         'required' => 1,
                                         'conditional_logic' => 0,
-                                        'wrapper' => array(
+                                        'wrapper' => [
                                             'width' => '',
                                             'class' => '',
                                             'id' => '',
-                                        ),
+                                        ],
                                         'default_value' => '',
                                         'placeholder' => '',
-                                    ),
-                                ),
+                                    ],
+                                ],
                                 'min' => '',
                                 'max' => '',
                                 'acfe_flexible_render_template' => false,
@@ -390,8 +393,8 @@ return array (
                                 'acfe_flexible_settings_size' => 'medium',
                                 'acfe_flexible_modal_edit_size' => false,
                                 'acfe_flexible_category' => false,
-                            ),
-                        ),
+                            ],
+                        ],
                         'button_label' => 'Add Row',
                         'min' => '',
                         'max' => '',
@@ -399,14 +402,14 @@ return array (
                         'acfe_flexible_empty_message' => '',
                         'acfe_flexible_layouts_previews' => false,
                         'acfe_flexible_layouts_state' => false,
-                    ),
-                ),
+                    ],
+                ],
                 'min' => '',
                 'max' => '',
-            ),
-        ),
+            ],
+        ],
         'button_label' => 'Add Module',
         'min' => '',
         'max' => '',
-    ),
-);
+    ],
+];

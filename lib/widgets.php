@@ -19,11 +19,11 @@ class UAMSWP_Call_Out_Widget extends WP_Widget {
     /**
     * Register widget with WordPress.
     */
-    function __construct() {
+    public function __construct() {
         parent::__construct(
             'uamswp_callout_widget', // Base ID
             __('UAMS Callout Widget', 'uamswp-uams-2020'), // Name
-            array( 'description' => __( 'UAMS call out widget', 'uamswp-uams-2020' ), 'classname' => 'uamswp-callout-widget' ) // Args
+            [ 'description' => __( 'UAMS call out widget', 'uamswp-uams-2020' ), 'classname' => 'uamswp-callout-widget' ] // Args
         );
     }
 
@@ -35,7 +35,7 @@ class UAMSWP_Call_Out_Widget extends WP_Widget {
     * @param array $args     Widget arguments.
     * @param array $instance Saved values from database.
     */
-    public function widget( $args, $instance ) {
+    public function widget( $args, $instance ): void {
         echo $args['before_widget'];
         // if ( !empty($instance['title']) ) {
         //     echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
@@ -62,7 +62,7 @@ class UAMSWP_Call_Out_Widget extends WP_Widget {
     *
     * @param array $instance Previously saved values from database.
     */
-    public function form( $instance ) {
+    public function form( $instance ): void {
         $title = '';
         if ( isset($instance['title']) ) {
             $title = $instance['title'];
@@ -85,11 +85,9 @@ class UAMSWP_Call_Out_Widget extends WP_Widget {
     *
     * @return array Updated safe values to be saved.
     */
-    public function update( $new_instance, $old_instance ) {
-        $instance = array();
-        $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-
-        return $instance;
+    public function update($new_instance, $old_instance)
+    {
+        return ['title' => ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : ''];
     }
 
 } // class UAMSWP_Call_Out_Widget
@@ -99,11 +97,11 @@ class UAMSWP_CTA_Widget extends WP_Widget {
     /**
     * Register widget with WordPress.
     */
-    function __construct() {
+    public function __construct() {
         parent::__construct(
             'uamswp_cta_widget', // Base ID
             __('UAMS Call-to-Action Widget', 'uamswp-uams-2020'), // Name
-            array( 'description' => __( 'UAMS call to action widget', 'uamswp-uams-2020' ), 'classname' => 'uamswp-cta-widget' ) // Args
+            [ 'description' => __( 'UAMS call to action widget', 'uamswp-uams-2020' ), 'classname' => 'uamswp-cta-widget' ] // Args
         );
     }
 
@@ -115,7 +113,7 @@ class UAMSWP_CTA_Widget extends WP_Widget {
     * @param array $args     Widget arguments.
     * @param array $instance Saved values from database.
     */
-    public function widget( $args, $instance ) {
+    public function widget( $args, $instance ): void {
         echo $args['before_widget'];
         // if ( !empty($instance['title']) ) {
         //     echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
@@ -147,7 +145,7 @@ class UAMSWP_CTA_Widget extends WP_Widget {
     *
     * @param array $instance Previously saved values from database.
     */
-    public function form( $instance ) {
+    public function form( $instance ): void {
         $title = '';
         if ( isset($instance['title']) ) {
             $title = $instance['title'];
@@ -170,17 +168,15 @@ class UAMSWP_CTA_Widget extends WP_Widget {
     *
     * @return array Updated safe values to be saved.
     */
-    public function update( $new_instance, $old_instance ) {
-        $instance = array();
-        $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-
-        return $instance;
+    public function update($new_instance, $old_instance)
+    {
+        return ['title' => ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : ''];
     }
 
 } // class UAMSWP_CTA_Widget
 
 // register UAMSWP widgets
-add_action( 'widgets_init', function(){
+add_action( 'widgets_init', function(): void{
   register_widget( 'UAMSWP_Call_Out_Widget' );
   register_widget( 'UAMSWP_CTA_Widget' );
 });

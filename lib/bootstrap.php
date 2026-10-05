@@ -12,10 +12,10 @@
 */
 
 // Add .row div inside .wrap/.container div
-add_action( 'get_header', function() {
-    $wraps = array(
+add_action( 'get_header', function(): void {
+    $wraps = [
         'footer-widgets'
-    );
+    ];
     
     foreach( $wraps as $wrap ) {
         $context= "genesis_structural_wrap-$wrap";
@@ -28,16 +28,18 @@ function uamswp_filter_structural_wrap( $output, $original_output ) {
     if( 'close' == $original_output ) {
         $output = '</div>' . $output;
     }
-    if ( 'open' == $original_output )  {
-    	$output = $output . '<div class="row">';
+
+    if ('open' == $original_output) {
+        return $output . '<div class="row">';
     }
+    
     return $output;
 }
 
 // Adds Filters Automatically from Array Keys
 // @link https://gist.github.com/bryanwillis/0f22c3ddb0d0b9453ad0
 add_action( 'genesis_meta', 'uamswp_add_array_filters_genesis_attr' );
-function uamswp_add_array_filters_genesis_attr() {
+function uamswp_add_array_filters_genesis_attr(): void {
     $filters = uamswp_merge_genesis_attr_classes();
     
     foreach( array_keys( $filters ) as $context ) {
@@ -48,13 +50,13 @@ function uamswp_add_array_filters_genesis_attr() {
 
 // Clean classes output
 function uamswp_add_markup_sanitize_classes( $attr, $context ) {
-    $classes = array();
+    $classes = [];
     
     if ( has_filter( 'uamswp_clean_classes_output' ) ) {
         $classes = apply_filters( 'uamswp_clean_classes_output', $classes, $context, $attr );
     }
     
-    $value = isset( $classes[$context] ) ? $classes[$context] : array();
+    $value = $classes[$context] ?? [];
     
     if ( is_array( $value ) ) {
         $classes_array = $value;
@@ -70,7 +72,7 @@ function uamswp_add_markup_sanitize_classes( $attr, $context ) {
 // Default array of classes to add
 function uamswp_merge_genesis_attr_classes() {
     global $wp_registered_sidebar;
-    $classes = array(
+    $classes = [
             'content-sidebar-wrap'      => 'row',
             'content'                   => 'col-12 col-md-8',
             'sidebar-primary'           => 'col-12 col-md-4',
@@ -82,9 +84,9 @@ function uamswp_merge_genesis_attr_classes() {
             'comment-list'              => 'list-unstyled',
             // 'home-featured'             => 'jumbotron',
             'entry-image'               => 'img-fluid'
-    );
+    ];
 
-    $navclasses = array();
+    $navclasses = [];
 
     $navclasses[] = 'navbar';
 
@@ -118,7 +120,7 @@ function uamswp_merge_genesis_attr_classes() {
     // Footer Class
     //$footerwidgetbg = get_theme_mod( 'footerwidgetbg', 'dark' );
     
-    $footerwidgetclasses = array();
+    $footerwidgetclasses = [];
     
     //if ( $footerwidgetbg !== 'primary' ) {
     //    $footerwidgetclasses[] = 'text-muted';
@@ -141,8 +143,8 @@ function uamswp_merge_genesis_attr_classes() {
 
     //$classes['site-footer'] = esc_attr( implode( ' ', $footerclasses ) );
     
-    if ( has_filter( 'uamswp_add_classes' ) ) {
-        $classes = apply_filters( 'uamswp_add_classes', $classes );
+    if (has_filter( 'uamswp_add_classes' )) {
+        return apply_filters( 'uamswp_add_classes', $classes );
     }
 
     return $classes;
@@ -151,8 +153,7 @@ function uamswp_merge_genesis_attr_classes() {
 // Adds classes array to uamswp_add_markup_class() for cleaning
 add_filter( 'uamswp_clean_classes_output', 'uamswp_modify_classes_based_on_extras', 10, 3) ;
 function uamswp_modify_classes_based_on_extras( $classes, $context, $attr ) {
-    $classes = uamswp_merge_genesis_attr_classes( $classes );
-    return $classes;
+    return uamswp_merge_genesis_attr_classes();
 }
 
 // Layout
@@ -201,7 +202,5 @@ function uamswp_layout_options_modify_classes_to_add( $classes_to_add ) {
 };
 
 function uamswp_modify_classes_based_on_template( $classes_to_add ) {
-    $classes_to_add = uamswp_layout_options_modify_classes_to_add( $classes_to_add );
-
-    return $classes_to_add;
+    return uamswp_layout_options_modify_classes_to_add( $classes_to_add );
 }

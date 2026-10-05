@@ -39,7 +39,7 @@ remove_action('genesis_after_entry', 'uamswp_list_child_pages');
 // Add Page Header Options
 remove_action( 'genesis_after_header', 'page_options', 5 ); // remove default template action
 add_action( 'genesis_after_header', 'mlp_header_options', 5 );
-function mlp_header_options() {
+function mlp_header_options(): void {
     $id = get_the_id();
     if ( get_field('page_title_options', $id) ) {
         $pageTitle = get_field('page_title_options', $id);

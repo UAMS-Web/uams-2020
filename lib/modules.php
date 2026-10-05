@@ -11,7 +11,7 @@
  * Display Modules
  *
  */
-function uamswp_modules( $post_id = false ) {
+function uamswp_modules( $post_id = false ): void {
 	if( ! function_exists( 'get_field' ) )
 		return;
 	$post_id = $post_id ? intval( $post_id ) : get_the_ID();
@@ -25,7 +25,7 @@ function uamswp_modules( $post_id = false ) {
  * Display Module
  *
  */
-function uamswp_module( $module = array(), $i = false ) {
+function uamswp_module( $module = [], $i = false ): void {
 	if( empty( $module['acf_fc_layout'] ) )
 		return;
 	uamswp_module_open( $module, $i );
@@ -283,7 +283,7 @@ function uamswp_module( $module = array(), $i = false ) {
                     $more_button_url = $module['gallery_more_button_url'] ?? '';
                     $more_button_target = $more_button_url['target'] ?? '';
                     $more_button_description = $module['gallery_more_button_description'] ?? '';
-                    if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto' ) ) {
+                    if ( empty($more_button_color) && ( in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto']) ) ) {
                         $more_button_color = 'primary';
                     } else {
                         $more_button_color = 'white';
@@ -375,7 +375,7 @@ function uamswp_module( $module = array(), $i = false ) {
  * Module Open
  *
  */
-function uamswp_module_open( $module, $i ) {
+function uamswp_module_open( $module, $i ): void {
 	if( uamswp_module_disable( $module ) )
 		return;
 	// $classes = array( 'module' );
@@ -397,7 +397,7 @@ function uamswp_module_open( $module, $i ) {
  * Module Header
  *
  */
-function uamswp_module_header( $module ) {
+function uamswp_module_header( $module ): void {
 	if( !empty( $module['title'] ) ) {
 		echo '<header><h3>' . esc_html( $module['title'] ) . '</h3></header>';
 	}
@@ -406,7 +406,7 @@ function uamswp_module_header( $module ) {
  * Module Close
  *
  */
-function uamswp_module_close( $module, $i ) {
+function uamswp_module_close( $module, $i ): void {
 	if( uamswp_module_disable( $module ) )
 		return;
 	// echo '</div>';
@@ -417,19 +417,17 @@ function uamswp_module_close( $module, $i ) {
  * Module Disable
  *
  */
-function uamswp_module_disable( $module ) {
-	$disable = false;
-	if( 'save_recipes_cta' == $module['acf_fc_layout'] && is_user_logged_in() )
-		$disable = true;
-	return $disable;
+function uamswp_module_disable($module): bool
+{
+    return 'save_recipes_cta' == $module['acf_fc_layout'] && is_user_logged_in();
 }
 /**
  * Has Module
  *
  */
-function uamswp_has_module( $module_to_find = '', $post_id = false ) {
+function uamswp_has_module( $module_to_find = '', $post_id = false ): ?bool {
 	if( ! function_exists( 'get_field' ) )
-		return;
+		return null;
 	$post_id = $post_id ? intval( $post_id ) : get_the_ID();
 	$modules = get_field( 'uamswp_modules', $post_id );
 	$has_module = false;
@@ -440,7 +438,7 @@ function uamswp_has_module( $module_to_find = '', $post_id = false ) {
 	return $has_module;
 }
 
-function display_call_out ($id, $className, $heading, $body, $use_image, $image, $background_color) {
+function display_call_out ($id, $className, $heading, $body, $use_image, $image, $background_color): void {
     ?>
     
     <?php }

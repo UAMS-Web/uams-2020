@@ -1,11 +1,14 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  *
  * Post Category Tile (Single) Block Fields
  * 
  */
-return array(
-    array(
+return [
+    [
         'key' => 'field_post_tile_intro'. $suffix,
         'label' => '',
         'name' => '',
@@ -13,17 +16,17 @@ return array(
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'message' => '<h2>UAMS Post Category Tile (Single) Block</h2>
         <p>This block is only intended to be used on the sidebar layout.</p>',
         'new_lines' => '',
         'esc_html' => 0,
-    ),
-    array(
+    ],
+    [
         'key' => 'field_post_tile_heading'. $suffix,
         'label' => 'Heading',
         'name' => 'post_tile_heading',
@@ -31,18 +34,18 @@ return array(
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'default_value' => '',
         'placeholder' => '',
         'prepend' => '',
         'append' => '',
         'maxlength' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_post_tile_hide_heading'. $suffix,
         'label' => 'Hide Heading?',
         'name' => 'post_tile_hide_heading',
@@ -50,18 +53,18 @@ return array(
         'instructions' => 'The heading is necessary for page hierarchy. But it can be hidden from all but screen readers and search engines. This is <strong>strongly</strong> not recommended in most cases, as the visible heading provides a jumping-in point for users as they scan your page.',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'message' => '',
         'default_value' => 0,
         'ui' => 1,
         'ui_on_text' => '',
         'ui_off_text' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_post_tile_category'. $suffix,
         'label' => 'Post Category',
         'name' => 'post_tile_category',
@@ -69,11 +72,11 @@ return array(
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'taxonomy' => 'category',
         'field_type' => 'select',
         'allow_null' => 0,
@@ -82,46 +85,46 @@ return array(
         'load_terms' => 0,
         'return_format' => 'object',
         'multiple' => 0,
-    ),
-    array(
+    ],
+    [
         'key' => 'field_post_tile_post_button_text'. $suffix,
-        'label' => 'Post Link\'s Button Text',
+        'label' => "Post Link's Button Text",
         'name' => 'post_tile_post_button_text',
         'type' => 'text',
         'instructions' => 'Text for the button linking to the individual post',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'default_value' => '',
         'placeholder' => 'Read the Story',
         'prepend' => '',
         'append' => '',
         'maxlength' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_post_tile_category_button_text'. $suffix,
-        'label' => 'Category Link\'s Button Text',
+        'label' => "Category Link's Button Text",
         'name' => 'post_tile_category_button_text',
         'type' => 'text',
         'instructions' => 'Text for the button linking to the full category',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'default_value' => '',
         'placeholder' => 'View [Category Name] Archive',
         'prepend' => '',
         'append' => '',
         'maxlength' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_post_tile_background_color'. $suffix,
         'label' => 'Background Color',
         'name' => 'post_tile_background_color',
@@ -129,27 +132,27 @@ return array(
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'choices' => array(
+        ],
+        'choices' => [
             'bg-auto' => 'Auto',
             'bg-white' => 'White',
             'bg-gray' => 'Gray',
-        ),
-        'default_value' => array(
+        ],
+        'default_value' => [
             0 => 'bg-auto',
-        ),
+        ],
         'allow_null' => 0,
         'multiple' => 0,
         'ui' => 0,
         'return_format' => 'value',
         'ajax' => 0,
         'placeholder' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_post_tile_geo_valid'. $suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
@@ -157,80 +160,80 @@ return array(
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => 'hidden',
             'id' => '',
-        ),
+        ],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'false' => 'False',
             'true' => 'True',
-        ),
+        ],
         'allow_null' => 0,
         'other_choice' => 0,
         'default_value' => 'false',
         'layout' => 'horizontal',
         'return_format' => 'value',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_post_tile_regions'. $suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
         'instructions' => '',
         'required' => 0,
-        'conditional_logic' => array(
-            array(
-                array(
+        'conditional_logic' => [
+            [
+                [
                     'field' => 'field_post_tile_geo_valid'. $suffix,
                     'operator' => '==',
                     'value' => 'true',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'open' => 0,
         'multi_expand' => 0,
         'endpoint' => 0,
-    ),
-    array(
+    ],
+    [
 		'key' => 'field_post_tile_geo'. $suffix,
 		'label' => 'Regions',
 		'name' => 'post_tile_geo',
 		'type' => 'radio',
 		'instructions' => '',
 		'required' => 0,
-		'conditional_logic' => array(
-            array(
-                array(
+		'conditional_logic' => [
+            [
+                [
                     'field' => 'field_post_tile_geo_valid'. $suffix,
                     'operator' => '==',
                     'value' => 'true',
-                ),
-            ),
-        ),
-		'wrapper' => array(
+                ],
+            ],
+        ],
+		'wrapper' => [
 			'width' => '',
 			'class' => '',
 			'id' => '',
-		),
+		],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'include' => 'Include',
             'exclude' => 'Exclude',
-        ),
+        ],
         'allow_null' => 0,
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
         'return_format' => 'value'
-    ),
-    array(
+    ],
+    [
 		'key' => 'field_post_tile_geo_region'. $suffix,
 		'label' => 'Regions',
 		'name' => 'post_tile_geo_region',
@@ -238,21 +241,21 @@ return array(
 		'instructions' => '',
 		'required' => 0,
 		'conditional_logic' => 0,
-		'wrapper' => array(
+		'wrapper' => [
 			'width' => '',
 			'class' => '',
 			'id' => '',
-		),
+		],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'central' => 'Central',
             'northeast' => 'Northeast',
             'northwest' => 'Northwest',
             'southeast' => 'Southeast',
             'southwest' => 'Southwest',
-        ),
-        'default_value' => array(
-        ),
+        ],
+        'default_value' => [
+        ],
         'allow_null' => 0,
         'multiple' => 1,
         'ui' => 1,
@@ -261,5 +264,5 @@ return array(
         'allow_custom' => 0,
         'placeholder' => '',
         'search_placeholder' => '',
-    ),
-);
+    ],
+];

@@ -4,7 +4,7 @@
  *
 */
 
-function uamswp_add_favicon() { ?>
+function uamswp_add_favicon(): void { ?>
     <?php // generics ?>
     <link rel="icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/favicon/favicon-32x32.png?v=1" sizes="32x32">
     <link rel="icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/favicon/favicon-96x96.png?v=1" sizes="96x96">

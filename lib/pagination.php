@@ -20,6 +20,7 @@ function uamswp_genesis_prev_link_text_numeric( $text ) {
         return '<span aria-hidden="true">&laquo;</span>'
             . '<span class="sr-only">' . __( 'Previous Page', 'uams-2020' ) . '</span>';
     }
+    
     return $text;
 }
 
@@ -28,8 +29,10 @@ function uamswp_genesis_next_link_text_numeric( $text ) {
         return '<span class="sr-only">' . __( 'Next Page', 'uams-2020' ) . '</span>'
             . '<span aria-hidden="true">&raquo;</span>';
     }
+    
     return $text;
 }
+
 // Pagination fix for /%category%/%postname%/
 function remove_page_from_query_string($query_string) {
     if (isset($query_string['name'] ) ) {
@@ -38,6 +41,8 @@ function remove_page_from_query_string($query_string) {
             $query_string['paged'] = $query_string['page'];
         }
     }
+    
 	return $query_string;
 }
+
 add_filter('request', 'remove_page_from_query_string');

@@ -18,28 +18,30 @@ function uamswp_post_image() {
 	$image_id = get_post_thumbnail_id( $post->ID );
 	$image = wp_get_attachment_image_src( $image_id, 'full' );
 	$image = $image[0];
-	if ( $image ) return $image;
+    if ($image) {
+        return $image;
+    }
+    
 	return uamswp_get_first_image();
 }
 
 // Get the First Image Attachment Function
-function uamswp_get_first_image() {
+function uamswp_get_first_image(): string {
 	global $post, $posts;
-	$first_img = '';
 	ob_start();
 	ob_end_clean();
-	$output = preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches );
-	$first_img = "";
-	if ( isset( $matches[1][0] ) )
-		$first_img = $matches[1][0];
-	return $first_img;
+	preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches );
+	
+	return $matches[1][0] ?? "";
 }
 
 // Custom Meta
 add_action( 'genesis_meta', 'uamswp_do_meta' );
-function uamswp_do_meta() {
+function uamswp_do_meta(): void {
 	// Jumbotron
-	if ( is_front_page() && is_active_sidebar( 'home-featured' ) ) add_action( 'genesis_after_header', 'uamswp_do_home_featured' );
+	if (is_front_page() && is_active_sidebar( 'home-featured' )) {
+        add_action( 'genesis_after_header', 'uamswp_do_home_featured' );
+    }
 
 	// Body Class
 	add_filter( 'body_class', 'uamswp_body_class' );
@@ -69,8 +71,9 @@ function uamswp_do_meta() {
 
 // Body Class
 function uamswp_body_class( $args ) {
-	if ( is_page_template( 'page_blog.php' ) )
-		$args[] = 'blog';
+	if (is_page_template( 'page_blog.php' )) {
+        $args[] = 'blog';
+    }
 
 	return $args;
 }
@@ -112,7 +115,7 @@ add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_c
 // Remove gutenberg blocks
 // add_filter( 'allowed_block_types', 'uamswp_allowed_block_types' );
  
-function uamswp_allowed_block_types( $allowed_blocks ) {
+function uamswp_allowed_block_types( $allowed_blocks ): array {
 
 	// get widget blocks and registered by plugins blocks
 	$registered_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
@@ -136,7 +139,7 @@ function uamswp_allowed_block_types( $allowed_blocks ) {
 	$registered_blocks = array_keys( $registered_blocks );
  
 	// merge the whitelist with plugins blocks
-	return array_merge( array(
+	return array_merge( [
 		// Common
 		'core/image',
 		'core/paragraph',
@@ -182,7 +185,7 @@ function uamswp_allowed_block_types( $allowed_blocks ) {
 		// 'core/rss',
 		// 'core/search',
 		// 'core/tag-cloud',
-	), $registered_blocks );
+	], $registered_blocks );
  
 }
 
@@ -201,22 +204,23 @@ function uamswp_allowed_block_types( $allowed_blocks ) {
  */
 function uamswp_disable_editor( $id = false ) {
 
-	$excluded_templates = array(
+	$excluded_templates = [
 		'templates/modules.php',
 		// 'templates/contact.php'
-	);
+	];
 
-	$excluded_ids = array(
+	$excluded_ids = [
 		// get_option( 'page_on_front' )
-	);
+	];
 
-	if( empty( $id ) )
-		return false;
+	if (empty( $id )) {
+        return false;
+    }
 
 	$id = intval( $id );
 	$template = get_page_template_slug( $id );
 
-	return in_array( $id, $excluded_ids ) || in_array( $template, $excluded_templates );
+	return in_array( $id, $excluded_ids, true ) || in_array( $template, $excluded_templates );
 }
 
 /**
@@ -225,15 +229,18 @@ function uamswp_disable_editor( $id = false ) {
  */
 function uamswp_disable_gutenberg( $can_edit, $post_type ) {
 
-	if( ! ( is_admin() && !empty( $_GET['post'] ) ) )
-		return $can_edit;
+	if (!is_admin() || empty( $_GET['post'] )) {
+        return $can_edit;
+    }
 
-	if( uamswp_disable_editor( $_GET['post'] ) )
-		$can_edit = false;
+	if (uamswp_disable_editor( $_GET['post'] )) {
+        return false;
+    }
 
 	return $can_edit;
 
 }
+
 add_filter( 'gutenberg_can_edit_post_type', 'uamswp_disable_gutenberg', 10, 2 );
 add_filter( 'use_block_editor_for_post_type', 'uamswp_disable_gutenberg', 10, 2 );
 
@@ -241,15 +248,17 @@ add_filter( 'use_block_editor_for_post_type', 'uamswp_disable_gutenberg', 10, 2 
  * Disable Classic Editor by template
  *
  */
-function uamswp_disable_classic_editor() {
+function uamswp_disable_classic_editor(): void {
 
 	$screen = get_current_screen();
-	if( 'page' !== $screen->id || ! isset( $_GET['post']) )
-		return;
+	if ('page' !== $screen->id || ! isset( $_GET['post'])) {
+        return;
+    }
 
 	if( uamswp_disable_editor( $_GET['post'] ) ) {
 		remove_post_type_support( 'page', 'editor' );
 	}
 
 }
+
 add_action( 'admin_head', 'uamswp_disable_classic_editor' );

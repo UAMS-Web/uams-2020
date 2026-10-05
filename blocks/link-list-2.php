@@ -94,7 +94,7 @@ if ($geo_display) :
                     <?php if ( $link_list_icons ) { ?>
                         <span class="fa-stack fa-lg">
                             <span class="fas fa-circle fa-stack-2x"></span>
-                            <span class="<?php echo $link_icon ? $link_icon : "fas fa-link" ; ?> fa-stack-1x fa-inverse"></span>
+                            <span class="<?php echo $link_icon ?: "fas fa-link" ; ?> fa-stack-1x fa-inverse"></span>
                         </span>
                     <?php } // endif ?>
                     <h3 class="h5"><a class="stretched-link" href="<?php echo $link_url; ?>"<?php echo $link_target ? ' target="'. $link_target . '"' : ''; ?> aria-label="<?php echo $link_desc; ?>"><?php echo $link_title; ?></a></h3>
