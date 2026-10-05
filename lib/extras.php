@@ -313,7 +313,7 @@ function uamswp_title($html)
             //         } else {
             //             $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | UAMS';
             //         }
-        } elseif (uams_get_site_info()['department'] != 'main' && uams_get_site_info()['department'] != '' && uams_get_site_info()['department'] != 'uams') {
+        } elseif (!in_array(uams_get_site_info()['department'], ['main', '', 'uams'])) {
             if ((uams_get_site_info()['department'] != 'none')) { // Dept / org unit
                 if (is_home() || is_front_page()) {
                     $html = $sitename.' | '.$uams_sitehome;
