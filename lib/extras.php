@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @author       Rotsen Mark Acob <webdevsuperfast.github.io>
  * @copyright    Copyright (c) 2017, Rotsen Mark Acob
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
-*/
+ */
 // Add class to images
 // @link http://stackoverflow.com/a/22078964
 add_filter('the_content', 'uamswp_image_responsive_class');
@@ -313,7 +313,7 @@ function uamswp_title($html)
             //         } else {
             //             $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | UAMS';
             //         }
-        } elseif (!in_array(uams_get_site_info()['department'], ['main', '', 'uams'])) {
+        } elseif (! in_array(uams_get_site_info()['department'], ['main', '', 'uams'])) {
             if ((uams_get_site_info()['department'] != 'none')) { // Dept / org unit
                 if (is_home() || is_front_page()) {
                     $html = $sitename.' | '.$uams_sitehome;

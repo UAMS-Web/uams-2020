@@ -11,6 +11,7 @@ use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamFromDimFetchKeyUseRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\StrictArrayParamDimFetchRector;
+use Rector\TypeDeclaration\Rector\Function_\AddFunctionVoidReturnTypeWhereNoReturnRector;
 // WordPress repositories: uncomment the import below together with the matching
 // `ArrayToFirstClassCallableRector::class` entry in `$sweepOnlyRules`. A `use`
 // inside that array is a parse error; keep the import here with the others.
@@ -131,6 +132,13 @@ return RectorConfig::configure()
     ->withSkip([
         ...$neverRules,
         ...($isSweepProfile ? [] : $sweepOnlyRules),
+        // Vendored TGM / Bootstrap walkers — not first-party.
+        __DIR__.'/lib/modules',
+        // Mixed PHP/HTML template: a void return type before the HTML
+        // section breaks Pint's PHP-Parser (and is noise on an echo-only helper).
+        AddFunctionVoidReturnTypeWhereNoReturnRector::class => [
+            __DIR__.'/lib/favicon.php',
+        ],
     ])
     ->withPreparedSets(
         deadCode: true,
