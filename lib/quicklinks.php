@@ -2,21 +2,21 @@
 /**
  * Quick Links
  *
- * @package      Bootstrap for Genesis
  * @since        1.0
  * @link         http://webdevsuperfast.github.io
+ *
  * @author       Rotsen Mark Acob <webdevsuperfast.github.io>
  * @copyright    Copyright (c) 2015, Rotsen Mark Acob
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
- *
 */
 
 /* Removing Quick Links action via comments in case we decide to bring it back. */
 // add_action( 'genesis_after', 'uamswp_quicklinks', 4 );
 
-function uamswp_quicklinks() {
+function uamswp_quicklinks(): void
+{
 
-	?>
+    ?>
 	<nav id="quick-links" class="closed" aria-label="Quick Links">
 		<button type="button" id="toggle-quick-links-inside" aria-controls="quick-links" aria-expanded="false" aria-label="Toggle Quick Links navigation">
 			<span class="sr-only label">Expand Quick Links</span>
@@ -25,45 +25,45 @@ function uamswp_quicklinks() {
 		<h2 class="">Quick Links</h2>
 		<?php
 
-		if ( site_custom_quicklinks() ) {
+        if (site_custom_quicklinks()) {
 
-			if (
-				( $locations = get_nav_menu_locations() )
-				&&
-				isset($locations[ 'quick-links' ])
-			) {
+            if (
+                ($locations = get_nav_menu_locations())
+                &&
+                isset($locations['quick-links'])
+            ) {
 
-				// Read quick links menu from this site
+                // Read quick links menu from this site
 
-					$menu = wp_get_nav_menu_object( $locations[ 'quick-links' ] );
+                $menu = wp_get_nav_menu_object($locations['quick-links']);
 
-				$menu_items = wp_get_nav_menu_items($menu->term_id);
+                $menu_items = wp_get_nav_menu_items($menu->term_id);
 
-				$menu_list = '<ul class="list-unstyled links links-large" id="menu-quick-links">';
+                $menu_list = '<ul class="list-unstyled links links-large" id="menu-quick-links">';
 
-				foreach ( (array) $menu_items as $key => $menu_item ) {
+                foreach ((array) $menu_items as $menu_item) {
 
-					$title = $menu_item->title;
-					$url = $menu_item->url;
-					$classes = $menu_item->classes;
-					$target = $menu_item->target;
-					$target = !empty($target) ? ' target="'. $target .'"' : '';
-					//$link_title = $menu_item->attr_title;
-					$menu_list .= '<li><a href="' . esc_url( $url ) . '"'. $target .'>';
-					$menu_list .= !empty($classes) ? '<span class="'. implode( " ", $classes ) .' fa-fw"></span>' : '';
-					$menu_list .= $title . '</a></li>';
+                    $title = $menu_item->title;
+                    $url = $menu_item->url;
+                    $classes = $menu_item->classes;
+                    $target = $menu_item->target;
+                    $target = ! empty($target) ? ' target="'.$target.'"' : '';
+                    // $link_title = $menu_item->attr_title;
+                    $menu_list .= '<li><a href="'.esc_url($url).'"'.$target.'>';
+                    $menu_list .= ! empty($classes) ? '<span class="'.implode(' ', $classes).' fa-fw"></span>' : '';
+                    $menu_list .= $title.'</a></li>';
 
-				}
+                }
 
-				$menu_list .= '</ul>';
+                $menu_list .= '</ul>';
 
-				echo $menu_list;
+                echo $menu_list;
 
-			} else {
+            } else {
 
-				// Write Default
+                // Write Default
 
-					?>
+                ?>
 					<ul class="list-unstyled links links-large">
 						<li><a href="https://gus.uams.edu/"><span class="fas fa-graduation-cap fa-fw "></span>GUS</a></li>
 						<li><a href="https://uams-triprofiles.uams.edu/profiles/search/"><span class="fas fa-users fa-fw "></span>Profiles</a></li>
@@ -72,15 +72,15 @@ function uamswp_quicklinks() {
 					</ul>
 					<?php
 
-			}
+            }
 
-		} else {
+        } else {
 
-			uamswp_request_quicklinks();
+            uamswp_request_quicklinks();
 
-		}
+        }
 
-		?>
+    ?>
 		<h3 class="h5">Campus Links</h3>
 		<ul class="list-unstyled links">
 			<li><a href="https://webmail.uams.edu/"><span class="far fa-envelope fa-fw "></span>Webmail</a></li>
@@ -93,200 +93,194 @@ function uamswp_quicklinks() {
 
 }
 
-function uamswp_request_quicklinks() {
+function uamswp_request_quicklinks(): ?bool
+{
 
-	$remote_url = 'https://web.uams.edu/wp-json/menus/v2/quicklinks/';  // Base URL - Currently Dev URL
+    $remote_url = 'https://web.uams.edu/wp-json/menus/v2/quicklinks/';  // Base URL - Currently Dev URL
 
-	if ( 'uamshealth' == uams_get_site_info()['site'] ) {
+    if (uams_get_site_info()['site'] == 'uamshealth') {
 
-		$remote_url = 'https://uamshealth.com/wp-json/menus/v2/quicklinks/'; // UAMS Health URL
+        $remote_url = 'https://uamshealth.com/wp-json/menus/v2/quicklinks/'; // UAMS Health URL
 
-	} elseif ( 'inside' == uams_get_site_info()['site'] ) {
+    } elseif (uams_get_site_info()['site'] == 'inside') {
 
-		$remote_url = 'https://inside.uams.edu/wp-json/menus/v2/quicklinks/'; // Inside URL
+        $remote_url = 'https://inside.uams.edu/wp-json/menus/v2/quicklinks/'; // Inside URL
 
-	}
+    }
 
-	$request = wp_remote_get( $remote_url );  // Dev URL
+    $request = wp_remote_get($remote_url);  // Dev URL
 
-	if ( is_wp_error( $request ) ) {
+    if (is_wp_error($request)) {
 
-		return false; // Bail early
+        return false; // Bail early
 
-	}
+    }
 
-	$body = wp_remote_retrieve_body( $request );
-	$data = json_decode( $body );
+    $body = wp_remote_retrieve_body($request);
+    $data = json_decode($body);
 
-	if ( ! empty( $data ) ) {
+    if (! empty($data)) {
 
-		echo '<ul class="list-unstyled links links-large">';
+        echo '<ul class="list-unstyled links links-large">';
 
-		foreach( $data as $key => $menu_item ) {
+        foreach ($data as $menu_item) {
 
-			echo '<li>';
-				echo '<a href="' . esc_url( $menu_item->url ) . '"'. ( !empty($menu_item->target) ? ' target="'. $menu_item->target .'"' : '' ) .'>'. ( !empty($menu_item->classes) ? '<span class="'. implode( " ", $menu_item->classes ) .' fa-fw"></span>' : '' ) . $menu_item->title . '</a>';
-			echo '</li>';
+            echo '<li>';
+            echo '<a href="'.esc_url($menu_item->url).'"'.(! empty($menu_item->target) ? ' target="'.$menu_item->target.'"' : '').'>'.(! empty($menu_item->classes) ? '<span class="'.implode(' ', $menu_item->classes).' fa-fw"></span>' : '').$menu_item->title.'</a>';
+            echo '</li>';
 
-		}
+        }
 
-		echo '</ul>';
+        echo '</ul>';
 
-	}
+    }
+
+    return null;
 
 }
 
 // Quick Link Functions
 
-	// Site gets custom quick links
+// Site gets custom quick links
 
-		function site_custom_quicklinks() {
+function site_custom_quicklinks(): bool
+{
 
-			if (
-				( 'institute' == uams_get_site_info()['site'] )
-				||
-				(
-					'uamshealth' == uams_get_site_info()['site']
-					&&
-					'main' == uams_get_site_info()['subsite']
-				)
-				||
-				(
-					'inside' == uams_get_site_info()['site']
-					&&
-					'main' == uams_get_site_info()['subsite']
-				)
-				||
-				(
-					'uams' == uams_get_site_info()['site']
-					&&
-					'main' == uams_get_site_info()['subsite']
-				)
-			) {
+    return (uams_get_site_info()['site'] == 'institute')
+        ||
+        (
+            uams_get_site_info()['site'] == 'uamshealth'
+            &&
+            uams_get_site_info()['subsite'] == 'main'
+        )
+        ||
+        (
+            uams_get_site_info()['site'] == 'inside'
+            &&
+            uams_get_site_info()['subsite'] == 'main'
+        )
+        ||
+        (
+            uams_get_site_info()['site'] == 'uams'
+            &&
+            uams_get_site_info()['subsite'] == 'main'
+        );
 
-				return true;
+}
 
-			} else {
+// Register quick links menu
 
-				return false;
+function register_quicklinks_menu(): void
+{
 
-			}
+    if (site_custom_quicklinks()) {
 
-		}
+        register_nav_menu('quick-links', __('Quick Links Menu'));
 
-	// Register quick links menu
+    }
 
-		function register_quicklinks_menu() {
+}
 
-			if ( site_custom_quicklinks() ) {
+// add_action( 'init', 'register_quicklinks_menu' );
 
-				register_nav_menu( 'quick-links' ,__( 'Quick Links Menu' ));
+if (site_custom_quicklinks()) {
 
-			}
+    // Add quick links menu
 
-		}
+    // add_action( 'init', 'register_quicklinks_menu' );
 
-		// add_action( 'init', 'register_quicklinks_menu' );
+    // Register function to run at rest_api_init hook
 
-	if ( site_custom_quicklinks() ) {
+    // add_action( 'rest_api_init', function () {
+    //
+    // 	// Setup siteurl/wp-json/menus/v2/header
+    //
+    // 		register_rest_route( 'menus/v2', '/quicklinks', array(
+    // 			'methods' => 'GET',
+    // 			'callback' => 'quicklinks_menu',
+    // 			'args' => array(
+    // 				'id' => array(
+    // 					'validate_callback' => function($param, $request, $key) {
+    // 						return is_numeric( $param );
+    // 					}
+    // 				),
+    // 			)
+    // 		));
+    //
+    // });
 
-		// Add quick links menu
+    // Callback function to generate quick links for REST API
 
-			// add_action( 'init', 'register_quicklinks_menu' );
+    function quicklinks_menu($data)
+    {
 
-		// Register function to run at rest_api_init hook
+        // Verify that menu locations are available in your WordPress site
 
-			// add_action( 'rest_api_init', function () {
-			//
-			// 	// Setup siteurl/wp-json/menus/v2/header
-			//
-			// 		register_rest_route( 'menus/v2', '/quicklinks', array(
-			// 			'methods' => 'GET',
-			// 			'callback' => 'quicklinks_menu',
-			// 			'args' => array(
-			// 				'id' => array(
-			// 					'validate_callback' => function($param, $request, $key) {
-			// 						return is_numeric( $param );
-			// 					}
-			// 				),
-			// 			)
-			// 		));
-			//
-			// });
+        if (
+            ($locations = get_nav_menu_locations())
+            &&
+            isset($locations['quick-links'])
+        ) {
 
-		// Callback function to generate quick links for REST API
+            // Retrieve the menu in location quick-links
 
-			function quicklinks_menu( $data ) {
+            $menu = wp_get_nav_menu_object($locations['quick-links']);
 
-				// Verify that menu locations are available in your WordPress site
+            // Create an empty array to store our JSON
 
-					if (
-						( $locations = get_nav_menu_locations() )
-						&&
-						isset($locations[ 'quick-links' ])
-					) {
+            $menuItems = [];
 
-						// Retrieve the menu in location quick-links
+            // If the menu isn't empty, start process of building an array, otherwise return a 404 error
 
-							$menu = wp_get_nav_menu_object($locations['quick-links']);
+            if (! empty($menu)) {
 
-						// Create an empty array to store our JSON
+                // Assign array of navigation items to $menu_items variable
 
-							$menuItems = array();
+                $menu_items = wp_get_nav_menu_items($menu->term_id);
 
-						// If the menu isn't empty, start process of building an array, otherwise return a 404 error
+                // If $menu_items isn't empty...
 
-							if ( !empty($menu) ) {
+                if ($menu_items) {
 
-								// Assign array of navigation items to $menu_items variable
+                    // For each menu item, verify the menu item has no parent and then push the menu item to the $menuItems array
 
-									$menu_items = wp_get_nav_menu_items($menu->term_id);
+                    foreach ($menu_items as $menu_item) {
 
-								// If $menu_items isn't empty...
+                        if ($menu_item->menu_item_parent == 0) {
 
-									if ( $menu_items ) {
+                            $menuItems[] = [
+                                'id' => $menu_item->ID,
+                                'title' => $menu_item->title,
+                                'url' => $menu_item->url,
+                                'classes' => $menu_item->classes,
+                                'target' => $menu_item->target,
+                                'link_title' => $menu_item->attr_title,
+                            ];
 
-										// For each menu item, verify the menu item has no parent and then push the menu item to the $menuItems array
+                        }
 
-											foreach ( $menu_items as $key => $menu_item ) {
+                    }
 
-												if ( $menu_item->menu_item_parent == 0 ) {
+                }
 
-													array_push(
-														$menuItems, array(
-																'id' => $menu_item->ID,
-																'title' => $menu_item->title,
-																'url' => $menu_item->url,
-																'classes' => $menu_item->classes,
-																'target' => $menu_item->target,
-																'link_title' => $menu_item->attr_title,
-														)
-													);
+            }
 
-												}
+        } else {
 
-											}
+            return new WP_Error(
+                'no_menus',
+                'Could not find any menus'.$locations['primary'],
+                [
+                    'status' => 404,
+                ]
+            );
 
-									}
+        }
 
-							}
+        // Return array of list items with title and url properties
 
-					} else {
+        return $menuItems;
 
-						return new WP_Error(
-							'no_menus',
-							'Could not find any menus' . $locations[ 'primary' ],
-							array(
-									'status' => 404
-							)
-						);
+    }
 
-					}
-
-				// Return array of list items with title and url properties
-
-					return $menuItems;
-
-			}
-
-	}
+}

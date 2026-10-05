@@ -1,118 +1,121 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  *
  * Text & Image Overlay ACF Fields
- * 
+ *
  */
-return array(
-    array(
-        'key' => 'field_overlay_intro'. $suffix,
+return [
+    [
+        'key' => 'field_overlay_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'message' => '<h2>UAMS Text &amp; Image Overlay Block</h2>',
         'new_lines' => 'wpautop',
         'esc_html' => 0,
-    ),
-    array(
-        'key' => 'field_overlay_section'. $suffix,
+    ],
+    [
+        'key' => 'field_overlay_section'.$suffix,
         'label' => 'Sections',
         'name' => 'overlay_section',
         'type' => 'repeater',
         'instructions' => 'You may have either one or two sections. If you only have one section, it will display full-width. Two sections will be displayed beside each other, half the width of the viewport.',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'collapsed' => 'field_overlay_section_heading'. $suffix,
+        ],
+        'collapsed' => 'field_overlay_section_heading'.$suffix,
         'min' => 1,
         'max' => 2,
         'layout' => 'block',
         'button_label' => 'Add Section',
-        'sub_fields' => array(
-            array(
-                'key' => 'field_overlay_section_heading'. $suffix,
+        'sub_fields' => [
+            [
+                'key' => 'field_overlay_section_heading'.$suffix,
                 'label' => 'Heading',
                 'name' => 'overlay_section_heading',
                 'type' => 'text',
                 'instructions' => '32 character limit.',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => 32,
-            ),
-            array(
-                'key' => 'field_overlay_section_body'. $suffix,
+            ],
+            [
+                'key' => 'field_overlay_section_body'.$suffix,
                 'label' => 'Body',
                 'name' => 'overlay_section_body',
                 'type' => 'textarea',
                 'instructions' => '280 character limit.',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => 280,
-            ),
-            array(
-                'key' => 'field_overlay_section_button_text'. $suffix,
+            ],
+            [
+                'key' => 'field_overlay_section_button_text'.$suffix,
                 'label' => 'Button Text',
                 'name' => 'overlay_section_button_text',
                 'type' => 'text',
                 'instructions' => '27 character limit.',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => 26,
-            ),
-            array(
-                'key' => 'field_overlay_section_button_url'. $suffix,
+            ],
+            [
+                'key' => 'field_overlay_section_button_url'.$suffix,
                 'label' => 'Button URL',
                 'name' => 'overlay_section_button_url',
                 'type' => 'link',
                 'instructions' => 'Include http:// or https://.',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'return_format' => 'array',
-            ),
+            ],
             // array(
             //     'key' => 'field_overlay_section_button_target'. $suffix,
             //     'label' => 'Open in New Window?',
@@ -132,39 +135,39 @@ return array(
             //     'ui_on_text' => '',
             //     'ui_off_text' => '',
             // ),
-            array(
-                'key' => 'field_overlay_section_button_description'. $suffix,
+            [
+                'key' => 'field_overlay_section_button_description'.$suffix,
                 'label' => 'Button Link Description',
                 'name' => 'overlay_section_button_description',
                 'type' => 'text',
                 'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '',
-            ),
-            array(
-                'key' => 'field_overlay_section_background_color'. $suffix,
+            ],
+            [
+                'key' => 'field_overlay_section_background_color'.$suffix,
                 'label' => 'Background Color',
                 'name' => 'overlay_section_background_color',
                 'type' => 'select',
                 'instructions' => 'Each section should use a different color. If this module is adjacent to another module with a background color, the adjacent modules/sections should all use different colors. If this module is adjacent to the footer, the color red should not be used, as the footer is red.',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
-                'choices' => array(
+                ],
+                'choices' => [
                     'bg-red' => 'Red',
                     'bg-black' => 'Black',
                     'bg-blue' => 'Blue',
@@ -172,30 +175,30 @@ return array(
                     'bg-teal' => 'Teal',
                     'bg-eggplant' => 'Eggplant',
                     'bg-orange' => 'Orange',
-                ),
-                'default_value' => array(
+                ],
+                'default_value' => [
                     0 => 'bg-black',
-                ),
+                ],
                 'allow_null' => 0,
                 'multiple' => 0,
                 'ui' => 0,
                 'return_format' => 'value',
                 'ajax' => 0,
                 'placeholder' => '',
-            ),
-            array(
-                'key' => 'field_overlay_section_image'. $suffix,
+            ],
+            [
+                'key' => 'field_overlay_section_image'.$suffix,
                 'label' => 'Image',
                 'name' => 'overlay_section_image',
                 'type' => 'image',
                 'instructions' => 'Recommended image dimensions for single section: 5120x2560. Recommended image dimensions for two sections: 2560x1920. Minimum image dimensions: 1920x720. If there are two sections, the image will be automatically cropped to a 4:3 aspect ratio. If there is one section, the image will be automatically cropped to a 8:3 aspect ratio.',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'return_format' => 'id',
                 'preview_size' => 'thumbnail',
                 'library' => 'all',
@@ -206,113 +209,113 @@ return array(
                 'max_height' => '',
                 'max_size' => '',
                 'mime_types' => '',
-            ),
-        ),
-    ),
-    array(
-        'key' => 'field_overlay_geo_valid'. $suffix,
+            ],
+        ],
+    ],
+    [
+        'key' => 'field_overlay_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => 'hidden',
             'id' => '',
-        ),
+        ],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'false' => 'False',
             'true' => 'True',
-        ),
+        ],
         'allow_null' => 0,
         'other_choice' => 0,
         'default_value' => 'false',
         'layout' => 'horizontal',
         'return_format' => 'value',
-    ),
-    array(
-        'key' => 'field_overlay_regions'. $suffix,
+    ],
+    [
+        'key' => 'field_overlay_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
         'instructions' => '',
         'required' => 0,
-        'conditional_logic' => array(
-            array(
-                array(
-                    'field' => 'field_overlay_geo_valid'. $suffix,
+        'conditional_logic' => [
+            [
+                [
+                    'field' => 'field_overlay_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'open' => 0,
         'multi_expand' => 0,
         'endpoint' => 0,
-    ),
-    array(
-		'key' => 'field_overlay_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'overlay_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => array(
-            array(
-                array(
-                    'field' => 'field_overlay_geo_valid'. $suffix,
+    ],
+    [
+        'key' => 'field_overlay_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'overlay_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
+            [
+                [
+                    'field' => 'field_overlay_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
-                ),
-            ),
-        ),
-		'wrapper' => array(
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		),
+                ],
+            ],
+        ],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'include' => 'Include',
             'exclude' => 'Exclude',
-        ),
+        ],
         'allow_null' => 0,
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
-    ),
-    array(
-		'key' => 'field_overlay_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'overlay_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => 0,
-		'wrapper' => array(
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		),
+        'return_format' => 'value',
+    ],
+    [
+        'key' => 'field_overlay_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'overlay_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'central' => 'Central',
             'northeast' => 'Northeast',
             'northwest' => 'Northwest',
             'southeast' => 'Southeast',
             'southwest' => 'Southwest',
-        ),
-        'default_value' => array(
-        ),
+        ],
+        'default_value' => [
+        ],
         'allow_null' => 0,
         'multiple' => 1,
         'ui' => 1,
@@ -321,5 +324,5 @@ return array(
         'allow_custom' => 0,
         'placeholder' => '',
         'search_placeholder' => '',
-    ),
-);
+    ],
+];

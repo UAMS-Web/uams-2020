@@ -2,44 +2,49 @@
 /**
  * Modules
  *
- * @package      UAMSWP
  * @author       Bill Erickson
+ *
  * @since        1.0.0
+ *
  * @license      GPL-2.0+
 **/
 /**
  * Display Modules
- *
  */
-function uamswp_modules( $post_id = false ) {
-	if( ! function_exists( 'get_field' ) )
-		return;
-	$post_id = $post_id ? intval( $post_id ) : get_the_ID();
-	$modules = get_field( 'uamswp_modules', $post_id );
-	if( empty( $modules ) )
-		return;
-	foreach( $modules as $i => $module )
-		uamswp_module( $module, $i );
+function uamswp_modules($post_id = false): void
+{
+    if (! function_exists('get_field')) {
+        return;
+    }
+    $post_id = $post_id ? intval($post_id) : get_the_ID();
+    $modules = get_field('uamswp_modules', $post_id);
+    if (empty($modules)) {
+        return;
+    }
+    foreach ($modules as $i => $module) {
+        uamswp_module($module, $i);
+    }
 }
 /**
  * Display Module
- *
  */
-function uamswp_module( $module = array(), $i = false ) {
-	if( empty( $module['acf_fc_layout'] ) )
-		return;
-	uamswp_module_open( $module, $i );
-	switch( $module['acf_fc_layout'] ) {
-		case uamswp_module_disable( $module ):
-			break;
-		// case 'content':
-		// 	uamswp_module_header( $module );
-		// 	echo '<div class="entry-content">' . apply_filters( 'uamswp_the_content', $module['content'] ) . '</div>';
-        //     break;
-        // case 'modules_heading':
-		// 	uamswp_module_header( $module );
-		// 	echo '<div class="entry-content">' . apply_filters( 'uamswp_the_content', $module['title'] ) . '</div>';
-        //     break;
+function uamswp_module($module = [], $i = false): void
+{
+    if (empty($module['acf_fc_layout'])) {
+        return;
+    }
+    uamswp_module_open($module, $i);
+    switch ($module['acf_fc_layout']) {
+        case uamswp_module_disable($module):
+            break;
+            // case 'content':
+            // 	uamswp_module_header( $module );
+            // 	echo '<div class="entry-content">' . apply_filters( 'uamswp_the_content', $module['content'] ) . '</div>';
+            //     break;
+            // case 'modules_heading':
+            // 	uamswp_module_header( $module );
+            // 	echo '<div class="entry-content">' . apply_filters( 'uamswp_the_content', $module['title'] ) . '</div>';
+            //     break;
 
         case 'modules_action_bar':
             $id = $i;
@@ -49,7 +54,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $geo = $module['action_bar_geo'];
             $geo_region = $module['action_bar_geo_region'];
 
-            include( get_stylesheet_directory() .'/blocks/action-bar.php' );
+            include get_stylesheet_directory().'/blocks/action-bar.php';
 
             break;
 
@@ -63,7 +68,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $geo = $module['call_out_geo'];
             $geo_region = $module['call_out_geo_region'];
 
-            include( get_stylesheet_directory() .'/blocks/call-out.php' );
+            include get_stylesheet_directory().'/blocks/call-out.php';
 
             break;
 
@@ -73,7 +78,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $body = $module['cta_bar_body'];
             $button_text = $module['cta_bar_button_text'];
             $button_url = $module['cta_bar_button_url'];
-            if ($module['cta_bar_button_url']){
+            if ($module['cta_bar_button_url']) {
                 $button_target = $module['cta_bar_button_url']['target'];
             }
             $button_desc = $module['cta_bar_button_description'];
@@ -85,7 +90,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $geo = $module['cta_bar_geo'];
             $geo_region = $module['cta_bar_geo_region'];
 
-            include( get_stylesheet_directory() .'/blocks/cta.php' );
+            include get_stylesheet_directory().'/blocks/cta.php';
 
             break;
 
@@ -95,7 +100,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $geo = $module['hero_geo'];
             $geo_region = $module['hero_geo_region'];
 
-            include( get_stylesheet_directory() .'/blocks/hero.php' );
+            include get_stylesheet_directory().'/blocks/hero.php';
 
             break;
 
@@ -110,7 +115,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $geo = $module['link_list_geo'];
             $geo_region = $module['link_list_geo_region'];
 
-            include( get_stylesheet_directory() .'/blocks/link-list.php' );
+            include get_stylesheet_directory().'/blocks/link-list.php';
 
             break;
 
@@ -119,29 +124,29 @@ function uamswp_module( $module = array(), $i = false ) {
             $layout = $module['side_text_layout'] ?: 'link-list';
             $heading = $module['side_heading'] ?: 'Heading goes here...';
 
-            if ( $layout == 'body-only' ) {
+            if ($layout == 'body-only') {
                 $body = $module['side_layout_body_text'] ?: 'This is where the body-only description goes';
-            } elseif ( $layout == 'blockquote-citation' || $layout == 'blockquote-citation-link' ) {
+            } elseif ($layout == 'blockquote-citation' || $layout == 'blockquote-citation-link') {
                 $body = '';
             } else {
                 $body = $module['side_layout_link_text'] ?: 'This is where the body + link list description goes';
             }
             // Set every time, so a quote never carries over to the next module on the page.
-            $quote_text = $module[ $layout == 'blockquote-citation-link' ? 'side_quote_text_link' : 'side_quote_text' ] ?? '';
+            $quote_text = $module[$layout == 'blockquote-citation-link' ? 'side_quote_text_link' : 'side_quote_text'] ?? '';
             $quote_name = $module['side_quote_speaker_name'] ?? '';
             $quote_title = $module['side_quote_speaker_title'] ?? '';
 
             $link_list = $module['side_link_list'] ?: '';
             $list_more = $module['side_link_include_more'] ?: '';
             $cta = $module['side_cta'] ?: '';
-            $image_group = $module['side_image']?: '';
+            $image_group = $module['side_image'] ?: '';
             $image_postion = $module['side_image_position'] ?: 'left';
             $image_anchor = $module['side_image']['side_image_anchor'] ?: 'center';
             $background_color = $module['side_image_background_color'] ?: 'bg-white';
             $geo = $module['side_image_geo'];
             $geo_region = $module['side_image_geo_region'];
 
-            include( get_stylesheet_directory() .'/blocks/image-side-by-side.php' );
+            include get_stylesheet_directory().'/blocks/image-side-by-side.php';
 
             break;
 
@@ -151,7 +156,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $geo = $module['overlay_geo'];
             $geo_region = $module['overlay_geo_region'];
 
-            include( get_stylesheet_directory() .'/blocks/overlay.php' );
+            include get_stylesheet_directory().'/blocks/overlay.php';
 
             break;
 
@@ -162,11 +167,11 @@ function uamswp_module( $module = array(), $i = false ) {
             $background_color = $module['post_tile_background_color'];
             $category = $module['post_tile_category'];
             $post_button_text = $module['post_tile_post_button_text'] ?: 'Read the Story';
-            $cat_button_text = $module['post_tile_category_button_text'] ?: 'View ' . $category->name . ' Archive';
+            $cat_button_text = $module['post_tile_category_button_text'] ?: 'View '.$category->name.' Archive';
             $geo = $module['post_tile_geo'];
             $geo_region = $module['post_tile_geo_region'];
 
-            include( get_stylesheet_directory() .'/blocks/post-category-tile.php' );
+            include get_stylesheet_directory().'/blocks/post-category-tile.php';
 
             break;
 
@@ -179,7 +184,7 @@ function uamswp_module( $module = array(), $i = false ) {
             $geo = $module['post_tiles_geo'];
             $geo_region = $module['post_tiles_geo_region'];
 
-            include( get_stylesheet_directory() .'/blocks/post-category-tiles.php' );
+            include get_stylesheet_directory().'/blocks/post-category-tiles.php';
 
             break;
 
@@ -198,9 +203,9 @@ function uamswp_module( $module = array(), $i = false ) {
             $geo = $module['stacked_geo'];
             $geo_region = $module['stacked_geo_region'];
 
-            include( get_stylesheet_directory() .'/blocks/stacked.php' );
+            include get_stylesheet_directory().'/blocks/stacked.php';
 
-            break; 
+            break;
 
         case 'modules_news_grid':
             if (class_exists('UAMS_Syndicate_News_Base')) {
@@ -224,223 +229,226 @@ function uamswp_module( $module = array(), $i = false ) {
                 $geo_region = $module['news_geo_region'];
                 $className = '';
 
-                if ( 'grid' == $output ) {
+                if ($output == 'grid') {
                     $count = '3';
-                } elseif ( 'cards' == $output ) {
+                } elseif ($output == 'cards') {
                     $count = '4';
-                } elseif ( 'full' == $output ) {
+                } elseif ($output == 'full') {
                     $count = '1';
-                } elseif ( 'side' == $output ) {
+                } elseif ($output == 'side') {
                     $count = '1';
                 }
 
-                include( get_stylesheet_directory() .'/blocks/news.php' );
+                include get_stylesheet_directory().'/blocks/news.php';
 
                 // uamswp_module_header( $module );
                 // // echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" hide_author="'. $hide_author.'" hide_date="'. $hide_date .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
                 // // echo '<!-- '; print_r($geo); echo ' -->';
                 // // echo '<!-- ' . do_shortcode( '[geot_debug]' ) . ' -->';
-				// // GEO Logic
+                // // GEO Logic
                 // $geo_display = false;
                 // if (!isset($geo)){
-	            //     $geo_display = true;
+                //     $geo_display = true;
                 // } else {
-	            //     if( $geo['geot_condition'] == 'include' ) {
-				// 		if( geot_target_city( '', $geo['geot_city_regions'] ) ){
-				// 			$geo_display = true;
-				// 		}
-				// 	}  else {
-				// 		if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
-				// 			$geo_display = true;
-				// 		}
-				// 	}
-				// }
-				// if ($geo_display) {
-				// 	echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
-				// }
+                //     if( $geo['geot_condition'] == 'include' ) {
+                // 		if( geot_target_city( '', $geo['geot_city_regions'] ) ){
+                // 			$geo_display = true;
+                // 		}
+                // 	}  else {
+                // 		if ( geot_target_city( '', '', '', $geo['geot_city_regions'] ) ){
+                // 			$geo_display = true;
+                // 		}
+                // 	}
+                // }
+                // if ($geo_display) {
+                // 	echo do_shortcode('[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]' );
+                // }
             }
             break;
 
         case 'modules_uams_gallery':
-                $id = $i;
-                $heading = $module['gallery_heading'];
-                $hide_heading = $module['gallery_hide_heading'];
-                $description = $module['gallery_description'];
-                $gallery_columns = $module['gallery_columns'];
-                $gallery_images = $module['gallery_images'];
-                $gallery_crop = $module['gallery_crop'];
-                if ( $gallery_crop == 'none' || $gallery_crop[0] == 'none' ) {
-                    $gallery_crop = -1;
+            $id = $i;
+            $heading = $module['gallery_heading'];
+            $hide_heading = $module['gallery_hide_heading'];
+            $description = $module['gallery_description'];
+            $gallery_columns = $module['gallery_columns'];
+            $gallery_images = $module['gallery_images'];
+            $gallery_crop = $module['gallery_crop'];
+            if ($gallery_crop == 'none' || $gallery_crop[0] == 'none') {
+                $gallery_crop = -1;
+            }
+            $background_color = $module['gallery_background_color'];
+            $geo = $module['gallery_geo'];
+            $geo_region = $module['gallery_geo_region'];
+            $modal = $module['gallery_modal'];
+            $more = $module['gallery_more'];
+            if ($more) {
+                $more_text = $module['gallery_more_text'] ?? '';
+                $more_button_text = $module['gallery_more_button_text'] ?? '';
+                $more_button_url = $module['gallery_more_button_url'] ?? '';
+                $more_button_target = $more_button_url['target'] ?? '';
+                $more_button_description = $module['gallery_more_button_description'] ?? '';
+                if (empty($more_button_color) && (in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto']))) {
+                    $more_button_color = 'primary';
+                } else {
+                    $more_button_color = 'white';
                 }
-                $background_color = $module['gallery_background_color'];
-                $geo = $module['gallery_geo'];
-                $geo_region = $module['gallery_geo_region'];
-                $modal = $module['gallery_modal'];
-                $more = $module['gallery_more'];
-                if ($more) {
-                    $more_text = $module['gallery_more_text'] ?? '';
-                    $more_button_text = $module['gallery_more_button_text'] ?? '';
-                    $more_button_url = $module['gallery_more_button_url'] ?? '';
-                    $more_button_target = $more_button_url['target'] ?? '';
-                    $more_button_description = $module['gallery_more_button_description'] ?? '';
-                    if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto' ) ) {
-                        $more_button_color = 'primary';
-                    } else {
-                        $more_button_color = 'white';
-                    }
-                }
-    
-                include( get_stylesheet_directory() .'/blocks/gallery.php' );
-    
-                break;
+            }
+
+            include get_stylesheet_directory().'/blocks/gallery.php';
+
+            break;
 
         case 'modules_uams_content':
-                    $id = $i;
-                    $heading = $module['content_heading'];
-                    $hide_heading = $module['content_hide_heading'];
-                    $content_block = $module['content_content'];
-                    $background_color = $module['content_background_color'];
-                    $geo = $module['content_geo'];
-                    $geo_region = $module['content_geo_region'];
-        
-                    include( get_stylesheet_directory() .'/blocks/content.php' );
-        
-                    break;
+            $id = $i;
+            $heading = $module['content_heading'];
+            $hide_heading = $module['content_hide_heading'];
+            $content_block = $module['content_content'];
+            $background_color = $module['content_background_color'];
+            $geo = $module['content_geo'];
+            $geo_region = $module['content_geo_region'];
+
+            include get_stylesheet_directory().'/blocks/content.php';
+
+            break;
 
         case 'modules_uams_livewhale':
-                    $id = $i;
-                    $heading = $module['livewhale_heading'];
-                    $livewhale = $module['livewhale_id'];
-                    $background_color = $module['livewhale_background_color'];
-                    $geo = $module['livewhale_geo'];
-                    $geo_region = $module['livewhale_geo_region'];
-        
-                    include( get_stylesheet_directory() .'/blocks/livewhale.php' );
-        
-                    break;
+            $id = $i;
+            $heading = $module['livewhale_heading'];
+            $livewhale = $module['livewhale_id'];
+            $background_color = $module['livewhale_background_color'];
+            $geo = $module['livewhale_geo'];
+            $geo_region = $module['livewhale_geo_region'];
+
+            include get_stylesheet_directory().'/blocks/livewhale.php';
+
+            break;
 
         case 'modules_uams_section':
-                    $id = $i;
-                    $heading = $module['modules_uams_section_heading'];
-                    $hide_heading = $module['modules_uams_section_hide_heading'];
-                    $background_color = $module['modules_uams_section_background_color'];
-                    $module_rows = $module['modules_uams_section_flexible_layout'];
-        
-                    if ( empty ($id) ) {
-                        $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
-                    } 
-                    $id = 'uams-section-' . $id;  
-                    ?>
-                    <section class="uams-module section-block <?php echo esc_attr( $background_color ); ?>" id="<?php echo $id; ?>" aria-label="<?php echo esc_attr( $heading ); ?>">
+            $id = $i;
+            $heading = $module['modules_uams_section_heading'];
+            $hide_heading = $module['modules_uams_section_hide_heading'];
+            $background_color = $module['modules_uams_section_background_color'];
+            $module_rows = $module['modules_uams_section_flexible_layout'];
+
+            if (empty($id)) {
+                $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+            }
+            $id = 'uams-section-'.$id;
+            ?>
+                    <section class="uams-module section-block <?php echo esc_attr($background_color); ?>" id="<?php echo $id; ?>" aria-label="<?php echo esc_attr($heading); ?>">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-12">
-                                    <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
-                                        <span class="title"><?php echo esc_html( $heading ); ?></span>
+                                    <h2 class="module-title <?php echo $hide_heading ? ' sr-only' : ''; ?>">
+                                        <span class="title"><?php echo esc_html($heading); ?></span>
                                     </h2>
                                     <?php
-                                    if( $module_rows ):
-                                        //print_r($module_rows);
-                                        echo '<div class="module-body">';
-                                        foreach($module_rows as $module_row){
-                                            if( $module_row['acf_fc_layout'] == 'uams_section_wysiwyg' ):
-                                                echo $module_row['section_wysiwyg_html'];
-                                            elseif($module_row['acf_fc_layout'] == 'modules_uams_section_youtube'):
-                                                if( function_exists('lyte_preparse') && strpos($module_row['section_youtube_url'],"youtu") !== false ) {
-                                                    echo '<div class="'. $module_row['section_youtube_width'] .'">';
-                                                    echo lyte_parse( str_replace( 'https', 'httpv', $module_row['section_youtube_url'] ) ); 
-                                                    echo '</div>';
-                                                } else {
-                                                    echo '<div class="'. $module_row['section_youtube_width'] .' wp-block-embed is-type-video embed-responsive wp-has-aspect-ratio embed-responsive-16by9">';
-                                                    echo wp_oembed_get( $module_row['section_youtube_url'] ); 
-                                                    echo '</div>';
-                                                }
-                                            endif;
+                            if ($module_rows) {
+                                // print_r($module_rows);
+                                echo '<div class="module-body">';
+                                foreach ($module_rows as $module_row) {
+                                    if ($module_row['acf_fc_layout'] == 'uams_section_wysiwyg') {
+                                        echo $module_row['section_wysiwyg_html'];
+                                    } elseif ($module_row['acf_fc_layout'] == 'modules_uams_section_youtube') {
+                                        if (function_exists('lyte_preparse') && strpos($module_row['section_youtube_url'], 'youtu') !== false) {
+                                            echo '<div class="'.$module_row['section_youtube_width'].'">';
+                                            echo lyte_parse(str_replace('https', 'httpv', $module_row['section_youtube_url']));
+                                            echo '</div>';
+                                        } else {
+                                            echo '<div class="'.$module_row['section_youtube_width'].' wp-block-embed is-type-video embed-responsive wp-has-aspect-ratio embed-responsive-16by9">';
+                                            echo wp_oembed_get($module_row['section_youtube_url']);
+                                            echo '</div>';
                                         }
-                                        echo '</div>';
-                                    endif; 
-                                    ?>
+                                    }
+                                }
+                                echo '</div>';
+                            }
+            ?>
                                 </div>
                             </div>
                         </div>
                     </section>
                     <?php
                     break;
- 
-		// More modules go here
-	}
-	uamswp_module_close( $module, $i );
+
+            // More modules go here
+    }
+    uamswp_module_close($module, $i);
 }
 /**
  * Module Open
- *
  */
-function uamswp_module_open( $module, $i ) {
-	if( uamswp_module_disable( $module ) )
-		return;
-	// $classes = array( 'module' );
-	// $classes[] = 'type-' . str_replace( '_', '-', $module['acf_fc_layout'] );
+function uamswp_module_open($module, $i): void
+{
+    if (uamswp_module_disable($module)) {
+        return;
+    }
+    // $classes = array( 'module' );
+    // $classes[] = 'type-' . str_replace( '_', '-', $module['acf_fc_layout'] );
     // foreach ($module as $key => $value) {
     //     if (strpos($key, 'background_color') !== false) {
     //         $classes[] = $value;
     //         break;
     //     }
     // }
-	// if( !empty( $module['bg_color'] ) )
-	// 	$classes[] = 'bg-' . $module['bg_color'];
-	// $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
-	// echo '<section class="' . join( ' ', $classes ) . '" id="' . $id . '">';
-	// echo '<div class="wrap">';
-    echo '<!-- // Begin Module - '. $module['acf_fc_layout'] . '// -->';
+    // if( !empty( $module['bg_color'] ) )
+    // 	$classes[] = 'bg-' . $module['bg_color'];
+    // $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
+    // echo '<section class="' . join( ' ', $classes ) . '" id="' . $id . '">';
+    // echo '<div class="wrap">';
+    echo '<!-- // Begin Module - '.$module['acf_fc_layout'].'// -->';
 }
 /**
  * Module Header
- *
  */
-function uamswp_module_header( $module ) {
-	if( !empty( $module['title'] ) ) {
-		echo '<header><h3>' . esc_html( $module['title'] ) . '</h3></header>';
-	}
+function uamswp_module_header($module): void
+{
+    if (! empty($module['title'])) {
+        echo '<header><h3>'.esc_html($module['title']).'</h3></header>';
+    }
 }
 /**
  * Module Close
- *
  */
-function uamswp_module_close( $module, $i ) {
-	if( uamswp_module_disable( $module ) )
-		return;
-	// echo '</div>';
-	// echo '</section>';
-    echo '<!-- // End Module - '. $module['acf_fc_layout'] .'// -->';
+function uamswp_module_close($module, $i): void
+{
+    if (uamswp_module_disable($module)) {
+        return;
+    }
+    // echo '</div>';
+    // echo '</section>';
+    echo '<!-- // End Module - '.$module['acf_fc_layout'].'// -->';
 }
 /**
  * Module Disable
- *
  */
-function uamswp_module_disable( $module ) {
-	$disable = false;
-	if( 'save_recipes_cta' == $module['acf_fc_layout'] && is_user_logged_in() )
-		$disable = true;
-	return $disable;
+function uamswp_module_disable($module): bool
+{
+    return $module['acf_fc_layout'] == 'save_recipes_cta' && is_user_logged_in();
 }
 /**
  * Has Module
- *
  */
-function uamswp_has_module( $module_to_find = '', $post_id = false ) {
-	if( ! function_exists( 'get_field' ) )
-		return;
-	$post_id = $post_id ? intval( $post_id ) : get_the_ID();
-	$modules = get_field( 'uamswp_modules', $post_id );
-	$has_module = false;
-	foreach( $modules as $module ) {
-		if( $module_to_find == $module['acf_fc_layout'] )
-			$has_module = true;
-	}
-	return $has_module;
+function uamswp_has_module($module_to_find = '', $post_id = false): ?bool
+{
+    if (! function_exists('get_field')) {
+        return null;
+    }
+    $post_id = $post_id ? intval($post_id) : get_the_ID();
+    $modules = get_field('uamswp_modules', $post_id);
+    $has_module = false;
+    foreach ($modules as $module) {
+        if ($module_to_find == $module['acf_fc_layout']) {
+            $has_module = true;
+        }
+    }
+
+    return $has_module;
 }
 
-function display_call_out ($id, $className, $heading, $body, $use_image, $image, $background_color) {
+function display_call_out($id, $className, $heading, $body, $use_image, $image, $background_color): void
+{
     ?>
     
     <?php }

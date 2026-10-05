@@ -1,24 +1,24 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Customizer
  *
- * @package      Bootstrap for Genesis
  * @since        1.0
  * @link         http://webdevsuperfast.github.io
+ *
  * @author       Rotsen Mark Acob <webdevsuperfast.github.io>
  * @copyright    Copyright (c) 2017, Rotsen Mark Acob
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
- *
 */
-
-add_action( 'customize_register', function( $wp_customize ) {
+add_action('customize_register', function ($wp_customize): void {
     // Add Default Settings
-    $wp_customize->add_setting( 'uams-2020', array(
+    $wp_customize->add_setting('uams-2020', [
         'capability' => 'edit_theme_options',
-        'type' => 'theme_mod'
-    ) );
+        'type' => 'theme_mod',
+    ]);
 
-    $wp_customize->remove_section( 'genesis_breadcrumbs' );
+    $wp_customize->remove_section('genesis_breadcrumbs');
 
     // // Add Bootstrap Panel
     // $wp_customize->add_panel( 'bootstrap', array(
@@ -84,7 +84,7 @@ add_action( 'customize_register', function( $wp_customize ) {
     //         'primary' => __( 'Primary', 'uams-2020' )
     //     )
     // ) );
-    
+
     // // Navigation Extras
     // $wp_customize->add_setting( 'navextra', array(
     //     'default' => 'search'
@@ -140,4 +140,4 @@ add_action( 'customize_register', function( $wp_customize ) {
     //         'primary' => __( 'Primary', 'uams-2020' )
     //     )
     // ) );
-} );
+});
