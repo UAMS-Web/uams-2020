@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 /*
  *
- * Gallery Block Fields 
- * 
+ * Gallery Block Fields
+ *
  */
 return [
     [
-        'key' => 'field_gallery_intro'. $suffix,
+        'key' => 'field_gallery_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
@@ -26,7 +26,7 @@ return [
         'esc_html' => 0,
     ],
     [
-        'key' => 'field_gallery_heading'. $suffix,
+        'key' => 'field_gallery_heading'.$suffix,
         'label' => 'Heading',
         'name' => 'gallery_heading',
         'type' => 'text',
@@ -46,7 +46,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_gallery_hide_heading'. $suffix,
+        'key' => 'field_gallery_hide_heading'.$suffix,
         'label' => 'Hide Heading',
         'name' => 'gallery_hide_heading',
         'type' => 'true_false',
@@ -66,7 +66,7 @@ return [
         'ui_off_text' => '',
     ],
     [
-        'key' => 'field_gallery_description'. $suffix,
+        'key' => 'field_gallery_description'.$suffix,
         'label' => 'Description',
         'name' => 'gallery_description',
         'type' => 'wysiwyg',
@@ -86,7 +86,7 @@ return [
         'delay' => 0,
     ],
     [
-        'key' => 'field_gallery_columns'. $suffix,
+        'key' => 'field_gallery_columns'.$suffix,
         'label' => 'Number of Columns',
         'name' => 'gallery_columns',
         'type' => 'button_group',
@@ -113,7 +113,7 @@ return [
         'save_other_choice' => 0,
     ],
     [
-        'key' => 'field_gallery_images'. $suffix,
+        'key' => 'field_gallery_images'.$suffix,
         'label' => 'Images',
         'name' => 'gallery_images',
         'type' => 'gallery',
@@ -141,7 +141,7 @@ return [
         'mime_types' => '',
     ],
     [
-        'key' => 'field_gallery_crop'. $suffix,
+        'key' => 'field_gallery_crop'.$suffix,
         'label' => 'Image Crop',
         'name' => 'gallery_crop',
         'type' => 'select',
@@ -172,7 +172,7 @@ return [
         'placeholder' => '',
     ],
     [
-        'key' => 'field_gallery_background_color'. $suffix,
+        'key' => 'field_gallery_background_color'.$suffix,
         'label' => 'Background Color',
         'name' => 'gallery_background_color',
         'type' => 'select',
@@ -208,7 +208,7 @@ return [
         'placeholder' => '',
     ],
     [
-        'key' => 'field_gallery_modal'. $suffix,
+        'key' => 'field_gallery_modal'.$suffix,
         'label' => 'Include modal with larger version of image?',
         'name' => 'gallery_modal',
         'type' => 'true_false',
@@ -228,7 +228,7 @@ return [
         'ui_off_text' => '',
     ],
     [
-        'key' => 'field_gallery_more'. $suffix,
+        'key' => 'field_gallery_more'.$suffix,
         'label' => 'Include link to something?',
         'name' => 'gallery_more',
         'type' => 'true_false',
@@ -248,7 +248,7 @@ return [
         'ui_off_text' => '',
     ],
     [
-        'key' => 'field_gallery_more_text'. $suffix,
+        'key' => 'field_gallery_more_text'.$suffix,
         'label' => 'Heading',
         'name' => 'gallery_more_text',
         'type' => 'text',
@@ -257,7 +257,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_gallery_more'. $suffix,
+                    'field' => 'field_gallery_more'.$suffix,
                     'operator' => '==',
                     'value' => '1',
                 ],
@@ -276,7 +276,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_gallery_more_button_text'. $suffix,
+        'key' => 'field_gallery_more_button_text'.$suffix,
         'label' => 'Button Text',
         'name' => 'gallery_more_button_text',
         'type' => 'text',
@@ -285,7 +285,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_gallery_more'. $suffix,
+                    'field' => 'field_gallery_more'.$suffix,
                     'operator' => '==',
                     'value' => '1',
                 ],
@@ -303,7 +303,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_gallery_more_button_url'. $suffix,
+        'key' => 'field_gallery_more_button_url'.$suffix,
         'label' => 'Button URL',
         'name' => 'gallery_more_button_url',
         'type' => 'link',
@@ -312,7 +312,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_gallery_more'. $suffix,
+                    'field' => 'field_gallery_more'.$suffix,
                     'operator' => '==',
                     'value' => '1',
                 ],
@@ -326,7 +326,7 @@ return [
         'return_format' => 'array',
     ],
     [
-        'key' => 'field_gallery_more_button_description'. $suffix,
+        'key' => 'field_gallery_more_button_description'.$suffix,
         'label' => 'Button Link Description',
         'name' => 'gallery_more_button_description',
         'type' => 'text',
@@ -335,7 +335,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_gallery_more'. $suffix,
+                    'field' => 'field_gallery_more'.$suffix,
                     'operator' => '==',
                     'value' => '1',
                 ],
@@ -353,7 +353,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_gallery_geo_valid'. $suffix,
+        'key' => 'field_gallery_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
@@ -377,7 +377,7 @@ return [
         'return_format' => 'value',
     ],
     [
-        'key' => 'field_gallery_regions'. $suffix,
+        'key' => 'field_gallery_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
@@ -386,7 +386,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_gallery_geo_valid'. $suffix,
+                    'field' => 'field_gallery_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
@@ -402,26 +402,26 @@ return [
         'endpoint' => 0,
     ],
     [
-		'key' => 'field_gallery_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'gallery_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => [
+        'key' => 'field_gallery_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'gallery_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
             [
                 [
-                    'field' => 'field_gallery_geo_valid'. $suffix,
+                    'field' => 'field_gallery_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
             ],
         ],
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'include' => 'Include',
@@ -431,21 +431,21 @@ return [
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
+        'return_format' => 'value',
     ],
     [
-		'key' => 'field_gallery_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'gallery_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => 0,
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'key' => 'field_gallery_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'gallery_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'central' => 'Central',

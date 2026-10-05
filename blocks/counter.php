@@ -3,48 +3,55 @@
  *
  * UAMS Counter List Block
  * (Based on UAMS Link List Block)
- * 
+ *
  */
 
 // Create id attribute allowing for custom "anchor" value.
-if (empty( $id )) {
-	$id = '';
+if (empty($id)) {
+    $id = '';
 }
-if ( empty( $id ) && isset($block) ) {
+if (empty($id) && isset($block)) {
     $id = $block['id'];
-} 
-if ( empty ($id) ) {
-    $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
-} 
+}
+if (empty($id)) {
+    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+}
 
-$id = 'link-list-' .  $id;
-if( !empty($block['anchor']) ) {
+$id = 'link-list-'.$id;
+if (! empty($block['anchor'])) {
     $id = $block['anchor'];
 }
 
 $className = '';
-if( !empty($block['className']) ) {
-    $className .= ' ' . $block['className'];
+if (! empty($block['className'])) {
+    $className .= ' '.$block['className'];
 }
-if( !empty($block['align']) ) {
-    $className .= ' align' . $block['align'];
-}   
+if (! empty($block['align'])) {
+    $className .= ' align'.$block['align'];
+}
 
 // Load values.
-if ( empty($heading) ) 
+if (empty($heading)) {
     $heading = get_field('counter_list_heading');
-if ( empty($hide_heading) ) 
+}
+if (empty($hide_heading)) {
     $hide_heading = get_field('counter_list_hide_heading');
-if ( empty($description) ) 
+}
+if (empty($description)) {
     $description = get_field('counter_list_description');
-if ( empty($start) ) 
+}
+if (empty($start)) {
     $start = get_field('counter_list_start');
-if ( empty($start_custom) ) 
+}
+if (empty($start_custom)) {
     $start_custom = get_field('counter_list_start_custom');
-if ( empty($background_color) ) 
+}
+if (empty($background_color)) {
     $background_color = get_field('counter_list_background_color');
-if ( empty($counter_list_rows) ) 
+}
+if (empty($counter_list_rows)) {
     $counter_list_rows = get_field('counter_list_section');
+}
 
 $row = 0;
 ?>
@@ -53,68 +60,68 @@ $row = 0;
         <div class="row">
             <div class="col-12 col-md-6 heading">
                 <div class="text-container">
-                    <h2 class="module-title <?php echo $hide_heading ? " sr-only" : ""; ?>">
+                    <h2 class="module-title <?php echo $hide_heading ? ' sr-only' : ''; ?>">
                         <span class="title"><?php echo esc_html($heading); ?></span>
                     </h2>
-                    <?php echo $description ? '<p class="note">'. wp_kses_post($description) . '</p>' : ''; ?>
+                    <?php echo $description ? '<p class="note">'.wp_kses_post($description).'</p>' : ''; ?>
                 </div>
             </div>
             <div class="col-12 col-md-6 list">
                     <ul>
-                    <?php 
-                        foreach($counter_list_rows as $counter_list_row) {
-                        // Load values.
-                        $row++;
-                        $counter_item_title = $counter_list_row['counter_list_section_title'];
-                        $counter_item_unit = $counter_list_row['counter_list_section_unit']; // Singular
-                        $counter_item_units = $counter_list_row['counter_list_section_units']; // Plural
-                        $counter_item_rate = $counter_list_row['counter_list_section_rate'];
-                        $counter_item_start_inherit = $counter_list_row['counter_list_section_start_inherit'];
-                        $counter_item_start_override = $counter_list_row['counter_list_section_start_override'];
-                        $counter_item_start_custom = $counter_list_row['counter_list_section_start_custom'];
-                        //
-                        if ( $counter_item_start_inherit == 1 ) {
-                            $counter_item_start = $start;
+                    <?php
+                        foreach ($counter_list_rows as $counter_list_row) {
+                            // Load values.
+                            $row++;
+                            $counter_item_title = $counter_list_row['counter_list_section_title'];
+                            $counter_item_unit = $counter_list_row['counter_list_section_unit']; // Singular
+                            $counter_item_units = $counter_list_row['counter_list_section_units']; // Plural
+                            $counter_item_rate = $counter_list_row['counter_list_section_rate'];
+                            $counter_item_start_inherit = $counter_list_row['counter_list_section_start_inherit'];
+                            $counter_item_start_override = $counter_list_row['counter_list_section_start_override'];
+                            $counter_item_start_custom = $counter_list_row['counter_list_section_start_custom'];
+                            //
+                            if ($counter_item_start_inherit == 1) {
+                                $counter_item_start = $start;
 
-                            if ($counter_item_start == 'custom') {
-                                $counter_item_start_custom = $start_custom;
+                                if ($counter_item_start == 'custom') {
+                                    $counter_item_start_custom = $start_custom;
+                                }
+                            } else {
+                                $counter_item_start = $counter_item_start_override;
                             }
-                        } else {
-                            $counter_item_start = $counter_item_start_override;
-                        }
-                        $date_day = date('Y-m-d') . ' 00:00:00';
-                        $date_week = date('Y-m-d', strtotime('last sunday')) . 'T00:00:00';
-                        $date_month = date('Y-m') . '-01T00:00:00';
-                        $date_year = date('Y') . '-01-01T00:00:00';
-                        $date_custom = $counter_item_start_custom;
-                        //$date_user = date('Y-m-d H:i:s'); // Replace with user input date picker value
+                            $date_day = date('Y-m-d').' 00:00:00';
+                            $date_week = date('Y-m-d', strtotime('last sunday')).'T00:00:00';
+                            $date_month = date('Y-m').'-01T00:00:00';
+                            $date_year = date('Y').'-01-01T00:00:00';
+                            $date_custom = $counter_item_start_custom;
+                            // $date_user = date('Y-m-d H:i:s'); // Replace with user input date picker value
 
-                        $date_now  = strtotime('now');
-                        $date_string = ${'date_'.$counter_item_start};
-                        $date = strtotime($date_string); // set the date value based on editor's selection
-                        $date_diff = $date_now - $date;
-                        $count_value = $counter_item_rate * $date_diff;
-                        if ($date_diff <= 1) {
-                            $append = $counter_item_unit;
-                        } else {
-                            $append = $counter_item_units;
-                        }
-                        if ($count_value < 1) {
-                            $count_value_display = 'Less than 1';
-                        } else {
-                            $count_value_display = number_format(floor($count_value));
-                        }
+                            $date_now = strtotime('now');
+                            $date_string = ${'date_'.$counter_item_start};
+                            $date = strtotime($date_string); // set the date value based on editor's selection
+                            $date_diff = $date_now - $date;
+                            $count_value = $counter_item_rate * $date_diff;
+                            if ($date_diff <= 1) {
+                                $append = $counter_item_unit;
+                            } else {
+                                $append = $counter_item_units;
+                            }
+                            if ($count_value < 1) {
+                                $count_value_display = 'Less than 1';
+                            } else {
+                                $count_value_display = number_format(floor($count_value));
+                            }
 
-                    ?>
-                        <li class="item" data-start-date="<?php echo esc_attr($date_string); ?>" data-rate="<?php echo esc_attr($counter_item_rate); ?>" data-unit-singular="<?php echo esc_attr($counter_item_unit); ?>" data-unit-plural="<?php echo esc_attr($counter_item_units); ?>" id="item-<?php echo esc_attr($id . '-row-' . $row); ?>">
+                            ?>
+                        <li class="item" data-start-date="<?php echo esc_attr($date_string); ?>" data-rate="<?php echo esc_attr($counter_item_rate); ?>" data-unit-singular="<?php echo esc_attr($counter_item_unit); ?>" data-unit-plural="<?php echo esc_attr($counter_item_units); ?>" id="item-<?php echo esc_attr($id.'-row-'.$row); ?>">
                             <div class="text-container">
                                 <h3 class="h5"><?php echo esc_html($counter_item_title); ?></h3>
                                 <p class="count"><span class="value"><?php echo $count_value_display; ?></span> <span class="append"><?php echo esc_html($append); ?></span></p>
                             </div>
                         </li>
                     <?php
-                    }
-                    ?>
+                        }
+?>
                 </ul>
             </div>
         </div>

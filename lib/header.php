@@ -2,140 +2,139 @@
 /**
  * Custom Header
  *
- * @package      Bootstrap for Genesis
  * @since        1.0
  * @link         http://webdevsuperfast.github.io
+ *
  * @author       Rotsen Mark Acob <webdevsuperfast.github.io>
  * @copyright    Copyright (c) 2015, Rotsen Mark Acob
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
- *
 */
 
 // Custom Header
 // remove_action( 'wp_head', 'genesis_custom_header_style' );
-remove_action( 'genesis_header', 'genesis_do_header' );
+remove_action('genesis_header', 'genesis_do_header');
 
-//Does this need to move to nav.php and tie into function uamswp_navbar_brand_markup?
+// Does this need to move to nav.php and tie into function uamswp_navbar_brand_markup?
 // Here goes the logo in Header -- need to update this with SVG magic?
-add_action( 'genesis_header', 'uamswp_site_image', 5 );
- 
-function uamswp_site_image(): void {
-	if ('uamshealth' == uams_get_site_info()['site']) {
-		$header_image = '<picture>
-		<source srcset="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark.svg" media="(min-width: 576px)">
-		<source srcset="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_vertical_dark.svg" media="(min-width: 1px)">
-		<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_health_horizontal_dark_386x50.png" alt="UAMS Health Logo" />
+add_action('genesis_header', 'uamswp_site_image', 5);
+
+function uamswp_site_image(): void
+{
+    if (uams_get_site_info()['site'] == 'uamshealth') {
+        $header_image = '<picture>
+		<source srcset="'.get_stylesheet_directory_uri().'/assets/svg/uams-logo_health_horizontal_dark.svg" media="(min-width: 576px)">
+		<source srcset="'.get_stylesheet_directory_uri().'/assets/svg/uams-logo_health_vertical_dark.svg" media="(min-width: 1px)">
+		<img src="'.get_stylesheet_directory_uri().'/assets/svg/uams-logo_health_horizontal_dark_386x50.png" alt="UAMS Health Logo" />
 		</picture>';
-		$header_image_link = 'https://uamshealth.com';
-		$header_image_text = 'UAMS Health';
-	}
-	else {
-		$header_image = '<picture>
-		<source srcset="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_main_dark.svg" media="(min-width: 1px)">
-		<img src="' . get_stylesheet_directory_uri() .'/assets/svg/uams-logo_main_dark_189x50.png" alt="University of Arkansas for Medical Sciences Logo" />
+        $header_image_link = 'https://uamshealth.com';
+        $header_image_text = 'UAMS Health';
+    } else {
+        $header_image = '<picture>
+		<source srcset="'.get_stylesheet_directory_uri().'/assets/svg/uams-logo_main_dark.svg" media="(min-width: 1px)">
+		<img src="'.get_stylesheet_directory_uri().'/assets/svg/uams-logo_main_dark_189x50.png" alt="University of Arkansas for Medical Sciences Logo" />
 		</picture>';
-		$header_image_link = 'https://www.uams.edu';
-		$header_image_text = 'University of Arkansas for Medical Sciences';
-	}
-	?>
+        $header_image_link = 'https://www.uams.edu';
+        $header_image_text = 'University of Arkansas for Medical Sciences';
+    }
+    ?>
 	<!-- /* Begin Title / Logo */  -->
 	<div class="global-title">
 
 	<?php
-	if ('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] && !uamswp_nav_subsection()) { // If it's the main UAMS Health site and not a subsection
-		printf( '<a href="' . $header_image_link . '" class="navbar-brand no-subbrand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text );
-	} else {
-		printf( '<a href="' . $header_image_link . '" class="navbar-brand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text );
-		echo '<div class="navbar-subbrand">';
+    if (uams_get_site_info()['site'] == 'uamshealth' && uams_get_site_info()['subsite'] == 'main' && ! uamswp_nav_subsection()) { // If it's the main UAMS Health site and not a subsection
+        printf('<a href="'.$header_image_link.'" class="navbar-brand no-subbrand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text);
+    } else {
+        printf('<a href="'.$header_image_link.'" class="navbar-brand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text);
+        echo '<div class="navbar-subbrand">';
 
-		if ('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite'] && uamswp_nav_subsection()) { // If it's a subsection on the main UAMS Health site
-			echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
-		} elseif (uamswp_nav_subsection()) { // If it's a subsection on any other site
-			echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a><span class="sr-only">: </span>';
-			echo '<a class="title" href="'. get_the_permalink( uamswp_nav_subsection() ) .'">'. get_the_title(uamswp_nav_subsection()) .'</a>';
-		} elseif ('inside' == uams_get_site_info()['site'] && 'main' !== uams_get_site_info()['subsite']) {
-			switch_to_blog(1);
-			$site_title = get_bloginfo( 'name' );
-			restore_current_blog();
-			echo '<a class="parent" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( network_site_url() ).'">'.$site_title.'<span class="sr-only">:</span></a>';
-			echo '<a class="title" href="'. esc_url( home_url( '/' ) ) .'">'. get_bloginfo( 'name' ) .'</a>';
-		} elseif ( // If it's an institute, college or grad school
-			'institute' == uams_get_site_info()['site']
-			|| 'health-prof' == uams_get_site_info()['subsite']
-			|| 'medicine' == uams_get_site_info()['subsite']
-			|| 'nursing' == uams_get_site_info()['subsite']
-			|| 'pharmacy' == uams_get_site_info()['subsite']
-			|| 'public-health' == uams_get_site_info()['subsite']
-			|| 'grad-school' == uams_get_site_info()['subsite']
-			|| 'regional-campus' == uams_get_site_info()['subsite']
-			|| 'other' == uams_get_site_info()['subsite']
-			) {
-			switch_to_blog(1);
-			$root_title_text = get_bloginfo( 'name' );
-			restore_current_blog();
-			$root_title_split = false;
-			$root_title_link = esc_url( network_site_url() );
-			$site_title = uams_site_title();
-			$site_title_link = esc_url( home_url( '/' ) );
-			$subsection_title = get_the_title(uamswp_nav_subsection());
-			$subsection_title_link = get_the_permalink( uamswp_nav_subsection() );
-			// Test if Root site title contains three spaces. Split title into vars if so.
-			$split_str = '   ';
-			if(strpos($root_title_text, $split_str) !== false){
-				$root_title_split = true;
-				$split_str_pos = strpos($site_title, $split_str);
-				$split_a_end = $split_str_pos;
-				$split_b_begin = $split_str_pos + 3;
-				$root_title_split_descr = substr($site_title, 0, $split_a_end);
-				$root_title_split_function = substr($site_title, $split_b_begin);
-				$root_title_text = str_replace($split_str, ' ', $root_title_text);
-			}
-			// Test if current site title contains three spaces. Replace with one space if so.
-			if(strpos($site_title, $split_str) !== false){
-				$site_title = str_replace($split_str, ' ', $site_title);
-			}
-			// Begin structure
-			if (uamswp_nav_subsection() && 'main' != uams_get_site_info()['department'] && 'none' != uams_get_site_info()['department']) {
-				// Subsection of site that is department/organization
-				echo '<a class="parent" href="'.$site_title_link.'">'.$site_title.'</a><span class="sr-only">: </span>';
-				echo '<a class="title" href="'.$subsection_title_link.'">'.$subsection_title.'</a>';
-			} elseif (uamswp_nav_subsection()) {
-				// Subsection of site that is not department/organization (includes Main)
-				echo '<a class="parent" href="'.$root_title_link.'">'.$root_title_text.'</a><span class="sr-only">: </span>';
-				echo '<a class="title" href="'.$subsection_title_link.'">'.$subsection_title.'</a>';
-			} elseif ('main' != uams_get_site_info()['department']) {
-				// All sites but main, not subsection
-				echo '<a class="parent" href="'.$root_title_link.'">'.$root_title_text.'</a><span class="sr-only">: </span>';
-				echo '<a class="title" href="'.$site_title_link.'">'.$site_title.'</a>';
-			} elseif ($root_title_split) {
-				// Main site, not subsection, split title
-				echo '<a class="title-split" href="'.$site_title_link.'"><span class="title-descriptor">'.$root_title_split_descr.'</span> <span class="title-function">'.$root_title_split_function.'</span></a>';
-			} else {
-				// Main site, not subsection, not split title
-				echo '<a class="title" href="'.$site_title_link.'">'.$site_title.'</a>';
-			}
-		} else {
-		// If it's a regular old homepage
-			echo '<a class="title" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.uams_site_title().'</a>';
-		}
+        if (uams_get_site_info()['site'] == 'uamshealth' && uams_get_site_info()['subsite'] == 'main' && uamswp_nav_subsection()) { // If it's a subsection on the main UAMS Health site
+            echo '<a class="title" href="'.get_the_permalink(uamswp_nav_subsection()).'">'.get_the_title(uamswp_nav_subsection()).'</a>';
+        } elseif (uamswp_nav_subsection()) { // If it's a subsection on any other site
+            echo '<a class="parent" title="'.esc_attr(get_bloginfo('description')).'" href="'.esc_url(home_url('/')).'">'.uams_site_title().'</a><span class="sr-only">: </span>';
+            echo '<a class="title" href="'.get_the_permalink(uamswp_nav_subsection()).'">'.get_the_title(uamswp_nav_subsection()).'</a>';
+        } elseif (uams_get_site_info()['site'] == 'inside' && uams_get_site_info()['subsite'] !== 'main') {
+            switch_to_blog(1);
+            $site_title = get_bloginfo('name');
+            restore_current_blog();
+            echo '<a class="parent" title="'.esc_attr(get_bloginfo('description')).'" href="'.esc_url(network_site_url()).'">'.$site_title.'<span class="sr-only">:</span></a>';
+            echo '<a class="title" href="'.esc_url(home_url('/')).'">'.get_bloginfo('name').'</a>';
+        } elseif ( // If it's an institute, college or grad school
+            uams_get_site_info()['site'] == 'institute'
+            || uams_get_site_info()['subsite'] == 'health-prof'
+            || uams_get_site_info()['subsite'] == 'medicine'
+            || uams_get_site_info()['subsite'] == 'nursing'
+            || uams_get_site_info()['subsite'] == 'pharmacy'
+            || uams_get_site_info()['subsite'] == 'public-health'
+            || uams_get_site_info()['subsite'] == 'grad-school'
+            || uams_get_site_info()['subsite'] == 'regional-campus'
+            || uams_get_site_info()['subsite'] == 'other'
+        ) {
+            switch_to_blog(1);
+            $root_title_text = get_bloginfo('name');
+            restore_current_blog();
+            $root_title_split = false;
+            $root_title_link = esc_url(network_site_url());
+            $site_title = uams_site_title();
+            $site_title_link = esc_url(home_url('/'));
+            $subsection_title = get_the_title(uamswp_nav_subsection());
+            $subsection_title_link = get_the_permalink(uamswp_nav_subsection());
+            // Test if Root site title contains three spaces. Split title into vars if so.
+            $split_str = '   ';
+            if (strpos($root_title_text, $split_str) !== false) {
+                $root_title_split = true;
+                $split_str_pos = strpos($site_title, $split_str);
+                $split_a_end = $split_str_pos;
+                $split_b_begin = $split_str_pos + 3;
+                $root_title_split_descr = substr($site_title, 0, $split_a_end);
+                $root_title_split_function = substr($site_title, $split_b_begin);
+                $root_title_text = str_replace($split_str, ' ', $root_title_text);
+            }
+            // Test if current site title contains three spaces. Replace with one space if so.
+            if (strpos($site_title, $split_str) !== false) {
+                $site_title = str_replace($split_str, ' ', $site_title);
+            }
+            // Begin structure
+            if (uamswp_nav_subsection() && uams_get_site_info()['department'] != 'main' && uams_get_site_info()['department'] != 'none') {
+                // Subsection of site that is department/organization
+                echo '<a class="parent" href="'.$site_title_link.'">'.$site_title.'</a><span class="sr-only">: </span>';
+                echo '<a class="title" href="'.$subsection_title_link.'">'.$subsection_title.'</a>';
+            } elseif (uamswp_nav_subsection()) {
+                // Subsection of site that is not department/organization (includes Main)
+                echo '<a class="parent" href="'.$root_title_link.'">'.$root_title_text.'</a><span class="sr-only">: </span>';
+                echo '<a class="title" href="'.$subsection_title_link.'">'.$subsection_title.'</a>';
+            } elseif (uams_get_site_info()['department'] != 'main') {
+                // All sites but main, not subsection
+                echo '<a class="parent" href="'.$root_title_link.'">'.$root_title_text.'</a><span class="sr-only">: </span>';
+                echo '<a class="title" href="'.$site_title_link.'">'.$site_title.'</a>';
+            } elseif ($root_title_split) {
+                // Main site, not subsection, split title
+                echo '<a class="title-split" href="'.$site_title_link.'"><span class="title-descriptor">'.$root_title_split_descr.'</span> <span class="title-function">'.$root_title_split_function.'</span></a>';
+            } else {
+                // Main site, not subsection, not split title
+                echo '<a class="title" href="'.$site_title_link.'">'.$site_title.'</a>';
+            }
+        } else {
+            // If it's a regular old homepage
+            echo '<a class="title" title="'.esc_attr(get_bloginfo('description')).'" href="'.esc_url(home_url('/')).'">'.uams_site_title().'</a>';
+        }
 
-		echo '</div>';
-	}
-  
-	// If it's an institute or other split title entity, separate the title descriptor (often the donor) and the functional title (often the center/institute of X) into two separate spans as below.
-	// Use three spaces in site title to indicate desire to split the title. Find/replace those three spaces 
-	//echo '<a class="title-split" href="javascript:void(0)"><span class="title-descriptor">Jackson T. Stephens</span> <span class="title-function">Spine and Neurosciences Institute</span></a>';
-	?>
+        echo '</div>';
+    }
+
+    // If it's an institute or other split title entity, separate the title descriptor (often the donor) and the functional title (often the center/institute of X) into two separate spans as below.
+    // Use three spaces in site title to indicate desire to split the title. Find/replace those three spaces
+    // echo '<a class="title-split" href="javascript:void(0)"><span class="title-descriptor">Jackson T. Stephens</span> <span class="title-function">Spine and Neurosciences Institute</span></a>';
+    ?>
 	
 	</div>
 	<!-- /* End Title / Logo */ -->
 
 	<!-- /* Begin Right Navbar */ -->
 	<nav class="header-nav" aria-label="Resource Navigation">
-		<?php if (! is_page_template( 'templates/marketing.php' ) ) { ?>
+		<?php if (! is_page_template('templates/marketing.php')) { ?>
 		<div class="collapse navbar-collapse" id="nav-secondary">
 			<ul class="nav">
-				<?php if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site']) || empty(uams_get_site_info()['site'])) { ?>
+				<?php if ((uams_get_site_info()['site'] == 'uams') || (uams_get_site_info()['site'] == 'institute') || empty(uams_get_site_info()['site'])) { ?>
 				<!-- Options - uams -->
 				<li class="nav-item">
 					<a class="nav-link" href="https://uamshealth.com/">UAMS Health</a>
@@ -147,7 +146,7 @@ function uamswp_site_image(): void {
 					<a class="nav-link" href="https://giving.uams.edu/">Giving</a>
 				</li>
 				<!-- End right nav -->
-				<?php } elseif ('uamshealth' == uams_get_site_info()['site']) { ?>
+				<?php } elseif (uams_get_site_info()['site'] == 'uamshealth') { ?>
 				<!-- Options - uamshealth -->
 				<li class="nav-item">
 					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
@@ -159,7 +158,7 @@ function uamswp_site_image(): void {
 					<a class="nav-link" href="https://giving.uams.edu/">Giving</a>
 				</li>
 				<!-- End right nav -->
-				<?php } elseif ('inside' == uams_get_site_info()['site']) { ?>
+				<?php } elseif (uams_get_site_info()['site'] == 'inside') { ?>
 				<!-- Options - inside -->
 				<li class="nav-item">
 					<a class="nav-link" href="https://www.uams.edu/">UAMS.edu</a>
@@ -173,12 +172,12 @@ function uamswp_site_image(): void {
 		</div>
 		<?php } ?>
 		<ul class="nav resource-nav" id="nav-resource">
-			<?php if ('uamshealth' == uams_get_site_info()['site'] && ! is_page_template( 'templates/marketing.php' )) { ?>
+			<?php if (uams_get_site_info()['site'] == 'uamshealth' && ! is_page_template('templates/marketing.php')) { ?>
 			<!-- uamshealth only -->
 			<li class="nav-item">
 				<a class="nav-link emergency-link" href="https://uamshealth.com/location/uams-emergency-room/" aria-label="Emergency Room"><svg class="" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ambulance" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M624 352h-16V243.9c0-12.7-5.1-24.9-14.1-33.9L494 110.1c-9-9-21.2-14.1-33.9-14.1H416V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h16c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zM160 464c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm144-248c0 4.4-3.6 8-8 8h-56v56c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8v-56h-56c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h56v-56c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v56h56c4.4 0 8 3.6 8 8v48zm176 248c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-208H416V144h44.1l99.9 99.9V256z"></path></svg><span class="sr-only">Emergency Room</span></a>
 			</li>
-			<?php } // endif ?>
+			<?php } // endif?>
 			<li class="nav-item">
 				<button class="search-toggler" type="button" id="toggle-search" aria-controls="header-search" aria-expanded="false" title="Toggle Search">
 					<span class="sr-only label">Toggle Search</span>
@@ -189,15 +188,15 @@ function uamswp_site_image(): void {
 		</ul>
 
 		<?php
-		// Removing Quick Links toggler via comments in case we decide to bring it back.
-		// <button class="quick-links-toggler" type="button" id="toggle-quick-links" aria-controls="quick-links" aria-expanded="false" title="Toggle Quick Links navigation">
-		// 	<span class="sr-only label">Toggle Quick Links</span>
-		// 	<span class="fas fa-bars fa-lg fa-fw"></span>
-		// 	<span class="fas fa-times fa-lg fa-fw"></span>
-		// </button>
-		?>
+        // Removing Quick Links toggler via comments in case we decide to bring it back.
+        // <button class="quick-links-toggler" type="button" id="toggle-quick-links" aria-controls="quick-links" aria-expanded="false" title="Toggle Quick Links navigation">
+        // 	<span class="sr-only label">Toggle Quick Links</span>
+        // 	<span class="fas fa-bars fa-lg fa-fw"></span>
+        // 	<span class="fas fa-times fa-lg fa-fw"></span>
+        // </button>
+    ?>
 
-		<?php if (! is_page_template( 'templates/marketing.php' ) ) { ?>
+		<?php if (! is_page_template('templates/marketing.php')) { ?>
 		<!-- // The data-target and aria-controls may need to be dynamically defined. -->
 		<button class="navbar-toggler mobile-menu-toggler" type="button" data-toggle="collapse" data-target="#genesis-nav-primary" aria-controls="genesis-nav-primary" aria-expanded="false" title="Toggle Primary navigation">
 			<span class="sr-only label">Toggle Primary Nav</span>

@@ -2,158 +2,157 @@
 /**
  * Functions
  *
- * @package      Bootstrap for Genesis
  * @since        1.0
  * @link         http://webdevsuperfast.github.io
+ *
  * @author       Rotsen Mark Acob <webdevsuperfast.github.io>
  * @copyright    Copyright (c) 2015, Rotsen Mark Acob
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
- *
 */
-
-if ( ! defined( 'CHILD_THEME_VERSION' ) ) {
-    define( 'CHILD_THEME_VERSION', wp_get_theme()->get( 'Version' ) );
+if (! defined('CHILD_THEME_VERSION')) {
+    define('CHILD_THEME_VERSION', wp_get_theme()->get('Version'));
 }
 
-add_action( 'genesis_setup', 'uamswp_childtheme_setup', 15 );
-function uams_custom_add_image_size_names( $sizes ): array {
-	return array_merge( $sizes, [
-		'content-image-side' => __( 'Content image aligned left/right' ),
-		'content-image-center' => __( 'Content image aligned center' ),
-		'content-image-wide' => __( 'Content image aligned wide' ),
-		'content-image-full' => __( 'Content image aligned full' ),
-	] );
-	}
+add_action('genesis_setup', 'uamswp_childtheme_setup', 15);
+function uams_custom_add_image_size_names($sizes): array
+{
+    return array_merge($sizes, [
+        'content-image-side' => __('Content image aligned left/right'),
+        'content-image-center' => __('Content image aligned center'),
+        'content-image-wide' => __('Content image aligned wide'),
+        'content-image-full' => __('Content image aligned full'),
+    ]);
+}
 
-function uamswp_childtheme_setup(): void {
-	// Start the engine
-	include_once( get_template_directory() . '/lib/init.php' );
+function uamswp_childtheme_setup(): void
+{
+    // Start the engine
+    include_once get_template_directory().'/lib/init.php';
 
-	// Child theme (do not remove)
-	define( 'UAMSWP_THEME_NAME', 'Bootstrap for Genesis' );
-	define( 'UAMSWP_THEME_URL', 'http://webdevsuperfast.github.io/' );
-	define( 'UAMSWP_THEME_LIB', CHILD_DIR . '/lib/' );
-	define( 'UAMSWP_THEME_LIB_URL', CHILD_URL . '/lib/' );
-	define( 'UAMSWP_THEME_IMAGES', CHILD_URL . '/images/' );
-	define( 'UAMSWP_THEME_JS', CHILD_URL . '/assets/js/' );
-	define( 'UAMSWP_THEME_CSS', CHILD_URL . '/assets/css/' );
-	define( 'UAMSWP_THEME_MODULES', CHILD_DIR . '/lib/modules/' );
+    // Child theme (do not remove)
+    define('UAMSWP_THEME_NAME', 'Bootstrap for Genesis');
+    define('UAMSWP_THEME_URL', 'http://webdevsuperfast.github.io/');
+    define('UAMSWP_THEME_LIB', CHILD_DIR.'/lib/');
+    define('UAMSWP_THEME_LIB_URL', CHILD_URL.'/lib/');
+    define('UAMSWP_THEME_IMAGES', CHILD_URL.'/images/');
+    define('UAMSWP_THEME_JS', CHILD_URL.'/assets/js/');
+    define('UAMSWP_THEME_CSS', CHILD_URL.'/assets/css/');
+    define('UAMSWP_THEME_MODULES', CHILD_DIR.'/lib/modules/');
 
-	// Cleanup WP Head
-	remove_action( 'wp_head', 'rsd_link' );
-	remove_action( 'wp_head', 'wlwmanifest_link' );
-	remove_action( 'wp_head', 'wp_generator' );
-	remove_action( 'wp_head', 'start_post_rel_link' );
-	remove_action( 'wp_head', 'index_rel_link' );
-	remove_action( 'wp_head', 'adjacent_posts_rel_link' );
-	remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+    // Cleanup WP Head
+    remove_action('wp_head', 'rsd_link');
+    remove_action('wp_head', 'wlwmanifest_link');
+    remove_action('wp_head', 'wp_generator');
+    remove_action('wp_head', 'start_post_rel_link');
+    remove_action('wp_head', 'index_rel_link');
+    remove_action('wp_head', 'adjacent_posts_rel_link');
+    remove_action('wp_head', 'wp_shortlink_wp_head');
 
-	// Disable REST API link tag
-	remove_action('wp_head', 'rest_output_link_wp_head', 10);
-	// Disable oEmbed Discovery Links
-	remove_action('wp_head', 'wp_oembed_add_discovery_links', 10);
-	// Disable REST API link in HTTP headers
-	remove_action('template_redirect', 'rest_output_link_header', 11, 0);
+    // Disable REST API link tag
+    remove_action('wp_head', 'rest_output_link_wp_head', 10);
+    // Disable oEmbed Discovery Links
+    remove_action('wp_head', 'wp_oembed_add_discovery_links', 10);
+    // Disable REST API link in HTTP headers
+    remove_action('template_redirect', 'rest_output_link_header', 11, 0);
 
-	// Add HTML5 markup structure
-	add_theme_support( 'html5', [ 'search-form', 'comment-form', 'comment-list' ] );
+    // Add HTML5 markup structure
+    add_theme_support('html5', ['search-form', 'comment-form', 'comment-list']);
 
-	//* Unregister secondary navigation menu
-	add_theme_support( 'genesis-menus', [ 'primary' => __( 'Primary Navigation Menu', 'genesis' ) ] );
+    // * Unregister secondary navigation menu
+    add_theme_support('genesis-menus', ['primary' => __('Primary Navigation Menu', 'genesis')]);
 
-	// Add viewport meta tag for mobile browsers
-	add_theme_support( 'genesis-responsive-viewport' );
+    // Add viewport meta tag for mobile browsers
+    add_theme_support('genesis-responsive-viewport');
 
-	// Add support for 3-column footer widgets
-	add_theme_support( 'genesis-footer-widgets', 1 ); 
+    // Add support for 3-column footer widgets
+    add_theme_support('genesis-footer-widgets', 1);
 
-	// Custom Logo
-	add_theme_support( 'custom-logo', [
-		'flex-width' => true,
-		'flex-height' => true
-	] );
+    // Custom Logo
+    add_theme_support('custom-logo', [
+        'flex-width' => true,
+        'flex-height' => true,
+    ]);
 
-	// Structural Wraps
-	add_theme_support( 'genesis-structural-wraps', [
-		//'header',
-		// 'site-inner',
-		// 'footer-widgets',
-		//'footer',
-		//'home-featured'
-	] );
+    // Structural Wraps
+    add_theme_support('genesis-structural-wraps', [
+        // 'header',
+        // 'site-inner',
+        // 'footer-widgets',
+        // 'footer',
+        // 'home-featured'
+    ]);
 
-	// WooCommerce Support
-	add_theme_support( 'genesis-connect-woocommerce' );
+    // WooCommerce Support
+    add_theme_support('genesis-connect-woocommerce');
 
-	// Responsive Embeds
-	add_theme_support( 'responsive-embeds' );
+    // Responsive Embeds
+    add_theme_support('responsive-embeds');
 
-	// Gutenberg Support for block editor
-	add_theme_support( 'align-wide' );
+    // Gutenberg Support for block editor
+    add_theme_support('align-wide');
 
-	//* Add Excerpt support to Pages in Genesis
-	add_post_type_support( 'page', 'excerpt' ); 
+    // * Add Excerpt support to Pages in Genesis
+    add_post_type_support('page', 'excerpt');
 
-	// Remove unneeded widget areas
-	unregister_sidebar( 'header-right' );
+    // Remove unneeded widget areas
+    unregister_sidebar('header-right');
 
-	// Move Sidebar Secondary After Content
-	remove_action( 'genesis_after_content_sidebar_wrap', 'genesis_get_sidebar_alt' );
-	add_action( 'genesis_after_content', 'genesis_get_sidebar_alt' );
+    // Move Sidebar Secondary After Content
+    remove_action('genesis_after_content_sidebar_wrap', 'genesis_get_sidebar_alt');
+    add_action('genesis_after_content', 'genesis_get_sidebar_alt');
 
-	// Remove Gallery CSS
-	add_filter( 'use_default_gallery_style', '__return_false' );
+    // Remove Gallery CSS
+    add_filter('use_default_gallery_style', '__return_false');
 
-	// Add Shortcode Functionality to Text Widgets
-	add_filter( 'widget_text', 'shortcode_unautop' );
-	add_filter( 'widget_text', 'do_shortcode' );
+    // Add Shortcode Functionality to Text Widgets
+    add_filter('widget_text', 'shortcode_unautop');
+    add_filter('widget_text', 'do_shortcode');
 
-	// Move Featured Image
-	remove_action( 'genesis_entry_content', 'genesis_do_post_image', 8 );
-	add_action( 'genesis_entry_header',  'genesis_do_post_image', 0 );
+    // Move Featured Image
+    remove_action('genesis_entry_content', 'genesis_do_post_image', 8);
+    add_action('genesis_entry_header', 'genesis_do_post_image', 0);
 
-	// Custom Image Size
-	add_image_size( 'bootstrap-featured', 730, 0, true );
-	add_image_size( 'aspect-16-9', 1024, 576, true );
-	add_image_size( 'aspect-16-9-small', 512, 288, true );
-	add_image_size( 'aspect-8-3', 1024, 384, true );
-	//add_image_size( 'aspect-8-3-small', 512, 192, true ); // hidden until needed
-	add_image_size( 'aspect-4-3', 1024, 768, true );
-	//add_image_size( 'aspect-4-3-small', 512, 384, true ); // hidden until needed
-	add_image_size( 'aspect-2-1', 1024, 512, true );
-	//add_image_size( 'aspect-2-1-small', 512, 256, true ); // hidden until needed
-	add_image_size( 'aspect-1-1', 1024, 1024, true );
-	//add_image_size( 'aspect-1-1-small', 512, 512, true ); // hidden until needed
-	add_image_size( 'hero-tablet', 455, 256, true );
-	add_image_size( 'portrait-3-4', 243, 324, true);
-	add_image_size( 'content-image-side', 299, 9999 );
-	add_image_size( 'content-image-center', 630, 9999 );
-	add_image_size( 'content-image-wide', 1020, 9999 );
-	add_image_size( 'content-image-full', 1920, 9999 );
+    // Custom Image Size
+    add_image_size('bootstrap-featured', 730, 0, true);
+    add_image_size('aspect-16-9', 1024, 576, true);
+    add_image_size('aspect-16-9-small', 512, 288, true);
+    add_image_size('aspect-8-3', 1024, 384, true);
+    // add_image_size( 'aspect-8-3-small', 512, 192, true ); // hidden until needed
+    add_image_size('aspect-4-3', 1024, 768, true);
+    // add_image_size( 'aspect-4-3-small', 512, 384, true ); // hidden until needed
+    add_image_size('aspect-2-1', 1024, 512, true);
+    // add_image_size( 'aspect-2-1-small', 512, 256, true ); // hidden until needed
+    add_image_size('aspect-1-1', 1024, 1024, true);
+    // add_image_size( 'aspect-1-1-small', 512, 512, true ); // hidden until needed
+    add_image_size('hero-tablet', 455, 256, true);
+    add_image_size('portrait-3-4', 243, 324, true);
+    add_image_size('content-image-side', 299, 9999);
+    add_image_size('content-image-center', 630, 9999);
+    add_image_size('content-image-wide', 1020, 9999);
+    add_image_size('content-image-full', 1920, 9999);
 
-	// Add custom image sizes to post editor
-	add_filter( 'image_size_names_choose', 'uams_custom_add_image_size_names' );
+    // Add custom image sizes to post editor
+    add_filter('image_size_names_choose', 'uams_custom_add_image_size_names');
 
+    // Add Accessibility support
+    add_theme_support('genesis-accessibility', ['404-page', 'drop-down-menu', 'headings', 'rems', 'search-form', 'skip-links']);
 
-	// Add Accessibility support
-	add_theme_support( 'genesis-accessibility', [ '404-page', 'drop-down-menu', 'headings', 'rems', 'search-form', 'skip-links' ] );
+    // TGM Plugin Activation
+    require_once UAMSWP_THEME_MODULES.'class-tgm-plugin-activation.php';
 
-	// TGM Plugin Activation
-	require_once( UAMSWP_THEME_MODULES . 'class-tgm-plugin-activation.php' );
+    // Include php files from lib folder
+    // @link https://gist.github.com/theandystratton/5924570
+    foreach (glob(__DIR__.'/lib/*.php') as $file) {
+        include $file;
+    }
 
-	// Include php files from lib folder
-	// @link https://gist.github.com/theandystratton/5924570
-	foreach ( glob( __DIR__ . '/lib/*.php' ) as $file ) {
-		include $file;
-	}
-	
-	// Load Child theme text domain
-	load_child_theme_textdomain( 'uams-2020', get_stylesheet_directory() . '/languages' );
+    // Load Child theme text domain
+    load_child_theme_textdomain('uams-2020', get_stylesheet_directory().'/languages');
 }
 
 // Custom Skip links - add aria and role
-remove_action ( 'genesis_before_header', 'genesis_skip_links', 5 );
-add_action( 'genesis_before_header', 'uamswp_skip_links', 5 );
+remove_action('genesis_before_header', 'genesis_skip_links', 5);
+add_action('genesis_before_header', 'uamswp_skip_links', 5);
 /**
  * Add skip links for screen readers and keyboard navigation.
  *
@@ -161,492 +160,522 @@ add_action( 'genesis_before_header', 'uamswp_skip_links', 5 );
  *
  * @return void Return early if skip links are not supported.
  */
-function uamswp_skip_links(): void {
+function uamswp_skip_links(): void
+{
 
-	if ( ! genesis_a11y( 'skip-links' ) ) {
-		return;
-	}
+    if (! genesis_a11y('skip-links')) {
+        return;
+    }
 
-	// Call function to add IDs to the markup.
-	genesis_skiplinks_markup();
+    // Call function to add IDs to the markup.
+    genesis_skiplinks_markup();
 
-	// Determine which skip links are needed.
-	$links = [];
+    // Determine which skip links are needed.
+    $links = [];
 
-	if ( genesis_nav_menu_supported( 'primary' ) && has_nav_menu( 'primary' ) ) {
-		$links['genesis-nav-primary'] = esc_html__( 'Skip to primary navigation', 'genesis' );
-	}
+    if (genesis_nav_menu_supported('primary') && has_nav_menu('primary')) {
+        $links['genesis-nav-primary'] = esc_html__('Skip to primary navigation', 'genesis');
+    }
 
-	$links['genesis-content'] = esc_html__( 'Skip to main content', 'genesis' );
+    $links['genesis-content'] = esc_html__('Skip to main content', 'genesis');
 
-	if ( 'full-width-content' !== genesis_site_layout() ) {
-		$links['genesis-sidebar-primary'] = esc_html__( 'Skip to primary sidebar', 'genesis' );
-	}
+    if (genesis_site_layout() !== 'full-width-content') {
+        $links['genesis-sidebar-primary'] = esc_html__('Skip to primary sidebar', 'genesis');
+    }
 
-	if ( in_array( genesis_site_layout(), [ 'sidebar-sidebar-content', 'sidebar-content-sidebar', 'content-sidebar-sidebar' ], true ) ) {
-		$links['genesis-sidebar-secondary'] = esc_html__( 'Skip to secondary sidebar', 'genesis' );
-	}
+    if (in_array(genesis_site_layout(), ['sidebar-sidebar-content', 'sidebar-content-sidebar', 'content-sidebar-sidebar'], true)) {
+        $links['genesis-sidebar-secondary'] = esc_html__('Skip to secondary sidebar', 'genesis');
+    }
 
-	if ( current_theme_supports( 'genesis-footer-widgets' ) ) {
-		$footer_widgets = get_theme_support( 'genesis-footer-widgets' );
-		if ( isset( $footer_widgets[0] ) && is_numeric( $footer_widgets[0] ) && is_active_sidebar( 'footer-1' ) ) {
-			$links['genesis-footer-widgets'] = esc_html__( 'Skip to footer', 'genesis' );
-		}
-	}
+    if (current_theme_supports('genesis-footer-widgets')) {
+        $footer_widgets = get_theme_support('genesis-footer-widgets');
+        if (isset($footer_widgets[0]) && is_numeric($footer_widgets[0]) && is_active_sidebar('footer-1')) {
+            $links['genesis-footer-widgets'] = esc_html__('Skip to footer', 'genesis');
+        }
+    }
 
-	/**
-	 * Filter the skip links.
-	 *
-	 * @since 2.2.0
-	 *
-	 * @param array $links {
-	 *     Default skiplinks.
-	 *
-	 *     @type string HTML ID attribute value to link to.
-	 *     @type string Anchor text.
-	 * }
-	 */
-	$links = (array) apply_filters( 'genesis_skip_links_output', $links );
+    /**
+     * Filter the skip links.
+     *
+     * @since 2.2.0
+     *
+     * @param  array  $links  {
+     *                        Default skiplinks.
+     *
+     * @type string HTML ID attribute value to link to.
+     * @type string Anchor text.
+     *              }
+     */
+    $links = (array) apply_filters('genesis_skip_links_output', $links);
 
-	// Write HTML, skiplinks in a list.
-	$skiplinks = '<nav aria-label="Skip links"><ul class="genesis-skip-link">';
+    // Write HTML, skiplinks in a list.
+    $skiplinks = '<nav aria-label="Skip links"><ul class="genesis-skip-link">';
 
-	// Add markup for each skiplink.
-	foreach ( $links as $key => $value ) {
-		$skiplinks .= '<li><a href="' . esc_url( '#' . $key ) . '" class="screen-reader-shortcut"> ' . $value . '</a></li>';
-	}
+    // Add markup for each skiplink.
+    foreach ($links as $key => $value) {
+        $skiplinks .= '<li><a href="'.esc_url('#'.$key).'" class="screen-reader-shortcut"> '.$value.'</a></li>';
+    }
 
-	$skiplinks .= '</ul></nav>';
+    $skiplinks .= '</ul></nav>';
 
-	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	echo $skiplinks;
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    echo $skiplinks;
 
 }
 
-add_filter( 'genesis_attr_site-header', 'uamswp_add_aria' );
-function uamswp_add_aria( $attributes ) {
- if ( isset($attributes['aria-label']) ) {
-	$attributes['aria-label'] .= 'Site Header';
- } else {
-	$attributes['aria-label'] = 'Site Header';
- }
- return $attributes;
+add_filter('genesis_attr_site-header', 'uamswp_add_aria');
+function uamswp_add_aria($attributes)
+{
+    if (isset($attributes['aria-label'])) {
+        $attributes['aria-label'] .= 'Site Header';
+    } else {
+        $attributes['aria-label'] = 'Site Header';
+    }
+
+    return $attributes;
 }
 
-add_filter ( 'genesis_home_crumb', 'uams_breadcrumb_home_icon' );
-function uams_breadcrumb_home_icon( $crumb ): string {
-		if (('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite']) || ('uamshealth' == uams_get_site_info()['site'] && is_front_page() ) ) {
-			$crumb = '<a href="'.uams_get_home_link().'" title="UAMS Health"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">UAMS Health</span></a><meta itemprop="position" content="1">';
-		} elseif ( ('inside' == uams_get_site_info()['site'] && is_front_page() ) ) {
-			$crumb = '<a href="'.uams_get_home_link().'" title="Inside UAMS"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1">';
-		} else {
-			if ( is_front_page() && 'main' != uams_get_site_info()['department'] && 'none' != uams_get_site_info()['department'] ) {
-				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="' . network_home_url() . '" title="' . get_blog_details(1)->blogname . '"><span itemprop="name">'.get_blog_details(1)->blogname.'</span></a><meta itemprop="position" content="2">';
-			} elseif ( 'main' != uams_get_site_info()['department'] && 'none' != uams_get_site_info()['department'] ) {
-				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="' . network_home_url() . '" title="' . get_blog_details(1)->blogname . '"><span itemprop="name">'.get_blog_details(1)->blogname.'</span></a><meta itemprop="position" content="2"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="' . home_url() . '/" title="' . uams_site_title() . '"><span itemprop="name">'.uams_site_title().'</span></a><meta itemprop="position" content="3">';
-			} elseif ( is_front_page() ) {
-				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1">';
-			} else {
-				$crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="' . home_url() . '/" title="' . uams_site_title() . '"><span itemprop="name">'.uams_site_title().'</span></a><meta itemprop="position" content="2">';
-			}
-		}
-     return $crumb;
+add_filter('genesis_home_crumb', 'uams_breadcrumb_home_icon');
+function uams_breadcrumb_home_icon($crumb): string
+{
+    if ((uams_get_site_info()['site'] == 'uamshealth' && uams_get_site_info()['subsite'] == 'main') || (uams_get_site_info()['site'] == 'uamshealth' && is_front_page())) {
+        $crumb = '<a href="'.uams_get_home_link().'" title="UAMS Health"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">UAMS Health</span></a><meta itemprop="position" content="1">';
+    } elseif ((uams_get_site_info()['site'] == 'inside' && is_front_page())) {
+        $crumb = '<a href="'.uams_get_home_link().'" title="Inside UAMS"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1">';
+    } else {
+        if (is_front_page() && uams_get_site_info()['department'] != 'main' && uams_get_site_info()['department'] != 'none') {
+            $crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="'.network_home_url().'" title="'.get_blog_details(1)->blogname.'"><span itemprop="name">'.get_blog_details(1)->blogname.'</span></a><meta itemprop="position" content="2">';
+        } elseif (uams_get_site_info()['department'] != 'main' && uams_get_site_info()['department'] != 'none') {
+            $crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="'.network_home_url().'" title="'.get_blog_details(1)->blogname.'"><span itemprop="name">'.get_blog_details(1)->blogname.'</span></a><meta itemprop="position" content="2"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="'.home_url().'/" title="'.uams_site_title().'"><span itemprop="name">'.uams_site_title().'</span></a><meta itemprop="position" content="3">';
+        } elseif (is_front_page()) {
+            $crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1">';
+        } else {
+            $crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="'.home_url().'/" title="'.uams_site_title().'"><span itemprop="name">'.uams_site_title().'</span></a><meta itemprop="position" content="2">';
+        }
+    }
+
+    return $crumb;
 }
 // Add Site Title as the Breadcrumb Title for front page
-add_filter ( 'genesis_page_crumb', 'uams_breadcrumb_home' );
-add_filter ( 'genesis_single_crumb', 'uams_breadcrumb_home' );
-function uams_breadcrumb_home( $crumb ) {
-	if ( is_front_page() ) {
-		return uams_site_title();
-	}
-	
-	return $crumb;
-	
+add_filter('genesis_page_crumb', 'uams_breadcrumb_home');
+add_filter('genesis_single_crumb', 'uams_breadcrumb_home');
+function uams_breadcrumb_home($crumb)
+{
+    if (is_front_page()) {
+        return uams_site_title();
+    }
+
+    return $crumb;
+
 }
 
 add_filter('seopress_pro_breadcrumbs_crumbs', 'sp_pro_breadcrumbs_crumbs');
-function sp_pro_breadcrumbs_crumbs($crumbs) {
-	//$crumbs is a multidimensional array.
-	//First array: key=position, second array: 0=>page title, 1=>URL
-	//do your stuff
-	// Change "Home" to site title
-	$crumbs[0][0] = uams_site_title();
-	if ( 'uamshealth' == uams_get_site_info()['site'] ) {
-		if ( ( 'main' == uams_get_site_info()['subsite']) ) {
-		$crumbs[0] = ['<span class="fas fa-home"></span><span class="sr-only">UAMS Health</span>', uams_get_home_link().'/'];
-		} else {
-			$home = ['<span class="fas fa-home"></span><span class="sr-only">UAMS Health</span>', uams_get_home_link().'/'];
-			array_unshift($crumbs, $home);
-		}
-	} elseif ( ('inside' == uams_get_site_info()['site'] ) ) {
-		if ( ( 'main' == uams_get_site_info()['subsite']) ) {
-			$crumbs[0] = ['<span class="fas fa-home"></span><span class="sr-only">Inside UAMS</span>', uams_get_home_link().'/'];
-		} else {
-			$home = ['<span class="fas fa-home"></span><span class="sr-only">Inside UAMS</span>', uams_get_home_link().'/'];
-			array_unshift($crumbs, $home);
-		}
-	} elseif ( ('institute' == uams_get_site_info()['site'] ) ) {
-		if ( ( 'main' == uams_get_site_info()['department']) ) {
-			$home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
-			array_unshift($crumbs, $home);
-			// $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
-		} else {
-			// if ('dept' == uams_get_site_info()['department']) {
-			$sitehome = [get_blog_details(1)->blogname, network_home_url()];
-			array_unshift($crumbs, $sitehome);
-			// }
-			$home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
-			array_unshift($crumbs, $home);
-		}
-	} else { // Site == uams
+function sp_pro_breadcrumbs_crumbs($crumbs)
+{
+    // $crumbs is a multidimensional array.
+    // First array: key=position, second array: 0=>page title, 1=>URL
+    // do your stuff
+    // Change "Home" to site title
+    $crumbs[0][0] = uams_site_title();
+    if (uams_get_site_info()['site'] == 'uamshealth') {
+        if ((uams_get_site_info()['subsite'] == 'main')) {
+            $crumbs[0] = ['<span class="fas fa-home"></span><span class="sr-only">UAMS Health</span>', uams_get_home_link().'/'];
+        } else {
+            $home = ['<span class="fas fa-home"></span><span class="sr-only">UAMS Health</span>', uams_get_home_link().'/'];
+            array_unshift($crumbs, $home);
+        }
+    } elseif ((uams_get_site_info()['site'] == 'inside')) {
+        if ((uams_get_site_info()['subsite'] == 'main')) {
+            $crumbs[0] = ['<span class="fas fa-home"></span><span class="sr-only">Inside UAMS</span>', uams_get_home_link().'/'];
+        } else {
+            $home = ['<span class="fas fa-home"></span><span class="sr-only">Inside UAMS</span>', uams_get_home_link().'/'];
+            array_unshift($crumbs, $home);
+        }
+    } elseif ((uams_get_site_info()['site'] == 'institute')) {
+        if ((uams_get_site_info()['department'] == 'main')) {
+            $home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
+            array_unshift($crumbs, $home);
+            // $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
+        } else {
+            // if ('dept' == uams_get_site_info()['department']) {
+            $sitehome = [get_blog_details(1)->blogname, network_home_url()];
+            array_unshift($crumbs, $sitehome);
+            // }
+            $home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
+            array_unshift($crumbs, $home);
+        }
+    } else { // Site == uams
 
-		if ( 'other' == uams_get_site_info()['subsite'] ) {
-			if ( ( 'main' == uams_get_site_info()['department']) ) {
-				$home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
-				array_unshift($crumbs, $home);
-				// $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
-			} else {
-				// if ('dept' == uams_get_site_info()['department']) {
-				$sitehome = [get_blog_details(1)->blogname, network_home_url()];
-				array_unshift($crumbs, $sitehome);
-				// }
-				$home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
-				array_unshift($crumbs, $home);
-			}
-		} elseif ( ( 'main' == uams_get_site_info()['subsite']) && !is_front_page() ) {
-			// Set www.uams.edu as home
-			$crumbs[0] = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
-		
-		} elseif ( 'main' != uams_get_site_info()['subsite'] && 'main' != uams_get_site_info()['department'] && '' != uams_get_site_info()['department'] && 'uams' != uams_get_site_info()['department'] ) {
-			// Multisite Home
-			$sitehome = [get_blog_details(1)->blogname, network_home_url()];
-			array_unshift($crumbs, $sitehome);
-			// UAMS Home
-			$home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
-			array_unshift($crumbs, $home);
-		} else {
-			// UAMS Home
-			$home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu'];
-			array_unshift($crumbs, $home);
-		}
-	}
-	// var_dump(uams_get_site_info());
-	// var_dump($crumbs);
-	return $crumbs;
+        if (uams_get_site_info()['subsite'] == 'other') {
+            if ((uams_get_site_info()['department'] == 'main')) {
+                $home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
+                array_unshift($crumbs, $home);
+                // $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
+            } else {
+                // if ('dept' == uams_get_site_info()['department']) {
+                $sitehome = [get_blog_details(1)->blogname, network_home_url()];
+                array_unshift($crumbs, $sitehome);
+                // }
+                $home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
+                array_unshift($crumbs, $home);
+            }
+        } elseif ((uams_get_site_info()['subsite'] == 'main') && ! is_front_page()) {
+            // Set www.uams.edu as home
+            $crumbs[0] = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
+
+        } elseif (uams_get_site_info()['subsite'] != 'main' && uams_get_site_info()['department'] != 'main' && uams_get_site_info()['department'] != '' && uams_get_site_info()['department'] != 'uams') {
+            // Multisite Home
+            $sitehome = [get_blog_details(1)->blogname, network_home_url()];
+            array_unshift($crumbs, $sitehome);
+            // UAMS Home
+            $home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
+            array_unshift($crumbs, $home);
+        } else {
+            // UAMS Home
+            $home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu'];
+            array_unshift($crumbs, $home);
+        }
+    }
+
+    // var_dump(uams_get_site_info());
+    // var_dump($crumbs);
+    return $crumbs;
 }
-function sp_pro_breadcrumbs_css(): bool { 
-	//Disable breadcrumbs inline CSS 
-	return false; 
-} 
+function sp_pro_breadcrumbs_css(): bool
+{
+    // Disable breadcrumbs inline CSS
+    return false;
+}
 add_action('seopress_pro_breadcrumbs_css', 'sp_pro_breadcrumbs_css');
 /* Disabled for latest version of SEOPress Pro > 3.8.5 Included as default in plugin
 add_filter('seopress_pro_breadcrumbs_html', 'sp_pro_breadcrumbs_html');
 function sp_pro_breadcrumbs_html($html) {
-	//$html = <nav aria-label="breadcrumb"><ol class="breadcrumb" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem"><a itemtype="https://schema.org/Thing" itemprop="item" href="https://www.seopress.org/"><span itemprop="name">Home</span></a><meta itemprop="position" content="1"></li>...
-	//Remove last link
-	$html = preg_replace('#^(.*)<a[^>]*?>(.*?)</a>(.*?)#im', '$1$2$3', $html);
-	return $html;
+    //$html = <nav aria-label="breadcrumb"><ol class="breadcrumb" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumb-item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem"><a itemtype="https://schema.org/Thing" itemprop="item" href="https://www.seopress.org/"><span itemprop="name">Home</span></a><meta itemprop="position" content="1"></li>...
+    //Remove last link
+    $html = preg_replace('#^(.*)<a[^>]*?>(.*?)</a>(.*?)#im', '$1$2$3', $html);
+    return $html;
 }
 */
 
 /** Returns site & subsite info **/
-if ( !function_exists('uams_get_site_info')):
+if (! function_exists('uams_get_site_info')) {
 
     function uams_get_site_info(): array
     {
-		$site = '';
-		$subsite = '';
-		$department = ''; // Settings page
-		$siteinfo = [];
-		if ( ! class_exists( 'acf' ) ) {
-			// Set base defaults if no ACF
-			$siteinfo = ['site' => 'uams', 'subsite' => 'uams', 'department' => 'uams'];
-			return $siteinfo;
-		}
-		/* Replace get_field functions with get_option - Remove ACF called too early errors */
-		$themestyle = get_option( 'options_uamswp_template' ); // get_field( 'uamswp_template', 'option' ); // uams, inside, health
-		$themelocation = get_option( 'options_uamswp_location' ); // get_field( 'uamswp_location', 'option' ); // campus, regional
-		$themeinstitute = get_option( 'options_uamswp_institute' ); // get_field( 'uamswp_institute', 'option' ); // institute name
-		$regional_campus = get_option( 'options_uamswp_regional_campus' ); // get_field( 'uamswp_regional_campus', 'option' ); // regional location
-		$aging_dept = get_option( 'options_uamswp_institute_aging_dept' ); // get_field( 'uamswp_institute_aging_dept', 'option' ); // Institute on Aging Departments
-		$eye_dept = get_option( 'options_uamswp_institute_eye_dept' ); // get_field( 'uamswp_institute_eye_dept', 'option' ); // Eye Institute Departments
-		$spine_dept = get_option( 'options_uamswp_institute_spine_dept' ); // get_field( 'uamswp_institute_spine_dept', 'option' ); // Spine & Neurosciences Institute Departments
-		$digihealth_dept = get_option( 'options_uamswp_institute_digi-health_dept' ); // get_field( 'uamswp_institute_digi-health_dept', 'option' ); // Institute for Digital Health & Innovation Departments
-		$pri_dept = get_option( 'options_uamswp_institute_pri_dept' ); // get_field( 'uamswp_institute_pri_dept', 'option' ); // Psychiatric Research Institute Departments
-		$tri_dept = get_option( 'options_uamswp_institute_tri_dept' ); // get_field( 'uamswp_institute_tri_dept', 'option' ); // Translational Research Institute Departments
-		$cancer_dept = get_option( 'options_uamswp_institute_cancer_dept' ); // get_field( 'uamswp_institute_cancer_dept', 'option' ); // Cancer Institute Departments
-    $ichi_dept = get_option( 'options_uamswp_institute_ichi_dept' ); // $ichi_dept = get_field( 'uamswp_institute_ichi_dept', 'option' ); // Institute for Community Health Innovation Departments
-		$uamsorganization = get_option( 'options_uamswp_uams_subsite' ); // get_field( 'uamswp_uams_subsite', 'option' ); // college 
-		$cohp_dept = get_option( 'options_uamswp_uams_cohp_dept' ); // get_field( 'uamswp_uams_cohp_dept', 'option' ); // college of health prof dept
-		$com_dept = get_option( 'options_uamswp_uams_com_dept' ); // get_field( 'uamswp_uams_com_dept', 'option' ); // college of medicine dept
-		$con_dept = get_option( 'options_uamswp_uams_con_dept' ); // get_field( 'uamswp_uams_con_dept', 'option' ); // college of nursing dept
-		$cop_dept = get_option( 'options_uamswp_uams_cop_dept' ); // get_field( 'uamswp_uams_cop_dept', 'option' ); // college of pharmacy dept
-		$coph_dept = get_option( 'options_uamswp_uams_coph_dept' ); // get_field( 'uamswp_uams_coph_dept', 'option' ); // college of public health dept
-		$grad_dept = get_option( 'options_uamswp_uams_grad-school_dept' ); // get_field( 'uamswp_uams_grad-school_dept', 'option' ); // graduate school dept
-		$other_dept = get_option( 'options_uamswp_uams_other_dept' ); // get_field( 'uamswp_uams_other_dept' , 'option' ); // Other (Multisite)
-		$healthorganization = get_option( 'options_uamswp_uamshealth_subsite' ); // get_field( 'uamswp_uamshealth_subsite', 'option' ); // health 
-		$insideorganization = get_option( 'options_uamswp_inside_subsite' ); // get_field( 'uamswp_inside_subsite', 'option' ); // inside 
-		if ('health' == $themestyle) {
-			$site = 'uamshealth';
-			if ('' != $healthorganization) {
-				$subsite = $healthorganization;
-			} else {
-				$subsite = 'uams';
-			}
-		} elseif ('inside' == $themestyle) {
-			$site = 'inside';
-			if ('' != $insideorganization) {
-				$subsite = $insideorganization;
-			} else {
-				$subsite = 'uams';
-			}
-		} elseif ('institute' == $themestyle) {
-			$site = 'institute';
-			if ('' != $themeinstitute) {
-				$subsite = $themeinstitute;
-				if ($subsite == 'institute_aging' && '' != $aging_dept) {
-					$department = $aging_dept;
-				} elseif ($subsite == 'institute_eye' && '' != $eye_dept) {
-					$department = $eye_dept;
-				} elseif ($subsite == 'institute_spine' && '' != $spine_dept) {
-					$department = $spine_dept;
-				} elseif ($subsite == 'institute_digi-health' && '' != $digihealth_dept) {
-					$department = $digihealth_dept;
-				} elseif ($subsite == 'institute_pri' && '' != $pri_dept) {
-					$department = $pri_dept;
-				} elseif ($subsite == 'institute_tri' && '' != $tri_dept) {
-					$department = $tri_dept;
-				} elseif ($subsite == 'institute_cancer' && '' != $cancer_dept) {
-					$department = $cancer_dept;
-				} elseif ($subsite == 'institute_ichi' && '' != $ichi_dept) {
-					$department = $ichi_dept;
-				} else {
-					$department = 'uams';
-				}
-			} else {
-				$subsite = 'uams';
-			}
-		} elseif ('uams' == $themestyle) {
-			$site = 'uams';
-			if ('' != $themelocation){
-				if ('uams' != $themelocation) {
-					$subsite = $themelocation;
-					if ($subsite == 'regional-campus' && '' != $regional_campus) {
-						$department = $regional_campus;
-					}
-				} else {
-					if ('' != $uamsorganization) {
-						$subsite = $uamsorganization;
-						if ($subsite == 'health-prof' && '' != $cohp_dept) {
-							$department = $cohp_dept;
-						} elseif ($subsite == 'medicine' && '' != $com_dept) {
-							$department = $com_dept;
-						} elseif ($subsite == 'nursing' && '' != $con_dept) {
-							$department = $con_dept;
-						} elseif ($subsite == 'pharmacy' && '' != $cop_dept) {
-							$department = $cop_dept;
-						} elseif ($subsite == 'public-health' && '' != $coph_dept) {
-							$department = $coph_dept;
-						} elseif ($subsite == 'grad-school' && '' != $grad_dept) {
-							$department = $grad_dept;
-						} elseif ($subsite == 'other' && '' != $other_dept) {
-							$department = $other_dept;
-						} else {
-							$department = 'uams';
-						}
-					} else {
-						$subsite = 'uams';
-					}
-				}
-			} else {
-				$subsite = 'uams';
-			}
-		}
+        $site = '';
+        $subsite = '';
+        $department = ''; // Settings page
+        $siteinfo = [];
+        if (! class_exists('acf')) {
+            // Set base defaults if no ACF
+            $siteinfo = ['site' => 'uams', 'subsite' => 'uams', 'department' => 'uams'];
+
+            return $siteinfo;
+        }
+        /* Replace get_field functions with get_option - Remove ACF called too early errors */
+        $themestyle = get_option('options_uamswp_template'); // get_field( 'uamswp_template', 'option' ); // uams, inside, health
+        $themelocation = get_option('options_uamswp_location'); // get_field( 'uamswp_location', 'option' ); // campus, regional
+        $themeinstitute = get_option('options_uamswp_institute'); // get_field( 'uamswp_institute', 'option' ); // institute name
+        $regional_campus = get_option('options_uamswp_regional_campus'); // get_field( 'uamswp_regional_campus', 'option' ); // regional location
+        $aging_dept = get_option('options_uamswp_institute_aging_dept'); // get_field( 'uamswp_institute_aging_dept', 'option' ); // Institute on Aging Departments
+        $eye_dept = get_option('options_uamswp_institute_eye_dept'); // get_field( 'uamswp_institute_eye_dept', 'option' ); // Eye Institute Departments
+        $spine_dept = get_option('options_uamswp_institute_spine_dept'); // get_field( 'uamswp_institute_spine_dept', 'option' ); // Spine & Neurosciences Institute Departments
+        $digihealth_dept = get_option('options_uamswp_institute_digi-health_dept'); // get_field( 'uamswp_institute_digi-health_dept', 'option' ); // Institute for Digital Health & Innovation Departments
+        $pri_dept = get_option('options_uamswp_institute_pri_dept'); // get_field( 'uamswp_institute_pri_dept', 'option' ); // Psychiatric Research Institute Departments
+        $tri_dept = get_option('options_uamswp_institute_tri_dept'); // get_field( 'uamswp_institute_tri_dept', 'option' ); // Translational Research Institute Departments
+        $cancer_dept = get_option('options_uamswp_institute_cancer_dept'); // get_field( 'uamswp_institute_cancer_dept', 'option' ); // Cancer Institute Departments
+        $ichi_dept = get_option('options_uamswp_institute_ichi_dept'); // $ichi_dept = get_field( 'uamswp_institute_ichi_dept', 'option' ); // Institute for Community Health Innovation Departments
+        $uamsorganization = get_option('options_uamswp_uams_subsite'); // get_field( 'uamswp_uams_subsite', 'option' ); // college
+        $cohp_dept = get_option('options_uamswp_uams_cohp_dept'); // get_field( 'uamswp_uams_cohp_dept', 'option' ); // college of health prof dept
+        $com_dept = get_option('options_uamswp_uams_com_dept'); // get_field( 'uamswp_uams_com_dept', 'option' ); // college of medicine dept
+        $con_dept = get_option('options_uamswp_uams_con_dept'); // get_field( 'uamswp_uams_con_dept', 'option' ); // college of nursing dept
+        $cop_dept = get_option('options_uamswp_uams_cop_dept'); // get_field( 'uamswp_uams_cop_dept', 'option' ); // college of pharmacy dept
+        $coph_dept = get_option('options_uamswp_uams_coph_dept'); // get_field( 'uamswp_uams_coph_dept', 'option' ); // college of public health dept
+        $grad_dept = get_option('options_uamswp_uams_grad-school_dept'); // get_field( 'uamswp_uams_grad-school_dept', 'option' ); // graduate school dept
+        $other_dept = get_option('options_uamswp_uams_other_dept'); // get_field( 'uamswp_uams_other_dept' , 'option' ); // Other (Multisite)
+        $healthorganization = get_option('options_uamswp_uamshealth_subsite'); // get_field( 'uamswp_uamshealth_subsite', 'option' ); // health
+        $insideorganization = get_option('options_uamswp_inside_subsite'); // get_field( 'uamswp_inside_subsite', 'option' ); // inside
+        if ($themestyle == 'health') {
+            $site = 'uamshealth';
+            if ($healthorganization != '') {
+                $subsite = $healthorganization;
+            } else {
+                $subsite = 'uams';
+            }
+        } elseif ($themestyle == 'inside') {
+            $site = 'inside';
+            if ($insideorganization != '') {
+                $subsite = $insideorganization;
+            } else {
+                $subsite = 'uams';
+            }
+        } elseif ($themestyle == 'institute') {
+            $site = 'institute';
+            if ($themeinstitute != '') {
+                $subsite = $themeinstitute;
+                if ($subsite == 'institute_aging' && $aging_dept != '') {
+                    $department = $aging_dept;
+                } elseif ($subsite == 'institute_eye' && $eye_dept != '') {
+                    $department = $eye_dept;
+                } elseif ($subsite == 'institute_spine' && $spine_dept != '') {
+                    $department = $spine_dept;
+                } elseif ($subsite == 'institute_digi-health' && $digihealth_dept != '') {
+                    $department = $digihealth_dept;
+                } elseif ($subsite == 'institute_pri' && $pri_dept != '') {
+                    $department = $pri_dept;
+                } elseif ($subsite == 'institute_tri' && $tri_dept != '') {
+                    $department = $tri_dept;
+                } elseif ($subsite == 'institute_cancer' && $cancer_dept != '') {
+                    $department = $cancer_dept;
+                } elseif ($subsite == 'institute_ichi' && $ichi_dept != '') {
+                    $department = $ichi_dept;
+                } else {
+                    $department = 'uams';
+                }
+            } else {
+                $subsite = 'uams';
+            }
+        } elseif ($themestyle == 'uams') {
+            $site = 'uams';
+            if ($themelocation != '') {
+                if ($themelocation != 'uams') {
+                    $subsite = $themelocation;
+                    if ($subsite == 'regional-campus' && $regional_campus != '') {
+                        $department = $regional_campus;
+                    }
+                } else {
+                    if ($uamsorganization != '') {
+                        $subsite = $uamsorganization;
+                        if ($subsite == 'health-prof' && $cohp_dept != '') {
+                            $department = $cohp_dept;
+                        } elseif ($subsite == 'medicine' && $com_dept != '') {
+                            $department = $com_dept;
+                        } elseif ($subsite == 'nursing' && $con_dept != '') {
+                            $department = $con_dept;
+                        } elseif ($subsite == 'pharmacy' && $cop_dept != '') {
+                            $department = $cop_dept;
+                        } elseif ($subsite == 'public-health' && $coph_dept != '') {
+                            $department = $coph_dept;
+                        } elseif ($subsite == 'grad-school' && $grad_dept != '') {
+                            $department = $grad_dept;
+                        } elseif ($subsite == 'other' && $other_dept != '') {
+                            $department = $other_dept;
+                        } else {
+                            $department = 'uams';
+                        }
+                    } else {
+                        $subsite = 'uams';
+                    }
+                }
+            } else {
+                $subsite = 'uams';
+            }
+        }
+
         return ['site' => $site, 'subsite' => $subsite, 'department' => $department];
     }
-	
-endif;
 
-if ( !function_exists('uams_get_permalink')):
+}
 
-	function uams_get_permalink( $post = null )
-	{
-		if (empty($post)){
-		  $postID = get_the_ID();
-		} else {
-		  $post = get_post( $post );
-		  $postID = $post->ID;
-		}
-		$external_url = get_post_meta( $postID, 'post_custom_link', true);
-		$post_format = get_post_format( $postID );
-		if (!empty($external_url) && ($post_format == 'link')){
-			return $external_url;
-		}
-		return get_permalink( $postID );
-	}
-  
-endif;
+if (! function_exists('uams_get_permalink')) {
+
+    function uams_get_permalink($post = null)
+    {
+        if (empty($post)) {
+            $postID = get_the_ID();
+        } else {
+            $post = get_post($post);
+            $postID = $post->ID;
+        }
+        $external_url = get_post_meta($postID, 'post_custom_link', true);
+        $post_format = get_post_format($postID);
+        if (! empty($external_url) && ($post_format == 'link')) {
+            return $external_url;
+        }
+
+        return get_permalink($postID);
+    }
+
+}
 
 /* Retrieve site site */
-if ( !function_exists('uams_site_title')):
+if (! function_exists('uams_site_title')) {
 
     function uams_site_title()
     {
-		if ('uamshealth' == uams_get_site_info()['site'] && 'main' == uams_get_site_info()['subsite']) {
-			return 'UAMS Health';
-		}
-        return get_bloginfo( 'name' );
+        if (uams_get_site_info()['site'] == 'uamshealth' && uams_get_site_info()['subsite'] == 'main') {
+            return 'UAMS Health';
+        }
+
+        return get_bloginfo('name');
     }
 
-endif;
+}
 
 /* returns home link for breadcrumbs, logo & anywhere else */
-if ( !function_exists('uams_get_home_link')):
+if (! function_exists('uams_get_home_link')) {
 
     function uams_get_home_link(): string
     {
-		if (('uams' == uams_get_site_info()['site']) || ('institute' == uams_get_site_info()['site'])) {
-			$homelink = 'https://www.uams.edu';
-		} elseif ('uamshealth' == uams_get_site_info()['site']) {
-			$homelink = 'https://uamshealth.com';
-		} elseif ('inside' == uams_get_site_info()['site']) {
-			$homelink = 'https://inside.uams.edu';
-		}
-		return $homelink;
+        if ((uams_get_site_info()['site'] == 'uams') || (uams_get_site_info()['site'] == 'institute')) {
+            $homelink = 'https://www.uams.edu';
+        } elseif (uams_get_site_info()['site'] == 'uamshealth') {
+            $homelink = 'https://uamshealth.com';
+        } elseif (uams_get_site_info()['site'] == 'inside') {
+            $homelink = 'https://inside.uams.edu';
+        }
+
+        return $homelink;
     }
 
-endif;
+}
 
 /* Helper Functions */
 function startsWith($haystack, $needle): bool
 {
-     $length = strlen($needle);
-     return (substr($haystack, 0, $length) === $needle);
+    $length = strlen($needle);
+
+    return substr($haystack, 0, $length) === $needle;
 }
 
-function format_phone($country, $phone) {
-  $function = 'format_phone_' . $country;
-  if(function_exists($function)) {
-    return $function($phone);
-  }
-  return $phone;
+function format_phone($country, $phone)
+{
+    $function = 'format_phone_'.$country;
+    if (function_exists($function)) {
+        return $function($phone);
+    }
+
+    return $phone;
 }
 
 // usage
 // $phone = format_phone('us', $phone);
 // echo $phone;
 
-function format_phone_us($phone) {
-	// note: making sure we have something
-	if(!isset($phone[3])) { return ''; }
-	// note: strip out everything but numbers 
-	$phone = preg_replace('/[^0-9]/', '', $phone);
-	$length = strlen($phone);
-	switch($length) {
-		case 7:
-			return preg_replace('/([0-9]{3})([0-9]{4})/', '$1-$2', $phone);
-		case 10:
-			return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})/', '($1) $2-$3', $phone);
-		case 11:
-			return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/', '($2) $3-$4', $phone);
-		case 15:
-			return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '($1) $2-$3 Ext. $4', $phone);
-		case 16:
-			return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '($2) $3-$4 Ext. $5', $phone);
-		default:
-			return $phone;
-	}
-}
-   
-function format_phone_dash($phone) {
-	// note: making sure we have something
-	if(!isset($phone[3])) { return ''; }
-	// note: strip out everything but numbers 
-	$phone = preg_replace('/[^0-9]/', '', $phone);
-	$length = strlen($phone);
-	switch($length) {
-		case 7:
-			return preg_replace('/([0-9]{3})([0-9]{4})/', '$1-$2', $phone);
-		case 10:
-			return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})/', '$1-$2-$3', $phone);
-		case 11:
-			return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/', '$2-$3-$4', $phone);
-		case 15:
-			return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '$1-$2-$3,$4', $phone); 
-		case 16:
-			return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '$2-$3-$4,$5', $phone);
-		default:
-			return $phone;
-	}
+function format_phone_us($phone)
+{
+    // note: making sure we have something
+    if (! isset($phone[3])) {
+        return '';
+    }
+    // note: strip out everything but numbers
+    $phone = preg_replace('/[^0-9]/', '', $phone);
+    $length = strlen($phone);
+    switch ($length) {
+        case 7:
+            return preg_replace('/([0-9]{3})([0-9]{4})/', '$1-$2', $phone);
+        case 10:
+            return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})/', '($1) $2-$3', $phone);
+        case 11:
+            return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/', '($2) $3-$4', $phone);
+        case 15:
+            return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '($1) $2-$3 Ext. $4', $phone);
+        case 16:
+            return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '($2) $3-$4 Ext. $5', $phone);
+        default:
+            return $phone;
+    }
 }
 
-if (!function_exists('apStyleDate')) {
-	function apStyleDate($date): string{
-
-		$date = strftime('%l:%M %P', strtotime($date));
-	
-		$date = str_replace(':00', '', $date);
-	
-		return str_replace('m', '.m.', $date);
-	
-	}
+function format_phone_dash($phone)
+{
+    // note: making sure we have something
+    if (! isset($phone[3])) {
+        return '';
+    }
+    // note: strip out everything but numbers
+    $phone = preg_replace('/[^0-9]/', '', $phone);
+    $length = strlen($phone);
+    switch ($length) {
+        case 7:
+            return preg_replace('/([0-9]{3})([0-9]{4})/', '$1-$2', $phone);
+        case 10:
+            return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})/', '$1-$2-$3', $phone);
+        case 11:
+            return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/', '$2-$3-$4', $phone);
+        case 15:
+            return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '$1-$2-$3,$4', $phone);
+        case 16:
+            return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '$2-$3-$4,$5', $phone);
+        default:
+            return $phone;
+    }
 }
 
-class SlidingWindowRateLimiter {
-	private $limit;
-    
-	private $timeWindow;
-    
-	private array $storage;
+if (! function_exists('apStyleDate')) {
+    function apStyleDate($date): string
+    {
 
-	public function __construct($limit, $timeWindow) {
-		$this->limit = $limit;
-		$this->timeWindow = $timeWindow; // In seconds
-		$this->storage = [];
-	}
+        $date = strftime('%l:%M %P', strtotime($date));
 
-	public function isRequestAllowed($clientId): bool {
-		$currentTime = time();
-		$windowStart = $currentTime - $this->timeWindow;
+        $date = str_replace(':00', '', $date);
 
-		$this->storage[$clientId] ??= [];
+        return str_replace('m', '.m.', $date);
 
-		// Remove outdated timestamps
-		$this->storage[$clientId] = array_filter(
-			$this->storage[$clientId],
-			fn($timestamp): bool => $timestamp > $windowStart
-		);
+    }
+}
 
-		if (count($this->storage[$clientId]) < $this->limit) {
-			$this->storage[$clientId][] = $currentTime;
-			return true;
-		}
+class SlidingWindowRateLimiter
+{
+    private $limit;
 
-		return false; // Limit exceeded
-	}
+    private $timeWindow;
+
+    private array $storage;
+
+    public function __construct($limit, $timeWindow)
+    {
+        $this->limit = $limit;
+        $this->timeWindow = $timeWindow; // In seconds
+        $this->storage = [];
+    }
+
+    public function isRequestAllowed($clientId): bool
+    {
+        $currentTime = time();
+        $windowStart = $currentTime - $this->timeWindow;
+
+        $this->storage[$clientId] ??= [];
+
+        // Remove outdated timestamps
+        $this->storage[$clientId] = array_filter(
+            $this->storage[$clientId],
+            fn ($timestamp): bool => $timestamp > $windowStart
+        );
+
+        if (count($this->storage[$clientId]) < $this->limit) {
+            $this->storage[$clientId][] = $currentTime;
+
+            return true;
+        }
+
+        return false; // Limit exceeded
+    }
 }
 
 /**
  * Queues image resizing tasks to reduce server load.
  * Uses transients to store queue and WP_Cron to process tasks.
  * Accepts a fallback image size name for use during queue processing.
- * 
+ *
  * Modified image_sizer function to queue resizing tasks with specified fallback size
- * @param int $id Attachment ID
- * @param int $prefwidth Preferred width
- * @param int $prefheight Preferred height
- * @param string $hcrop Horizontal crop position (default: 'center')
- * @param string $vcrop Vertical crop position (default: 'center')
- * @param string $fallback_size WordPress image size name to use as fallback (default: 'full')
+ *
+ * @param  int  $id  Attachment ID
+ * @param  int  $prefwidth  Preferred width
+ * @param  int  $prefheight  Preferred height
+ * @param  string  $hcrop  Horizontal crop position (default: 'center')
+ * @param  string  $vcrop  Vertical crop position (default: 'center')
+ * @param  string  $fallback_size  WordPress image size name to use as fallback (default: 'full')
  * @return string Image URL (cached, fallback, or original)
  */
-function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center', $fallback_size = 'full') {
-    if (!function_exists('bis_get_attachment_image') || empty($id) || empty(wp_get_attachment_image_src($id))) {
+function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center', $fallback_size = 'full')
+{
+    if (! function_exists('bis_get_attachment_image') || empty($id) || empty(wp_get_attachment_image_src($id))) {
         return; // Validate input
     }
 
     // Check if resized image already exists in queue cache
-    $transient_key = 'image_sizer_' . md5($id . $prefwidth . $prefheight . $hcrop . $vcrop);
+    $transient_key = 'image_sizer_'.md5($id.$prefwidth.$prefheight.$hcrop.$vcrop);
     $cached_image = get_transient($transient_key);
     if ($cached_image !== false) {
         return $cached_image; // Return cached URL if available
@@ -695,9 +724,9 @@ function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = '
 
     // Check for duplicate jobs in queue
     $queue = get_option('image_sizer_queue', []);
-    $job_key = md5($id . serialize($params));
+    $job_key = md5($id.serialize($params));
     foreach ($queue as $job) {
-        if (md5($job['id'] . serialize($job['params'])) === $job_key) {
+        if (md5($job['id'].serialize($job['params'])) === $job_key) {
             return image_sizer_get_fallback($id, $fallback_size); // Duplicate found, return fallback
         }
     }
@@ -706,12 +735,12 @@ function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = '
     $queue[] = [
         'id' => $id,
         'params' => $params,
-        'transient_key' => $transient_key
+        'transient_key' => $transient_key,
     ];
     update_option('image_sizer_queue', $queue, false);
 
     // Schedule cron if not already scheduled
-    if (!wp_next_scheduled('process_image_sizer_queue')) {
+    if (! wp_next_scheduled('process_image_sizer_queue')) {
         wp_schedule_event(time(), 'ten_seconds', 'process_image_sizer_queue');
     }
 
@@ -721,18 +750,20 @@ function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = '
 
 /**
  * Helper function to get the specified WordPress image size as fallback
- * @param int $id Attachment ID
- * @param string $fallback_size WordPress image size name
+ *
+ * @param  int  $id  Attachment ID
+ * @param  string  $fallback_size  WordPress image size name
  * @return string Image URL
  */
-function image_sizer_get_fallback($id, $fallback_size) {
+function image_sizer_get_fallback($id, $fallback_size)
+{
     // Allow overriding default fallback size via filter
     $default_fallback = apply_filters('image_sizer_default_fallback', 'full');
     $fallback_size = $fallback_size ?: $default_fallback;
 
     // Check if the fallback size exists for the attachment
     $image_src = wp_get_attachment_image_src($id, $fallback_size);
-    if ($image_src && !empty($image_src[0])) {
+    if ($image_src && ! empty($image_src[0])) {
         return $image_src[0]; // Return the specified size URL
     }
 
@@ -743,6 +774,7 @@ function image_sizer_get_fallback($id, $fallback_size) {
 
     // Fall back to default size if specified size doesn't exist
     $image_src = wp_get_attachment_image_src($id, $default_fallback);
+
     return $image_src[0] ?: '';
 }
 
@@ -752,8 +784,9 @@ function image_sizer_get_fallback($id, $fallback_size) {
 add_filter('cron_schedules', function ($schedules) {
     $schedules['ten_seconds'] = [
         'interval' => 10, // 10 seconds
-        'display' => __('Every Ten Seconds')
+        'display' => __('Every Ten Seconds'),
     ];
+
     return $schedules;
 });
 
@@ -820,15 +853,15 @@ add_action('admin_init', function (): void {
  * Add manual trigger link to media library
  */
 add_action('admin_notices', function (): void {
-    if (get_current_screen()->id !== 'upload' || !current_user_can('manage_options')) {
+    if (get_current_screen()->id !== 'upload' || ! current_user_can('manage_options')) {
         return;
     }
     $queue = get_option('image_sizer_queue', []);
-    if (!empty($queue)) {
+    if (! empty($queue)) {
         $url = wp_nonce_url(admin_url('upload.php?process_image_queue=1'), 'process_image_queue_nonce');
         echo '<div class="notice notice-info"><p>';
-        echo 'Image resizing queue has ' . count($queue) . ' pending jobs. ';
-        echo '<a href="' . esc_url($url) . '">Process now</a>';
+        echo 'Image resizing queue has '.count($queue).' pending jobs. ';
+        echo '<a href="'.esc_url($url).'">Process now</a>';
         echo '</p></div>';
     }
     if (isset($_GET['queue_processed'])) {
@@ -843,217 +876,231 @@ add_action('admin_notices', function (): void {
 // option were never cleaned up. Clear them when this theme is switched away instead.
 // (Gating the queue so anonymous page views cannot enqueue work is a behaviour change
 // left for review: see #577.)
-add_action( 'switch_theme', function ( $new_name, $new_theme, $old_theme ): void {
-    if ( $old_theme && $old_theme->get_stylesheet() === 'uams-2020' ) {
+add_action('switch_theme', function ($new_name, $new_theme, $old_theme): void {
+    if ($old_theme && $old_theme->get_stylesheet() === 'uams-2020') {
         wp_clear_scheduled_hook('process_image_sizer_queue');
         delete_option('image_sizer_queue');
     }
-}, 10, 3 );
+}, 10, 3);
 
 /**
  * Return dimension for gallery image.
  * For use inside image_sizer function.
  *
- * @param string	$breakpoint	// short name of breakpoint (xxs, xs, sm, md, lg, xl, xxl)
- * @param integer 	$columns	// Number of columns displayed per row
- * @param integer 	$density	// Pixel density (1 or 2)
- * @param integer	$ratio		// Aspect ratio of the image to return height in decimal (16:9 = 1.7778). Leave as 0 if not returning height. Set to -1 if height should be set as native ratio of preferred width.
- * @return integer				// image dimension
+ * @param  string  $breakpoint  // short name of breakpoint (xxs, xs, sm, md, lg, xl, xxl)
+ * @param  int  $columns  // Number of columns displayed per row
+ * @param  int  $density  // Pixel density (1 or 2)
+ * @param  int  $ratio  // Aspect ratio of the image to return height in decimal (16:9 = 1.7778). Leave as 0 if not returning height. Set to -1 if height should be set as native ratio of preferred width.
+ * @return int // image dimension
  */
-function gallery_image_dimension( $breakpoint, $columns, $density = 1, $ratio = 0 ) {
-	if ( $breakpoint == 'xxs' || $breakpoint == 'xs' ) {
-		$viewportwidth = 768;
-		$modulepadding = 32;
-	} elseif ( $breakpoint == 'sm' ) {
-		$viewportwidth = 992;
-		$modulepadding = 48;
-	} elseif ( $breakpoint == 'md' ) {
-		$viewportwidth = 1200;
-		$modulepadding = 48;
-	} elseif ( $breakpoint == 'lg' ) {
-		$viewportwidth = 1500;
-		$modulepadding = 48;
-	} elseif ( $breakpoint == 'xl' ) {
-		$viewportwidth = 1921;
-		$modulepadding = 48;
-	} else {
-		$viewportwidth = 2560;
-		$modulepadding = 48;
-	}
-	if ( $ratio == -1 ) {
-		$dimension = -1;
-	} else {
-		$dimension = ( $viewportwidth - (2 * $modulepadding) - (($columns - 1) * 30) ) / $columns;
+function gallery_image_dimension($breakpoint, $columns, $density = 1, $ratio = 0)
+{
+    if ($breakpoint == 'xxs' || $breakpoint == 'xs') {
+        $viewportwidth = 768;
+        $modulepadding = 32;
+    } elseif ($breakpoint == 'sm') {
+        $viewportwidth = 992;
+        $modulepadding = 48;
+    } elseif ($breakpoint == 'md') {
+        $viewportwidth = 1200;
+        $modulepadding = 48;
+    } elseif ($breakpoint == 'lg') {
+        $viewportwidth = 1500;
+        $modulepadding = 48;
+    } elseif ($breakpoint == 'xl') {
+        $viewportwidth = 1921;
+        $modulepadding = 48;
+    } else {
+        $viewportwidth = 2560;
+        $modulepadding = 48;
+    }
+    if ($ratio == -1) {
+        $dimension = -1;
+    } else {
+        $dimension = ($viewportwidth - (2 * $modulepadding) - (($columns - 1) * 30)) / $columns;
 
-		if ( $ratio != 0 ) {
-			$dimension /= $ratio;
-		}
+        if ($ratio != 0) {
+            $dimension /= $ratio;
+        }
 
-		if ( $density > 1 ) {
-			$dimension *= 2;
-		}
-	}
-	
-	return $dimension;
+        if ($density > 1) {
+            $dimension *= 2;
+        }
+    }
+
+    return $dimension;
 }
 
 //
 /* Add dynamic_sidebar_params filter */
-add_filter('dynamic_sidebar_params','footer_widgets');
- 
+add_filter('dynamic_sidebar_params', 'footer_widgets');
+
 /* Register our callback function */
-function footer_widgets($params) {	 
-  
-     //Check if we are displaying "Footer Sidebar"
-      if(isset($params[0]['id']) && $params[0]['id'] == 'footer-1'){
- 
-         //If widget is not uams widget, add class
-		if (strpos($params[0]['before_widget'], 'uamswp') == false) {
-	    $class = 'class="uams-module '; 
-	    $params[0]['before_widget'] = str_replace('class="', $class, $params[0]['before_widget']);
-	  	}
- 
-	}
- 
-      return $params;
+function footer_widgets($params)
+{
+
+    // Check if we are displaying "Footer Sidebar"
+    if (isset($params[0]['id']) && $params[0]['id'] == 'footer-1') {
+
+        // If widget is not uams widget, add class
+        if (strpos($params[0]['before_widget'], 'uamswp') == false) {
+            $class = 'class="uams-module ';
+            $params[0]['before_widget'] = str_replace('class="', $class, $params[0]['before_widget']);
+        }
+
+    }
+
+    return $params;
 }
 
-add_action( 'admin_enqueue_scripts', 'enqueue_admin_style_sheet' );
-function enqueue_admin_style_sheet(): void {
+add_action('admin_enqueue_scripts', 'enqueue_admin_style_sheet');
+function enqueue_admin_style_sheet(): void
+{
 
-	wp_register_style( 'admin-css', get_stylesheet_directory_uri() . '/assets/css/admin.css', false, '1.0.0' );
-	wp_enqueue_style( 'admin-css' );
+    wp_register_style('admin-css', get_stylesheet_directory_uri().'/assets/css/admin.css', false, '1.0.0');
+    wp_enqueue_style('admin-css');
 
 }
 
 // Remove the edit link
-add_filter ( 'genesis_edit_post_link' , '__return_false' );
+add_filter('genesis_edit_post_link', '__return_false');
 
 // Add REST API Filter for local sites. Used for local News Syndication
-add_action( 'rest_api_init', 'rest_api_filter_add_filters' );
- /**
-  * Add the necessary filter to each post type
-  **/
-function rest_api_filter_add_filters(): void {
-	foreach ( get_post_types( [ 'show_in_rest' => true ], 'objects' ) as $post_type ) {
-		add_filter( 'rest_' . $post_type->name . '_query', 'rest_api_filter_add_filter_param', 10, 2 );
-	}
+add_action('rest_api_init', 'rest_api_filter_add_filters');
+/**
+ * Add the necessary filter to each post type
+ **/
+function rest_api_filter_add_filters(): void
+{
+    foreach (get_post_types(['show_in_rest' => true], 'objects') as $post_type) {
+        add_filter('rest_'.$post_type->name.'_query', 'rest_api_filter_add_filter_param', 10, 2);
+    }
 }
 /**
  * Add the filter parameter
  *
- * @param  array           $args    The query arguments.
- * @param  WP_REST_Request $request Full details about the request.
+ * @param  array  $args  The query arguments.
+ * @param  WP_REST_Request  $request  Full details about the request.
  * @return array $args.
  **/
-function rest_api_filter_add_filter_param( $args, $request ) {
-	// Bail out if no filter parameter is set.
-	if ( empty( $request['filter'] ) || ! is_array( $request['filter'] ) ) {
-		return $args;
-	}
-	$filter = $request['filter'];
-	if ( isset( $filter['posts_per_page'] ) && ( (int) $filter['posts_per_page'] >= 1 && (int) $filter['posts_per_page'] <= 100 ) ) {
-		$args['posts_per_page'] = $filter['posts_per_page'];
-	}
-	// Copy only a fixed, safe set of query vars from the request. meta_query, meta_key,
-	// meta_value, meta_compare and post_type are intentionally excluded: allowing them let
-	// an unauthenticated request run arbitrary post-meta queries and read across post types.
-	$allowed = [ 'orderby', 'order', 'offset', 'category_name', 'tag', 'author_name' ];
-	foreach ( $allowed as $var ) {
-		if ( isset( $filter[ $var ] ) ) {
-			$args[ $var ] = $filter[ $var ];
-		}
-	}
-	return $args;
+function rest_api_filter_add_filter_param($args, $request)
+{
+    // Bail out if no filter parameter is set.
+    if (empty($request['filter']) || ! is_array($request['filter'])) {
+        return $args;
+    }
+    $filter = $request['filter'];
+    if (isset($filter['posts_per_page']) && ((int) $filter['posts_per_page'] >= 1 && (int) $filter['posts_per_page'] <= 100)) {
+        $args['posts_per_page'] = $filter['posts_per_page'];
+    }
+    // Copy only a fixed, safe set of query vars from the request. meta_query, meta_key,
+    // meta_value, meta_compare and post_type are intentionally excluded: allowing them let
+    // an unauthenticated request run arbitrary post-meta queries and read across post types.
+    $allowed = ['orderby', 'order', 'offset', 'category_name', 'tag', 'author_name'];
+    foreach ($allowed as $var) {
+        if (isset($filter[$var])) {
+            $args[$var] = $filter[$var];
+        }
+    }
+
+    return $args;
 }
-//Gravity Forms JS to footer
+// Gravity Forms JS to footer
 add_filter('gform_init_scripts_footer', '__return_true');
 
 add_filter('relevanssi_modify_wp_query', 'rlv_search_all_blogs');
-function rlv_search_all_blogs($query) {
-	$raw_blog_list = get_sites(['number' => 2000]);
-	$blog_list = [];
-	foreach ($raw_blog_list as $blog) {
-		$blog_list[] = $blog->blog_id;
-	}
-	$blog_list = implode(',', $blog_list);
-	$query->set('searchblogs', $blog_list);
-	return $query;
+function rlv_search_all_blogs($query)
+{
+    $raw_blog_list = get_sites(['number' => 2000]);
+    $blog_list = [];
+    foreach ($raw_blog_list as $blog) {
+        $blog_list[] = $blog->blog_id;
+    }
+    $blog_list = implode(',', $blog_list);
+    $query->set('searchblogs', $blog_list);
+
+    return $query;
 }
 
 // Add Google Tag Manager code in <head>
-add_action( 'wp_head', 'uamswp_gtm_1' );
-function uamswp_gtm_1(): void {
-	$gtm = get_option( 'options_google_tag_manager_id' );
-	$gtm_disable = get_option( 'options_google_tag_manager_disable' );
-	$gtmvalue = (!empty($gtm) ? $gtm : 'GTM-NGG4P7F' );
-	if ($gtm_disable !== '1') {
-	?>
+add_action('wp_head', 'uamswp_gtm_1');
+function uamswp_gtm_1(): void
+{
+    $gtm = get_option('options_google_tag_manager_id');
+    $gtm_disable = get_option('options_google_tag_manager_disable');
+    $gtmvalue = (! empty($gtm) ? $gtm : 'GTM-NGG4P7F');
+    if ($gtm_disable !== '1') {
+        ?>
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','<?php echo esc_js( $gtmvalue ); ?>');</script>
+	})(window,document,'script','dataLayer','<?php echo esc_js($gtmvalue); ?>');</script>
 	<!-- End Google Tag Manager -->
 <?php } else {
-	echo '<!-- Google Tag Manager is disabled -->';
+    echo '<!-- Google Tag Manager is disabled -->';
 }
- 	}
+}
 // Add Google Tag Manager code immediately below opening <body> tag
-add_action( 'genesis_before', 'uamswp_gtm_2' );
-function uamswp_gtm_2( ): void { 
-	$gtm = get_option( 'options_google_tag_manager_id' );
-	$gtm_disable = get_option( 'options_google_tag_manager_disable' );
-	$gtmvalue = (!empty($gtm) ? $gtm : 'GTM-NGG4P7F' );
-	if ($gtm_disable !== '1') {
-	?>
+add_action('genesis_before', 'uamswp_gtm_2');
+function uamswp_gtm_2(): void
+{
+    $gtm = get_option('options_google_tag_manager_id');
+    $gtm_disable = get_option('options_google_tag_manager_disable');
+    $gtmvalue = (! empty($gtm) ? $gtm : 'GTM-NGG4P7F');
+    if ($gtm_disable !== '1') {
+        ?>
 	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe title="Google Tag Manager" src="<?php echo esc_url( 'https://www.googletagmanager.com/ns.html?id=' . $gtmvalue ); ?>"
+	<noscript><iframe title="Google Tag Manager" src="<?php echo esc_url('https://www.googletagmanager.com/ns.html?id='.$gtmvalue); ?>"
 	height="0" width="0" aria-hidden="true" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
-<?php } }
+<?php }
+    }
 
 // Reject anything that is not a GTM container ID before it is stored, so the value
 // echoed into the inline GTM script and the noscript iframe can only be safe characters.
-add_filter( 'acf/validate_value/name=google_tag_manager_id', 'uamswp_validate_gtm_id', 10, 2 );
-function uamswp_validate_gtm_id( $valid, $value ) {
-	if ( $valid !== true ) {
-		return $valid;
-	}
-	if ( $value !== '' && ! preg_match( '/^GTM-[A-Z0-9]+$/', $value ) ) {
-		return 'Enter a valid Google Tag Manager container ID (GTM-XXXXXXX).';
-	}
-	return $valid;
+add_filter('acf/validate_value/name=google_tag_manager_id', 'uamswp_validate_gtm_id', 10, 2);
+function uamswp_validate_gtm_id($valid, $value)
+{
+    if ($valid !== true) {
+        return $valid;
+    }
+    if ($value !== '' && ! preg_match('/^GTM-[A-Z0-9]+$/', $value)) {
+        return 'Enter a valid Google Tag Manager container ID (GTM-XXXXXXX).';
+    }
+
+    return $valid;
 }
 
-add_filter( 'big_image_size_threshold', '__return_false' );
+add_filter('big_image_size_threshold', '__return_false');
 
-function uamswp_list_child_posts( $posttype, $posttitle ): void {
-	if (!isset($posttype)) {
-		$posttype = 'page'; // What post_type
-	}
-	if (!isset($posttitle)) {
-		$posttitle = 'Subpages'; // Title for the section
-	}
-	$page_id = get_the_ID();
-	$args =  [
-		'post_type' => $posttype,
-		'post_status' => 'publish',
-		'post_parent' => $page_id,
-		'order' => 'ASC',
-		'orderby' => 'menu_order title',
-		'posts_per_page' => -1, // We do not want to limit the post count
-		'meta_query' => [
-			[
-				'key' => 'page_hide_from_menu',
-				'value' => '1',
-				'compare' => '!=',
-			]
-		],
-	];
-	$pages = New WP_Query ( $args );
-	if ( $pages->have_posts() ) { ?>
+function uamswp_list_child_posts($posttype, $posttitle): void
+{
+    if (! isset($posttype)) {
+        $posttype = 'page'; // What post_type
+    }
+    if (! isset($posttitle)) {
+        $posttitle = 'Subpages'; // Title for the section
+    }
+    $page_id = get_the_ID();
+    $args = [
+        'post_type' => $posttype,
+        'post_status' => 'publish',
+        'post_parent' => $page_id,
+        'order' => 'ASC',
+        'orderby' => 'menu_order title',
+        'posts_per_page' => -1, // We do not want to limit the post count
+        'meta_query' => [
+            [
+                'key' => 'page_hide_from_menu',
+                'value' => '1',
+                'compare' => '!=',
+            ],
+        ],
+    ];
+    $pages = new WP_Query($args);
+    if ($pages->have_posts()) { ?>
 		<section class="uams-module link-list link-list-layout-split bg-auto" aria-label="List of subpages under the current page">
 			<div class="container-fluid">
 				<div class="row">
@@ -1065,47 +1112,49 @@ function uamswp_list_child_posts( $posttype, $posttitle ): void {
             		<div class="col-12 col-md-6 list">
 						<ul>
 						<?php
-						while ( $pages->have_posts() ) : $pages->the_post();
-							echo '<li class="item"><div class="text-container"><span class="h5"><a href="'.get_permalink().'">';
-							echo get_the_title();
-							echo '</a></span></div></li>';
-						endwhile;
-						wp_reset_postdata(); ?>
+                        while ($pages->have_posts()) {
+                            $pages->the_post();
+                            echo '<li class="item"><div class="text-container"><span class="h5"><a href="'.get_permalink().'">';
+                            echo get_the_title();
+                            echo '</a></span></div></li>';
+                        }
+        wp_reset_postdata(); ?>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</section>
 	<?php
-	}
+    }
 }
 // Whitelist specific blocks for the Marketing Landing Page template
-add_filter('allowed_block_types', function($block_types, $post) {
-	$allowed_marketing = [
-		'acf/action-bar',
-		'acf/call-out',
-		'acf/cta',
-		//'acf/hero',
-		'acf/link-list',
-		'acf/uams-news',
-		'acf/text-overlay',
-		'acf/image-side',
-		'acf/text-stacked',
-		'acf/livewhale-calendar',
-		'acf/uams-gallery',
-		//'acf/uams-content',
-		'acf/fad-providers',
-		'acf/fad-locations',
-		'acf/logo-list'
-	];
-	if ( current_user_can( 'manage_options' ) ) {
-		$allowed_marketing[] = 'acf/uams-content';
-        //return $allowed_marketing;
+add_filter('allowed_block_types', function ($block_types, $post) {
+    $allowed_marketing = [
+        'acf/action-bar',
+        'acf/call-out',
+        'acf/cta',
+        // 'acf/hero',
+        'acf/link-list',
+        'acf/uams-news',
+        'acf/text-overlay',
+        'acf/image-side',
+        'acf/text-stacked',
+        'acf/livewhale-calendar',
+        'acf/uams-gallery',
+        // 'acf/uams-content',
+        'acf/fad-providers',
+        'acf/fad-locations',
+        'acf/logo-list',
+    ];
+    if (current_user_can('manage_options')) {
+        $allowed_marketing[] = 'acf/uams-content';
+        // return $allowed_marketing;
     }
-	if (get_page_template_slug( $post ) == 'templates/marketing.php') {
-		return $allowed_marketing;
-	}
-	return $block_types;
+    if (get_page_template_slug($post) == 'templates/marketing.php') {
+        return $allowed_marketing;
+    }
+
+    return $block_types;
 }, 10, 2);
 // ACF for GEO
 // add_filter('acf/load_field/name=geo_valid', 'uamswp_set_geo');
@@ -1114,37 +1163,41 @@ add_filter('acf/update_value/name=geo_valid', 'uamswp_force_geo', 10, 3);
 
 function uamswp_force_geo($value, $post_id, $field): string
 {
-	if (function_exists('geoip_detect2_get_external_ip_adress')) {
-		return 'true';
-	}
+    if (function_exists('geoip_detect2_get_external_ip_adress')) {
+        return 'true';
+    }
+
     return 'false';
 }
 function uamswp_set_geo($field)
 {
-	if (function_exists('geoip_detect2_get_external_ip_adress')) {
-		$value = 'true';
-	} else {
-		$value = 'false';
-	}
-	if (array_key_exists('value', $field)) {
+    if (function_exists('geoip_detect2_get_external_ip_adress')) {
+        $value = 'true';
+    } else {
+        $value = 'false';
+    }
+    if (array_key_exists('value', $field)) {
         $field['value'] = $value;
     }
+
     return $field;
 }
 
-// Password reset to include /uams-login/ 
-add_filter( 'retrieve_password_message', 'my_retrieve_password_message', 10, 4 );
-function my_retrieve_password_message( $message, $key, $user_login, $user_data ): string {
+// Password reset to include /uams-login/
+add_filter('retrieve_password_message', 'my_retrieve_password_message', 10, 4);
+function my_retrieve_password_message($message, $key, $user_login, $user_data): string
+{
     // Start with the default content.
-    $site_name = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-    $message = __( 'Someone has requested a password reset for the following account:' ) . "\r\n\r\n";
+    $site_name = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+    $message = __('Someone has requested a password reset for the following account:')."\r\n\r\n";
     /* translators: %s: site name */
-    $message .= sprintf( __( 'Site Name: %s' ), $site_name ) . "\r\n\r\n";
+    $message .= sprintf(__('Site Name: %s'), $site_name)."\r\n\r\n";
     /* translators: %s: user login */
-    $message .= sprintf( __( 'Username: %s' ), $user_login ) . "\r\n\r\n";
-    $message .= __( 'If this was a mistake, just ignore this email and nothing will happen.' ) . "\r\n\r\n";
-    $message .= __( 'To reset your password, visit the following address:' ) . "\r\n\r\n";
-    $message .= '<' . network_site_url( "/uams-login/?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' ) . ">\r\n";
+    $message .= sprintf(__('Username: %s'), $user_login)."\r\n\r\n";
+    $message .= __('If this was a mistake, just ignore this email and nothing will happen.')."\r\n\r\n";
+    $message .= __('To reset your password, visit the following address:')."\r\n\r\n";
+    $message .= '<'.network_site_url("/uams-login/?action=rp&key=$key&login=".rawurlencode($user_login), 'login').">\r\n";
+
     /*
      * If the problem persists with this filter, remove
      * the last line above and use the line below by
@@ -1157,136 +1210,136 @@ function my_retrieve_password_message( $message, $key, $user_login, $user_data )
     return $message;
 }
 /* Unregister blocks */
-add_action( 'init', function(): void {
-	$registry = WP_Block_Type_Registry::get_instance();
-	// All extra blocks
-	// WP SEO
-	if ( $registry->get_registered( 'wpseopress/sitemap' ) ) {
-		// unregister_block_type( 'wpseopress/faq-block' );
-		unregister_block_type( 'wpseopress/sitemap' );
-		unregister_block_type( 'wpseopress/local-business-field' );
-		unregister_block_type( 'wpseopress/local-business' );
-		unregister_block_type( 'wpseopress/breadcrumbs' );
-		unregister_block_type( 'wpseopress/how-to-step' );
-		unregister_block_type( 'wpseopress/how-to' );
-		unregister_block_type( 'wpseopress/table-of-contents' );
-		unregister_block_type( 'wpseopress/how-to-step' );
-	}
-	// SearchWP
-	if ( $registry->get_registered( 'searchwp/search-form' ) ) {
-		unregister_block_type( 'searchwp/search-form' );
-	}
-	// Minerva KB
-	if ( $registry->get_registered( 'minervakb/faq' ) ) {
-		unregister_block_type( 'minervakb/tip' );
-		unregister_block_type( 'minervakb/info' );
-		unregister_block_type( 'minervakb/warning' );
-		// unregister_block_type( 'minervakb/faq' );
-		// unregister_block_type( 'minervakb/topics' );
-		// unregister_block_type( 'minervakb/topic' );
-		// unregister_block_type( 'minervakb/search' );
-		unregister_block_type( 'minervakb/related' );
-		unregister_block_type( 'minervakb/article-content' );
-		unregister_block_type( 'minervakb/guestpost' );
-	}
-	// Ajax Search Pro
-	if ( $registry->get_registered( 'ajax-search-pro/block-asp-main' ) ) {
-		unregister_block_type( 'ajax-search-pro/block-asp-main' );
-	}
-	// Formidable
-	if ( $registry->get_registered( 'formidable/simple-form' ) ) {
-		// unregister_block_type( 'formidable/simple-form' );
-		unregister_block_type( 'frm-charts/graph' );
-		// unregister_block_type( 'formidable/simple-view' );
-		unregister_block_type( 'formidable/calculator' );
-	}
-	// Gravity Forms
-	// if ( WP_Block_Type_Registry::get_instance()->is_registered( 'wpseopress/sitemap' ) ) {
-	// 	// unregister_block_type( 'gravityforms/form' );
-	// }
-	// TablePress
-	// if ( WP_Block_Type_Registry::get_instance()->is_registered( 'tablepress/table' ) ) {
-	// 	// unregister_block_type( 'tablepress/table' );
-	// }
-	// FacetWP Blocks
-	// if ( $registry->get_registered( 'acf/uamswp-fad-facetwp-cards' ) ) {
-	// 	unregister_block_type( 'acf/uamswp-fad-facetwp-cards' );
-	// 	unregister_block_type( 'acf/uamswp-fad-facetwp-blocks' );
-	// }
-	// unregister_block_type( '' );
-}, PHP_INT_MAX );
+add_action('init', function (): void {
+    $registry = WP_Block_Type_Registry::get_instance();
+    // All extra blocks
+    // WP SEO
+    if ($registry->get_registered('wpseopress/sitemap')) {
+        // unregister_block_type( 'wpseopress/faq-block' );
+        unregister_block_type('wpseopress/sitemap');
+        unregister_block_type('wpseopress/local-business-field');
+        unregister_block_type('wpseopress/local-business');
+        unregister_block_type('wpseopress/breadcrumbs');
+        unregister_block_type('wpseopress/how-to-step');
+        unregister_block_type('wpseopress/how-to');
+        unregister_block_type('wpseopress/table-of-contents');
+        unregister_block_type('wpseopress/how-to-step');
+    }
+    // SearchWP
+    if ($registry->get_registered('searchwp/search-form')) {
+        unregister_block_type('searchwp/search-form');
+    }
+    // Minerva KB
+    if ($registry->get_registered('minervakb/faq')) {
+        unregister_block_type('minervakb/tip');
+        unregister_block_type('minervakb/info');
+        unregister_block_type('minervakb/warning');
+        // unregister_block_type( 'minervakb/faq' );
+        // unregister_block_type( 'minervakb/topics' );
+        // unregister_block_type( 'minervakb/topic' );
+        // unregister_block_type( 'minervakb/search' );
+        unregister_block_type('minervakb/related');
+        unregister_block_type('minervakb/article-content');
+        unregister_block_type('minervakb/guestpost');
+    }
+    // Ajax Search Pro
+    if ($registry->get_registered('ajax-search-pro/block-asp-main')) {
+        unregister_block_type('ajax-search-pro/block-asp-main');
+    }
+    // Formidable
+    if ($registry->get_registered('formidable/simple-form')) {
+        // unregister_block_type( 'formidable/simple-form' );
+        unregister_block_type('frm-charts/graph');
+        // unregister_block_type( 'formidable/simple-view' );
+        unregister_block_type('formidable/calculator');
+    }
+    // Gravity Forms
+    // if ( WP_Block_Type_Registry::get_instance()->is_registered( 'wpseopress/sitemap' ) ) {
+    // 	// unregister_block_type( 'gravityforms/form' );
+    // }
+    // TablePress
+    // if ( WP_Block_Type_Registry::get_instance()->is_registered( 'tablepress/table' ) ) {
+    // 	// unregister_block_type( 'tablepress/table' );
+    // }
+    // FacetWP Blocks
+    // if ( $registry->get_registered( 'acf/uamswp-fad-facetwp-cards' ) ) {
+    // 	unregister_block_type( 'acf/uamswp-fad-facetwp-cards' );
+    // 	unregister_block_type( 'acf/uamswp-fad-facetwp-blocks' );
+    // }
+    // unregister_block_type( '' );
+}, PHP_INT_MAX);
 
-add_filter( 'allowed_block_types_all', function( $allowed_blocks, $editor_context ): array {
-    $blocks = array_keys( WP_Block_Type_Registry::get_instance()->get_all_registered() );
+add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context): array {
+    $blocks = array_keys(WP_Block_Type_Registry::get_instance()->get_all_registered());
 
     $removelist = [
-		// 'core/html',
-		'core/latest-comments',
-		'core/nextpage',
-		'core/page-list',
-		'core/page-list-item',
-		'core/pattern',
-		// 'core/preformatted',
-		// 'core/block',
-		// 'core/rss',
-		'core/search',
-		// 'core/separator',
-		// 'core/shortcode',
-		'core/spacer',
-		// 'core/table',
-		'core/footnotes',
-		'core/navigation',
-		'core/navigation-link',
-		'core/navigation-submenu',
-		'core/site-logo',
-		'core/site-title',
-		'core/site-tagline',
-		'core/query',
-		'core/template-part',
-		'core/avatar',
-		'core/post-title',
-		'core/post-excerpt',
-		'core/post-featured-image',
-		'core/post-content',
-		'core/post-author',
-		'core/post-author-name',
-		'core/post-date',
-		'core/post-terms',
-		'core/post-navigation-link',
-		'core/post-template',
-		'core/query-pagination',
-		'core/query-pagination-next"',
-		'core/query-pagination-numbers',
-		'core/query-pagination-previous',
-		'core/query-no-results',
-		'core/query-total',
-		'core/read-more',
-		'core/comments',
-		'core/comment-author-name',
-		'core/comment-content',
-		'core/comment-date',
-		'core/comment-edit-link',
-		'core/comment-reply-link',
-		'core/comment-template',
-		'core/comments-title',
-		'core/comments-pagination',
-		'core/comments-pagination-next',
-		'core/comments-pagination-numbers',
-		'core/comments-pagination-previous',
-		'core/post-comments-form',
-		'core/home-link',
-		'core/loginout',
-		'core/term-description',
-		'core/query-title',
-		'core/post-author-biography',
-		'core/freeform',
-		// 'core/legacy-widget',
-		'core/widget-group',
+        // 'core/html',
+        'core/latest-comments',
+        'core/nextpage',
+        'core/page-list',
+        'core/page-list-item',
+        'core/pattern',
+        // 'core/preformatted',
+        // 'core/block',
+        // 'core/rss',
+        'core/search',
+        // 'core/separator',
+        // 'core/shortcode',
+        'core/spacer',
+        // 'core/table',
+        'core/footnotes',
+        'core/navigation',
+        'core/navigation-link',
+        'core/navigation-submenu',
+        'core/site-logo',
+        'core/site-title',
+        'core/site-tagline',
+        'core/query',
+        'core/template-part',
+        'core/avatar',
+        'core/post-title',
+        'core/post-excerpt',
+        'core/post-featured-image',
+        'core/post-content',
+        'core/post-author',
+        'core/post-author-name',
+        'core/post-date',
+        'core/post-terms',
+        'core/post-navigation-link',
+        'core/post-template',
+        'core/query-pagination',
+        'core/query-pagination-next"',
+        'core/query-pagination-numbers',
+        'core/query-pagination-previous',
+        'core/query-no-results',
+        'core/query-total',
+        'core/read-more',
+        'core/comments',
+        'core/comment-author-name',
+        'core/comment-content',
+        'core/comment-date',
+        'core/comment-edit-link',
+        'core/comment-reply-link',
+        'core/comment-template',
+        'core/comments-title',
+        'core/comments-pagination',
+        'core/comments-pagination-next',
+        'core/comments-pagination-numbers',
+        'core/comments-pagination-previous',
+        'core/post-comments-form',
+        'core/home-link',
+        'core/loginout',
+        'core/term-description',
+        'core/query-title',
+        'core/post-author-biography',
+        'core/freeform',
+        // 'core/legacy-widget',
+        'core/widget-group',
     ];
 
-	if ( ! current_user_can( 'manage_options' ) ) {
-    	$removelist[] = 'acf/uams-content';
+    if (! current_user_can('manage_options')) {
+        $removelist[] = 'acf/uams-content';
     }
 
-    return array_values( array_diff( $blocks, $removelist ) );
-}, 100, 2 );
+    return array_values(array_diff($blocks, $removelist));
+}, 100, 2);

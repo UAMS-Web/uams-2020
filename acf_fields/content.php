@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 /*
  *
- * Content Block Fields 
- * 
+ * Content Block Fields
+ *
  */
 return [
     [
-        'key' => 'field_content_intro'. $suffix,
+        'key' => 'field_content_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
@@ -26,7 +26,7 @@ return [
         'esc_html' => 0,
     ],
     [
-        'key' => 'field_content_heading'. $suffix,
+        'key' => 'field_content_heading'.$suffix,
         'label' => 'Heading',
         'name' => 'content_heading',
         'type' => 'text',
@@ -39,9 +39,9 @@ return [
             'id' => '',
         ],
         'acfe_permissions' => [
-				0 => 'super_admin',
-				1 => 'administrator',
-			],
+            0 => 'super_admin',
+            1 => 'administrator',
+        ],
         'default_value' => '',
         'placeholder' => '',
         'prepend' => '',
@@ -49,7 +49,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_content_hide_heading'. $suffix,
+        'key' => 'field_content_hide_heading'.$suffix,
         'label' => 'Hide Heading',
         'name' => 'content_hide_heading',
         'type' => 'true_false',
@@ -62,9 +62,9 @@ return [
             'id' => '',
         ],
         'acfe_permissions' => [
-				0 => 'super_admin',
-				1 => 'administrator',
-			],
+            0 => 'super_admin',
+            1 => 'administrator',
+        ],
         'message' => '',
         'default_value' => 0,
         'ui' => 1,
@@ -72,7 +72,7 @@ return [
         'ui_off_text' => '',
     ],
     [
-        'key' => 'field_content_description'. $suffix,
+        'key' => 'field_content_description'.$suffix,
         'label' => 'Content / Text',
         'name' => 'content_content',
         'type' => 'wysiwyg',
@@ -84,10 +84,10 @@ return [
             'class' => '',
             'id' => '',
         ],
-        'acfe_permissions'=> [
-				0 => 'super_admin',
-				1 => 'administrator',
-			],
+        'acfe_permissions' => [
+            0 => 'super_admin',
+            1 => 'administrator',
+        ],
         'default_value' => '',
         'tabs' => 'all',
         'toolbar' => 'full',
@@ -95,7 +95,7 @@ return [
         'delay' => 0,
     ],
     [
-        'key' => 'field_content_background_color'. $suffix,
+        'key' => 'field_content_background_color'.$suffix,
         'label' => 'Background Color',
         'name' => 'content_background_color',
         'type' => 'select',
@@ -108,9 +108,9 @@ return [
             'id' => '',
         ],
         'acfe_permissions' => [
-				0 => 'super_admin',
-				1 => 'administrator',
-			],
+            0 => 'super_admin',
+            1 => 'administrator',
+        ],
         'choices' => [
             'bg-auto' => 'Auto',
             'bg-white' => 'White',
@@ -134,7 +134,7 @@ return [
         'placeholder' => '',
     ],
     [
-        'key' => 'field_content_locked'. $suffix,
+        'key' => 'field_content_locked'.$suffix,
         'label' => 'Locked Content',
         'name' => '',
         'aria-label' => '',
@@ -156,7 +156,7 @@ return [
         ],
     ],
     [
-        'key' => 'field_content_geo_valid'. $suffix,
+        'key' => 'field_content_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
@@ -179,7 +179,7 @@ return [
         'return_format' => 'value',
     ],
     [
-        'key' => 'field_content_regions'. $suffix,
+        'key' => 'field_content_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
@@ -188,7 +188,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_content_geo_valid'. $suffix,
+                    'field' => 'field_content_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
@@ -199,39 +199,39 @@ return [
             'class' => '',
             'id' => '',
         ],
-        'acfe_permissions'=> [
-				0 => 'super_admin',
-				1 => 'administrator',
-			],
+        'acfe_permissions' => [
+            0 => 'super_admin',
+            1 => 'administrator',
+        ],
         'open' => 0,
         'multi_expand' => 0,
         'endpoint' => 0,
     ],
     [
-		'key' => 'field_content_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'content_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => [
+        'key' => 'field_content_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'content_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
             [
                 [
-                    'field' => 'field_content_geo_valid'. $suffix,
+                    'field' => 'field_content_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
             ],
         ],
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
-        'acfe_permissions'=> [
-				0 => 'super_admin',
-				1 => 'administrator',
-			],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
+        'acfe_permissions' => [
+            0 => 'super_admin',
+            1 => 'administrator',
+        ],
         'choices' => [
             'include' => 'Include',
             'exclude' => 'Exclude',
@@ -240,25 +240,25 @@ return [
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
+        'return_format' => 'value',
     ],
     [
-		'key' => 'field_content_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'content_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => 0,
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
-        'acfe_permissions'=> [
-				0 => 'super_admin',
-				1 => 'administrator',
-			],
+        'key' => 'field_content_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'content_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
+        'acfe_permissions' => [
+            0 => 'super_admin',
+            1 => 'administrator',
+        ],
         'choices' => [
             'central' => 'Central',
             'northeast' => 'Northeast',

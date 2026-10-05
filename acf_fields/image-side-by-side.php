@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 /*
  *
- * Image Side-by-side ACF Fields 
- * 
+ * Image Side-by-side ACF Fields
+ *
  */
 return [
     [
-        'key' => 'field_side_intro' . $suffix,
+        'key' => 'field_side_intro'.$suffix,
         'label' => '',
         'name' => 'field_side_intro',
         'type' => 'message',
@@ -26,7 +26,7 @@ return [
         'esc_html' => 0,
     ],
     [
-        'key' => 'field_side_layout' . $suffix,
+        'key' => 'field_side_layout'.$suffix,
         'label' => 'Choose Text Layout',
         'name' => 'side_text_layout',
         'type' => 'select',
@@ -55,7 +55,7 @@ return [
         'placeholder' => '',
     ],
     [
-        'key' => 'field_side_heading' . $suffix,
+        'key' => 'field_side_heading'.$suffix,
         'label' => 'Heading',
         'name' => 'side_heading',
         'type' => 'text',
@@ -74,7 +74,7 @@ return [
         'maxlength' => 50,
     ],
     [
-        'key' => 'field_side_layout_body_text'. $suffix,
+        'key' => 'field_side_layout_body_text'.$suffix,
         'label' => 'Body',
         'name' => 'side_layout_body_text',
         'type' => 'textarea',
@@ -83,7 +83,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_side_layout'. $suffix,
+                    'field' => 'field_side_layout'.$suffix,
                     'operator' => '==',
                     'value' => 'body-only',
                 ],
@@ -101,7 +101,7 @@ return [
         'new_lines' => '',
     ],
     [
-        'key' => 'field_side_layout_link_text'. $suffix,
+        'key' => 'field_side_layout_link_text'.$suffix,
         'label' => 'Body',
         'name' => 'side_layout_link_text',
         'type' => 'textarea',
@@ -110,7 +110,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_side_layout'. $suffix,
+                    'field' => 'field_side_layout'.$suffix,
                     'operator' => '==',
                     'value' => 'link-list',
                 ],
@@ -128,7 +128,7 @@ return [
         'new_lines' => '',
     ],
     [
-        'key' => 'field_side_link_list'. $suffix,
+        'key' => 'field_side_link_list'.$suffix,
         'label' => 'Link List',
         'name' => 'side_link_list',
         'type' => 'repeater',
@@ -137,7 +137,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_side_layout'. $suffix,
+                    'field' => 'field_side_layout'.$suffix,
                     'operator' => '==',
                     'value' => 'link-list',
                 ],
@@ -148,14 +148,14 @@ return [
             'class' => '',
             'id' => '',
         ],
-        'collapsed' => 'field_side_link_list_text'. $suffix,
+        'collapsed' => 'field_side_link_list_text'.$suffix,
         'min' => 1,
         'max' => 6,
         'layout' => 'block',
         'button_label' => 'Add Link',
         'sub_fields' => [
             [
-                'key' => 'field_side_link_list_text'. $suffix,
+                'key' => 'field_side_link_list_text'.$suffix,
                 'label' => 'Link Text',
                 'name' => 'side_link_list_text',
                 'type' => 'text',
@@ -174,7 +174,7 @@ return [
                 'maxlength' => 40,
             ],
             [
-                'key' => 'field_side_link_list_url'. $suffix,
+                'key' => 'field_side_link_list_url'.$suffix,
                 'label' => 'Link URL',
                 'name' => 'side_link_list_url',
                 'type' => 'link',
@@ -189,7 +189,7 @@ return [
                 'return_format' => 'array',
             ],
             [
-                'key' => 'field_side_link_list_description'. $suffix,
+                'key' => 'field_side_link_list_description'.$suffix,
                 'label' => 'Link Description',
                 'name' => 'side_link_list_description',
                 'type' => 'text',
@@ -210,7 +210,7 @@ return [
         ],
     ],
     [
-        'key' => 'field_side_link_include_more'. $suffix,
+        'key' => 'field_side_link_include_more'.$suffix,
         'label' => 'Include "and more" at the end of the Link List?',
         'name' => 'side_link_include_more',
         'type' => 'true_false',
@@ -219,7 +219,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_side_link_list'. $suffix,
+                    'field' => 'field_side_link_list'.$suffix,
                     'operator' => '<',
                     'value' => '6',
                 ],
@@ -237,7 +237,7 @@ return [
         'ui_off_text' => '',
     ],
     [
-        'key' => 'field_side_quote_text'. $suffix,
+        'key' => 'field_side_quote_text'.$suffix,
         'label' => 'Quote',
         'name' => 'side_quote_text',
         'type' => 'textarea',
@@ -246,7 +246,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_side_layout'. $suffix,
+                    'field' => 'field_side_layout'.$suffix,
                     'operator' => '==',
                     'value' => 'blockquote-citation',
                 ],
@@ -264,7 +264,7 @@ return [
         'new_lines' => '',
     ],
     [
-        'key' => 'field_side_quote_text_link'. $suffix,
+        'key' => 'field_side_quote_text_link'.$suffix,
         'label' => 'Quote',
         'name' => 'side_quote_text_link',
         'type' => 'textarea',
@@ -273,7 +273,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_side_layout'. $suffix,
+                    'field' => 'field_side_layout'.$suffix,
                     'operator' => '==',
                     'value' => 'blockquote-citation-link',
                 ],
@@ -291,7 +291,7 @@ return [
         'new_lines' => '',
     ],
     [
-        'key' => 'field_side_quote_speaker_name'. $suffix,
+        'key' => 'field_side_quote_speaker_name'.$suffix,
         'label' => 'Speaker Name',
         'name' => 'side_quote_speaker_name',
         'type' => 'text',
@@ -300,14 +300,14 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_side_layout'. $suffix,
+                    'field' => 'field_side_layout'.$suffix,
                     'operator' => '==',
                     'value' => 'blockquote-citation',
                 ],
             ],
             [
                 [
-                    'field' => 'field_side_layout'. $suffix,
+                    'field' => 'field_side_layout'.$suffix,
                     'operator' => '==',
                     'value' => 'blockquote-citation-link',
                 ],
@@ -325,7 +325,7 @@ return [
         'maxlength' => 58,
     ],
     [
-        'key' => 'field_side_quote_speaker_title'. $suffix,
+        'key' => 'field_side_quote_speaker_title'.$suffix,
         'label' => 'Speaker Title',
         'name' => 'side_quote_speaker_title',
         'type' => 'text',
@@ -334,23 +334,23 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_side_layout'. $suffix,
+                    'field' => 'field_side_layout'.$suffix,
                     'operator' => '==',
                     'value' => 'blockquote-citation',
                 ],
                 [
-                    'field' => 'field_side_quote_speaker_name'. $suffix,
+                    'field' => 'field_side_quote_speaker_name'.$suffix,
                     'operator' => '!=empty',
                 ],
             ],
             [
                 [
-                    'field' => 'field_side_layout'. $suffix,
+                    'field' => 'field_side_layout'.$suffix,
                     'operator' => '==',
                     'value' => 'blockquote-citation-link',
                 ],
                 [
-                    'field' => 'field_side_quote_speaker_name'. $suffix,
+                    'field' => 'field_side_quote_speaker_name'.$suffix,
                     'operator' => '!=empty',
                 ],
             ],
@@ -367,7 +367,7 @@ return [
         'maxlength' => 121,
     ],
     [
-        'key' => 'field_side_cta'. $suffix,
+        'key' => 'field_side_cta'.$suffix,
         'label' => 'Call to Action Button',
         'name' => 'side_cta',
         'type' => 'group',
@@ -376,7 +376,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_side_layout'. $suffix,
+                    'field' => 'field_side_layout'.$suffix,
                     'operator' => '!=',
                     'value' => 'blockquote-citation',
                 ],
@@ -390,7 +390,7 @@ return [
         'layout' => 'block',
         'sub_fields' => [
             [
-                'key' => 'field_side_cta_text'. $suffix,
+                'key' => 'field_side_cta_text'.$suffix,
                 'label' => 'Button Text',
                 'name' => 'side_cta_text',
                 'type' => 'text',
@@ -409,7 +409,7 @@ return [
                 'maxlength' => '',
             ],
             [
-                'key' => 'field_side_cta_url'. $suffix,
+                'key' => 'field_side_cta_url'.$suffix,
                 'label' => 'Button URL',
                 'name' => 'side_cta_url',
                 'type' => 'link',
@@ -418,7 +418,7 @@ return [
                 'conditional_logic' => [
                     [
                         [
-                            'field' => 'field_side_cta_text'. $suffix,
+                            'field' => 'field_side_cta_text'.$suffix,
                             'operator' => '!=empty',
                         ],
                     ],
@@ -451,7 +451,7 @@ return [
             //     'ui_off_text' => '',
             // ),
             [
-                'key' => 'field_side_cta_description'. $suffix,
+                'key' => 'field_side_cta_description'.$suffix,
                 'label' => 'Link Description',
                 'name' => 'side_cta_description',
                 'type' => 'text',
@@ -460,7 +460,7 @@ return [
                 'conditional_logic' => [
                     [
                         [
-                            'field' => 'field_side_cta_text'. $suffix,
+                            'field' => 'field_side_cta_text'.$suffix,
                             'operator' => '!=empty',
                         ],
                     ],
@@ -479,7 +479,7 @@ return [
         ],
     ],
     [
-        'key' => 'field_side_image'. $suffix,
+        'key' => 'field_side_image'.$suffix,
         'label' => 'Image Options',
         'name' => 'side_image',
         'type' => 'group',
@@ -494,7 +494,7 @@ return [
         'layout' => 'block',
         'sub_fields' => [
             [
-                'key' => 'field_side_image_image'. $suffix,
+                'key' => 'field_side_image_image'.$suffix,
                 'label' => 'Image',
                 'name' => 'side_image_image',
                 'type' => 'image',
@@ -518,7 +518,7 @@ return [
                 'mime_types' => '',
             ],
             [
-                'key' => 'field_side_image_alt_text'. $suffix,
+                'key' => 'field_side_image_alt_text'.$suffix,
                 'label' => 'Image Alt Text Override',
                 'name' => 'side_image_alt_text',
                 'type' => 'text',
@@ -537,7 +537,7 @@ return [
                 'maxlength' => 125,
             ],
             [
-                'key' => 'field_side_image_crop'. $suffix,
+                'key' => 'field_side_image_crop'.$suffix,
                 'label' => 'Vertical Crop',
                 'name' => 'side_image_crop',
                 'type' => 'button_group',
@@ -560,7 +560,7 @@ return [
                 'return_format' => 'value',
             ],
             [
-                'key' => 'field_side_image_anchor'. $suffix,
+                'key' => 'field_side_image_anchor'.$suffix,
                 'label' => 'Image Anchor Position',
                 'name' => 'side_image_anchor',
                 'type' => 'button_group',
@@ -585,7 +585,7 @@ return [
         ],
     ],
     [
-        'key' => 'field_side_image_position'. $suffix,
+        'key' => 'field_side_image_position'.$suffix,
         'label' => 'Image & Text Position',
         'name' => 'side_image_position',
         'type' => 'select',
@@ -612,7 +612,7 @@ return [
         'placeholder' => '',
     ],
     [
-        'key' => 'field_side_image_background_color'. $suffix,
+        'key' => 'field_side_image_background_color'.$suffix,
         'label' => 'Background Color',
         'name' => 'side_image_background_color',
         'type' => 'select',
@@ -640,7 +640,7 @@ return [
         'placeholder' => '',
     ],
     [
-        'key' => 'field_side_image_geo_valid'. $suffix,
+        'key' => 'field_side_image_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
@@ -664,7 +664,7 @@ return [
         'return_format' => 'value',
     ],
     [
-        'key' => 'field_side_image_regions'. $suffix,
+        'key' => 'field_side_image_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
@@ -673,7 +673,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_side_image_geo_valid'. $suffix,
+                    'field' => 'field_side_image_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
@@ -689,26 +689,26 @@ return [
         'endpoint' => 0,
     ],
     [
-		'key' => 'field_side_image_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'side_image_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => [
+        'key' => 'field_side_image_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'side_image_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
             [
                 [
-                    'field' => 'field_side_image_geo_valid'. $suffix,
+                    'field' => 'field_side_image_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
             ],
         ],
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'include' => 'Include',
@@ -718,21 +718,21 @@ return [
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
+        'return_format' => 'value',
     ],
     [
-		'key' => 'field_side_image_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'side_image_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => 0,
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'key' => 'field_side_image_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'side_image_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'central' => 'Central',

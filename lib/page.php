@@ -1,73 +1,76 @@
 <?php
+
+declare(strict_types=1);
 /*
  *
  * Page options
- * 
+ *
  */
 
-add_action( 'genesis_after_header', 'page_options', 5 );
-function page_options(): void {
+add_action('genesis_after_header', 'page_options', 5);
+function page_options(): void
+{
     $id = get_the_id();
-    if ( get_field('page_title_options', $id) ) {
+    if (get_field('page_title_options', $id)) {
         $pageTitle = get_field('page_title_options', $id);
-        if ('hidden' == $pageTitle) {
+        if ($pageTitle == 'hidden') {
             // Hide Entry-header
             add_filter('genesis_attr_entry-header', 'uamswp_attributes_entry_header');
-        } elseif ('graphic' == $pageTitle) {
+        } elseif ($pageTitle == 'graphic') {
             // Graphic Header
             // Remove original
-            remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
-            remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
-            remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
+            remove_action('genesis_entry_header', 'genesis_entry_header_markup_open', 5);
+            remove_action('genesis_entry_header', 'genesis_do_post_title');
+            remove_action('genesis_entry_header', 'genesis_entry_header_markup_close', 15);
             // Add new location
-            add_action( 'genesis_before_content', 'uamswp_graphic_title_wrap_open', 5 );
-            add_action( 'genesis_before_content', 'genesis_entry_header_markup_open', 5 );
-            add_action( 'genesis_before_content', 'uamswp_graphic_title_inner_1', 5 );
-            add_action( 'genesis_before_content', 'genesis_do_post_title' );
-            add_action( 'genesis_before_content', 'uamswp_graphic_title_inner_2', 15 );
-            add_action( 'genesis_before_content', 'uamswp_graphic_title_lead_paragraph', 15 );
-            add_action( 'genesis_before_content', 'uamswp_graphic_title_inner_3', 15 );
-            add_action( 'genesis_before_content', 'genesis_entry_header_markup_close', 15 );
-            add_action( 'genesis_before_content', 'uamswp_graphic_title_wrap_close', 15 );
+            add_action('genesis_before_content', 'uamswp_graphic_title_wrap_open', 5);
+            add_action('genesis_before_content', 'genesis_entry_header_markup_open', 5);
+            add_action('genesis_before_content', 'uamswp_graphic_title_inner_1', 5);
+            add_action('genesis_before_content', 'genesis_do_post_title');
+            add_action('genesis_before_content', 'uamswp_graphic_title_inner_2', 15);
+            add_action('genesis_before_content', 'uamswp_graphic_title_lead_paragraph', 15);
+            add_action('genesis_before_content', 'uamswp_graphic_title_inner_3', 15);
+            add_action('genesis_before_content', 'genesis_entry_header_markup_close', 15);
+            add_action('genesis_before_content', 'uamswp_graphic_title_wrap_close', 15);
 
             // Add relevant classes
             add_filter('genesis_attr_entry-header', 'uamswp_attributes_entry_header_graphic_title');
 
-        } elseif ('landingpage' == $pageTitle) {
+        } elseif ($pageTitle == 'landingpage') {
             // Landing Page Header
             // Remove original
-            remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
-            remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
-            remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
+            remove_action('genesis_entry_header', 'genesis_entry_header_markup_open', 5);
+            remove_action('genesis_entry_header', 'genesis_do_post_title');
+            remove_action('genesis_entry_header', 'genesis_entry_header_markup_close', 15);
             // Add new location
-            add_action( 'genesis_before_content', 'uamswp_landing_page_title_wrap_open', 5 );
-            add_action( 'genesis_before_content', 'genesis_entry_header_markup_open', 5 );
-            add_action( 'genesis_before_content', 'uamswp_landing_page_title_inner_1', 5 );
-            add_action( 'genesis_before_content', 'uamswp_landing_page_title_do_post_title' );
-            add_action( 'genesis_before_content', 'uamswp_landing_page_title_inner_2', 15 );
-            add_action( 'genesis_before_content', 'uamswp_landing_page_title_lead_paragraph', 15 );
-            add_action( 'genesis_before_content', 'uamswp_landing_page_title_inner_3', 15 );
-            add_action( 'genesis_before_content', 'genesis_entry_header_markup_close', 15 );
-            add_action( 'genesis_before_content', 'uamswp_landing_page_title_wrap_close', 15 );
+            add_action('genesis_before_content', 'uamswp_landing_page_title_wrap_open', 5);
+            add_action('genesis_before_content', 'genesis_entry_header_markup_open', 5);
+            add_action('genesis_before_content', 'uamswp_landing_page_title_inner_1', 5);
+            add_action('genesis_before_content', 'uamswp_landing_page_title_do_post_title');
+            add_action('genesis_before_content', 'uamswp_landing_page_title_inner_2', 15);
+            add_action('genesis_before_content', 'uamswp_landing_page_title_lead_paragraph', 15);
+            add_action('genesis_before_content', 'uamswp_landing_page_title_inner_3', 15);
+            add_action('genesis_before_content', 'genesis_entry_header_markup_close', 15);
+            add_action('genesis_before_content', 'uamswp_landing_page_title_wrap_close', 15);
 
             // Add relevant classes
             add_filter('genesis_attr_entry-header', 'uamswp_attributes_entry_header_landing_page_title');
 
-        } elseif ('hero' == $pageTitle) {
+        } elseif ($pageTitle == 'hero') {
             // Hero
             // Remove original header
-            remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
-            remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
-            remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
+            remove_action('genesis_entry_header', 'genesis_entry_header_markup_open', 5);
+            remove_action('genesis_entry_header', 'genesis_do_post_title');
+            remove_action('genesis_entry_header', 'genesis_entry_header_markup_close', 15);
             // Add new location for header
-            add_action( 'genesis_before_content', 'genesis_entry_header_markup_open', 5 );
-            add_action( 'genesis_before_content', 'genesis_do_post_title' );
-            add_action( 'genesis_before_content', 'genesis_entry_header_markup_close', 15 );
+            add_action('genesis_before_content', 'genesis_entry_header_markup_open', 5);
+            add_action('genesis_before_content', 'genesis_do_post_title');
+            add_action('genesis_before_content', 'genesis_entry_header_markup_close', 15);
             // Add SR-Only
-            add_filter( 'genesis_attr_entry-header', 'uamswp_attributes_entry_header' );
+            add_filter('genesis_attr_entry-header', 'uamswp_attributes_entry_header');
 
             // Add hero section
-            add_action( 'genesis_before_content', 'uamswp_page_hero', 20 );
+            add_action('genesis_before_content', 'uamswp_page_hero', 20);
         } else {
             // do nothing
         }
@@ -76,9 +79,9 @@ function page_options(): void {
 
 function uamswp_attributes_entry_header($attributes)
 {
-	$attributes['class'] .= ' sr-only';
-	
-	return $attributes;
+    $attributes['class'] .= ' sr-only';
+
+    return $attributes;
 }
 
 function uamswp_attributes_entry_header_graphic_title($attributes)
@@ -89,12 +92,11 @@ function uamswp_attributes_entry_header_graphic_title($attributes)
 
     if ($page_cover_image) {
         $attributes['class'] .= ' uams-module extra-padding graphic-title bg-image bg-red';
-    }
-    else {
+    } else {
         $attributes['class'] .= ' uams-module extra-padding graphic-title bg-red';
     }
-	
-	return $attributes;
+
+    return $attributes;
 }
 
 function uamswp_graphic_title_wrap_open(): void
@@ -107,60 +109,59 @@ function uamswp_graphic_title_inner_1(): void
     if (empty($page_cover_image)) {
         $page_cover_image = get_field('page_cover_image', get_the_id());
     }
-    
-    if ($page_cover_image && function_exists( 'bis_get_attachment_image' ) ) {
+
+    if ($page_cover_image && function_exists('bis_get_attachment_image')) {
         echo '<style>
         .entry-header:before {
-            background-image: url("' . image_sizer($page_cover_image, 576, 216, 'center', 'center', 'aspect-8-3-small') . '");
+            background-image: url("'.image_sizer($page_cover_image, 576, 216, 'center', 'center', 'aspect-8-3-small').'");
         }
 
         /* XS Breakpoint */
         @media (min-width: 576px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 768, 288, 'center', 'center', 'aspect-8-3-small') . '");
+                background-image: url("'.image_sizer($page_cover_image, 768, 288, 'center', 'center', 'aspect-8-3-small').'");
             }
         }
 
         /* SM Breakpoint */
         @media (min-width: 768px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 992, 372, 'center', 'center', 'aspect-8-3') . '");
+                background-image: url("'.image_sizer($page_cover_image, 992, 372, 'center', 'center', 'aspect-8-3').'");
             }
         }
 
         /* MD Breakpoint */
         @media (min-width: 992px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 1200, 450, 'center', 'center', 'aspect-8-3') . '");
+                background-image: url("'.image_sizer($page_cover_image, 1200, 450, 'center', 'center', 'aspect-8-3').'");
             }
         }
 
         /* LG Breakpoint */
         @media (min-width: 1200px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 1500, 563, 'center', 'center', 'aspect-8-3') . '");
+                background-image: url("'.image_sizer($page_cover_image, 1500, 563, 'center', 'center', 'aspect-8-3').'");
             }
         }
 
         /* XL Breakpoint */
         @media (min-width: 1500px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 1921, 720, 'center', 'center', 'aspect-8-3') . '");
+                background-image: url("'.image_sizer($page_cover_image, 1921, 720, 'center', 'center', 'aspect-8-3').'");
             }
         }
 
         /* XXL Breakpoint */
         @media (min-width: 1921px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_cover_image, 2560, 960, 'center', 'center', 'aspect-8-3') . '");
+                background-image: url("'.image_sizer($page_cover_image, 2560, 960, 'center', 'center', 'aspect-8-3').'");
             }
         }
     </style>';
-    }
-    elseif ($page_cover_image) {
+    } elseif ($page_cover_image) {
         echo '<style>
             .entry-header:before {
-                background-image: url("' . wp_get_attachment_url( $page_cover_image, 'aspect-8-3' ) . '");
+                background-image: url("'.wp_get_attachment_url($page_cover_image, 'aspect-8-3').'");
             }
         </style>';
     }
@@ -205,12 +206,11 @@ function uamswp_attributes_entry_header_landing_page_title($attributes)
 
     if ($page_landing_page_cover_image) {
         $attributes['class'] .= ' uams-module extra-padding landing-page-title bg-image';
-    }
-    else {
+    } else {
         $attributes['class'] .= ' uams-module extra-padding landing-page-title';
     }
-	
-	return $attributes;
+
+    return $attributes;
 }
 
 function uamswp_landing_page_title_wrap_open(): void
@@ -231,60 +231,59 @@ function uamswp_landing_page_title_inner_1(): void
     if (empty($page_landing_page_cover_image_mobile)) {
         $page_landing_page_cover_image_mobile = $page_landing_page_cover_image;
     } // fallback to desktop image
-    
-    if ($page_landing_page_cover_image && function_exists( 'bis_get_attachment_image' ) ) {
+
+    if ($page_landing_page_cover_image && function_exists('bis_get_attachment_image')) {
         echo '<style>
         .entry-header:before {
-            background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 576, 468, 'center', 'center', 'aspect-4-3-small') . '");
+            background-image: url("'.image_sizer($page_landing_page_cover_image_mobile, 576, 468, 'center', 'center', 'aspect-4-3-small').'");
         }
 
         /* XS Breakpoint */
         @media (min-width: 576px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 768, 624, 'center', 'center', 'aspect-4-3') . '");
+                background-image: url("'.image_sizer($page_landing_page_cover_image_mobile, 768, 624, 'center', 'center', 'aspect-4-3').'");
             }
         }
 
         /* SM Breakpoint */
         @media (min-width: 768px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image_mobile, 992, 806, 'center', 'center', 'aspect-4-3') . '");
+                background-image: url("'.image_sizer($page_landing_page_cover_image_mobile, 992, 806, 'center', 'center', 'aspect-4-3').'");
             }
         }
 
         /* MD Breakpoint */
         @media (min-width: 992px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 1200, 375, 'center', 'center', 'aspect-8-3') . '");
+                background-image: url("'.image_sizer($page_landing_page_cover_image, 1200, 375, 'center', 'center', 'aspect-8-3').'");
             }
         }
 
         /* LG Breakpoint */
         @media (min-width: 1200px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 1500, 469, 'center', 'center', 'aspect-8-3') . '");
+                background-image: url("'.image_sizer($page_landing_page_cover_image, 1500, 469, 'center', 'center', 'aspect-8-3').'");
             }
         }
 
         /* XL Breakpoint */
         @media (min-width: 1500px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 1921, 601, 'center', 'center', 'aspect-8-3') . '");
+                background-image: url("'.image_sizer($page_landing_page_cover_image, 1921, 601, 'center', 'center', 'aspect-8-3').'");
             }
         }
 
         /* XXL Breakpoint */
         @media (min-width: 1921px) {
             .entry-header:before {
-                background-image: url("' . image_sizer($page_landing_page_cover_image, 2560, 800, 'center', 'center', 'aspect-8-3') . '");
+                background-image: url("'.image_sizer($page_landing_page_cover_image, 2560, 800, 'center', 'center', 'aspect-8-3').'");
             }
         }
     </style>';
-    }
-    elseif ($page_landing_page_cover_image) {
+    } elseif ($page_landing_page_cover_image) {
         echo '<style>
             .entry-header:before {
-                background-image: url("' . wp_get_attachment_url( $page_landing_page_cover_image, 'full' ) . '");
+                background-image: url("'.wp_get_attachment_url($page_landing_page_cover_image, 'full').'");
             }
         </style>';
     }
@@ -297,7 +296,7 @@ function uamswp_landing_page_title_do_post_title(): void
 {
     $page_landing_page_heading = get_field('page_landing_page_heading', get_the_id());
 
-    if ( empty($page_landing_page_heading) ) {
+    if (empty($page_landing_page_heading)) {
         $page_landing_page_heading = get_the_title();
     }
 
@@ -334,12 +333,13 @@ function uamswp_landing_page_title_wrap_close(): void
     echo '</div>';
 }
 
-function uamswp_page_hero(): void {
-    //$id = 'header';
+function uamswp_page_hero(): void
+{
+    // $id = 'header';
     $hero_rows = get_field('page_hero', get_the_id())['hero'];
     $i = 0; // Set $i for blocks since it is outside of block editor
     echo '<div class="col-12">';
-    include( get_stylesheet_directory() .'/blocks/hero.php' );
+    include get_stylesheet_directory().'/blocks/hero.php';
     echo '</div>';
 }
 
@@ -349,15 +349,17 @@ function uamswp_page_hero(): void {
  * @return string $id or false
  *
  * @since 1.0
+ *
  * @author Josh Daugherty
  */
-function uamswp_hide_breadcrumbs(){
+function uamswp_hide_breadcrumbs()
+{
     $hidebreadcrumbs = false;
-    if (get_post_meta( get_the_id(), 'page_hide_breadcrumbs', true)) {
+    if (get_post_meta(get_the_id(), 'page_hide_breadcrumbs', true)) {
         $id = get_the_id();
         $hidebreadcrumbs = true;
     }
-    
+
     if ($hidebreadcrumbs) {
         return $id;
     }
@@ -366,63 +368,66 @@ function uamswp_hide_breadcrumbs(){
 }
 
 /**
- * 
  * Remove Breadcrumbs if page settings say breadcrumbs should be hidden.
- * 
+ *
  * @since 1.0
+ *
  * @author Josh Daugherty
  */
-add_action( 'template_redirect', 'remove_breadcrumbs' );
-function remove_breadcrumbs(): void {
-	if ( uamswp_hide_breadcrumbs() ) {
-        remove_action( 'genesis_after_header', 'genesis_do_breadcrumbs' );
-        remove_action( 'genesis_after_header', 'sp_breadcrumb_after_header' );
-	}
+add_action('template_redirect', 'remove_breadcrumbs');
+function remove_breadcrumbs(): void
+{
+    if (uamswp_hide_breadcrumbs()) {
+        remove_action('genesis_after_header', 'genesis_do_breadcrumbs');
+        remove_action('genesis_after_header', 'sp_breadcrumb_after_header');
+    }
 }
 
 /**
  * Use h1 for all entry titles, linking if on archive page
  */
-function uamswp_entry_title_h1( $title ): string {
-    $post_title = get_the_title( get_the_ID() );
-    $post_link = get_the_permalink( get_the_ID() );
+function uamswp_entry_title_h1($title): string
+{
+    $post_title = get_the_title(get_the_ID());
+    $post_link = get_the_permalink(get_the_ID());
     if (is_archive()) {
-        return '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
+        return '<h2 class="entry-title" itemprop="headline"><a href="'.$post_link.'">'.$post_title.'</a></h2>';
     }
-    
-    return '<h1 class="entry-title" itemprop="headline">' . $post_title . '</h1>';
+
+    return '<h1 class="entry-title" itemprop="headline">'.$post_title.'</h1>';
 }
 
-add_filter( 'genesis_post_title_output', 'uamswp_entry_title_h1' );
-
+add_filter('genesis_post_title_output', 'uamswp_entry_title_h1');
 
 // Customize the entry meta in the entry header (requires HTML5 theme support)
-add_filter( 'genesis_post_info', 'uamswp_post_info_filter' );
-function uamswp_post_info_filter($post_info): ?string {
-	if ( is_single() && 'post' == get_post_type() ) {
+add_filter('genesis_post_info', 'uamswp_post_info_filter');
+function uamswp_post_info_filter($post_info): ?string
+{
+    if (is_single() && get_post_type() == 'post') {
         $author_info = get_field('post_hide_author');
         if ($author_info) {
             return 'Posted on [post_date]';
         }
-        
-		return 'Posted by [post_author_posts_link] on [post_date]';
-	}
+
+        return 'Posted by [post_author_posts_link] on [post_date]';
+    }
 
     return null;
 }
 
 // Relocate post info
-remove_action( 'genesis_entry_header', 'genesis_post_info', 12 );
-add_action( 'genesis_entry_footer', 'genesis_post_info', 9 );
+remove_action('genesis_entry_header', 'genesis_post_info', 12);
+add_action('genesis_entry_footer', 'genesis_post_info', 9);
 
-function uamswp_list_child_pages() {
-	$hidechildmenu = false;
-    if ((get_post_meta( get_the_id(), 'page_hide_child_menu', true) ) || ( 0 === count( get_pages('child_of=' . get_the_id())) ) || is_search() ) { // If it's suppressed or none available, set to false
+function uamswp_list_child_pages()
+{
+    $hidechildmenu = false;
+    if ((get_post_meta(get_the_id(), 'page_hide_child_menu', true)) || (count(get_pages('child_of='.get_the_id())) === 0) || is_search()) { // If it's suppressed or none available, set to false
         $hidechildmenu = true;
     }
-    
-    if (!$hidechildmenu) {
-        return uamswp_list_child_posts( 'page', 'Subpages' );
+
+    if (! $hidechildmenu) {
+        return uamswp_list_child_posts('page', 'Subpages');
     }
 }
 

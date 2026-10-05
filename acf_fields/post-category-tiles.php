@@ -5,11 +5,11 @@ declare(strict_types=1);
 /*
  *
  * Post Category Tiles (Double) Block Fields
- * 
+ *
  */
 return [
     [
-        'key' => 'field_post_tiles_intro'. $suffix,
+        'key' => 'field_post_tiles_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
@@ -27,7 +27,7 @@ return [
         'esc_html' => 0,
     ],
     [
-        'key' => 'field_post_tiles_heading'. $suffix,
+        'key' => 'field_post_tiles_heading'.$suffix,
         'label' => 'Module Heading',
         'name' => 'post_tiles_heading',
         'type' => 'text',
@@ -46,7 +46,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_post_tiles_hide_heading'. $suffix,
+        'key' => 'field_post_tiles_hide_heading'.$suffix,
         'label' => 'Hide the Module Heading?',
         'name' => 'post_tiles_hide_heading',
         'type' => 'true_false',
@@ -65,7 +65,7 @@ return [
         'ui_off_text' => '',
     ],
     [
-        'key' => 'field_post_tiles_background_color'. $suffix,
+        'key' => 'field_post_tiles_background_color'.$suffix,
         'label' => 'Background Color',
         'name' => 'post_tiles_background_color',
         'type' => 'select',
@@ -93,7 +93,7 @@ return [
         'placeholder' => '',
     ],
     [
-        'key' => 'field_post_tiles_section'. $suffix,
+        'key' => 'field_post_tiles_section'.$suffix,
         'label' => 'Items',
         'name' => 'post_tiles_section',
         'type' => 'repeater',
@@ -112,7 +112,7 @@ return [
         'button_label' => 'Add item',
         'sub_fields' => [
             [
-                'key' => 'field_post_tiles_section_category'. $suffix,
+                'key' => 'field_post_tiles_section_category'.$suffix,
                 'label' => 'Post Category',
                 'name' => 'post_tiles_section_category',
                 'type' => 'taxonomy',
@@ -134,7 +134,7 @@ return [
                 'multiple' => 0,
             ],
             [
-                'key' => 'field_post_tiles_section_post_button_text'. $suffix,
+                'key' => 'field_post_tiles_section_post_button_text'.$suffix,
                 'label' => "Post's Button Text",
                 'name' => 'post_tiles_section_post_button_text',
                 'type' => 'text',
@@ -153,7 +153,7 @@ return [
                 'maxlength' => '',
             ],
             [
-                'key' => 'field_post_tiles_section_category_button_text'. $suffix,
+                'key' => 'field_post_tiles_section_category_button_text'.$suffix,
                 'label' => "Category Link's Button Text",
                 'name' => 'post_tiles_section_category_button_text',
                 'type' => 'text',
@@ -174,7 +174,7 @@ return [
         ],
     ],
     [
-        'key' => 'field_post_tiles_geo_valid'. $suffix,
+        'key' => 'field_post_tiles_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
@@ -198,7 +198,7 @@ return [
         'return_format' => 'value',
     ],
     [
-        'key' => 'field_post_tiles_regions'. $suffix,
+        'key' => 'field_post_tiles_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
@@ -207,7 +207,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_post_tiles_geo_valid'. $suffix,
+                    'field' => 'field_post_tiles_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
@@ -223,26 +223,26 @@ return [
         'endpoint' => 0,
     ],
     [
-		'key' => 'field_post_tiles_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'post_tiles_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => [
+        'key' => 'field_post_tiles_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'post_tiles_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
             [
                 [
-                    'field' => 'field_post_tiles_geo_valid'. $suffix,
+                    'field' => 'field_post_tiles_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
             ],
         ],
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'include' => 'Include',
@@ -252,21 +252,21 @@ return [
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
+        'return_format' => 'value',
     ],
     [
-		'key' => 'field_post_tiles_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'post_tiles_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => 0,
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'key' => 'field_post_tiles_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'post_tiles_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'central' => 'Central',

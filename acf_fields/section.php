@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 /*
  *
- * Section Block Fields 
- * 
+ * Section Block Fields
+ *
  */
 return [
     [
-        'key' => 'field_section_heading'. $suffix,
+        'key' => 'field_section_heading'.$suffix,
         'label' => 'Section Title',
         'name' => 'section_heading',
         'type' => 'text',
@@ -29,7 +29,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_section_hide_heading'. $suffix,
+        'key' => 'field_section_hide_heading'.$suffix,
         'label' => 'Hide Heading',
         'name' => 'section_hide_heading',
         'type' => 'true_false',
@@ -49,7 +49,7 @@ return [
         'ui_off_text' => '',
     ],
     [
-        'key' => 'field_section_background_color'. $suffix,
+        'key' => 'field_section_background_color'.$suffix,
         'label' => 'Background Color',
         'name' => 'section_background_color',
         'type' => 'select',

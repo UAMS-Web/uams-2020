@@ -5,11 +5,11 @@ declare(strict_types=1);
 /*
  *
  * Stacked Image & Text Block Fields
- * 
+ *
  */
 return [
     [
-        'key' => 'field_link_list_intro'. $suffix,
+        'key' => 'field_link_list_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
@@ -26,7 +26,7 @@ return [
         'esc_html' => 0,
     ],
     [
-        'key' => 'field_link_list_heading'. $suffix,
+        'key' => 'field_link_list_heading'.$suffix,
         'label' => 'Heading',
         'name' => 'link_list_heading',
         'type' => 'text',
@@ -45,7 +45,7 @@ return [
         'maxlength' => '',
     ],
     [
-        'key' => 'field_link_list_description'. $suffix,
+        'key' => 'field_link_list_description'.$suffix,
         'label' => 'List Description',
         'name' => 'link_list_description',
         'type' => 'textarea',
@@ -64,7 +64,7 @@ return [
         'new_lines' => '',
     ],
     [
-        'key' => 'field_link_list_background_color'. $suffix,
+        'key' => 'field_link_list_background_color'.$suffix,
         'label' => 'Background Color',
         'name' => 'link_list_background_color',
         'type' => 'select',
@@ -118,7 +118,7 @@ return [
     //     'ui_off_text' => '',
     // ),
     [
-        'key' => 'field_link_list_section'. $suffix,
+        'key' => 'field_link_list_section'.$suffix,
         'label' => 'Links',
         'name' => 'link_list_section',
         'type' => 'repeater',
@@ -130,14 +130,14 @@ return [
             'class' => '',
             'id' => '',
         ],
-        'collapsed' => 'field_link_list_section_title'. $suffix,
+        'collapsed' => 'field_link_list_section_title'.$suffix,
         'min' => 1,
         'max' => 0,
         'layout' => 'block',
         'button_label' => 'Add Link',
         'sub_fields' => [
             [
-                'key' => 'field_link_list_section_title'. $suffix,
+                'key' => 'field_link_list_section_title'.$suffix,
                 'label' => 'Link Title',
                 'name' => 'link_list_section_title',
                 'type' => 'text',
@@ -156,7 +156,7 @@ return [
                 'maxlength' => '',
             ],
             [
-                'key' => 'field_link_list_section_body'. $suffix,
+                'key' => 'field_link_list_section_body'.$suffix,
                 'label' => 'Link Caption',
                 'name' => 'link_list_section_body',
                 'type' => 'text',
@@ -175,7 +175,7 @@ return [
                 'maxlength' => 90,
             ],
             [
-                'key' => 'field_link_list_section_url'. $suffix,
+                'key' => 'field_link_list_section_url'.$suffix,
                 'label' => 'Link URL',
                 'name' => 'link_list_section_url',
                 'type' => 'link',
@@ -190,7 +190,7 @@ return [
                 'return_format' => 'array',
             ],
             [
-                'key' => 'field_link_list_section_description'. $suffix,
+                'key' => 'field_link_list_section_description'.$suffix,
                 'label' => 'Link Accessibility Description',
                 'name' => 'link_list_section_description',
                 'type' => 'text',
@@ -230,7 +230,7 @@ return [
         ],
     ],
     [
-        'key' => 'field_link_list_geo_valid'. $suffix,
+        'key' => 'field_link_list_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
@@ -254,7 +254,7 @@ return [
         'return_format' => 'value',
     ],
     [
-        'key' => 'field_link_list_regions'. $suffix,
+        'key' => 'field_link_list_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
@@ -263,7 +263,7 @@ return [
         'conditional_logic' => [
             [
                 [
-                    'field' => 'field_link_list_geo_valid'. $suffix,
+                    'field' => 'field_link_list_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
@@ -279,26 +279,26 @@ return [
         'endpoint' => 0,
     ],
     [
-		'key' => 'field_link_list_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'link_list_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => [
+        'key' => 'field_link_list_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'link_list_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
             [
                 [
-                    'field' => 'field_link_list_geo_valid'. $suffix,
+                    'field' => 'field_link_list_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
                 ],
             ],
         ],
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'include' => 'Include',
@@ -308,21 +308,21 @@ return [
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
+        'return_format' => 'value',
     ],
     [
-		'key' => 'field_link_list_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'link_list_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => 0,
-		'wrapper' => [
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		],
+        'key' => 'field_link_list_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'link_list_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
         'choices' => [
             'central' => 'Central',

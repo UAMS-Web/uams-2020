@@ -1,18 +1,19 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Template Name: Landing
  *
- * @package      Bootstrap for Genesis
  * @since        1.0
  * @link         http://webdevsuperfast.github.io
+ *
  * @author       Rotsen Mark Acob <webdevsuperfast.github.io>
  * @copyright    Copyright (c) 2015, Rotsen Mark Acob
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
- *
 */
 
 // Remove the primary navigation
-// remove_action( 'genesis_after_header', 'genesis_do_nav' ); 
+// remove_action( 'genesis_after_header', 'genesis_do_nav' );
 
 // Remove header
 // remove_action( 'genesis_header', 'genesis_do_header' );
@@ -45,11 +46,13 @@
 // add_filter( 'wp_nav_menu', '__return_false' );
 
 // Add extra class to content
-function uamswp_add_class( $attributes ) {
+function uamswp_add_class($attributes)
+{
     $attributes['class'] .= ' sr-only';
-      return $attributes;
+
+    return $attributes;
 }
 
-add_filter( 'genesis_attr_entry-title', 'uamswp_add_class' );
+add_filter('genesis_attr_entry-title', 'uamswp_add_class');
 
 genesis();
