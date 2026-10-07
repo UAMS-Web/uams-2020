@@ -6,6 +6,11 @@
  * 
  */
 
+// Editor placeholder for a newly inserted, still-empty block (ACF Blocks V3).
+if ( uamswp_block_placeholder( $block ?? null, $is_preview ?? false ) ) {
+    return;
+}
+
 // Create id attribute allowing for custom "anchor" value.
 if (empty( $id )) {
 	$id = '';
@@ -124,6 +129,7 @@ $row = 0;
         </div>
     </div>
 </section>
+<?php if ( empty( $is_preview ) ) : // Scripts don't run in editor previews; the PHP-rendered count is shown there. ?>
 <script>
     (function($) {
         $(document).ready(function(){
@@ -162,4 +168,5 @@ $row = 0;
         })
     })(jQuery);
 </script>
+<?php endif; ?>
 
