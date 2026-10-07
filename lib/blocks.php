@@ -6,6 +6,51 @@
  * 
  */
 
+/**
+ * Child blocks allowed inside the uams-section InnerBlocks.
+ * Shared by blocks/section.php and the Marketing Landing Page allowlist in functions.php.
+ */
+function uamswp_section_allowed_blocks() {
+    $blocks = array( 'core/heading', 'core/paragraph', 'core/embed', 'core/list', 'core/list-item', 'core/quote', 'core/image', 'core/shortcode', 'core/table', 'core/file', 'gravityforms/form', 'formidable/simple-form' );
+    if ( current_user_can( 'manage_options' ) ) {
+        $blocks[] = 'acf/uams-iframe';
+    }
+    return apply_filters( 'uamswp_section_allowed_blocks', $blocks );
+}
+
+/**
+ * Editor placeholder for ACF blocks that have no content yet.
+ *
+ * ACF Blocks V3 always render the template as a preview, so a freshly inserted
+ * block would otherwise show an empty section. Returns true (after printing the
+ * placeholder) when the caller should stop rendering.
+ *
+ * Safe outside block context (flexible content modules, widgets): $block and
+ * $is_preview are not set there, so this returns false.
+ */
+function uamswp_block_placeholder( $block = null, $is_preview = false ) {
+    if ( empty( $is_preview ) || empty( $block ) || ! is_array( $block ) ) {
+        return false;
+    }
+    $data = isset( $block['data'] ) && is_array( $block['data'] ) ? $block['data'] : array();
+    foreach ( $data as $key => $value ) {
+        // ACF stores "_field_name" => field key reference entries alongside values.
+        if ( is_string( $key ) && 0 === strpos( $key, '_' ) ) {
+            continue;
+        }
+        if ( '' !== $value && null !== $value && array() !== $value && false !== $value && '0' !== $value ) {
+            return false;
+        }
+    }
+    $title = ! empty( $block['title'] ) ? $block['title'] : __( 'UAMS block' );
+    printf(
+        '<div class="uams-block-placeholder" style="padding:1.5rem;border:1px dashed currentColor;text-align:center;"><strong>%s</strong><br>%s</div>',
+        esc_html( $title ),
+        esc_html__( 'Click the pencil icon in the block toolbar to add content.' )
+    );
+    return true;
+}
+
 add_action('acf/init', 'uams_register_blocks');
 function uams_register_blocks() {
 
@@ -19,7 +64,7 @@ function uams_register_blocks() {
             'category'          => 'common',
             'icon'              => 'admin-links',
             'keywords'          => array('uams', 'action bar', 'links'),
-            'mode'              => 'auto',
+            'acf_block_version' => 3,
             'align'             => 'full',
             'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/action-bar.php',
@@ -31,7 +76,7 @@ function uams_register_blocks() {
             'category'          => 'common',
             'icon'              => 'megaphone',
             'keywords'          => array('uams', 'callout', 'call-out', 'text'),
-            'mode'              => 'auto',
+            'acf_block_version' => 3,
             'align'             => 'full',
             'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/call-out.php',
@@ -43,7 +88,7 @@ function uams_register_blocks() {
             'category'          => 'common',
             'icon'              => 'format-status',
             'keywords'          => array('uams', 'cta', 'call-to-action', 'call to action', 'button'),
-            'mode'              => 'auto',
+            'acf_block_version' => 3,
             'align'             => 'full',
             'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/cta.php',
@@ -55,7 +100,7 @@ function uams_register_blocks() {
             'category'          => 'common',
             'icon'              => 'images-alt2',
             'keywords'          => array('uams', 'slides', 'slideshow', 'hero'),
-            'mode'              => 'auto',
+            'acf_block_version' => 3,
             'align'             => 'full',
             'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/hero.php',
@@ -67,7 +112,7 @@ function uams_register_blocks() {
             'category'          => 'common',
             'icon'              => 'admin-links',
             'keywords'          => array('uams', 'link', 'links', 'list'),
-            'mode'              => 'auto',
+            'acf_block_version' => 3,
             'align'             => 'full',
             'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/link-list.php',
@@ -80,7 +125,7 @@ function uams_register_blocks() {
                 'category'          => 'common',
                 'icon'              => 'rss',
                 'keywords'          => array('uams', 'news', 'syndication'),
-                'mode'              => 'auto',
+                'acf_block_version' => 3,
                 'align'             => 'full',
                 'supports'          => array( 'anchor' => true ),
                 'render_template'   => 'blocks/news.php',
@@ -93,7 +138,7 @@ function uams_register_blocks() {
             'category'          => 'common',
             'icon'              => 'format-image',
             'keywords'          => array('uams', 'text', 'image', 'overlay'),
-            'mode'              => 'auto',
+            'acf_block_version' => 3,
             'align'             => 'full',
             'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/overlay.php',
@@ -105,7 +150,7 @@ function uams_register_blocks() {
         //     'category'          => 'common',
         //     'icon'              => 'screenoptions',
         //     'keywords'          => array('uams', 'news', 'posts', 'post', 'articles', 'article', 'link', 'links', 'intranet', 'inside', 'tile', 'tiles', 'sidebar', 'side bar'),
-        //     'mode'              => 'auto',
+        //     'acf_block_version' => 3,
         //     'align'             => 'full',
         //     'render_template'   => 'blocks/post-category-tile.php',
         // ));
@@ -116,7 +161,7 @@ function uams_register_blocks() {
         //     'category'          => 'common',
         //     'icon'              => 'screenoptions',
         //     'keywords'          => array('uams', 'news', 'posts', 'post', 'articles', 'article', 'link', 'links', 'intranet', 'inside', 'tile', 'tiles', 'sidebar', 'side bar'),
-        //     'mode'              => 'auto',
+        //     'acf_block_version' => 3,
         //     'align'             => 'full',
         //     'render_template'   => 'blocks/post-category-tiles.php',
         // ));
@@ -127,7 +172,7 @@ function uams_register_blocks() {
             'category'          => 'common',
             'icon'              => 'id',
             'keywords'          => array('uams', 'text', 'image', 'side'),
-            'mode'              => 'auto',
+            'acf_block_version' => 3,
             'align'             => 'full',
             'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/image-side-by-side.php',
@@ -139,7 +184,7 @@ function uams_register_blocks() {
             'category'          => 'common',
             'icon'              => 'screenoptions',
             'keywords'          => array('uams', 'text', 'image', 'stack', 'stacked'),
-            'mode'              => 'auto',
+            'acf_block_version' => 3,
             'align'             => 'full',
             'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/stacked.php',
@@ -151,7 +196,7 @@ function uams_register_blocks() {
             'category'          => 'common',
             'icon'              => 'calendar-alt',
             'keywords'          => array('uams', 'calendar', 'livewhale'),
-            'mode'              => 'auto',
+            'acf_block_version' => 3,
             'align'             => 'full',
             'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/livewhale.php',
@@ -163,7 +208,7 @@ function uams_register_blocks() {
             'category'          => 'common',
             'icon'              => 'format-gallery',
             'keywords'          => array('uams', 'gallery'),
-            'mode'              => 'auto',
+            'acf_block_version' => 3,
             'align'             => 'full',
             'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/gallery.php',
@@ -175,9 +220,9 @@ function uams_register_blocks() {
             'category'          => 'common',
             'icon'              => 'analytics',
             'keywords'          => array('uams', 'content'),
-            'mode'              => 'auto',
+            'acf_block_version' => 3,
             'align'             => 'full',
-            'supports'          => array( 'anchor' => true ),
+            'supports'          => array( 'anchor' => true, 'inserter' => false ), // Deprecated: use uams-section. Existing instances still render and edit.
             'render_template'   => 'blocks/content.php',
 		));
         acf_register_block_type(array(
@@ -187,7 +232,7 @@ function uams_register_blocks() {
             'category'          => 'common',
             'icon'              => 'clock',
             'keywords'          => array('uams', 'counter', 'list'),
-            'mode'              => 'auto',
+            'acf_block_version' => 3,
             'align'             => 'full',
             'supports'          => array( 'anchor' => true ),
             'render_template'   => 'blocks/counter.php',
@@ -199,7 +244,7 @@ function uams_register_blocks() {
         //     'category'          => 'common',
         //     'icon'              => '',
         //     'keywords'          => array('uams', 'block'),
-        //     'mode'              => 'auto',
+        //     'acf_block_version' => 3,
         //     'align'             => 'full',
         //     'render_template'   => 'blocks/block.php',
 		// ));
@@ -210,7 +255,7 @@ function uams_register_blocks() {
             'category'          => 'common',
             'icon'              => '',
             'keywords'          => array('uams', 'inner', 'block'),
-            'mode'              => 'preview',
+            'acf_block_version' => 3,
             'supports'          => [
                 'align'             => true,
                 'anchor'            => true,
@@ -219,6 +264,20 @@ function uams_register_blocks() {
             ],
             'render_template'   => 'blocks/section.php',
 		));
+        acf_register_block_type(array(
+            'name'              => 'uams-iframe',
+            'title'             => __('UAMS iFrame'),
+            'description'       => __('Embed an external page in an iframe. Administrators only.'),
+            'category'          => 'embed',
+            'icon'              => 'editor-code',
+            'keywords'          => array('uams', 'iframe', 'embed'),
+            'acf_block_version' => 3,
+            'supports'          => array(
+                'anchor' => true,
+                'align'  => array( 'wide', 'full' ),
+            ),
+            'render_template'   => 'blocks/iframe.php',
+        ));
     }
 }
 
@@ -643,3 +702,100 @@ if( function_exists('acf_add_local_field_group') ):
     ));
     
     endif;
+
+/**
+ * UAMS iFrame block fields.
+ */
+add_action( 'acf/init', 'uamswp_iframe_block_fields' );
+function uamswp_iframe_block_fields() {
+    if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+        return;
+    }
+    acf_add_local_field_group( array(
+        'key'    => 'group_block_uams_iframe',
+        'title'  => 'Block: UAMS iFrame',
+        'fields' => array(
+            array(
+                'key'          => 'field_iframe_url_b',
+                'label'        => 'URL',
+                'name'         => 'iframe_url',
+                'type'         => 'url',
+                'instructions' => 'Must be an https:// address.',
+                'required'     => 1,
+            ),
+            array(
+                'key'          => 'field_iframe_title_b',
+                'label'        => 'Title',
+                'name'         => 'iframe_title',
+                'type'         => 'text',
+                'instructions' => 'Describes the embedded content for screen reader users (e.g. "Clinic location map").',
+                'required'     => 1,
+            ),
+            array(
+                'key'           => 'field_iframe_height_b',
+                'label'         => 'Height',
+                'name'          => 'iframe_height',
+                'type'          => 'number',
+                'append'        => 'px',
+                'default_value' => 600,
+                'min'           => 100,
+                'max'           => 3000,
+            ),
+            array(
+                'key'           => 'field_iframe_fullscreen_b',
+                'label'         => 'Allow fullscreen',
+                'name'          => 'iframe_allow_fullscreen',
+                'type'          => 'true_false',
+                'ui'            => 1,
+                'default_value' => 0,
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param'    => 'block',
+                    'operator' => '==',
+                    'value'    => 'acf/uams-iframe',
+                ),
+            ),
+        ),
+        'active' => true,
+    ) );
+}
+
+/**
+ * Hosts the UAMS iFrame block may embed. Empty array = any https host.
+ * Filter to lock this down, e.g. return array( 'calendar.uams.edu', 'www.google.com' );
+ */
+function uamswp_iframe_allowed_hosts() {
+    return (array) apply_filters( 'uamswp_iframe_allowed_hosts', array() );
+}
+
+/**
+ * Validate an iframe URL: https only, and on the host allowlist when one is set.
+ */
+function uamswp_iframe_url_is_allowed( $url ) {
+    $parts = wp_parse_url( $url );
+    if ( empty( $parts['scheme'] ) || 'https' !== strtolower( $parts['scheme'] ) || empty( $parts['host'] ) ) {
+        return false;
+    }
+    $hosts = uamswp_iframe_allowed_hosts();
+    return empty( $hosts ) || in_array( strtolower( $parts['host'] ), array_map( 'strtolower', $hosts ), true );
+}
+
+add_filter( 'acf/validate_value/key=field_iframe_url_b', function( $valid, $value ) {
+    if ( true !== $valid || '' === $value ) {
+        return $valid;
+    }
+    return uamswp_iframe_url_is_allowed( $value ) ? true : __( 'Use an https:// address on an approved host.' );
+}, 10, 2 );
+
+// Only administrators can see/edit the iframe fields. Non-admins editing a page
+// that already contains the block see the preview but no fields.
+foreach ( array( 'field_iframe_url_b', 'field_iframe_title_b', 'field_iframe_height_b', 'field_iframe_fullscreen_b' ) as $uamswp_iframe_field_key ) {
+    add_filter( 'acf/prepare_field/key=' . $uamswp_iframe_field_key, function( $field ) {
+        return current_user_can( 'manage_options' ) ? $field : false;
+    } );
+}
+unset( $uamswp_iframe_field_key );
+

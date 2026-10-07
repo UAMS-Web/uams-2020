@@ -5,6 +5,11 @@
  * 
  */
 
+// Editor placeholder for a newly inserted, still-empty block (ACF Blocks V3).
+if ( uamswp_block_placeholder( $block ?? null, $is_preview ?? false ) ) {
+    return;
+}
+
 // Create id attribute allowing for custom "anchor" value.
 if (empty( $id )) {
 	$id = '';
@@ -58,7 +63,7 @@ if (!isset($geo) || empty($geo_region)){
         }
     }
 }
-if (is_admin() && !empty($geo) && !empty($geo_region)) {
+if (!empty($is_preview) && !empty($geo) && !empty($geo_region)) {
     $geo_display = true;
     echo esc_html(ucwords($geo) . ' region(s): ' . implode(', ', $geo_region)) . '<hr>';
 }
@@ -76,8 +81,12 @@ if ($geo_display) :
             </div>
             <div class="col-12 col-md-6 list">
                 <!-- Livewhale Calendar Widget -->
-                <div class="lwcw" data-options="id=<?php echo absint($livewhale); ?>&format=html"></div> 
+                <?php if ( ! empty( $is_preview ) ) : // The LiveWhale widget script doesn't run in editor previews. ?>
+                <p><em><?php echo esc_html( sprintf( __( 'LiveWhale calendar widget #%d displays here on the live page.' ), absint( $livewhale ) ) ); ?></em></p>
+                <?php else : ?>
+                <div class="lwcw" data-options="id=<?php echo absint($livewhale); ?>&format=html"></div>
                 <script type="text/javascript" id="lw_lwcw" src="https://calendar.uams.edu/livewhale/theme/core/scripts/lwcw.js"></script>
+                <?php endif; ?>
             </div>
         </div>
     </div>

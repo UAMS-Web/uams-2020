@@ -33,17 +33,17 @@ $className = array_filter( array_unique( $className ) );
 
 // NOTE: this allow-list only constrains the block editor UI (the InnerBlocks inserter).
 // It is not enforced when content is saved or created over REST. See #575.
-$allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/embed', 'core/list', 'core/quote', 'core/image', 'core/shortcode', 'core/table', 'core/file', 'gravityforms/form', 'formidable/simple-form' );
+$allowed_blocks = uamswp_section_allowed_blocks();
 
 $template = array(
 );
 ?>  
-<section class="<?php echo join( ' ', $className ); ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="<?php echo esc_attr( join( ' ', $className ) ); ?> <?php echo esc_attr( $background_color ); ?>" id="<?php echo esc_attr( $id ); ?>" aria-label="<?php echo esc_attr( $heading ); ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12<?php echo $hide_heading ? " sr-only" : ""; ?>">
                 <h2 class="module-title<?php echo $hide_heading ? " sr-only" : ""; ?>">
-                    <span class="title"><?php echo $heading; ?></span>
+                    <span class="title"><?php echo esc_html( $heading ); ?></span>
                 </h2>
             </div>
             <div class="module-body">
