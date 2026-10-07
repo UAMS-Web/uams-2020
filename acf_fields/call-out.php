@@ -1,79 +1,82 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  *
  * Call-Out Block Fields
  *
  */
-return array(
-    array(
-        'key' => 'field_call_out_intro'. $suffix,
+return [
+    [
+        'key' => 'field_call_out_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'message' => '<h2>UAMS Call-Out Block</h2>',
         'new_lines' => '',
         'esc_html' => 0,
-    ),
-    array(
-        'key' => 'field_call_out_heading'. $suffix,
+    ],
+    [
+        'key' => 'field_call_out_heading'.$suffix,
         'label' => 'Heading',
         'name' => 'call_out_heading',
         'type' => 'text',
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'default_value' => '',
         'placeholder' => '',
         'prepend' => '',
         'append' => '',
         'maxlength' => '',
-    ),
-    array(
-        'key' => 'field_call_out_body'. $suffix,
+    ],
+    [
+        'key' => 'field_call_out_body'.$suffix,
         'label' => 'Body',
         'name' => 'call_out_body',
         'type' => 'textarea',
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'default_value' => '',
         'placeholder' => '',
         'maxlength' => '',
         'rows' => '',
         'new_lines' => '',
-    ),
-    array(
-        'key' => 'field_call_out_background_color'. $suffix,
+    ],
+    [
+        'key' => 'field_call_out_background_color'.$suffix,
         'label' => 'Background Color',
         'name' => 'call_out_background_color',
         'type' => 'select',
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'choices' => array(
+        ],
+        'choices' => [
             'bg-auto' => 'Auto',
             'bg-white' => 'White',
             'bg-gray' => 'Gray',
@@ -84,57 +87,57 @@ return array(
             'bg-teal' => 'Teal',
             'bg-eggplant' => 'Eggplant',
             'bg-orange' => 'Orange',
-        ),
-        'default_value' => array(
+        ],
+        'default_value' => [
             0 => 'bg-auto',
-        ),
+        ],
         'allow_null' => 0,
         'multiple' => 0,
         'ui' => 0,
         'return_format' => 'value',
         'ajax' => 0,
         'placeholder' => '',
-    ),
-    array(
-        'key' => 'field_call_out_use_image'. $suffix,
+    ],
+    [
+        'key' => 'field_call_out_use_image'.$suffix,
         'label' => 'Use Background Image?',
         'name' => 'call_out_use_image',
         'type' => 'true_false',
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'message' => '',
         'default_value' => 0,
         'ui' => 1,
         'ui_on_text' => '',
         'ui_off_text' => '',
-    ),
-    array(
-        'key' => 'field_call_out_image'. $suffix,
+    ],
+    [
+        'key' => 'field_call_out_image'.$suffix,
         'label' => 'Image',
         'name' => 'call_out_image',
         'type' => 'image',
         'instructions' => 'Recommended image dimensions: 5120x1920. Minimum image dimensions: 1920x720. The image will be automatically cropped to a 8:3 aspect ratio.',
         'required' => 1,
-        'conditional_logic' => array(
-            array(
-                array(
-                    'field' => 'field_call_out_use_image'. $suffix,
+        'conditional_logic' => [
+            [
+                [
+                    'field' => 'field_call_out_use_image'.$suffix,
                     'operator' => '==',
                     'value' => '1',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'return_format' => 'id',
         'preview_size' => 'thumbnail',
         'library' => 'all',
@@ -145,111 +148,111 @@ return array(
         'max_height' => '',
         'max_size' => '',
         'mime_types' => '',
-    ),
-    array(
-        'key' => 'field_call_out_geo_valid'. $suffix,
+    ],
+    [
+        'key' => 'field_call_out_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => 'hidden',
             'id' => '',
-        ),
+        ],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'false' => 'False',
             'true' => 'True',
-        ),
+        ],
         'allow_null' => 0,
         'other_choice' => 0,
         'default_value' => 'false',
         'layout' => 'horizontal',
         'return_format' => 'value',
-    ),
-    array(
-        'key' => 'field_call_out_regions'. $suffix,
+    ],
+    [
+        'key' => 'field_call_out_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
         'instructions' => '',
         'required' => 0,
-        'conditional_logic' => array(
-            array(
-                array(
-                    'field' => 'field_call_out_geo_valid'. $suffix,
+        'conditional_logic' => [
+            [
+                [
+                    'field' => 'field_call_out_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'open' => 0,
         'multi_expand' => 0,
         'endpoint' => 0,
-    ),
-    array(
-		'key' => 'field_call_out_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'call_out_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => array(
-            array(
-                array(
-                    'field' => 'field_call_out_geo_valid'. $suffix,
+    ],
+    [
+        'key' => 'field_call_out_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'call_out_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
+            [
+                [
+                    'field' => 'field_call_out_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
-                ),
-            ),
-        ),
-		'wrapper' => array(
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		),
+                ],
+            ],
+        ],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'include' => 'Include',
             'exclude' => 'Exclude',
-        ),
+        ],
         'allow_null' => 0,
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
-    ),
-    array(
-		'key' => 'field_call_out_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'call_out_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => 0,
-		'wrapper' => array(
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		),
+        'return_format' => 'value',
+    ],
+    [
+        'key' => 'field_call_out_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'call_out_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'central' => 'Central',
             'northeast' => 'Northeast',
             'northwest' => 'Northwest',
             'southeast' => 'Southeast',
             'southwest' => 'Southwest',
-        ),
-        'default_value' => array(
-        ),
+        ],
+        'default_value' => [
+        ],
         'allow_null' => 0,
         'multiple' => 1,
         'ui' => 1,
@@ -258,5 +261,5 @@ return array(
         'allow_custom' => 0,
         'placeholder' => '',
         'search_placeholder' => '',
-    ),
-);
+    ],
+];

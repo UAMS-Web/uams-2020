@@ -1,107 +1,123 @@
-<?php 
+<?php
 /*
  *
  * UAMS Image Side-by-side Block
- * 
+ *
  */
 // Create id attribute allowing for custom "anchor" value.
-if (empty( $id )) {
-	$id = '';
+if (empty($id)) {
+    $id = '';
 }
-if ( empty( $id ) && isset($block) ) {
+if (empty($id) && isset($block)) {
     $id = $block['id'];
-} 
-if ( empty ($id) ) {
-    $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
+}
+if (empty($id)) {
+    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
 }
 
-$id = 'image-side-' . $id;
-if( !empty($block['anchor']) ) {
+$id = 'image-side-'.$id;
+if (! empty($block['anchor'])) {
     $id = $block['anchor'];
 }
-$id = sanitize_html_class( $id );
+$id = sanitize_html_class($id);
 
 // Create class attribute allowing for custom "className" and "align" values.
 $className = 'uams-side-by-side-block';
-if( !empty($block['className']) ) {
-    $className .= ' ' . $block['className'];
+if (! empty($block['className'])) {
+    $className .= ' '.$block['className'];
 }
-if( !empty($block['align']) ) {
-    $className .= ' align' . $block['align'];
+if (! empty($block['align'])) {
+    $className .= ' align'.$block['align'];
 }
 
 // Load values and setting defaults.
 // If values are empty => used for modules & widgets
-if ( empty($layout) ) 
+if (empty($layout)) {
     $layout = get_field('side_text_layout') ?: 'link-list';
-if ( empty($heading) ) 
+}
+if (empty($heading)) {
     $heading = get_field('side_heading') ?: 'Heading goes here...';
-$is_quote = ( $layout == 'blockquote-citation' || $layout == 'blockquote-citation-link' );
+}
+$is_quote = ($layout == 'blockquote-citation' || $layout == 'blockquote-citation-link');
 
-if ( empty($body) ){
-    if ( $layout == 'body-only' ) {
+if (empty($body)) {
+    if ($layout == 'body-only') {
         $body = get_field('side_layout_body_text') ?: 'This is where the body-only description goes';
-    } elseif ( $is_quote ) {
+    } elseif ($is_quote) {
         $body = ''; // The quote layouts show a quote and citation instead of a body.
     } else {
         $body = get_field('side_layout_link_text') ?: 'This is where the body + link list description goes';
     }
 }
 
-if ( $is_quote ) {
-    if ( empty($quote_text) )
-        $quote_text = get_field( $layout == 'blockquote-citation-link' ? 'side_quote_text_link' : 'side_quote_text' ) ?: 'This is where the quote goes';
+if ($is_quote) {
+    if (empty($quote_text)) {
+        $quote_text = get_field($layout == 'blockquote-citation-link' ? 'side_quote_text_link' : 'side_quote_text') ?: 'This is where the quote goes';
+    }
     // Strip quotation marks typed at the start or end. Curly quotes are added on output.
-    $quote_text = preg_replace( '/^[\s"\'“”‘’]+|[\s"\'“”‘’]+$/u', '', $quote_text ) ?? $quote_text;
-    if ( empty($quote_name) )
+    $quote_text = preg_replace('/^[\s"\'“”‘’]+|[\s"\'“”‘’]+$/u', '', $quote_text) ?? $quote_text;
+    if (empty($quote_name)) {
         $quote_name = get_field('side_quote_speaker_name') ?: 'Speaker name';
-    if ( empty($quote_title) )
+    }
+    if (empty($quote_title)) {
         $quote_title = get_field('side_quote_speaker_title') ?: '';
+    }
 }
 
-if ( empty($link_list) ) 
+if (empty($link_list)) {
     $link_list = get_field('side_link_list') ?: '';
-if ( empty($list_more) ) 
+}
+if (empty($list_more)) {
     $list_more = get_field('side_link_include_more') ?: '';
-if ( empty($cta) ) 
+}
+if (empty($cta)) {
     $cta = get_field('side_cta') ?: '';
+}
 // A layout that hides the button (Blockquote with Citation) saves no button fields.
-if ( ! is_array($cta) )
-    $cta = array();
-$cta += array( 'side_cta_text' => '', 'side_cta_url' => '', 'side_cta_description' => '' );
+if (! is_array($cta)) {
+    $cta = [];
+}
+$cta += ['side_cta_text' => '', 'side_cta_url' => '', 'side_cta_description' => ''];
 $cta_text = $cta['side_cta_text'] ?: '';
 $cta_link = '';
 $cta_target = '';
-if ( $cta['side_cta_url'] ) {
+if ($cta['side_cta_url']) {
     $cta_link = $cta['side_cta_url']['url'] ?: '';
     $cta_target = $cta['side_cta_url']['target'] ?: '';
 }
 $cta_desc = $cta['side_cta_description'] ?: '';
-if ( $layout == 'blockquote-citation' ) {
+if ($layout == 'blockquote-citation') {
     $cta_text = ''; // This layout has no button, even if one was saved under another layout.
 }
-if ( empty($image_group) ) 
-    $image_group = get_field('side_image')?: '';
-if ( ! is_array($image_group) )
-    $image_group = array();
-$image_group += array( 'side_image_image' => '', 'side_image_alt_text' => '', 'side_image_crop' => '', 'side_image_anchor' => '' );
+if (empty($image_group)) {
+    $image_group = get_field('side_image') ?: '';
+}
+if (! is_array($image_group)) {
+    $image_group = [];
+}
+$image_group += ['side_image_image' => '', 'side_image_alt_text' => '', 'side_image_crop' => '', 'side_image_anchor' => ''];
 $side_image = $image_group['side_image_image'] ?: '';
 $image_alt = $image_group['side_image_alt_text'] ?: '';
 $image_crop = $image_group['side_image_crop'] ?: '';
 $image_anchor = $image_group['side_image_anchor'] ?: 'center';
-if ( empty($image_postion) ) 
+if (empty($image_postion)) {
     $image_postion = get_field('side_image_position') ?: 'left';
-if ( empty($background_color) ) 
+}
+if (empty($background_color)) {
     $background_color = get_field('side_image_background_color') ?: 'bg-white';
-if ( empty($geo) )
+}
+if (empty($geo)) {
     $geo = get_field('side_image_geo');
-if ( empty($geo_region) )
+}
+if (empty($geo_region)) {
     $geo_region = get_field('side_image_geo_region');
-if ( empty($image_alt) ) 
-    $image_alt = $image_alt ? $image_alt : get_post_meta($side_image, '_wp_attachment_image_alt', true);
-$cta_target = $cta_target ? ' target="'. esc_attr($cta_target) .'"' : '';
+}
+if (empty($image_alt)) {
+    $image_alt = $image_alt ?: get_post_meta($side_image, '_wp_attachment_image_alt', true);
+}
+$cta_target = $cta_target ? ' target="'.esc_attr($cta_target).'"' : '';
 $cta_desc = $cta_desc ? ' aria-label="'.esc_attr($cta_desc).'"' : '';
-$cta_link = $cta_link ? '<a class="btn btn-primary" href="'. esc_url($cta_link) .'"' . $cta_desc . $cta_target . ' data-moduletitle="' . esc_attr($heading) . '">' : '';
+$cta_link = $cta_link ? '<a class="btn btn-primary" href="'.esc_url($cta_link).'"'.$cta_desc.$cta_target.' data-moduletitle="'.esc_attr($heading).'">' : '';
 $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1] ?? '';
 // $side_image_height = wp_get_attachment_image_src($side_image, 'full')[2];
 
@@ -115,31 +131,31 @@ $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1] ?? '';
 
 // GEO Logic
 $geo_display = false;
-if (!isset($geo) || empty($geo_region)){
+if (! isset($geo) || empty($geo_region)) {
     $geo_display = true;
 } else {
-    if( $geo == 'include' && !empty($geo_region) ) {
-        if( is_in_region($geo_region) ){
+    if ($geo == 'include' && ! empty($geo_region)) {
+        if (is_in_region($geo_region)) {
             $geo_display = true;
         }
-    } elseif( $geo == 'exclude' && !empty($geo_region) ) {
-        if ( is_not_in_region($geo_region) ){
+    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
+        if (is_not_in_region($geo_region)) {
             $geo_display = true;
         }
     }
 }
-if (is_admin() && !empty($geo) && !empty($geo_region)) {
+if (is_admin() && ! empty($geo) && ! empty($geo_region)) {
     $geo_display = true;
-    echo esc_html( ucwords($geo) ) . ' region(s): ' . esc_html( implode(', ', $geo_region) ) . '<hr>';
+    echo esc_html(ucwords($geo)).' region(s): '.esc_html(implode(', ', $geo_region)).'<hr>';
 }
-if ($geo_display) :
-?>
+if ($geo_display) {
+    ?>
 <section class="uams-module no-padding side-by-side <?php echo esc_attr($className); ?> image-on-<?php echo esc_attr($image_postion); ?> image-background-<?php echo esc_attr($image_anchor); ?> <?php echo esc_attr($background_color); ?>" id="side-by-side-<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 image-container" aria-label="<?php echo esc_attr($image_alt) ?>" role="img">
 
-                <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>
+                <?php if (function_exists('bis_get_attachment_image')) { ?>
                 <style>
                     #side-by-side-<?php echo esc_attr($id); ?> .image-container {
                         background-image: url("<?php echo image_sizer($side_image, 576, 324, $image_anchor, $image_crop, 'aspect-16-9-small'); ?>");
@@ -190,59 +206,59 @@ if ($geo_display) :
                 <?php } else { ?>
                 <style>
                     #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                        background-image: url("<?php echo wp_get_attachment_url( $side_image, 'aspect-16-9' ); ?>");
+                        background-image: url("<?php echo wp_get_attachment_url($side_image, 'aspect-16-9'); ?>");
                     }
                 </style>
-                <?php } //endif ?>
+                <?php } // endif?>
                 <div class="image-inner-container">
                 </div>
             </div>
             <div class="col-12 col-md-6 text-container">
                 <div class="text-inner-container">
                     <h2 class="h3"><?php echo esc_html($heading); ?></h2>
-                    <?php echo !empty($body) ? '<p>' . esc_html($body) . '</p>' : ''; ?>
-                    <?php if ( $is_quote ) : ?>
+                    <?php echo ! empty($body) ? '<p>'.esc_html($body).'</p>' : ''; ?>
+                    <?php if ($is_quote) { ?>
                     <figure>
                         <blockquote>
-                            <p>“<?php echo esc_html( $quote_text ); ?>”</p>
+                            <p>“<?php echo esc_html($quote_text); ?>”</p>
                         </blockquote>
                         <figcaption class="blockquote-footer">
-                            <?php echo esc_html( $quote_name ); ?><?php if ( $quote_title ) : ?><br>
-                            <?php echo esc_html( $quote_title ); ?><?php endif; ?>
+                            <?php echo esc_html($quote_name); ?><?php if ($quote_title) { ?><br>
+                            <?php echo esc_html($quote_title); ?><?php } ?>
 
                         </figcaption>
                     </figure>
-                    <?php endif; ?>
-                    <?php if ($layout == 'link-list' && $link_list): ?>
+                    <?php } ?>
+                    <?php if ($layout == 'link-list' && $link_list) { ?>
                     <ul>
-                        <?php foreach( $link_list as $link ) {
+                        <?php foreach ($link_list as $link) {
                             $list_text = $link['side_link_list_text'];
                             $list_url = $link['side_link_list_url']['url'] ?? null;
                             $list_desc = $link['side_link_list_description'];
-                        ?>
+                            ?>
                         <li>
-                            <?php if( $list_url ): ?>
-                            <a href="<?php echo esc_url($list_url); ?>"<?php echo $list_desc ? ' aria-label="' . esc_attr($list_desc) . '"' : ''; ?> data-moduletitle="<?php echo esc_attr($heading); ?>">
-                            <?php endif; ?>
-                            <?php if( $list_text ): ?>
+                            <?php if ($list_url) { ?>
+                            <a href="<?php echo esc_url($list_url); ?>"<?php echo $list_desc ? ' aria-label="'.esc_attr($list_desc).'"' : ''; ?> data-moduletitle="<?php echo esc_attr($heading); ?>">
+                            <?php } ?>
+                            <?php if ($list_text) { ?>
                                 <?php echo esc_html($list_text); ?>
-                            <?php endif; ?>
-                            <?php if( $list_url ): ?>
+                            <?php } ?>
+                            <?php if ($list_url) { ?>
                             </a>
-                            <?php endif; ?>
+                            <?php } ?>
                         </li>
-                        <?php } //end foreach ?>
+                        <?php } // end foreach?>
                         <?php echo $list_more ? '<li><em>and more</em></li>' : ''; ?>
                     </ul>
-                    <?php endif;
-                        if( $cta_text ){
-                            echo $cta_link;
-                            echo $cta_text ? esc_html($cta_text) : 'Learn More';
-                            echo '</a>';
-                        } ?>
+                    <?php }
+                    if ($cta_text) {
+                        echo $cta_link;
+                        echo $cta_text ? esc_html($cta_text) : 'Learn More';
+                        echo '</a>';
+                    } ?>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<?php endif;
+<?php }

@@ -1,0 +1,367 @@
+parameters:
+	ignoreErrors:
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 5
+			path: blocks/action-bar.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 7
+			path: blocks/call-out.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 6
+			path: blocks/content.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 7
+			path: blocks/counter.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 17
+			path: blocks/cta.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 15
+			path: blocks/gallery.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 3
+			path: blocks/hero.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 15
+			path: blocks/image-side-by-side.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 8
+			path: blocks/link-list-2.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 6
+			path: blocks/link-list.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 5
+			path: blocks/livewhale.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 17
+			path: blocks/news.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 3
+			path: blocks/overlay.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 8
+			path: blocks/post-category-tile.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 6
+			path: blocks/post-category-tiles.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 3
+			path: blocks/section.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 12
+			path: blocks/stacked.php
+
+		-
+			rawMessage: Function bis_get_attachment_image_src not found.
+			identifier: function.notFound
+			count: 1
+			path: functions.php
+
+		-
+			rawMessage: Function genesis_a11y not found.
+			identifier: function.notFound
+			count: 1
+			path: functions.php
+
+		-
+			rawMessage: Function genesis_nav_menu_supported not found.
+			identifier: function.notFound
+			count: 1
+			path: functions.php
+
+		-
+			rawMessage: Function genesis_site_layout not found.
+			identifier: function.notFound
+			count: 2
+			path: functions.php
+
+		-
+			rawMessage: Function genesis_skiplinks_markup not found.
+			identifier: function.notFound
+			count: 1
+			path: functions.php
+
+		-
+			rawMessage: Function genesis not found.
+			identifier: function.notFound
+			count: 1
+			path: home.php
+
+		-
+			rawMessage: 'Callback expects 1 parameter, $accepted_args is set to 3.'
+			identifier: arguments.count
+			count: 1
+			path: lib/bootstrap.php
+
+		-
+			rawMessage: Function genesis_site_layout not found.
+			identifier: function.notFound
+			count: 1
+			path: lib/bootstrap.php
+
+		-
+			rawMessage: 'Callback expects 1 parameter, $accepted_args is set to 2.'
+			identifier: arguments.count
+			count: 1
+			path: lib/breadcrumb.php
+
+		-
+			rawMessage: Function genesis_attr not found.
+			identifier: function.notFound
+			count: 1
+			path: lib/breadcrumb.php
+
+		-
+			rawMessage: 'Callback expects 1 parameter, $accepted_args is set to 2.'
+			identifier: arguments.count
+			count: 3
+			path: lib/extras.php
+
+		-
+			rawMessage: Function genesis_markup not found.
+			identifier: function.notFound
+			count: 2
+			path: lib/extras.php
+
+		-
+			rawMessage: Function genesis_markup not found.
+			identifier: function.notFound
+			count: 1
+			path: lib/footer-widgets.php
+
+		-
+			rawMessage: Function genesis_structural_wrap not found.
+			identifier: function.notFound
+			count: 2
+			path: lib/footer-widgets.php
+
+		-
+			rawMessage: Filter callback return statement is missing.
+			identifier: return.missing
+			count: 1
+			path: lib/footer.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 8
+			path: lib/footer.php
+
+		-
+			rawMessage: Function genesis_set_default_layout not found.
+			identifier: function.notFound
+			count: 1
+			path: lib/misc.php
+
+		-
+			rawMessage: Function genesis_unregister_layout not found.
+			identifier: function.notFound
+			count: 4
+			path: lib/misc.php
+
+		-
+			rawMessage: Function lyte_parse not found.
+			identifier: function.notFound
+			count: 1
+			path: lib/modules.php
+
+		-
+			rawMessage: Function genesis_markup not found.
+			identifier: function.notFound
+			count: 2
+			path: lib/nav.php
+
+		-
+			rawMessage: Function uamswp_wp_list_child_pages not found.
+			identifier: function.notFound
+			count: 1
+			path: lib/nav.php
+
+		-
+			rawMessage: Function uamswp_wp_list_pages not found.
+			identifier: function.notFound
+			count: 1
+			path: lib/nav.php
+
+		-
+			rawMessage: 'Inner named functions are not supported by PHPStan. Consider refactoring to an anonymous function, class method, or a top-level-defined function. See issue #165 (https://github.com/phpstan/phpstan/issues/165) for more details.'
+			identifier: function.inner
+			count: 2
+			path: lib/nav.php
+
+		-
+			rawMessage: Instantiated class WP_Bootstrap_Navwalker not found.
+			identifier: class.notFound
+			count: 1
+			path: lib/nav.php
+
+		-
+			rawMessage: Instantiated class WP_Bootstrap_Pagewalker not found.
+			identifier: class.notFound
+			count: 2
+			path: lib/nav.php
+
+		-
+			rawMessage: 'Result of function wp_list_pages (void) is used.'
+			identifier: function.void
+			count: 2
+			path: lib/nav.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 12
+			path: lib/page.php
+
+		-
+			rawMessage: 'Result of function uamswp_list_child_posts (void) is used.'
+			identifier: function.void
+			count: 1
+			path: lib/page.php
+
+		-
+			rawMessage: Function genesis_get_option not found.
+			identifier: function.notFound
+			count: 2
+			path: lib/pagination.php
+
+		-
+			rawMessage: Function tgmpa not found.
+			identifier: function.notFound
+			count: 1
+			path: lib/tgm.php
+
+		-
+			rawMessage: 'Undefined variable: $role'
+			identifier: variable.undefined
+			count: 1
+			path: lib/users.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 15
+			path: lib/widgets.php
+
+		-
+			rawMessage: Function genesis not found.
+			identifier: function.notFound
+			count: 1
+			path: page_archive.php
+
+		-
+			rawMessage: Function genesis_a11y not found.
+			identifier: function.notFound
+			count: 1
+			path: page_archive.php
+
+		-
+			rawMessage: Function genesis_sitemap not found.
+			identifier: function.notFound
+			count: 1
+			path: page_archive.php
+
+		-
+			rawMessage: Function genesis not found.
+			identifier: function.notFound
+			count: 1
+			path: page_blog.php
+
+		-
+			rawMessage: Function genesis not found.
+			identifier: function.notFound
+			count: 1
+			path: search.php
+
+		-
+			rawMessage: Function genesis_posts_nav not found.
+			identifier: function.notFound
+			count: 5
+			path: search.php
+
+		-
+			rawMessage: Function genesis_standard_loop not found.
+			identifier: function.notFound
+			count: 1
+			path: search.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 4
+			path: search.php
+
+		-
+			rawMessage: Function genesis not found.
+			identifier: function.notFound
+			count: 1
+			path: templates/marketing.php
+
+		-
+			rawMessage: Function get_field not found.
+			identifier: function.notFound
+			count: 2
+			path: templates/marketing.php
+
+		-
+			rawMessage: Function genesis not found.
+			identifier: function.notFound
+			count: 1
+			path: templates/modules.php
+
+		-
+			rawMessage: Function genesis not found.
+			identifier: function.notFound
+			count: 1
+			path: templates/page_landing.php
