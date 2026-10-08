@@ -1,85 +1,88 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  *
  * Counter List Fields
- * 
+ *
  */
-return array(
-    array(
-        'key' => 'field_counter_list_intro'. $suffix,
+return [
+    [
+        'key' => 'field_counter_list_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'message' => '<h2>Counter List</h2>',
         'new_lines' => '',
         'esc_html' => 0,
-    ),
-    array(
-        'key' => 'field_counter_list_heading'. $suffix,
+    ],
+    [
+        'key' => 'field_counter_list_heading'.$suffix,
         'label' => 'Heading',
         'name' => 'counter_list_heading',
         'type' => 'text',
         'instructions' => 'Even if this heading is hidden, it is necessary for accessibility.',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'default_value' => '',
         'placeholder' => '',
         'prepend' => '',
         'append' => '',
         'maxlength' => '',
-    ),
-    array(
-        'key' => 'field_counter_list_hide_heading'. $suffix,
+    ],
+    [
+        'key' => 'field_counter_list_hide_heading'.$suffix,
         'label' => 'Hide Heading?',
         'name' => 'counter_list_hide_heading',
         'type' => 'true_false',
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'message' => '',
         'default_value' => 0,
         'ui' => 1,
         'ui_on_text' => '',
         'ui_off_text' => '',
-    ),
-    array(
-        'key' => 'field_counter_list_description'. $suffix,
+    ],
+    [
+        'key' => 'field_counter_list_description'.$suffix,
         'label' => 'Counter List Description',
         'name' => 'counter_list_description',
         'type' => 'textarea',
         'instructions' => 'This has a 518-character limit, but the recommended number of characters is 317 or fewer.',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'default_value' => '',
         'placeholder' => '',
         'maxlength' => 518,
         'rows' => 3,
         'new_lines' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_counter_list_start',
         'label' => 'Starting Date/Time',
         'name' => 'counter_list_start',
@@ -87,68 +90,68 @@ return array(
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'choices' => array(
+        ],
+        'choices' => [
             'day' => 'Beginning of today',
             'week' => 'Beginning of this week (Sunday)',
             'month' => 'Beginning of this month',
             'year' => 'Beginning of this year',
             'custom' => 'Custom Date/Time',
-            //'user' => 'User Input Date/Time',
-        ),
-        'default_value' => array(
+            // 'user' => 'User Input Date/Time',
+        ],
+        'default_value' => [
             0 => 'day',
-        ),
+        ],
         'allow_null' => 0,
         'multiple' => 0,
         'ui' => 0,
         'return_format' => 'value',
         'ajax' => 0,
         'placeholder' => '',
-    ),
-    array(
+    ],
+    [
         'key' => 'field_counter_list_start_custom',
         'label' => 'Custom Starting Date/Time',
         'name' => 'counter_list_start_custom',
         'type' => 'date_time_picker',
         'instructions' => '',
         'required' => 0,
-        'conditional_logic' => array(
-            array(
-                array(
+        'conditional_logic' => [
+            [
+                [
                     'field' => 'field_counter_list_start',
                     'operator' => '==',
                     'value' => 'custom',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'display_format' => 'Y-m-d H:i:s',
         'return_format' => 'Y-m-d H:i:s',
         'first_day' => 0,
-    ),
-    array(
-        'key' => 'field_counter_list_background_color'. $suffix,
+    ],
+    [
+        'key' => 'field_counter_list_background_color'.$suffix,
         'label' => 'Background Color',
         'name' => 'counter_list_background_color',
         'type' => 'select',
         'instructions' => '',
         'required' => 1,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'choices' => array(
+        ],
+        'choices' => [
             'bg-auto' => 'Auto',
             'bg-white' => 'White',
             'bg-gray' => 'Gray',
@@ -159,17 +162,17 @@ return array(
             'bg-teal' => 'Teal',
             'bg-eggplant' => 'Eggplant',
             'bg-orange' => 'Orange',
-        ),
-        'default_value' => array(
+        ],
+        'default_value' => [
             0 => 'bg-auto',
-        ),
+        ],
         'allow_null' => 0,
         'multiple' => 0,
         'ui' => 0,
         'return_format' => 'value',
         'ajax' => 0,
         'placeholder' => '',
-    ),
+    ],
     // array(
     //     'key' => 'field_counter_list_icons'. $suffix,
     //     'label' => 'Include Icons?',
@@ -189,95 +192,95 @@ return array(
     //     'ui_on_text' => '',
     //     'ui_off_text' => '',
     // ),
-    array(
-        'key' => 'field_counter_list_section'. $suffix,
+    [
+        'key' => 'field_counter_list_section'.$suffix,
         'label' => 'Counter Items',
         'name' => 'counter_list_section',
         'type' => 'repeater',
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
-        'collapsed' => 'field_counter_list_section_title'. $suffix,
+        ],
+        'collapsed' => 'field_counter_list_section_title'.$suffix,
         'min' => 1,
         'max' => 0,
         'layout' => 'block',
         'button_label' => 'Add Counter Item',
-        'sub_fields' => array(
-            array(
-                'key' => 'field_counter_list_section_title'. $suffix,
+        'sub_fields' => [
+            [
+                'key' => 'field_counter_list_section_title'.$suffix,
                 'label' => 'Counter Item Title',
                 'name' => 'counter_list_section_title',
                 'type' => 'text',
                 'instructions' => '',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '',
-            ),
-            array(
-                'key' => 'field_counter_list_section_unit'. $suffix,
+            ],
+            [
+                'key' => 'field_counter_list_section_unit'.$suffix,
                 'label' => 'Counter Item Unit Singular',
                 'name' => 'counter_list_section_unit',
                 'type' => 'text',
                 'instructions' => 'This is the text displayed after the number, if the number is 1.',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => 90,
-            ),
-            array(
-                'key' => 'field_counter_list_section_units'. $suffix,
+            ],
+            [
+                'key' => 'field_counter_list_section_units'.$suffix,
                 'label' => 'Counter Item Unit Plural',
                 'name' => 'counter_list_section_units',
                 'type' => 'text',
                 'instructions' => 'This is the text displayed after the number, if the number is not 1.',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => 90,
-            ),
-            array(
-                'key' => 'field_counter_list_section_rate'. $suffix,
+            ],
+            [
+                'key' => 'field_counter_list_section_rate'.$suffix,
                 'label' => 'Rate of Increase',
                 'name' => 'counter_list_section_rate',
                 'type' => 'number',
                 'instructions' => 'Enter the amount the counter should increase in one second.',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
@@ -285,8 +288,8 @@ return array(
                 'min' => '',
                 'max' => '',
                 'step' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_counter_list_section_start_inherit',
                 'label' => 'Inherit Date/Time?',
                 'name' => 'counter_list_section_start_inherit',
@@ -294,80 +297,80 @@ return array(
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'message' => '',
                 'default_value' => 1,
                 'ui' => 1,
                 'ui_on_text' => '',
                 'ui_off_text' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_counter_list_section_start_override',
                 'label' => 'Starting Date/Time',
                 'name' => 'counter_list_section_start_override',
                 'type' => 'select',
                 'instructions' => '',
                 'required' => 1,
-                'conditional_logic' => array(
-                    array(
-                        array(
+                'conditional_logic' => [
+                    [
+                        [
                             'field' => 'field_counter_list_section_start_inherit',
                             'operator' => '==',
                             'value' => '0',
-                        ),
-                    ),
-                ),
-                'wrapper' => array(
+                        ],
+                    ],
+                ],
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
-                'choices' => array(
+                ],
+                'choices' => [
                     'day' => 'Beginning of today',
                     'week' => 'Beginning of this week (Sunday)',
                     'month' => 'Beginning of this month',
                     'year' => 'Beginning of this year',
                     'custom' => 'Custom Date/Time',
-                ),
-                'default_value' => array(
+                ],
+                'default_value' => [
                     0 => 'day',
-                ),
+                ],
                 'allow_null' => 0,
                 'multiple' => 0,
                 'ui' => 0,
                 'return_format' => 'value',
                 'ajax' => 0,
                 'placeholder' => '',
-            ),
-            array(
+            ],
+            [
                 'key' => 'field_counter_list_section_start_custom',
                 'label' => 'Custom Starting Date/Time',
                 'name' => 'counter_list_section_start_custom',
                 'type' => 'date_time_picker',
                 'instructions' => '',
                 'required' => 1,
-                'conditional_logic' => array(
-                    array(
-                        array(
+                'conditional_logic' => [
+                    [
+                        [
                             'field' => 'field_counter_list_section_start_override',
                             'operator' => '==',
                             'value' => 'custom',
-                        ),
-                    ),
-                ),
-                'wrapper' => array(
+                        ],
+                    ],
+                ],
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'display_format' => 'Y-m-d H:i:s',
                 'return_format' => 'Y-m-d H:i:s',
                 'first_day' => 0,
-            ),
+            ],
             // array(
             //     'key' => 'field_counter_list_section_icon'. $suffix,
             //     'label' => 'Icon Class',
@@ -387,6 +390,6 @@ return array(
             //     'append' => '',
             //     'maxlength' => '',
             // ),
-        ),
-    ),
-);
+        ],
+    ],
+];

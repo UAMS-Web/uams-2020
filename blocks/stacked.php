@@ -2,32 +2,32 @@
 /*
  *
  * UAMS Stacked Image & Text Block
- * 
+ *
  */
 
 // Create id attribute allowing for custom "anchor" value.
-if (empty( $id )) {
-	$id = '';
+if (empty($id)) {
+    $id = '';
 }
-if ( empty( $id ) && isset($block) ) {
+if (empty($id) && isset($block)) {
     $id = $block['id'];
-} 
-if ( empty ($id) ) {
-    $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
-} 
+}
+if (empty($id)) {
+    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+}
 
-$id = 'stacked-image-text-' .  $id;
-if( !empty($block['anchor']) ) {
+$id = 'stacked-image-text-'.$id;
+if (! empty($block['anchor'])) {
     $id = $block['anchor'];
 }
 
 $className = '';
-if( !empty($block['className']) ) {
-    $className .= ' ' . $block['className'];
+if (! empty($block['className'])) {
+    $className .= ' '.$block['className'];
 }
-if( !empty($block['align']) ) {
-    $className .= ' align' . $block['align'];
-}   
+if (! empty($block['align'])) {
+    $className .= ' align'.$block['align'];
+}
 
 // PHP variables
 $more_text = '';
@@ -36,132 +36,139 @@ $more_button_url = '';
 $more_button_target = '';
 
 // Load values.
-if ( empty($heading) )
+if (empty($heading)) {
     $heading = get_field('stacked_heading');
-if ( empty($hide_heading) )
+}
+if (empty($hide_heading)) {
     $hide_heading = get_field('stacked_hide_heading');
-if ( empty($description) )
+}
+if (empty($description)) {
     $description = get_field('stacked_description');
-if ( empty($background_color) )
+}
+if (empty($background_color)) {
     $background_color = get_field('stacked_background_color');
-if ( empty($more) )
+}
+if (empty($more)) {
     $more = get_field('stacked_more');
-if ( $more ) {
-    if ( empty($more_text) )
-        $more_text = get_field('stacked_more_text');
-    if ( empty($more_button_text) )
-        $more_button_text = get_field('stacked_more_button_text');
-    if ( empty($more_button_url) )
-        $more_button_url = get_field('stacked_more_button_url');
-    if ( empty($more_button_target) && is_array($more_button_url) )
+}
+if ($more) {
+    $more_text = get_field('stacked_more_text');
+    $more_button_text = get_field('stacked_more_button_text');
+    $more_button_url = get_field('stacked_more_button_url');
+    if (is_array($more_button_url)) {
         $more_button_target = $more_button_url['target'];
-    if ( empty($more_button_description) )
+    }
+    if (empty($more_button_description)) {
         $more_button_description = get_field('stacked_more_button_description');
-    if ( empty($more_button_color) && ( $background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto' ) ) {
+    }
+    if (empty($more_button_color) && (in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto']))) {
         $more_button_color = 'primary';
     } else {
         $more_button_color = 'white';
     }
 }
-if ( empty($geo) )
+if (empty($geo)) {
     $geo = get_field('stacked_geo');
-if ( empty($geo_region) )
+}
+if (empty($geo_region)) {
     $geo_region = get_field('stacked_geo_region');
-if ( empty($stacked_rows) )
+}
+if (empty($stacked_rows)) {
     $stacked_rows = get_field('stacked_section');
+}
 
 // GEO Logic
 $geo_display = false;
-if (!isset($geo) || empty($geo_region)){
+if (! isset($geo) || empty($geo_region)) {
     $geo_display = true;
 } else {
-    if( $geo == 'include' && !empty($geo_region) ) {
-        if( is_in_region($geo_region) ){
+    if ($geo == 'include' && ! empty($geo_region)) {
+        if (is_in_region($geo_region)) {
             $geo_display = true;
         }
-    } elseif( $geo == 'exclude' && !empty($geo_region) ) {
-        if ( is_not_in_region($geo_region) ){
+    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
+        if (is_not_in_region($geo_region)) {
             $geo_display = true;
         }
     }
 }
-if (is_admin() && !empty($geo) && !empty($geo_region)) {
+if (is_admin() && ! empty($geo) && ! empty($geo_region)) {
     $geo_display = true;
-    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
+    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
 }
 if ($geo_display) {
 
-if( $stacked_rows ) :
-    $row_count = count($stacked_rows); // Not user, but just in case
+    if ($stacked_rows) {
+        $row_count = count($stacked_rows); // Not user, but just in case
 
-?>
+        ?>
 <section class="uams-module stacked-image-text<?php echo esc_attr($className); ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12<?php echo ($hide_heading && empty($description)) ? " sr-only" : ""; ?>">
-                <h2 class="module-title<?php echo ($hide_heading && $description) ? " sr-only" : ""; ?>">
+            <div class="col-12<?php echo ($hide_heading && empty($description)) ? ' sr-only' : ''; ?>">
+                <h2 class="module-title<?php echo ($hide_heading && $description) ? ' sr-only' : ''; ?>">
                     <span class="title"><?php echo esc_html($heading); ?></span>
                 </h2>
-                <?php echo $description ? '<div class="module-description"><p>'. esc_html($description) .'</p></div>' : ''; ?>
+                <?php echo $description ? '<div class="module-description"><p>'.esc_html($description).'</p></div>' : ''; ?>
             </div>
             <div class="col-12">
                 <div class="card-list card-list-left">
-                    <?php 
-                        foreach($stacked_rows as $stacked_row) {
-                        // Load values.
-                        $image = $stacked_row['stacked_section_image'];
-                        $image_alt_native = get_post_meta($image, '_wp_attachment_image_alt', TRUE);
-                        $image_alt_override = $stacked_row['stacked_section_alt_override'];
-                        $item_heading = $stacked_row['stacked_section_heading'];
-                        $body = $stacked_row['stacked_section_body'];
-                        $button_text = $stacked_row['stacked_section_button_text'];
-                        if ( $stacked_row['stacked_section_button_url'] ) {
-                            $button_url = $stacked_row['stacked_section_button_url']['url'];
-                            $button_target = $stacked_row['stacked_section_button_url']['target'];
-                        }
-                        $button_desc = $stacked_row['stacked_section_button_description'];
+                    <?php
+                                foreach ($stacked_rows as $stacked_row) {
+                                    // Load values.
+                                    $image = $stacked_row['stacked_section_image'];
+                                    $image_alt_native = get_post_meta($image, '_wp_attachment_image_alt', true);
+                                    $image_alt_override = $stacked_row['stacked_section_alt_override'];
+                                    $item_heading = $stacked_row['stacked_section_heading'];
+                                    $body = $stacked_row['stacked_section_body'];
+                                    $button_text = $stacked_row['stacked_section_button_text'];
+                                    if ($stacked_row['stacked_section_button_url']) {
+                                        $button_url = $stacked_row['stacked_section_button_url']['url'];
+                                        $button_target = $stacked_row['stacked_section_button_url']['target'];
+                                    }
+                                    $button_desc = $stacked_row['stacked_section_button_description'];
 
-                    ?>
+                                    ?>
                         <div class="item">
                             <div class="card">
                                 <div class="card-img-top">
                                     <picture>
-                                        <?php if ( function_exists( 'bis_get_attachment_image' ) ) { ?>  
+                                        <?php if (function_exists('bis_get_attachment_image')) { ?>  
                                             <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 1921px)">
                                             <source srcset="<?php echo image_sizer($image, 433, 244, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 1500px)">
                                             <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 992px)">
                                             <source srcset="<?php echo image_sizer($image, 433, 244, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 768px)">
                                             <source srcset="<?php echo image_sizer($image, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 1px)">
                                             <!-- Fallback -->
-                                            <img src="<?php echo image_sizer($image, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" alt="<?php echo esc_attr( $image_alt_override ? $image_alt_override : $image_alt_native ); ?>" />
+                                            <img src="<?php echo image_sizer($image, 455, 256, 'center', 'center', 'aspect-16-9-small'); ?>" alt="<?php echo esc_attr($image_alt_override ?: $image_alt_native); ?>" />
                                         <?php } else { ?>
                                             <!-- Fallback -->
-                                            <img src="<?php echo wp_get_attachment_image_url( $image, 'aspect-16-9-small' ); ?>" alt="<?php echo esc_attr( $image_alt_override ? $image_alt_override : $image_alt_native ); ?>" />
-                                        <?php } //endif ?>
+                                            <img src="<?php echo wp_get_attachment_image_url($image, 'aspect-16-9-small'); ?>" alt="<?php echo esc_attr($image_alt_override ?: $image_alt_native); ?>" />
+                                        <?php } // endif?>
                                     </picture>
                                 </div>
                                 <div class="card-body">
                                     <h3 class="card-title h5"><?php echo esc_html($item_heading); ?></h3>
                                     <p class="card-text"><?php echo esc_html($body); ?></p>
-                                    <?php if ( $button_text ) { ?>  
-                                        <a href="<?php echo esc_url($button_url); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo esc_attr($button_desc); ?>"<?php echo $button_target ? ' target="'. esc_attr($button_target) .'"' : ''; ?> data-moduletitle="<?php echo esc_attr($heading); ?>" data-itemtitle="<?php echo esc_attr($item_heading); ?>"><?php echo esc_html($button_text); ?></a>
-                                    <?php } //endif ?>
+                                    <?php if ($button_text) { ?>  
+                                        <a href="<?php echo esc_url($button_url); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo esc_attr($button_desc); ?>"<?php echo $button_target ? ' target="'.esc_attr($button_target).'"' : ''; ?> data-moduletitle="<?php echo esc_attr($heading); ?>" data-itemtitle="<?php echo esc_attr($item_heading); ?>"><?php echo esc_html($button_text); ?></a>
+                                    <?php } // endif?>
                                 </div>
                             </div>
                         </div>
-                    <?php } // end foreach ?>
+                    <?php } // end foreach?>
                 </div>
             </div>
-            <?php if ( $more ) { ?>
+            <?php if ($more) { ?>
                 <div class="col-12 more">
                     <p class="lead"><?php echo $more_text; ?></p>
                     <div class="cta-container">
-                        <a href="<?php echo $more_button_url['url'] ?? ''; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'. $more_button_target . '"' : '' ?>><?php echo $more_button_text; ?></a>
+                        <a href="<?php echo $more_button_url['url'] ?? ''; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'.$more_button_target.'"' : '' ?>><?php echo $more_button_text; ?></a>
                     </div>
                 </div>
-            <?php } // endif ?>
+            <?php } // endif?>
         </div>
     </div>
 </section>
-<?php endif;
-}
+<?php }
+    }

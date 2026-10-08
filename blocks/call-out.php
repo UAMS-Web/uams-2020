@@ -6,70 +6,77 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-if (empty( $id )) {
-	$id = '';
+if (empty($id)) {
+    $id = '';
 }
-if ( empty( $id ) && isset($block) ) {
+if (empty($id) && isset($block)) {
     $id = $block['id'];
 }
-if ( empty ($id) ) {
-    $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
+if (empty($id)) {
+    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
 }
 
-$id = 'call-out-' . $id;
-if( !empty($block['anchor']) ) {
+$id = 'call-out-'.$id;
+if (! empty($block['anchor'])) {
     $id = $block['anchor'];
 }
 
 $className = '';
-if( !empty($block['className']) ) {
-    $className .= ' ' . $block['className'];
+if (! empty($block['className'])) {
+    $className .= ' '.$block['className'];
 }
-if( !empty($block['align']) ) {
-    $className .= ' align' . $block['align'];
+if (! empty($block['align'])) {
+    $className .= ' align'.$block['align'];
 }
 
 // Load values.
-if ( empty($heading) )
+if (empty($heading)) {
     $heading = get_field('call_out_heading');
-if ( empty($body) )
+}
+if (empty($body)) {
     $body = get_field('call_out_body');
-if ( empty($use_image) )
+}
+if (empty($use_image)) {
     $use_image = get_field('call_out_use_image');
-if ( empty($image) )
+}
+if (empty($image)) {
     $image = get_field('call_out_image');
-if ( empty($background_color) )
+}
+if (empty($background_color)) {
     $background_color = get_field('call_out_background_color');
-if ( empty($geo) )
+}
+if (empty($geo)) {
     $geo = get_field('call_out_geo');
-if ( empty($geo_region) )
+}
+if (empty($geo_region)) {
     $geo_region = get_field('call_out_geo_region');
+}
 
 // echo '<!-- '; print_r($geo); echo ' -->';
 // echo '<!-- ' . do_shortcode( '[geot_debug]' ) . ' -->';
 // GEO Logic
 $geo_display = false;
-if (!isset($geo) || empty($geo_region)){
+if (! isset($geo) || empty($geo_region)) {
     $geo_display = true;
 } else {
-    if( $geo == 'include' && !empty($geo_region) ) {
-        if( is_in_region($geo_region) ){
+    if ($geo == 'include' && ! empty($geo_region)) {
+        if (is_in_region($geo_region)) {
             $geo_display = true;
         }
-    } elseif( $geo == 'exclude' && !empty($geo_region) ) {
-        if ( is_not_in_region($geo_region) ){
+    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
+        if (is_not_in_region($geo_region)) {
             $geo_display = true;
         }
     }
 }
-if (is_admin() && !empty($geo) && !empty($geo_region)) {
+if (is_admin() && ! empty($geo) && ! empty($geo_region)) {
     $geo_display = true;
-    echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
+    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
 }
-if ($geo_display) : 
-?>
+if ($geo_display) {
+    ?>
     <section class="uams-module extra-padding call-out<?php echo esc_attr($className); ?> <?php echo esc_attr($background_color); ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
-        <?php if ( $use_image && function_exists( 'bis_get_attachment_image' ) ) { ?>
+        <?php if ($use_image && function_exists('bis_get_attachment_image')) { ?>
         <style>
             #<?php echo esc_attr($id); ?>:before {
                 background-image: url("<?php echo image_sizer($image, 576, 216, 'center', 'center', 'aspect-8-3'); ?>");
@@ -117,13 +124,13 @@ if ($geo_display) :
                 }
             }
         </style>
-        <?php } elseif ( $use_image ) { ?>
+        <?php } elseif ($use_image) { ?>
         <style>
             #<?php echo esc_attr($id); ?>:before {
-                background-image: url("<?php echo wp_get_attachment_url( $image, 'aspect-8-3' ); ?>");
+                background-image: url("<?php echo wp_get_attachment_url($image, 'aspect-8-3'); ?>");
             }
         </style>
-        <?php } //endif ?>
+        <?php } // endif?>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -139,4 +146,4 @@ if ($geo_display) :
             </div>
         </div>
     </section>
-<?php endif;
+<?php }
