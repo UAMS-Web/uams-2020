@@ -5,6 +5,11 @@
  * 
  */
 
+// Editor placeholder for a newly inserted, still-empty block (ACF Blocks V3).
+if ( uamswp_block_placeholder( $block ?? null, $is_preview ?? false ) ) {
+    return;
+}
+
 // Create id attribute allowing for custom "anchor" value.
 if (empty( $id )) {
 	$id = '';
@@ -117,7 +122,7 @@ if (!isset($geo) || empty($geo_region)){
         }
     }
 }
-if (is_admin() && !empty($geo) && !empty($geo_region)) {
+if (!empty($is_preview) && !empty($geo) && !empty($geo_region)) {
     $geo_display = true;
     echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
 }
