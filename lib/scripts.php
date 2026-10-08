@@ -135,10 +135,24 @@ function add_allowed_origins($origins) {
  *
  */
 function uamswp_gutenberg_scripts() {
-	wp_enqueue_style( 'theme-fonts', uamswp_theme_fonts_url() );
 	wp_enqueue_script( 'theme-editor', get_stylesheet_directory_uri() . '/assets/js/editor.js', array( 'wp-blocks', 'wp-dom' ), filemtime( get_stylesheet_directory() . '/assets/js/editor.js' ), true );
+	// Loaded in the head (not footer) so the transform filter exists before ACF registers its blocks.
+	wp_enqueue_script( 'uamswp-content-transform', get_stylesheet_directory_uri() . '/assets/js/uams-content-transform.js', array( 'wp-hooks', 'wp-blocks' ), filemtime( get_stylesheet_directory() . '/assets/js/uams-content-transform.js' ), false );
 }
 add_action( 'enqueue_block_editor_assets', 'uamswp_gutenberg_scripts' );
+
+/**
+ * Editor canvas styles.
+ * enqueue_block_assets loads inside the iframed editor canvas (WP 6.3+), unlike
+ * enqueue_block_editor_assets, which only loads in the outer admin frame. The
+ * is_admin() check keeps the font from double-loading on the front end.
+ */
+function uamswp_block_canvas_assets() {
+	if ( is_admin() ) {
+		wp_enqueue_style( 'theme-fonts', uamswp_theme_fonts_url() );
+	}
+}
+add_action( 'enqueue_block_assets', 'uamswp_block_canvas_assets' );
 
 /**
  * Theme Fonts URL

@@ -63,7 +63,7 @@ if (!isset($geo) || empty($geo_region)){
         }
     }
 }
-if (is_admin() && !empty($geo) && !empty($geo_region)) {
+if (!empty($is_preview) && !empty($geo) && !empty($geo_region)) {
     $geo_display = true;
     echo ucwords($geo) . ' region(s): ' . implode(', ', $geo_region) . '<hr>';
 }

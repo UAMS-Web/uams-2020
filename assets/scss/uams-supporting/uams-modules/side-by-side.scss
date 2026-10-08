@@ -95,6 +95,24 @@
                 display: block;
             }
 
+            // Blockquote with Citation layouts: the quote takes no blockquote
+            // styling of its own. The figcaption uses .blockquote-footer.
+            blockquote {
+                border: 0;
+                font-size: inherit;
+                margin: 0;
+                padding: 0;
+            }
+
+            // The block's .alignfull class would otherwise give the figcaption
+            // the centered image caption styles.
+            figcaption {
+                font-size: 75%;
+                margin: 0;
+                max-width: none;
+                text-align: inherit;
+            }
+
             ul {
                 list-style: none;
                 padding: 0 0 0 (1.5 * $font-size-base);

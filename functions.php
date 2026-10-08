@@ -1098,8 +1098,12 @@ function uamswp_list_child_posts( $posttype, $posttitle ) {
 	<?php
 	}
 }
-// Whitelist specific blocks for the Marketing Landing Page template
-add_filter('allowed_block_types', function($block_types, $post) {
+// Whitelist specific blocks for the Marketing Landing Page template.
+// Runs at priority 110 so it applies after the global removelist filter (priority 100) below.
+add_filter( 'allowed_block_types_all', function( $allowed_blocks, $editor_context ) {
+	if ( empty( $editor_context->post ) || 'templates/marketing.php' !== get_page_template_slug( $editor_context->post ) ) {
+		return $allowed_blocks;
+	}
 	$allowed_marketing = [
 		'acf/action-bar',
 		'acf/call-out',
@@ -1112,20 +1116,21 @@ add_filter('allowed_block_types', function($block_types, $post) {
 		'acf/text-stacked',
 		'acf/livewhale-calendar',
 		'acf/uams-gallery',
-		//'acf/uams-content',
+		'acf/uams-section',
+		// acf/uams-content is deprecated; it is hidden from the inserter via its block supports,
+		// but stays allowed here so existing instances remain editable and transformable.
+		'acf/uams-content',
 		'acf/fad-providers',
 		'acf/fad-locations',
-		'acf/logo-list'
+		'acf/logo-list',
 	];
 	if ( current_user_can( 'manage_options' ) ) {
-		$allowed_marketing[] = 'acf/uams-content';
-        //return $allowed_marketing;
-    }
-	if (get_page_template_slug( $post ) == 'templates/marketing.php') {
-		return $allowed_marketing;
+		$allowed_marketing[] = 'acf/uams-iframe';
 	}
-	return $block_types;
-}, 10, 2);
+	// uams-section InnerBlocks need their child blocks allowed too.
+	$allowed_marketing = array_merge( $allowed_marketing, uamswp_section_allowed_blocks() );
+	return array_values( array_unique( $allowed_marketing ) );
+}, 110, 2 );
 // ACF for GEO
 // add_filter('acf/load_field/name=geo_valid', 'uamswp_set_geo');
 add_filter('acf/prepare_field/name=geo_valid', 'uamswp_set_geo');
@@ -1305,9 +1310,10 @@ add_filter( 'allowed_block_types_all', function( $allowed_blocks, $editor_contex
 		'core/widget-group',
     ];
 
+	// Administrator-only blocks.
 	if ( ! current_user_can( 'manage_options' ) ) {
-    	$removelist[] = 'acf/uams-content';
-    }
+		$removelist[] = 'acf/uams-iframe';
+	}
 
     return array_values( array_diff( $blocks, $removelist ) );
 }, 100, 2 );

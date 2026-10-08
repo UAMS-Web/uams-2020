@@ -4,6 +4,11 @@
  * UAMS Image Side-by-side Block
  * 
  */
+
+// Editor placeholder for a newly inserted, still-empty block (ACF Blocks V3).
+if ( uamswp_block_placeholder( $block ?? null, $is_preview ?? false ) ) {
+    return;
+}
 // Create id attribute allowing for custom "anchor" value.
 if (empty( $id )) {
 	$id = '';
@@ -36,13 +41,27 @@ if ( empty($layout) )
     $layout = get_field('side_text_layout') ?: 'link-list';
 if ( empty($heading) ) 
     $heading = get_field('side_heading') ?: 'Heading goes here...';
+$is_quote = ( $layout == 'blockquote-citation' || $layout == 'blockquote-citation-link' );
 
 if ( empty($body) ){
     if ( $layout == 'body-only' ) {
         $body = get_field('side_layout_body_text') ?: 'This is where the body-only description goes';
+    } elseif ( $is_quote ) {
+        $body = ''; // The quote layouts show a quote and citation instead of a body.
     } else {
         $body = get_field('side_layout_link_text') ?: 'This is where the body + link list description goes';
     }
+}
+
+if ( $is_quote ) {
+    if ( empty($quote_text) )
+        $quote_text = get_field( $layout == 'blockquote-citation-link' ? 'side_quote_text_link' : 'side_quote_text' ) ?: 'This is where the quote goes';
+    // Strip quotation marks typed at the start or end. Curly quotes are added on output.
+    $quote_text = preg_replace( '/^[\s"\'“”‘’]+|[\s"\'“”‘’]+$/u', '', $quote_text ) ?? $quote_text;
+    if ( empty($quote_name) )
+        $quote_name = get_field('side_quote_speaker_name') ?: 'Speaker name';
+    if ( empty($quote_title) )
+        $quote_title = get_field('side_quote_speaker_title') ?: '';
 }
 
 if ( empty($link_list) ) 
@@ -51,6 +70,10 @@ if ( empty($list_more) )
     $list_more = get_field('side_link_include_more') ?: '';
 if ( empty($cta) ) 
     $cta = get_field('side_cta') ?: '';
+// A layout that hides the button (Blockquote with Citation) saves no button fields.
+if ( ! is_array($cta) )
+    $cta = array();
+$cta += array( 'side_cta_text' => '', 'side_cta_url' => '', 'side_cta_description' => '' );
 $cta_text = $cta['side_cta_text'] ?: '';
 $cta_link = '';
 $cta_target = '';
@@ -59,8 +82,14 @@ if ( $cta['side_cta_url'] ) {
     $cta_target = $cta['side_cta_url']['target'] ?: '';
 }
 $cta_desc = $cta['side_cta_description'] ?: '';
+if ( $layout == 'blockquote-citation' ) {
+    $cta_text = ''; // This layout has no button, even if one was saved under another layout.
+}
 if ( empty($image_group) ) 
     $image_group = get_field('side_image')?: '';
+if ( ! is_array($image_group) )
+    $image_group = array();
+$image_group += array( 'side_image_image' => '', 'side_image_alt_text' => '', 'side_image_crop' => '', 'side_image_anchor' => '' );
 $side_image = $image_group['side_image_image'] ?: '';
 $image_alt = $image_group['side_image_alt_text'] ?: '';
 $image_crop = $image_group['side_image_crop'] ?: '';
@@ -104,7 +133,7 @@ if (!isset($geo) || empty($geo_region)){
         }
     }
 }
-if (is_admin() && !empty($geo) && !empty($geo_region)) {
+if (!empty($is_preview) && !empty($geo) && !empty($geo_region)) {
     $geo_display = true;
     echo esc_html( ucwords($geo) ) . ' region(s): ' . esc_html( implode(', ', $geo_region) ) . '<hr>';
 }
@@ -177,6 +206,18 @@ if ($geo_display) :
                 <div class="text-inner-container">
                     <h2 class="h3"><?php echo esc_html($heading); ?></h2>
                     <?php echo !empty($body) ? '<p>' . esc_html($body) . '</p>' : ''; ?>
+                    <?php if ( $is_quote ) : ?>
+                    <figure>
+                        <blockquote>
+                            <p>“<?php echo esc_html( $quote_text ); ?>”</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            <?php echo esc_html( $quote_name ); ?><?php if ( $quote_title ) : ?><br>
+                            <?php echo esc_html( $quote_title ); ?><?php endif; ?>
+
+                        </figcaption>
+                    </figure>
+                    <?php endif; ?>
                     <?php if ($layout == 'link-list' && $link_list): ?>
                     <ul>
                         <?php foreach( $link_list as $link ) {
