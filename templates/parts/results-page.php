@@ -20,19 +20,19 @@ $blog_id = $data['blog_id'];
 $post = get_post( $post_id );
 
 /**
- * Get the post title (relies on global $post if not explicitly passed)
+ * Get the post title
  */
-$post_title = get_the_title();
+$post_title = get_the_title( $post_id );
 
 /**
  * Get the permalink for the post
  */
-$post_link = get_the_permalink();
+$post_link = get_permalink( $post_id );
 
 /**
  * Initialize thumbnail variable and check for featured image
  */
-if(has_post_thumbnail()) {
+if(has_post_thumbnail( $post_id )) {
     // If a thumbnail exists, get its URL with 'thumbnail' size
     $post_thumb = get_the_post_thumbnail_url( $post->ID, 'thumbnail' );
 } else {
@@ -79,7 +79,7 @@ if ( empty($excerpt) ) {
 <!-- Display the page summary in an article with Bootstrap classes -->
 <article class="post-summary type-page pb-4">
     <!-- Post title as a heading with a link to the full page -->
-    <h3 class="h4"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></h3>
+    <h3 class="h4"><a href="<?php echo esc_url( $post_link ); ?>"><?php echo esc_html( $post_title ); ?></a></h3>
     
     <!-- Row for thumbnail/icon and excerpt content -->
     <div class="row">
@@ -87,7 +87,7 @@ if ( empty($excerpt) ) {
         <div class="col-2">
         <?php if ( $post_thumb ) {
             // If thumbnail exists, output it with the post title as alt text
-            echo '<img src="'.$post_thumb.'" alt="'. $post_title .'"/>';
+            echo '<img src="' . esc_url( $post_thumb ) . '" alt="' . esc_attr( wp_strip_all_tags( $post_title ) ) . '"/>';
         } else { ?>
             <!-- Fallback: Page icon as a base64-encoded PNG image -->
             <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTkuNSAxNC4yNVYxMS42MjVDMTkuNSA5Ljc2MTA0IDE3Ljk4OSA4LjI1IDE2LjEyNSA4LjI1SDE0LjYyNUMxNC4wMDM3IDguMjUgMTMuNSA3Ljc0NjMyIDEzLjUgNy4xMjVWNS42MjVDMTMuNSAzLjc2MTA0IDExLjk4OSAyLjI1IDEwLjEyNSAyLjI1SDguMjVNOC4yNSAxNUgxNS43NU04LjI1IDE4SDEyTTEwLjUgMi4yNUg1LjYyNUM1LjAwMzY4IDIuMjUgNC41IDIuNzUzNjggNC41IDMuMzc1VjIwLjYyNUM0LjUgMjEuMjQ2MyA1LjAwMzY4IDIxLjc1IDUuNjI1IDIxLjc1SDE4LjM3NUMxOC45OTYzIDIxLjc1IDE5LjUgMjEuMjQ2MyAxOS41IDIwLjYyNVYxMS4yNUMxOS41IDYuMjc5NDQgMTUuNDcwNiAyLjI1IDEwLjUgMi4yNVoiIHN0cm9rZT0iI0E5QTdBOCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K" alt="Page Icon - No image available"/>

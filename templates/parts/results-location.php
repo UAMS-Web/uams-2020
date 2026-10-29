@@ -20,14 +20,14 @@ $blog_id = $data['blog_id'];
 $post = get_post( $post_id );
 
 /**
- * Get the post title (relies on global $post if not explicitly passed)
+ * Get the post title
  */
-$post_title = get_the_title( );
+$post_title = get_the_title( $post_id );
 
 /**
  * Get the permalink for the post
  */
-$post_link = get_the_permalink();
+$post_link = get_permalink( $post_id );
 
 /**
  * Determine the post type and retrieve its singular name label
@@ -59,13 +59,13 @@ $excerpt = '';
 if ( empty($excerpt) ) {
     /* Make a custom excerpt */
     // First, try to get the 'location_short_desc' field and trim if available
-    $excerpt = get_field('location_short_desc');
+    $excerpt = get_field( 'location_short_desc', $post_id );
     if ($excerpt) {
         $excerpt = wp_trim_words( $excerpt, 20, '... ' );
     }
     
     // If still empty, get the 'location_about' field, strip tags, and trim
-    $about_loc = get_field('location_about');
+    $about_loc = get_field( 'location_about', $post_id );
     if (empty($excerpt)){
         if ($about_loc){
             $excerpt = wp_trim_words(wp_strip_all_tags($about_loc), 20, '...');
@@ -77,7 +77,7 @@ if ( empty($excerpt) ) {
 <!-- Display the location post as a summary article with Bootstrap classes -->
 <article class="post-summary type-post entry pb-4">
     <!-- Post title as a heading with link to full post -->
-    <h3 class="h4"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></h3>
+    <h3 class="h4"><a href="<?php echo esc_url( $post_link ); ?>"><?php echo esc_html( $post_title ); ?></a></h3>
     
     <!-- Row for thumbnail/icon and excerpt content -->
     <div class="row">
@@ -91,12 +91,12 @@ if ( empty($excerpt) ) {
                 <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTUgMTAuNUMxNSAxMi4xNTY5IDEzLjY1NjkgMTMuNSAxMiAxMy41QzEwLjM0MzEgMTMuNSA5IDEyLjE1NjkgOSAxMC41QzkgOC44NDMxNSAxMC4zNDMxIDcuNSAxMiA3LjVDMTMuNjU2OSA3LjUgMTUgOC44NDMxNSAxNSAxMC41WiIgc3Ryb2tlPSIjQTlBN0E4IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0xOS41IDEwLjVDMTkuNSAxNy42NDIxIDEyIDIxLjc1IDEyIDIxLjc1QzEyIDIxLjc1IDQuNSAxNy42NDIxIDQuNSAxMC41QzQuNSA2LjM1Nzg2IDcuODU3ODYgMyAxMiAzQzE2LjE0MjEgMyAxOS41IDYuMzU3ODYgMTkuNSAxMC41WiIgc3Ryb2tlPSIjQTlBN0E4IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=" alt="Location Icon - No image available"/>
         <?php } ?>
         <!-- Label indicating the post type -->
-        <div class="search-type"><?php echo $post_type_name; ?></div>
+        <div class="search-type"><?php echo esc_html( $post_type_name ); ?></div>
         </div>
         <!-- Main content column (10/12 width) -->
         <div class="col-10">
             <!-- Display the excerpt with a "Continue Reading" link appended -->
-            <div class="search-excerpt"><?php echo $excerpt . (str_word_count($excerpt) >= 20 || empty($excerpt) ? ' <a href="'.$post_link.'">View Location</a>' : ''); ?></div>
+            <div class="search-excerpt"><?php echo $excerpt . (str_word_count($excerpt) >= 20 || empty($excerpt) ? ' <a href="' . esc_url( $post_link ) . '">View Location</a>' : ''); ?></div>
         </div>
     </div>
 </article>

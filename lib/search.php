@@ -19,18 +19,94 @@ function uamswp_search_form( $form ) {
         <div class="input-group-append">
             <button type="submit" id="searchsubmit" value="'. esc_attr__('Search', 'uams-2020') .'" class="btn btn-primary" title="Search"><span class="fas fa-search"></span><span class="sr-only">Search</span></button>
         </div>
-    </div>
-    <div class="form-group text-center d-none" role="radiogroup" aria-labelledby="uams-search-picker-label">
-        <span class="sr-only" id="uams-search-picker-label">Choose which site to search.</span>
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="search-scope-1" name="search-scope" class="custom-control-input" checked>
-            <label class="custom-control-label" for="search-scope-1">Current site</label>
-        </div>
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" id="search-scope-2" name="search-scope" class="custom-control-input">
-            <label class="custom-control-label" for="search-scope-2">All of UAMS</label>
-        </div>
-    </div>
-    </form>';
+    </div>';
+
+    // Keep the post type filter when searching again from a filtered view.
+    if ( ! empty( $_GET['type'] ) ) {
+        $form .= '<input type="hidden" name="type" value="' . esc_attr( sanitize_key( wp_unslash( $_GET['type'] ) ) ) . '">';
+    }
+
+    $form .= '</form>';
     return $form;
+}
+
+// Keep search results pages out of search engine indexes.
+add_filter( 'wp_robots', 'uamswp_search_robots' );
+function uamswp_search_robots( $robots ) {
+    if ( is_search() ) {
+        $robots['noindex']   = true;
+        $robots['noarchive'] = true;
+        $robots['follow']    = true;
+    }
+    return $robots;
+}
+
+// Search results styles (previously printed inline in search.php).
+add_action( 'wp_enqueue_scripts', 'uamswp_search_results_styles', 20 );
+function uamswp_search_results_styles() {
+    if ( ! is_search() ) {
+        return;
+    }
+    wp_add_inline_style( 'app-css', '
+        .search-link { font-size: small; color: blue; }
+        .search-type {
+            border: 1px solid transparent;
+            border-radius: 3px;
+            padding: .125em .25em;
+            background-color: #DCDADB;
+            font-size: .85em;
+            text-align: center;
+        }
+        .search-count { margin-bottom: 1.5rem; }
+    ' );
+}
+
+// UAMS Settings > Search: when to show the Google search of all UAMS sites.
+add_action( 'acf/init', 'uamswp_search_settings_fields' );
+function uamswp_search_settings_fields() {
+    if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+        return;
+    }
+
+    acf_add_local_field_group( array(
+        'key'    => 'group_uamswp_search_settings',
+        'title'  => 'Search',
+        'fields' => array(
+            array(
+                'key'           => 'field_uamswp_search_google_display',
+                'label'         => 'Google search of all UAMS sites',
+                'name'          => 'uamswp_search_google_display',
+                'type'          => 'radio',
+                'instructions'  => 'Shows a "Search All UAMS Sites" section with Google results for UAMS.edu and UAMShealth.com on the search results page.',
+                'required'      => 0,
+                'choices'       => array(
+                    'fallback'   => 'Only when SearchWP is not available (default)',
+                    'no_results' => 'When this site\'s search finds no results',
+                    'always'     => 'Always, below this site\'s results',
+                    'never'      => 'Never',
+                ),
+                'default_value' => 'fallback',
+                'layout'        => 'vertical',
+                'return_format' => 'value',
+                'allow_null'    => 0,
+                'other_choice'  => 0,
+                'save_other_choice' => 0,
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param'    => 'options_page',
+                    'operator' => '==',
+                    'value'    => 'uamswp-settings',
+                ),
+            ),
+        ),
+        'menu_order'            => 50,
+        'position'              => 'normal',
+        'style'                 => 'default',
+        'label_placement'       => 'top',
+        'instruction_placement' => 'label',
+        'active'                => true,
+    ) );
 }

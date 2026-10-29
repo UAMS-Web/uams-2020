@@ -19,11 +19,11 @@ $blog_id = $data['blog_id'];
 // Retrieve the full post object using the provided post ID
 $post = get_post( $post_id );
 
-// Get the post title (uses global $post if $post_id not specified, but here it relies on context)
-$post_title = get_the_title( );
+// Get the post title
+$post_title = get_the_title( $post_id );
 
 // Get the permalink for the post
-$post_link = get_the_permalink();
+$post_link = get_permalink( $post_id );
 
 // Initialize thumbnail variable as empty string
 $post_thumb = '';
@@ -65,7 +65,7 @@ if ( empty($excerpt) ) {
 <!-- Display the post as a summary article with Bootstrap classes -->
 <article class="post-summary type-post entry pb-4">
     <!-- Post title as a heading with link to full post -->
-    <h3 class="h4"><a href="<?php echo $post_link; ?>"><?php echo $post_title; ?></a></h3>
+    <h3 class="h4"><a href="<?php echo esc_url( $post_link ); ?>"><?php echo esc_html( $post_title ); ?></a></h3>
     
     <!-- Row for thumbnail/icon and excerpt content -->
     <div class="row">
