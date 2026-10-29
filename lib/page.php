@@ -378,7 +378,7 @@ function uamswp_entry_title_h1( $title ) {
     $post_title = get_the_title( get_the_ID() );
     $post_link = get_the_permalink( get_the_ID() );
     if( is_archive() ) {
-        $title = '<h1 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h1>';
+        $title = '<h2 class="entry-title" itemprop="headline"><a href="' . $post_link . '">' . $post_title . '</a></h2>';
     } else {
         $title = '<h1 class="entry-title" itemprop="headline">' . $post_title . '</h1>';
     }

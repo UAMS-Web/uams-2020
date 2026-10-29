@@ -124,4 +124,11 @@
             }
         }
     }
+
+    // Drop Instructions
+    .gform_legacy_markup_wrapper {
+        span.gform_drop_instructions {
+            color: $input-color;
+        }
+    }
 }
