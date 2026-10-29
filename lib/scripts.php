@@ -103,7 +103,17 @@ function add_allowed_origins($origins) {
 	$origins[] = 'https://public-api.wordpress.com';
 	$origins[] = 'https://uamshealth.com';
 	$origins[] = 'https://news.uams.edu';
+	$origins[] = 'https://uamshealth.dev';
     return $origins;
+}
+
+add_action('send_headers', 'add_custom_frame_allow_list_headers');
+function add_custom_frame_allow_list_headers() {
+    // Fallback for old browsers
+    header('X-Frame-Options: SAMEORIGIN');
+    
+    // Modern allow list using CSP (Replace with your actual partner domains)
+    header("Content-Security-Policy: frame-ancestors 'self' https://www.uams.edu https://sites.uams.edu https://uamshealth.dev;");
 }
 
 // function defer_parsing_of_js( $url ) {
