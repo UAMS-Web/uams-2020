@@ -30,6 +30,12 @@ function uamswp_search_form( $form ) {
     return $form;
 }
 
+// UAMS Search (uamswp-search plugin): this theme renders its own results page
+// (search.php) and keeps its own search form; the plugin only answers the query
+// and adds its hidden scope/type fields to the form.
+add_filter( 'uams_search_use_template', '__return_false' );
+add_filter( 'uams_search_replace_form', '__return_false' );
+
 // Keep search results pages out of search engine indexes.
 add_filter( 'wp_robots', 'uamswp_search_robots' );
 function uamswp_search_robots( $robots ) {
@@ -80,7 +86,7 @@ function uamswp_search_settings_fields() {
                 'instructions'  => 'Shows a "Search All UAMS Sites" section with Google results for UAMS.edu and UAMShealth.com on the search results page.',
                 'required'      => 0,
                 'choices'       => array(
-                    'fallback'   => 'Only when SearchWP is not available (default)',
+                    'fallback'   => 'Only when UAMS Search is not available (default)',
                     'no_results' => 'When this site\'s search finds no results',
                     'always'     => 'Always, below this site\'s results',
                     'never'      => 'Never',

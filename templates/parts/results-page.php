@@ -74,6 +74,17 @@ if ( empty($excerpt) ) {
  * Commented-out debug line for post and blog IDs
  */
 // echo 'Post ID: ' . $data['post_id'] . ' Blog ID: ' . $data['blog_id'];
+
+/**
+ * Prefer UAMS Search's highlighted excerpt (escaped; only <mark> added).
+ * The loop has already switched to the result's site.
+ */
+if ( function_exists( 'uams_search_excerpt' ) ) {
+    $uams_excerpt = uams_search_excerpt( (int) $post_id, get_current_blog_id() );
+    if ( '' !== $uams_excerpt ) {
+        $excerpt = $uams_excerpt;
+    }
+}
 ?>
 
 <!-- Display the page summary in an article with Bootstrap classes -->

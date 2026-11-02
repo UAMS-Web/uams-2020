@@ -63,6 +63,17 @@ if ( has_excerpt( $post_id ) ) {
     // Otherwise, generate an automatic excerpt from the post content
     $excerpt = wp_trim_excerpt( "", $post_id );
 }
+
+/**
+ * Prefer UAMS Search's highlighted excerpt (escaped; only <mark> added).
+ * The loop has already switched to the result's site.
+ */
+if ( function_exists( 'uams_search_excerpt' ) ) {
+    $uams_excerpt = uams_search_excerpt( (int) $post_id, get_current_blog_id() );
+    if ( '' !== $uams_excerpt ) {
+        $excerpt = $uams_excerpt;
+    }
+}
 ?>
 
 <!-- Display the post as a summary article with Bootstrap classes -->

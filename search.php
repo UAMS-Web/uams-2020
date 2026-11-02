@@ -3,7 +3,8 @@
 /**
  * Search results template.
  *
- * Uses SearchWP when active (multisite results, post type filter links).
+ * Uses UAMS Search (uamswp-search plugin) when it answers the query:
+ * multisite results, scope and type links, highlighted excerpts.
  * Falls back to WordPress' native search on the current site otherwise.
  *
  * Author: Todd McKee
@@ -21,8 +22,9 @@ add_action( 'genesis_after_loop', 'uamswp_search_page_after_entry', 10 );
 /**
  * Output the search form, filters, result count and results.
  *
- * SearchWP results (with 'fields' => 'default') are stdClass objects with
- * ->id and ->site; native results are WP_Post objects. Both are handled.
+ * UAMS Search results are post objects that also carry ->id and ->site
+ * (the result's sub-site); native results are plain WP_Post objects.
+ * Both are handled.
  *
  * @return void
  */
@@ -43,8 +45,9 @@ function uamswp_do_search_results() {
 	echo '<div class="inner-container content-width">';
 	echo '<div class="pb-4">';
 	get_search_form();
-	if ( function_exists( 'uamswp_search_post_type_links' ) && class_exists( '\\SearchWP\\Engine' ) ) {
-		echo uamswp_search_post_type_links();
+	// Scope ("This site" / "Whole website") and result-type links.
+	if ( function_exists( 'uams_search_filters' ) ) {
+		uams_search_filters();
 	}
 	echo '</div>';
 
@@ -60,6 +63,11 @@ function uamswp_do_search_results() {
 			esc_html( _n( 'result', 'results', $found, 'uams-2020' ) ),
 			esc_html( $search_term )
 		);
+
+		// "Did you mean" and "Not every word matched" notes.
+		if ( function_exists( 'uams_search_notices' ) ) {
+			uams_search_notices();
+		}
 	}
 
 	// The Loop
@@ -115,8 +123,8 @@ function uamswp_do_search_results() {
  * Whether to show the Google search section, based on the site's
  * UAMS Settings > Search option.
  *
- * fallback   – only when SearchWP is not active (default)
- * no_results – when this site's search finds nothing, or SearchWP is not active
+ * fallback   – only when UAMS Search did not answer the query (default)
+ * no_results – when this site's search finds nothing, or UAMS Search did not answer
  * always     – always, below this site's results
  * never      – never
  *
@@ -127,7 +135,7 @@ function uamswp_show_google_search( $found ) {
 	$mode = function_exists( 'get_field' ) ? get_field( 'uamswp_search_google_display', 'option' ) : '';
 	$mode = $mode ? $mode : 'fallback';
 
-	$searchwp_active = class_exists( '\\SearchWP\\Query' );
+	$local_search = function_exists( 'uams_search_is_active' ) && uams_search_is_active();
 
 	switch ( $mode ) {
 		case 'never':
@@ -135,10 +143,10 @@ function uamswp_show_google_search( $found ) {
 		case 'always':
 			return true;
 		case 'no_results':
-			return ! $searchwp_active || 0 === (int) $found;
+			return ! $local_search || 0 === (int) $found;
 		case 'fallback':
 		default:
-			return ! $searchwp_active;
+			return ! $local_search;
 	}
 }
 
