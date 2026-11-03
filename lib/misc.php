@@ -210,7 +210,7 @@ function uamswp_allowed_block_types($allowed_blocks): array
 /**
  * Templates and Page IDs without editor
  */
-function uamswp_disable_editor($id = false)
+function uamswp_disable_editor($id = false): bool
 {
 
     $excluded_templates = [

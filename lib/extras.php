@@ -14,7 +14,7 @@ declare(strict_types=1);
 // Add class to images
 // @link http://stackoverflow.com/a/22078964
 add_filter('the_content', 'uamswp_image_responsive_class');
-function uamswp_image_responsive_class($content)
+function uamswp_image_responsive_class($content): string|array|null
 {
     global $post;
 
@@ -38,7 +38,7 @@ function page_blog_class($classes)
 // @link http://wordpress.stackexchange.com/questions/88545/how-to-remove-the-parentheses-from-the-category-widget
 add_filter('wp_list_categories', 'uamswp_categories_postcount_filter', 10, 2);
 add_filter('get_archives_link', 'uamswp_categories_postcount_filter', 10, 2);
-function uamswp_categories_postcount_filter($variable)
+function uamswp_categories_postcount_filter($variable): string|array
 {
     $variable = str_replace('(', '<span class="badge badge-pill badge-primary tag-default post-count">', $variable);
 
@@ -113,7 +113,7 @@ add_filter('genesis_pre_get_option_footer_text', function ($creds) {
 
 // Remove P tags wrapping on images
 add_filter('the_content', 'uamswp_filter_ptags_on_images');
-function uamswp_filter_ptags_on_images($content)
+function uamswp_filter_ptags_on_images($content): string|array|null
 {
     return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
 }
@@ -125,7 +125,7 @@ function uamswp_filter_download_button($content)
     $preg_match = '/<div class="wp-block-file"><a .*>([^<]*)<\/a><a(.*)/iU';
     $has_download_button = preg_match($preg_match, $content, $matches);
     if ($has_download_button && ! empty($matches[1])) {
-        return preg_replace_callback($preg_match, 'add_download_title', $content);
+        return preg_replace_callback($preg_match, add_download_title(...), $content);
     }
 
     return $content;
@@ -140,7 +140,7 @@ function add_download_title($matches): string
 }
 
 // Replace custom logo class to bootstrap
-add_filter('get_custom_logo', fn ($html) => str_replace('custom-logo-link', 'navbar-brand', $html), 10);
+add_filter('get_custom_logo', fn ($html): string|array => str_replace('custom-logo-link', 'navbar-brand', $html), 10);
 
 function uamswp_title($html)
 {
@@ -178,11 +178,11 @@ function uamswp_title($html)
     $uams_sitehome = $sitehome;
 
     // Prepend UAMS to sitename & sitehome as uams_ versions. Used for Institutes and potential others
-    if (strpos('UAMS', (string) $sitename) === false && strpos('University of Arkansas for Medical Sciences', (string) $sitename) === false) {
+    if (! str_contains('UAMS', (string) $sitename) && ! str_contains('University of Arkansas for Medical Sciences', (string) $sitename)) {
         $uams_sitename = 'UAMS '.$sitename;
     }
 
-    if (strpos('UAMS', (string) $sitehome) === false && strpos('University of Arkansas for Medical Sciences', (string) $sitehome) === false) {
+    if (! str_contains('UAMS', (string) $sitehome) && ! str_contains('University of Arkansas for Medical Sciences', (string) $sitehome)) {
         $uams_sitehome = 'UAMS '.$sitehome;
     }
 

@@ -68,7 +68,7 @@ function uamswp_add_markup_sanitize_classes($attr, $context)
         $classes_array = explode(' ', (string) $value);
     }
 
-    $classes_array = array_map('sanitize_html_class', $classes_array);
+    $classes_array = array_map(sanitize_html_class(...), $classes_array);
     $attr['class'] .= ' '.implode(' ', $classes_array);
 
     return $attr;

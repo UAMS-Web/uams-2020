@@ -6,10 +6,12 @@ use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRe
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveDuplicatedReturnSelfDocblockRector;
 use Rector\DeadCode\Rector\Property\RemoveUselessVarTagRector;
+use Rector\Php80\Rector\Switch_\ChangeSwitchToMatchRector;
 use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamFromDimFetchKeyUseRector;
+use Rector\TypeDeclaration\Rector\ClassMethod\ReturnUnionTypeRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\StrictArrayParamDimFetchRector;
 use Rector\TypeDeclaration\Rector\Function_\AddFunctionVoidReturnTypeWhereNoReturnRector;
 // WordPress repositories: uncomment the import below together with the matching
@@ -75,6 +77,15 @@ $sweepOnlyRules = [
     // before promoting either rule into the gate.
     StrictArrayParamDimFetchRector::class,
     AddParamFromDimFetchKeyUseRector::class,
+
+    // `switch` compares loosely and `match` compares strictly, so the rewrite
+    // can change which branch a value reaches, and an unmatched value throws
+    // where `switch` fell through. A union return type inferred from the body
+    // turns a caller passing an unexpected type into a TypeError fatal on
+    // untyped helpers such as `format_phone_us()`. Apply under the sweep
+    // profile and review each site first.
+    ChangeSwitchToMatchRector::class,
+    ReturnUnionTypeRector::class,
 
     // WordPress repositories: uncomment the rule below and the matching `use`
     // at the top of this file (not inside this array -- a `use` here is a

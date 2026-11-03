@@ -300,7 +300,7 @@ function uamswp_do_search_loop(): void
             ]);
 
             $post_type_text = ucfirst($post_type);
-            if (substr($post_type_text, -1) !== 's') {
+            if (! str_ends_with($post_type_text, 's')) {
                 $post_type_text .= 's';
             }
 
@@ -345,7 +345,7 @@ function uamswp_do_search_loop(): void
             uamswp_custom_loop_base($args);
 
             $post_type_text = ucfirst($post_type);
-            if (substr($post_type_text, -1) !== 's') {
+            if (! str_ends_with($post_type_text, 's')) {
                 $post_type_text .= 's';
             }
 
@@ -475,7 +475,7 @@ function uamswp_do_search_loop(): void
 
                 // $term_query = new WP_Term_Query( $args );
                 $post_type_text = ucfirst($post_type);
-                if (substr($post_type_text, -1) !== 's') {
+                if (! str_ends_with($post_type_text, 's')) {
                     $post_type_text .= 's';
                 }
 
