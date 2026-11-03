@@ -1,14 +1,32 @@
 * text=auto eol=lf
-/vendor/ export-ignore
-/tests/ export-ignore
-/tests-legacy/ export-ignore
-/phpunit.xml export-ignore
-/composer.json export-ignore
-/composer.lock export-ignore
-rector.php export-ignore
-rector-sweep.php export-ignore
-phpstan.neon.dist export-ignore
-phpstan-baseline.neon export-ignore
-pint.json export-ignore
-phpcs.xml.dist export-ignore
-.phpstan/ export-ignore
+
+# The GitHub download holds only what the theme runs (keep-the-download-to-what-runs rule).
+# The first two lines leave out every top-level entry, dot-entries included; each line
+# after them puts one runtime path back.
+/* export-ignore
+/.* export-ignore
+
+# Theme files WordPress loads
+/style.css -export-ignore
+/screenshot.png -export-ignore
+/theme.json -export-ignore
+/functions.php -export-ignore
+/home.php -export-ignore
+/search.php -export-ignore
+/page_archive.php -export-ignore
+/page_blog.php -export-ignore
+
+# Theme folders
+/acf_fields -export-ignore
+/blocks -export-ignore
+/lib -export-ignore
+/templates -export-ignore
+/images -export-ignore
+/languages -export-ignore
+/assets -export-ignore
+
+# Bundled plugin zips that lib/tgm.php installs through TGM Plugin Activation
+/plugins -export-ignore
+
+# Build inputs under assets/ that the theme does not load
+/assets/scss export-ignore
