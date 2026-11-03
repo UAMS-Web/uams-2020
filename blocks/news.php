@@ -11,9 +11,11 @@ $className = '';
 if (empty($id)) {
     $id = '';
 }
+
 if (empty($id) && isset($block)) {
     $id = $block['id'];
 }
+
 if (empty($id)) {
     $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
 }
@@ -31,51 +33,65 @@ if (! empty($block['align'])) {
 if (empty($title)) {
     $title = get_field('news_title');
 }
+
 if (empty($hide_title)) {
     $hide_title = get_field('news_hide_title');
 }
+
 if (empty($output)) {
     $output = get_field('news_format');
 }
+
 if (empty($category)) {
     $category = get_field('news_category');
 }
+
 if (empty($count)) {
     $count = get_field('news_count');
 }
+
 if (empty($offset)) {
     $offset = get_field('news_offset');
 }
+
 if (empty($advancedCat)) {
     $advancedCat = get_field('news_advanced_cat');
 }
+
 if (empty($background_color)) {
     $background_color = get_field('news_background_color');
 }
+
 if (empty($hide_img)) {
     $hide_img = get_field('news_hide_img');
 }
+
 if (empty($hide_author)) {
     $hide_author = get_field('news_hide_author');
 }
+
 if (empty($hide_date)) {
     $hide_date = get_field('news_hide_date');
 }
+
 if (empty($articleID)) {
     $articleID = get_field('news_article_id');
 }
+
 if (empty($local)) {
     $local = get_field('news_local');
 }
-if (! isset($link)) {
-    $link = get_field('news_include_link');
-}
+
+$link ??= get_field('news_include_link');
+
 if (empty($position)) {
     $position = get_field('news_position');
 }
+
 if (empty($geo)) {
     $geo = get_field('news_geo');
 }
+
 if (empty($geo_region)) {
     $geo_region = get_field('news_geo_region');
 }
@@ -107,10 +123,12 @@ if (! isset($geo) || empty($geo_region)) {
         }
     }
 }
+
 if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
     $geo_display = true;
     echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
 }
+
 // Sanitize editor-controlled values before they are concatenated into the shortcode string.
 $articleID = absint($articleID);
 $count = absint($count);

@@ -48,7 +48,7 @@ declare(strict_types=1);
 // Add extra class to content
 function uamswp_add_class($attributes)
 {
-    $attributes['class'] = $attributes['class'].' sr-only';
+    $attributes['class'] .= ' sr-only';
 
     return $attributes;
 }

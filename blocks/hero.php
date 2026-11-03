@@ -98,7 +98,7 @@ if ($geo_display) {
                 if ($row_count > 1) { ?>
             <ol class="carousel-indicators">
                 <?php for ($i = 0; $i < $row_count; $i++) { ?>
-                <li data-target="#carousel-<?php echo esc_attr($id) ?>" data-slide-to="<?php echo $i; ?>" <?php echo $i == 0 ? 'class="active"' : ''; ?>></li>
+                <li data-target="#carousel-<?php echo esc_attr($id) ?>" data-slide-to="<?php echo $i; ?>" <?php echo $i === 0 ? 'class="active"' : ''; ?>></li>
                 <?php } ?>
             </ol>
 <?php }  ?>
@@ -143,7 +143,7 @@ if ($geo_display) {
             $background_color_4 = 'eggplant';
 
             // If the image alt text override field is empty, assign the normal alt value to the variable
-            $image_alt = $image_alt ? $image_alt : get_post_meta($image_desktop, '_wp_attachment_image_alt', true);
+            $image_alt = $image_alt ?: get_post_meta($image_desktop, '_wp_attachment_image_alt', true);
 
             // If image for tablet or mobile is empty, assign desktop's id to those variables
             if (empty($image_tablet)) {
@@ -156,11 +156,11 @@ if ($geo_display) {
                 ?>
         <div class="carousel-item <?php
                         if ($background_color == 'auto') {
-                            if ($index == 1) {
+                            if ($index === 1) {
                                 echo $background_color_1;
-                            } elseif ($index == 2) {
+                            } elseif ($index === 2) {
                                 echo $background_color_2;
-                            } elseif ($index == 3) {
+                            } elseif ($index === 3) {
                                 echo $background_color_3;
                             } else {
                                 echo $background_color_4;
@@ -168,7 +168,7 @@ if ($geo_display) {
                         } else {
                             echo esc_attr($background_color);
                         }
-                ?><?php echo 0 == ($index - 1) ? ' active' : ''; ?>" id="carousel-item-<?php echo $index - 1; ?>">
+                ?><?php echo 0 === $index - 1 ? ' active' : ''; ?>" id="carousel-item-<?php echo $index - 1; ?>">
             <div class="image-container">
                 <picture>
                     <?php if (function_exists('bis_get_attachment_image')) { ?>

@@ -23,11 +23,11 @@ $region_central = [
     'Little Rock Air Force Base', 'North Little Rock', 'Bryant', 'Benton', 'Little Rock', 'Adona', 'Alexander', 'Bauxite', 'Bigelow', 'Cabot', 'Carlisle', 'Conway', 'England', 'Enola', 'Greenbrier', 'Hot Springs Village', 'Jacksonville', 'Jessieville', 'Lonoke', 'Maumelle', 'Mount Vernon', 'Pearcy', 'Sheridan', 'Sherwood', 'Vilonia', 'Ward', 'Wrightsville', 'Hot Springs', 'Hot Springs National Park',
 ];
 // Function include
-function is_in_region(array $regions)
+function is_in_region(array $regions): ?bool
 {
     // Check if geoip is installed / activated
     if (! function_exists('geoip_detect2_get_info_from_current_ip')) {
-        return;
+        return null;
     }
 
     global $region_northwest, $region_northeast, $region_southwest, $region_southeast, $region_central;
@@ -64,14 +64,16 @@ function is_in_region(array $regions)
             return false;
         }
     }
+    return null;
 
 }
+
 // Function exclude
-function is_not_in_region(array $regions)
+function is_not_in_region(array $regions): ?bool
 {
     // Check if geoip is installed / activated
     if (! function_exists('geoip_detect2_get_info_from_current_ip')) {
-        return;
+        return null;
     }
 
     global $region_northwest, $region_northeast, $region_southwest, $region_southeast, $region_central;

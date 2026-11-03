@@ -20,9 +20,8 @@ function uamswp_image_responsive_class($content)
 
     $pattern = '/<img(.*?)class="(.*?)"(.*?)>/i';
     $replacement = '<img$1class="$2 img-fluid"$3>';
-    $content = preg_replace($pattern, $replacement, $content);
 
-    return $content;
+    return preg_replace($pattern, $replacement, $content);
 }
 
 add_filter('body_class', 'page_blog_class');
@@ -42,31 +41,28 @@ add_filter('get_archives_link', 'uamswp_categories_postcount_filter', 10, 2);
 function uamswp_categories_postcount_filter($variable)
 {
     $variable = str_replace('(', '<span class="badge badge-pill badge-primary tag-default post-count">', $variable);
-    $variable = str_replace(')', '</span>', $variable);
 
-    return $variable;
+    return str_replace(')', '</span>', $variable);
 }
 
-add_filter('the_password_form', function () {
+add_filter('the_password_form', function (): string {
     global $post;
 
-    $label = 'pwbox-'.(empty($post->ID) ? rand() : $post->ID);
+    $label = 'pwbox-'.(empty($post->ID) ? random_int(0, mt_getrandmax()) : $post->ID);
 
-    $o = '<p>'.__('To view this protected post, enter the password below:').'</p><form class="form-inline" action="'.esc_url(site_url('wp-login.php?action=postpass', 'login_post')).'" method="post"><label for="'.$label.'" class="sr-only">'.__('Password:').' </label><input class="form-control mr-2"name="post_password" id="'.$label.'" type="password" size="20" maxlength="20" /><input type="submit" class="btn btn-primary" name="Submit" value="'.esc_attr__('Submit').'" />
+    return '<p>'.__('To view this protected post, enter the password below:').'</p><form class="form-inline" action="'.esc_url(site_url('wp-login.php?action=postpass', 'login_post')).'" method="post"><label for="'.$label.'" class="sr-only">'.__('Password:').' </label><input class="form-control mr-2"name="post_password" id="'.$label.'" type="password" size="20" maxlength="20" /><input type="submit" class="btn btn-primary" name="Submit" value="'.esc_attr__('Submit').'" />
     </form>
     ';
-
-    return $o;
 });
 
 // Filter viewport meta values for Bootstrap
 add_filter('genesis_viewport_value', 'uamswp_viewport_value');
-function uamswp_viewport_value()
+function uamswp_viewport_value(): string
 {
     return 'width=device-width, initial-scale=1, shrink-to-fit=no';
 }
 
-add_filter('genesis_register_widget_area_defaults', function ($defaults) {
+add_filter('genesis_register_widget_area_defaults', function ($defaults): array {
     global $wp_registered_sidebars;
     global $wp_widget_factory;
     // $test = $wp_widget_factory->widgets['WP_Widget_Recent_Posts'];
@@ -98,20 +94,18 @@ add_filter('wp_link_pages_args', function ($params) {
     return $params;
 });
 
-add_filter('wp_link_pages_link', function ($link) {
+add_filter('wp_link_pages_link', function ($link): string {
     // var_dump( $link[1] );
     if ($link && $link[1] !== 'a') {
-        $link = '<li class="page-item active"><a href="#">'.$link.'</a></li>';
-    } else {
-        $link = '<li class="page-item">'.$link.'</li>';
+        return '<li class="page-item active"><a href="#">'.$link.'</a></li>';
     }
 
-    return $link;
+    return '<li class="page-item">'.$link.'</li>';
 });
 
 add_filter('genesis_pre_get_option_footer_text', function ($creds) {
     if (get_theme_mod('creds', false)) {
-        $creds = get_theme_mod('creds');
+        return get_theme_mod('creds');
     }
 
     return $creds;
@@ -131,12 +125,13 @@ function uamswp_filter_download_button($content)
     $preg_match = '/<div class="wp-block-file"><a .*>([^<]*)<\/a><a(.*)/iU';
     $has_download_button = preg_match($preg_match, $content, $matches);
     if ($has_download_button && ! empty($matches[1])) {
-        $content = preg_replace_callback($preg_match, 'add_download_title', $content);
+        return preg_replace_callback($preg_match, 'add_download_title', $content);
     }
 
     return $content;
 }
-function add_download_title($matches)
+
+function add_download_title($matches): string
 {
     // matches[0] = <div class="wp-block-file"><a href="">File Name</a><a
     // matches[1] = File Name
@@ -145,35 +140,35 @@ function add_download_title($matches)
 }
 
 // Replace custom logo class to bootstrap
-add_filter('get_custom_logo', function ($html) {
-    $html = str_replace('custom-logo-link', 'navbar-brand', $html);
-
-    return $html;
-}, 10);
+add_filter('get_custom_logo', fn($html) => str_replace('custom-logo-link', 'navbar-brand', $html), 10);
 
 function uamswp_title($html)
 {
     // Get site information
-    $site = uams_get_site_info()['site'];
-    $subsite = uams_get_site_info()['subsite'];
+    uams_get_site_info();
+    uams_get_site_info();
 
     $pagetitle = get_the_title();
     if (is_search()) {
         $pagetitle = 'Search Results';
     }
+
     if (is_archive()) {
         $post_type = get_post_type(get_the_id());
         $post_type_object = get_post_type_object($post_type);
         $pagetitle = $post_type_object->label ?? '';
     }
+
     if (is_archive() && (is_category() || is_tag() || is_tax())) {
         $pagetitle = single_term_title('', false);
     }
+
     // Check if seopress title is set and use it for page title
     $seopress_title = get_post_meta(get_the_id(), '_seopress_titles_title', true) ?: '';
     if (! empty($seopress_title)) {
         $pagetitle = $seopress_title;
     }
+
     // Replace three spaces in sitename with one
     $sitename = str_replace('   ', ' ', get_bloginfo('name'));
     // Multisite - get the base multisite name
@@ -183,10 +178,11 @@ function uamswp_title($html)
     $uams_sitehome = $sitehome;
 
     // Prepend UAMS to sitename & sitehome as uams_ versions. Used for Institutes and potential others
-    if (strpos('UAMS', $sitename) === false && strpos('University of Arkansas for Medical Sciences', $sitename) === false) {
+    if (strpos('UAMS', (string) $sitename) === false && strpos('University of Arkansas for Medical Sciences', (string) $sitename) === false) {
         $uams_sitename = 'UAMS '.$sitename;
     }
-    if (strpos('UAMS', $sitehome) === false && strpos('University of Arkansas for Medical Sciences', $sitehome) === false) {
+
+    if (strpos('UAMS', (string) $sitehome) === false && strpos('University of Arkansas for Medical Sciences', (string) $sitehome) === false) {
         $uams_sitehome = 'UAMS '.$sitehome;
     }
 
@@ -226,7 +222,7 @@ function uamswp_title($html)
     if (uams_get_site_info()['site'] == 'uamshealth') {
         if ((uams_get_site_info()['subsite'] == 'main')) {
             if (is_home() || is_front_page()) {
-                $html = 'UAMS Health | Arkansas\'s Leading Academic Medical Center';
+                $html = "UAMS Health | Arkansas's Leading Academic Medical Center";
             } else {
                 $html = (is_404() ? $page_title_404 : $pagetitle).' | UAMS Health';
             }
@@ -310,13 +306,14 @@ function uamswp_title($html)
             } else {
                 $html = (is_404() ? $page_title_404 : $pagetitle).' | UAMS';
             }
+
             // } elseif ('none' == uams_get_site_info()['subsite'] ) { // Option if needed in the future
             //         if ( is_home() || is_front_page() ) {
             //             $html = $sitename . ' | UAMS';
             //         } else {
             //             $html = ( is_404() ? $page_title_404 : $pagetitle ) . ' | UAMS';
             //         }
-        } elseif (uams_get_site_info()['department'] != 'main' && uams_get_site_info()['department'] != '' && uams_get_site_info()['department'] != 'uams') {
+        } elseif (!in_array(uams_get_site_info()['department'], ['main', '', 'uams'])) {
             if ((uams_get_site_info()['department'] != 'none')) { // Dept / org unit
                 if (is_home() || is_front_page()) {
                     $html = $sitename.' | '.$uams_sitehome;
@@ -341,4 +338,5 @@ function uamswp_title($html)
 
     return $html;
 }
+
 add_filter('seopress_titles_title', 'uamswp_title', 10, 2);

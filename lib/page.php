@@ -8,7 +8,7 @@ declare(strict_types=1);
  */
 
 add_action('genesis_after_header', 'page_options', 5);
-function page_options()
+function page_options(): void
 {
     $id = get_the_id();
     if (get_field('page_title_options', $id)) {
@@ -99,12 +99,12 @@ function uamswp_attributes_entry_header_graphic_title($attributes)
     return $attributes;
 }
 
-function uamswp_graphic_title_wrap_open()
+function uamswp_graphic_title_wrap_open(): void
 {
     echo '<div class="col-12">';
 }
 
-function uamswp_graphic_title_inner_1()
+function uamswp_graphic_title_inner_1(): void
 {
     if (empty($page_cover_image)) {
         $page_cover_image = get_field('page_cover_image', get_the_id());
@@ -170,12 +170,12 @@ function uamswp_graphic_title_inner_1()
     <div class="graphic-title-heading">';
 }
 
-function uamswp_graphic_title_inner_2()
+function uamswp_graphic_title_inner_2(): void
 {
     echo '</div>';
 }
 
-function uamswp_graphic_title_lead_paragraph()
+function uamswp_graphic_title_lead_paragraph(): void
 {
     if (empty($page_description)) {
         $page_description = get_field('page_description', get_the_id());
@@ -188,12 +188,12 @@ function uamswp_graphic_title_lead_paragraph()
     }
 }
 
-function uamswp_graphic_title_inner_3()
+function uamswp_graphic_title_inner_3(): void
 {
     echo '</div>';
 }
 
-function uamswp_graphic_title_wrap_close()
+function uamswp_graphic_title_wrap_close(): void
 {
     echo '</div>';
 }
@@ -213,12 +213,12 @@ function uamswp_attributes_entry_header_landing_page_title($attributes)
     return $attributes;
 }
 
-function uamswp_landing_page_title_wrap_open()
+function uamswp_landing_page_title_wrap_open(): void
 {
     echo '<div class="col-12">';
 }
 
-function uamswp_landing_page_title_inner_1()
+function uamswp_landing_page_title_inner_1(): void
 {
     if (empty($page_landing_page_cover_image)) {
         $page_landing_page_cover_image = get_field('page_landing_page_cover_image', get_the_id());
@@ -292,7 +292,7 @@ function uamswp_landing_page_title_inner_1()
     <div class="landing-page-title-heading">';
 }
 
-function uamswp_landing_page_title_do_post_title()
+function uamswp_landing_page_title_do_post_title(): void
 {
     $page_landing_page_heading = get_field('page_landing_page_heading', get_the_id());
 
@@ -305,12 +305,12 @@ function uamswp_landing_page_title_do_post_title()
     echo '</h1>';
 }
 
-function uamswp_landing_page_title_inner_2()
+function uamswp_landing_page_title_inner_2(): void
 {
     echo '</div>';
 }
 
-function uamswp_landing_page_title_lead_paragraph()
+function uamswp_landing_page_title_lead_paragraph(): void
 {
     if (empty($page_landing_page_description)) {
         $page_landing_page_description = get_field('page_landing_page_description', get_the_ID());
@@ -323,17 +323,17 @@ function uamswp_landing_page_title_lead_paragraph()
     }
 }
 
-function uamswp_landing_page_title_inner_3()
+function uamswp_landing_page_title_inner_3(): void
 {
     echo '</div>';
 }
 
-function uamswp_landing_page_title_wrap_close()
+function uamswp_landing_page_title_wrap_close(): void
 {
     echo '</div>';
 }
 
-function uamswp_page_hero()
+function uamswp_page_hero(): void
 {
     // $id = 'header';
     $hero_rows = get_field('page_hero', get_the_id())['hero'];
@@ -359,11 +359,11 @@ function uamswp_hide_breadcrumbs()
         $id = get_the_id();
         $hidebreadcrumbs = true;
     }
+
     if ($hidebreadcrumbs) {
         return $id;
-    } else {
-        return false;
     }
+    return false;
 }
 
 /**
@@ -374,7 +374,7 @@ function uamswp_hide_breadcrumbs()
  * @author Josh Daugherty
  */
 add_action('template_redirect', 'remove_breadcrumbs');
-function remove_breadcrumbs()
+function remove_breadcrumbs(): void
 {
     if (uamswp_hide_breadcrumbs()) {
         remove_action('genesis_after_header', 'genesis_do_breadcrumbs');
@@ -385,34 +385,32 @@ function remove_breadcrumbs()
 /**
  * Use h1 for all entry titles, linking if on archive page
  */
-function uamswp_entry_title_h1($title)
+function uamswp_entry_title_h1($title): string
 {
     $post_title = get_the_title(get_the_ID());
     $post_link = get_the_permalink(get_the_ID());
     if (is_archive()) {
-        $title = '<h2 class="entry-title" itemprop="headline"><a href="'.$post_link.'">'.$post_title.'</a></h2>';
-    } else {
-        $title = '<h1 class="entry-title" itemprop="headline">'.$post_title.'</h1>';
+        return '<h2 class="entry-title" itemprop="headline"><a href="'.$post_link.'">'.$post_title.'</a></h2>';
     }
 
-    return $title;
+    return '<h1 class="entry-title" itemprop="headline">'.$post_title.'</h1>';
 }
+
 add_filter('genesis_post_title_output', 'uamswp_entry_title_h1');
 
 // Customize the entry meta in the entry header (requires HTML5 theme support)
 add_filter('genesis_post_info', 'uamswp_post_info_filter');
-function uamswp_post_info_filter($post_info)
+function uamswp_post_info_filter($post_info): ?string
 {
     if (is_single() && get_post_type() == 'post') {
         $author_info = get_field('post_hide_author');
         if ($author_info) {
-            $post_info = 'Posted on [post_date]';
-        } else {
-            $post_info = 'Posted by [post_author_posts_link] on [post_date]';
+            return 'Posted on [post_date]';
         }
 
-        return $post_info;
+        return 'Posted by [post_author_posts_link] on [post_date]';
     }
+    return null;
 }
 
 // Relocate post info
@@ -425,8 +423,10 @@ function uamswp_list_child_pages()
     if ((get_post_meta(get_the_id(), 'page_hide_child_menu', true)) || (count(get_pages('child_of='.get_the_id())) === 0) || is_search()) { // If it's suppressed or none available, set to false
         $hidechildmenu = true;
     }
+
     if (! $hidechildmenu) {
         return uamswp_list_child_posts('page', 'Subpages');
     }
 }
+
 add_action('genesis_after_entry', 'uamswp_list_child_pages');

@@ -10,7 +10,7 @@ declare(strict_types=1);
 // (Removing them when the theme is switched away is deferred: see #574, because the
 // Gravity Forms access is intentional site policy and may be meant to persist.)
 add_action('after_switch_theme', 'uamswp_editor_users');
-function uamswp_editor_users()
+function uamswp_editor_users(): void
 {
     $role = get_role('editor');
     $role->add_cap('edit_theme_options');
@@ -29,16 +29,11 @@ function uamswp_editor_users()
     $role->add_cap('gravityforms_view_entry_notes');
     $role->add_cap('gravityforms_edit_entry_notes');
 }
-add_action('admin_menu', 'custom_admin_menu');
-function custom_admin_menu()
-{
-    $user = new WP_User(get_current_user_id());
-    if (! empty($user->roles) && is_array($user->roles)) {
-        foreach ($user->roles as $role) {
-            $role = $role;
-        }
-    }
 
+add_action('admin_menu', 'custom_admin_menu');
+function custom_admin_menu(): void
+{
+    new WP_User(get_current_user_id());
     if (isset($role) && $role == 'editor') {
         remove_submenu_page('themes.php', 'themes.php');
         remove_submenu_page('themes.php', 'widgets.php');
@@ -59,17 +54,19 @@ function custom_admin_menu()
  *
  */
 add_action('admin_init', 'uamswp_restrict_editor_theme_screens');
-function uamswp_restrict_editor_theme_screens()
+function uamswp_restrict_editor_theme_screens(): void
 {
     // Administrators (and super admins) always pass.
     if (current_user_can('manage_options')) {
         return;
     }
+
     // Only enforce against users who actually hold the editor role.
     $user = wp_get_current_user();
     if (! ($user instanceof WP_User) || ! in_array('editor', (array) $user->roles, true)) {
         return;
     }
+
     // Deny direct access to exactly the screens custom_admin_menu() hides.
     global $pagenow;
     if (in_array($pagenow, ['themes.php', 'widgets.php'], true)) {
@@ -86,10 +83,11 @@ function uamswp_restrict_editor_theme_screens()
  *
  */
 
-function uamswp_user_last_login($user_login, $user)
+function uamswp_user_last_login($user_login, $user): void
 {
     update_user_meta($user->ID, 'last_login', time());
 }
+
 add_action('wp_login', 'uamswp_user_last_login', 10, 2);
 
 /*
@@ -103,10 +101,10 @@ function uamswp_lastlogin()
     if (! is_user_logged_in()) {
         return '';
     }
-    $last_login = get_the_author_meta('last_login');
-    $the_login_date = human_time_diff($last_login);
 
-    return $the_login_date;
+    $last_login = get_the_author_meta('last_login');
+
+    return human_time_diff($last_login);
 }
 
 /*
@@ -127,6 +125,7 @@ function uamswp_modify_user_table($column)
 
     return $column;
 }
+
 add_filter('manage_users_columns', 'uamswp_modify_user_table');
 
 function uamswp_modify_user_table_row($val, $column_name, $user_id)
@@ -136,7 +135,7 @@ function uamswp_modify_user_table_row($val, $column_name, $user_id)
             $the_login_date = __('Never', 'uamswp');
             $last_login = get_the_author_meta('last_login', $user_id);
             if ($last_login) {
-                $the_login_date = human_time_diff($last_login);
+                return human_time_diff($last_login);
             }
 
             return $the_login_date;
@@ -145,4 +144,5 @@ function uamswp_modify_user_table_row($val, $column_name, $user_id)
 
     return $val;
 }
+
 add_filter('manage_users_custom_column', 'uamswp_modify_user_table_row', 10, 3);

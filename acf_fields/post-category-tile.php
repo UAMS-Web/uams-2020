@@ -88,7 +88,7 @@ return [
     ],
     [
         'key' => 'field_post_tile_post_button_text'.$suffix,
-        'label' => 'Post Link\'s Button Text',
+        'label' => "Post Link's Button Text",
         'name' => 'post_tile_post_button_text',
         'type' => 'text',
         'instructions' => 'Text for the button linking to the individual post',
@@ -107,7 +107,7 @@ return [
     ],
     [
         'key' => 'field_post_tile_category_button_text'.$suffix,
-        'label' => 'Category Link\'s Button Text',
+        'label' => "Category Link's Button Text",
         'name' => 'post_tile_category_button_text',
         'type' => 'text',
         'instructions' => 'Text for the button linking to the full category',

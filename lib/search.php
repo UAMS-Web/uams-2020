@@ -12,9 +12,9 @@ declare(strict_types=1);
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 add_filter('get_search_form', 'uamswp_search_form');
-function uamswp_search_form($form)
+function uamswp_search_form($form): string
 {
-    $form = '<form class="uams-search" role="search" method="get" id="searchform" action="'.home_url('/').'" >
+    return '<form class="uams-search" role="search" method="get" id="searchform" action="'.home_url('/').'" >
     <div class="input-group">
         <input type="search" class="form-control" id="uams-search-bar" value="'.get_search_query().'" placeholder="'.esc_attr__('Search', 'uams-2020').'..." name="s" autocomplete="off" aria-label="Enter search text">
         <div class="input-group-append">
@@ -33,6 +33,4 @@ function uamswp_search_form($form)
         </div>
     </div>
     </form>';
-
-    return $form;
 }

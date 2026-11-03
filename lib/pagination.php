@@ -35,6 +35,7 @@ function uamswp_genesis_next_link_text_numeric($text)
 
     return $text;
 }
+
 // Pagination fix for /%category%/%postname%/
 function remove_page_from_query_string($query_string)
 {
@@ -47,4 +48,5 @@ function remove_page_from_query_string($query_string)
 
     return $query_string;
 }
+
 add_filter('request', 'remove_page_from_query_string');

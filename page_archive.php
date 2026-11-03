@@ -7,7 +7,7 @@ declare(strict_types=1);
 remove_action('genesis_entry_content', 'genesis_do_post_content');
 add_action('genesis_entry_content', 'genesis_page_archive_content');
 
-function genesis_page_archive_content()
+function genesis_page_archive_content(): void
 {
     $heading = (genesis_a11y('headings') ? 'h2' : 'h4');
     genesis_sitemap($heading);

@@ -14,8 +14,17 @@ if (! defined('CHILD_THEME_VERSION')) {
 }
 
 add_action('genesis_setup', 'uamswp_childtheme_setup', 15);
+function uams_custom_add_image_size_names($sizes): array
+{
+    return array_merge($sizes, [
+        'content-image-side' => __('Content image aligned left/right'),
+        'content-image-center' => __('Content image aligned center'),
+        'content-image-wide' => __('Content image aligned wide'),
+        'content-image-full' => __('Content image aligned full'),
+    ]);
+}
 
-function uamswp_childtheme_setup()
+function uamswp_childtheme_setup(): void
 {
     // Start the engine
     include_once get_template_directory().'/lib/init.php';
@@ -124,15 +133,6 @@ function uamswp_childtheme_setup()
 
     // Add custom image sizes to post editor
     add_filter('image_size_names_choose', 'uams_custom_add_image_size_names');
-    function uams_custom_add_image_size_names($sizes)
-    {
-        return array_merge($sizes, [
-            'content-image-side' => __('Content image aligned left/right'),
-            'content-image-center' => __('Content image aligned center'),
-            'content-image-wide' => __('Content image aligned wide'),
-            'content-image-full' => __('Content image aligned full'),
-        ]);
-    }
 
     // Add Accessibility support
     add_theme_support('genesis-accessibility', ['404-page', 'drop-down-menu', 'headings', 'rems', 'search-form', 'skip-links']);
@@ -142,7 +142,7 @@ function uamswp_childtheme_setup()
 
     // Include php files from lib folder
     // @link https://gist.github.com/theandystratton/5924570
-    foreach (glob(dirname(__FILE__).'/lib/*.php') as $file) {
+    foreach (glob(__DIR__.'/lib/*.php') as $file) {
         include $file;
     }
 
@@ -160,7 +160,7 @@ add_action('genesis_before_header', 'uamswp_skip_links', 5);
  *
  * @return void Return early if skip links are not supported.
  */
-function uamswp_skip_links()
+function uamswp_skip_links(): void
 {
 
     if (! genesis_a11y('skip-links')) {
@@ -227,7 +227,7 @@ add_filter('genesis_attr_site-header', 'uamswp_add_aria');
 function uamswp_add_aria($attributes)
 {
     if (isset($attributes['aria-label'])) {
-        $attributes['aria-label'] = $attributes['aria-label'].'Site Header';
+        $attributes['aria-label'] .= 'Site Header';
     } else {
         $attributes['aria-label'] = 'Site Header';
     }
@@ -236,7 +236,7 @@ function uamswp_add_aria($attributes)
 }
 
 add_filter('genesis_home_crumb', 'uams_breadcrumb_home_icon');
-function uams_breadcrumb_home_icon($crumb)
+function uams_breadcrumb_home_icon($crumb): string
 {
     if ((uams_get_site_info()['site'] == 'uamshealth' && uams_get_site_info()['subsite'] == 'main') || (uams_get_site_info()['site'] == 'uamshealth' && is_front_page())) {
         $crumb = '<a href="'.uams_get_home_link().'" title="UAMS Health"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">UAMS Health</span></a><meta itemprop="position" content="1">';
@@ -262,7 +262,7 @@ add_filter('genesis_single_crumb', 'uams_breadcrumb_home');
 function uams_breadcrumb_home($crumb)
 {
     if (is_front_page()) {
-        $crumb = uams_site_title();
+        return uams_site_title();
     }
 
     return $crumb;
@@ -341,7 +341,7 @@ function sp_pro_breadcrumbs_crumbs($crumbs)
     // var_dump($crumbs);
     return $crumbs;
 }
-function sp_pro_breadcrumbs_css()
+function sp_pro_breadcrumbs_css(): bool
 {
     // Disable breadcrumbs inline CSS
     return false;
@@ -360,20 +360,17 @@ function sp_pro_breadcrumbs_html($html) {
 /** Returns site & subsite info **/
 if (! function_exists('uams_get_site_info')) {
 
-    function uams_get_site_info()
+    function uams_get_site_info(): array
     {
         $site = '';
         $subsite = '';
-        $department = '';
-        $option_name = 'uamswp_options'; // Settings page
+        $department = ''; // Settings page
         $siteinfo = [];
         if (! class_exists('acf')) {
             // Set base defaults if no ACF
             $siteinfo = ['site' => 'uams', 'subsite' => 'uams', 'department' => 'uams'];
 
             return $siteinfo;
-
-            return;
         }
         /* Replace get_field functions with get_option - Remove ACF called too early errors */
         $themestyle = get_option('options_uamswp_template'); // get_field( 'uamswp_template', 'option' ); // uams, inside, health
@@ -474,9 +471,8 @@ if (! function_exists('uams_get_site_info')) {
                 $subsite = 'uams';
             }
         }
-        $siteinfo = ['site' => $site, 'subsite' => $subsite, 'department' => $department];
 
-        return $siteinfo;
+        return ['site' => $site, 'subsite' => $subsite, 'department' => $department];
     }
 
 }
@@ -494,12 +490,10 @@ if (! function_exists('uams_get_permalink')) {
         $external_url = get_post_meta($postID, 'post_custom_link', true);
         $post_format = get_post_format($postID);
         if (! empty($external_url) && ($post_format == 'link')) {
-            $link = $external_url;
-        } else {
-            $link = get_permalink($postID);
+            return $external_url;
         }
 
-        return $link;
+        return get_permalink($postID);
     }
 
 }
@@ -511,9 +505,8 @@ if (! function_exists('uams_site_title')) {
     {
         if (uams_get_site_info()['site'] == 'uamshealth' && uams_get_site_info()['subsite'] == 'main') {
             return 'UAMS Health';
-        } else {
-            return get_bloginfo('name');
         }
+        return get_bloginfo('name');
     }
 
 }
@@ -521,7 +514,7 @@ if (! function_exists('uams_site_title')) {
 /* returns home link for breadcrumbs, logo & anywhere else */
 if (! function_exists('uams_get_home_link')) {
 
-    function uams_get_home_link()
+    function uams_get_home_link(): string
     {
         if ((uams_get_site_info()['site'] == 'uams') || (uams_get_site_info()['site'] == 'institute')) {
             $homelink = 'https://www.uams.edu';
@@ -537,7 +530,7 @@ if (! function_exists('uams_get_home_link')) {
 }
 
 /* Helper Functions */
-function startsWith($haystack, $needle)
+function startsWith($haystack, $needle): bool
 {
     $length = strlen($needle);
 
@@ -570,22 +563,16 @@ function format_phone_us($phone)
     switch ($length) {
         case 7:
             return preg_replace('/([0-9]{3})([0-9]{4})/', '$1-$2', $phone);
-            break;
         case 10:
             return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})/', '($1) $2-$3', $phone);
-            break;
         case 11:
-            return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/', '($2) $3-$4', $phone); // Removed country code
-            break;
+            return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/', '($2) $3-$4', $phone);
         case 15:
-            return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '($1) $2-$3 Ext. $4', $phone); // Removed country code
-            break;
+            return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '($1) $2-$3 Ext. $4', $phone);
         case 16:
-            return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '($2) $3-$4 Ext. $5', $phone); // Removed country code
-            break;
+            return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '($2) $3-$4 Ext. $5', $phone);
         default:
             return $phone;
-            break;
     }
 }
 
@@ -601,35 +588,28 @@ function format_phone_dash($phone)
     switch ($length) {
         case 7:
             return preg_replace('/([0-9]{3})([0-9]{4})/', '$1-$2', $phone);
-            break;
         case 10:
             return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})/', '$1-$2-$3', $phone);
-            break;
         case 11:
-            return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/', '$2-$3-$4', $phone); // Removed country code
-            break;
+            return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/', '$2-$3-$4', $phone);
         case 15:
-            return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '$1-$2-$3,$4', $phone); // Removed country code
-            break;
+            return preg_replace('/([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '$1-$2-$3,$4', $phone);
         case 16:
-            return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '$2-$3-$4,$5', $phone); // Removed country code
-            break;
+            return preg_replace('/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{5})/', '$2-$3-$4,$5', $phone);
         default:
             return $phone;
-            break;
     }
 }
 
 if (! function_exists('apStyleDate')) {
-    function apStyleDate($date)
+    function apStyleDate($date): string
     {
 
         $date = strftime('%l:%M %P', strtotime($date));
 
         $date = str_replace(':00', '', $date);
-        $date = str_replace('m', '.m.', $date);
 
-        return $date;
+        return str_replace('m', '.m.', $date);
 
     }
 }
@@ -640,7 +620,7 @@ class SlidingWindowRateLimiter
 
     private $timeWindow;
 
-    private $storage;
+    private array $storage;
 
     public function __construct($limit, $timeWindow)
     {
@@ -649,19 +629,17 @@ class SlidingWindowRateLimiter
         $this->storage = [];
     }
 
-    public function isRequestAllowed($clientId)
+    public function isRequestAllowed($clientId): bool
     {
         $currentTime = time();
         $windowStart = $currentTime - $this->timeWindow;
 
-        if (! isset($this->storage[$clientId])) {
-            $this->storage[$clientId] = [];
-        }
+        $this->storage[$clientId] ??= [];
 
         // Remove outdated timestamps
         $this->storage[$clientId] = array_filter(
             $this->storage[$clientId],
-            fn ($timestamp) => $timestamp > $windowStart
+            fn ($timestamp): bool => $timestamp > $windowStart
         );
 
         if (count($this->storage[$clientId]) < $this->limit) {
@@ -814,7 +792,7 @@ add_filter('cron_schedules', function ($schedules) {
 /**
  * Process the image resizing queue
  */
-add_action('process_image_sizer_queue', function () {
+add_action('process_image_sizer_queue', function (): void {
     $queue = get_option('image_sizer_queue', []);
     if (empty($queue)) {
         return;
@@ -861,7 +839,7 @@ add_action('process_image_sizer_queue', function () {
 /**
  * Add admin action to manually trigger queue processing
  */
-add_action('admin_init', function () {
+add_action('admin_init', function (): void {
     if (isset($_GET['process_image_queue']) && current_user_can('manage_options')) {
         check_admin_referer('process_image_queue_nonce');
         do_action('process_image_sizer_queue');
@@ -873,7 +851,7 @@ add_action('admin_init', function () {
 /**
  * Add manual trigger link to media library
  */
-add_action('admin_notices', function () {
+add_action('admin_notices', function (): void {
     if (get_current_screen()->id !== 'upload' || ! current_user_can('manage_options')) {
         return;
     }
@@ -897,7 +875,7 @@ add_action('admin_notices', function () {
 // option were never cleaned up. Clear them when this theme is switched away instead.
 // (Gating the queue so anonymous page views cannot enqueue work is a behaviour change
 // left for review: see #577.)
-add_action('switch_theme', function ($new_name, $new_theme, $old_theme) {
+add_action('switch_theme', function ($new_name, $new_theme, $old_theme): void {
     if ($old_theme && $old_theme->get_stylesheet() === 'uams-2020') {
         wp_clear_scheduled_hook('process_image_sizer_queue');
         delete_option('image_sizer_queue');
@@ -941,11 +919,11 @@ function gallery_image_dimension($breakpoint, $columns, $density = 1, $ratio = 0
         $dimension = ($viewportwidth - (2 * $modulepadding) - (($columns - 1) * 30)) / $columns;
 
         if ($ratio != 0) {
-            $dimension = $dimension / $ratio;
+            $dimension /= $ratio;
         }
 
         if ($density > 1) {
-            $dimension = $dimension * 2;
+            $dimension *= 2;
         }
     }
 
@@ -975,7 +953,7 @@ function footer_widgets($params)
 }
 
 add_action('admin_enqueue_scripts', 'enqueue_admin_style_sheet');
-function enqueue_admin_style_sheet()
+function enqueue_admin_style_sheet(): void
 {
 
     wp_register_style('admin-css', get_stylesheet_directory_uri().'/assets/css/admin.css', false, '1.0.0');
@@ -991,7 +969,7 @@ add_action('rest_api_init', 'rest_api_filter_add_filters');
 /**
  * Add the necessary filter to each post type
  **/
-function rest_api_filter_add_filters()
+function rest_api_filter_add_filters(): void
 {
     foreach (get_post_types(['show_in_rest' => true], 'objects') as $post_type) {
         add_filter('rest_'.$post_type->name.'_query', 'rest_api_filter_add_filter_param', 10, 2);
@@ -1045,7 +1023,7 @@ function rlv_search_all_blogs($query)
 
 // Add Google Tag Manager code in <head>
 add_action('wp_head', 'uamswp_gtm_1');
-function uamswp_gtm_1()
+function uamswp_gtm_1(): void
 {
     $gtm = get_option('options_google_tag_manager_id');
     $gtm_disable = get_option('options_google_tag_manager_disable');
@@ -1065,7 +1043,7 @@ function uamswp_gtm_1()
 }
 // Add Google Tag Manager code immediately below opening <body> tag
 add_action('genesis_before', 'uamswp_gtm_2');
-function uamswp_gtm_2()
+function uamswp_gtm_2(): void
 {
     $gtm = get_option('options_google_tag_manager_id');
     $gtm_disable = get_option('options_google_tag_manager_disable');
@@ -1096,7 +1074,7 @@ function uamswp_validate_gtm_id($valid, $value)
 
 add_filter('big_image_size_threshold', '__return_false');
 
-function uamswp_list_child_posts($posttype, $posttitle)
+function uamswp_list_child_posts($posttype, $posttitle): void
 {
     if (! isset($posttype)) {
         $posttype = 'page'; // What post_type
@@ -1187,15 +1165,13 @@ add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context
 add_filter('acf/prepare_field/name=geo_valid', 'uamswp_set_geo');
 add_filter('acf/update_value/name=geo_valid', 'uamswp_force_geo', 10, 3);
 
-function uamswp_force_geo($value, $post_id, $field)
+function uamswp_force_geo($value, $post_id, $field): string
 {
     if (function_exists('geoip_detect2_get_external_ip_adress')) {
-        $value = 'true';
-    } else {
-        $value = 'false';
+        return 'true';
     }
 
-    return $value;
+    return 'false';
 }
 function uamswp_set_geo($field)
 {
@@ -1213,7 +1189,7 @@ function uamswp_set_geo($field)
 
 // Password reset to include /uams-login/
 add_filter('retrieve_password_message', 'my_retrieve_password_message', 10, 4);
-function my_retrieve_password_message($message, $key, $user_login, $user_data)
+function my_retrieve_password_message($message, $key, $user_login, $user_data): string
 {
     // Start with the default content.
     $site_name = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
@@ -1238,7 +1214,7 @@ function my_retrieve_password_message($message, $key, $user_login, $user_data)
     return $message;
 }
 /* Unregister blocks */
-add_action('init', function () {
+add_action('init', function (): void {
     $registry = WP_Block_Type_Registry::get_instance();
     // All extra blocks
     // WP SEO
@@ -1297,7 +1273,7 @@ add_action('init', function () {
     // unregister_block_type( '' );
 }, PHP_INT_MAX);
 
-add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context) {
+add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context): array {
     $blocks = array_keys(WP_Block_Type_Registry::get_instance()->get_all_registered());
 
     $removelist = [

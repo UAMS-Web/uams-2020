@@ -32,21 +32,24 @@ function uamswp_section_allowed_blocks()
  * Safe outside block context (flexible content modules, widgets): $block and
  * $is_preview are not set there, so this returns false.
  */
-function uamswp_block_placeholder($block = null, $is_preview = false)
+function uamswp_block_placeholder($block = null, $is_preview = false): bool
 {
     if (empty($is_preview) || empty($block) || ! is_array($block)) {
         return false;
     }
+
     $data = isset($block['data']) && is_array($block['data']) ? $block['data'] : [];
     foreach ($data as $key => $value) {
         // ACF stores "_field_name" => field key reference entries alongside values.
         if (is_string($key) && strpos($key, '_') === 0) {
             continue;
         }
-        if ($value !== '' && $value !== null && $value !== [] && $value !== false && $value !== '0') {
+
+        if (!in_array($value, ['', null, [], false, '0'], true)) {
             return false;
         }
     }
+
     $title = ! empty($block['title']) ? $block['title'] : __('UAMS block');
     printf(
         '<div class="uams-block-placeholder" style="padding:1.5rem;border:1px dashed currentColor;text-align:center;"><strong>%s</strong><br>%s</div>',
@@ -58,7 +61,7 @@ function uamswp_block_placeholder($block = null, $is_preview = false)
 }
 
 add_action('acf/init', 'uams_register_blocks');
-function uams_register_blocks()
+function uams_register_blocks(): void
 {
 
     // check function exists.
@@ -138,6 +141,7 @@ function uams_register_blocks()
                 'render_template' => 'blocks/news.php',
             ]);
         }
+
         acf_register_block_type([
             'name' => 'text-overlay',
             'title' => __('UAMS Text & Image Overlay'),
@@ -713,11 +717,12 @@ if (function_exists('acf_add_local_field_group')) {
  * UAMS iFrame block fields.
  */
 add_action('acf/init', 'uamswp_iframe_block_fields');
-function uamswp_iframe_block_fields()
+function uamswp_iframe_block_fields(): void
 {
     if (! function_exists('acf_add_local_field_group')) {
         return;
     }
+
     acf_add_local_field_group([
         'key' => 'group_block_uams_iframe',
         'title' => 'Block: UAMS iFrame',
@@ -774,7 +779,7 @@ function uamswp_iframe_block_fields()
  * Hosts the UAMS iFrame block may embed. Empty array = any https host.
  * Filter to lock this down, e.g. return array( 'calendar.uams.edu', 'www.google.com' );
  */
-function uamswp_iframe_allowed_hosts()
+function uamswp_iframe_allowed_hosts(): array
 {
     return (array) apply_filters('uamswp_iframe_allowed_hosts', []);
 }
@@ -788,6 +793,7 @@ function uamswp_iframe_url_is_allowed($url)
     if (empty($parts['scheme']) || strtolower($parts['scheme']) !== 'https' || empty($parts['host'])) {
         return false;
     }
+
     $hosts = uamswp_iframe_allowed_hosts();
 
     return empty($hosts) || in_array(strtolower($parts['host']), array_map('strtolower', $hosts), true);
@@ -804,8 +810,7 @@ add_filter('acf/validate_value/key=field_iframe_url_b', function ($valid, $value
 // Only administrators can see/edit the iframe fields. Non-admins editing a page
 // that already contains the block see the preview but no fields.
 foreach (['field_iframe_url_b', 'field_iframe_title_b', 'field_iframe_height_b', 'field_iframe_fullscreen_b'] as $uamswp_iframe_field_key) {
-    add_filter('acf/prepare_field/key='.$uamswp_iframe_field_key, function ($field) {
-        return current_user_can('manage_options') ? $field : false;
-    });
+    add_filter('acf/prepare_field/key='.$uamswp_iframe_field_key, fn($field) => current_user_can('manage_options') ? $field : false);
 }
+
 unset($uamswp_iframe_field_key);

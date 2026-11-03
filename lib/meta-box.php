@@ -16,6 +16,7 @@ function my_acf_show_admin($show)
     return current_user_can('manage_options');
 
 }
+
 // Create Options Page
 if (function_exists('acf_add_options_page')) {
 
@@ -31,6 +32,7 @@ if (function_exists('acf_add_options_page')) {
     ]);
 
 }
+
 // Add metaboxes for Settings page
 if (function_exists('acf_add_local_field_group')) {
 

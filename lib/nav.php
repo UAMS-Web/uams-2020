@@ -40,15 +40,17 @@ function uamswp_nav_subsection()
         }
 
     }
+
     if (is_search()) {
         $subsection = false;
     }
+
     if ($subsection) {
         return $id;
-    } else {
-        return false;
     }
+    return false;
 }
+
 /**
  * Remove Primary Navigation if page or parent is subsection
  *
@@ -57,12 +59,13 @@ function uamswp_nav_subsection()
  * @author Todd McKee
  */
 add_action('genesis_before', 'remove_primary_nav');
-function remove_primary_nav()
+function remove_primary_nav(): void
 {
     if (uamswp_nav_subsection() || ! has_nav_menu('primary')) {
         remove_action('genesis_after_header', 'genesis_do_nav');
     }
 }
+
 /**
  * Add list_pages Primary Navigation if page or parent is subsection
  *
@@ -71,7 +74,7 @@ function remove_primary_nav()
  * @author Todd McKee
  */
 add_action('genesis_after_header', 'custom_nav_menu', 5);
-function custom_nav_menu()
+function custom_nav_menu(): void
 {
     $registered_nav_menus = get_registered_nav_menus();
     if (uamswp_nav_subsection()) {
@@ -107,6 +110,7 @@ function custom_nav_menu()
                     $excluded_pages[] = $the_page->ID;
                 }
             }
+
             $excluded_pages[] = get_option('page_on_front');
             // Build a menu listing top level parent's children
             $args = [
@@ -187,6 +191,7 @@ function custom_nav_menu()
                     $excluded_pages[] = $the_page->ID;
                 }
             }
+
             $excluded_pages[] = get_option('page_on_front');
             // Build a menu listing top level parent's children
             $args = [
@@ -291,7 +296,7 @@ function uamswp_nav_menu_markup_filter($html, $args)
 }
 
 // * Navigation Extras
-function uamswp_navbar_content_markup()
+function uamswp_navbar_content_markup(): string
 {
     $url = get_home_url();
 
@@ -323,7 +328,7 @@ function uamswp_navbar_content_markup()
 // * Filter primary navigation output to match Bootstrap markup
 // @link http://wordpress.stackexchange.com/questions/58377/using-a-filter-to-modify-genesis-wp-nav-menu/58394#58394
 add_filter('genesis_do_nav', 'uamswp_override_do_nav', 10, 3);
-function uamswp_override_do_nav($nav_output, $nav, $args)
+function uamswp_override_do_nav($nav_output, $nav, $args): string
 {
     // return the modified result
     return sprintf('%1$s', $nav);
@@ -331,7 +336,7 @@ function uamswp_override_do_nav($nav_output, $nav, $args)
 }
 
 remove_action('genesis_before_loop', 'genesis_do_breadcrumbs');
-function sp_breadcrumb_after_header()
+function sp_breadcrumb_after_header(): void
 {
     if (function_exists('seopress_display_breadcrumbs')) {
         seopress_display_breadcrumbs();
@@ -339,4 +344,5 @@ function sp_breadcrumb_after_header()
         add_action('genesis_after_header', 'genesis_do_breadcrumbs');
     }
 }
+
 add_action('genesis_after_header', 'sp_breadcrumb_after_header');

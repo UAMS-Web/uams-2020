@@ -15,20 +15,20 @@ declare(strict_types=1);
 // Custom footer widget area
 add_filter('genesis_footer_widget_areas', 'uamswp_footer_widget_areas', 10, 2);
 
-function uamswp_footer_widget_areas($output, $footer_widgets)
+function uamswp_footer_widget_areas($output, $footer_widgets): ?string
 {
 
     $footer_widgets = get_theme_support('genesis-footer-widgets');
 
     if (! $footer_widgets || ! isset($footer_widgets[0]) || ! is_numeric($footer_widgets[0])) {
-        return;
+        return null;
     }
 
     $footer_widgets = (int) $footer_widgets[0];
 
     // * Check to see if first widget area has widgets. If not, do nothing. No need to check all footer widget areas.
     if (! is_active_sidebar('footer-1')) {
-        return;
+        return null;
     }
 
     switch ($footer_widgets) {

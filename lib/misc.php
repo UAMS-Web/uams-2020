@@ -28,24 +28,19 @@ function uamswp_post_image()
 }
 
 // Get the First Image Attachment Function
-function uamswp_get_first_image()
+function uamswp_get_first_image(): string
 {
     global $post, $posts;
-    $first_img = '';
     ob_start();
     ob_end_clean();
-    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
-    $first_img = '';
-    if (isset($matches[1][0])) {
-        $first_img = $matches[1][0];
-    }
+    preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
 
-    return $first_img;
+    return $matches[1][0] ?? '';
 }
 
 // Custom Meta
 add_action('genesis_meta', 'uamswp_do_meta');
-function uamswp_do_meta()
+function uamswp_do_meta(): void
 {
     // Jumbotron
     if (is_front_page() && is_active_sidebar('home-featured')) {
@@ -127,7 +122,7 @@ add_filter('genesis_pre_get_option_site_layout', '__genesis_return_full_width_co
 // Remove gutenberg blocks
 // add_filter( 'allowed_block_types', 'uamswp_allowed_block_types' );
 
-function uamswp_allowed_block_types($allowed_blocks)
+function uamswp_allowed_block_types($allowed_blocks): array
 {
 
     // get widget blocks and registered by plugins blocks
@@ -234,7 +229,7 @@ function uamswp_disable_editor($id = false)
     $id = intval($id);
     $template = get_page_template_slug($id);
 
-    return in_array($id, $excluded_ids) || in_array($template, $excluded_templates);
+    return in_array($id, $excluded_ids, true) || in_array($template, $excluded_templates);
 }
 
 /**
@@ -243,24 +238,25 @@ function uamswp_disable_editor($id = false)
 function uamswp_disable_gutenberg($can_edit, $post_type)
 {
 
-    if (! (is_admin() && ! empty($_GET['post']))) {
+    if (!is_admin() || empty($_GET['post'])) {
         return $can_edit;
     }
 
     if (uamswp_disable_editor($_GET['post'])) {
-        $can_edit = false;
+        return false;
     }
 
     return $can_edit;
 
 }
+
 add_filter('gutenberg_can_edit_post_type', 'uamswp_disable_gutenberg', 10, 2);
 add_filter('use_block_editor_for_post_type', 'uamswp_disable_gutenberg', 10, 2);
 
 /**
  * Disable Classic Editor by template
  */
-function uamswp_disable_classic_editor()
+function uamswp_disable_classic_editor(): void
 {
 
     $screen = get_current_screen();
@@ -273,4 +269,5 @@ function uamswp_disable_classic_editor()
     }
 
 }
+
 add_action('admin_head', 'uamswp_disable_classic_editor');

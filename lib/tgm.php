@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 // TGM Plugin Activation
 add_action('tgmpa_register', 'uamswp_do_plugins_register');
-function uamswp_do_plugins_register()
+function uamswp_do_plugins_register(): void
 {
 
     $plugins = [
@@ -167,6 +167,7 @@ function uamswp_do_plugins_register()
     tgmpa($plugins, $config);
 
 }
+
 // Disable Plugin Nags
 function disable_plugin_updates($value)
 {
@@ -186,4 +187,5 @@ function disable_plugin_updates($value)
 
     return $value;
 }
+
 add_filter('site_transient_update_plugins', 'disable_plugin_updates');

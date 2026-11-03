@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @copyright    Copyright (c) 2017, Rotsen Mark Acob
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
-add_action('customize_register', function ($wp_customize) {
+add_action('customize_register', function ($wp_customize): void {
     // Add Default Settings
     $wp_customize->add_setting('uams-2020', [
         'capability' => 'edit_theme_options',

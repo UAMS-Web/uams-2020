@@ -13,7 +13,7 @@ declare(strict_types=1);
 */
 
 // Add .row div inside .wrap/.container div
-add_action('get_header', function () {
+add_action('get_header', function (): void {
     $wraps = [
         'footer-widgets',
     ];
@@ -30,8 +30,9 @@ function uamswp_filter_structural_wrap($output, $original_output)
     if ($original_output == 'close') {
         $output = '</div>'.$output;
     }
+
     if ($original_output == 'open') {
-        $output = $output.'<div class="row">';
+        return $output.'<div class="row">';
     }
 
     return $output;
@@ -40,7 +41,7 @@ function uamswp_filter_structural_wrap($output, $original_output)
 // Adds Filters Automatically from Array Keys
 // @link https://gist.github.com/bryanwillis/0f22c3ddb0d0b9453ad0
 add_action('genesis_meta', 'uamswp_add_array_filters_genesis_attr');
-function uamswp_add_array_filters_genesis_attr()
+function uamswp_add_array_filters_genesis_attr(): void
 {
     $filters = uamswp_merge_genesis_attr_classes();
 
@@ -59,7 +60,7 @@ function uamswp_add_markup_sanitize_classes($attr, $context)
         $classes = apply_filters('uamswp_clean_classes_output', $classes, $context, $attr);
     }
 
-    $value = isset($classes[$context]) ? $classes[$context] : [];
+    $value = $classes[$context] ?? [];
 
     if (is_array($value)) {
         $classes_array = $value;
@@ -149,7 +150,7 @@ function uamswp_merge_genesis_attr_classes()
     // $classes['site-footer'] = esc_attr( implode( ' ', $footerclasses ) );
 
     if (has_filter('uamswp_add_classes')) {
-        $classes = apply_filters('uamswp_add_classes', $classes);
+        return apply_filters('uamswp_add_classes', $classes);
     }
 
     return $classes;
@@ -159,9 +160,7 @@ function uamswp_merge_genesis_attr_classes()
 add_filter('uamswp_clean_classes_output', 'uamswp_modify_classes_based_on_extras', 10, 3);
 function uamswp_modify_classes_based_on_extras($classes, $context, $attr)
 {
-    $classes = uamswp_merge_genesis_attr_classes($classes);
-
-    return $classes;
+    return uamswp_merge_genesis_attr_classes();
 }
 
 // Layout
@@ -210,7 +209,5 @@ function uamswp_layout_options_modify_classes_to_add($classes_to_add)
 
 function uamswp_modify_classes_based_on_template($classes_to_add)
 {
-    $classes_to_add = uamswp_layout_options_modify_classes_to_add($classes_to_add);
-
-    return $classes_to_add;
+    return uamswp_layout_options_modify_classes_to_add($classes_to_add);
 }

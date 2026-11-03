@@ -620,24 +620,23 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
             'search_placeholder' => '',
         ],
     ];
-} else {
-    return [
-        [
-            'key' => 'field_news_not_available'.$suffix,
-            'label' => 'Not Available',
-            'name' => '',
-            'type' => 'message',
-            'instructions' => '',
-            'required' => 0,
-            'conditional_logic' => 0,
-            'wrapper' => [
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ],
-            'message' => 'This module is not available, please activate News Syndication plugin.',
-            'new_lines' => 'wpautop',
-            'esc_html' => 0,
-        ],
-    ];
 }
+return [
+    [
+        'key' => 'field_news_not_available'.$suffix,
+        'label' => 'Not Available',
+        'name' => '',
+        'type' => 'message',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
+        'message' => 'This module is not available, please activate News Syndication plugin.',
+        'new_lines' => 'wpautop',
+        'esc_html' => 0,
+    ],
+];

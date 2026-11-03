@@ -70,7 +70,7 @@ if (empty($action_type) && $button_text) { // If still empty (meaning page hasn'
     $action_type = 'url';
 }
 if (empty($phone_prepend)) {
-    $phone_prepend = get_field('cta_bar_phone_prepend') ? get_field('cta_bar_phone_prepend') : 'Call';
+    $phone_prepend = get_field('cta_bar_phone_prepend') ?: 'Call';
 }
 if (empty($phone)) {
     $phone = get_field('cta_bar_phone');
@@ -106,7 +106,7 @@ if (empty($image)) {
 if (empty($background_color)) {
     $background_color = get_field('cta_bar_background_color');
 }
-if ($background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto') {
+if (in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto'])) {
     $btn_color = 'primary';
 } else {
     $btn_color = 'white';

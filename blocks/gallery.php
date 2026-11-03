@@ -87,7 +87,7 @@ if ($more) {
     if (empty($more_button_description)) {
         $more_button_description = get_field('gallery_more_button_description');
     }
-    if (empty($more_button_color) && ($background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto')) {
+    if (empty($more_button_color) && (in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto']))) {
         $more_button_color = 'primary';
     } else {
         $more_button_color = 'white';

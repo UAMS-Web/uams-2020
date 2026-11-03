@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 // Theme Scripts & Stylesheet
 add_action('wp_enqueue_scripts', 'uamswp_theme_scripts');
-function uamswp_theme_scripts()
+function uamswp_theme_scripts(): void
 {
     $version = wp_get_theme()->Version;
     if (! is_admin()) {
@@ -91,7 +91,7 @@ function uamswp_theme_scripts()
 
 // Editor Styles
 add_action('init', 'uamswp_custom_editor_css');
-function uamswp_custom_editor_css()
+function uamswp_custom_editor_css(): void
 {
     add_editor_style(get_stylesheet_uri());
 }
@@ -137,12 +137,13 @@ function add_allowed_origins($origins)
 /**
  * Gutenberg scripts and styles
  */
-function uamswp_gutenberg_scripts()
+function uamswp_gutenberg_scripts(): void
 {
     wp_enqueue_script('theme-editor', get_stylesheet_directory_uri().'/assets/js/editor.js', ['wp-blocks', 'wp-dom'], filemtime(get_stylesheet_directory().'/assets/js/editor.js'), true);
     // Loaded in the head (not footer) so the transform filter exists before ACF registers its blocks.
     wp_enqueue_script('uamswp-content-transform', get_stylesheet_directory_uri().'/assets/js/uams-content-transform.js', ['wp-hooks', 'wp-blocks'], filemtime(get_stylesheet_directory().'/assets/js/uams-content-transform.js'), false);
 }
+
 add_action('enqueue_block_editor_assets', 'uamswp_gutenberg_scripts');
 
 /**
@@ -151,25 +152,27 @@ add_action('enqueue_block_editor_assets', 'uamswp_gutenberg_scripts');
  * enqueue_block_editor_assets, which only loads in the outer admin frame. The
  * is_admin() check keeps the font from double-loading on the front end.
  */
-function uamswp_block_canvas_assets()
+function uamswp_block_canvas_assets(): void
 {
     if (is_admin()) {
         wp_enqueue_style('theme-fonts', uamswp_theme_fonts_url());
     }
 }
+
 add_action('enqueue_block_assets', 'uamswp_block_canvas_assets');
 
 /**
  * Theme Fonts URL
  */
-function uamswp_theme_fonts_url()
+function uamswp_theme_fonts_url(): string
 {
     return 'https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap';
 }
+
 /**
  * Remove Gutenberg Block Directory
  */
-add_action('admin_init', function () {
+add_action('admin_init', function (): void {
     remove_action('enqueue_block_editor_assets', 'wp_enqueue_editor_block_directory_assets');
 });
 /**
@@ -177,7 +180,7 @@ add_action('admin_init', function () {
  */
 remove_theme_support('core-block-patterns');
 
-function uamswp_gutenberg_disable_all_colors_fonts()
+function uamswp_gutenberg_disable_all_colors_fonts(): void
 {
     /**
      * Disable colors
@@ -191,4 +194,5 @@ function uamswp_gutenberg_disable_all_colors_fonts()
     add_theme_support('editor-font-sizes', []);
     add_theme_support('disable-custom-font-sizes');
 }
+
 add_action('after_setup_theme', 'uamswp_gutenberg_disable_all_colors_fonts');

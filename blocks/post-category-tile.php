@@ -140,10 +140,10 @@ if ($geo_display) {
                                 media="(min-width: 1px)" 
                                 srcset="<?php echo image_sizer($image, 497, 497, 'center', 'center', 'aspect-1-1'); ?>">
                             <!-- Fallback -->
-                            <img src="<?php echo image_sizer($image, 496, 496, 'center', 'center', 'aspect-1-1'); ?>" alt="<?php echo esc_attr($alt_text ? $alt_text : ''); ?>" />
+                            <img src="<?php echo image_sizer($image, 496, 496, 'center', 'center', 'aspect-1-1'); ?>" alt="<?php echo esc_attr($alt_text ?: ''); ?>" />
                             <?php } else { ?>
                             <!-- Fallback -->
-                            <img src="<?php echo wp_get_attachment_image_url($image, 'aspect-16-9'); ?>" alt="<?php echo esc_attr($alt_text ? $alt_text : ''); ?>" />
+                            <img src="<?php echo wp_get_attachment_image_url($image, 'aspect-16-9'); ?>" alt="<?php echo esc_attr($alt_text ?: ''); ?>" />
                             <?php } // endif?>
                         </picture>
                     </div>

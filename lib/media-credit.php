@@ -18,11 +18,7 @@ function uamswp_attachment_fields_to_edit_source($form_fields, $post)
     $media_meta = wp_read_image_metadata($file);
     $media_credit = get_post_meta($post->ID, '_media_credit', true);
 
-    if (! isset($media_credit)) {
-
-        $media_credit = $media_meta['credit'];
-
-    }
+    $media_credit ??= $media_meta['credit'];
 
     $image_credit = '';
     if (isset(wp_get_attachment_metadata($post->ID)['image_meta']) && is_array(wp_get_attachment_metadata($post->ID)['image_meta'])) {
