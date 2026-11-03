@@ -1,25 +1,30 @@
 <?php
 
 /**
- * Integration bootstrap: boots WordPress through wp-phpunit.
+ * Integration bootstrap for a theme.
  *
- * Required by tests/bootstrap.php, after Composer's autoloader, only in the
- * Integration process. Configuration comes from WP_TESTS_* environment
- * variables, read in tests/Integration/wp-tests-config.php.
+ * The plugin template's tests/Integration/bootstrap.php with one difference:
+ * instead of requiring a plugin file on muplugins_loaded, it makes this
+ * checkout the active theme, from wherever the checkout sits, without writing
+ * an option. The recipe is the one `wp scaffold theme-tests` generates. Like
+ * the plugin's, it loads the Integration suite's own Composer setup in this
+ * directory, never the root's.
  */
 
 declare(strict_types=1);
 
-/*
- * Locate WordPress. Unset, WP_TESTS_ABSPATH defaults to the install this
- * checkout sits in (<wordpress>/wp-content/plugins/<plugin>/tests/Integration),
- * five levels up. Exported so wp-tests-config.php reads the same answer.
- *
- * A checkout that is not inside a WordPress install must set WP_TESTS_ABSPATH
- * to a core copy, for example one fetched with:
- *   wp core download --path=/tmp/wordpress
- *   WP_TESTS_ABSPATH=/tmp/wordpress composer test:integration
- */
+if (! is_readable(__DIR__.'/vendor/autoload.php')) {
+    fwrite(
+        STDERR,
+        PHP_EOL."Refusing to run: the Integration suite's own Composer setup is not installed.".PHP_EOL
+        .'Run `composer setup:integration` (or `composer install` in tests/Integration) first.'.PHP_EOL.PHP_EOL
+    );
+
+    exit(1);
+}
+
+require_once __DIR__.'/vendor/autoload.php';
+
 $wordpress = rtrim((string) (getenv('WP_TESTS_ABSPATH') ?: dirname(__DIR__, 5)), '/').'/';
 
 putenv('WP_TESTS_ABSPATH='.$wordpress);
@@ -28,19 +33,12 @@ if (! is_readable($wordpress.'wp-settings.php')) {
     fwrite(
         STDERR,
         PHP_EOL."Refusing to run: no WordPress at {$wordpress}.".PHP_EOL
-        .'Check this plugin out inside a WordPress install, or set WP_TESTS_ABSPATH to one'.PHP_EOL
-        .'(for example a copy fetched with `wp core download --path=<dir>`).'.PHP_EOL.PHP_EOL
+        .'Check this theme out inside a WordPress install, or set WP_TESTS_ABSPATH to one.'.PHP_EOL.PHP_EOL
     );
 
     exit(1);
 }
 
-/*
- * Refuse to run against the working install's database.
- *
- * WordPress' test installer DROPS EVERY TABLE it finds and rebuilds the schema.
- * Pointed at the development site's database it destroys it, with no prompt.
- */
 $testDatabase = (string) (getenv('WP_TESTS_DB_NAME') ?: 'uams_2020_tests');
 $liveConfig = $wordpress.'wp-config.php';
 
@@ -63,28 +61,25 @@ if (is_readable($liveConfig)) {
     }
 }
 
-/*
- * Point core's bootstrap at this configuration. Left undefined, it looks in its
- * own package directory and fails with a list of missing constants.
- */
 define('WP_TESTS_CONFIG_FILE_PATH', __DIR__.'/wp-tests-config.php');
 
-// Set by wp-phpunit's own autoloaded file.
 $wpPhpunit = (string) getenv('WP_PHPUNIT__DIR');
 
 require_once $wpPhpunit.'/includes/functions.php';
 
-/*
- * Load the plugin the way WordPress would, before anything runs: on
- * muplugins_loaded, the earliest hook the test bootstrap fires. A plugin that
- * depends on another plugin requires that one first, in the same closure.
- */
-tests_add_filter('muplugins_loaded', static function () {
-    require dirname(__DIR__, 2).'/functions.php';
+tests_add_filter('muplugins_loaded', static function (): void {
+    $themeDirectory = dirname(__DIR__, 2);
+    $themeRoot = dirname($themeDirectory);
+    $theme = basename($themeDirectory);
+
+    register_theme_directory($themeRoot);
+    add_filter('theme_root', static fn (): string => $themeRoot);
+    add_filter('pre_option_template', static fn (): string => $theme);
+    add_filter('pre_option_stylesheet', static fn (): string => $theme);
 });
 
 require $wpPhpunit.'/includes/bootstrap.php';
 
-require_once dirname(__DIR__).'/Support/IntegrationTestCase.php';
+require_once __DIR__.'/../Support/IntegrationTestCase.php';
 
-// cspell:ignore ABSPATH autoloaded muplugins
+// cspell:ignore ABSPATH fwrite getenv muplugins preg putenv rtrim stylesheet
