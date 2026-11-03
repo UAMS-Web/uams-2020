@@ -25,8 +25,13 @@
 /languages -export-ignore
 /assets -export-ignore
 
-# Bundled plugin zips that lib/tgm.php installs through TGM Plugin Activation
+# The three bundled plugin zips that lib/tgm.php installs through TGM Plugin Activation;
+# the other zips in plugins/ are not referenced by any active code and stay out.
 /plugins -export-ignore
+/plugins/* export-ignore
+/plugins/advanced-custom-fields-pro.zip -export-ignore
+/plugins/acf-maskfield.zip -export-ignore
+/plugins/uamswp-youtube-lyte.zip -export-ignore
 
 # Build inputs under assets/ that the theme does not load
 /assets/scss export-ignore
