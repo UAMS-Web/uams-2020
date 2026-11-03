@@ -125,9 +125,24 @@ jobs:
 
       - run: composer test:unit
 
+  lint-floor:
+    name: Lint on the PHP 8.2 floor
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+      - name: Parse every shipped PHP file on the PHP 8.2 floor
+        run: |
+          git ls-files -z '*.php' ':!:vendor/**' ':!:tests/**' |
+            xargs -0 -n1 php -l > /dev/null
+
   ci:
     name: CI
-    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, pint, rector, phpstan, pest]
+    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, pint, rector, phpstan, pest, lint-floor]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
