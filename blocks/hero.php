@@ -168,7 +168,7 @@ if ($geo_display) {
                         } else {
                             echo esc_attr($background_color);
                         }
-                ?><?php echo 0 === $index - 1 ? ' active' : ''; ?>" id="carousel-item-<?php echo $index - 1; ?>">
+                ?><?php echo $index - 1 === 0 ? ' active' : ''; ?>" id="carousel-item-<?php echo $index - 1; ?>">
             <div class="image-container">
                 <picture>
                     <?php if (function_exists('bis_get_attachment_image')) { ?>

@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @author       Rotsen Mark Acob <webdevsuperfast.github.io>
  * @copyright    Copyright (c) 2017, Rotsen Mark Acob
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
-*/
+ */
 
 // Pagination Numeric
 add_filter('genesis_prev_link_text', 'uamswp_genesis_prev_link_text_numeric');

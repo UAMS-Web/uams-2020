@@ -621,6 +621,7 @@ if (class_exists('UAMS_Syndicate_News_Base')) {
         ],
     ];
 }
+
 return [
     [
         'key' => 'field_news_not_available'.$suffix,

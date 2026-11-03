@@ -45,7 +45,7 @@ function uamswp_block_placeholder($block = null, $is_preview = false): bool
             continue;
         }
 
-        if (!in_array($value, ['', null, [], false, '0'], true)) {
+        if (! in_array($value, ['', null, [], false, '0'], true)) {
             return false;
         }
     }
@@ -796,7 +796,7 @@ function uamswp_iframe_url_is_allowed($url)
 
     $hosts = uamswp_iframe_allowed_hosts();
 
-    return empty($hosts) || in_array(strtolower($parts['host']), array_map('strtolower', $hosts), true);
+    return $hosts === [] || in_array(strtolower($parts['host']), array_map('strtolower', $hosts), true);
 }
 
 add_filter('acf/validate_value/key=field_iframe_url_b', function ($valid, $value) {
@@ -810,7 +810,7 @@ add_filter('acf/validate_value/key=field_iframe_url_b', function ($valid, $value
 // Only administrators can see/edit the iframe fields. Non-admins editing a page
 // that already contains the block see the preview but no fields.
 foreach (['field_iframe_url_b', 'field_iframe_title_b', 'field_iframe_height_b', 'field_iframe_fullscreen_b'] as $uamswp_iframe_field_key) {
-    add_filter('acf/prepare_field/key='.$uamswp_iframe_field_key, fn($field) => current_user_can('manage_options') ? $field : false);
+    add_filter('acf/prepare_field/key='.$uamswp_iframe_field_key, fn ($field) => current_user_can('manage_options') ? $field : false);
 }
 
 unset($uamswp_iframe_field_key);

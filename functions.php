@@ -506,6 +506,7 @@ if (! function_exists('uams_site_title')) {
         if (uams_get_site_info()['site'] == 'uamshealth' && uams_get_site_info()['subsite'] == 'main') {
             return 'UAMS Health';
         }
+
         return get_bloginfo('name');
     }
 

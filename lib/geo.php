@@ -64,6 +64,7 @@ function is_in_region(array $regions): ?bool
             return false;
         }
     }
+
     return null;
 
 }

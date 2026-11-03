@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @author       Rotsen Mark Acob <webdevsuperfast.github.io>
  * @copyright    Copyright (c) 2015, Rotsen Mark Acob
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
-*/
+ */
 
 // Custom Image Function
 function uamswp_post_image()
@@ -238,7 +238,7 @@ function uamswp_disable_editor($id = false)
 function uamswp_disable_gutenberg($can_edit, $post_type)
 {
 
-    if (!is_admin() || empty($_GET['post'])) {
+    if (! is_admin() || empty($_GET['post'])) {
         return $can_edit;
     }
 

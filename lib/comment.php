@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @author       Rotsen Mark Acob <webdevsuperfast.github.io>
  * @copyright    Copyright (c) 2015, Rotsen Mark Acob
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
-*/
+ */
 
 // Comment Form
 // @link http://www.codecheese.com/2013/11/wordpress-comment-form-with-twitter-bootstrap-3-supports/

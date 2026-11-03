@@ -134,6 +134,7 @@ function uamswp_request_quicklinks(): ?bool
         echo '</ul>';
 
     }
+
     return null;
 
 }

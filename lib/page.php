@@ -363,6 +363,7 @@ function uamswp_hide_breadcrumbs()
     if ($hidebreadcrumbs) {
         return $id;
     }
+
     return false;
 }
 
@@ -410,6 +411,7 @@ function uamswp_post_info_filter($post_info): ?string
 
         return 'Posted by [post_author_posts_link] on [post_date]';
     }
+
     return null;
 }
 

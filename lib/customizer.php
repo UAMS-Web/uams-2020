@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @author       Rotsen Mark Acob <webdevsuperfast.github.io>
  * @copyright    Copyright (c) 2017, Rotsen Mark Acob
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
-*/
+ */
 add_action('customize_register', function ($wp_customize): void {
     // Add Default Settings
     $wp_customize->add_setting('uams-2020', [

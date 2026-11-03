@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @author       Rotsen Mark Acob <webdevsuperfast.github.io>
  * @copyright    Copyright (c) 2017, Rotsen Mark Acob
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
-*/
+ */
 add_filter('get_search_form', 'uamswp_search_form');
 function uamswp_search_form($form): string
 {
