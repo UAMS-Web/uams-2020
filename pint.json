@@ -15,8 +15,10 @@
         }
     },
     "exclude": [
-        "lib/favicon.php",
         "lib/modules",
         "tests"
+    ],
+    "notPath": [
+        "lib/favicon.php"
     ]
 }
