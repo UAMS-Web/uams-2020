@@ -72,30 +72,15 @@ if ( function_exists( 'uams_search_excerpt' ) ) {
         $excerpt = $uams_excerpt;
     }
 }
-?>
-<!-- Display the post as a summary article with Bootstrap classes -->
-<article class="post-summary type-post entry pb-4">
-    <!-- Post title as a heading with link to full post -->
-    <h3 class="h4"><a href="<?php echo esc_url( $post_link ); ?>"><?php echo esc_html( $post_title ); ?></a></h3>
-    
-    <!-- Row for thumbnail/icon and excerpt content -->
-    <div class="row">
-        <!-- Column for thumbnail or default icon (2/12 width) -->
-        <div class="col-2">
-        <?php if ($post_thumb) {
-                // If thumbnail exists, output it
-                echo $post_thumb;
-            } else { ?>
-                <!-- Fallback: News icon as a base64-encoded PNG image -->
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTIgNy41SDEzLjVNMTIgMTAuNUgxMy41TTYgMTMuNUgxMy41TTYgMTYuNUgxMy41TTE2LjUgNy41SDE5Ljg3NUMyMC40OTYzIDcuNSAyMSA4LjAwMzY4IDIxIDguNjI1VjE4QzIxIDE5LjI0MjYgMTkuOTkyNiAyMC4yNSAxOC43NSAyMC4yNU0xNi41IDcuNVYxOEMxNi41IDE5LjI0MjYgMTcuNTA3NCAyMC4yNSAxOC43NSAyMC4yNU0xNi41IDcuNVY0Ljg3NUMxNi41IDQuMjUzNjggMTUuOTk2MyAzLjc1IDE1LjM3NSAzLjc1SDQuMTI1QzMuNTAzNjggMy43NSAzIDQuMjUzNjggMyA0Ljg3NVYxOEMzIDE5LjI0MjYgNC4wMDczNiAyMC4yNSA1LjI1IDIwLjI1SDE4Ljc1TTYgNy41SDlWMTAuNUg2VjcuNVoiIHN0cm9rZT0iI0E5QTdBOCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K" alt="News Icon - No image available"/>
-        <?php } ?>
-        <!-- Label indicating the post type -->
-        <div class="search-type">News</div>
-        </div>
-        <!-- Main content column (10/12 width) -->
-        <div class="col-10">
-            <!-- Date and excerpt display -->
-            <div class="search-excerpt"><em><?php echo get_the_date('F j, Y', $post_id); ?></em> &ndash; <?php echo $excerpt; ?></div>
-        </div>
-    </div>
-</article>
+
+/**
+ * Shared result markup: breadcrumb, title, excerpt, image when the post has one.
+ * See uamswp_search_render_result() in lib/search.php.
+ */
+uamswp_search_render_result( array(
+    'post_id' => (int) $post_id,
+    'title'   => $post_title,
+    'url'     => $post_link,
+    'excerpt' => $excerpt,
+    'meta'    => get_the_date( 'F j, Y', $post_id ),
+) );

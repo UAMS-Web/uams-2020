@@ -74,31 +74,15 @@ if ( function_exists( 'uams_search_excerpt' ) ) {
         $excerpt = $uams_excerpt;
     }
 }
-?>
 
-<!-- Display the post as a summary article with Bootstrap classes -->
-<article class="post-summary type-post entry entry pb-4">
-    <!-- Post title as a heading with link to full post -->
-    <h3 class="h4"><a href="<?php echo esc_url( $post_link ); ?>"><?php echo esc_html( $post_title ); ?></a></h3>
-    
-    <!-- Row for thumbnail/icon and excerpt content -->
-    <div class="row">
-        <!-- Column for thumbnail or default icon (2/12 width) -->
-        <div class="col-2">
-        <?php if ($post_thumb) {
-                // If thumbnail exists, output it
-                echo $post_thumb;
-            } else { ?>
-                <!-- Fallback: Generic icon as a base64-encoded PNG image -->
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTkuNSAxNC4yNVYxMS42MjVDMTkuNSA5Ljc2MTA0IDE3Ljk4OSA4LjI1IDE2LjEyNSA4LjI1SDE0LjYyNUMxNC4wMDM3IDguMjUgMTMuNSA3Ljc0NjMyIDEzLjUgNy4xMjVWNS42MjVDMTMuNSAzLjc2MTA0IDExLjk4OSAyLjI1IDEwLjEyNSAyLjI1SDguMjVNMTAuNSAyLjI1SDUuNjI1QzUuMDAzNjggMi4yNSA0LjUgMi43NTM2OCA0LjUgMy4zNzVWMjAuNjI1QzQuNSAyMS4yNDYzIDUuMDAzNjggMjEuNzUgNS42MjUgMjEuNzVIMTguMzc1QzE4Ljk5NjMgMjEuNzUgMTkuNSAyMS4yNDYzIDE5LjUgMjAuNjI1VjExLjI1QzE5LjUgNi4yNzk0NCAxNS40NzA2IDIuMjUgMTAuNSAyLjI1WiIgc3Ryb2tlPSIjQTlBN0E4IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=" alt="No preview available"/>
-        <?php } ?>
-        <!-- Label indicating the post type -->
-        <div class="search-type"><?php echo esc_html( $post_type_name ); ?></div>
-        </div>
-        <!-- Main content column (10/12 width) -->
-        <div class="col-10">
-            <!-- Display the excerpt -->
-            <div class="search-excerpt"><?php echo $excerpt; ?></div>
-        </div>
-    </div>
-</article>
+/**
+ * Shared result markup: breadcrumb, title, excerpt, image when the post has one.
+ * See uamswp_search_render_result() in lib/search.php.
+ */
+uamswp_search_render_result( array(
+    'post_id' => (int) $post_id,
+    'title'   => $post_title,
+    'url'     => $post_link,
+    'excerpt' => $excerpt,
+    'meta'    => '',
+) );

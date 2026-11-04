@@ -51,27 +51,40 @@ function uamswp_do_search_results() {
 	}
 	echo '</div>';
 
-	// Result count / empty search.
-	// The count is an h2 so the h3 result titles sit under it (h1 > h2 > h3),
-	// and the Google section below gets its own h2 at the same level.
+	// Result count, notes, featured results, then the results list.
+	// Headings: h1 (page) > h2 "Featured results" / h2 "Search results" > h3 per result.
+	$featured = ( $has_term && function_exists( 'uams_search_featured' ) ) ? uams_search_featured() : array();
+
 	if ( ! $has_term ) {
 		echo '<p class="search-count">Enter a search term above to search UAMS sites.</p>';
-	} else {
+	} elseif ( $found ) {
+		$per_page = max( 1, (int) $wp_query->get( 'posts_per_page' ) );
+		$paged    = max( 1, (int) get_query_var( 'paged' ) );
+		$first    = ( $paged - 1 ) * $per_page + 1;
+		$last     = min( $found, $paged * $per_page );
 		printf(
-			'<h2 class="search-count h5">%s %s for <span class="search-count-term">%s</span></h2>',
-			esc_html( $found ? number_format_i18n( $found ) : 'No' ),
+			'<p class="search-count">Displaying %s&ndash;%s of %s %s for <strong>%s</strong></p>',
+			esc_html( number_format_i18n( $first ) ),
+			esc_html( number_format_i18n( $last ) ),
+			esc_html( number_format_i18n( $found ) ),
 			esc_html( _n( 'result', 'results', $found, 'uams-2020' ) ),
 			esc_html( $search_term )
 		);
+	} elseif ( ! $featured ) {
+		printf( '<h2 class="search-count h5">No results for <strong>%s</strong></h2>', esc_html( $search_term ) );
+	}
 
+	if ( $has_term ) {
 		// "Did you mean" and "Not every word matched" notes.
 		if ( function_exists( 'uams_search_notices' ) ) {
 			uams_search_notices();
 		}
+		uamswp_search_render_featured( $featured );
 	}
 
 	// The Loop
 	if ( $has_term && have_posts() ) :
+		echo '<h2 class="sr-only">Search results</h2>';
 		while ( have_posts() ) :
 			the_post();
 
@@ -97,11 +110,13 @@ function uamswp_do_search_results() {
 		endwhile;
 		wp_reset_postdata();
 
-	elseif ( $has_term ) :
+		uamswp_search_pagination();
+
+	elseif ( $has_term && ! $featured ) :
 		if ( $show_google ) {
-			echo '<p>Sorry, no content matched your criteria. Try the <a href="#uams-google-search">search of all UAMS sites</a> below.</p>';
+			echo '<p>Try fewer words or check the spelling, or use the <a href="#uams-google-search">search of all UAMS sites</a> below.</p>';
 		} else {
-			echo '<p>Sorry, no content matched your criteria.</p>';
+			echo '<p>Try fewer words or check the spelling.</p>';
 		}
 	endif;
 
@@ -109,7 +124,6 @@ function uamswp_do_search_results() {
 	echo '</div>'; // .inner-container
 	echo '</div>'; // .col-12
 	echo '</div>'; // .search-content
-	genesis_posts_nav();
 	echo '</div>'; // .container-fluid
 	echo '</div>'; // .uams-module
 
@@ -186,8 +200,9 @@ function uamswp_google_search_block( $search_term = '' ) {
 	<?php
 }
 
+// The result title is the link; a "Continue Reading" link per result would repeat it.
 function new_excerpt_more( $more ) {
-	return '... <a class="more-link" href="' . esc_url( get_permalink() ) . '">Continue Reading</a>';
+	return '&hellip;';
 }
 
 function uamswp_excerpt_length( $length ) {

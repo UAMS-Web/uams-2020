@@ -83,31 +83,15 @@ if ( function_exists( 'uams_search_excerpt' ) ) {
         $excerpt = $uams_excerpt;
     }
 }
-?>
 
-<!-- Display the location post as a summary article with Bootstrap classes -->
-<article class="post-summary type-post entry pb-4">
-    <!-- Post title as a heading with link to full post -->
-    <h3 class="h4"><a href="<?php echo esc_url( $post_link ); ?>"><?php echo esc_html( $post_title ); ?></a></h3>
-    
-    <!-- Row for thumbnail/icon and excerpt content -->
-    <div class="row">
-        <!-- Column for thumbnail or default icon (2/12 width) -->
-        <div class="col-2">
-        <?php if ($post_thumb) {
-                // If thumbnail exists, output it
-                echo $post_thumb;
-            } else { ?>
-                <!-- Fallback: Map icon as a base64-encoded PNG image (note: may be a generic icon for locations) -->
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTUgMTAuNUMxNSAxMi4xNTY5IDEzLjY1NjkgMTMuNSAxMiAxMy41QzEwLjM0MzEgMTMuNSA5IDEyLjE1NjkgOSAxMC41QzkgOC44NDMxNSAxMC4zNDMxIDcuNSAxMiA3LjVDMTMuNjU2OSA3LjUgMTUgOC44NDMxNSAxNSAxMC41WiIgc3Ryb2tlPSIjQTlBN0E4IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0xOS41IDEwLjVDMTkuNSAxNy42NDIxIDEyIDIxLjc1IDEyIDIxLjc1QzEyIDIxLjc1IDQuNSAxNy42NDIxIDQuNSAxMC41QzQuNSA2LjM1Nzg2IDcuODU3ODYgMyAxMiAzQzE2LjE0MjEgMyAxOS41IDYuMzU3ODYgMTkuNSAxMC41WiIgc3Ryb2tlPSIjQTlBN0E4IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=" alt="Location Icon - No image available"/>
-        <?php } ?>
-        <!-- Label indicating the post type -->
-        <div class="search-type"><?php echo esc_html( $post_type_name ); ?></div>
-        </div>
-        <!-- Main content column (10/12 width) -->
-        <div class="col-10">
-            <!-- Display the excerpt with a "Continue Reading" link appended -->
-            <div class="search-excerpt"><?php echo $excerpt . (str_word_count($excerpt) >= 20 || empty($excerpt) ? ' <a href="' . esc_url( $post_link ) . '">View Location</a>' : ''); ?></div>
-        </div>
-    </div>
-</article>
+/**
+ * Shared result markup: breadcrumb, title, excerpt, image when the post has one.
+ * See uamswp_search_render_result() in lib/search.php.
+ */
+uamswp_search_render_result( array(
+    'post_id' => (int) $post_id,
+    'title'   => $post_title,
+    'url'     => $post_link,
+    'excerpt' => $excerpt,
+    'meta'    => '',
+) );

@@ -139,31 +139,15 @@ if ( function_exists( 'uams_search_excerpt' ) ) {
         $excerpt = $uams_excerpt;
     }
 }
-?>
 
-<!-- Display the location post as a summary article with Bootstrap classes -->
-<article class="post-summary type-post entry pb-4">
-    <!-- Post title as a heading with link to full post -->
-    <h3 class="h4"><a href="<?php echo esc_url( $post_link ); ?>"><?php echo wp_kses_post( $post_title ); ?></a></h3>
-    
-    <!-- Row for thumbnail/icon and excerpt content -->
-    <div class="row">
-        <!-- Column for thumbnail or default icon (2/12 width) -->
-        <div class="col-2">
-        <?php if ($post_thumb) {
-                // If thumbnail exists, output it
-                echo $post_thumb;
-            } else { ?>
-                <!-- Fallback: Doctor icon as a base64-encoded PNG image (note: may be a generic icon for locations) -->
-                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJhIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBkPSJNNjIuMjIsNDcuOTFoLTI0LjcyYy03LjM2LDAtMTMuMzYsNS45OS0xMy4zNiwxMy4zNnYzMS4wMWMwLC41NS40NSwxLDEsMWg0OS40NGMuNTUsMCwxLS40NSwxLTF2LTMxLjAxYzAtNy4zNy01Ljk5LTEzLjM2LTEzLjM2LTEzLjM2Wk0zNy41LDcyLjA2YzEuODEsMCwzLjI3LDEuNDcsMy4yNywzLjI3cy0xLjQ3LDMuMjctMy4yNywzLjI3LTMuMjctMS40Ny0zLjI3LTMuMjcsMS40Ny0zLjI3LDMuMjctMy4yN1pNNzMuNTgsOTEuMjhIMjYuMTN2LTMwLjAxYzAtNS45Myw0LjU3LTEwLjgxLDEwLjM3LTExLjMxdjIwLjIxYy0yLjQzLjQ3LTQuMjcsMi42LTQuMjcsNS4xNywwLDIuOSwyLjM2LDUuMjcsNS4yNyw1LjI3czUuMjctMi4zNiw1LjI3LTUuMjdjMC0yLjU2LTEuODQtNC43LTQuMjctNS4xN3YtMjAuMjZoMjIuNzN2MjAuMjNjLTMuNTUuNDctNi4zLDMuNTEtNi4zLDcuMTh2Ni4yNWMwLC41NS40NSwxLDEsMXMxLS40NSwxLTF2LTYuMjVjMC0yLjksMi4zNi01LjI2LDUuMjYtNS4yNnM1LjI2LDIuMzYsNS4yNiw1LjI2djYuMjVjMCwuNTUuNDUsMSwxLDFzMS0uNDUsMS0xdi02LjI1YzAtMy42NC0yLjctNi42Ni02LjIxLTcuMTZ2LTIwLjE5YzUuOC41MSwxMC4zNyw1LjM4LDEwLjM3LDExLjMxdjMwLjAxaDBaIiBmaWxsPSIjYTlhN2E4IiBzdHJva2U9IiNhOWE3YTgiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSIzIi8+PHBhdGggZD0iTTQ5Ljg2LDQzLjVjMTAuMjIsMCwxOC41My04LjMxLDE4LjUzLTE4LjUzUzYwLjA4LDYuNDQsNDkuODYsNi40NHMtMTguNTMsOC4zMS0xOC41MywxOC41Myw4LjMxLDE4LjUzLDE4LjUzLDE4LjUzWk00OS44Niw4LjQzYzkuMTIsMCwxNi41NCw3LjQyLDE2LjU0LDE2LjU0cy03LjQyLDE2LjU0LTE2LjU0LDE2LjU0LTE2LjU0LTcuNDItMTYuNTQtMTYuNTQsNy40Mi0xNi41NCwxNi41NC0xNi41NFoiIGZpbGw9IiNhOWE3YTgiIHN0cm9rZT0iI2E5YTdhOCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2Utd2lkdGg9IjMiLz48L3N2Zz4=" alt="Provider Icon - No photo available"/>
-        <?php } ?>
-        <!-- Label indicating the post type -->
-        <div class="search-type"><?php echo esc_html( $post_type_name ); ?></div>
-        </div>
-        <!-- Main content column (10/12 width) -->
-        <div class="col-10">
-            <!-- Display the excerpt with a "Continue Reading" link appended -->
-            <div class="search-excerpt"><?php echo $excerpt . (str_word_count($excerpt) >= 20 ? ' <a href="' . esc_url( $post_link ) . '">View Profile</a>' : ''); ?></div>
-        </div>
-    </div>
-</article>
+/**
+ * Shared result markup: breadcrumb, title, excerpt, image when the post has one.
+ * See uamswp_search_render_result() in lib/search.php.
+ */
+uamswp_search_render_result( array(
+    'post_id' => (int) $post_id,
+    'title'   => $post_title,
+    'url'     => $post_link,
+    'excerpt' => $excerpt,
+    'meta'    => '',
+) );

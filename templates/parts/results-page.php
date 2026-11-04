@@ -85,31 +85,15 @@ if ( function_exists( 'uams_search_excerpt' ) ) {
         $excerpt = $uams_excerpt;
     }
 }
-?>
 
-<!-- Display the page summary in an article with Bootstrap classes -->
-<article class="post-summary type-page pb-4">
-    <!-- Post title as a heading with a link to the full page -->
-    <h3 class="h4"><a href="<?php echo esc_url( $post_link ); ?>"><?php echo esc_html( $post_title ); ?></a></h3>
-    
-    <!-- Row for thumbnail/icon and excerpt content -->
-    <div class="row">
-        <!-- Column for thumbnail or default icon (2/12 width) -->
-        <div class="col-2">
-        <?php if ( $post_thumb ) {
-            // If thumbnail exists, output it with the post title as alt text
-            echo '<img src="' . esc_url( $post_thumb ) . '" alt="' . esc_attr( wp_strip_all_tags( $post_title ) ) . '"/>';
-        } else { ?>
-            <!-- Fallback: Page icon as a base64-encoded PNG image -->
-            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTkuNSAxNC4yNVYxMS42MjVDMTkuNSA5Ljc2MTA0IDE3Ljk4OSA4LjI1IDE2LjEyNSA4LjI1SDE0LjYyNUMxNC4wMDM3IDguMjUgMTMuNSA3Ljc0NjMyIDEzLjUgNy4xMjVWNS42MjVDMTMuNSAzLjc2MTA0IDExLjk4OSAyLjI1IDEwLjEyNSAyLjI1SDguMjVNOC4yNSAxNUgxNS43NU04LjI1IDE4SDEyTTEwLjUgMi4yNUg1LjYyNUM1LjAwMzY4IDIuMjUgNC41IDIuNzUzNjggNC41IDMuMzc1VjIwLjYyNUM0LjUgMjEuMjQ2MyA1LjAwMzY4IDIxLjc1IDUuNjI1IDIxLjc1SDE4LjM3NUMxOC45OTYzIDIxLjc1IDE5LjUgMjEuMjQ2MyAxOS41IDIwLjYyNVYxMS4yNUMxOS41IDYuMjc5NDQgMTUuNDcwNiAyLjI1IDEwLjUgMi4yNVoiIHN0cm9rZT0iI0E5QTdBOCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K" alt="Page Icon - No image available"/>
-        <?php } ?>
-        <!-- Label indicating the post type -->
-        <div class="search-type">Page</div>
-        </div>
-        <!-- Main content column (10/12 width) -->
-        <div class="col-10">
-            <!-- Display the excerpt -->
-            <div class="search-excerpt"><?php echo $excerpt; ?></div>
-        </div>
-    </div>
-</article>
+/**
+ * Shared result markup: breadcrumb, title, excerpt, image when the post has one.
+ * See uamswp_search_render_result() in lib/search.php.
+ */
+uamswp_search_render_result( array(
+    'post_id' => (int) $post_id,
+    'title'   => $post_title,
+    'url'     => $post_link,
+    'excerpt' => $excerpt,
+    'meta'    => '',
+) );
