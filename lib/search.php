@@ -64,6 +64,14 @@ function uamswp_search_crumbs( $post ) {
         $crumbs[] = get_bloginfo( 'name' );
     }
 
+    // Section name for a post type: the result-type link label from the UAMS Search
+    // network settings when one link covers just that type, else the post type's name.
+    // Filter: uamswp_search_crumb_label( $label, $post_type ).
+    $type_label = function ( $type, $fallback ) {
+        $label = function_exists( 'uams_search_type_label' ) ? uams_search_type_label( $type ) : null;
+        return apply_filters( 'uamswp_search_crumb_label', $label ? $label : $fallback, $type );
+    };
+
     $ancestors = function ( $id ) {
         $titles = array();
         foreach ( array_reverse( get_post_ancestors( $id ) ) as $ancestor ) {
@@ -77,14 +85,14 @@ function uamswp_search_crumbs( $post ) {
             $crumbs = array_merge( $crumbs, $ancestors( $post->ID ) );
             break;
         case 'post':
-            $crumbs[]   = 'News';
+            $crumbs[]   = $type_label( 'post', 'News' );
             $categories = get_the_category( $post->ID );
             if ( $categories && 'uncategorized' !== $categories[0]->slug ) {
                 $crumbs[] = $categories[0]->name;
             }
             break;
         case 'attachment':
-            $crumbs[] = 'Documents';
+            $crumbs[] = $type_label( 'attachment', 'Documents' );
             if ( $post->post_parent ) {
                 $crumbs   = array_merge( $crumbs, $ancestors( $post->post_parent ) );
                 $crumbs[] = get_the_title( $post->post_parent );
@@ -93,7 +101,7 @@ function uamswp_search_crumbs( $post ) {
         default:
             $object = get_post_type_object( $post->post_type );
             if ( $object ) {
-                $crumbs[] = $object->labels->name;
+                $crumbs[] = $type_label( $post->post_type, $object->labels->name );
                 if ( $object->hierarchical ) {
                     $crumbs = array_merge( $crumbs, $ancestors( $post->ID ) );
                 }
@@ -244,9 +252,6 @@ function uamswp_search_results_styles() {
     wp_add_inline_style( 'app-css', '
         .search-count { margin: 1.5rem 0 1rem; font-size: .9375rem; }
         .search-content .uams-search-filters { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin: 1rem 0 0; }
-        .search-content .uams-search-types .uams-search-filters a { display: inline-block; padding: .375rem .875rem; min-height: 24px; border: 1px solid #740024; border-radius: 2px; color: #740024; text-decoration: none; font-size: .875rem; }
-        .search-content .uams-search-types .uams-search-filters a:hover { text-decoration: underline; }
-        .search-content .uams-search-types .uams-search-filters a[aria-current="page"] { background: #740024; color: #fff; font-weight: 600; }
         .search-content .uams-search-scope .uams-search-filters { gap: 1rem; font-size: .875rem; }
         .search-content .uams-search-scope a[aria-current="page"] { font-weight: 700; text-decoration-thickness: 3px; }
         .search-content .uams-search-notice { margin: 0 0 1rem; }

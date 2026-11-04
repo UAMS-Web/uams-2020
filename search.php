@@ -46,8 +46,12 @@ function uamswp_do_search_results() {
 	echo '<div class="pb-4">';
 	get_search_form();
 	// Scope ("This site" / "Whole website") and result-type links.
+	// Type links use the theme's Bootstrap buttons; the selected one is filled.
 	if ( function_exists( 'uams_search_filters' ) ) {
-		uams_search_filters();
+		uams_search_filters( array(
+			'type_class'         => 'btn btn-outline-primary btn-sm',
+			'type_current_class' => 'btn btn-primary btn-sm',
+		) );
 	}
 	echo '</div>';
 
