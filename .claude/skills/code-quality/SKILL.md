@@ -325,7 +325,7 @@ Never reformat vendor code, and never let the reformat commit include it: if Pin
 
 ## Before a pull request
 
-In a public repository whose CI workflow runs the three tools, that run on a draft pull request is the pre-PR check: run nothing locally first, open the pull request as a draft, fix what the workflow reports by pushing to the same branch, and flip it to ready once every remote check is green. The [`writing-pull-requests`](../writing-pull-requests/SKILL.md) skill's *Draft state and merge order* owns this and names the cases that still run locally. Where the tools have no remote run:
+In a public repository whose CI workflow runs the three tools, that run on a draft pull request is the pre-PR check. Before each push, run the three tools on the changed files with the commands in *Local CI jobs* below (`vendor/bin/pint --test` and `vendor/bin/rector --dry-run` with the changed PHP files as arguments, and `composer stan`; a repository without one of the tools skips it), then open the pull request as a draft, fix what the workflow reports by pushing to the same branch, and flip it to ready once every remote check is green. The [`writing-pull-requests`](../writing-pull-requests/SKILL.md) skill's *Draft state and merge order* owns this and names the cases that still run locally. Where the tools have no remote run:
 
 Run the three commands on the branch, and fix what they report before asking for review.
 
