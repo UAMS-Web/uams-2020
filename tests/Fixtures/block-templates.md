@@ -17,3 +17,5 @@ Strict identity compares the complete result, including types, array order and w
 A generous 2,000-call escaping limit makes non-terminating template loops fail inside the test rather than consume unbounded memory. Normal fixtures stay far below this limit. QueryDouble separately rejects loops that read more than 100 times without advancing. These guards run after the template starts; they are not bootstrap or command failures.
 
 Each block has a distinct test description while retaining every fixed case and assertion. Mutation test selection can therefore select the relevant block instead of running unrelated blocks for every trial change.
+
+Fourteen gallery density literals carry only `DecrementInteger` exclusions. The actual helper scales densities greater than 1, so explicit densities 0 and 1 have the same result for every crop and column input. Each original generated change passed all 75 gallery cases with the real helper. The annotations attach to those individual density arguments; the neighboring column numerators remain active.

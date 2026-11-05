@@ -15,6 +15,11 @@ foreach ($blockTemplateCases as $case) {
 }
 
 foreach ($blockCasesByName as $name => $cases) {
+    /**
+     * Gallery has fourteen explicit density literals whose 1-to-0 mutations are equivalent:
+     * the real first-party dimension helper scales only densities greater than 1.
+     * Native sizing is executed here; no mock receipt distinguishes the equal inputs.
+     */
     it('pins '.$name.' block markup and external boundary arguments', function (array $case): void {
         $actual = BlockTemplateScenario::render($case);
         Assert::assertTrue($case['expected'] === $actual, 'Block output or calls changed: '.$case['name'].' / '.$case['label']);
