@@ -110,3 +110,9 @@ it('falls back to the default image when a requested size is absent', function (
     Functions\expect('wp_get_attachment_image_src')->once()->with(42, 'full')->andReturn(['full.jpg', 400, 200]);
     expect(image_sizer_get_fallback(42, 'missing'))->toBe('full.jpg');
 });
+
+it('returns an empty URL when the default fallback has an empty URL', function (): void {
+    Functions\expect('wp_get_attachment_image_src')->once()->with(42, 'missing')->andReturn(false);
+    Functions\expect('wp_get_attachment_image_src')->once()->with(42, 'full')->andReturn(['', 0, 0]);
+    expect(image_sizer_get_fallback(42, 'missing'))->toBe('');
+});

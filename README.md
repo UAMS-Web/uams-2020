@@ -51,7 +51,7 @@ The supported PHP floor is 8.2. Development and tests run on PHP 8.4 (`config.pl
 
 With Xdebug coverage mode or PCOV enabled, run `php tests/mutate.php` for the root templates, `functions.php` and `search.php`. Pass `--path=functions.php,search.php` to narrow a run. The launcher uses every unit test file and rejects an empty test list. It disables cached results and requires every generated mutant to be caught; inspect any surviving or uncovered case before claiming full coverage.
 
-The launcher names test files explicitly to avoid a directory-walking conflict between the mutation loader and Patchwork. Do not add `--processes`: the locked mutation tool forwards it to children without `--parallel`, which makes those children reject the option and can falsely count failed starts as caught mutations. Runs are serial because the parallel runner does not accept the required file list. The launcher rejects `--parallel` and its `-p` aliases as well. No vendor patch is applied.
+The launcher copies the PHPUnit settings to a temporary XML file with explicit unit-test and source-file entries. This avoids a directory-walking conflict between the mutation loader and Patchwork while allowing the parallel runner to read one configuration file. It selects parallel execution automatically. Do not add `--processes`: the locked mutation tool forwards that option to children without `--parallel`, which can make failed starts look like caught mutations. The launcher rejects process-count, parallel, and configuration overrides. No vendor patch is applied. The installed revisions checked for these workarounds are `pestphp/pest-plugin-mutate` v5.0.2 at `d0c87110416b699413cc073b8dcc92e440d81931` and Patchwork 2.2.4 at `d5d5c6032b7109477163b68e25ff531f7654ebf9`, as pinned in `composer.lock`.
 
 ## Continuous integration
 
@@ -79,3 +79,5 @@ composer test:unit
 The supported PHP floor is 8.2, and the `lint-floor` job in CI parses every shipped PHP file on it.
 
 The rate limiter keeps its `array_filter()` call on one line. Patchwork removes whitespace after the opening parenthesis when rewriting that internal call. A newline there shifts later coverage hits away from the original source lines and makes mutation test selection unreliable. This layout keeps the executed and original line maps aligned without a vendor patch.
+
+Isolated PHPUnit tests receive the Composer loader and, during mutation testing, the mutation stream wrapper before Patchwork loads. This keeps constant-sensitive tests on the mutated source rather than silently testing the original file.

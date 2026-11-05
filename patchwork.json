@@ -4,7 +4,9 @@
         "class_exists",
         "function_exists",
         "strftime",
-        "glob"
+        "glob",
+        "error_log",
+        "exit"
     ],
     "blacklist": [
         "vendor/symfony/finder/"

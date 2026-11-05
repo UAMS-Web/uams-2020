@@ -50,7 +50,8 @@ it('pins gallery padding, spacing, density limits and loose breakpoint matching'
     expect(gallery_image_dimension('sm', 1))->toBe(896)
         ->and(gallery_image_dimension('md', 3))->toBe(348)
         ->and(gallery_image_dimension('xs', 2, 3))->toBe(674)
-        ->and(gallery_image_dimension('xs', 2, 0))->toBe(337);
+        ->and(gallery_image_dimension('xs', 2, 0))->toBe(337)
+        ->and(gallery_image_dimension('xs', 2, 1, '0'))->toBe(337);
 });
 
 it('keeps rate limits per client and expires the boundary timestamp', function (): void {
@@ -113,6 +114,11 @@ it('replaces page crumbs only on the front page', function (bool $front): void {
     expect(uams_breadcrumb_home('Original'))->toBe($front ? 'Department' : 'Original');
 })->with([true, false]);
 
+/**
+ * EqualToIdentical on the post-format comparison is equivalent: WordPress 7.1.3 returns
+ * strings or false; malformed filtered slugs may yield arrays. Comparing those outputs
+ * with the nonnumeric string 'link' gives the same result under either operator.
+ */
 it('uses an external link only for posts with link format', function ($input, $external, $format, $expected): void {
     when('get_the_id')->justReturn(17);
     when('get_post')->justReturn((object) ['ID' => 42]);

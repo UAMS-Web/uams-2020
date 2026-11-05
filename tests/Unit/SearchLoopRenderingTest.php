@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Brain\Monkey\Functions;
+use Uams2020\Tests\Support\HtmlFixture;
 use Uams2020\Tests\Support\SearchTemplateLoader;
 
 use function Brain\Monkey\Functions\when;
@@ -90,6 +91,7 @@ it('includes the right external card for each typed result', function (string $t
     ob_start();
     uamswp_do_search_loop();
     $html = ob_get_clean();
+    HtmlFixture::assertSearch('typed-card-'.$type, $html);
     expect($html)->toContain('['.$card.':11]['.$card.':22]')->not->toContain('Sorry, no content')
         ->and($this->searchState->queries)->toBe([['s' => 'heart', 'post_type' => $type, 'posts_per_page' => $type === 'provider' ? 6 : 10, 'paged' => 2]]);
 })->with([['provider', 'physician'], ['location', 'location'], ['expertise', 'expertise']]);
@@ -105,6 +107,7 @@ it('pins taxonomy content, missing terms and empty fields in typed results', fun
     ob_start();
     uamswp_do_search_loop();
     $html = ob_get_clean();
+    HtmlFixture::assertSearch('typed-tax-'.$type.'-'.(int) $taxExists.'-'.(int) (bool) $content, $html);
     expect(str_contains($html, '<article'))->toBe($article);
     if ($article) {
         expect($html)->toContain('<article class="'.$type.'-'.($taxExists ? '77' : '').' entry">')
@@ -127,6 +130,7 @@ it('renders general page and post results with excerpts and cross-blog restorati
     ob_start();
     uamswp_do_search_loop();
     $html = ob_get_clean();
+    HtmlFixture::assertSearch('general-'.$total, $html);
     expect($html)->toContain('data-id="12"', 'data-id="13"', 'data-id="14"', '<p>Excerpt 12</p>', '<p>Trimmed 13</p>', '<p>Excerpt 14</p>')
         ->and(substr_count($html, '>More results</a>'))->toBe($total > 5 ? 2 : 0)
         ->and($state->resets)->toBe(2)
@@ -149,6 +153,7 @@ it('renders plugin groups only when they have results and pins each more-link bo
     ob_start();
     uamswp_do_search_loop();
     $html = ob_get_clean();
+    HtmlFixture::assertSearch('plugin-'.$extra.'-'.(int) $hasTerms, $html);
     expect($html)->toContain('[physician:11]', '[location:22]', '[expertise:33]')
         ->and(substr_count($html, '>More results</a>'))->toBe($extra * ($hasTerms ? 5 : 3))
         ->and(str_contains($html, '>Conditions</span>'))->toBe($hasTerms)
@@ -173,6 +178,7 @@ it('omits empty plugin card groups and handles missing terms with empty content'
     ob_start();
     uamswp_do_search_loop();
     $html = ob_get_clean();
+    HtmlFixture::assertSearch('missing-terms-empty-content', $html);
     expect($html)->not->toContain('>Providers</span>', '>Locations</span>', '>Areas of Expertise</span>', '<p>Preview')
         ->toContain('Title 44', 'Title 55', 'Search All UAMS Sites')
         ->and($state->fields)->toBe([['condition_content', 'condition_'], ['treatment_content', 'treatment_'], ['treatment_procedure_content', 'treatment_']])

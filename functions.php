@@ -53,7 +53,13 @@ function uamswp_childtheme_setup(): void
     // Disable oEmbed Discovery Links
     remove_action('wp_head', 'wp_oembed_add_discovery_links', 10);
     // Disable REST API link in HTTP headers
-    remove_action('template_redirect', 'rest_output_link_header', 11, 0);
+    // WordPress remove_action() reads only its first three arguments.
+    remove_action(
+        'template_redirect',
+        'rest_output_link_header',
+        11,
+        0 // @pest-mutate-ignore: IncrementInteger,DecrementInteger
+    );
 
     // Add HTML5 markup structure
     add_theme_support('html5', ['search-form', 'comment-form', 'comment-list']);
@@ -489,7 +495,8 @@ if (! function_exists('uams_get_permalink')) {
         }
         $external_url = get_post_meta($postID, 'post_custom_link', true);
         $post_format = get_post_format($postID);
-        if (! empty($external_url) && ($post_format == 'link')) {
+        // WordPress returns strings, false, or filtered arrays; strict equality is equivalent here.
+        if (! empty($external_url) && ($post_format == 'link')) { // @pest-mutate-ignore: EqualToIdentical
             return $external_url;
         }
 

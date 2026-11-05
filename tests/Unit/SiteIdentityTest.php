@@ -30,6 +30,8 @@ it('pins site identity for missing, empty and configured ACF options', function 
     'college defaults' => [true, ['options_uamswp_template' => 'uams', 'options_uamswp_location' => 'uams', 'options_uamswp_uams_subsite' => 'medicine'], ['site' => 'uams', 'subsite' => 'medicine', 'department' => 'uams']],
     ...array_map(static fn (string $institute): array => [true, ['options_uamswp_template' => 'institute', 'options_uamswp_institute' => 'institute_'.$institute, 'options_uamswp_institute_'.$institute.'_dept' => 'department'], ['site' => 'institute', 'subsite' => 'institute_'.$institute, 'department' => 'department']], ['aging', 'eye', 'spine', 'digi-health', 'pri', 'tri', 'cancer', 'ichi']),
     ...array_map(static fn (array $college): array => [true, ['options_uamswp_template' => 'uams', 'options_uamswp_location' => 'uams', 'options_uamswp_uams_subsite' => $college[0], 'options_uamswp_uams_'.$college[1].'_dept' => 'department'], ['site' => 'uams', 'subsite' => $college[0], 'department' => 'department']], [['health-prof', 'cohp'], ['medicine', 'com'], ['nursing', 'con'], ['pharmacy', 'cop'], ['public-health', 'coph'], ['grad-school', 'grad-school'], ['other', 'other']]),
+    ...array_map(static fn (string $institute): array => [true, ['options_uamswp_template' => 'institute', 'options_uamswp_institute' => 'institute_'.$institute], ['site' => 'institute', 'subsite' => 'institute_'.$institute, 'department' => 'uams']], ['aging', 'eye', 'spine', 'digi-health', 'pri', 'tri', 'cancer', 'ichi']),
+    ...array_map(static fn (string $college): array => [true, ['options_uamswp_template' => 'uams', 'options_uamswp_location' => 'uams', 'options_uamswp_uams_subsite' => $college], ['site' => 'uams', 'subsite' => $college, 'department' => 'uams']], ['health-prof', 'medicine', 'nursing', 'pharmacy', 'public-health', 'grad-school', 'other']),
 ]);
 
 it('pins GeoIP presence without contacting the external service', function (bool $available): void {
@@ -49,6 +51,7 @@ it('preserves stringable option values while selecting site and department branc
 })->with([
     [['options_uamswp_template' => 'health', 'options_uamswp_uamshealth_subsite' => 'main'], 'uamshealth', 'options_uamswp_uamshealth_subsite', null],
     [['options_uamswp_template' => 'inside', 'options_uamswp_inside_subsite' => 'main'], 'inside', 'options_uamswp_inside_subsite', null],
+    [['options_uamswp_template' => 'uams', 'options_uamswp_location' => 'regional-campus', 'options_uamswp_regional_campus' => 'northwest'], 'uams', 'options_uamswp_location', 'options_uamswp_regional_campus'],
     ...array_map(static fn (string $name): array => [
         ['options_uamswp_template' => 'institute', 'options_uamswp_institute' => 'institute_'.$name, 'options_uamswp_institute_'.$name.'_dept' => 'department'],
         'institute', 'options_uamswp_institute', 'options_uamswp_institute_'.$name.'_dept',

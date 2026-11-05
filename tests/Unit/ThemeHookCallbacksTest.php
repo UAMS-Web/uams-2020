@@ -176,8 +176,9 @@ it('dispatches an authorized queue request before redirecting to the media libra
     Functions\expect('check_admin_referer')->once()->with('process_image_queue_nonce')->globally()->ordered()->andReturn(1);
     expectDone('process_image_sizer_queue')->once()->globally()->ordered();
     Functions\expect('admin_url')->once()->with('upload.php?queue_processed=1')->andReturn('https://example.test/wp-admin/upload.php?queue_processed=1');
-    Functions\expect('wp_redirect')->once()->with('https://example.test/wp-admin/upload.php?queue_processed=1')->globally()->ordered()->andThrow(new RuntimeException('Redirect reached'));
-    expect(ThemeHooks::callback('action', 'admin_init'))->toThrow(RuntimeException::class, 'Redirect reached');
+    Functions\expect('wp_redirect')->once()->with('https://example.test/wp-admin/upload.php?queue_processed=1')->globally()->ordered()->andReturn(true);
+    Functions\expect('exit')->once()->withNoArgs()->globally()->ordered()->andThrow(new RuntimeException('Exit reached'));
+    expect(ThemeHooks::callback('action', 'admin_init'))->toThrow(RuntimeException::class, 'Exit reached');
 });
 
 it('maps both administrator and editor redirect capabilities to edit_pages', function (): void {

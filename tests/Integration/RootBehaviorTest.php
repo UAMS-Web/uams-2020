@@ -114,4 +114,28 @@ final class RootBehaviorTest extends IntegrationTestCase
         $this->assertSame(2, $GLOBALS['wp_query']->found_posts);
         wp_reset_query();
     }
+
+    public function test_post_format_boundary_selects_external_links_only_for_link_posts(): void
+    {
+        $hadSupport = post_type_supports('post', 'post-formats');
+        add_post_type_support('post', 'post-formats');
+        $id = self::factory()->post->create();
+        $canonical = get_permalink($id);
+        update_post_meta($id, 'post_custom_link', 'https://example.test/external');
+        try {
+            set_post_format($id, 'link');
+            $this->assertSame('link', get_post_format($id));
+            $this->assertSame('https://example.test/external', \uams_get_permalink($id));
+            set_post_format($id, 'aside');
+            $this->assertSame('aside', get_post_format($id));
+            $this->assertSame($canonical, \uams_get_permalink($id));
+            set_post_format($id, false);
+            $this->assertFalse(get_post_format($id));
+            $this->assertSame($canonical, \uams_get_permalink($id));
+        } finally {
+            if (! $hadSupport) {
+                remove_post_type_support('post', 'post-formats');
+            }
+        }
+    }
 }

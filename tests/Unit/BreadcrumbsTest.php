@@ -2,20 +2,23 @@
 
 declare(strict_types=1);
 
+use Brain\Monkey\Functions;
 use Uams2020\Tests\Support\OptionString;
 
 use function Brain\Monkey\Functions\when;
 
-it('builds the Genesis home trail for each site and front-page context', function (array $site, bool $front, array $hrefs, array $titles): void {
+it('builds the Genesis home trail for each site and front-page context', function (string $fixtureKey, array $site, bool $front, array $hrefs, array $titles): void {
     when('uams_get_site_info')->justReturn($site);
     when('is_front_page')->justReturn($front);
     when('uams_get_home_link')->justReturn('https://home.test');
     when('network_home_url')->justReturn('https://network.test/');
     when('home_url')->justReturn('https://department.test');
     when('uams_site_title')->justReturn('Department');
-    when('get_blog_details')->justReturn((object) ['blogname' => 'Network']);
+    Functions\expect('get_blog_details')->with(1)->zeroOrMoreTimes()->andReturn((object) ['blogname' => 'Network']);
 
     $html = uams_breadcrumb_home_icon('Original');
+    $fixtures = json_decode(file_get_contents(__DIR__.'/../Fixtures/genesis-breadcrumbs.json'), true, flags: JSON_THROW_ON_ERROR);
+    expect($html)->toBe($fixtures[$fixtureKey]);
     $document = new DOMDocument;
     $document->loadHTML('<ol>'.$html.'</ol>', LIBXML_NOERROR | LIBXML_NOWARNING);
 
@@ -26,16 +29,17 @@ it('builds the Genesis home trail for each site and front-page context', functio
         ->and($html)->toContain('<span class="fas fa-home"></span>')
         ->and(array_map(static fn ($node) => $node->getAttribute('content'), iterator_to_array($xpath->query('//meta[@itemprop="position"]'))))->toBe(array_map(strval(...), range(1, count($hrefs))));
 })->with([
-    [['site' => 'uamshealth', 'subsite' => new OptionString('main'), 'department' => ''], false, ['https://home.test'], ['UAMS Health']],
-    [['site' => 'uams', 'subsite' => 'medicine', 'department' => new OptionString('main')], false, ['https://home.test', 'https://department.test/'], ['University of Arkansas for Medical Sciences', 'Department']],
-    [['site' => 'uams', 'subsite' => 'medicine', 'department' => new OptionString('none')], true, ['https://home.test'], ['University of Arkansas for Medical Sciences']],
-    [['site' => 'uamshealth', 'subsite' => 'main', 'department' => 'main'], false, ['https://home.test'], ['UAMS Health']],
-    [['site' => 'uamshealth', 'subsite' => 'clinic', 'department' => 'none'], true, ['https://home.test'], ['UAMS Health']],
-    [['site' => 'inside', 'subsite' => 'main', 'department' => 'main'], true, ['https://home.test'], ['Inside UAMS']],
-    [['site' => 'uams', 'subsite' => 'main', 'department' => 'dept'], true, ['https://home.test', 'https://network.test/'], ['University of Arkansas for Medical Sciences', 'Network']],
-    [['site' => 'uams', 'subsite' => 'main', 'department' => 'dept'], false, ['https://home.test', 'https://network.test/', 'https://department.test/'], ['University of Arkansas for Medical Sciences', 'Network', 'Department']],
-    [['site' => 'uams', 'subsite' => 'main', 'department' => 'main'], true, ['https://home.test'], ['University of Arkansas for Medical Sciences']],
-    [['site' => 'uams', 'subsite' => 'main', 'department' => 'none'], false, ['https://home.test', 'https://department.test/'], ['University of Arkansas for Medical Sciences', 'Department']],
+    ['health-main-object', ['site' => 'uamshealth', 'subsite' => new OptionString('main'), 'department' => ''], false, ['https://home.test'], ['UAMS Health']],
+    ['uams-department-main-object', ['site' => 'uams', 'subsite' => 'medicine', 'department' => new OptionString('main')], false, ['https://home.test', 'https://department.test/'], ['University of Arkansas for Medical Sciences', 'Department']],
+    ['uams-department-none-object', ['site' => 'uams', 'subsite' => 'medicine', 'department' => new OptionString('none')], true, ['https://home.test'], ['University of Arkansas for Medical Sciences']],
+    ['health-main', ['site' => 'uamshealth', 'subsite' => 'main', 'department' => 'main'], false, ['https://home.test'], ['UAMS Health']],
+    ['health-clinic-front', ['site' => new OptionString('uamshealth'), 'subsite' => 'clinic', 'department' => 'none'], true, ['https://home.test'], ['UAMS Health']],
+    ['inside-main-front', ['site' => 'inside', 'subsite' => 'main', 'department' => 'main'], true, ['https://home.test'], ['Inside UAMS']],
+    ['uams-network-front', ['site' => 'uams', 'subsite' => 'main', 'department' => 'dept'], true, ['https://home.test', 'https://network.test/'], ['University of Arkansas for Medical Sciences', 'Network']],
+    ['uams-network-department', ['site' => 'uams', 'subsite' => 'main', 'department' => 'dept'], false, ['https://home.test', 'https://network.test/', 'https://department.test/'], ['University of Arkansas for Medical Sciences', 'Network', 'Department']],
+    ['uams-main-front', ['site' => 'uams', 'subsite' => 'main', 'department' => 'main'], true, ['https://home.test'], ['University of Arkansas for Medical Sciences']],
+    ['uams-department-none', ['site' => 'uams', 'subsite' => 'main', 'department' => new OptionString('none')], false, ['https://home.test', 'https://department.test/'], ['University of Arkansas for Medical Sciences', 'Department']],
+    ['uams-main-front', ['site' => 'uams', 'subsite' => 'main', 'department' => new OptionString('main')], true, ['https://home.test'], ['University of Arkansas for Medical Sciences']],
 ]);
 
 it('keeps SEOPress child crumbs while setting the site and network ancestors', function (array $site, bool $front, array $expected): void {
@@ -44,7 +48,7 @@ it('keeps SEOPress child crumbs while setting the site and network ancestors', f
     when('uams_site_title')->justReturn('Department');
     when('uams_get_home_link')->justReturn('https://home.test');
     when('network_home_url')->justReturn('https://network.test/');
-    when('get_blog_details')->justReturn((object) ['blogname' => 'Network']);
+    Functions\expect('get_blog_details')->with(1)->zeroOrMoreTimes()->andReturn((object) ['blogname' => 'Network']);
 
     $labels = [
         'health' => ['<span class="fas fa-home"></span><span class="sr-only">UAMS Health</span>', 'https://home.test/'],
@@ -78,6 +82,10 @@ it('keeps SEOPress child crumbs while setting the site and network ancestors', f
     [['site' => 'uams', 'subsite' => 'medicine', 'department' => 'main'], false, ['uams-no-slash', 'department', 'child']],
     [['site' => 'uams', 'subsite' => 'medicine', 'department' => ''], false, ['uams-no-slash', 'department', 'child']],
     [['site' => 'uams', 'subsite' => 'medicine', 'department' => 'uams'], false, ['uams-no-slash', 'department', 'child']],
+    [['site' => 'uams', 'subsite' => 'medicine', 'department' => new OptionString('main')], false, ['uams-no-slash', 'department', 'child']],
+    [['site' => 'uams', 'subsite' => 'other', 'department' => new OptionString('main')], false, ['uams', 'department', 'child']],
+    [['site' => 'uams', 'subsite' => new OptionString('main'), 'department' => 'dept'], true, ['uams-no-slash', 'department', 'child']],
+    [['site' => 'uams', 'subsite' => 'medicine', 'department' => null], false, ['uams-no-slash', 'department', 'child']],
 ]);
 
 it('formats the platform time string without normalizing unsupported format tokens', function (string $input, string $raw, string $expected): void {

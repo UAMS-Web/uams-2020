@@ -9,6 +9,11 @@ use function Brain\Monkey\Actions\expectAdded;
 use function Brain\Monkey\Actions\expectRemoved;
 use function Brain\Monkey\Functions\when;
 
+/**
+ * Equivalent IncrementInteger/DecrementInteger mutations change only the unused fourth
+ * remove_action() argument. WordPress 7.1.3 reads and forwards its first three arguments;
+ * the priority 11 and the call itself remain covered by the hook expectation below.
+ */
 it('loads the engine and child libraries and registers the current theme support', function (): void {
     $fixture = __DIR__.'/../Fixtures/genesis';
     define('CHILD_DIR', $fixture);
