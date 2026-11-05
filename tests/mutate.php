@@ -18,7 +18,7 @@ foreach ($options as $option) {
         exit(2);
     }
 
-    if ($option === '-p' || str_starts_with($option, '-p=') || $option === '--parallel' || str_starts_with($option, '--parallel=')) {
+    if (str_starts_with($option, '-p') || $option === '--parallel' || str_starts_with($option, '--parallel=')) {
         fwrite(STDERR, "Use serial mutation runs: the parallel runner cannot accept the explicit test-file list.\n");
         exit(2);
     }
