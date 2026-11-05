@@ -32,8 +32,8 @@ it('renders the archive with both accessible sitemap headings', function (): voi
     Actions\expectAdded('genesis_entry_content')->once()->with('genesis_page_archive_content');
     Functions\expect('genesis')->once();
     Functions\expect('genesis_a11y')->twice()->with('headings')->andReturn(true, false);
-    Functions\expect('genesis_sitemap')->once()->with('h2');
-    Functions\expect('genesis_sitemap')->once()->with('h4');
+    Functions\expect('genesis_sitemap')->once()->with('h2')->ordered();
+    Functions\expect('genesis_sitemap')->once()->with('h4')->ordered();
 
     require dirname(__DIR__, 2).'/page_archive.php';
     genesis_page_archive_content();
