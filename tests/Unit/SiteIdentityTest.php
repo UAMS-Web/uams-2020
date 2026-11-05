@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Uams2020\Tests\Support\OptionString;
+
 use function Brain\Monkey\Functions\when;
 use function Patchwork\relay;
 
@@ -37,3 +39,30 @@ it('pins GeoIP presence without contacting the external service', function (bool
         ->and(uamswp_set_geo(['value' => 'old', 'label' => 'Geo']))->toBe(['value' => $value, 'label' => 'Geo'])
         ->and(uamswp_set_geo(['label' => 'Geo']))->toBe(['label' => 'Geo']);
 })->with([true, false]);
+
+it('preserves stringable option values while selecting site and department branches', function (array $values, string $site, string $subsiteKey, ?string $departmentKey): void {
+    $options = array_map(static fn ($value): OptionString => new OptionString($value), $values);
+    when('class_exists')->alias(static fn ($class) => $class === 'acf' ? true : relay());
+    when('get_option')->alias(static fn ($key) => $options[$key] ?? false);
+
+    expect(uams_get_site_info())->toBe(['site' => $site, 'subsite' => $options[$subsiteKey], 'department' => $departmentKey === null ? '' : $options[$departmentKey]]);
+})->with([
+    [['options_uamswp_template' => 'health', 'options_uamswp_uamshealth_subsite' => 'main'], 'uamshealth', 'options_uamswp_uamshealth_subsite', null],
+    [['options_uamswp_template' => 'inside', 'options_uamswp_inside_subsite' => 'main'], 'inside', 'options_uamswp_inside_subsite', null],
+    ...array_map(static fn (string $name): array => [
+        ['options_uamswp_template' => 'institute', 'options_uamswp_institute' => 'institute_'.$name, 'options_uamswp_institute_'.$name.'_dept' => 'department'],
+        'institute', 'options_uamswp_institute', 'options_uamswp_institute_'.$name.'_dept',
+    ], ['aging', 'eye', 'spine', 'digi-health', 'pri', 'tri', 'cancer', 'ichi']),
+    ...array_map(static fn (array $college): array => [
+        ['options_uamswp_template' => 'uams', 'options_uamswp_location' => 'uams', 'options_uamswp_uams_subsite' => $college[0], 'options_uamswp_uams_'.$college[1].'_dept' => 'department'],
+        'uams', 'options_uamswp_uams_subsite', 'options_uamswp_uams_'.$college[1].'_dept',
+    ], [['health-prof', 'cohp'], ['medicine', 'com'], ['nursing', 'con'], ['pharmacy', 'cop'], ['public-health', 'coph'], ['grad-school', 'grad-school'], ['other', 'other']]),
+]);
+
+it('retains a truthy raw subsite and department from WordPress options', function (): void {
+    $options = ['options_uamswp_template' => 'uams', 'options_uamswp_location' => 'uams', 'options_uamswp_uams_subsite' => true, 'options_uamswp_uams_cohp_dept' => 'department'];
+    when('class_exists')->alias(static fn ($class) => $class === 'acf' ? true : relay());
+    when('get_option')->alias(static fn ($key): bool|string => $options[$key] ?? false);
+
+    expect(uams_get_site_info())->toBe(['site' => 'uams', 'subsite' => true, 'department' => 'department']);
+});

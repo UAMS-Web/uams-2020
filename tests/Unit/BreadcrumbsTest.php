@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Uams2020\Tests\Support\OptionString;
+
 use function Brain\Monkey\Functions\when;
 
 it('builds the Genesis home trail for each site and front-page context', function (array $site, bool $front, array $hrefs, array $titles): void {
@@ -24,6 +26,9 @@ it('builds the Genesis home trail for each site and front-page context', functio
         ->and($html)->toContain('<span class="fas fa-home"></span>')
         ->and(array_map(static fn ($node) => $node->getAttribute('content'), iterator_to_array($xpath->query('//meta[@itemprop="position"]'))))->toBe(array_map(strval(...), range(1, count($hrefs))));
 })->with([
+    [['site' => 'uamshealth', 'subsite' => new OptionString('main'), 'department' => ''], false, ['https://home.test'], ['UAMS Health']],
+    [['site' => 'uams', 'subsite' => 'medicine', 'department' => new OptionString('main')], false, ['https://home.test', 'https://department.test/'], ['University of Arkansas for Medical Sciences', 'Department']],
+    [['site' => 'uams', 'subsite' => 'medicine', 'department' => new OptionString('none')], true, ['https://home.test'], ['University of Arkansas for Medical Sciences']],
     [['site' => 'uamshealth', 'subsite' => 'main', 'department' => 'main'], false, ['https://home.test'], ['UAMS Health']],
     [['site' => 'uamshealth', 'subsite' => 'clinic', 'department' => 'none'], true, ['https://home.test'], ['UAMS Health']],
     [['site' => 'inside', 'subsite' => 'main', 'department' => 'main'], true, ['https://home.test'], ['Inside UAMS']],
@@ -52,6 +57,13 @@ it('keeps SEOPress child crumbs while setting the site and network ancestors', f
     ];
     expect(sp_pro_breadcrumbs_crumbs([['Old', '/original/'], ['Child', '/child/']]))->toBe(array_map(static fn ($label): array => $labels[$label], $expected));
 })->with([
+    [['site' => 'uamshealth', 'subsite' => new OptionString('main'), 'department' => ''], false, ['health', 'child']],
+    [['site' => 'inside', 'subsite' => new OptionString('main'), 'department' => ''], false, ['inside', 'child']],
+    [['site' => 'institute', 'subsite' => 'eye', 'department' => new OptionString('main')], false, ['uams', 'department', 'child']],
+    [['site' => 'uams', 'subsite' => new OptionString('other'), 'department' => 'main'], false, ['uams', 'department', 'child']],
+    [['site' => 'uams', 'subsite' => new OptionString('main'), 'department' => ''], false, ['uams', 'child']],
+    [['site' => 'uams', 'subsite' => true, 'department' => 'dept'], true, ['uams', 'network', 'department', 'child']],
+    [['site' => 'uams', 'subsite' => 'medicine', 'department' => new OptionString('uams')], false, ['uams-no-slash', 'department', 'child']],
     [['site' => 'uamshealth', 'subsite' => 'main', 'department' => ''], false, ['health', 'child']],
     [['site' => 'uamshealth', 'subsite' => 'clinic', 'department' => ''], false, ['health', 'department', 'child']],
     [['site' => 'inside', 'subsite' => 'main', 'department' => ''], false, ['inside', 'child']],

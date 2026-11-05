@@ -17,6 +17,11 @@ foreach ($options as $option) {
         fwrite(STDERR, "Do not pass --processes: the locked mutation tool leaks it into child runs.\n");
         exit(2);
     }
+
+    if ($option === '--parallel' || str_starts_with($option, '--parallel=')) {
+        fwrite(STDERR, "Use serial mutation runs: the parallel runner cannot accept the explicit test-file list.\n");
+        exit(2);
+    }
 }
 
 if (! chdir($root)) {
@@ -27,7 +32,7 @@ if (! chdir($root)) {
 $arguments = [
     $root.'/vendor/bin/pest',
     ...$files,
-    '--mutate', '--everything', '--parallel', '--no-cache', '--min=100',
+    '--mutate', '--everything', '--no-cache', '--min=100',
     '--path=functions.php,home.php,page_archive.php,page_blog.php,search.php,templates',
     ...$options,
 ];

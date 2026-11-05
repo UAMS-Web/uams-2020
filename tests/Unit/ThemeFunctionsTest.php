@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Brain\Monkey\Functions;
+use Uams2020\Tests\Support\OptionString;
 
 use function Brain\Monkey\Filters\expectAdded;
 use function Brain\Monkey\Functions\when;
@@ -98,6 +99,7 @@ it('chooses the site title and home URL from site identity', function ($site, $s
     expect(uams_site_title())->toBe($title)->and(uams_get_home_link())->toBe($home);
 })->with([
     ['uamshealth', 'main', 'UAMS Health', 'https://uamshealth.com'],
+    ['uamshealth', new OptionString('main'), 'UAMS Health', 'https://uamshealth.com'],
     ['uamshealth', 'clinic', 'Department title', 'https://uamshealth.com'],
     ['inside', 'main', 'Department title', 'https://inside.uams.edu'],
     ['uams', 'main', 'Department title', 'https://www.uams.edu'],
@@ -136,6 +138,10 @@ it('adds a module class only to ordinary widgets in the footer', function ($para
     [[['id' => 'footer-1', 'before_widget' => '<div class="uamswp-widget">']], [['id' => 'footer-1', 'before_widget' => '<div class="uamswp-widget">']]],
     [[['id' => 'footer-1', 'before_widget' => 'uamswp<div class="widget">']], [['id' => 'footer-1', 'before_widget' => 'uamswp<div class="widget">']]],
 ]);
+
+it('pins the current footer treatment of a truthy non-string widget ID', function (): void {
+    expect(footer_widgets([['id' => true, 'before_widget' => '<div class="widget">']]))->toBe([['id' => true, 'before_widget' => '<div class="uams-module widget">']]);
+});
 
 it('leaves unrelated REST arguments alone when filters are missing or not arrays', function ($filter): void {
     expect(rest_api_filter_add_filter_param(['post_type' => 'post'], ['filter' => $filter]))->toBe(['post_type' => 'post']);
