@@ -23,6 +23,7 @@ if (! empty($block['anchor'])) {
 
 $className = '';
 if (! empty($block['className'])) {
+    // @pest-mutate-ignore: ConcatEqualToEqual
     $className .= ' '.$block['className'];
 }
 if (! empty($block['align'])) {
@@ -152,6 +153,7 @@ if ($geo_display) {
                         <h3><?php the_title(); ?></h3>
                         <p><?php
                                      if (! has_excerpt()) {
+                                         // @pest-mutate-ignore: DecrementInteger,IncrementInteger
                                          $content = wp_trim_words(wp_strip_all_tags(get_the_content(), 50));
                                          $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
                                          echo mb_strimwidth(preg_replace($regex, ' ', $content), 0, 176, ' ...');

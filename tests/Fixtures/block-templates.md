@@ -1,6 +1,6 @@
 # Block template characterization
 
-`block-templates.json` contains fixed inputs and expected complete markup, ordered field and region calls, and query arguments for the 18 PHP render templates in `blocks/`. The capture was made before editing any application file. No fixture is regenerated during a test. The input matrix includes field lookups and caller-supplied values, IDs and anchors, both image-plugin states, empty and repeated rows, editor previews, region inclusion and exclusion, counter dates and thresholds, gallery columns and crops, quote layouts, and news formats.
+`block-templates.json` contains fixed inputs and expected complete markup, ordered field, region, attribute-escaping and metadata calls, and query arguments for the 18 PHP render templates in `blocks/`. The complete markup capture was made before editing any application file. The additional escaping and metadata receipts were captured against identical executable tokens and literal HTML; all 746 saved markup strings and earlier boundary calls remain unchanged. No fixture is regenerated during a test. The input matrix includes field lookups and caller-supplied values, IDs and anchors, both image-plugin states, empty and repeated rows, editor previews, region inclusion and exclusion, counter dates and thresholds, gallery columns and crops, quote layouts, and news formats.
 
 The fixture records current behavior rather than desired markup. For example, the gallery and stacked templates evaluate their more-link target expression without echoing it; their existing output has no target attribute. The legacy second link-list and stacked templates can retain the preceding row's link values when the next row has no URL. These outputs are pinned, not repaired here.
 
@@ -19,3 +19,23 @@ A generous 2,000-call escaping limit makes non-terminating template loops fail i
 Each block has a distinct test description while retaining every fixed case and assertion. Mutation test selection can therefore select the relevant block instead of running unrelated blocks for every trial change.
 
 Fourteen gallery density literals carry only `DecrementInteger` exclusions. The actual helper scales densities greater than 1, so explicit densities 0 and 1 have the same result for every crop and column input. Each original generated change passed all 75 gallery cases with the real helper. The annotations attach to those individual density arguments; the neighboring column numerators remain active.
+
+
+## Mutation equivalence review
+
+The original population contains 2,657 generated changes. Fifty-six narrow named exclusions remove only independently reviewed equivalents: the fourteen density arguments above plus the following forty-two changes. A complete token multiset comparison retains multiplicity and proves that every other original generated change remains active. All 18 templates retain exactly the original executable tokens and literal HTML.
+
+- Fourteen templates initialize a local class string to empty, then append its first component. Replacing that first append with assignment preserves the value and all caller conversions. Later appends remain active.
+- Livewhale and news do not output their generated local IDs. Four changes each alter the fallback prefix or numeric literal while preserving index arithmetic, failures and string conversion; one outer prefix swap each retains the same conversion. Changing plus to minus remains active because its native error message differs.
+- The side-image width index can move from 1 to 0 or 2, and its empty fallback can change, after the same real WordPress image lookup and filters. The resulting width is unused. Its CTA and image scalar fallbacks immediately become empty arrays through the existing guards; those two fallback-string changes are also equivalent.
+- The final gallery crop predicate runs the same comparison once. Negating its result changes only an unused ratio assignment. Earlier predicates and caller conversion effects remain tested.
+- The double-category index is never read, so its initial 1-to-0/2 changes and increment-to-decrement change have no observer.
+- Each category template passes 50 as the boolean strip-breaks flag to WordPress. The adjacent literals 49 and 51 are equally true; the real function has no filter exposing the raw flag.
+- Four stacked more-link initial strings are overwritten before any observable use when the button exists, or remain unused otherwise. A remaining scalar target value can affect only an unprinted expression without external calls or conversions.
+
+Sixteen additional equivalents stay active because Pest's comment-based ancestor exclusion would also suppress non-equivalent descendants. No whitespace-dependent parser workaround or broad suppression is used:
+
+- In the unused CTA phone-link expression, three literal-only concat removals and three swaps preserve both actual formatter calls, their order, arguments and caller conversions. The distinct swap that reverses formatter order stays active and fails the native-order test.
+- In each gallery/stacked unprinted more-target expression, removing the left literal, removing the outer right literal, swapping either concat's operands, or changing the false empty default preserves one target conversion and has no other observer. Removing the target conversion remains active and fails its caller test.
+
+The covering tests document these reasons. Attribute-escaping and metadata receipts represent real WordPress filter arguments. Independent integration controls confirm both: an actual metadata-single mutation and an unused CTA-target mutation fail their new filter assertions, and exact source restoration passes. A partial CTA also checks complete saved markup, including the existing unmatched closing anchor.

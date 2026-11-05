@@ -28,6 +28,7 @@ if (! empty($block['anchor'])) {
 
 $className = '';
 if (! empty($block['className'])) {
+    // @pest-mutate-ignore: ConcatEqualToEqual
     $className .= ' '.$block['className'];
 }
 if (! empty($block['align'])) {
@@ -117,7 +118,7 @@ if ($gallery_crop == '1.7778') {
     $gallery_ratio = 'aspect-16-9';
 } elseif ($gallery_crop == '1.3333') {
     $gallery_ratio = 'aspect-4-3';
-} elseif ($gallery_crop == '1') {
+} elseif ($gallery_crop == '1') { // @pest-mutate-ignore: ElseIfNegated,EqualToNotEqual
     $gallery_ratio = 'aspect-1-1';
 } else {
     $gallery_ratio = 'full'; // Fallback to full if none or portait

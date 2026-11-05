@@ -28,6 +28,7 @@ if (! empty($block['anchor'])) {
 
 $className = '';
 if (! empty($block['className'])) {
+    // @pest-mutate-ignore: ConcatEqualToEqual
     $className .= ' '.$block['className'];
 }
 if (! empty($block['align'])) {
@@ -35,9 +36,13 @@ if (! empty($block['align'])) {
 }
 
 // PHP variables
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $more_text = '';
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $more_button_text = '';
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $more_button_url = '';
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $more_button_target = '';
 
 // Load values.

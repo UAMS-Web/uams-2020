@@ -63,9 +63,13 @@ final class BlockTemplateScenario
 
         $escapeCalls = 0;
         foreach (['esc_attr' => 'ATTR', 'esc_html' => 'HTML', 'esc_url' => 'URL', 'wp_kses_post' => 'POST', 'sanitize_title_with_dashes' => 'SLUG', 'sanitize_html_class' => 'CLASS', 'sanitize_text_field' => 'TEXT'] as $function => $marker) {
-            when($function)->alias(static function ($value) use ($marker, &$escapeCalls): string {
+            when($function)->alias(static function ($value) use ($function, $marker, &$escapeCalls, &$calls): string {
                 if (++$escapeCalls > 2000) {
                     throw new \RuntimeException('Block rendering did not finish within 2,000 escaping calls.');
+                }
+
+                if ($function === 'esc_attr') {
+                    $calls[] = ['esc_attr', $value];
                 }
 
                 return $marker.'('.$value.')';
@@ -100,7 +104,15 @@ final class BlockTemplateScenario
 
             return ['image:'.$id.':'.$size, 1200, 675];
         });
-        when('get_post_meta')->alias(static fn ($id, $key, $single): string => 'meta:'.$id.':'.$key.':'.(int) $single);
+        when('get_post_meta')->alias(static function ($id, $key, $single) use ($case, &$calls): string {
+            $calls[] = ['get_post_meta', $id, $key, $single];
+
+            if ($key === '_wp_attachment_image_alt' && array_key_exists('meta_alt', $case)) {
+                return $case['meta_alt'];
+            }
+
+            return 'meta:'.$id.':'.$key.':'.(int) (bool) $single;
+        });
         when('format_phone_dash')->alias(static fn ($value): string => ! empty($case['native_phone']) ? relay() : 'dash:'.$value);
         when('format_phone_us')->alias(static fn ($value): string => ! empty($case['native_phone']) ? relay() : 'us:'.$value);
         when('do_shortcode')->alias(static fn ($value): string => 'SHORTCODE('.$value.')');

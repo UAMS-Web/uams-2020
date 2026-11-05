@@ -23,6 +23,7 @@ if (! empty($block['anchor'])) {
 
 $className = '';
 if (! empty($block['className'])) {
+    // @pest-mutate-ignore: ConcatEqualToEqual
     $className .= ' '.$block['className'];
 }
 if (! empty($block['align'])) {
@@ -82,6 +83,7 @@ if ($geo_display) {
                 <h2 class="module-title"><span class="title"><?php echo $heading; ?></span></h2>
             </div>
             <?php
+                        // @pest-mutate-ignore: DecrementInteger,IncrementInteger
                         $index = 1;
         foreach ($post_tiles_rows as $post_tiles_row) {
 
@@ -152,6 +154,7 @@ if ($geo_display) {
                         </h3>
                         <p class="card-text"><?php
                                     if (! has_excerpt()) {
+                                        // @pest-mutate-ignore: DecrementInteger,IncrementInteger
                                         $content = wp_trim_words(wp_strip_all_tags(get_the_content(), 50));
                                         $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
                                         echo mb_strimwidth(preg_replace($regex, ' ', $content), 0, 176, ' ...');
@@ -172,6 +175,7 @@ if ($geo_display) {
             <?php }
                     } ?>
             <?php
+                        // @pest-mutate-ignore: PostIncrementToPostDecrement
                         $index++;
         }
         ?>

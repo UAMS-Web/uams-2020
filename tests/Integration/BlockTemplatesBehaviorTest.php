@@ -166,4 +166,50 @@ final class BlockTemplatesBehaviorTest extends IntegrationTestCase
             remove_filter('wp_get_attachment_image_src', $filter);
         }
     }
+
+    public function test_category_alt_metadata_lookup_keeps_the_single_value_filter_argument(): void
+    {
+        $category = self::factory()->category->create_and_get(['name' => 'Metadata category']);
+        $post = self::factory()->post->create(['post_status' => 'publish', 'post_category' => [$category->term_id]]);
+        $attachment = self::factory()->attachment->create(['post_mime_type' => 'image/jpeg', 'guid' => 'https://example.org/meta.jpg']);
+        update_post_meta($attachment, '_wp_attached_file', 'meta.jpg');
+        update_post_meta($attachment, '_wp_attachment_image_alt', 'Metadata alt');
+        set_post_thumbnail($post, $attachment);
+        $received = [];
+        $filter = static function ($value, $id, $key, $single) use (&$received, $attachment) {
+            if ($id === $attachment && $key === '_wp_attachment_image_alt') {
+                $received[] = $single;
+            }
+
+            return $value;
+        };
+        add_filter('get_post_metadata', $filter, 10, 4);
+        try {
+            $this->render('post-category-tiles', ['id' => 'metadata', 'heading' => 'Heading', 'hide_heading' => true, 'background_color' => 'bg-white', 'geo' => 'include', 'geo_region' => [], 'post_tiles_rows' => [['post_tiles_section_category' => $category, 'post_tiles_section_post_button_text' => '', 'post_tiles_section_category_button_text' => '']]]);
+            $this->assertSame([true], $received);
+        } finally {
+            remove_filter('get_post_metadata', $filter);
+        }
+    }
+
+    public function test_partial_side_image_cta_does_not_add_unused_attribute_filter_calls(): void
+    {
+        $attachment = self::factory()->attachment->create(['post_mime_type' => 'image/jpeg', 'guid' => 'https://example.org/side.jpg']);
+        update_post_meta($attachment, '_wp_attached_file', 'side.jpg');
+        $received = [];
+        $filter = static function ($safe, $original) use (&$received) {
+            $received[] = $original;
+
+            return $safe;
+        };
+        $vars = ['id' => 8, 'layout' => 'body-only', 'heading' => 'Side image', 'body' => 'Body', 'link_list' => [['unused']], 'list_more' => true, 'cta' => ['side_cta_text' => 'Unused text'], 'image_group' => ['side_image_image' => $attachment, 'side_image_alt_text' => 'Alt', 'side_image_crop' => 'center', 'side_image_anchor' => 'center'], 'image_postion' => 'left', 'background_color' => 'bg-white', 'geo' => 'include', 'geo_region' => []];
+        BlockIntegrationFields::$values = ['side_image_geo_region' => []];
+        add_filter('attribute_escape', $filter, 10, 2);
+        try {
+            $this->render('image-side-by-side', $vars);
+            $this->assertSame(['uams-side-by-side-block', 'left', 'center', 'bg-white', 'image-side-8', 'Side image', 'Alt', 'image-side-8'], $received);
+        } finally {
+            remove_filter('attribute_escape', $filter);
+        }
+    }
 }
