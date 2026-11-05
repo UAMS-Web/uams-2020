@@ -39,12 +39,12 @@ final class PageBuilderRegistrationTest extends TestCase
     public static function pluginStates(): array
     {
         return [
+            'all with optional plugins' => [true, true, true, true, true],
             'no ACF functions' => [false, false, false, false, false],
             'options only' => [true, false, false, false, false],
             'fields only' => [false, true, false, false, false],
             'blocks only' => [false, false, true, true, true],
             'all without optional plugins' => [true, true, true, false, false],
-            'all with optional plugins' => [true, true, true, true, true],
             'mask fields without news' => [true, true, true, true, false],
             'news without mask fields' => [true, true, true, false, true],
         ];

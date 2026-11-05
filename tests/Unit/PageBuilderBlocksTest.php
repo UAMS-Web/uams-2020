@@ -51,6 +51,15 @@ it('uses empty defaults when a placeholder is called outside block context', fun
     expect(ob_get_clean())->toBe('');
 });
 
+it('does not treat a supplied block as an editor preview unless preview is requested', function (): void {
+    when('esc_html')->returnArg();
+    when('esc_html__')->returnArg();
+    ob_start();
+    $shown = uamswp_block_placeholder(['title' => 'Named block', 'data' => []]);
+    $html = ob_get_clean();
+    expect($shown)->toBeFalse()->and($html)->toBe('');
+});
+
 it('checks HTTPS and host boundaries using the filtered allowlist', function ($url, $hosts, bool $allowed): void {
     when('wp_parse_url')->alias(parse_url(...));
     when('apply_filters')->alias(static function ($hook, $value) use ($hosts) {

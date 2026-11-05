@@ -166,6 +166,37 @@ it('returns early when ACF is absent or the module field is empty', function ():
     expect(uamswp_modules())->toBeNull()->and(uamswp_has_module())->toBeFalse();
 });
 
+it('does no field or post lookup when ACF is unavailable', function (): void {
+    Functions\expect('get_field')->never();
+    Functions\expect('get_the_id')->never();
+
+    when('function_exists')->alias(static fn ($name) => $name === 'get_field' ? false : relay());
+    expect(uamswp_modules())->toBeNull()->and(uamswp_has_module())->toBeNull();
+});
+
+it('uses the current post when the modules post argument is omitted', function (): void {
+    when('get_the_id')->justReturn(91);
+    $module = ['acf_fc_layout' => 'modules_action_bar'];
+    Functions\expect('get_field')->once()->with('uamswp_modules', 91)->andReturn([$module]);
+    Functions\expect('uamswp_module')->once()->with($module, 0);
+    uamswp_modules();
+});
+
+it('retains the empty layout lookup and current post when both lookup arguments are omitted', function (): void {
+    when('get_the_id')->justReturn(91);
+    Functions\expect('get_field')->once()->with('uamswp_modules', 91)->andReturn([['acf_fc_layout' => '']]);
+    expect(uamswp_has_module())->toBeTrue();
+});
+
+it('passes the default false index to a directly rendered module', function (): void {
+    ob_start();
+    uamswp_module(pageBuilderModuleInput('modules_action_bar'));
+    $html = ob_get_clean();
+    expect($html)->toBe('<!-- // Begin Module - modules_action_bar// -->[template:action-bar.php]<!-- // End Module - modules_action_bar// -->')
+        ->and(ModuleTemplateCapture::$calls[0]['variables']['i'])->toBeFalse()
+        ->and(ModuleTemplateCapture::$calls[0]['variables']['id'])->toBeFalse();
+});
+
 it('searches all module layouts using the current loose comparison', function ($needle, array $modules, bool $expected, $post, int $postId): void {
     when('get_the_id')->justReturn(91);
     Functions\expect('get_field')->once()->with('uamswp_modules', $postId)->andReturn($modules);
