@@ -13,18 +13,16 @@ if ($files === false || $files === []) {
 sort($files);
 $options = array_slice($_SERVER['argv'], 1);
 foreach ($options as $option) {
-    if ($option === '--processes' || str_starts_with($option, '--processes=')) {
-        fwrite(STDERR, "Do not pass --processes: the locked mutation tool leaks it into child runs.\n");
-        exit(2);
+    $name = explode('=', $option, 2)[0];
+    foreach (['--processes', '--parallel', '--configuration', '--no-configuration'] as $reserved) {
+        if (str_starts_with($name, '--') && $name !== '--' && str_starts_with($reserved, $name)) {
+            fwrite(STDERR, "Process-count, parallel, and configuration options are managed by this launcher.\n");
+            exit(2);
+        }
     }
 
-    if (str_starts_with($option, '-p') || $option === '--parallel' || str_starts_with($option, '--parallel=')) {
-        fwrite(STDERR, "Parallel execution is selected by this launcher; do not pass parallel flags.\n");
-        exit(2);
-    }
-
-    if (str_starts_with($option, '-c') || $option === '--configuration' || str_starts_with($option, '--configuration=') || $option === '--no-configuration') {
-        fwrite(STDERR, "This launcher requires its generated explicit-file configuration.\n");
+    if (str_starts_with($option, '-p') || str_starts_with($option, '-c')) {
+        fwrite(STDERR, "Short parallel and configuration flags are managed by this launcher.\n");
         exit(2);
     }
 }
