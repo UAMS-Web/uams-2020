@@ -16,6 +16,8 @@ final class BlockTemplateScenario
     public static function render(array $case): array
     {
         $calls = [];
+        $timezone = date_default_timezone_get();
+        date_default_timezone_set('UTC');
         if ($case['name'] === 'post-category-tile' && isset($case['variables']['category'])) {
             $case['variables']['category'] = (object) $case['variables']['category'];
         }
@@ -96,8 +98,8 @@ final class BlockTemplateScenario
         when('format_phone_dash')->alias(static fn ($value): string => 'dash:'.$value);
         when('format_phone_us')->alias(static fn ($value): string => 'us:'.$value);
         when('do_shortcode')->alias(static fn ($value): string => 'SHORTCODE('.$value.')');
-        when('date')->alias(static fn ($format, $timestamp = null): string => gmdate($format, $timestamp ?? 1710504000));
-        when('strtotime')->alias(static fn ($value, $base = null): int|false => $value === '' ? false : (new \DateTimeImmutable('@'.($base ?? 1710504000)))->setTimezone(new \DateTimeZone('UTC'))->modify($value)->getTimestamp());
+        when('date')->alias(static fn ($format, $timestamp = null): string => relay([$format, $timestamp ?? 1710504000]));
+        when('strtotime')->alias(static fn ($value, $base = null): int|false => relay([$value, $base ?? 1710504000]));
         if (! class_exists('WP_Query')) {
             class_alias(QueryDouble::class, 'WP_Query');
         }
@@ -136,6 +138,7 @@ final class BlockTemplateScenario
             } else {
                 unset($GLOBALS['post']);
             }
+            date_default_timezone_set($timezone);
             QueryDouble::$nextRows = [];
         }
 

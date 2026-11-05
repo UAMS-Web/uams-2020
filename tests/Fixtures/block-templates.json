@@ -98602,5 +98602,329 @@
             ],
             "queries": []
         }
+    },
+    {
+        "name": "counter",
+        "label": "custom-date-''",
+        "fields": {
+            "counter_list_heading": "counter_list_heading <&\"",
+            "counter_list_hide_heading": false,
+            "counter_list_description": "counter_list_description <&\"",
+            "counter_list_start": "custom",
+            "counter_list_start_custom": "",
+            "counter_list_background_color": "bg-white",
+            "counter_list_section": [
+                {
+                    "counter_list_section_title": "counter_list_section_title <&\"",
+                    "counter_list_section_unit": "counter_list_section_unit <&\"",
+                    "counter_list_section_units": "counter_list_section_units <&\"",
+                    "counter_list_section_rate": 0.125,
+                    "counter_list_section_start_inherit": 1,
+                    "counter_list_section_start_override": "custom",
+                    "counter_list_section_start_custom": "2024-03-15T12:00:00"
+                },
+                {
+                    "counter_list_section_title": "counter_list_section_title <&\"",
+                    "counter_list_section_unit": "counter_list_section_unit <&\"",
+                    "counter_list_section_units": "counter_list_section_units <&\"",
+                    "counter_list_section_rate": 0.125,
+                    "counter_list_section_start_inherit": 1,
+                    "counter_list_section_start_override": "custom",
+                    "counter_list_section_start_custom": "2024-03-15T12:00:00"
+                }
+            ]
+        },
+        "variables": {
+            "block": {
+                "id": "block-7",
+                "className": "custom class",
+                "align": "wide"
+            },
+            "i": 4,
+            "is_preview": false
+        },
+        "resizer": true,
+        "in_region": true,
+        "out_region": false,
+        "placeholder": false,
+        "admin": false,
+        "iframe_allowed": true,
+        "sandbox": "allow-forms",
+        "rows": [
+            {
+                "ID": 81,
+                "post_title": "Post title"
+            }
+        ],
+        "thumbnail": 47,
+        "excerpt": false,
+        "expected": {
+            "html": "<section class=\"uams-module link-list counter-list link-list-layout-splitATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(counter_list_heading <&\")\">\n    <div class=\"container-fluid\">\n        <div class=\"row\">\n            <div class=\"col-12 col-md-6 heading\">\n                <div class=\"text-container\">\n                    <h2 class=\"module-title \">\n                        <span class=\"title\">HTML(counter_list_heading <&\")</span>\n                    </h2>\n                    <p class=\"note\">POST(counter_list_description <&\")</p>                </div>\n            </div>\n            <div class=\"col-12 col-md-6 list\">\n                    <ul>\n                                            <li class=\"item\" data-start-date=\"ATTR()\" data-rate=\"ATTR(0.125)\" data-unit-singular=\"ATTR(counter_list_section_unit <&\")\" data-unit-plural=\"ATTR(counter_list_section_units <&\")\" id=\"item-ATTR(link-list-block-7-row-1)\">\n                            <div class=\"text-container\">\n                                <h3 class=\"h5\">HTML(counter_list_section_title <&\")</h3>\n                                <p class=\"count\"><span class=\"value\">213,813,000</span> <span class=\"append\">HTML(counter_list_section_units <&\")</span></p>\n                            </div>\n                        </li>\n                                            <li class=\"item\" data-start-date=\"ATTR()\" data-rate=\"ATTR(0.125)\" data-unit-singular=\"ATTR(counter_list_section_unit <&\")\" data-unit-plural=\"ATTR(counter_list_section_units <&\")\" id=\"item-ATTR(link-list-block-7-row-2)\">\n                            <div class=\"text-container\">\n                                <h3 class=\"h5\">HTML(counter_list_section_title <&\")</h3>\n                                <p class=\"count\"><span class=\"value\">213,813,000</span> <span class=\"append\">HTML(counter_list_section_units <&\")</span></p>\n                            </div>\n                        </li>\n                                    </ul>\n            </div>\n        </div>\n    </div>\n</section>\n<script>\n    (function($) {\n        $(document).ready(function(){\n            $('.counter-list .item').each(function() {\n                var $id = $(this).attr('id');\n                var $this = $('#' + $id);\n                var $startDate = new Date($this.attr('data-start-date'));\n                var $rate = $this.attr('data-rate');\n                var $unit_singular = $this.attr('data-unit-singular');\n                var $unit_plural = $this.attr('data-unit-plural');\n                var $currentDate_js = new Date();\n                var $dateDiff_js = ($currentDate_js - $startDate) / 1000; // seconds\n                var $count = $dateDiff_js * $rate;\n\n                function recalculateCount() {\n                    var $currentDate_js = new Date();\n                    var $dateDiff_js = ($currentDate_js - $startDate) / 1000; // seconds\n                    var $count = $dateDiff_js * $rate;\n                    if ($count < 1) {\n                        var $count_display = '<1';\n                        var $unit_display = $unit_singular;\n                    } else {\n                        var $count_display = Math.floor($dateDiff_js * $rate).toLocaleString('en');\n                        var $unit_display = $unit_plural;\n                    }\n                    $('#' + $id + ' .count .value').text($count_display);\n                    $('#' + $id + ' .count .append').text($unit_display);\n                }\n\n                recalculateCount();\n\n                setInterval(function() {\n                    recalculateCount();\n                }, 1000);\n            });\n        })\n    })(jQuery);\n</script>\n\n",
+            "calls": [
+                [
+                    "placeholder",
+                    [
+                        {
+                            "id": "block-7",
+                            "className": "custom class",
+                            "align": "wide"
+                        },
+                        false
+                    ]
+                ],
+                [
+                    "get_field",
+                    "counter_list_heading",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_hide_heading",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_description",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_start",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_start_custom",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_background_color",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_section",
+                    []
+                ]
+            ],
+            "queries": []
+        }
+    },
+    {
+        "name": "counter",
+        "label": "custom-date-False",
+        "fields": {
+            "counter_list_heading": "counter_list_heading <&\"",
+            "counter_list_hide_heading": false,
+            "counter_list_description": "counter_list_description <&\"",
+            "counter_list_start": "custom",
+            "counter_list_start_custom": false,
+            "counter_list_background_color": "bg-white",
+            "counter_list_section": [
+                {
+                    "counter_list_section_title": "counter_list_section_title <&\"",
+                    "counter_list_section_unit": "counter_list_section_unit <&\"",
+                    "counter_list_section_units": "counter_list_section_units <&\"",
+                    "counter_list_section_rate": 0.125,
+                    "counter_list_section_start_inherit": 1,
+                    "counter_list_section_start_override": "custom",
+                    "counter_list_section_start_custom": "2024-03-15T12:00:00"
+                },
+                {
+                    "counter_list_section_title": "counter_list_section_title <&\"",
+                    "counter_list_section_unit": "counter_list_section_unit <&\"",
+                    "counter_list_section_units": "counter_list_section_units <&\"",
+                    "counter_list_section_rate": 0.125,
+                    "counter_list_section_start_inherit": 1,
+                    "counter_list_section_start_override": "custom",
+                    "counter_list_section_start_custom": "2024-03-15T12:00:00"
+                }
+            ]
+        },
+        "variables": {
+            "block": {
+                "id": "block-7",
+                "className": "custom class",
+                "align": "wide"
+            },
+            "i": 4,
+            "is_preview": false
+        },
+        "resizer": true,
+        "in_region": true,
+        "out_region": false,
+        "placeholder": false,
+        "admin": false,
+        "iframe_allowed": true,
+        "sandbox": "allow-forms",
+        "rows": [
+            {
+                "ID": 81,
+                "post_title": "Post title"
+            }
+        ],
+        "thumbnail": 47,
+        "excerpt": false,
+        "expected": {
+            "html": "<section class=\"uams-module link-list counter-list link-list-layout-splitATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(counter_list_heading <&\")\">\n    <div class=\"container-fluid\">\n        <div class=\"row\">\n            <div class=\"col-12 col-md-6 heading\">\n                <div class=\"text-container\">\n                    <h2 class=\"module-title \">\n                        <span class=\"title\">HTML(counter_list_heading <&\")</span>\n                    </h2>\n                    <p class=\"note\">POST(counter_list_description <&\")</p>                </div>\n            </div>\n            <div class=\"col-12 col-md-6 list\">\n                    <ul>\n                                            <li class=\"item\" data-start-date=\"ATTR()\" data-rate=\"ATTR(0.125)\" data-unit-singular=\"ATTR(counter_list_section_unit <&\")\" data-unit-plural=\"ATTR(counter_list_section_units <&\")\" id=\"item-ATTR(link-list-block-7-row-1)\">\n                            <div class=\"text-container\">\n                                <h3 class=\"h5\">HTML(counter_list_section_title <&\")</h3>\n                                <p class=\"count\"><span class=\"value\">213,813,000</span> <span class=\"append\">HTML(counter_list_section_units <&\")</span></p>\n                            </div>\n                        </li>\n                                            <li class=\"item\" data-start-date=\"ATTR()\" data-rate=\"ATTR(0.125)\" data-unit-singular=\"ATTR(counter_list_section_unit <&\")\" data-unit-plural=\"ATTR(counter_list_section_units <&\")\" id=\"item-ATTR(link-list-block-7-row-2)\">\n                            <div class=\"text-container\">\n                                <h3 class=\"h5\">HTML(counter_list_section_title <&\")</h3>\n                                <p class=\"count\"><span class=\"value\">213,813,000</span> <span class=\"append\">HTML(counter_list_section_units <&\")</span></p>\n                            </div>\n                        </li>\n                                    </ul>\n            </div>\n        </div>\n    </div>\n</section>\n<script>\n    (function($) {\n        $(document).ready(function(){\n            $('.counter-list .item').each(function() {\n                var $id = $(this).attr('id');\n                var $this = $('#' + $id);\n                var $startDate = new Date($this.attr('data-start-date'));\n                var $rate = $this.attr('data-rate');\n                var $unit_singular = $this.attr('data-unit-singular');\n                var $unit_plural = $this.attr('data-unit-plural');\n                var $currentDate_js = new Date();\n                var $dateDiff_js = ($currentDate_js - $startDate) / 1000; // seconds\n                var $count = $dateDiff_js * $rate;\n\n                function recalculateCount() {\n                    var $currentDate_js = new Date();\n                    var $dateDiff_js = ($currentDate_js - $startDate) / 1000; // seconds\n                    var $count = $dateDiff_js * $rate;\n                    if ($count < 1) {\n                        var $count_display = '<1';\n                        var $unit_display = $unit_singular;\n                    } else {\n                        var $count_display = Math.floor($dateDiff_js * $rate).toLocaleString('en');\n                        var $unit_display = $unit_plural;\n                    }\n                    $('#' + $id + ' .count .value').text($count_display);\n                    $('#' + $id + ' .count .append').text($unit_display);\n                }\n\n                recalculateCount();\n\n                setInterval(function() {\n                    recalculateCount();\n                }, 1000);\n            });\n        })\n    })(jQuery);\n</script>\n\n",
+            "calls": [
+                [
+                    "placeholder",
+                    [
+                        {
+                            "id": "block-7",
+                            "className": "custom class",
+                            "align": "wide"
+                        },
+                        false
+                    ]
+                ],
+                [
+                    "get_field",
+                    "counter_list_heading",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_hide_heading",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_description",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_start",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_start_custom",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_background_color",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_section",
+                    []
+                ]
+            ],
+            "queries": []
+        }
+    },
+    {
+        "name": "counter",
+        "label": "custom-date-'not-a-real-date'",
+        "fields": {
+            "counter_list_heading": "counter_list_heading <&\"",
+            "counter_list_hide_heading": false,
+            "counter_list_description": "counter_list_description <&\"",
+            "counter_list_start": "custom",
+            "counter_list_start_custom": "not-a-real-date",
+            "counter_list_background_color": "bg-white",
+            "counter_list_section": [
+                {
+                    "counter_list_section_title": "counter_list_section_title <&\"",
+                    "counter_list_section_unit": "counter_list_section_unit <&\"",
+                    "counter_list_section_units": "counter_list_section_units <&\"",
+                    "counter_list_section_rate": 0.125,
+                    "counter_list_section_start_inherit": 1,
+                    "counter_list_section_start_override": "custom",
+                    "counter_list_section_start_custom": "2024-03-15T12:00:00"
+                },
+                {
+                    "counter_list_section_title": "counter_list_section_title <&\"",
+                    "counter_list_section_unit": "counter_list_section_unit <&\"",
+                    "counter_list_section_units": "counter_list_section_units <&\"",
+                    "counter_list_section_rate": 0.125,
+                    "counter_list_section_start_inherit": 1,
+                    "counter_list_section_start_override": "custom",
+                    "counter_list_section_start_custom": "2024-03-15T12:00:00"
+                }
+            ]
+        },
+        "variables": {
+            "block": {
+                "id": "block-7",
+                "className": "custom class",
+                "align": "wide"
+            },
+            "i": 4,
+            "is_preview": false
+        },
+        "resizer": true,
+        "in_region": true,
+        "out_region": false,
+        "placeholder": false,
+        "admin": false,
+        "iframe_allowed": true,
+        "sandbox": "allow-forms",
+        "rows": [
+            {
+                "ID": 81,
+                "post_title": "Post title"
+            }
+        ],
+        "thumbnail": 47,
+        "excerpt": false,
+        "expected": {
+            "html": "<section class=\"uams-module link-list counter-list link-list-layout-splitATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(counter_list_heading <&\")\">\n    <div class=\"container-fluid\">\n        <div class=\"row\">\n            <div class=\"col-12 col-md-6 heading\">\n                <div class=\"text-container\">\n                    <h2 class=\"module-title \">\n                        <span class=\"title\">HTML(counter_list_heading <&\")</span>\n                    </h2>\n                    <p class=\"note\">POST(counter_list_description <&\")</p>                </div>\n            </div>\n            <div class=\"col-12 col-md-6 list\">\n                    <ul>\n                                            <li class=\"item\" data-start-date=\"ATTR(not-a-real-date)\" data-rate=\"ATTR(0.125)\" data-unit-singular=\"ATTR(counter_list_section_unit <&\")\" data-unit-plural=\"ATTR(counter_list_section_units <&\")\" id=\"item-ATTR(link-list-block-7-row-1)\">\n                            <div class=\"text-container\">\n                                <h3 class=\"h5\">HTML(counter_list_section_title <&\")</h3>\n                                <p class=\"count\"><span class=\"value\">213,813,000</span> <span class=\"append\">HTML(counter_list_section_units <&\")</span></p>\n                            </div>\n                        </li>\n                                            <li class=\"item\" data-start-date=\"ATTR(not-a-real-date)\" data-rate=\"ATTR(0.125)\" data-unit-singular=\"ATTR(counter_list_section_unit <&\")\" data-unit-plural=\"ATTR(counter_list_section_units <&\")\" id=\"item-ATTR(link-list-block-7-row-2)\">\n                            <div class=\"text-container\">\n                                <h3 class=\"h5\">HTML(counter_list_section_title <&\")</h3>\n                                <p class=\"count\"><span class=\"value\">213,813,000</span> <span class=\"append\">HTML(counter_list_section_units <&\")</span></p>\n                            </div>\n                        </li>\n                                    </ul>\n            </div>\n        </div>\n    </div>\n</section>\n<script>\n    (function($) {\n        $(document).ready(function(){\n            $('.counter-list .item').each(function() {\n                var $id = $(this).attr('id');\n                var $this = $('#' + $id);\n                var $startDate = new Date($this.attr('data-start-date'));\n                var $rate = $this.attr('data-rate');\n                var $unit_singular = $this.attr('data-unit-singular');\n                var $unit_plural = $this.attr('data-unit-plural');\n                var $currentDate_js = new Date();\n                var $dateDiff_js = ($currentDate_js - $startDate) / 1000; // seconds\n                var $count = $dateDiff_js * $rate;\n\n                function recalculateCount() {\n                    var $currentDate_js = new Date();\n                    var $dateDiff_js = ($currentDate_js - $startDate) / 1000; // seconds\n                    var $count = $dateDiff_js * $rate;\n                    if ($count < 1) {\n                        var $count_display = '<1';\n                        var $unit_display = $unit_singular;\n                    } else {\n                        var $count_display = Math.floor($dateDiff_js * $rate).toLocaleString('en');\n                        var $unit_display = $unit_plural;\n                    }\n                    $('#' + $id + ' .count .value').text($count_display);\n                    $('#' + $id + ' .count .append').text($unit_display);\n                }\n\n                recalculateCount();\n\n                setInterval(function() {\n                    recalculateCount();\n                }, 1000);\n            });\n        })\n    })(jQuery);\n</script>\n\n",
+            "calls": [
+                [
+                    "placeholder",
+                    [
+                        {
+                            "id": "block-7",
+                            "className": "custom class",
+                            "align": "wide"
+                        },
+                        false
+                    ]
+                ],
+                [
+                    "get_field",
+                    "counter_list_heading",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_hide_heading",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_description",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_start",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_start_custom",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_background_color",
+                    []
+                ],
+                [
+                    "get_field",
+                    "counter_list_section",
+                    []
+                ]
+            ],
+            "queries": []
+        }
     }
 ]
