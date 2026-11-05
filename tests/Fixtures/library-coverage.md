@@ -53,6 +53,10 @@ The population is every first-party PHP file below `lib/` other than the four pa
 
 Warning tests accept exactly one specified warning from the compiled function or method range. Other errors are thrown. Reflection boundaries allow the mutation printer to move lines. A temporary control pretty-printed all 26 files without changing behavior, ran the full Unit suite, restored every original byte, and passed. Final mutation conclusions still require a separate complete run.
 
+## Test isolation controls
+
+Independent review found two test-only defects. The footer sidebar double now checks the expected call bound and exact next sidebar ID before writing output. Removing the production counter increment causes eight bounded assertion failures, instead of waiting for a timeout. The WordPress widget test restores the factory and all three core registration arrays. Disabling that restoration fails the explicit global-state assertion. Both temporary controls were restored before validation.
+
 ## WordPress commands
 
 Set `WP_TESTS_ABSPATH` to a clean WordPress 7.1.3 core tree and use the isolated `uams_2020_tests` database configured by `tests/Integration/wp-tests-config.php`.

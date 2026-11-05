@@ -122,6 +122,10 @@ final class LibraryBehaviorTest extends IntegrationTestCase
     {
         global $wp_widget_factory;
         $saved = $wp_widget_factory->widgets;
+        $registrations = [];
+        foreach (['wp_registered_widgets', 'wp_registered_widget_controls', 'wp_registered_widget_updates'] as $global) {
+            $registrations[$global] = $GLOBALS[$global];
+        }
         try {
             do_action('widgets_init');
             foreach (['UAMSWP_Call_Out_Widget' => 'uamswp_callout_widget', 'UAMSWP_CTA_Widget' => 'uamswp_cta_widget'] as $class => $id) {
@@ -135,6 +139,13 @@ final class LibraryBehaviorTest extends IntegrationTestCase
             }
         } finally {
             $wp_widget_factory->widgets = $saved;
+            foreach ($registrations as $global => $value) {
+                $GLOBALS[$global] = $value;
+            }
+        }
+        $this->assertTrue($saved === $wp_widget_factory->widgets, 'Widget factory was not restored.');
+        foreach ($registrations as $global => $value) {
+            $this->assertTrue($value === $GLOBALS[$global], 'Widget registration was not restored: '.$global);
         }
     }
 

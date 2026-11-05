@@ -50,7 +50,9 @@ it('pins footer columns, integer coercion, boundaries and ordered sidebar output
     Functions\expect('get_theme_support')->once()->with('genesis-footer-widgets')->andReturn([$count]);
     Functions\expect('is_active_sidebar')->once()->with('footer-1')->andReturn(true);
     $seen = [];
-    when('dynamic_sidebar')->alias(function ($id) use (&$seen): void {
+    when('dynamic_sidebar')->alias(function ($id) use (&$seen, $rendered): void {
+        expect(count($seen))->toBeLessThan($rendered);
+        expect($id)->toBe('footer-'.(count($seen) + 1));
         $seen[] = $id;
         echo '['.$id.']';
     });
