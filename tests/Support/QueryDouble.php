@@ -11,7 +11,12 @@ final class QueryDouble
 
     public static array $lastArgs = [];
 
+    public static array $history = [];
+
     public array $args;
+
+    /** WP_Query exposes unknown ID through __get as null; thumbnail helpers then use the current post. */
+    public $ID = null;
 
     private array $rows;
 
@@ -22,6 +27,7 @@ final class QueryDouble
     public function __construct(array $args)
     {
         self::$lastArgs = $args;
+        self::$history[] = $args;
         $this->args = $args;
         $this->rows = self::$nextRows;
     }

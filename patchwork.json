@@ -8,7 +8,9 @@
         "error_log",
         "exit",
         "random_int",
-        "mt_getrandmax"
+        "mt_getrandmax",
+        "date",
+        "strtotime"
     ],
     "blacklist": [
         "vendor/symfony/finder/"
