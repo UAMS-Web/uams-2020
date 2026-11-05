@@ -14,6 +14,7 @@ use Rector\TypeDeclaration\Rector\ClassLike\AddVoidReturnTypeWhereNoReturnRector
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamFromDimFetchKeyUseRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\ReturnUnionTypeRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\StrictArrayParamDimFetchRector;
+use Rector\TypeDeclaration\Rector\ClassMethod\StringReturnTypeFromStrictStringReturnsRector;
 use Rector\TypeDeclaration\Rector\Function_\AddFunctionVoidReturnTypeWhereNoReturnRector;
 // WordPress repositories: uncomment the import below together with the matching
 // `ArrayToFirstClassCallableRector::class` entry in `$sweepOnlyRules`. A `use`
@@ -149,6 +150,11 @@ return RectorConfig::configure()
         // The WordPress walker parent has no return type. Adding void to its
         // unit boundary makes the unchanged child walker fail PHP inheritance checks.
         AddVoidReturnTypeWhereNoReturnRector::class => [
+            __DIR__.'/tests/Support/LibraryCoreDoubles.php',
+        ],
+        // Core widget getters have no return type. Keep the unit boundary
+        // compatible with widget subclasses returning null or another field-name value.
+        StringReturnTypeFromStrictStringReturnsRector::class => [
             __DIR__.'/tests/Support/LibraryCoreDoubles.php',
         ],
         // Mixed PHP/HTML template: a void return type before the HTML

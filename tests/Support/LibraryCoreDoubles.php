@@ -27,12 +27,12 @@ class WP_Widget
         $this->constructorArguments = $args;
     }
 
-    public function get_field_id($field): string
+    public function get_field_id($field)
     {
         return 'FIELD-ID:'.$field;
     }
 
-    public function get_field_name($field): string
+    public function get_field_name($field)
     {
         return 'FIELD-NAME:'.$field;
     }

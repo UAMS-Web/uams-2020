@@ -414,5 +414,29 @@
         "fields": {
             "uamswp_secondary_number_type": "phone"
         }
+    },
+    "link default label": {
+        "site": {
+            "site": "uams",
+            "subsite": "main",
+            "department": "main"
+        },
+        "fields": {
+            "uamswp_secondary_number_type": "link",
+            "uamswp_secondary_link_url": {
+                "url": "https://directory.test/"
+            }
+        }
+    },
+    "phone default label": {
+        "site": {
+            "site": "uams",
+            "subsite": "main",
+            "department": "main"
+        },
+        "fields": {
+            "uamswp_secondary_number_type": "phone",
+            "uamswp_secondary_phone_number": "1234567890"
+        }
     }
 }

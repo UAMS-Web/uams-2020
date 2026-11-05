@@ -38,8 +38,9 @@ The population is every first-party PHP file below `lib/` other than the four pa
 - `library-hook-registrations.json` records load-time additions, removals, priorities, accepted arguments and other setup calls. `LibraryLoader` checks it before clearing Brain Monkey state. Header and title-option runtime registrations have their own exact argument checks.
 - Branding, page-image, quick-link tray, search, favicon and plugin-registration fixtures are fixed output from the unchanged source with explicit external values. Tests read them; they never update expectations from source at runtime. Complete markup is compared, including whitespace and existing irregular markup.
 - Footer year markers are replaced with the current year in the expectation. No other output is normalized. Header site-switch stubs check balanced calls; the separate WordPress network test checks real site IDs and the full switch stack.
-- Region fixtures list all configured cities individually. Additional cases exercise wrong states, unknown cities and region order. The include helper intentionally returns null after a recognized region misses a city, and false on an unknown region.
+- Region fixtures list all configured cities individually. The loader also checks the complete five region lists at initialization, when mutation coverage attributes their assignments. Additional cases exercise wrong states, unknown cities and region order. The include helper intentionally returns null after a recognized region misses a city, and false on an unknown region.
 - Template fixtures record include inputs instead of rendering blocks. Block rendering has a separate coverage issue. Widget constructor and walker parent doubles only expose unit boundaries; WordPress integration checks actual widget IDs, field names and tree output.
+- Repeated subsection reads may change through real WordPress metadata filters. Sequenced header cases cover those paths; they are not treated as dead code just because an earlier lookup returned false. Widget getter boundaries keep WordPress' untyped signatures so legitimate widget subclasses can return null or a false-like field name.
 - The existing block-registry double is shared with root-helper tests, with its data restored after use. No second competing registry implementation is loaded.
 - The WordPress network command uses an empty ACF presence marker so the theme reads site settings from actual WordPress options. This marker implements no ACF API. No claim is made about an installed ACF implementation.
 
@@ -56,6 +57,10 @@ Warning tests accept exactly one specified warning from the compiled function or
 ## Test isolation controls
 
 Independent review found two test-only defects. The footer sidebar double now checks the expected call bound and exact next sidebar ID before writing output. Removing the production counter increment causes eight bounded assertion failures, instead of waiting for a timeout. The WordPress widget test restores the factory and all three core registration arrays. Disabling that restoration fails the explicit global-state assertion. Both temporary controls were restored before validation.
+
+## Global configuration and mutation selection
+
+An initial mutation run was stopped without a completed result after it selected only first-load tests for changes to a global city list. The selected tests did not include later city consumers. Replaying a mutation that removed Sheridan passed all 154 selected tests, while the actual city tests failed on the missing membership. A fixed-data assertion now compares all five complete lists at initialization. The identical selected-test replay then fails on the changed central list. The functional city cases remain in place. No mutation-tool patch or dependency change was needed.
 
 ## WordPress commands
 

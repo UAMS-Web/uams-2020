@@ -101,3 +101,28 @@ it('removes the block directory on admin initialization and pins editor theme su
     uamswp_gutenberg_disable_all_colors_fonts();
     expect($calls)->toBe([['editor-color-palette', []], ['disable-custom-colors'], ['editor-font-sizes', []], ['disable-custom-font-sizes']]);
 });
+
+it('allows CTA widget subclasses to supply null or false-like field names', function ($fieldName, string $expectedName): void {
+    when('__')->returnArg();
+    Functions\expect('_e')->once()->with('Title (Not Displayed)')->andReturnUsing(static function (): void {
+        echo 'Translated Title';
+    });
+    Functions\expect('esc_attr')->once()->with('')->andReturn('ESCAPED');
+    $widget = new class($fieldName) extends UAMSWP_CTA_Widget
+    {
+        public function __construct(private mixed $fieldName)
+        {
+            parent::__construct();
+        }
+
+        public function get_field_name($field): mixed
+        {
+            expect($field)->toBe('title');
+
+            return $this->fieldName;
+        }
+    };
+    ob_start();
+    $widget->form([]);
+    expect(ob_get_clean())->toBe("    <p>\n      <label for=\"FIELD-ID:title\">Translated Title</label>\n      <input class=\"widefat\" id=\"FIELD-ID:title\" name=\"".$expectedName."\" type=\"text\" value=\"ESCAPED\">\n    </p>\n    ");
+})->with([[null, ''], ['0', '0'], ['', '']]);

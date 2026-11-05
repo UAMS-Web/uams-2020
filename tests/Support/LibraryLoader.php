@@ -55,6 +55,15 @@ final class LibraryLoader
         $expected = json_decode((string) file_get_contents(__DIR__.'/../Fixtures/library-hook-registrations.json'), true, flags: JSON_THROW_ON_ERROR);
         Assert::assertSame($expected, ['hooks' => $actualHooks, 'calls' => self::$loadCalls]);
         Assert::assertTrue(function_exists('quicklinks_menu'));
+        $regions = [];
+        foreach (json_decode((string) file_get_contents(__DIR__.'/../Fixtures/library-region-cities.json'), true, flags: JSON_THROW_ON_ERROR) as [$region, $city]) {
+            $regions[$region][] = $city;
+        }
+
+        foreach ($regions as $region => $cities) {
+            Assert::assertTrue($cities === ($GLOBALS['region_'.$region] ?? null), 'Configured city list changed: '.$region);
+        }
+
         self::$loaded = true;
         tearDown();
         setUp();

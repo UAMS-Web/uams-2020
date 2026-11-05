@@ -25,7 +25,16 @@ final class LibraryBrandingScenario
 
             return $input['fields'][$key] ?? false;
         });
-        when('uamswp_nav_subsection')->justReturn($input['subsection'] ?? false);
+        if (isset($input['subsection_sequence'])) {
+            $values = $input['subsection_sequence'];
+            $index = 0;
+            when('uamswp_nav_subsection')->alias(static function () use ($values, &$index) {
+                return $values[min($index++, count($values) - 1)];
+            });
+        } else {
+            when('uamswp_nav_subsection')->justReturn($input['subsection'] ?? false);
+        }
+
         when('uams_site_title')->justReturn($input['title'] ?? 'Current Title');
         when('get_the_title')->alias(static fn ($id): string => 'PAGE:'.json_encode($id));
         when('get_the_permalink')->alias(static fn ($id): string => '/page/'.json_encode($id));

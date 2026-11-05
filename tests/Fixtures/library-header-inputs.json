@@ -655,5 +655,60 @@
         },
         "title": "Current   Split",
         "root_title": "Root Title"
+    },
+    "late subsection department": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "dept"
+        },
+        "subsection_sequence": [
+            false,
+            7,
+            7,
+            7
+        ]
+    },
+    "late subsection main": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "main"
+        },
+        "subsection_sequence": [
+            false,
+            7,
+            7,
+            7,
+            7
+        ]
+    },
+    "late subsection none": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "none"
+        },
+        "subsection_sequence": [
+            false,
+            7,
+            7,
+            7,
+            7
+        ]
+    },
+    "subsection changes after condition": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "dept"
+        },
+        "subsection_sequence": [
+            false,
+            7,
+            7,
+            false,
+            7
+        ]
     }
 }

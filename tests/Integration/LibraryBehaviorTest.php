@@ -103,6 +103,28 @@ final class LibraryBehaviorTest extends IntegrationTestCase
         $this->assertStringContainsString('dropdown-item', $markup);
     }
 
+    public function test_subsection_reads_can_change_between_calls_through_real_metadata_filters(): void
+    {
+        $page = self::factory()->post->create(['post_type' => 'page']);
+        $this->go_to(get_permalink($page));
+        $GLOBALS['post'] = get_post($page);
+        $reads = 0;
+        $filter = static function ($value, $id, $key) use ($page, &$reads) {
+            if ($id === $page && $key === 'page_subsection') {
+                return [$reads++ > 0];
+            }
+
+            return $value;
+        };
+        add_filter('get_post_metadata', $filter, 10, 3);
+        try {
+            $this->assertFalse(uamswp_nav_subsection());
+            $this->assertSame($page, uamswp_nav_subsection());
+        } finally {
+            remove_filter('get_post_metadata', $filter, 10);
+        }
+    }
+
     public function test_media_credit_filters_round_trip_metadata_and_render_real_image_blocks(): void
     {
         $image = self::factory()->attachment->create(['post_mime_type' => 'image/jpeg']);
