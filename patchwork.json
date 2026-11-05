@@ -2,7 +2,9 @@
     "redefinable-internals": [
         "time",
         "class_exists",
-        "function_exists"
+        "function_exists",
+        "strftime",
+        "glob"
     ],
     "blacklist": [
         "vendor/symfony/finder/"

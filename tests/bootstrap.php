@@ -10,6 +10,13 @@
 
 declare(strict_types=1);
 
+use Uams2020\Tests\Support\ThemeHooks;
+
+use function Brain\Monkey\Functions\when;
+use function Brain\Monkey\setUp;
+use function Brain\Monkey\tearDown;
+use function Patchwork\redefine;
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 /*
@@ -32,59 +39,56 @@ if (! defined('ABSPATH')) {
  * WordPress function stubs in this file: Patchwork treats this bootstrap as too
  * early and Brain Monkey cannot redefine them in tests (DefinedTooEarly).
  */
-Brain\Monkey\setUp();
+setUp();
 
-Brain\Monkey\Functions\when('plugin_dir_path')->justReturn(dirname(__DIR__).'/');
-Brain\Monkey\Functions\when('plugin_dir_url')->justReturn('https://example.test/wp-content/plugins/'.basename(dirname(__DIR__)).'/');
-Brain\Monkey\Functions\when('plugin_basename')->alias(static function ($file) {
-    return basename(dirname($file)).'/'.basename($file);
-});
-Brain\Monkey\Functions\when('is_multisite')->justReturn(false);
-Brain\Monkey\Functions\when('get_site_option')->alias(static function ($key, $default = false) {
-    return $default;
-});
-Brain\Monkey\Functions\when('get_option')->alias(static function ($key, $default = false) {
-    return $default;
-});
-Brain\Monkey\Functions\when('update_option')->justReturn(null);
-Brain\Monkey\Functions\when('register_activation_hook')->justReturn(null);
-Brain\Monkey\Functions\when('register_deactivation_hook')->justReturn(null);
-Brain\Monkey\Functions\when('register_uninstall_hook')->justReturn(null);
-Brain\Monkey\Functions\when('load_plugin_textdomain')->justReturn(null);
-Brain\Monkey\Functions\when('is_admin')->justReturn(false);
-Brain\Monkey\Functions\when('wp_enqueue_script')->justReturn(null);
-Brain\Monkey\Functions\when('wp_enqueue_style')->justReturn(null);
-Brain\Monkey\Functions\when('wp_register_script')->justReturn(null);
-Brain\Monkey\Functions\when('wp_register_style')->justReturn(null);
-Brain\Monkey\Functions\when('wp_localize_script')->justReturn(null);
-Brain\Monkey\Functions\when('esc_html')->returnArg();
-Brain\Monkey\Functions\when('esc_attr')->returnArg();
-Brain\Monkey\Functions\when('esc_url')->returnArg();
-Brain\Monkey\Functions\when('__')->returnArg();
-Brain\Monkey\Functions\when('_e')->justReturn(null);
-Brain\Monkey\Functions\when('esc_html__')->returnArg();
-Brain\Monkey\Functions\when('esc_attr__')->returnArg();
-Brain\Monkey\Functions\when('get_template_directory')->justReturn(dirname(__DIR__));
-Brain\Monkey\Functions\when('get_stylesheet_directory')->justReturn(dirname(__DIR__));
-Brain\Monkey\Functions\when('get_template_directory_uri')->justReturn('https://example.test/wp-content/themes/'.basename(dirname(__DIR__)));
-Brain\Monkey\Functions\when('get_stylesheet_directory_uri')->justReturn('https://example.test/wp-content/themes/'.basename(dirname(__DIR__)));
-Brain\Monkey\Functions\when('trailingslashit')->alias(static function ($value) {
-    return rtrim((string) $value, '/\\').'/';
-});
-Brain\Monkey\Functions\when('load_theme_textdomain')->justReturn(null);
-Brain\Monkey\Functions\when('add_theme_support')->justReturn(null);
-Brain\Monkey\Functions\when('register_nav_menus')->justReturn(null);
-Brain\Monkey\Functions\when('wp_get_theme')->justReturn(new class {
-    public function get($key)
+when('plugin_dir_path')->justReturn(__DIR__.'/../');
+when('plugin_dir_url')->justReturn('https://example.test/wp-content/plugins/'.basename(dirname(__DIR__)).'/');
+when('plugin_basename')->alias(static fn ($file): string => basename(dirname($file)).'/'.basename($file));
+when('is_multisite')->justReturn(false);
+when('get_site_option')->alias(static fn ($key, $default = false) => $default);
+when('get_option')->alias(static fn ($key, $default = false) => $default);
+when('update_option')->justReturn();
+when('register_activation_hook')->justReturn();
+when('register_deactivation_hook')->justReturn();
+when('register_uninstall_hook')->justReturn();
+when('load_plugin_textdomain')->justReturn();
+when('is_admin')->justReturn(false);
+when('wp_enqueue_script')->justReturn();
+when('wp_enqueue_style')->justReturn();
+when('wp_register_script')->justReturn();
+when('wp_register_style')->justReturn();
+when('wp_localize_script')->justReturn();
+when('esc_html')->returnArg();
+when('esc_attr')->returnArg();
+when('esc_url')->returnArg();
+when('__')->returnArg();
+when('_e')->justReturn();
+when('esc_html__')->returnArg();
+when('esc_attr__')->returnArg();
+when('get_template_directory')->justReturn(dirname(__DIR__));
+when('get_stylesheet_directory')->justReturn(dirname(__DIR__));
+when('get_template_directory_uri')->justReturn('https://example.test/wp-content/themes/'.basename(dirname(__DIR__)));
+when('get_stylesheet_directory_uri')->justReturn('https://example.test/wp-content/themes/'.basename(dirname(__DIR__)));
+when('trailingslashit')->alias(static fn ($value): string => rtrim((string) $value, '/\\').'/');
+when('load_theme_textdomain')->justReturn();
+when('add_theme_support')->justReturn();
+when('register_nav_menus')->justReturn();
+when('wp_get_theme')->justReturn(new class
+{
+    public function get($key): string
     {
         return $key === 'Version' ? '0.0.0-test' : '';
     }
 });
 
-if (is_readable(dirname(__DIR__).'/functions.php')) {
-    require_once dirname(__DIR__).'/functions.php';
+// Keep actual anonymous callbacks available for unit tests without reloading declarations.
+redefine('add_action', ThemeHooks::capture('action'));
+redefine('add_filter', ThemeHooks::capture('filter'));
+
+if (is_readable(__DIR__.'/../functions.php')) {
+    require_once __DIR__.'/../functions.php';
 }
 
-Brain\Monkey\tearDown();
+tearDown();
 
 // cspell:ignore ABSPATH stylesheet
