@@ -3,18 +3,23 @@
 declare(strict_types=1);
 
 use Brain\Monkey\Actions;
-use Brain\Monkey\Filters;
 use Brain\Monkey\Functions;
 
+use function Brain\Monkey\Actions\expectRemoved;
+use function Brain\Monkey\Filters\expectAdded;
+use function Brain\Monkey\Functions\when;
+use function Brain\Monkey\setUp;
+use function Brain\Monkey\tearDown;
+
 it('renders the posts home with title and excerpt filters', function (): void {
-    Filters\expectAdded('genesis_post_title_output')->once()->with('uamswp_post_title_link');
-    Filters\expectAdded('get_the_excerpt')->once()->with('uamswp_link_excerpt_more');
+    expectAdded('genesis_post_title_output')->once()->with('uamswp_post_title_link');
+    expectAdded('get_the_excerpt')->once()->with('uamswp_link_excerpt_more');
     Functions\expect('genesis')->once();
-    Functions\when('get_the_title')->justReturn('A title & more');
-    Functions\when('get_the_permalink')->justReturn('https://example.test/post/');
-    Functions\when('esc_url')->returnArg();
-    Functions\when('esc_attr')->alias(htmlspecialchars(...));
-    Functions\when('esc_html__')->returnArg();
+    when('get_the_title')->justReturn('A title & more');
+    when('get_the_permalink')->justReturn('https://example.test/post/');
+    when('esc_url')->returnArg();
+    when('esc_attr')->alias(htmlspecialchars(...));
+    when('esc_html__')->returnArg();
 
     require dirname(__DIR__, 2).'/home.php';
 
@@ -23,7 +28,7 @@ it('renders the posts home with title and excerpt filters', function (): void {
 });
 
 it('renders the archive with both accessible sitemap headings', function (): void {
-    Actions\expectRemoved('genesis_entry_content')->once()->with('genesis_do_post_content');
+    expectRemoved('genesis_entry_content')->once()->with('genesis_do_post_content');
     Actions\expectAdded('genesis_entry_content')->once()->with('genesis_page_archive_content');
     Functions\expect('genesis')->once();
     Functions\expect('genesis_a11y')->twice()->with('headings')->andReturn(true, false);
@@ -41,11 +46,11 @@ it('renders the plain blog template', function (): void {
 });
 
 it('renders the modules template with its content callback', function (): void {
-    Filters\expectAdded('genesis_pre_get_option_site_layout')->once()->with('__genesis_return_full_width_content');
-    Actions\expectRemoved('genesis_sidebar')->once()->with('genesis_do_sidebar');
-    Actions\expectRemoved('genesis_entry_content')->once()->with('genesis_do_post_content');
+    expectAdded('genesis_pre_get_option_site_layout')->once()->with('__genesis_return_full_width_content');
+    expectRemoved('genesis_sidebar')->once()->with('genesis_do_sidebar');
+    expectRemoved('genesis_entry_content')->once()->with('genesis_do_post_content');
     Actions\expectAdded('genesis_entry_content')->once()->with('uamswp_modules_display');
-    Actions\expectRemoved('genesis_entry_footer')->once()->with('genesis_post_meta');
+    expectRemoved('genesis_entry_footer')->once()->with('genesis_post_meta');
     Functions\expect('uamswp_modules')->once();
     Functions\expect('genesis')->once();
 
@@ -54,7 +59,7 @@ it('renders the modules template with its content callback', function (): void {
 });
 
 it('hides the landing title while preserving existing attributes', function (): void {
-    Filters\expectAdded('genesis_attr_entry-title')->once()->with('uamswp_add_class');
+    expectAdded('genesis_attr_entry-title')->once()->with('uamswp_add_class');
     Functions\expect('genesis')->once();
 
     require dirname(__DIR__, 2).'/templates/page_landing.php';
@@ -73,15 +78,16 @@ it('registers the marketing layout and selects each header mode', function (): v
         ['genesis_after_entry', 'uamswp_list_child_pages', 10],
         ['genesis_after_header', 'page_options', 5],
     ] as [$hook, $callback, $priority]) {
-        Actions\expectRemoved($hook)->once()->with($callback, $priority);
+        expectRemoved($hook)->once()->with($callback, $priority);
     }
+
     Actions\expectAdded('genesis_after_header')->once()->with('mlp_header_options', 5);
     Functions\expect('genesis')->once();
 
     require dirname(__DIR__, 2).'/templates/marketing.php';
 
     // Verify registrations before resetting the hook mocks for each header case.
-    Brain\Monkey\tearDown();
+    tearDown();
     $stringHero = new class implements Stringable
     {
         public function __toString(): string
@@ -90,16 +96,17 @@ it('registers the marketing layout and selects each header mode', function (): v
         }
     };
     foreach ([[false, ''], ['', ''], ['ordinary', 'ordinary'], ['hero', 'hero'], ['landingpage', 'landingpage'], [true, 'landingpage'], [$stringHero, 'hero']] as [$option, $mode]) {
-        Brain\Monkey\setUp();
+        setUp();
         Functions\expect('get_the_id')->once()->andReturn(42);
         Functions\expect('get_field')->with('page_title_options', 42)->times($option ? 2 : 1)->andReturn($option);
         if ($mode === 'hero' || $mode === 'landingpage') {
-            Actions\expectRemoved('genesis_entry_header')->once()->with('genesis_entry_header_markup_open', 5);
-            Actions\expectRemoved('genesis_entry_header')->once()->with('genesis_do_post_title');
-            Actions\expectRemoved('genesis_entry_header')->once()->with('genesis_entry_header_markup_close', 15);
+            expectRemoved('genesis_entry_header')->once()->with('genesis_entry_header_markup_open', 5);
+            expectRemoved('genesis_entry_header')->once()->with('genesis_do_post_title');
+            expectRemoved('genesis_entry_header')->once()->with('genesis_entry_header_markup_close', 15);
         } else {
-            Actions\expectRemoved('genesis_entry_header')->never();
+            expectRemoved('genesis_entry_header')->never();
         }
+
         $actions = match ($mode) {
             'hero' => [['genesis_entry_header_markup_open', 5], ['genesis_do_post_title', 10], ['genesis_entry_header_markup_close', 15], ['uamswp_page_hero', 20]],
             'landingpage' => [
@@ -114,17 +121,21 @@ it('registers the marketing layout and selects each header mode', function (): v
         foreach ($actions as [$callback, $priority]) {
             Actions\expectAdded('genesis_before_content')->once()->with($callback, $priority);
         }
+
         if ($actions === []) {
             Actions\expectAdded('genesis_before_content')->never();
         }
+
         if ($option) {
-            Filters\expectAdded('genesis_attr_entry-header')->once()->with($mode === 'landingpage' ? 'uamswp_attributes_entry_header_landing_page_title' : 'uamswp_attributes_entry_header');
+            expectAdded('genesis_attr_entry-header')->once()->with($mode === 'landingpage' ? 'uamswp_attributes_entry_header_landing_page_title' : 'uamswp_attributes_entry_header');
         } else {
-            Filters\expectAdded('genesis_attr_entry-header')->never();
+            expectAdded('genesis_attr_entry-header')->never();
         }
+
         mlp_header_options();
         $this->addToAssertionCount(Mockery::getContainer()->mockery_getExpectationCount());
-        Brain\Monkey\tearDown();
+        tearDown();
     }
-    Brain\Monkey\setUp();
+
+    setUp();
 });

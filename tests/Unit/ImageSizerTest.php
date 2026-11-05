@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 use Brain\Monkey\Functions;
 
+use function Brain\Monkey\Filters\expectApplied;
+use function Brain\Monkey\Functions\when;
+use function Patchwork\relay;
+
 beforeEach(function (): void {
-    Functions\when('function_exists')->alias(static function ($function) {
-        return $function === 'bis_get_attachment_image' ? true : Patchwork\relay();
-    });
-    Functions\when('time')->justReturn(1000);
+    when('function_exists')->alias(static fn ($function) => $function === 'bis_get_attachment_image' ? true : relay());
+    when('time')->justReturn(1000);
 });
 
 it('refuses resizing without the image plugin', function (): void {
-    Functions\when('function_exists')->alias(static function ($function) {
-        return $function === 'bis_get_attachment_image' ? false : Patchwork\relay();
-    });
+    when('function_exists')->alias(static fn ($function) => $function === 'bis_get_attachment_image' ? false : relay());
     Functions\expect('wp_get_attachment_image_src')->never();
     expect(image_sizer(42, 100, 50))->toBeNull();
 });
@@ -30,15 +30,15 @@ it('refuses an attachment without image metadata', function (): void {
 });
 
 it('returns cached values including an empty cached URL', function ($cached): void {
-    Functions\when('wp_get_attachment_image_src')->justReturn(['original.jpg', 400, 200]);
+    when('wp_get_attachment_image_src')->justReturn(['original.jpg', 400, 200]);
     Functions\expect('get_transient')->once()->with('image_sizer_'.md5('4210050leftright'))->andReturn($cached);
     Functions\expect('get_option')->never();
     expect(image_sizer(42, 100, 50, 'left', 'right'))->toBe($cached);
 })->with([['cached.jpg'], [''], [null]]);
 
 it('queues the current crop dimensions and schedules the first batch', function (array $source, int $width, int $height, array $dimensions): void {
-    Functions\when('wp_get_attachment_image_src')->justReturn(['original.jpg', ...$source]);
-    Functions\when('get_transient')->justReturn(false);
+    when('wp_get_attachment_image_src')->justReturn(['original.jpg', ...$source]);
+    when('get_transient')->justReturn(false);
     Functions\expect('get_option')->once()->with('image_sizer_queue', [])->andReturn([]);
     Functions\expect('update_option')->once()->with('image_sizer_queue', [[
         'id' => 42,
@@ -61,17 +61,18 @@ it('queues the current crop dimensions and schedules the first batch', function 
 ]);
 
 it('does not upscale a smaller image with the preferred ratio', function (): void {
-    Functions\when('wp_get_attachment_image_src')->justReturn(['original.jpg', 400, 200]);
-    Functions\when('get_transient')->justReturn(false);
+    when('wp_get_attachment_image_src')->justReturn(['original.jpg', 400, 200]);
+    when('get_transient')->justReturn(false);
+
     Functions\expect('get_option')->never();
     Functions\expect('image_sizer_get_fallback')->once()->with(42, 'full')->andReturn('original.jpg');
     expect(image_sizer(42, 800, 400))->toBe('original.jpg');
 });
 
 it('does not append an existing queued crop', function (): void {
-    Functions\when('wp_get_attachment_image_src')->justReturn(['original.jpg', 400, 200]);
-    Functions\when('get_transient')->justReturn(false);
-    Functions\when('get_option')->justReturn([
+    when('wp_get_attachment_image_src')->justReturn(['original.jpg', 400, 200]);
+    when('get_transient')->justReturn(false);
+    when('get_option')->justReturn([
         ['id' => 7, 'params' => ['width' => 100, 'height' => 50, 'hcrop' => 'center', 'vcrop' => 'center']],
         ['id' => 42, 'params' => ['width' => 100, 'height' => 50, 'hcrop' => 'center', 'vcrop' => 'center']],
     ]);
@@ -83,21 +84,21 @@ it('does not append an existing queued crop', function (): void {
 
 it('preserves earlier queued crops without scheduling a duplicate cron event', function (): void {
     $previous = ['id' => 7, 'params' => ['width' => 100, 'height' => 50, 'hcrop' => 'center', 'vcrop' => 'center']];
-    Functions\when('wp_get_attachment_image_src')->justReturn(['original.jpg', 400, 200]);
-    Functions\when('get_transient')->justReturn(false);
-    Functions\when('get_option')->justReturn([$previous]);
+    when('wp_get_attachment_image_src')->justReturn(['original.jpg', 400, 200]);
+    when('get_transient')->justReturn(false);
+    when('get_option')->justReturn([$previous]);
     Functions\expect('update_option')->once()->with('image_sizer_queue', [$previous, [
         'id' => 42, 'params' => ['width' => 100, 'height' => 50, 'hcrop' => 'center', 'vcrop' => 'center'],
         'transient_key' => 'image_sizer_'.md5('4210050centercenter'),
     ]], false);
-    Functions\when('wp_next_scheduled')->justReturn(1000);
+    when('wp_next_scheduled')->justReturn(1000);
     Functions\expect('wp_schedule_event')->never();
-    Functions\when('image_sizer_get_fallback')->justReturn('fallback.jpg');
+    when('image_sizer_get_fallback')->justReturn('fallback.jpg');
     expect(image_sizer(42, 100, 50))->toBe('fallback.jpg');
 });
 
 it('returns a requested fallback URL before using the filtered default', function ($requested, $expectedSize): void {
-    Brain\Monkey\Filters\expectApplied('image_sizer_default_fallback')->once()->with('full')->andReturn('medium');
+    expectApplied('image_sizer_default_fallback')->once()->with('full')->andReturn('medium');
     Functions\expect('wp_get_attachment_image_src')->once()->with(42, $expectedSize)->andReturn(['fallback.jpg', 100, 50]);
     expect(image_sizer_get_fallback(42, $requested))->toBe('fallback.jpg');
 })->with([['thumbnail', 'thumbnail'], ['', 'medium'], [null, 'medium']]);

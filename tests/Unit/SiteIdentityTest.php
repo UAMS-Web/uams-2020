@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use Brain\Monkey\Functions;
+use function Brain\Monkey\Functions\when;
+use function Patchwork\relay;
 
 it('pins site identity for missing, empty and configured ACF options', function (bool $acfAvailable, array $options, array $expected): void {
-    Functions\when('class_exists')->alias(static function ($class) use ($acfAvailable) {
-        return $class === 'acf' ? $acfAvailable : Patchwork\relay();
-    });
-    Functions\when('get_option')->alias(static fn ($key) => $options[$key] ?? false);
+    when('class_exists')->alias(static fn ($class) => $class === 'acf' ? $acfAvailable : relay());
+    when('get_option')->alias(static fn ($key) => $options[$key] ?? false);
+
     expect(uams_get_site_info())->toBe($expected);
 })->with([
     'ACF absent' => [false, [], ['site' => 'uams', 'subsite' => 'uams', 'department' => 'uams']],
@@ -25,14 +25,12 @@ it('pins site identity for missing, empty and configured ACF options', function 
     'regional campus' => [true, ['options_uamswp_template' => 'uams', 'options_uamswp_location' => 'regional-campus', 'options_uamswp_regional_campus' => 'northwest'], ['site' => 'uams', 'subsite' => 'regional-campus', 'department' => 'northwest']],
     'other location' => [true, ['options_uamswp_template' => 'uams', 'options_uamswp_location' => 'other'], ['site' => 'uams', 'subsite' => 'other', 'department' => '']],
     'college defaults' => [true, ['options_uamswp_template' => 'uams', 'options_uamswp_location' => 'uams', 'options_uamswp_uams_subsite' => 'medicine'], ['site' => 'uams', 'subsite' => 'medicine', 'department' => 'uams']],
-    ...array_map(static fn ($institute) => [true, ['options_uamswp_template' => 'institute', 'options_uamswp_institute' => 'institute_'.$institute, 'options_uamswp_institute_'.$institute.'_dept' => 'department'], ['site' => 'institute', 'subsite' => 'institute_'.$institute, 'department' => 'department']], ['aging', 'eye', 'spine', 'digi-health', 'pri', 'tri', 'cancer', 'ichi']),
-    ...array_map(static fn ($college) => [true, ['options_uamswp_template' => 'uams', 'options_uamswp_location' => 'uams', 'options_uamswp_uams_subsite' => $college[0], 'options_uamswp_uams_'.$college[1].'_dept' => 'department'], ['site' => 'uams', 'subsite' => $college[0], 'department' => 'department']], [['health-prof', 'cohp'], ['medicine', 'com'], ['nursing', 'con'], ['pharmacy', 'cop'], ['public-health', 'coph'], ['grad-school', 'grad-school'], ['other', 'other']]),
+    ...array_map(static fn (string $institute): array => [true, ['options_uamswp_template' => 'institute', 'options_uamswp_institute' => 'institute_'.$institute, 'options_uamswp_institute_'.$institute.'_dept' => 'department'], ['site' => 'institute', 'subsite' => 'institute_'.$institute, 'department' => 'department']], ['aging', 'eye', 'spine', 'digi-health', 'pri', 'tri', 'cancer', 'ichi']),
+    ...array_map(static fn (array $college): array => [true, ['options_uamswp_template' => 'uams', 'options_uamswp_location' => 'uams', 'options_uamswp_uams_subsite' => $college[0], 'options_uamswp_uams_'.$college[1].'_dept' => 'department'], ['site' => 'uams', 'subsite' => $college[0], 'department' => 'department']], [['health-prof', 'cohp'], ['medicine', 'com'], ['nursing', 'con'], ['pharmacy', 'cop'], ['public-health', 'coph'], ['grad-school', 'grad-school'], ['other', 'other']]),
 ]);
 
 it('pins GeoIP presence without contacting the external service', function (bool $available): void {
-    Functions\when('function_exists')->alias(static function ($function) use ($available) {
-        return $function === 'geoip_detect2_get_external_ip_adress' ? $available : Patchwork\relay();
-    });
+    when('function_exists')->alias(static fn ($function) => $function === 'geoip_detect2_get_external_ip_adress' ? $available : relay());
     $value = $available ? 'true' : 'false';
     expect(uamswp_force_geo('old', 42, []))->toBe($value)
         ->and(uamswp_set_geo(['value' => 'old', 'label' => 'Geo']))->toBe(['value' => $value, 'label' => 'Geo'])

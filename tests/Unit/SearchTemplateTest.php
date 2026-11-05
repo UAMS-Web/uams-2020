@@ -2,23 +2,26 @@
 
 declare(strict_types=1);
 
-use Brain\Monkey\Actions;
 use Brain\Monkey\Filters;
 use Brain\Monkey\Functions;
+
+use function Brain\Monkey\Actions\expectAdded;
+use function Brain\Monkey\Actions\expectRemoved;
+use function Brain\Monkey\Functions\when;
 
 beforeEach(function (): void {
     $this->originalSearchGet = $_GET;
     $_GET = [];
     if (! function_exists('uamswp_do_search_loop')) {
-        Actions\expectRemoved('genesis_loop')->once()->with('genesis_do_loop');
-        Actions\expectAdded('genesis_loop')->once()->with('uamswp_do_search_loop');
+        expectRemoved('genesis_loop')->once()->with('genesis_do_loop');
+        expectAdded('genesis_loop')->once()->with('uamswp_do_search_loop');
         Filters\expectAdded('seopress_titles_robots')->once()->with('sp_titles_robots', 8);
         Functions\expect('remove_all_actions')->once()->with('wp_robots');
-        Actions\expectRemoved('genesis_meta')->once()->with('genesis_robots_meta');
-        Actions\expectRemoved('genesis_after_header')->once()->with('page_options', 5);
-        Actions\expectAdded('genesis_before_loop')->once()->with('uamswp_search_page_before_entry', 5);
-        Actions\expectAdded('genesis_before_loop')->once()->with('uamswp_search_page_heading', 8);
-        Actions\expectAdded('genesis_after_loop')->once()->with('uamswp_search_page_after_entry', 10);
+        expectRemoved('genesis_meta')->once()->with('genesis_robots_meta');
+        expectRemoved('genesis_after_header')->once()->with('page_options', 5);
+        expectAdded('genesis_before_loop')->once()->with('uamswp_search_page_before_entry', 5);
+        expectAdded('genesis_before_loop')->once()->with('uamswp_search_page_heading', 8);
+        expectAdded('genesis_after_loop')->once()->with('uamswp_search_page_after_entry', 10);
         Filters\expectAdded('genesis_breadcrumb_args')->once()->with('uamswp_prefix_search_breadcrumb');
         Filters\expectAdded('get_the_excerpt')->once()->with('strip_shortcodes', 20);
         Filters\expectAdded('excerpt_more')->once()->with('new_excerpt_more');
@@ -33,7 +36,7 @@ afterEach(function (): void {
 });
 
 it('sets search robots markup and excerpt defaults', function (): void {
-    Functions\when('get_permalink')->justReturn('https://example.test/article/');
+    when('get_permalink')->justReturn('https://example.test/article/');
     expect(sp_titles_robots('original'))->toBe('<meta name="robots" content="noindex, noarchive, nosnippet"/><meta name="google" content="noimageindex">')
         ->and(uamswp_content_limit())->toBe('150')
         ->and(uamswp_show_excerpts())->toBe('excerpts')
@@ -45,7 +48,7 @@ it('sets search robots markup and excerpt defaults', function (): void {
 
 it('prints the search page wrapper and escapes its query', function (): void {
     $_GET['s'] = '<script>&';
-    Functions\when('esc_html')->alias(htmlspecialchars(...));
+    when('esc_html')->alias(htmlspecialchars(...));
     ob_start();
     uamswp_search_page_before_entry();
     uamswp_search_page_heading();
@@ -62,7 +65,7 @@ it('prints an empty search heading when the query is absent', function (): void 
 
 it('queries allowed card and taxonomy types with the current page size', function ($type, $size, $heading, $page): void {
     $_GET = ['s' => 'heart', 'type' => $type];
-    Functions\when('esc_html')->returnArg();
+    when('esc_html')->returnArg();
     Functions\expect('get_query_var')->once()->with('paged')->andReturn($page);
     Functions\expect('uamswp_custom_loop_base')->once()->with(['s' => 'heart', 'post_type' => $type, 'posts_per_page' => $size, 'paged' => $page ?: 1]);
     Functions\expect('have_posts')->once()->andReturn(false);
@@ -80,8 +83,9 @@ it('queries allowed card and taxonomy types with the current page size', functio
 
 it('uses the standard loop for a requested page or post', function ($type, $heading): void {
     $_GET = ['s' => 'news', 'type' => $type];
-    Functions\when('esc_html')->returnArg();
-    Functions\when('get_query_var')->justReturn(4);
+    when('esc_html')->returnArg();
+    when('get_query_var')->justReturn(4);
+
     Functions\expect('uamswp_loop_layout')->once();
     Functions\expect('uamswp_custom_loop')->once()->with(['s' => 'news', 'post_type' => $type, 'paged' => 4]);
     ob_start();
@@ -94,7 +98,8 @@ it('rejects an unsupported search type and queries pages then posts', function (
     if ($type !== null) {
         $_GET['type'] = $type;
     }
-    Functions\when('esc_html')->returnArg();
+
+    when('esc_html')->returnArg();
     Functions\expect('uamswp_custom_loop_base')->once()->ordered()->with(['s' => 'news', 'post_type' => 'page', 'posts_per_page' => 5]);
     Functions\expect('uamswp_custom_loop_base')->once()->ordered()->with(['s' => 'news', 'post_type' => 'post', 'posts_per_page' => 5]);
     Functions\expect('have_posts')->twice()->andReturn(false);
@@ -108,8 +113,9 @@ it('rejects an unsupported search type and queries pages then posts', function (
 
 it('pins the search loop layout callbacks and priorities', function (): void {
     foreach ([['genesis_entry_header', 'genesis_post_info', 12], ['genesis_entry_content', 'genesis_do_post_image', 8], ['genesis_entry_content', 'genesis_do_post_content_nav', 12], ['genesis_entry_content', 'genesis_do_post_permalink', 14], ['genesis_entry_footer', 'genesis_entry_footer_markup_open', 5], ['genesis_entry_footer', 'genesis_entry_footer_markup_close', 15], ['genesis_entry_footer', 'genesis_post_meta', 10]] as [$hook, $callback, $priority]) {
-        Actions\expectRemoved($hook)->once()->with($callback, $priority);
+        expectRemoved($hook)->once()->with($callback, $priority);
     }
+
     Filters\expectAdded('genesis_pre_get_option_content_archive_limit')->once()->with('uamswp_content_limit');
     Filters\expectAdded('get_the_content_more_link')->once()->with('uamswp_read_more_link');
     Filters\expectRemoved('genesis_post_title_output')->once()->with('uamswp_entry_title_h1');

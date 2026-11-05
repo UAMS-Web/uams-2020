@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 use Brain\Monkey\Functions;
 
+use function Brain\Monkey\Filters\expectAdded;
+use function Brain\Monkey\Functions\when;
+
 it('matches a prefix without treating it as a pattern', function ($value, $prefix, $expected): void {
     expect(startsWith($value, $prefix))->toBe($expected);
 })->with([
@@ -51,7 +54,7 @@ it('pins gallery padding, spacing, density limits and loose breakpoint matching'
 
 it('keeps rate limits per client and expires the boundary timestamp', function (): void {
     $now = 1000;
-    Functions\when('time')->alias(static function () use (&$now): int {
+    when('time')->alias(static function () use (&$now): int {
         return $now;
     });
     $limiter = new SlidingWindowRateLimiter(2, 10);
@@ -79,7 +82,7 @@ it('preserves other header attributes while appending the current aria label', f
 });
 
 it('adds translated image size labels without losing existing sizes', function (): void {
-    Functions\when('__')->returnArg();
+    when('__')->returnArg();
     expect(uams_custom_add_image_size_names(['thumbnail' => 'Thumbnail']))->toBe([
         'thumbnail' => 'Thumbnail',
         'content-image-side' => 'Content image aligned left/right',
@@ -90,8 +93,8 @@ it('adds translated image size labels without losing existing sizes', function (
 });
 
 it('chooses the site title and home URL from site identity', function ($site, $subsite, $title, $home): void {
-    Functions\when('uams_get_site_info')->justReturn(['site' => $site, 'subsite' => $subsite, 'department' => '']);
-    Functions\when('get_bloginfo')->justReturn('Department title');
+    when('uams_get_site_info')->justReturn(['site' => $site, 'subsite' => $subsite, 'department' => '']);
+    when('get_bloginfo')->justReturn('Department title');
     expect(uams_site_title())->toBe($title)->and(uams_get_home_link())->toBe($home);
 })->with([
     ['uamshealth', 'main', 'UAMS Health', 'https://uamshealth.com'],
@@ -102,18 +105,20 @@ it('chooses the site title and home URL from site identity', function ($site, $s
 ]);
 
 it('replaces page crumbs only on the front page', function (bool $front): void {
-    Functions\when('is_front_page')->justReturn($front);
-    Functions\when('uams_site_title')->justReturn('Department');
+    when('is_front_page')->justReturn($front);
+    when('uams_site_title')->justReturn('Department');
+
     expect(uams_breadcrumb_home('Original'))->toBe($front ? 'Department' : 'Original');
 })->with([true, false]);
 
 it('uses an external link only for posts with link format', function ($input, $external, $format, $expected): void {
-    Functions\when('get_the_id')->justReturn(17);
-    Functions\when('get_post')->justReturn((object) ['ID' => 42]);
+    when('get_the_id')->justReturn(17);
+    when('get_post')->justReturn((object) ['ID' => 42]);
+
     $id = empty($input) ? 17 : 42;
     Functions\expect('get_post_meta')->once()->with($id, 'post_custom_link', true)->andReturn($external);
     Functions\expect('get_post_format')->once()->with($id)->andReturn($format);
-    Functions\when('get_permalink')->justReturn('https://example.test/internal/');
+    when('get_permalink')->justReturn('https://example.test/internal/');
     expect(uams_get_permalink($input))->toBe($expected);
 })->with([
     [null, 'https://example.test/external/', 'link', 'https://example.test/external/'],
@@ -156,8 +161,8 @@ it('retains REST arguments when a safe field is explicitly null', function (): v
 
 it('registers REST filters only for post types exposed in REST', function (): void {
     Functions\expect('get_post_types')->once()->with(['show_in_rest' => true], 'objects')->andReturn([(object) ['name' => 'post'], (object) ['name' => 'page']]);
-    Brain\Monkey\Filters\expectAdded('rest_post_query')->once()->with('rest_api_filter_add_filter_param', 10, 2);
-    Brain\Monkey\Filters\expectAdded('rest_page_query')->once()->with('rest_api_filter_add_filter_param', 10, 2);
+    expectAdded('rest_post_query')->once()->with('rest_api_filter_add_filter_param', 10, 2);
+    expectAdded('rest_page_query')->once()->with('rest_api_filter_add_filter_param', 10, 2);
     rest_api_filter_add_filters();
 });
 
@@ -169,7 +174,7 @@ it('collects multisite IDs and returns the original query', function (): void {
 });
 
 it('handles an empty multisite list', function (): void {
-    Functions\when('get_sites')->justReturn([]);
+    when('get_sites')->justReturn([]);
     $query = Mockery::mock();
     $query->shouldReceive('set')->once()->with('searchblogs', '');
     expect(rlv_search_all_blogs($query))->toBe($query);
@@ -191,16 +196,16 @@ it('disables SEOPress breadcrumb inline styles', function (): void {
 });
 
 it('renders only the skip links supported by the current layout', function ($layout, bool $primary, $footer, bool $activeFooter, array $targets): void {
-    Functions\when('genesis_a11y')->justReturn(true);
+    when('genesis_a11y')->justReturn(true);
     Functions\expect('genesis_skiplinks_markup')->once();
-    Functions\when('genesis_nav_menu_supported')->justReturn($primary);
-    Functions\when('has_nav_menu')->justReturn($primary);
-    Functions\when('genesis_site_layout')->justReturn($layout);
-    Functions\when('current_theme_supports')->justReturn($footer !== false);
-    Functions\when('get_theme_support')->justReturn($footer);
-    Functions\when('is_active_sidebar')->justReturn($activeFooter);
-    Functions\when('esc_html__')->returnArg();
-    Functions\when('esc_url')->returnArg();
+    when('genesis_nav_menu_supported')->justReturn($primary);
+    when('has_nav_menu')->justReturn($primary);
+    when('genesis_site_layout')->justReturn($layout);
+    when('current_theme_supports')->justReturn($footer !== false);
+    when('get_theme_support')->justReturn($footer);
+    when('is_active_sidebar')->justReturn($activeFooter);
+    when('esc_html__')->returnArg();
+    when('esc_url')->returnArg();
     ob_start();
     uamswp_skip_links();
     $html = ob_get_clean();
@@ -213,6 +218,7 @@ it('renders only the skip links supported by the current layout', function ($lay
     foreach ($targets as $target) {
         $expected .= '<li><a href="#'.$target.'" class="screen-reader-shortcut"> '.$labels[$target].'</a></li>';
     }
+
     expect($html)->toBe($expected.'</ul></nav>');
 })->with([
     ['full-width-content', false, false, false, ['genesis-content']],
@@ -231,9 +237,9 @@ it('emits no skip links when accessibility support is disabled', function (): vo
 });
 
 it('prints the configured GTM container or the current fallback', function ($container, $disabled, $expected): void {
-    Functions\when('get_option')->alias(static fn ($key) => $key === 'options_google_tag_manager_id' ? $container : $disabled);
-    Functions\when('esc_js')->returnArg();
-    Functions\when('esc_url')->returnArg();
+    when('get_option')->alias(static fn ($key) => $key === 'options_google_tag_manager_id' ? $container : $disabled);
+    when('esc_js')->returnArg();
+    when('esc_url')->returnArg();
     ob_start();
     uamswp_gtm_1();
     $head = ob_get_clean();
@@ -249,9 +255,9 @@ it('prints the configured GTM container or the current fallback', function ($con
 })->with([['GTM-ABC123', '', 'GTM-ABC123'], ['', false, 'GTM-NGG4P7F'], ['GTM-ABC123', '1', ''], ['GTM-ABC123', 1, 'GTM-ABC123']]);
 
 it('includes the reset key and an encoded login in the custom password message', function (): void {
-    Functions\when('get_option')->justReturn('Site &amp; Name');
+    when('get_option')->justReturn('Site &amp; Name');
     Functions\expect('wp_specialchars_decode')->once()->with('Site &amp; Name', ENT_QUOTES)->andReturn('Site & Name');
-    Functions\when('__')->returnArg();
+    when('__')->returnArg();
     Functions\expect('network_site_url')->once()->with('/uams-login/?action=rp&key=reset-key&login=editor%2Bname', 'login')->andReturn('https://example.test/uams-login/?action=rp&key=reset-key&login=editor%2Bname');
     expect(my_retrieve_password_message('old', 'reset-key', 'editor+name', null))->toBe(
         "Someone has requested a password reset for the following account:\r\n\r\n"
@@ -264,7 +270,7 @@ it('includes the reset key and an encoded login in the custom password message',
 });
 
 it('registers and enqueues the admin stylesheet', function (): void {
-    Functions\when('get_stylesheet_directory_uri')->justReturn('https://example.test/theme');
+    when('get_stylesheet_directory_uri')->justReturn('https://example.test/theme');
     Functions\expect('wp_register_style')->once()->with('admin-css', 'https://example.test/theme/assets/css/admin.css', false, '1.0.0');
     Functions\expect('wp_enqueue_style')->once()->with('admin-css');
     enqueue_admin_style_sheet();
