@@ -19,6 +19,10 @@ it('pins image extraction including its greedy same-line match', function (strin
     ['text', ''], ['<img src="first"><img src="second">', 'second'], ["<img src=\"first\">\n<img src=\"second\">", 'first'], ["<IMG alt='x' src='chosen'>", 'chosen'], ['<img data-src="lazy">', 'lazy'],
 ]);
 
+/**
+ * lib/misc.php: EmptyStringToNotEmpty on the initial image value is equivalent. The attachment API
+ * overwrites it before any read.
+ */
 it('uses a featured image before scanning the content', function ($image, string $expected): void {
     $old = $GLOBALS['post'] ?? null;
     $GLOBALS['post'] = (object) ['ID' => 92, 'post_content' => '<img src="first">'];

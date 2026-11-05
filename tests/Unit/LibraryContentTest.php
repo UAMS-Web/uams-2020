@@ -102,3 +102,7 @@ it('pins the existing one-digit current-page warning and active markup', functio
     $output = LibraryWarnings::capture($callback, 'Uninitialized string offset 1', static fn () => $callback('1'));
     expect($output)->toBe('<li class="page-item active"><a href="#">1</a></li>');
 });
+
+it('preserves the complete capture-array contract of the download-title callback', function (): void {
+    expect(add_download_title(['<a', 'Guide', ' href="/file">Download</a>']))->toBe('<a aria-label="Download for Guide" href="/file">Download</a>');
+});

@@ -54,3 +54,12 @@ it('adds credits to core images using exactly the current caption rules', functi
     [['blockName' => 'core/image', 'attrs' => ['id' => 41]], null, false, '<figure></figure>', '<figure></figure>'],
     [['blockName' => 'core/image', 'attrs' => ['id' => 41]], 'Credit', false, '<div>no figure</div>', '<div>no figure</div>'],
 ]);
+
+it('preserves loose block-name comparison for filter-supplied boolean names', function (): void {
+    when('get_post_meta')->justReturn('Photographer');
+    when('esc_html__')->alias(static fn ($value) => $value);
+    when('esc_html')->alias(static fn ($value) => $value);
+
+    $actual = uamswp_core_image_add_credits('<figure><img/></figure>', ['blockName' => true, 'attrs' => ['id' => 41]], null);
+    expect($actual)->toContain('Photographer')->toContain('photo-credit');
+});

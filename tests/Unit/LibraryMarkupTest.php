@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Brain\Monkey\Functions;
 use Uams2020\Tests\Support\LibraryLoader;
+use Uams2020\Tests\Support\OptionString;
 
 use function Brain\Monkey\Filters\expectAdded;
 use function Brain\Monkey\Filters\expectApplied;
@@ -145,6 +146,10 @@ it('pins the comment box while preserving caller options', function (): void {
     ]);
 });
 
+/**
+ * lib/comment.php: IncrementInteger on the HTML5 flag is equivalent because 1 and 2 are both
+ * truthy. The flag is only used in the two input-type ternaries.
+ */
 it('pins optional and required comment fields with both input standards', function (bool $required, bool $html5): void {
     Functions\expect('wp_get_current_commenter')->once()->andReturn(['comment_author' => 'A"', 'comment_author_email' => 'B&', 'comment_author_url' => '<C>']);
     Functions\expect('get_option')->once()->with('require_name_email')->andReturn($required);
@@ -187,4 +192,12 @@ it('pins the outer container tags and their whitespace', function (): void {
     uamswp_sitecontainerouteropen();
     uamswp_sitecontainerouterclose();
     expect(ob_get_clean())->toBe("        <div id=\"site-container-outer\">\n            </div>\n    ");
+});
+
+it('preserves stringable structural-wrap markers at the public filter boundary', function (string $marker, string $expected): void {
+    expect(uamswp_filter_structural_wrap('BASE', new OptionString($marker)))->toBe($expected);
+})->with([['open', 'BASE<div class="row">'], ['close', '</div>BASE']]);
+
+it('rewrites stringable page markers in request-filter input', function (): void {
+    expect(remove_page_from_query_string(['name' => new OptionString('page'), 'page' => 3, 'keep' => 'v']))->toBe(['page' => 3, 'keep' => 'v', 'paged' => 3]);
 });

@@ -29,7 +29,7 @@ function uamswp_nav_subsection()
         $subsection = true;
     } else {
         $parents = get_post_ancestors(get_the_id());
-        $parentsection = '';
+        $parentsection = ''; // @pest-mutate-ignore: EmptyStringToNotEmpty
         foreach ($parents as $parent) {
             $parentsection = get_post_meta($parent, 'page_subsection', true);
             if (! empty($parentsection)) {
@@ -278,7 +278,7 @@ function uamswp_nav_menu_markup_filter($html, $args)
 
     $output = '';
 
-    $output .= '<nav class="site-nav navbar navbar-expand-sm" aria-label="Primary Navigation">';
+    $output .= '<nav class="site-nav navbar navbar-expand-sm" aria-label="Primary Navigation">'; // @pest-mutate-ignore: ConcatEqualToEqual
     // $output .= '<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#'.$data_target.'" aria-controls="'.$data_target.'" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon">Test</span></button>';
     $output .= '<div class="collapse navbar-collapse inner-container" id="'.$data_target.'">';
 
@@ -308,18 +308,18 @@ function uamswp_navbar_content_markup(): string
     switch ($choices) {
         case 'search':
         default:
-            $output .= '<form class="form-inline float-lg-right" method="get" action="'.$url.'" role="search">';
+            $output .= '<form class="form-inline float-lg-right" method="get" action="'.$url.'" role="search">'; // @pest-mutate-ignore: ConcatEqualToEqual
             $output .= '<input class="form-control mr-sm-2" type="text" placeholder="Search" name="s">';
             $output .= '<button class="btn btn-outline-success" type="submit">Search</button>';
             $output .= '</form>';
             break;
         case 'date':
-            $output .= '<p class="navbar-text navbar-right mb-0">';
+            $output .= '<p class="navbar-text navbar-right mb-0">'; // @pest-mutate-ignore: ConcatEqualToEqual
             $output .= date_i18n(get_option('date_format'));
             $output .= '</p>';
             break;
         case '':
-            $output .= '';
+            $output .= ''; // @pest-mutate-ignore: ConcatEqualToEqual
             break;
     }
 

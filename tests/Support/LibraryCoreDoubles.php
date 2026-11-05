@@ -6,7 +6,7 @@ use Uams2020\Tests\Support\BlockRegistryDouble;
 /** Unit-only core boundaries. Integration tests use WordPress' original classes. */
 class WP_User
 {
-    public array $roles = [];
+    public mixed $roles = [];
 
     public static array $constructed = [];
 

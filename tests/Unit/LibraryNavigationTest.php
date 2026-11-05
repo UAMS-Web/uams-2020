@@ -10,6 +10,10 @@ use function Brain\Monkey\Filters\expectApplied;
 use function Brain\Monkey\Functions\when;
 use function Patchwork\relay;
 
+/**
+ * lib/nav.php: EmptyStringToNotEmpty on parentsection is equivalent: each loop iteration overwrites
+ * it before reading, and an empty parent list never reads it.
+ */
 it('finds the nearest marked subsection unless this is a search request', function ($marked, array $parents, array $meta, bool $search, $expected): void {
     when('get_the_id')->justReturn(41);
     $visited = [];
@@ -37,6 +41,10 @@ it('removes primary navigation only for a subsection or missing primary menu', f
     remove_primary_nav();
 })->with([[7, true], [7, false], [false, true], [false, false]]);
 
+/**
+ * lib/nav.php: ConcatEqualToEqual on the first navigation wrapper append is equivalent because
+ * output is a fresh empty local string.
+ */
 it('wraps only primary menus and inserts filtered extra content when enabled', function (string $location, $extra, string $expected): void {
     Functions\expect('sanitize_html_class')->times($location === 'primary' ? 1 : 0)->with('-primary')->andReturn('-SAFE');
     Functions\expect('get_theme_mod')->times($location === 'primary' ? 1 : 0)->with('navextra', false)->andReturn($extra);
@@ -52,6 +60,10 @@ it('wraps only primary menus and inserts filtered extra content when enabled', f
     ['primary', 'search', '<nav class="site-nav navbar navbar-expand-sm" aria-label="Primary Navigation"><div class="collapse navbar-collapse inner-container" id="genesis-nav-SAFE">FILTEREDMENU</div></nav>'],
 ]);
 
+/**
+ * lib/nav.php: the three ConcatEqualToEqual mutations on the first append in each switch arm are
+ * equivalent. Each arm starts with the same empty local output and terminates with break.
+ */
 it('pins search, date, empty and unknown navigation-extra choices', function ($choice, string $expected): void {
     Functions\expect('get_home_url')->once()->withNoArgs()->andReturn('https://home.test/');
     Functions\expect('get_theme_mod')->once()->with('navextra', 'search')->andReturn($choice);

@@ -14,6 +14,12 @@ it('grants only the current editor capability set', function (): void {
     uamswp_editor_users();
 });
 
+/**
+ * lib/users.php: role is neither a parameter, imported global nor assigned local. Its isset guard
+ * is always false. The two role-comparison mutations, two submenu-call removals and four
+ * unset-index integer changes are therefore unreachable. The isset/boolean guard mutations remain
+ * active, including the change that exposes an undefined-role warning.
+ */
 it('pins the current admin-menu callback with its unset local role', function (): void {
     $old = WP_User::$constructed;
     WP_User::$constructed = [];
@@ -51,7 +57,7 @@ it('guards editor-only theme screens while allowing administrators and other scr
     [true, ['editor'], 'themes.php', false], [false, null, 'themes.php', false],
     [false, ['author'], 'themes.php', false], [false, ['Editor'], 'themes.php', false],
     [false, ['editor'], 'themes.php', true], [false, ['editor'], 'widgets.php', true],
-    [false, ['author', 'editor'], 'themes.php', true], [false, ['editor'], 'nav-menus.php', false],
+    [false, ['author', 'editor'], 'themes.php', true], [false, (object) ['primary' => 'editor'], 'themes.php', true], [false, ['editor'], 'nav-menus.php', false],
     [false, ['editor'], 'customize.php', false], [false, ['editor'], 'THEMES.php', false],
 ]);
 

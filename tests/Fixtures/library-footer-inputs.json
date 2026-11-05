@@ -438,5 +438,78 @@
             "uamswp_secondary_number_type": "phone",
             "uamswp_secondary_phone_number": "1234567890"
         }
+    },
+    "two addresses with missing title": {
+        "site": {
+            "site": "institute",
+            "subsite": "institute_eye",
+            "department": "main"
+        },
+        "fields": {
+            "uamswp_address": [
+                {},
+                {
+                    "address_title": "Second"
+                }
+            ]
+        },
+        "warning": "Undefined variable $address_sr"
+    },
+    "one address with secondary phone": {
+        "site": {
+            "site": "institute",
+            "subsite": "institute_eye",
+            "department": "main"
+        },
+        "fields": {
+            "uamswp_address": [
+                {
+                    "address_title": "Office"
+                }
+            ],
+            "uamswp_secondary_number_type": "phone",
+            "uamswp_secondary_phone_number": "1234567890"
+        }
+    },
+    "main site ignores custom addresses": {
+        "site": {
+            "site": "uams",
+            "subsite": "main",
+            "department": "main"
+        },
+        "fields": {
+            "uamswp_address": [
+                {
+                    "address_title": "Ignored",
+                    "address_street_1": "This should not display"
+                }
+            ]
+        }
+    },
+    "boolean institute subsite": {
+        "site": {
+            "site": "institute",
+            "subsite": true,
+            "department": "main"
+        }
+    },
+    "advancement custom address": {
+        "site": {
+            "site": "uams",
+            "subsite": "advancement",
+            "department": "main"
+        },
+        "fields": {
+            "uamswp_address": [
+                {
+                    "address_title": "Office <&>",
+                    "address_street_1": "12 & 13",
+                    "address_street_2": "Suite <A>",
+                    "address_city": "City <&>",
+                    "address_state": "ST",
+                    "address_zip": "12345"
+                }
+            ]
+        }
     }
 }

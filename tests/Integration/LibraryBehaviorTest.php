@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Uams2020\Tests\Integration;
 
 use Uams2020\Tests\Support\IntegrationTestCase;
+use Uams2020\Tests\Support\OptionString;
 
 foreach (['users', 'nav', 'media-credit', 'widgets', 'search'] as $library) {
     require_once dirname(__DIR__, 2).'/lib/'.$library.'.php';
 }
 
 require_once dirname(__DIR__, 2).'/lib/modules/class-wp-bootstrap-pagewalker.php';
+require_once __DIR__.'/../Support/OptionString.php';
 
 final class LibraryBehaviorTest extends IntegrationTestCase
 {
@@ -47,10 +49,22 @@ final class LibraryBehaviorTest extends IntegrationTestCase
         }
     }
 
-    public function test_editor_theme_screen_access_is_enforced_by_the_actual_admin_hook(): void
+    public static function editorRoleShapes(): array
+    {
+        return [[false], [true]];
+    }
+
+    /** @dataProvider editorRoleShapes */
+    public function test_editor_theme_screen_access_is_enforced_by_the_actual_admin_hook(bool $objectRoles): void
     {
         $user = self::factory()->user->create(['role' => 'editor']);
-        wp_set_current_user($user);
+        $current = wp_set_current_user($user);
+        $savedRoles = $current->roles;
+        if ($objectRoles) {
+            $current->roles = (object) ['primary' => 'editor'];
+            $this->assertSame($current, wp_get_current_user());
+        }
+
         $old = $GLOBALS['pagenow'] ?? null;
         $oldScreen = $GLOBALS['current_screen'] ?? null;
         set_current_screen('widgets');
@@ -73,6 +87,7 @@ final class LibraryBehaviorTest extends IntegrationTestCase
             $this->expectExceptionMessage('Expected editor denial');
             do_action('admin_init');
         } finally {
+            $current->roles = $savedRoles;
             remove_filter('wp_die_handler', $handler);
             if ($headerPriority !== false) {
                 add_action('admin_init', 'wp_admin_headers', $headerPriority);
@@ -179,5 +194,133 @@ final class LibraryBehaviorTest extends IntegrationTestCase
         $markup = get_search_form(['echo' => false]);
         $this->assertStringContainsString('id="uams-search-bar" value="Library Needle"', $markup);
         $this->assertStringContainsString('name="search-scope"', $markup);
+    }
+
+    public function test_real_wordpress_filters_preserve_numeric_metadata_and_changing_menu_choices(): void
+    {
+        $page = self::factory()->post->create(['post_type' => 'page']);
+        $reads = 0;
+        $menu = static function ($available, $location) use (&$reads): bool {
+            if ($location !== 'primary') {
+                return $available;
+            }
+
+            return $reads++ === 0;
+        };
+        $metadata = (static fn ($value, $id, $key) => $id === $page && $key === 'page_hide_from_menu' ? [1] : $value);
+        add_filter('has_nav_menu', $menu, 10, 2);
+        add_filter('get_post_metadata', $metadata, 10, 3);
+        try {
+            $this->assertSame([true, false], [has_nav_menu('primary'), has_nav_menu('primary')]);
+            $this->assertSame(2, $reads);
+            $this->assertSame([1], get_post_meta($page, 'page_hide_from_menu'));
+        } finally {
+            remove_filter('has_nav_menu', $menu, 10);
+            remove_filter('get_post_metadata', $metadata, 10);
+        }
+    }
+
+    public function test_raw_cached_posts_preserve_extension_supplied_numeric_string_parents(): void
+    {
+        $parent = self::factory()->post->create(['post_type' => 'page', 'post_title' => 'Parent']);
+        $child = self::factory()->post->create(['post_type' => 'page', 'post_parent' => $parent]);
+        $raw = new \WP_Post((object) array_merge(get_post($child, ARRAY_A), ['post_parent' => (string) $parent, 'filter' => 'raw']));
+        wp_cache_set($child, $raw, 'posts');
+        try {
+            $this->assertSame((string) $parent, get_post($child)->post_parent);
+            $this->assertSame((string) $parent, get_post($raw)->post_parent);
+            $page = get_post($parent);
+            $walker = new \WP_Bootstrap_Pagewalker;
+            $currentOutput = '';
+            $walker->start_el($currentOutput, clone $page, 0, [], (string) $parent);
+            $this->assertStringContainsString('current-page-item', $currentOutput);
+            $parentOutput = '';
+            $walker->start_el($parentOutput, clone $page, 0, [], $child);
+            $this->assertStringContainsString('current-page-parent', $parentOutput);
+        } finally {
+            clean_post_cache($child);
+        }
+    }
+
+    public function test_blog_name_option_filters_can_supply_arrays_without_core_coercion(): void
+    {
+        $value = ['Filtered name'];
+        $filter = static fn (): array => $value;
+        add_filter('pre_option_blogname', $filter);
+        try {
+            $this->assertSame($value, get_option('blogname'));
+            $this->assertSame($value, get_bloginfo('name'));
+
+        } finally {
+            remove_filter('pre_option_blogname', $filter);
+
+        }
+    }
+
+    public function test_raw_global_posts_preserve_extension_supplied_stringable_post_types(): void
+    {
+        $id = self::factory()->post->create(['post_type' => 'post']);
+        $this->go_to(get_permalink($id));
+        $saved = $GLOBALS['post'];
+        $type = new OptionString('post');
+        $raw = clone get_post($id);
+        $raw->filter = 'raw';
+        $raw->post_type = $type;
+        $GLOBALS['post'] = $raw;
+        try {
+            $this->assertSame($type, get_post_type());
+            $raw->post_type = 'post';
+            $raw->post_title = new OptionString('Boundary title');
+            $output = '';
+            (new \WP_Bootstrap_Pagewalker)->start_el($output, $raw);
+            $this->assertStringContainsString('title="Boundary title"', $output);
+        } finally {
+            $GLOBALS['post'] = $saved;
+        }
+    }
+
+    public function test_filtered_boolean_block_names_reach_the_real_credit_filter(): void
+    {
+        $image = self::factory()->attachment->create(['post_mime_type' => 'image/jpeg']);
+        update_post_meta($image, '_media_credit', 'Boundary photographer');
+        $content = '<figure><img/></figure>';
+        $block = ['blockName' => 'core/image', 'attrs' => ['id' => $image], 'innerBlocks' => [], 'innerHTML' => $content, 'innerContent' => [$content]];
+        $filter = static function ($parsed) use ($image) {
+            if (($parsed['attrs']['id'] ?? null) === $image) {
+                $parsed['blockName'] = true;
+            }
+
+            return $parsed;
+        };
+        add_filter('render_block_data', $filter);
+        try {
+            $this->assertStringContainsString('Boundary photographer', render_block($block));
+        } finally {
+            remove_filter('render_block_data', $filter);
+        }
+    }
+
+    public function test_unset_page_titles_can_change_through_actual_post_metadata_getters(): void
+    {
+        $id = self::factory()->post->create(['post_type' => 'page']);
+        $page = get_post($id);
+        unset($page->post_title);
+        $reads = 0;
+        $filter = static function ($value, $postId, $key) use ($id, &$reads) {
+            if ($postId !== $id || $key !== 'post_title') {
+                return $value;
+            }
+
+            return [$reads++ < 3 ? 'Initial title' : ''];
+        };
+        add_filter('get_post_metadata', $filter, 10, 3);
+        try {
+            $output = '';
+            (new \WP_Bootstrap_Pagewalker)->start_el($output, $page);
+            $this->assertStringNotContainsString(' title=', $output);
+            $this->assertStringContainsString('class="nav-link"></a>', $output);
+        } finally {
+            remove_filter('get_post_metadata', $filter, 10);
+        }
     }
 }

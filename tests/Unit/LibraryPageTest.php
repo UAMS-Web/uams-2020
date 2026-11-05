@@ -6,6 +6,7 @@ use Brain\Monkey\Functions;
 use Uams2020\Tests\Support\LibraryBrandingScenario;
 use Uams2020\Tests\Support\LibraryPageScenario;
 use Uams2020\Tests\Support\ModuleTemplateCapture;
+use Uams2020\Tests\Support\OptionString;
 
 use function Brain\Monkey\Actions\expectRemoved;
 use function Brain\Monkey\Functions\when;
@@ -113,3 +114,23 @@ it('pins all cover-image CSS sizes, mobile fallbacks and missing-image markup', 
     LibraryPageScenario::configure($fields, $resizer);
     expect(LibraryBrandingScenario::render($function))->toBe($expected);
 })->with(json_decode(file_get_contents(__DIR__.'/../Fixtures/library-page-image-output.json'), true, flags: JSON_THROW_ON_ERROR));
+
+$stringablePageOptions = [];
+foreach (json_decode(file_get_contents(__DIR__.'/../Fixtures/library-page-option-hooks.json'), true, flags: JSON_THROW_ON_ERROR) as $name => $expected) {
+    $option = json_decode($name, true, flags: JSON_THROW_ON_ERROR);
+    if (is_string($option)) {
+        $stringablePageOptions[] = [new OptionString($option), $expected];
+    }
+}
+
+it('accepts stringable ACF title-option values without changing hook selection', function ($option, array $expected): void {
+    expect(LibraryPageScenario::options($option))->toBe($expected);
+})->with($stringablePageOptions);
+
+it('keeps stringable raw post types supplied by WordPress extensions', function (): void {
+    when('is_single')->justReturn(true);
+    when('get_post_type')->justReturn(new OptionString('post'));
+    when('get_field')->justReturn(false);
+
+    expect(uamswp_post_info_filter('old'))->toBe('Posted by [post_author_posts_link] on [post_date]');
+});

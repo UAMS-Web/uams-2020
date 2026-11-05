@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Brain\Monkey\Functions;
+use Uams2020\Tests\Support\OptionString;
 
 use function Brain\Monkey\Functions\when;
 use function Patchwork\relay;
@@ -37,7 +38,7 @@ it('ignores absent or nonnumeric footer-widget support', function ($support): vo
     Functions\expect('get_theme_support')->once()->with('genesis-footer-widgets')->andReturn($support);
     Functions\expect('is_active_sidebar')->never();
     expect(uamswp_footer_widget_areas('old', 999))->toBeNull();
-})->with([[false], [[]], [[null]], [['not numeric']]]);
+})->with([[false], [true], [[]], [[null]], [['not numeric']], [['other' => 3]]]);
 
 it('does not render footer widgets when the first area is inactive', function (): void {
     Functions\expect('get_theme_support')->once()->with('genesis-footer-widgets')->andReturn([3]);
@@ -46,6 +47,10 @@ it('does not render footer widgets when the first area is inactive', function ()
     expect(uamswp_footer_widget_areas('old', 999))->toBeNull();
 });
 
+/**
+ * lib/footer-widgets.php: ConcatEqualToEqual on the first outer wrapper append is equivalent: the
+ * local output is still an empty string on every path that reaches it.
+ */
 it('pins footer columns, integer coercion, boundaries and ordered sidebar output', function ($count, int $rendered, string $class): void {
     Functions\expect('get_theme_support')->once()->with('genesis-footer-widgets')->andReturn([$count]);
     Functions\expect('is_active_sidebar')->once()->with('footer-1')->andReturn(true);
@@ -78,3 +83,9 @@ it('pins footer columns, integer coercion, boundaries and ordered sidebar output
     [3, 3, 'col-sm-4'], [4, 4, 'col-sm-3'], [6, 6, 'col-sm-2'], [12, 12, 'col-sm-1'],
     [5, 5, 'col-sm-12'], ['2.9', 2, 'col-sm-6'],
 ]);
+
+it('accepts stringable region names from formatted field values', function (string $region, string $city): void {
+    Functions\expect('geoip_detect2_get_info_from_current_ip')->twice()->andReturn((object) ['city' => (object) ['name' => $city], 'subdivisions' => [(object) ['name' => 'Arkansas']]]);
+    $regions = [new OptionString($region)];
+    expect(is_in_region($regions))->toBeTrue()->and(is_not_in_region($regions))->toBeFalse();
+})->with([['northwest', 'Fayetteville'], ['northeast', 'Jonesboro'], ['southwest', 'Hope'], ['southeast', 'Dumas'], ['central', 'Little Rock']]);

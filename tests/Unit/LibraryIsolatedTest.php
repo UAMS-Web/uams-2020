@@ -112,17 +112,30 @@ final class LibraryIsolatedTest extends TestCase
             'subsection populated' => [7, true, true, '<li>SUB</li>', [3, 5]],
             'fallback empty' => [false, false, true, '', [3, 5]],
             'fallback populated' => [false, false, true, '<li>ALL</li>', [3, 5]],
+            'changing primary' => [false, [true, false], true, '<li>ALL</li>', [3, 5]],
+            'numeric hidden subsection' => [7, true, true, '<li>SUB</li>', [3, 5], 1],
+            'numeric hidden fallback' => [false, false, true, '<li>ALL</li>', [3, 5], 1],
         ];
     }
 
     #[DataProvider('pageNavigationCases')]
-    public function test_page_navigation_boundaries(bool|int $subsection, bool $primary, bool $page, string $pagenav, array $ids): void
+    public function test_page_navigation_boundaries(bool|int $subsection, bool|array $primary, bool $page, string $pagenav, array $ids, string|int $hidden = '1'): void
     {
-        expect('get_registered_nav_menus')->once()->andReturn(['primary' => 'Primary']);
+        when('get_registered_nav_menus')->justReturn(['primary' => 'Primary']);
         when('uamswp_nav_subsection')->justReturn($subsection);
-        when('has_nav_menu')->justReturn($primary);
+        if (is_array($primary)) {
+            $calls = 0;
+            when('has_nav_menu')->alias(static function ($location) use (&$calls, $primary): bool {
+                self::assertSame('primary', $location);
+
+                return $primary[min($calls++, count($primary) - 1)];
+            });
+        } else {
+            when('has_nav_menu')->justReturn($primary);
+        }
+
         expect('is_page')->times($subsection ? 1 : 0)->andReturn($page);
-        $list = (! $subsection || $page) && ($subsection || ! $primary);
+        $list = (! $subsection || $page) && ($subsection || (is_array($primary) ? true : ! $primary));
         expect('wp_nav_menu')->times($list ? 1 : 0)->with(['theme_location' => 'primary', 'container' => '', 'menu' => $subsection ? 'subsection-navigation' : 'page-navigation', 'echo' => $subsection ? 0 : false])->andReturn('UNUSED NAV');
         $getPages = expect('get_pages')->times($list ? 1 : 0);
         if ($subsection) {
@@ -134,7 +147,7 @@ final class LibraryIsolatedTest extends TestCase
         $getPages->andReturn(array_map(static fn ($id): object => (object) ['ID' => $id], $ids));
         if ($list) {
             foreach ($ids as $id) {
-                expect('get_post_meta')->once()->with($id, 'page_hide_from_menu')->andReturn($id === 3 ? ['1'] : []);
+                expect('get_post_meta')->once()->with($id, 'page_hide_from_menu')->andReturn($id === 3 ? [$hidden] : []);
             }
 
             expect('get_option')->once()->with('page_on_front')->andReturn(11);

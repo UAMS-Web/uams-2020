@@ -3,10 +3,12 @@
 declare(strict_types=1);
 
 use Brain\Monkey\Functions;
+use Uams2020\Tests\Support\LibraryWarnings;
+use Uams2020\Tests\Support\OptionString;
 
 use function Brain\Monkey\Functions\when;
 
-function libraryTitleContext(array $site, array $flags = [], string $name = 'Local   Name', string $root = 'Root   Name'): void
+function libraryTitleContext(array $site, array $flags = [], string|array $name = 'Local   Name', string|array $root = 'Root   Name'): void
 {
     when('uams_get_site_info')->justReturn($site);
     when('get_the_title')->justReturn('Page Title');
@@ -89,3 +91,37 @@ it('pins the current substring direction for institutional prefixes', function (
     ['UAMS Local', 'UAMS Root', 'UAMS Local | UAMS UAMS Root'],
     ['AMS', 'Medical', 'AMS | Medical'],
 ]);
+
+$stringableTitleCases = [];
+foreach ($libraryTitleMatrix as $name => [$site, $mode, $expected]) {
+    foreach (['site', 'subsite', 'department'] as $key) {
+        $copy = $site;
+        $copy[$key] = new OptionString($copy[$key]);
+        $stringableTitleCases[$name.' object '.$key] = [$copy, $mode, $expected];
+    }
+}
+
+it('preserves pluggable stringable site identity in page titles', function (array $site, string $mode, string $expected): void {
+    libraryTitleContext($site, [$mode => true]);
+    expect(uamswp_title('ignored'))->toBe($expected);
+})->with($stringableTitleCases);
+
+it('keeps a local UAMS name without adding a duplicate institutional prefix on inner pages', function (): void {
+    libraryTitleContext(['site' => 'institute', 'subsite' => 'eye', 'department' => 'dept'], [], 'UAMS', 'Root');
+    expect(uamswp_title('ignored'))->toBe('Page Title | UAMS');
+});
+
+it('preserves pluggable site-helper effects before selecting the title branch', function (): void {
+    libraryTitleContext(['site' => 'uams', 'subsite' => 'main', 'department' => 'main']);
+    $calls = 0;
+    when('uams_get_site_info')->alias(static function () use (&$calls): array {
+        return $calls++ < 2 ? ['site' => 'uams', 'subsite' => 'main', 'department' => 'main'] : ['site' => 'uamshealth', 'subsite' => 'main', 'department' => 'main'];
+    });
+    expect(uamswp_title('ignored'))->toBe('Page Title | UAMS Health');
+});
+
+it('pins array blog names supplied by mixed WordPress option filters', function ($name, $root, string $department): void {
+    libraryTitleContext(['site' => 'institute', 'subsite' => 'eye', 'department' => $department], [], $name, $root);
+    $actual = LibraryWarnings::capture('uamswp_title', array_fill(0, 3, 'Array to string conversion'), static fn () => uamswp_title('ignored'));
+    expect($actual)->toBe('Page Title | UAMS Array');
+})->with([[['Local'], 'Root', 'main'], ['Local', ['Root'], 'other']]);

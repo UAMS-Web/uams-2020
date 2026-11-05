@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Brain\Monkey\Functions;
 use Uams2020\Tests\Support\LibraryBrandingScenario;
 use Uams2020\Tests\Support\LibraryWarnings;
+use Uams2020\Tests\Support\OptionString;
 
 use function Brain\Monkey\Functions\when;
 
@@ -80,15 +81,17 @@ it('pins the complete tray for remote, local and unassigned quick-link menus', f
         return null;
     });
     Functions\expect('get_nav_menu_locations')->times($case === 'remote' ? 0 : 1)->andReturn(match ($case) {
-        'custom' => ['quick-links' => 19], 'other location' => ['primary' => 17], default => false
+        'custom', 'custom empty' => ['quick-links' => 19], 'other location' => ['primary' => 17], default => false
     });
-    Functions\expect('wp_get_nav_menu_object')->times($case === 'custom' ? 1 : 0)->with(19)->andReturn((object) ['term_id' => 29]);
-    Functions\expect('wp_get_nav_menu_items')->times($case === 'custom' ? 1 : 0)->with(29)->andReturn([
+    Functions\expect('wp_get_nav_menu_object')->times(in_array($case, ['custom', 'custom empty'], true) ? 1 : 0)->with(19)->andReturn((object) ['term_id' => 29]);
+    Functions\expect('wp_get_nav_menu_items')->times(in_array($case, ['custom', 'custom empty'], true) ? 1 : 0)->with(29)->andReturn($case === 'custom empty' ? false : [
         (object) ['title' => 'First', 'url' => '/a', 'classes' => ['fas', 'fa-info'], 'target' => '_blank'],
         (object) ['title' => 'Second', 'url' => '/b', 'classes' => [], 'target' => ''],
     ]);
     when('esc_url')->alias(static fn ($value): string => 'SAFE:'.$value);
-    expect(LibraryBrandingScenario::render('uamswp_quicklinks'))->toBe($expected);
+    $render = static fn (): string => LibraryBrandingScenario::render('uamswp_quicklinks');
+    $actual = $case === 'custom empty' ? LibraryWarnings::capture('uamswp_quicklinks', array_map(static fn (string $property): string => 'Attempt to read property "'.$property.'" on false', ['title', 'url', 'classes', 'target']), $render) : $render();
+    expect($actual)->toBe($expected);
 })->with(array_map(static fn ($case, $expected): array => [$case, $expected], array_keys(json_decode(file_get_contents(__DIR__.'/../Fixtures/library-quicklinks-output.json'), true, flags: JSON_THROW_ON_ERROR)), array_values(json_decode(file_get_contents(__DIR__.'/../Fixtures/library-quicklinks-output.json'), true, flags: JSON_THROW_ON_ERROR))));
 
 it('pins the missing-primary-location warning alongside the no-menu error', function (): void {
@@ -96,3 +99,23 @@ it('pins the missing-primary-location warning alongside the no-menu error', func
     $result = LibraryWarnings::capture('quicklinks_menu', 'Undefined array key "primary"', static fn () => quicklinks_menu(null));
     expect($result->arguments)->toBe(['no_menus', 'Could not find any menus', ['status' => 404]]);
 });
+
+it('accepts stringable identities in custom menu classification', function (string $site, string $subsite, string $key): void {
+    $identity = ['site' => $site, 'subsite' => $subsite];
+    $identity[$key] = new OptionString($identity[$key]);
+    when('uams_get_site_info')->justReturn($identity);
+    expect(site_custom_quicklinks())->toBeTrue();
+})->with([
+    ['institute', 'eye', 'site'], ['uamshealth', 'main', 'site'], ['uamshealth', 'main', 'subsite'],
+    ['inside', 'main', 'site'], ['inside', 'main', 'subsite'], ['uams', 'main', 'site'], ['uams', 'main', 'subsite'],
+]);
+
+it('selects remote endpoints for stringable site identities', function (string $site, string $url): void {
+    when('uams_get_site_info')->justReturn(['site' => new OptionString($site)]);
+    Functions\expect('wp_remote_get')->once()->with($url)->andReturn(false);
+    when('is_wp_error')->justReturn(true);
+    expect(uamswp_request_quicklinks())->toBeFalse();
+})->with([
+    ['uamshealth', 'https://uamshealth.com/wp-json/menus/v2/quicklinks/'],
+    ['inside', 'https://inside.uams.edu/wp-json/menus/v2/quicklinks/'],
+]);

@@ -71,6 +71,15 @@ final class LibraryBrandingScenario
         });
     }
 
+    public static function renderCase(string $function, array $input): string
+    {
+        if (isset($input['warning'])) {
+            return LibraryWarnings::capture($function, $input['warning'], static fn (): string => self::render($function));
+        }
+
+        return self::render($function);
+    }
+
     public static function render(string $function): string
     {
         ob_start();

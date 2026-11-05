@@ -78,7 +78,7 @@ function uamswp_footer_widget_areas($output, $footer_widgets): ?string
 
     if ($inside) {
 
-        $output .= genesis_markup([
+        $output .= genesis_markup([ // @pest-mutate-ignore: ConcatEqualToEqual
             'html5' => '<div %s>',
             'xhtml' => '<div id="footer-widgets" class="footer-widgets">',
             'context' => 'footer-widgets',

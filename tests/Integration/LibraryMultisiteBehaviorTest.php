@@ -44,4 +44,22 @@ final class LibraryMultisiteBehaviorTest extends IntegrationTestCase
             update_blog_option(1, 'blogname', $oldRootTitle);
         }
     }
+
+    public function test_network_details_preserve_mixed_blog_name_option_filter_values(): void
+    {
+        if (! is_multisite() || getenv('UAMS_LIBRARY_SITE_CONTEXT') !== '1') {
+            $this->markTestSkipped('Requires the separate multisite branding command.');
+        }
+
+        $value = ['Filtered network name'];
+        $filter = static fn (): array => $value;
+        add_filter('pre_option_blogname', $filter);
+        clean_blog_cache(get_current_blog_id());
+        try {
+            $this->assertSame($value, get_blog_details(get_current_blog_id())->blogname);
+        } finally {
+            remove_filter('pre_option_blogname', $filter);
+            clean_blog_cache(get_current_blog_id());
+        }
+    }
 }

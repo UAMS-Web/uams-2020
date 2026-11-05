@@ -28,6 +28,12 @@ it('pins every favicon asset, size and metadata value', function (): void {
     expect(ob_get_clean())->toBe(file_get_contents(__DIR__.'/../Fixtures/library-favicon.html'));
 });
 
+/**
+ * lib/tgm.php: BooleanAndToBooleanOr on the outer isset/object guard is equivalent. Objects enter
+ * under both forms, null enters neither, and other non-null values only gain property-offset isset
+ * checks that are safely false for every scalar, array and resource. Neither form modifies those
+ * values.
+ */
 it('suppresses updates for exactly the two bundled SEO plugins', function (): void {
     $value = (object) ['response' => ['uamswp-seopress/seopress.php' => 'one', 'uamswp-seopress-pro/seopress-pro.php' => 'two', 'other/plugin.php' => 'kept'], 'other' => 'kept'];
     expect(disable_plugin_updates($value))->toBe($value)->and($value)->toEqual((object) ['response' => ['other/plugin.php' => 'kept'], 'other' => 'kept']);

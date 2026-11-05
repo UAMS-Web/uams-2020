@@ -50,9 +50,12 @@ The population is every first-party PHP file below `lib/` other than the four pa
 - A nested page menu with no preceding link ID emits `Undefined variable $labledby` and leaves the labeling attribute absent.
 - A quick-link callback without a primary menu location emits `Undefined array key "primary"` while building its missing-menu error.
 - The image extractor selects the last matching image on one line, while a newline separates matches. The test pins this greedy regex behavior.
+- A false quick-link item response emits four property-read warnings and an empty link after the existing array cast.
+- Two custom addresses with a missing title emit `Undefined variable $address_sr`.
+- Array blog names supplied by mixed option filters emit three `Array to string conversion` warnings before the current title is returned.
 - The admin-menu callback creates a user object but never sets its local role variable, so its editor-only menu removal body does not run.
 
-Warning tests accept exactly one specified warning from the compiled function or method range. Other errors are thrown. Reflection boundaries allow the mutation printer to move lines. A temporary control pretty-printed all 26 files without changing behavior, ran the full Unit suite, restored every original byte, and passed. Final mutation conclusions still require a separate complete run.
+Warning tests accept the exact specified warning list from the compiled function or method range. Other errors are thrown. Reflection boundaries allow the mutation printer to move lines. A temporary control pretty-printed all 26 files without changing behavior, ran the full Unit suite, restored every original byte, and passed. Final mutation conclusions still require a separate complete run.
 
 ## Test isolation controls
 
@@ -71,4 +74,9 @@ php tests/Integration/vendor/bin/phpunit --configuration tests/Integration/phpun
 WP_MULTISITE=1 UAMS_LIBRARY_SITE_CONTEXT=1 php tests/Integration/vendor/bin/phpunit --configuration tests/Integration/phpunit.xml --filter LibraryMultisiteBehaviorTest --do-not-cache-result
 ```
 
-The normal command deliberately skips the network-only branding case. The second command runs that case on a real network. The site marker is enabled only in the second process.
+The normal command deliberately skips the two network-only cases. The second command runs both cases on a real network. The site marker is enabled only in the second process.
+
+The first-party page walker keeps its existing `lib/modules` Pint exclusion. Its
+coverage changes add only narrow mutation comments. Applying the formatter's
+strict-types declaration would reject numeric and Stringable titles that its
+existing weak calls accept; the page-walker tests pin both values.

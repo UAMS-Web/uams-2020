@@ -177,7 +177,7 @@ function disable_plugin_updates($value)
         'uamswp-seopress-pro/seopress-pro.php',
     ];
 
-    if (isset($value) && is_object($value)) {
+    if (isset($value) && is_object($value)) { // @pest-mutate-ignore: BooleanAndToBooleanOr
         foreach ($pluginsToDisable as $plugin) {
             if (isset($value->response[$plugin])) {
                 unset($value->response[$plugin]);
