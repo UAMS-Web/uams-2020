@@ -30,12 +30,14 @@ final class BlockTemplatesBehaviorTest extends IntegrationTestCase
             while (ob_get_level() > $level) {
                 ob_end_clean();
             }
+
             wp_reset_postdata();
             if ($hadPost) {
                 $GLOBALS['post'] = $post;
             } else {
                 unset($GLOBALS['post']);
             }
+
             BlockIntegrationFields::$values = [];
         }
     }
@@ -48,6 +50,7 @@ final class BlockTemplatesBehaviorTest extends IntegrationTestCase
         foreach ([['Old first', $first, 'publish', '2020-01-01 12:00:00'], ['Latest first', $first, 'publish', '2024-01-01 12:00:00'], ['Draft first', $first, 'draft', '2025-01-01 12:00:00'], ['Latest second', $second, 'publish', '2024-01-01 12:00:00']] as [$title, $category, $status, $date]) {
             $posts[$title] = self::factory()->post->create(['post_title' => $title, 'post_status' => $status, 'post_date' => $date, 'post_category' => [$category->term_id], 'post_excerpt' => 'Excerpt for '.$title]);
         }
+
         $attachment = self::factory()->attachment->create(['post_mime_type' => 'image/jpeg', 'guid' => 'https://example.org/thumbnail.jpg']);
         update_post_meta($attachment, '_wp_attached_file', 'thumbnail.jpg');
         update_post_meta($attachment, '_wp_attachment_image_alt', 'Native image "& alt');
@@ -67,6 +70,7 @@ final class BlockTemplatesBehaviorTest extends IntegrationTestCase
         foreach (['Latest first', 'Latest second', 'Read the Story', 'View First category Archive', 'View Second category Archive'] as $text) {
             $this->assertStringContainsString($text, $html);
         }
+
         $this->assertStringNotContainsString('Old first', $html);
         $this->assertStringNotContainsString('Draft first', $html);
         $empty = self::factory()->category->create_and_get(['name' => 'No posts']);
@@ -98,6 +102,7 @@ final class BlockTemplatesBehaviorTest extends IntegrationTestCase
             } finally {
                 remove_filter('uamswp_iframe_sandbox', $emptySandbox);
             }
+
             $fields['iframe_url'] = 'https://unapproved.test/';
             BlockIntegrationFields::$values = $fields;
             $this->assertSame('', $this->render('iframe', $vars));

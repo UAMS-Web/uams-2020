@@ -21,18 +21,22 @@ final class BlockTemplateScenario
         if ($case['name'] === 'post-category-tile' && isset($case['variables']['category'])) {
             $case['variables']['category'] = (object) $case['variables']['category'];
         }
+
         foreach ($case['variables']['post_tiles_rows'] ?? [] as $i => $row) {
             $case['variables']['post_tiles_rows'][$i]['post_tiles_section_category'] = (object) $row['post_tiles_section_category'];
         }
+
         $fields = $case['fields'];
         foreach (['post_tile_category'] as $key) {
             if (isset($fields[$key])) {
                 $fields[$key] = (object) $fields[$key];
             }
         }
+
         foreach ($fields['post_tiles_section'] ?? [] as $i => $row) {
             $fields['post_tiles_section'][$i]['post_tiles_section_category'] = (object) $row['post_tiles_section_category'];
         }
+
         when('get_field')->alias(static function ($key, ...$args) use ($fields, &$calls) {
             Assert::assertArrayHasKey($key, $fields);
             $calls[] = ['get_field', $key, $args];
@@ -56,6 +60,7 @@ final class BlockTemplateScenario
             return $case['out_region'];
         });
         when('is_admin')->justReturn($case['admin']);
+
         $escapeCalls = 0;
         foreach (['esc_attr' => 'ATTR', 'esc_html' => 'HTML', 'esc_url' => 'URL', 'wp_kses_post' => 'POST', 'sanitize_title_with_dashes' => 'SLUG', 'sanitize_html_class' => 'CLASS', 'sanitize_text_field' => 'TEXT'] as $function => $marker) {
             when($function)->alias(static function ($value) use ($marker, &$escapeCalls): string {
@@ -63,9 +68,10 @@ final class BlockTemplateScenario
                     throw new \RuntimeException('Block rendering did not finish within 2,000 escaping calls.');
                 }
 
-                return $marker.'('.(string) $value.')';
+                return $marker.'('.$value.')';
             });
         }
+
         when('__')->returnArg();
         when('esc_html__')->alias(static fn ($value): string => 'HTML('.$value.')');
         when('absint')->alias(static fn ($value): int => abs((int) $value));
@@ -81,6 +87,7 @@ final class BlockTemplateScenario
             if ($hook !== 'uamswp_iframe_sandbox') {
                 return relay();
             }
+
             $calls[] = ['apply_filters', $hook, $value, $args];
 
             return $case['sandbox'];
@@ -103,6 +110,7 @@ final class BlockTemplateScenario
         if (! class_exists('WP_Query')) {
             class_alias(QueryDouble::class, 'WP_Query');
         }
+
         QueryDouble::$nextRows = $case['rows'];
         QueryDouble::$history = [];
         when('get_post_thumbnail_id')->alias(static function ($id) use ($case, &$calls) {
@@ -122,6 +130,7 @@ final class BlockTemplateScenario
         when('get_the_content')->justReturn('<p>'.str_repeat('Body text https://example.test/a?q=b next ', 15).'</p>');
         when('wp_strip_all_tags')->alias(static fn ($value, $removeBreaks = false): string => 'STRIPPED('.strip_tags($value).')'.(int) $removeBreaks);
         when('wp_trim_words')->alias(static fn ($value, $number = 55): string => implode(' ', array_slice(explode(' ', $value), 0, $number)));
+
         $before = $GLOBALS['post'] ?? null;
         $hadPost = array_key_exists('post', $GLOBALS);
         $level = ob_get_level();
@@ -133,11 +142,13 @@ final class BlockTemplateScenario
             while (ob_get_level() > $level) {
                 ob_end_clean();
             }
+
             if ($hadPost) {
                 $GLOBALS['post'] = $before;
             } else {
                 unset($GLOBALS['post']);
             }
+
             date_default_timezone_set($timezone);
             QueryDouble::$nextRows = [];
         }

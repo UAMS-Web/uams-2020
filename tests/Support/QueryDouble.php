@@ -16,7 +16,7 @@ final class QueryDouble
     public array $args;
 
     /** WP_Query exposes unknown ID through __get as null; thumbnail helpers then use the current post. */
-    public $ID = null;
+    public $ID;
 
     private array $rows;
 
