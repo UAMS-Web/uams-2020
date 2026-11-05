@@ -7,6 +7,7 @@ use Uams2020\Tests\Support\BlockTemplateScenario;
 use Uams2020\Tests\Support\TraceString;
 
 use function Brain\Monkey\Functions\when;
+use function Patchwork\relay;
 
 $blockTemplateCases = json_decode(file_get_contents(__DIR__.'/../Fixtures/block-templates.json'), true, flags: JSON_THROW_ON_ERROR);
 $blockCasesByName = [];
@@ -89,9 +90,11 @@ foreach ($blockBaseCases as $name => $baseCase) {
     if ($geoKeys === []) {
         continue;
     }
+
     if (count($geoKeys) !== 1) {
         throw new LogicException('Ambiguous geo field for '.$name);
     }
+
     $geoKey = $geoKeys[0];
     it('preserves '.$name.' loose geo comparisons for caller values', function (string $selection, int $conversions) use ($baseCase, $geoKey): void {
         $case = $baseCase;
@@ -111,6 +114,7 @@ $blockCasesByLabel = [];
 foreach ($blockTemplateCases as $case) {
     $blockCasesByLabel[$case['name']][$case['label']] = $case;
 }
+
 $assertConvertedMarkup = static function (string $html, string $expected, string $marker, int $conversions): void {
     Assert::assertSame($conversions, substr_count($html, $marker));
     Assert::assertTrue($expected === str_replace($marker, '', $html), 'Caller conversion changed the established block markup.');
@@ -170,6 +174,7 @@ it('inherits counter starts from a true boolean field', function () use ($blockB
     foreach ($case['fields']['counter_list_section'] as &$row) {
         $row['counter_list_section_start_inherit'] = true;
     }
+
     unset($row);
     $actual = BlockTemplateScenario::render($case);
     Assert::assertTrue($case['expected']['html'] === $actual['html'], 'Boolean counter inheritance changed.');
@@ -205,6 +210,7 @@ it('floors fractional counter values above the display threshold', function () u
         $row['counter_list_section_start_custom'] = '2024-03-15T11:59:57+00:00';
         $row['counter_list_section_rate'] = 0.5;
     }
+
     unset($row);
     $actual = BlockTemplateScenario::render($case);
     Assert::assertSame(2, substr_count($actual['html'], '<span class="value">1</span>'));
@@ -247,6 +253,7 @@ it('keeps empty nested link targets in the printed false arm', function (string 
     foreach ($case['fields'][$repeater] as &$row) {
         $row[$urlKey]['target'] = '';
     }
+
     unset($row);
     $actual = BlockTemplateScenario::render($case);
     $attribute = $name === 'link-list-2' ? ' target="_blank"' : ' target="ATTR(_blank)"';
@@ -306,6 +313,7 @@ it('preserves partial CTA link groups and their observable escaping calls', func
         Assert::assertSame(1, $replaced);
         Assert::assertTrue($expectedHtml === $actual['html'], 'A partial CTA changed the saved complete markup.');
     }
+
     if ($hasLink) {
         Assert::assertStringContainsString('<a class="btn btn-primary" href="URL(https://example.test/partial)" data-moduletitle="ATTR('.$case['fields']['side_heading'].')">', $actual['html']);
     }
@@ -342,8 +350,10 @@ it('preserves news module caller index and anchor conversions', function (string
     if ($source === 'anchor') {
         $module['anchor_id'] = new TraceString('module-anchor', '[news-anchor-conversion]');
     }
-    when('class_exists')->alias(static fn ($name) => $name === 'UAMS_Syndicate_News_Base' ? true : \Patchwork\relay());
+
+    when('class_exists')->alias(static fn ($name) => $name === 'UAMS_Syndicate_News_Base' ? true : relay());
     when('get_stylesheet_directory')->justReturn(dirname(__DIR__, 2));
+
     $actual = BlockTemplateScenario::render($case, static fn () => uamswp_module($module, $index));
     Assert::assertStringContainsString(($source === 'index' ? '[news-index-conversion]' : '[news-anchor-conversion]').'SHORTCODE(', $actual['html']);
 })->with(['index', 'anchor']);
@@ -351,7 +361,7 @@ it('preserves news module caller index and anchor conversions', function (string
 it('retains the public module failure for an empty-array numeric index', function (string $name) use ($blockBaseCases): void {
     $case = $blockBaseCases[$name];
     $module = ['acf_fc_layout' => $name === 'news' ? 'modules_news_grid' : 'modules_uams_livewhale'] + $case['fields'];
-    when('class_exists')->alias(static fn ($class) => $class === 'UAMS_Syndicate_News_Base' ? true : \Patchwork\relay());
+    when('class_exists')->alias(static fn ($class) => $class === 'UAMS_Syndicate_News_Base' ? true : relay());
     when('get_stylesheet_directory')->justReturn(dirname(__DIR__, 2));
     $this->expectException(TypeError::class);
     $this->expectExceptionMessage('Unsupported operand types: array + int');
@@ -373,6 +383,7 @@ it('releases an ephemeral fullscreen field before iframe markup', function () us
                     }
                 };
             }
+
             Assert::assertArrayHasKey($key, $values);
 
             return $values[$key];
