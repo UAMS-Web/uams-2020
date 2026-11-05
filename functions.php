@@ -633,10 +633,7 @@ class SlidingWindowRateLimiter
         $this->storage[$clientId] ??= [];
 
         // Remove outdated timestamps
-        $this->storage[$clientId] = array_filter(
-            $this->storage[$clientId],
-            fn ($timestamp): bool => $timestamp > $windowStart
-        );
+        $this->storage[$clientId] = array_filter($this->storage[$clientId], fn ($timestamp): bool => $timestamp > $windowStart);
 
         if (count($this->storage[$clientId]) < $this->limit) {
             $this->storage[$clientId][] = $currentTime;

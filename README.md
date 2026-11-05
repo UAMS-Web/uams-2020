@@ -51,7 +51,7 @@ The supported PHP floor is 8.2. Development and tests run on PHP 8.4 (`config.pl
 
 With Xdebug coverage mode or PCOV enabled, run `php tests/mutate.php` for the root templates, `functions.php` and `search.php`. Pass `--path=functions.php,search.php` to narrow a run. The launcher uses every unit test file and rejects an empty test list. It disables cached results and requires every generated mutant to be caught; inspect any surviving or uncovered case before claiming full coverage.
 
-The launcher names test files explicitly to avoid a directory-walking conflict between the mutation loader and Patchwork. Do not add `--processes`: the locked mutation tool forwards it to children without `--parallel`, which makes those children reject the option and can falsely count failed starts as caught mutations. Runs are serial because the parallel runner does not accept the required file list. The launcher rejects `--parallel` as well. No vendor patch is applied.
+The launcher names test files explicitly to avoid a directory-walking conflict between the mutation loader and Patchwork. Do not add `--processes`: the locked mutation tool forwards it to children without `--parallel`, which makes those children reject the option and can falsely count failed starts as caught mutations. Runs are serial because the parallel runner does not accept the required file list. The launcher rejects `--parallel` and its `-p` aliases as well. No vendor patch is applied.
 
 ## Continuous integration
 
@@ -77,3 +77,5 @@ composer test:unit
 ```
 
 The supported PHP floor is 8.2, and the `lint-floor` job in CI parses every shipped PHP file on it.
+
+The rate limiter keeps its `array_filter()` call on one line. Patchwork removes whitespace after the opening parenthesis when rewriting that internal call. A newline there shifts later coverage hits away from the original source lines and makes mutation test selection unreliable. This layout keeps the executed and original line maps aligned without a vendor patch.
