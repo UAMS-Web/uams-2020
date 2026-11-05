@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Brain\Monkey\Functions;
+use Uams2020\Tests\Support\OptionSequence;
 use Uams2020\Tests\Support\OptionString;
 
 use function Brain\Monkey\Functions\when;
@@ -47,10 +48,6 @@ it('does not render footer widgets when the first area is inactive', function ()
     expect(uamswp_footer_widget_areas('old', 999))->toBeNull();
 });
 
-/**
- * lib/footer-widgets.php: ConcatEqualToEqual on the first outer wrapper append is equivalent: the
- * local output is still an empty string on every path that reaches it.
- */
 it('pins footer columns, integer coercion, boundaries and ordered sidebar output', function ($count, int $rendered, string $class): void {
     Functions\expect('get_theme_support')->once()->with('genesis-footer-widgets')->andReturn([$count]);
     Functions\expect('is_active_sidebar')->once()->with('footer-1')->andReturn(true);
@@ -89,3 +86,16 @@ it('accepts stringable region names from formatted field values', function (stri
     $regions = [new OptionString($region)];
     expect(is_in_region($regions))->toBeTrue()->and(is_not_in_region($regions))->toBeFalse();
 })->with([['northwest', 'Fayetteville'], ['northeast', 'Jonesboro'], ['southwest', 'Hope'], ['southeast', 'Dumas'], ['central', 'Little Rock']]);
+
+it('converts mixed Genesis wrapper values before reading the next structural wrapper', function (): void {
+    $wrappers = new OptionSequence(['<OUTER>', '<WRAP>']);
+    when('get_theme_support')->justReturn([1]);
+    when('is_active_sidebar')->justReturn(true);
+    when('dynamic_sidebar')->alias(static function (): void {
+        echo 'WIDGET';
+    });
+    when('genesis_markup')->justReturn($wrappers);
+    when('genesis_structural_wrap')->alias(static fn ($context, $position): string => $position === 'open' ? (string) $wrappers : '</WRAP>');
+
+    expect(uamswp_footer_widget_areas('', 0))->toBe('<OUTER><WRAP><div class="footer-widgets-1 col-sm-12 widget-area">WIDGET</div></WRAP></div>');
+});

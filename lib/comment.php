@@ -34,7 +34,9 @@ function uamswp_comment_form_fields($fields): array
 
     $req = get_option('require_name_email');
     $aria_req = ($req ? " aria-required='true'" : '');
-    $html5 = current_theme_supports('html5', 'comment-form') ? 1 : 0; // @pest-mutate-ignore: IncrementInteger
+    $html5 = current_theme_supports('html5', 'comment-form')
+        ? 1 // @pest-mutate-ignore: IncrementInteger
+        : 0;
 
     return [
         'author' => '<div class="form-group comment-form-author">'.'<label for="author">'.__('Name').($req ? ' <span class="text-muted required">*</span>' : '').'</label> '.
