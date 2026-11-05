@@ -142,4 +142,28 @@ final class BlockTemplatesBehaviorTest extends IntegrationTestCase
             }
         }
     }
+
+    public function test_unused_side_image_width_lookup_still_runs_real_wordpress_filters(): void
+    {
+        $attachment = self::factory()->attachment->create(['post_mime_type' => 'image/jpeg', 'guid' => 'https://example.org/side-image.jpg']);
+        update_post_meta($attachment, '_wp_attached_file', 'side-image.jpg');
+        $filter = function ($image, $id, $size) use ($attachment) {
+            $this->assertSame($attachment, $id);
+            $this->assertSame('full', $size);
+            echo '[real-image-source-filter]';
+
+            return $image;
+        };
+        add_filter('wp_get_attachment_image_src', $filter, 10, 3);
+        $vars = ['id' => 8, 'layout' => 'body-only', 'heading' => 'Side image', 'body' => 'Body', 'link_list' => [['unused']], 'list_more' => true, 'cta' => ['side_cta_text' => '', 'side_cta_url' => '', 'side_cta_description' => ''], 'image_group' => ['side_image_image' => $attachment, 'side_image_alt_text' => 'Alt', 'side_image_crop' => 'center', 'side_image_anchor' => 'center'], 'image_postion' => 'left', 'background_color' => 'bg-white', 'geo' => 'include', 'geo_region' => []];
+        BlockIntegrationFields::$values = ['side_image_geo_region' => []];
+        try {
+            $html = $this->render('image-side-by-side', $vars);
+            $this->assertStringStartsWith('[real-image-source-filter]', $html);
+            $this->assertSame(1, substr_count($html, '[real-image-source-filter]'));
+            $this->assertStringContainsString('side-by-side-image-side-8', $html);
+        } finally {
+            remove_filter('wp_get_attachment_image_src', $filter);
+        }
+    }
 }

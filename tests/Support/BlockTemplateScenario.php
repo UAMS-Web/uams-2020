@@ -13,7 +13,7 @@ use function Patchwork\relay;
 /** Deterministic external boundaries for fixed block-rendering fixtures. */
 final class BlockTemplateScenario
 {
-    public static function render(array $case): array
+    public static function render(array $case, ?callable $body = null): array
     {
         $calls = [];
         $timezone = date_default_timezone_get();
@@ -93,17 +93,16 @@ final class BlockTemplateScenario
             return $case['sandbox'];
         });
         when('image_sizer')->alias(static fn (...$args): string => 'sized:'.json_encode($args, JSON_THROW_ON_ERROR));
-        when('gallery_image_dimension')->alias(static function (...$args) use (&$calls): float {
-            $calls[] = ['gallery_image_dimension', $args];
-
-            return (['xxl' => 2000, 'xl' => 1500, 'lg' => 1200, 'md' => 992, 'sm' => 768, 'xs' => 576][$args[0]] / $args[1]) / (isset($args[3]) && is_numeric($args[3]) && (float) $args[3] > 0 ? (float) $args[3] : 1);
-        });
         when('wp_get_attachment_url')->alias(static fn ($id): string => 'attachment:'.$id);
         when('wp_get_attachment_image_url')->alias(static fn ($id, $size): string => 'image:'.$id.':'.$size);
-        when('wp_get_attachment_image_src')->alias(static fn ($id, $size): array => ['image:'.$id.':'.$size, 1200, 675]);
+        when('wp_get_attachment_image_src')->alias(static function ($id, $size) use (&$calls): array {
+            $calls[] = ['wp_get_attachment_image_src', $id, $size];
+
+            return ['image:'.$id.':'.$size, 1200, 675];
+        });
         when('get_post_meta')->alias(static fn ($id, $key, $single): string => 'meta:'.$id.':'.$key.':'.(int) $single);
-        when('format_phone_dash')->alias(static fn ($value): string => 'dash:'.$value);
-        when('format_phone_us')->alias(static fn ($value): string => 'us:'.$value);
+        when('format_phone_dash')->alias(static fn ($value): string => ! empty($case['native_phone']) ? relay() : 'dash:'.$value);
+        when('format_phone_us')->alias(static fn ($value): string => ! empty($case['native_phone']) ? relay() : 'us:'.$value);
         when('do_shortcode')->alias(static fn ($value): string => 'SHORTCODE('.$value.')');
         when('date')->alias(static fn ($format, $timestamp = null): string => relay([$format, $timestamp ?? 1710504000]));
         when('strtotime')->alias(static fn ($value, $base = null): int|false => relay([$value, $base ?? 1710504000]));
@@ -128,7 +127,7 @@ final class BlockTemplateScenario
         when('has_excerpt')->justReturn($case['excerpt']);
         when('get_the_excerpt')->justReturn(str_repeat('Excerpt & long words ', 20));
         when('get_the_content')->justReturn('<p>'.str_repeat('Body text https://example.test/a?q=b next ', 15).'</p>');
-        when('wp_strip_all_tags')->alias(static fn ($value, $removeBreaks = false): string => 'STRIPPED('.strip_tags($value).')'.(int) $removeBreaks);
+        when('wp_strip_all_tags')->alias(static fn ($value, $removeBreaks = false): string => 'STRIPPED('.strip_tags($value).')'.(int) (bool) $removeBreaks);
         when('wp_trim_words')->alias(static fn ($value, $number = 55): string => implode(' ', array_slice(explode(' ', $value), 0, $number)));
 
         $before = $GLOBALS['post'] ?? null;
@@ -136,7 +135,12 @@ final class BlockTemplateScenario
         $level = ob_get_level();
         ob_start();
         try {
-            self::include($case['name'], $case['variables']);
+            if ($body !== null) {
+                $body();
+            } else {
+                self::include($case['name'], $case['variables']);
+            }
+
             $html = ob_get_contents();
         } finally {
             while (ob_get_level() > $level) {
