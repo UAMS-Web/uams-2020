@@ -80,3 +80,7 @@ The first-party page walker keeps its existing `lib/modules` Pint exclusion. Its
 coverage changes add only narrow mutation comments. Applying the formatter's
 strict-types declaration would reject numeric and Stringable titles that its
 existing weak calls accept; the page-walker tests pin both values.
+
+Genesis helper return values are mocked in the Unit suite. The wrapper-order case
+pins this function's conversion order for a Stringable boundary value. It is not
+an integration claim about an installed Genesis engine.
