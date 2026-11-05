@@ -54,8 +54,15 @@ final class BlockTemplateScenario
             return $case['out_region'];
         });
         when('is_admin')->justReturn($case['admin']);
+        $escapeCalls = 0;
         foreach (['esc_attr' => 'ATTR', 'esc_html' => 'HTML', 'esc_url' => 'URL', 'wp_kses_post' => 'POST', 'sanitize_title_with_dashes' => 'SLUG', 'sanitize_html_class' => 'CLASS', 'sanitize_text_field' => 'TEXT'] as $function => $marker) {
-            when($function)->alias(static fn ($value): string => $marker.'('.(string) $value.')');
+            when($function)->alias(static function ($value) use ($marker, &$escapeCalls): string {
+                if (++$escapeCalls > 2000) {
+                    throw new \RuntimeException('Block rendering did not finish within 2,000 escaping calls.');
+                }
+
+                return $marker.'('.(string) $value.')';
+            });
         }
         when('__')->returnArg();
         when('esc_html__')->alias(static fn ($value): string => 'HTML('.$value.')');
