@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Brain\Monkey\Functions;
 use Uams2020\Tests\Support\ModuleTemplateCapture;
+use Uams2020\Tests\Support\OptionString;
 
 use function Brain\Monkey\Functions\when;
 use function Patchwork\relay;
@@ -83,6 +84,33 @@ it('passes empty image and absent quote values through the image-side fallbacks'
     expect(ModuleTemplateCapture::$calls[0]['variables']['quote_text'])->toBe('');
 });
 
+it('pins the false-image fallback and its existing anchor-offset warning', function (): void {
+    $module = pageBuilderModuleInput('modules_image_side');
+    $module['side_image'] = false;
+    $warnings = [];
+    $source = dirname(__DIR__, 2).'/lib/modules.php';
+    $message = 'Trying to access array offset on false';
+    $renderer = new ReflectionFunction('uamswp_module');
+    set_error_handler(static function (int $severity, string $text, string $file, int $line) use (&$warnings, $source, $message, $renderer): bool {
+        if ($severity !== E_WARNING || realpath($file) !== realpath($source) || $line < $renderer->getStartLine() || $line > $renderer->getEndLine() || $text !== $message) {
+            throw new ErrorException($text, 0, $severity, $file, $line);
+        }
+
+        $warnings[] = [$severity, $text];
+
+        return true;
+    });
+    try {
+        capturePageBuilderModule($module);
+    } finally {
+        restore_error_handler();
+    }
+
+    expect($warnings)->toBe([[E_WARNING, $message]])
+        ->and(ModuleTemplateCapture::$calls[0]['variables']['image_group'])->toBe('')
+        ->and(ModuleTemplateCapture::$calls[0]['variables']['image_anchor'])->toBe('center');
+});
+
 it('keeps CTA target absent without a button and applies post-tile text defaults', function (): void {
     $module = pageBuilderModuleInput('modules_cta');
     $module['cta_bar_button_url'] = '';
@@ -129,6 +157,47 @@ it('forces news count only for the four fixed formats', function (string $format
     capturePageBuilderModule($module);
     expect(ModuleTemplateCapture::$calls[0]['variables']['count'])->toBe($count);
 })->with([['grid', '3'], ['cards', '4'], ['full', '1'], ['side', '1'], ['other', 'value:news_count']]);
+
+/** The untyped dispatcher retains PHP string comparisons for filtered, stringable values. */
+it('preserves stringable layout and quote comparisons at the public module boundary', function (string $layout, string $body, string $quote): void {
+    $module = pageBuilderModuleInput('modules_image_side');
+    $module['side_text_layout'] = new OptionString($layout);
+    $module['side_quote_text'] = 'plain quote';
+    $module['side_quote_text_link'] = 'linked quote';
+    capturePageBuilderModule($module);
+    $variables = ModuleTemplateCapture::$calls[0]['variables'];
+    expect($variables['body'])->toBe($body)->and($variables['quote_text'])->toBe($quote);
+})->with([
+    ['body-only', 'value:side_layout_body_text', 'plain quote'],
+    ['blockquote-citation', '', 'plain quote'],
+    ['blockquote-citation-link', '', 'linked quote'],
+]);
+
+it('preserves each stringable news-format comparison independently', function (string $format, string $count): void {
+    $module = pageBuilderModuleInput('modules_news_grid');
+    $module['news_format'] = new OptionString($format);
+    capturePageBuilderModule($module);
+    expect(ModuleTemplateCapture::$calls[0]['variables']['count'])->toBe($count);
+})->with([['grid', '3'], ['cards', '4'], ['full', '1'], ['side', '1']]);
+
+it('keeps stringable crop none short-circuiting and mixed crop elements normalized', function ($crop): void {
+    $module = pageBuilderModuleInput('modules_uams_gallery');
+    $module['gallery_crop'] = $crop;
+    capturePageBuilderModule($module);
+    expect(ModuleTemplateCapture::$calls[0]['variables']['gallery_crop'])->toBe(-1);
+})->with([[new OptionString('none')], [[true]]]);
+
+it('preserves each stringable more-button background comparison independently', function (string $background): void {
+    $module = pageBuilderModuleInput('modules_uams_gallery');
+    $module['gallery_background_color'] = new OptionString($background);
+    capturePageBuilderModule($module);
+    expect(ModuleTemplateCapture::$calls[0]['variables']['more_button_color'])->toBe('primary');
+})->with(['bg-white', 'bg-gray', 'bg-auto']);
+
+it('recognizes the stringable disabled layout only for a signed-in visitor', function (bool $signedIn): void {
+    when('is_user_logged_in')->justReturn($signedIn);
+    expect(uamswp_module_disable(['acf_fc_layout' => new OptionString('save_recipes_cta')]))->toBe($signedIn);
+})->with([false, true]);
 
 it('skips news output without its plugin but retains the wrapper', function (): void {
     when('class_exists')->alias(static fn ($name) => $name === 'UAMS_Syndicate_News_Base' ? false : relay());
@@ -259,4 +328,6 @@ it('renders section module boundaries and each supported row', function ($index,
     [false, 'Custom Anchor', false, [['acf_fc_layout' => 'modules_uams_section_youtube', 'section_youtube_url' => 'https://youtube.test/watch', 'section_youtube_width' => 'wide']], true, 'custom-anchor', '<div class="module-body"><div class="wide">[lyte]</div></div>'],
     [0, '', false, [['acf_fc_layout' => 'modules_uams_section_youtube', 'section_youtube_url' => 'https://youtube.test/watch', 'section_youtube_width' => 'wide']], false, 'module-1', '<div class="module-body"><div class="wide wp-block-embed is-type-video embed-responsive wp-has-aspect-ratio embed-responsive-16by9">[embed:https://youtube.test/watch]</div></div>'],
     [2, '', false, [['acf_fc_layout' => 'modules_uams_section_youtube', 'section_youtube_url' => 'https://other.test/watch', 'section_youtube_width' => 'narrow'], ['acf_fc_layout' => 'unknown']], true, '2', '<div class="module-body"><div class="narrow wp-block-embed is-type-video embed-responsive wp-has-aspect-ratio embed-responsive-16by9">[embed:https://other.test/watch]</div></div>'],
+    [2, '', false, [['acf_fc_layout' => new OptionString('uams_section_wysiwyg'), 'section_wysiwyg_html' => '<p>Filtered</p>']], false, '2', '<div class="module-body"><p>Filtered</p></div>'],
+    [2, '', false, [['acf_fc_layout' => new OptionString('modules_uams_section_youtube'), 'section_youtube_url' => 'https://youtube.test/watch', 'section_youtube_width' => 'wide']], false, '2', '<div class="module-body"><div class="wide wp-block-embed is-type-video embed-responsive wp-has-aspect-ratio embed-responsive-16by9">[embed:https://youtube.test/watch]</div></div>'],
 ]);

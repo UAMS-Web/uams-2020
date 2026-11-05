@@ -43,6 +43,7 @@ it('handles placeholder boundaries and escapes both displayed strings', function
     [['data' => ['body' => true]], true, false, ''],
     [['data' => ['body' => ['nested']]], true, false, ''],
     [['data' => ['a_field' => 'field_key']], true, false, ''],
+    [['data' => ['_field' => 'field_key', 'body' => 'real content']], true, false, ''],
 ]);
 
 it('uses empty defaults when a placeholder is called outside block context', function (): void {
