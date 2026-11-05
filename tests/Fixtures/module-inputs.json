@@ -1,0 +1,179 @@
+{
+    "modules_action_bar": {
+        "acf_fc_layout": "modules_action_bar",
+        "action_bar_heading": "value:action_bar_heading",
+        "action_bar_background_color": "value:action_bar_background_color",
+        "action_bar_section": "value:action_bar_section",
+        "action_bar_geo": "value:action_bar_geo",
+        "action_bar_geo_region": "value:action_bar_geo_region"
+    },
+    "modules_call_out": {
+        "acf_fc_layout": "modules_call_out",
+        "call_out_heading": "value:call_out_heading",
+        "call_out_body": "value:call_out_body",
+        "call_out_use_image": "value:call_out_use_image",
+        "call_out_image": "value:call_out_image",
+        "call_out_background_color": "value:call_out_background_color",
+        "call_out_geo": "value:call_out_geo",
+        "call_out_geo_region": "value:call_out_geo_region"
+    },
+    "modules_cta": {
+        "acf_fc_layout": "modules_cta",
+        "cta_bar_heading": "value:cta_bar_heading",
+        "cta_bar_body": "value:cta_bar_body",
+        "cta_bar_button_text": "value:cta_bar_button_text",
+        "cta_bar_button_url": {
+            "url": "https://example.test/cta",
+            "target": "_blank"
+        },
+        "cta_bar_button_description": "value:cta_bar_button_description",
+        "cta_bar_layout": "value:cta_bar_layout",
+        "cta_bar_size": "value:cta_bar_size",
+        "cta_bar_use_image": "value:cta_bar_use_image",
+        "cta_bar_image": "value:cta_bar_image",
+        "cta_bar_background_color": "value:cta_bar_background_color",
+        "cta_bar_geo": "value:cta_bar_geo",
+        "cta_bar_geo_region": "value:cta_bar_geo_region"
+    },
+    "modules_hero": {
+        "acf_fc_layout": "modules_hero",
+        "hero": "value:hero",
+        "hero_geo": "value:hero_geo",
+        "hero_geo_region": "value:hero_geo_region"
+    },
+    "modules_link_list": {
+        "acf_fc_layout": "modules_link_list",
+        "link_list_heading": "value:link_list_heading",
+        "link_list_hide_heading": "value:link_list_hide_heading",
+        "link_list_description": "value:link_list_description",
+        "link_list_background_color": "value:link_list_background_color",
+        "link_list_icons": "value:link_list_icons",
+        "link_list_section": "value:link_list_section",
+        "link_list_geo": "value:link_list_geo",
+        "link_list_geo_region": "value:link_list_geo_region"
+    },
+    "modules_image_side": {
+        "acf_fc_layout": "modules_image_side",
+        "side_text_layout": "value:side_text_layout",
+        "side_heading": "value:side_heading",
+        "side_layout_body_text": "value:side_layout_body_text",
+        "side_layout_link_text": "value:side_layout_link_text",
+        "side_quote_speaker_name": "value:side_quote_speaker_name",
+        "side_quote_speaker_title": "value:side_quote_speaker_title",
+        "side_link_list": "value:side_link_list",
+        "side_link_include_more": "value:side_link_include_more",
+        "side_cta": "value:side_cta",
+        "side_image": {
+            "side_image_anchor": "top",
+            "image": 51
+        },
+        "side_image_position": "value:side_image_position",
+        "side_image_background_color": "value:side_image_background_color",
+        "side_image_geo": "value:side_image_geo",
+        "side_image_geo_region": "value:side_image_geo_region"
+    },
+    "modules_text_overlay": {
+        "acf_fc_layout": "modules_text_overlay",
+        "overlay_section": "value:overlay_section",
+        "overlay_geo": "value:overlay_geo",
+        "overlay_geo_region": "value:overlay_geo_region"
+    },
+    "modules_post_tile": {
+        "acf_fc_layout": "modules_post_tile",
+        "post_tile_heading": "value:post_tile_heading",
+        "post_tile_hide_heading": "value:post_tile_hide_heading",
+        "post_tile_background_color": "value:post_tile_background_color",
+        "post_tile_category": {
+            "name": "Research",
+            "term_id": 3
+        },
+        "post_tile_post_button_text": "value:post_tile_post_button_text",
+        "post_tile_category_button_text": "value:post_tile_category_button_text",
+        "post_tile_geo": "value:post_tile_geo",
+        "post_tile_geo_region": "value:post_tile_geo_region"
+    },
+    "modules_post_tiles": {
+        "acf_fc_layout": "modules_post_tiles",
+        "post_tiles_heading": "value:post_tiles_heading",
+        "post_tiles_hide_heading": "value:post_tiles_hide_heading",
+        "post_tiles_background_color": "value:post_tiles_background_color",
+        "post_tiles_section": "value:post_tiles_section",
+        "post_tiles_geo": "value:post_tiles_geo",
+        "post_tiles_geo_region": "value:post_tiles_geo_region"
+    },
+    "modules_text_stacked": {
+        "acf_fc_layout": "modules_text_stacked",
+        "stacked_heading": "value:stacked_heading",
+        "stacked_hide_heading": "value:stacked_hide_heading",
+        "stacked_description": "value:stacked_description",
+        "stacked_background_color": "value:stacked_background_color",
+        "stacked_section": "value:stacked_section",
+        "stacked_more": "value:stacked_more",
+        "stacked_more_text": "value:stacked_more_text",
+        "stacked_more_button_text": "value:stacked_more_button_text",
+        "stacked_more_button_url": "value:stacked_more_button_url",
+        "stacked_more_button_description": "value:stacked_more_button_description",
+        "stacked_geo": "value:stacked_geo",
+        "stacked_geo_region": "value:stacked_geo_region"
+    },
+    "modules_news_grid": {
+        "acf_fc_layout": "modules_news_grid",
+        "news_title": "value:news_title",
+        "news_hide_title": "value:news_hide_title",
+        "news_format": "value:news_format",
+        "news_category": "value:news_category",
+        "news_count": "value:news_count",
+        "news_offset": "value:news_offset",
+        "news_advanced_cat": "value:news_advanced_cat",
+        "news_background_color": "value:news_background_color",
+        "news_hide_img": "value:news_hide_img",
+        "news_hide_author": "value:news_hide_author",
+        "news_hide_date": "value:news_hide_date",
+        "news_local": "value:news_local",
+        "news_include_link": "value:news_include_link",
+        "news_position": "value:news_position",
+        "news_article_id": "value:news_article_id",
+        "news_geo": "value:news_geo",
+        "news_geo_region": "value:news_geo_region"
+    },
+    "modules_uams_gallery": {
+        "acf_fc_layout": "modules_uams_gallery",
+        "gallery_heading": "value:gallery_heading",
+        "gallery_hide_heading": "value:gallery_hide_heading",
+        "gallery_description": "value:gallery_description",
+        "gallery_columns": "value:gallery_columns",
+        "gallery_images": "value:gallery_images",
+        "gallery_crop": [
+            "square"
+        ],
+        "gallery_background_color": "value:gallery_background_color",
+        "gallery_geo": "value:gallery_geo",
+        "gallery_geo_region": "value:gallery_geo_region",
+        "gallery_modal": "value:gallery_modal",
+        "gallery_more": "value:gallery_more",
+        "gallery_more_text": "value:gallery_more_text",
+        "gallery_more_button_text": "value:gallery_more_button_text",
+        "gallery_more_button_url": {
+            "url": "https://example.test/more",
+            "target": "_self"
+        },
+        "gallery_more_button_description": "value:gallery_more_button_description"
+    },
+    "modules_uams_content": {
+        "acf_fc_layout": "modules_uams_content",
+        "content_heading": "value:content_heading",
+        "content_hide_heading": "value:content_hide_heading",
+        "content_content": "value:content_content",
+        "content_background_color": "value:content_background_color",
+        "content_geo": "value:content_geo",
+        "content_geo_region": "value:content_geo_region"
+    },
+    "modules_uams_livewhale": {
+        "acf_fc_layout": "modules_uams_livewhale",
+        "livewhale_heading": "value:livewhale_heading",
+        "livewhale_id": "value:livewhale_id",
+        "livewhale_background_color": "value:livewhale_background_color",
+        "livewhale_geo": "value:livewhale_geo",
+        "livewhale_geo_region": "value:livewhale_geo_region"
+    }
+}

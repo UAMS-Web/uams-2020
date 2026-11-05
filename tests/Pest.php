@@ -9,6 +9,7 @@
 
 declare(strict_types=1);
 
+use Uams2020\Tests\Support\PageBuilderLoader;
 use Uams2020\Tests\Support\ThemeBootstrap;
 
 use function Brain\Monkey\setUp;
@@ -29,6 +30,7 @@ uses()
     ->beforeEach(function (): void {
         setUp();
         ThemeBootstrap::load();
+        PageBuilderLoader::load();
     })
     ->afterEach(function (): void {
         $this->addToAssertionCount(Mockery::getContainer()->mockery_getExpectationCount());
