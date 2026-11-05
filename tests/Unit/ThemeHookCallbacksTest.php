@@ -87,6 +87,7 @@ it('limits manual queue requests to the admin capability and checks the nonce fi
     }
 
     Functions\expect('current_user_can')->times($requested ? 1 : 0)->with('manage_options')->andReturn($canManage);
+    expectDone('process_image_sizer_queue')->never();
     if ($requested && $canManage) {
         Functions\expect('check_admin_referer')->once()->with('process_image_queue_nonce')->andThrow(new RuntimeException('Rejected nonce'));
         expect(ThemeHooks::callback('action', 'admin_init'))->toThrow(RuntimeException::class, 'Rejected nonce');
@@ -172,9 +173,15 @@ it('pins optional block unregistration including the existing duplicate', functi
 it('dispatches an authorized queue request before redirecting to the media library', function (): void {
     $_GET['process_image_queue'] = '1';
     Functions\expect('current_user_can')->once()->with('manage_options')->andReturn(true);
-    Functions\expect('check_admin_referer')->once()->with('process_image_queue_nonce')->ordered()->andReturn(1);
-    expectDone('process_image_sizer_queue')->once()->ordered();
+    Functions\expect('check_admin_referer')->once()->with('process_image_queue_nonce')->globally()->ordered()->andReturn(1);
+    expectDone('process_image_sizer_queue')->once()->globally()->ordered();
     Functions\expect('admin_url')->once()->with('upload.php?queue_processed=1')->andReturn('https://example.test/wp-admin/upload.php?queue_processed=1');
-    Functions\expect('wp_redirect')->once()->with('https://example.test/wp-admin/upload.php?queue_processed=1')->ordered()->andThrow(new RuntimeException('Redirect reached'));
+    Functions\expect('wp_redirect')->once()->with('https://example.test/wp-admin/upload.php?queue_processed=1')->globally()->ordered()->andThrow(new RuntimeException('Redirect reached'));
     expect(ThemeHooks::callback('action', 'admin_init'))->toThrow(RuntimeException::class, 'Redirect reached');
+});
+
+it('maps both administrator and editor redirect capabilities to edit_pages', function (): void {
+    $callback = ThemeHooks::callback('filter', 'srm_map_meta_caps');
+    expect($callback('manage_options'))->toBe('edit_pages')
+        ->and($callback('edit_pages'))->toBe('edit_pages');
 });

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Brain\Monkey\Functions;
 use Uams2020\Tests\Support\QueryDouble;
+use Uams2020\Tests\Support\SearchTemplateLoader;
 
 use function Brain\Monkey\Filters\expectApplied;
 use function Brain\Monkey\Functions\when;
@@ -19,9 +20,7 @@ beforeEach(function (): void {
         class_alias(QueryDouble::class, 'WP_Query');
     }
 
-    when('genesis')->justReturn();
-    when('remove_all_actions')->justReturn();
-    require_once dirname(__DIR__, 2).'/search.php';
+    SearchTemplateLoader::load();
     QueryDouble::$nextRows = [];
     QueryDouble::$lastArgs = [];
 });

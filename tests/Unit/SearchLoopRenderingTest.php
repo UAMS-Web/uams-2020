@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Brain\Monkey\Functions;
+use Uams2020\Tests\Support\SearchTemplateLoader;
 
 use function Brain\Monkey\Functions\when;
 use function Patchwork\relay;
@@ -18,9 +19,7 @@ beforeEach(function (): void {
         define('WP_PLUGIN_DIR', __DIR__.'/../Fixtures/plugins');
     }
 
-    when('genesis')->justReturn();
-    when('remove_all_actions')->justReturn();
-    require_once dirname(__DIR__, 2).'/search.php';
+    SearchTemplateLoader::load();
 
     $state = (object) [
         'rowsByType' => [], 'totals' => [], 'rows' => [], 'index' => -1,

@@ -13,6 +13,7 @@ it('pins site identity for missing, empty and configured ACF options', function 
 })->with([
     'ACF absent' => [false, [], ['site' => 'uams', 'subsite' => 'uams', 'department' => 'uams']],
     'unconfigured' => [true, [], ['site' => '', 'subsite' => '', 'department' => '']],
+    'truthy template keeps loose matching' => [true, ['options_uamswp_template' => true], ['site' => 'uamshealth', 'subsite' => 'uams', 'department' => '']],
     'health defaults' => [true, ['options_uamswp_template' => 'health'], ['site' => 'uamshealth', 'subsite' => 'uams', 'department' => '']],
     'health main' => [true, ['options_uamswp_template' => 'health', 'options_uamswp_uamshealth_subsite' => 'main'], ['site' => 'uamshealth', 'subsite' => 'main', 'department' => '']],
     'inside defaults' => [true, ['options_uamswp_template' => 'inside'], ['site' => 'inside', 'subsite' => 'uams', 'department' => '']],

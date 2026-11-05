@@ -47,6 +47,12 @@ composer test:unit
 
 The supported PHP floor is 8.2. Development and tests run on PHP 8.4 (`config.platform.php` is `8.4.27`). The unit suite runs on Pest 5 with Brain Monkey. The integration suite runs on PHPUnit 9.6 from its own Composer setup in `tests/Integration/`: run `composer setup:integration`, create the `uams_2020_tests` database, then `composer test:integration`.
 
+## Mutation testing
+
+With Xdebug coverage mode or PCOV enabled, run `php tests/mutate.php` for the root templates, `functions.php` and `search.php`. Pass `--path=functions.php,search.php` to narrow a run. The launcher uses every unit test file and rejects an empty test list. It disables cached results and requires every generated mutant to be caught; inspect any surviving or uncovered case before claiming full coverage.
+
+The launcher names test files explicitly to avoid a directory-walking conflict between the mutation loader and Patchwork. Do not add `--processes`: the locked mutation tool forwards it to children without `--parallel`, which makes those children reject the option and can falsely count failed starts as caught mutations. The launcher's parallel mode uses the detected CPU count. No vendor patch is applied.
+
 ## Continuous integration
 
 Pull requests are gated by the GitHub Actions workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs Pint, Rector (dry-run), PHPStan, and the Unit suite on every push and pull request. A red check fails the workflow.
