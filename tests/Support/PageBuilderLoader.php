@@ -7,6 +7,8 @@ namespace Uams2020\Tests\Support;
 use PHPUnit\Framework\Assert;
 
 use function Brain\Monkey\Functions\when;
+use function Brain\Monkey\setUp;
+use function Brain\Monkey\tearDown;
 use function Patchwork\redefine;
 use function Patchwork\relay;
 
@@ -38,5 +40,7 @@ final class PageBuilderLoader
         require dirname(__DIR__, 2).'/lib/acf.php';
         Assert::assertCount(8, self::$hooks);
         self::$loaded = true;
+        tearDown();
+        setUp();
     }
 }
