@@ -95,3 +95,28 @@ it('formats the platform time string without normalizing unsupported format toke
     ['2026-01-01 13:35:00', ' 1:35 pm', ' 1:35 p.m.'],
     ['2026-01-01 09:00:00', ' 9:00 P', ' 9 P'],
 ]);
+
+// The function_exists guard permits an external site identity helper.
+it('uses site identifiers supplied by a compatible external helper in breadcrumbs', function (string $site, bool $front, string $label, string $url, array $tail): void {
+    when('uams_get_site_info')->justReturn(['site' => new OptionString($site), 'subsite' => 'main', 'department' => 'main']);
+    when('is_front_page')->justReturn($front);
+    when('uams_get_home_link')->justReturn('https://home.test');
+    when('uams_site_title')->justReturn('Department');
+    when('home_url')->justReturn('https://department.test');
+
+    $crumbs = sp_pro_breadcrumbs_crumbs([['Old', '/original/'], ['Child', '/child/']]);
+    expect($crumbs)->toBe([
+        ['<span class="fas fa-home"></span><span class="sr-only">'.$label.'</span>', $url],
+        ...$tail,
+    ]);
+    $document = new DOMDocument;
+    $document->loadHTML('<ol>'.uams_breadcrumb_home_icon('Original').'</ol>', LIBXML_NOERROR | LIBXML_NOWARNING);
+
+    $xpath = new DOMXPath($document);
+    expect($xpath->query('//a')->item(0)->getAttribute('title'))->toBe($label);
+})->with([
+    ['uamshealth', false, 'UAMS Health', 'https://home.test/', [['Child', '/child/']]],
+    ['uamshealth', true, 'UAMS Health', 'https://home.test/', [['Child', '/child/']]],
+    ['inside', true, 'Inside UAMS', 'https://home.test/', [['Child', '/child/']]],
+    ['institute', false, 'University of Arkansas for Medical Sciences', 'https://www.uams.edu/', [['Department', '/original/'], ['Child', '/child/']]],
+]);

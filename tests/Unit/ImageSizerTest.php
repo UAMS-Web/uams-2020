@@ -36,7 +36,7 @@ it('returns cached values including an empty cached URL', function ($cached): vo
     expect(image_sizer(42, 100, 50, 'left', 'right'))->toBe($cached);
 })->with([['cached.jpg'], [''], [null]]);
 
-it('queues the current crop dimensions and schedules the first batch', function (array $source, int $width, int $height, array $dimensions): void {
+it('queues the current crop dimensions and schedules the first batch', function (array $source, int|string $width, int|string $height, array $dimensions): void {
     when('wp_get_attachment_image_src')->justReturn(['original.jpg', ...$source]);
     when('get_transient')->justReturn(false);
     Functions\expect('get_option')->once()->with('image_sizer_queue', [])->andReturn([]);
@@ -57,7 +57,9 @@ it('queues the current crop dimensions and schedules the first batch', function 
     [[400, 200], 800, 100, [400, 50]],
     [[200, 400], 100, 800, [50, 400]],
     [[400, 200], 100, -1, [100, 50.0]],
+    [[400, 200], 100, '-1', [100, 50.0]],
     [[400, 200], -1, 50, [100.0, 50]],
+    [[400, 200], '-1', 50, [100.0, 50]],
 ]);
 
 it('does not upscale a smaller image with the preferred ratio', function (): void {

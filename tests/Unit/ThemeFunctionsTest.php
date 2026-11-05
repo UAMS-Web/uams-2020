@@ -281,3 +281,20 @@ it('registers and enqueues the admin stylesheet', function (): void {
     Functions\expect('wp_enqueue_style')->once()->with('admin-css');
     enqueue_admin_style_sheet();
 });
+
+// A predeclared uams_get_site_info() may supply stringable site identifiers.
+it('accepts site identity values from a compatible external helper', function (string $site, string $title, string $home): void {
+    when('uams_get_site_info')->justReturn(['site' => new OptionString($site), 'subsite' => 'main', 'department' => 'main']);
+    when('get_bloginfo')->justReturn('Department title');
+    expect(uams_site_title())->toBe($title)->and(uams_get_home_link())->toBe($home);
+})->with([
+    ['uamshealth', 'UAMS Health', 'https://uamshealth.com'],
+    ['inside', 'Department title', 'https://inside.uams.edu'],
+    ['uams', 'Department title', 'https://www.uams.edu'],
+    ['institute', 'Department title', 'https://www.uams.edu'],
+]);
+
+it('accepts stringable gallery breakpoints and numeric string ratios', function (string $breakpoint, int|float $expected): void {
+    expect(gallery_image_dimension(new OptionString($breakpoint), 2))->toBe($expected)
+        ->and(gallery_image_dimension($breakpoint, 2, 2, '-1'))->toBe(-1);
+})->with([['xxs', 337], ['xs', 337], ['sm', 433], ['md', 537], ['lg', 687], ['xl', 897.5]]);
