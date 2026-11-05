@@ -25,7 +25,7 @@ beforeEach(function (): void {
     $state = (object) [
         'rowsByType' => [], 'totals' => [], 'rows' => [], 'index' => -1,
         'queries' => [], 'resets' => 0, 'blogEvents' => [], 'fields' => [],
-        'pluginAvailable' => false, 'taxExists' => true, 'content' => 'Content',
+        'pluginAvailable' => false, 'taxExists' => true, 'content' => 'Content', 'readsWithoutAdvance' => 0,
     ];
     $this->searchState = $state;
     when('class_exists')->alias(static fn ($class) => $class === 'UAMSPhysicians' ? $state->pluginAvailable : relay());
@@ -36,10 +36,18 @@ beforeEach(function (): void {
         $type = is_array($args['post_type']) ? $args['post_type'][0] : $args['post_type'];
         $state->rows = $state->rowsByType[$type] ?? [];
         $state->index = -1;
+        $state->readsWithoutAdvance = 0;
         $GLOBALS['wp_query'] = (object) ['found_posts' => $state->totals[$type] ?? count($state->rows)];
     });
-    when('have_posts')->alias(static fn (): bool => isset($state->rows[$state->index + 1]));
+    when('have_posts')->alias(static function () use ($state): bool {
+        if (++$state->readsWithoutAdvance > 100) {
+            throw new RuntimeException('Search loop did not advance.');
+        }
+
+        return isset($state->rows[$state->index + 1]);
+    });
     when('the_post')->alias(static function () use ($state): void {
+        $state->readsWithoutAdvance = 0;
         $row = $state->rows[++$state->index];
         $GLOBALS['post'] = (object) $row;
         $GLOBALS['wp_query']->post = (object) $row;

@@ -12,7 +12,7 @@ Implementation is tracked in UAMS-Web/uams-2020#641. Follow-ups are UAMS-Web/uam
 
 ### Verification
 
-- `tests/Unit/MutationToolPatchTest.php` fails on the stock package because declaration line 3 does not reach body line 6, and passes after the patch for all four function forms.
+- `tests/Unit/MutationToolPatchTest.php` fails on the stock package because a declaration-only range does not reach the function body, and passes after the patch for all four function forms.
 - The added signature `instanceof Node\FunctionLike` occurs once in the patched file and is absent from the stock revision.
 - `php tests/mutate.php` remains the full regression gate; a passing presence guard alone is insufficient.
 

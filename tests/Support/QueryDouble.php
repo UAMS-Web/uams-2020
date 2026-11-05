@@ -17,6 +17,8 @@ final class QueryDouble
 
     private int $index = -1;
 
+    private int $readsWithoutAdvance = 0;
+
     public function __construct(array $args)
     {
         self::$lastArgs = $args;
@@ -26,11 +28,16 @@ final class QueryDouble
 
     public function have_posts(): bool
     {
+        if (++$this->readsWithoutAdvance > 100) {
+            throw new \RuntimeException('Query loop did not advance.');
+        }
+
         return isset($this->rows[$this->index + 1]);
     }
 
     public function the_post(): void
     {
+        $this->readsWithoutAdvance = 0;
         $GLOBALS['post'] = (object) $this->rows[++$this->index];
     }
 }
