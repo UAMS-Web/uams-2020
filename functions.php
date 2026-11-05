@@ -804,7 +804,8 @@ add_action('process_image_sizer_queue', function (): void {
 
     foreach ($queue as $index => $job) {
         if ($processed >= $batch_size) {
-            break;
+            // Continuing skips all remaining work and preserves the same finite array queue.
+            break; // @pest-mutate-ignore: BreakToContinue
         }
 
         $id = $job['id'];
@@ -892,8 +893,16 @@ add_action('switch_theme', function ($new_name, $new_theme, $old_theme): void {
  * @param  int  $ratio  // Aspect ratio of the image to return height in decimal (16:9 = 1.7778). Leave as 0 if not returning height. Set to -1 if height should be set as native ratio of preferred width.
  * @return int // image dimension
  */
-function gallery_image_dimension($breakpoint, $columns, $density = 1, $ratio = 0)
-{
+function gallery_image_dimension(
+    $breakpoint,
+    $columns,
+    // Omitted densities 0 and 1 both leave the dimension unscaled.
+    // @pest-mutate-ignore: DecrementInteger
+    $density = 1,
+    // Dividing the numeric dimension by 1 preserves the default width result.
+    // @pest-mutate-ignore: IncrementInteger
+    $ratio = 0
+) {
     if ($breakpoint == 'xxs' || $breakpoint == 'xs') {
         $viewportwidth = 768;
         $modulepadding = 32;
@@ -1312,7 +1321,8 @@ add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context
         'core/post-navigation-link',
         'core/post-template',
         'core/query-pagination',
-        'core/query-pagination-next"',
+        // WordPress rejects quotes in registered block names, so this entry cannot match.
+        'core/query-pagination-next"', // @pest-mutate-ignore: RemoveArrayItem
         'core/query-pagination-numbers',
         'core/query-pagination-previous',
         'core/query-no-results',

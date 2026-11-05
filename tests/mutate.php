@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Pest\Mutate\MutationSuite;
+
 // Resolve test files before the mutation and Patchwork stream wrappers start.
 $root = dirname(__DIR__);
 $files = glob(__DIR__.'/Unit/*Test.php');
@@ -99,4 +101,36 @@ $arguments = [
 ];
 $_SERVER['argv'] = $GLOBALS['argv'] = $arguments;
 $_SERVER['argc'] = $GLOBALS['argc'] = count($arguments);
+$reportPath = getenv('UAMS_MUTATION_REPORT');
+if ($reportPath !== false && $reportPath !== '') {
+    register_shutdown_function(static function () use ($reportPath, $root): void {
+        $records = [];
+        if (class_exists(MutationSuite::class, false)) {
+            foreach (MutationSuite::instance()->repository->all() as $collection) {
+                foreach ($collection->tests() as $test) {
+                    $mutation = $test->mutation;
+                    $records[] = [
+                        'id' => $mutation->id,
+                        'file' => substr($mutation->file->getRealPath(), strlen($root) + 1),
+                        'mutator' => $mutation->mutator::name(),
+                        'start' => $mutation->startLine,
+                        'end' => $mutation->endLine,
+                        'result' => $test->result()->value,
+                        'duration' => $test->duration(),
+                        'modifiedSourcePath' => $mutation->modifiedSourcePath,
+                        'diff' => $mutation->diff,
+                    ];
+                }
+            }
+        }
+
+        $counts = array_count_values(array_column($records, 'result'));
+        $report = ['finished' => $records !== [] && ! isset($counts['none']), 'counts' => $counts, 'mutations' => $records];
+        if (file_put_contents($reportPath, json_encode($report, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR)) === false) {
+            fwrite(STDERR, "Cannot write the mutation report.\n");
+            exit(2);
+        }
+    });
+}
+
 require $root.'/vendor/bin/pest';

@@ -36,15 +36,20 @@ it('returns cached values including an empty cached URL', function ($cached): vo
     expect(image_sizer(42, 100, 50, 'left', 'right'))->toBe($cached);
 })->with([['cached.jpg'], [''], [null]]);
 
-it('queues the current crop dimensions and schedules the first batch', function (array $source, int|string $width, int|string $height, array $dimensions): void {
+it('queues the current crop dimensions and schedules the first batch', function (array $source, int|float|string $width, int|float|string $height, array $dimensions): void {
     when('wp_get_attachment_image_src')->justReturn(['original.jpg', ...$source]);
     when('get_transient')->justReturn(false);
     Functions\expect('get_option')->once()->with('image_sizer_queue', [])->andReturn([]);
-    Functions\expect('update_option')->once()->with('image_sizer_queue', [[
+    $expectedQueue = [[
         'id' => 42,
         'params' => ['width' => $dimensions[0], 'height' => $dimensions[1], 'hcrop' => 'left', 'vcrop' => 'top'],
         'transient_key' => 'image_sizer_'.md5('42'.$width.$height.'lefttop'),
-    ]], false);
+    ]];
+    Functions\expect('update_option')->once()->withArgs(static function ($key, $queue, $autoload) use ($expectedQueue): bool {
+        expect([$key, $queue, $autoload])->toBe(['image_sizer_queue', $expectedQueue, false]);
+
+        return true;
+    });
     Functions\expect('wp_next_scheduled')->once()->with('process_image_sizer_queue')->andReturn(false);
     Functions\expect('wp_schedule_event')->once()->with(1000, 'ten_seconds', 'process_image_sizer_queue');
     Functions\expect('image_sizer_get_fallback')->once()->with(42, 'medium')->andReturn('fallback.jpg');
@@ -55,11 +60,13 @@ it('queues the current crop dimensions and schedules the first batch', function 
     [[400, 200], 800, 800, [200, 200]],
     [[200, 400], 800, 800, [200, 200]],
     [[400, 200], 800, 100, [400, 50]],
-    [[200, 400], 100, 800, [50, 400]],
-    [[400, 200], 100, -1, [100, 50.0]],
-    [[400, 200], 100, '-1', [100, 50.0]],
-    [[400, 200], -1, 50, [100.0, 50]],
-    [[400, 200], '-1', 50, [100.0, 50]],
+    [[200, 400], 100, 800, [50.0, 400]],
+    [[400, 200], 100, -1, [100, 50]],
+    [[400, 200], 100, '-1', [100, 50]],
+    [[400, 200], -1, 50, [100, 50]],
+    [[400, 200], '-1', 50, [100, 50]],
+    [[1, 5], 1.9999999999999998, 10, [1, 5.0]],
+    [[1, 3], 2.666666666666667, 8, [1.0, 3]],
 ]);
 
 it('does not upscale a smaller image with the preferred ratio', function (): void {
@@ -115,4 +122,15 @@ it('returns an empty URL when the default fallback has an empty URL', function (
     Functions\expect('wp_get_attachment_image_src')->once()->with(42, 'missing')->andReturn(false);
     Functions\expect('wp_get_attachment_image_src')->once()->with(42, 'full')->andReturn(['', 0, 0]);
     expect(image_sizer_get_fallback(42, 'missing'))->toBe('');
+});
+
+it('uses the default when a requested image size has an empty URL', function (): void {
+    Functions\expect('wp_get_attachment_image_src')->once()->with(42, 'thumbnail')->andReturn(['', 100, 50]);
+    Functions\expect('wp_get_attachment_image_src')->once()->with(42, 'full')->andReturn(['full.jpg', 400, 200]);
+    expect(image_sizer_get_fallback(42, 'thumbnail'))->toBe('full.jpg');
+});
+
+it('returns a valid fallback URL even when its dimensions are unknown', function (): void {
+    Functions\expect('wp_get_attachment_image_src')->once()->with(42, 'thumbnail')->andReturn(['thumbnail.jpg', 0, 0]);
+    expect(image_sizer_get_fallback(42, 'thumbnail'))->toBe('thumbnail.jpg');
 });

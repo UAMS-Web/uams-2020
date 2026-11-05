@@ -300,6 +300,8 @@ function uamswp_do_search_loop(): void
             ]);
 
             $post_type_text = ucfirst($post_type);
+            // Page and Post neither start nor end with lowercase s.
+            // @pest-mutate-ignore: StrEndsWithToStrStartsWith
             if (! str_ends_with($post_type_text, 's')) {
                 $post_type_text .= 's';
             }
@@ -345,6 +347,8 @@ function uamswp_do_search_loop(): void
             uamswp_custom_loop_base($args);
 
             $post_type_text = ucfirst($post_type);
+            // Page and Post neither start nor end with lowercase s.
+            // @pest-mutate-ignore: StrEndsWithToStrStartsWith
             if (! str_ends_with($post_type_text, 's')) {
                 $post_type_text .= 's';
             }
@@ -369,6 +373,8 @@ function uamswp_do_search_loop(): void
                     } else {
                         $content = wp_trim_excerpt('', $wp_query->post->ID);
                     }
+                    // The title always includes nonempty h3 markup, even for empty text.
+                    // @pest-mutate-ignore: EmptyStringToNotEmpty
                     echo $title ?: '';
                     // echo $post_type.'_'.$post_id;
                     echo $content ? '<p>'.$content.'</p>' : '';
@@ -453,6 +459,8 @@ function uamswp_do_search_loop(): void
             $conditions_treatments = '';
             $show_conditions_treatments = false;
             // If possible, nest within a condition so that it only displays if there are taxonomy results.
+            // The buffer was initialized to an empty string immediately above.
+            // @pest-mutate-ignore: ConcatEqualToEqual
             $conditions_treatments .= '<div class="uams-module bg-auto">';
             $conditions_treatments .= '<div class="container-fluid">';
             $conditions_treatments .= '<div class="search-content row">';
@@ -475,6 +483,8 @@ function uamswp_do_search_loop(): void
 
                 // $term_query = new WP_Term_Query( $args );
                 $post_type_text = ucfirst($post_type);
+                // Condition and Treatment neither start nor end with lowercase s.
+                // @pest-mutate-ignore: StrEndsWithToStrStartsWith
                 if (! str_ends_with($post_type_text, 's')) {
                     $post_type_text .= 's';
                 }

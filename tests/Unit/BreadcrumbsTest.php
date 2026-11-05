@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Brain\Monkey\Functions;
 use Uams2020\Tests\Support\OptionString;
 
 use function Brain\Monkey\Functions\when;
@@ -14,7 +13,11 @@ it('builds the Genesis home trail for each site and front-page context', functio
     when('network_home_url')->justReturn('https://network.test/');
     when('home_url')->justReturn('https://department.test');
     when('uams_site_title')->justReturn('Department');
-    Functions\expect('get_blog_details')->with(1)->zeroOrMoreTimes()->andReturn((object) ['blogname' => 'Network']);
+    when('get_blog_details')->alias(static function ($id): object {
+        expect($id)->toBe(1);
+
+        return (object) ['blogname' => 'Network'];
+    });
 
     $html = uams_breadcrumb_home_icon('Original');
     $fixtures = json_decode(file_get_contents(__DIR__.'/../Fixtures/genesis-breadcrumbs.json'), true, flags: JSON_THROW_ON_ERROR);
@@ -48,7 +51,11 @@ it('keeps SEOPress child crumbs while setting the site and network ancestors', f
     when('uams_site_title')->justReturn('Department');
     when('uams_get_home_link')->justReturn('https://home.test');
     when('network_home_url')->justReturn('https://network.test/');
-    Functions\expect('get_blog_details')->with(1)->zeroOrMoreTimes()->andReturn((object) ['blogname' => 'Network']);
+    when('get_blog_details')->alias(static function ($id): object {
+        expect($id)->toBe(1);
+
+        return (object) ['blogname' => 'Network'];
+    });
 
     $labels = [
         'health' => ['<span class="fas fa-home"></span><span class="sr-only">UAMS Health</span>', 'https://home.test/'],

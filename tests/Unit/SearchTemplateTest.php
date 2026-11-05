@@ -48,11 +48,15 @@ it('prints an empty search heading when the query is absent', function (): void 
     expect(ob_get_clean())->toBe('<header class="entry-header"><h1 class="entry-title" itemprop="headline">Search results for: </h1></header>');
 });
 
-it('queries allowed card and taxonomy types with the current page size', function ($type, $size, $heading, $page): void {
-    $_GET = ['s' => 'heart', 'type' => $type];
+it('queries allowed card and taxonomy types with the current page size', function ($type, $size, $heading, $page, bool $queryPresent = true): void {
+    $_GET = ['type' => $type];
+    if ($queryPresent) {
+        $_GET['s'] = 'heart';
+    }
+
     when('esc_html')->returnArg();
     Functions\expect('get_query_var')->once()->with('paged')->andReturn($page);
-    Functions\expect('uamswp_custom_loop_base')->once()->with(['s' => 'heart', 'post_type' => $type, 'posts_per_page' => $size, 'paged' => $page ?: 1]);
+    Functions\expect('uamswp_custom_loop_base')->once()->with(['s' => $queryPresent ? 'heart' : '', 'post_type' => $type, 'posts_per_page' => $size, 'paged' => $page ?: 1]);
     Functions\expect('have_posts')->once()->andReturn(false);
     ob_start();
     uamswp_do_search_loop();
@@ -64,19 +68,25 @@ it('queries allowed card and taxonomy types with the current page size', functio
     ['provider', 6, 'Providers', 0], ['location', 10, 'Locations', 2],
     ['expertise', 10, 'Services', 1], ['condition', 10, 'Conditions', 0],
     ['treatment', 10, 'Treatments &amp; Procedures', 3],
+    ['location', 10, 'Locations', 0], ['expertise', 10, 'Services', 0],
+    ['treatment', 10, 'Treatments &amp; Procedures', 0], ['provider', 6, 'Providers', 0, false],
 ]);
 
-it('uses the standard loop for a requested page or post', function ($type, $heading): void {
+/**
+ * StrEndsWithToStrStartsWith is equivalent for this branch's only labels, Page/Post:
+ * neither starts nor ends with lowercase s.
+ */
+it('uses the standard loop for a requested page or post', function ($type, $heading, int $page = 4): void {
     $_GET = ['s' => 'news', 'type' => $type];
     when('esc_html')->returnArg();
-    when('get_query_var')->justReturn(4);
+    when('get_query_var')->justReturn($page);
 
     Functions\expect('uamswp_loop_layout')->once();
-    Functions\expect('uamswp_custom_loop')->once()->with(['s' => 'news', 'post_type' => $type, 'paged' => 4]);
+    Functions\expect('uamswp_custom_loop')->once()->with(['s' => 'news', 'post_type' => $type, 'paged' => $page ?: 1]);
     ob_start();
     uamswp_do_search_loop();
     expect(ob_get_clean())->toBe('<div class="uams-module bg-auto"><div class="container-fluid"><div class="search-content row"><div class="col-12"><h2 class="module-title"><span class="title">'.$heading.'</span></h2><div class="module-body"></div></div></div></div></div>');
-})->with([['page', 'Pages'], ['post', 'Posts']]);
+})->with([['page', 'Pages'], ['post', 'Posts'], ['page', 'Pages', 0], ['post', 'Posts', 0]]);
 
 it('rejects an unsupported search type and queries pages then posts', function ($type): void {
     $_GET = ['s' => 'news'];

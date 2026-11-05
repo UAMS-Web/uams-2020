@@ -8,6 +8,7 @@ use Closure;
 use ReflectionFunction;
 use Uams2020\Tests\Support\IntegrationTestCase;
 use WP_Block_Editor_Context;
+use WP_Block_Type_Registry;
 use WP_Theme;
 
 final class RootBehaviorTest extends IntegrationTestCase
@@ -135,6 +136,28 @@ final class RootBehaviorTest extends IntegrationTestCase
         } finally {
             if (! $hadSupport) {
                 remove_post_type_support('post', 'post-formats');
+            }
+        }
+    }
+
+    public function test_registry_rejects_the_quoted_name_and_keeps_the_valid_next_block(): void
+    {
+        $registry = WP_Block_Type_Registry::get_instance();
+        $this->setExpectedIncorrectUsage('WP_Block_Type_Registry::register');
+        $this->assertFalse(register_block_type('core/query-pagination-next"'));
+        $this->assertArrayNotHasKey('core/query-pagination-next"', $registry->get_all_registered());
+        $valid = 'core/query-pagination-next';
+        $hadValid = $registry->is_registered($valid);
+        if (! $hadValid) {
+            register_block_type($valid);
+        }
+
+        try {
+            $allowed = apply_filters('allowed_block_types_all', true, new WP_Block_Editor_Context);
+            $this->assertContains($valid, $allowed);
+        } finally {
+            if (! $hadValid) {
+                unregister_block_type($valid);
             }
         }
     }

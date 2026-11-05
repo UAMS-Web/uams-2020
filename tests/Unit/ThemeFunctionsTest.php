@@ -36,6 +36,11 @@ it('dispatches supported telephone styles and preserves an unknown style', funct
         ->and(format_phone('unknown', '+44 20 1234'))->toBe('+44 20 1234');
 });
 
+/**
+ * Omitted density 1->0 is equivalent because both values skip scaling. Omitted ratio
+ * 0->1 is equivalent because the resulting numeric dimension is divided by 1.
+ * Explicit values are unaffected; the opposite numeric mutations remain testable.
+ */
 it('calculates gallery dimensions at every breakpoint', function ($breakpoint, $expected): void {
     expect(gallery_image_dimension($breakpoint, 2))->toBe($expected)
         ->and(gallery_image_dimension($breakpoint, 2, 2))->toBe($expected * 2)
@@ -151,7 +156,7 @@ it('pins the current footer treatment of a truthy non-string widget ID', functio
 
 it('leaves unrelated REST arguments alone when filters are missing or not arrays', function ($filter): void {
     expect(rest_api_filter_add_filter_param(['post_type' => 'post'], ['filter' => $filter]))->toBe(['post_type' => 'post']);
-})->with([[null], [false], [''], ['posts_per_page=10'], [5], [[]]]);
+})->with([[null], [false], [''], ['posts_per_page=10'], [5], [[]], [new ArrayObject(['tag' => 'new'])], [(object) ['tag' => 'new']]]);
 
 it('bounds the REST page size without admitting unsafe query fields', function ($size, $expected): void {
     $args = ['post_type' => 'post', 'posts_per_page' => 7];
@@ -165,7 +170,7 @@ it('bounds the REST page size without admitting unsafe query fields', function (
         'post_type' => 'post', 'posts_per_page' => $expected, 'orderby' => 'date', 'order' => 'DESC',
         'offset' => 0, 'category_name' => 'news', 'tag' => 'research', 'author_name' => 'editor',
     ]);
-})->with([[0, 7], [1, 1], [100, 100], [101, 7], [-1, 7], ['25', '25'], ['invalid', 7]]);
+})->with([[0, 7], [1, 1], [100, 100], [100.9, 100.9], [101, 7], [-1, 7], ['25', '25'], ['invalid', 7]]);
 
 it('retains REST arguments when a safe field is explicitly null', function (): void {
     expect(rest_api_filter_add_filter_param(['tag' => 'old'], ['filter' => ['tag' => null]]))->toBe(['tag' => 'old']);

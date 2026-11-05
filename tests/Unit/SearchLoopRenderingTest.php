@@ -60,7 +60,11 @@ beforeEach(function (): void {
     });
     when('has_excerpt')->alias(static fn ($id): bool => $id % 2 === 0);
     when('get_the_excerpt')->alias(static fn ($id): string => 'Excerpt '.$id);
-    when('wp_trim_excerpt')->alias(static fn ($text, $id): string => 'Trimmed '.$id);
+    when('wp_trim_excerpt')->alias(static function ($text, $id): string {
+        expect($text)->toBe('');
+
+        return 'Trimmed '.$id;
+    });
     when('home_url')->justReturn('https://example.test');
     when('trailingslashit')->alias(static fn ($url): string => rtrim($url, '/').'/');
     when('wp_reset_query')->alias(static function () use ($state): void {
@@ -123,6 +127,11 @@ it('pins taxonomy content, missing terms and empty fields in typed results', fun
     ['treatment', false, 'Content', true], ['treatment', false, '', true],
 ]);
 
+/**
+ * The Page/Post labels make StrEndsWithToStrStartsWith equivalent. The title's h3
+ * markup is always nonempty, so EmptyStringToNotEmpty on its Elvis fallback is
+ * unreachable; empty excerpt content is tested separately.
+ */
 it('renders general page and post results with excerpts and cross-blog restoration', function (int $total): void {
     $state = $this->searchState;
     $state->rowsByType = ['page' => [['ID' => 12, 'blog_id' => 3], ['ID' => 13]], 'post' => [['ID' => 14, 'blog_id' => 4]]];
@@ -140,6 +149,11 @@ it('renders general page and post results with excerpts and cross-blog restorati
     }
 })->with([5, 6]);
 
+/**
+ * Condition/Treatment make StrEndsWithToStrStartsWith equivalent. The first buffered
+ * append's ConcatEqualToEqual is equivalent because the buffer is reset to '' directly
+ * before it. Later append operations remain covered by complete output assertions.
+ */
 it('renders plugin groups only when they have results and pins each more-link boundary', function (int $extra, bool $hasTerms): void {
     $state = $this->searchState;
     $state->pluginAvailable = true;
@@ -159,7 +173,15 @@ it('renders plugin groups only when they have results and pins each more-link bo
         ->and(str_contains($html, '>Conditions</span>'))->toBe($hasTerms)
         ->and(str_contains($html, '>Treatments</span>'))->toBe($hasTerms)
         ->and($state->resets)->toBe(7)
-        ->and(array_column($state->queries, 'post_type'))->toBe(['page', 'post', ['provider'], 'condition', 'treatment', ['location'], ['expertise']]);
+        ->and($state->queries)->toBe([
+            ['s' => 'heart', 'post_type' => 'page', 'posts_per_page' => 5],
+            ['s' => 'heart', 'post_type' => 'post', 'posts_per_page' => 5],
+            ['s' => 'heart', 'post_type' => ['provider'], 'posts_per_page' => 6],
+            ['s' => 'heart', 'post_type' => 'condition', 'posts_per_page' => 5],
+            ['s' => 'heart', 'post_type' => 'treatment', 'posts_per_page' => 5],
+            ['s' => 'heart', 'post_type' => ['location'], 'posts_per_page' => 4],
+            ['s' => 'heart', 'post_type' => ['expertise'], 'posts_per_page' => 4],
+        ]);
     if ($hasTerms) {
         expect($html)->toContain('<p>Preview Content<p>')
             ->and($state->fields)->toBe([['condition_content', 'condition_77'], ['treatment_content', 'treatment_77'], ['treatment_procedure_content', 'treatment_77']]);
@@ -183,4 +205,24 @@ it('omits empty plugin card groups and handles missing terms with empty content'
         ->toContain('Title 44', 'Title 55', 'Search All UAMS Sites')
         ->and($state->fields)->toBe([['condition_content', 'condition_'], ['treatment_content', 'treatment_'], ['treatment_procedure_content', 'treatment_']])
         ->and(array_column($state->queries, 's'))->toBe(['', '', '', '', '', '', '']);
+});
+
+it('omits empty excerpt content without adding whitespace after the title', function (): void {
+    $this->searchState->rowsByType = ['page' => [['ID' => 12]]];
+    when('get_the_excerpt')->justReturn('');
+    ob_start();
+    uamswp_do_search_loop();
+    $html = ob_get_clean();
+    expect($html)->toContain('<h3 class="h4" data-id="12"><a href="https://example.test/post/12">Title 12</a></h3></div></div>');
+});
+
+it('retains populated conditions when the treatment group is empty', function (): void {
+    $state = $this->searchState;
+    $state->pluginAvailable = true;
+    $state->rowsByType = ['condition' => [['ID' => 44]]];
+    ob_start();
+    uamswp_do_search_loop();
+    $html = ob_get_clean();
+    expect($html)->toContain('Title 44', '<p>Preview Content<p>')
+        ->toContain(' <div class="col-12 col-md-6 post-type treatment"><div class="inner-container content-width"><h2 class="module-title post-type-heading"><span class="title">Treatments</span></h2><p>Sorry, no content matched your criteria.</p></div></div>');
 });
