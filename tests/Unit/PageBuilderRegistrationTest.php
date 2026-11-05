@@ -113,7 +113,8 @@ final class PageBuilderRegistrationTest extends TestCase
             $expected['blocks'] = [];
         }
 
-        self::assertSame($expected, $actual);
+        // Keep PHPUnit from formatting megabytes of nested field data on failure.
+        self::assertTrue($expected === $actual, 'The complete registration payload differs from its fixed fixture.');
         $expectedHooks = [
             ['filter', 'acf/settings/show_admin', 'my_acf_show_admin', 10, 1],
             ['action', 'acf/init', 'uams_register_blocks', 10, 1],
