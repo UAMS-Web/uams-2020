@@ -1,0 +1,62 @@
+{
+    "graphic resized": [
+        "uamswp_graphic_title_inner_1",
+        {
+            "page_cover_image": 70
+        },
+        true,
+        "<style>\n        .entry-header:before {\n            background-image: url(\"https://image.test/70/576/216/center/center/aspect-8-3-small\");\n        }\n\n        /* XS Breakpoint */\n        @media (min-width: 576px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/768/288/center/center/aspect-8-3-small\");\n            }\n        }\n\n        /* SM Breakpoint */\n        @media (min-width: 768px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/992/372/center/center/aspect-8-3\");\n            }\n        }\n\n        /* MD Breakpoint */\n        @media (min-width: 992px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/1200/450/center/center/aspect-8-3\");\n            }\n        }\n\n        /* LG Breakpoint */\n        @media (min-width: 1200px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/1500/563/center/center/aspect-8-3\");\n            }\n        }\n\n        /* XL Breakpoint */\n        @media (min-width: 1500px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/1921/720/center/center/aspect-8-3\");\n            }\n        }\n\n        /* XXL Breakpoint */\n        @media (min-width: 1921px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/2560/960/center/center/aspect-8-3\");\n            }\n        }\n    </style><div class=\"text-container\">\n    <div class=\"graphic-title-heading\">"
+    ],
+    "graphic fallback": [
+        "uamswp_graphic_title_inner_1",
+        {
+            "page_cover_image": 70
+        },
+        false,
+        "<style>\n            .entry-header:before {\n                background-image: url(\"https://attachment.test/70\");\n            }\n        </style><div class=\"text-container\">\n    <div class=\"graphic-title-heading\">"
+    ],
+    "graphic absent": [
+        "uamswp_graphic_title_inner_1",
+        {
+            "page_cover_image": false
+        },
+        true,
+        "<div class=\"text-container\">\n    <div class=\"graphic-title-heading\">"
+    ],
+    "landing separate mobile": [
+        "uamswp_landing_page_title_inner_1",
+        {
+            "page_landing_page_cover_image": 70,
+            "page_landing_page_cover_image_mobile": 80
+        },
+        true,
+        "<style>\n        .entry-header:before {\n            background-image: url(\"https://image.test/80/576/468/center/center/aspect-4-3-small\");\n        }\n\n        /* XS Breakpoint */\n        @media (min-width: 576px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/80/768/624/center/center/aspect-4-3\");\n            }\n        }\n\n        /* SM Breakpoint */\n        @media (min-width: 768px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/80/992/806/center/center/aspect-4-3\");\n            }\n        }\n\n        /* MD Breakpoint */\n        @media (min-width: 992px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/1200/375/center/center/aspect-8-3\");\n            }\n        }\n\n        /* LG Breakpoint */\n        @media (min-width: 1200px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/1500/469/center/center/aspect-8-3\");\n            }\n        }\n\n        /* XL Breakpoint */\n        @media (min-width: 1500px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/1921/601/center/center/aspect-8-3\");\n            }\n        }\n\n        /* XXL Breakpoint */\n        @media (min-width: 1921px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/2560/800/center/center/aspect-8-3\");\n            }\n        }\n    </style><div class=\"text-container\">\n    <div class=\"landing-page-title-heading\">"
+    ],
+    "landing mobile fallback": [
+        "uamswp_landing_page_title_inner_1",
+        {
+            "page_landing_page_cover_image": 70,
+            "page_landing_page_cover_image_mobile": false
+        },
+        true,
+        "<style>\n        .entry-header:before {\n            background-image: url(\"https://image.test/70/576/468/center/center/aspect-4-3-small\");\n        }\n\n        /* XS Breakpoint */\n        @media (min-width: 576px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/768/624/center/center/aspect-4-3\");\n            }\n        }\n\n        /* SM Breakpoint */\n        @media (min-width: 768px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/992/806/center/center/aspect-4-3\");\n            }\n        }\n\n        /* MD Breakpoint */\n        @media (min-width: 992px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/1200/375/center/center/aspect-8-3\");\n            }\n        }\n\n        /* LG Breakpoint */\n        @media (min-width: 1200px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/1500/469/center/center/aspect-8-3\");\n            }\n        }\n\n        /* XL Breakpoint */\n        @media (min-width: 1500px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/1921/601/center/center/aspect-8-3\");\n            }\n        }\n\n        /* XXL Breakpoint */\n        @media (min-width: 1921px) {\n            .entry-header:before {\n                background-image: url(\"https://image.test/70/2560/800/center/center/aspect-8-3\");\n            }\n        }\n    </style><div class=\"text-container\">\n    <div class=\"landing-page-title-heading\">"
+    ],
+    "landing attachment fallback": [
+        "uamswp_landing_page_title_inner_1",
+        {
+            "page_landing_page_cover_image": 70,
+            "page_landing_page_cover_image_mobile": 80
+        },
+        false,
+        "<style>\n            .entry-header:before {\n                background-image: url(\"https://attachment.test/70\");\n            }\n        </style><div class=\"text-container\">\n    <div class=\"landing-page-title-heading\">"
+    ],
+    "landing absent": [
+        "uamswp_landing_page_title_inner_1",
+        {
+            "page_landing_page_cover_image": false,
+            "page_landing_page_cover_image_mobile": false
+        },
+        true,
+        "<div class=\"text-container\">\n    <div class=\"landing-page-title-heading\">"
+    ]
+}

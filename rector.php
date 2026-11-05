@@ -10,6 +10,7 @@ use Rector\Php80\Rector\Switch_\ChangeSwitchToMatchRector;
 use Rector\Php81\Rector\Array_\ArrayToFirstClassCallableRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
+use Rector\TypeDeclaration\Rector\ClassLike\AddVoidReturnTypeWhereNoReturnRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamFromDimFetchKeyUseRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\ReturnUnionTypeRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\StrictArrayParamDimFetchRector;
@@ -145,6 +146,11 @@ return RectorConfig::configure()
         ...($isSweepProfile ? [] : $sweepOnlyRules),
         // Vendored TGM / Bootstrap walkers — not first-party.
         __DIR__.'/lib/modules',
+        // The WordPress walker parent has no return type. Adding void to its
+        // unit boundary makes the unchanged child walker fail PHP inheritance checks.
+        AddVoidReturnTypeWhereNoReturnRector::class => [
+            __DIR__.'/tests/Support/LibraryCoreDoubles.php',
+        ],
         // Mixed PHP/HTML template: a void return type before the HTML
         // section breaks Pint's PHP-Parser (and is noise on an echo-only helper).
         AddFunctionVoidReturnTypeWhereNoReturnRector::class => [

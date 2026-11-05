@@ -1,0 +1,418 @@
+{
+    "institute aging": {
+        "site": {
+            "site": "institute",
+            "subsite": "institute_aging",
+            "department": "main"
+        }
+    },
+    "institute eye": {
+        "site": {
+            "site": "institute",
+            "subsite": "institute_eye",
+            "department": "main"
+        }
+    },
+    "institute spine": {
+        "site": {
+            "site": "institute",
+            "subsite": "institute_spine",
+            "department": "main"
+        }
+    },
+    "institute digi-health": {
+        "site": {
+            "site": "institute",
+            "subsite": "institute_digi-health",
+            "department": "main"
+        }
+    },
+    "institute pri": {
+        "site": {
+            "site": "institute",
+            "subsite": "institute_pri",
+            "department": "main"
+        }
+    },
+    "institute tri": {
+        "site": {
+            "site": "institute",
+            "subsite": "institute_tri",
+            "department": "main"
+        }
+    },
+    "institute cancer": {
+        "site": {
+            "site": "institute",
+            "subsite": "institute_cancer",
+            "department": "main"
+        }
+    },
+    "institute ichi": {
+        "site": {
+            "site": "institute",
+            "subsite": "institute_ichi",
+            "department": "main"
+        }
+    },
+    "institute unknown": {
+        "site": {
+            "site": "institute",
+            "subsite": "institute_unknown",
+            "department": "main"
+        }
+    },
+    "institute ''": {
+        "site": {
+            "site": "institute",
+            "subsite": "",
+            "department": "main"
+        }
+    },
+    "institute 'uams'": {
+        "site": {
+            "site": "institute",
+            "subsite": "uams",
+            "department": "main"
+        }
+    },
+    "health-prof": {
+        "site": {
+            "site": "uams",
+            "subsite": "health-prof",
+            "department": "main"
+        }
+    },
+    "health-prof suffix": {
+        "site": {
+            "site": "uams",
+            "subsite": "health-prof-dept",
+            "department": "main"
+        }
+    },
+    "medicine": {
+        "site": {
+            "site": "uams",
+            "subsite": "medicine",
+            "department": "main"
+        }
+    },
+    "medicine suffix": {
+        "site": {
+            "site": "uams",
+            "subsite": "medicine-dept",
+            "department": "main"
+        }
+    },
+    "nursing": {
+        "site": {
+            "site": "uams",
+            "subsite": "nursing",
+            "department": "main"
+        }
+    },
+    "nursing suffix": {
+        "site": {
+            "site": "uams",
+            "subsite": "nursing-dept",
+            "department": "main"
+        }
+    },
+    "pharmacy": {
+        "site": {
+            "site": "uams",
+            "subsite": "pharmacy",
+            "department": "main"
+        }
+    },
+    "pharmacy suffix": {
+        "site": {
+            "site": "uams",
+            "subsite": "pharmacy-dept",
+            "department": "main"
+        }
+    },
+    "public-health": {
+        "site": {
+            "site": "uams",
+            "subsite": "public-health",
+            "department": "main"
+        }
+    },
+    "public-health suffix": {
+        "site": {
+            "site": "uams",
+            "subsite": "public-health-dept",
+            "department": "main"
+        }
+    },
+    "grad-school": {
+        "site": {
+            "site": "uams",
+            "subsite": "grad-school",
+            "department": "main"
+        }
+    },
+    "grad-school suffix": {
+        "site": {
+            "site": "uams",
+            "subsite": "grad-school-dept",
+            "department": "main"
+        }
+    },
+    "medicine emergency-medicine": {
+        "site": {
+            "site": "uams",
+            "subsite": "medicine",
+            "department": "emergency-medicine"
+        }
+    },
+    "medicine pediatrics": {
+        "site": {
+            "site": "uams",
+            "subsite": "medicine",
+            "department": "pediatrics"
+        }
+    },
+    "medicine otolaryngology": {
+        "site": {
+            "site": "uams",
+            "subsite": "medicine",
+            "department": "otolaryngology"
+        }
+    },
+    "medicine family-medicine": {
+        "site": {
+            "site": "uams",
+            "subsite": "medicine",
+            "department": "family-medicine"
+        }
+    },
+    "medicine orthopaedic-surgery": {
+        "site": {
+            "site": "uams",
+            "subsite": "medicine",
+            "department": "orthopaedic-surgery"
+        }
+    },
+    "medicine pathology": {
+        "site": {
+            "site": "uams",
+            "subsite": "medicine",
+            "department": "pathology"
+        }
+    },
+    "medicine urology": {
+        "site": {
+            "site": "uams",
+            "subsite": "medicine",
+            "department": "urology"
+        }
+    },
+    "pharmacy arpoison": {
+        "site": {
+            "site": "uams",
+            "subsite": "pharmacy",
+            "department": "arpoison"
+        }
+    },
+    "uams main": {
+        "site": {
+            "site": "uams",
+            "subsite": "main",
+            "department": "main"
+        }
+    },
+    "uams nw-campus": {
+        "site": {
+            "site": "uams",
+            "subsite": "nw-campus",
+            "department": "main"
+        }
+    },
+    "uams advancement": {
+        "site": {
+            "site": "uams",
+            "subsite": "advancement",
+            "department": "main"
+        }
+    },
+    "uams gsa": {
+        "site": {
+            "site": "uams",
+            "subsite": "gsa",
+            "department": "main"
+        }
+    },
+    "uams continuing-ed": {
+        "site": {
+            "site": "uams",
+            "subsite": "continuing-ed",
+            "department": "main"
+        }
+    },
+    "uams health-literacy": {
+        "site": {
+            "site": "uams",
+            "subsite": "health-literacy",
+            "department": "main"
+        }
+    },
+    "uams ipe": {
+        "site": {
+            "site": "uams",
+            "subsite": "ipe",
+            "department": "main"
+        }
+    },
+    "uams library": {
+        "site": {
+            "site": "uams",
+            "subsite": "library",
+            "department": "main"
+        }
+    },
+    "uams employee_nurses": {
+        "site": {
+            "site": "uams",
+            "subsite": "employee_nurses",
+            "department": "main"
+        }
+    },
+    "uams regional-south": {
+        "site": {
+            "site": "uams",
+            "subsite": "regional-south",
+            "department": "main"
+        }
+    },
+    "uams other": {
+        "site": {
+            "site": "uams",
+            "subsite": "other",
+            "department": "main"
+        }
+    },
+    "uamshealth main": {
+        "site": {
+            "site": "uamshealth",
+            "subsite": "main",
+            "department": "main"
+        }
+    },
+    "uamshealth uams-aux": {
+        "site": {
+            "site": "uamshealth",
+            "subsite": "uams-aux",
+            "department": "main"
+        }
+    },
+    "inside main": {
+        "site": {
+            "site": "inside",
+            "subsite": "main",
+            "department": "main"
+        }
+    },
+    "inside fitness-center": {
+        "site": {
+            "site": "inside",
+            "subsite": "fitness-center",
+            "department": "main"
+        }
+    },
+    "unknown other": {
+        "site": {
+            "site": "unknown",
+            "subsite": "other",
+            "department": "main"
+        }
+    },
+    "custom address": {
+        "site": {
+            "site": "institute",
+            "subsite": "institute_eye",
+            "department": "main"
+        },
+        "fields": {
+            "uamswp_address": [
+                {
+                    "address_title": "Office <&>",
+                    "address_street_1": "12 & 13",
+                    "address_street_2": "Suite <A>",
+                    "address_city": "City <&>",
+                    "address_state": "ST",
+                    "address_zip": "12345"
+                }
+            ]
+        }
+    },
+    "fallback address": {
+        "site": {
+            "site": "uams",
+            "subsite": "nw-campus",
+            "department": "main"
+        },
+        "fields": {
+            "uamswp_address": [
+                {}
+            ]
+        }
+    },
+    "two addresses with phone": {
+        "site": {
+            "site": "uams",
+            "subsite": "regional-south",
+            "department": "main"
+        },
+        "fields": {
+            "uamswp_address": [
+                {
+                    "address_title": "First"
+                },
+                {
+                    "address_title": "Second"
+                }
+            ],
+            "uamswp_primary_phone_text": "Call <&>",
+            "uamswp_primary_phone_number": "1234567890",
+            "uamswp_secondary_number_type": "phone",
+            "uamswp_secondary_phone_text": "Other <&>",
+            "uamswp_secondary_phone_number": "9876543210"
+        }
+    },
+    "link phone": {
+        "site": {
+            "site": "uams",
+            "subsite": "main",
+            "department": "main"
+        },
+        "fields": {
+            "uamswp_secondary_number_type": "link",
+            "uamswp_secondary_link_text": "Directory <&>",
+            "uamswp_secondary_link_url": {
+                "url": "https://phones.test/"
+            }
+        }
+    },
+    "link missing": {
+        "site": {
+            "site": "uams",
+            "subsite": "main",
+            "department": "main"
+        },
+        "fields": {
+            "uamswp_secondary_number_type": "link"
+        }
+    },
+    "phone missing": {
+        "site": {
+            "site": "uams",
+            "subsite": "main",
+            "department": "main"
+        },
+        "fields": {
+            "uamswp_secondary_number_type": "phone"
+        }
+    }
+}
