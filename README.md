@@ -38,6 +38,19 @@
 
 Based on the [Bootstrap for Genesis](https://github.com/webdevsuperfast/bootstrap-for-genesis) theme by Rotsen Mark Acob
 
+## Tests
+
+```bash
+composer install
+composer test:unit
+```
+
+The supported PHP floor is 8.2. Development and tests run on PHP 8.4 (`config.platform.php` is `8.4.27`). The unit suite runs on Pest 5 with Brain Monkey. The integration suite runs on PHPUnit 9.6 from its own Composer setup in `tests/Integration/`: run `composer setup:integration`, create the `uams_2020_tests` database, then `composer test:integration`.
+
+## Continuous integration
+
+Pull requests are gated by the GitHub Actions workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs Pint, Rector (dry-run), PHPStan, and the Unit suite on every push and pull request. A red check fails the workflow.
+
 Without these projects, this theme wouldn't be where it is today.
 
 * [Genesis Framework](http://my.studiopress.com/themes/genesis/)
@@ -49,3 +62,12 @@ Without these projects, this theme wouldn't be where it is today.
 * [Bootstrap Genesis](https://github.com/salcode/bootstrap-genesis)
 * [Bones for Genesis 2.0 with Bootstrap integration](https://github.com/jer0dh/bones-for-genesis-2-0-bootstrap)
 * [SmartMenus Bootstrap Addon](http://www.smartmenus.org/)
+
+## Tests
+
+```bash
+composer install
+composer test:unit
+```
+
+The supported PHP floor is 8.2, and the `lint-floor` job in CI parses every shipped PHP file on it.

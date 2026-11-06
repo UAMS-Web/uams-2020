@@ -1,0 +1,37 @@
+* text=auto eol=lf
+
+# The GitHub download holds only what the theme runs (keep-the-download-to-what-runs rule).
+# The first two lines leave out every top-level entry, dot-entries included; each line
+# after them puts one runtime path back.
+/* export-ignore
+/.* export-ignore
+
+# Theme files WordPress loads
+/style.css -export-ignore
+/screenshot.png -export-ignore
+/theme.json -export-ignore
+/functions.php -export-ignore
+/home.php -export-ignore
+/search.php -export-ignore
+/page_archive.php -export-ignore
+/page_blog.php -export-ignore
+
+# Theme folders
+/acf_fields -export-ignore
+/blocks -export-ignore
+/lib -export-ignore
+/templates -export-ignore
+/images -export-ignore
+/languages -export-ignore
+/assets -export-ignore
+
+# The three bundled plugin zips that lib/tgm.php installs through TGM Plugin Activation;
+# the other zips in plugins/ are not referenced by any active code and stay out.
+/plugins -export-ignore
+/plugins/* export-ignore
+/plugins/advanced-custom-fields-pro.zip -export-ignore
+/plugins/acf-maskfield.zip -export-ignore
+/plugins/uamswp-youtube-lyte.zip -export-ignore
+
+# Build inputs under assets/ that the theme does not load
+/assets/scss export-ignore
