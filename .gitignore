@@ -78,3 +78,5 @@ yarn.lock
 !plugins/*
 plugins/*.DS_Store
 package-lock.json
+/.phpunit.result.cache
+/.phpstan/
