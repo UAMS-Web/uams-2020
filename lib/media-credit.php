@@ -360,7 +360,7 @@ function uamswp_core_image_add_credits($block_content, $block, $instance)
 
             // If figcaption is already used, append the photo credit to the figcaption
 
-            if (strpos($block_content, '<figcaption>') !== false) {
+            if (str_contains($block_content, '<figcaption>')) {
 
                 $block_content = str_replace(
                     '</figcaption>',

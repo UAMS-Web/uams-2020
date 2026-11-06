@@ -41,7 +41,7 @@ function uamswp_block_placeholder($block = null, $is_preview = false): bool
     $data = isset($block['data']) && is_array($block['data']) ? $block['data'] : [];
     foreach ($data as $key => $value) {
         // ACF stores "_field_name" => field key reference entries alongside values.
-        if (is_string($key) && strpos($key, '_') === 0) {
+        if (is_string($key) && str_starts_with($key, '_')) {
             continue;
         }
 
@@ -787,7 +787,7 @@ function uamswp_iframe_allowed_hosts(): array
 /**
  * Validate an iframe URL: https only, and on the host allowlist when one is set.
  */
-function uamswp_iframe_url_is_allowed($url)
+function uamswp_iframe_url_is_allowed($url): bool
 {
     $parts = wp_parse_url($url);
     if (empty($parts['scheme']) || strtolower($parts['scheme']) !== 'https' || empty($parts['host'])) {
@@ -796,7 +796,7 @@ function uamswp_iframe_url_is_allowed($url)
 
     $hosts = uamswp_iframe_allowed_hosts();
 
-    return $hosts === [] || in_array(strtolower($parts['host']), array_map('strtolower', $hosts), true);
+    return $hosts === [] || in_array(strtolower($parts['host']), array_map(strtolower(...), $hosts), true);
 }
 
 add_filter('acf/validate_value/key=field_iframe_url_b', function ($valid, $value) {

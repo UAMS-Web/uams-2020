@@ -80,7 +80,7 @@ function uamswp_site_image(): void
             $subsection_title_link = get_the_permalink(uamswp_nav_subsection());
             // Test if Root site title contains three spaces. Split title into vars if so.
             $split_str = '   ';
-            if (strpos($root_title_text, $split_str) !== false) {
+            if (str_contains($root_title_text, $split_str)) {
                 $root_title_split = true;
                 $split_str_pos = strpos($site_title, $split_str);
                 $split_a_end = $split_str_pos;
@@ -90,7 +90,7 @@ function uamswp_site_image(): void
                 $root_title_text = str_replace($split_str, ' ', $root_title_text);
             }
             // Test if current site title contains three spaces. Replace with one space if so.
-            if (strpos($site_title, $split_str) !== false) {
+            if (str_contains($site_title, $split_str)) {
                 $site_title = str_replace($split_str, ' ', $site_title);
             }
             // Begin structure

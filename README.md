@@ -45,7 +45,7 @@ composer install
 composer test:unit
 ```
 
-PHP floor is 7.4, so the harness is PHPUnit 9 (Pest needs PHP 8.2+).
+The supported PHP floor is 8.2. Development and tests run on PHP 8.4 (`config.platform.php` is `8.4.27`). The unit suite runs on Pest 5 with Brain Monkey. The integration suite runs on PHPUnit 9.6 from its own Composer setup in `tests/Integration/`: run `composer setup:integration`, create the `uams_2020_tests` database, then `composer test:integration`.
 
 ## Continuous integration
 
@@ -70,4 +70,4 @@ composer install
 composer test:unit
 ```
 
-The supported PHP floor is 7.4, so this repository uses PHPUnit 9 from the shared `tests` skill templates (Pest requires PHP 8.2+).
+The supported PHP floor is 8.2, and the `lint-floor` job in CI parses every shipped PHP file on it.

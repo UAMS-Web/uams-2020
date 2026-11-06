@@ -617,16 +617,11 @@ if (! function_exists('apStyleDate')) {
 
 class SlidingWindowRateLimiter
 {
-    private $limit;
-
-    private $timeWindow;
-
     private array $storage;
 
-    public function __construct($limit, $timeWindow)
+    public function __construct(private $limit, private $timeWindow)
     {
-        $this->limit = $limit;
-        $this->timeWindow = $timeWindow; // In seconds
+        // In seconds
         $this->storage = [];
     }
 
@@ -943,7 +938,7 @@ function footer_widgets($params)
     if (isset($params[0]['id']) && $params[0]['id'] == 'footer-1') {
 
         // If widget is not uams widget, add class
-        if (strpos($params[0]['before_widget'], 'uamswp') == false) {
+        if (! str_contains($params[0]['before_widget'], 'uamswp')) {
             $class = 'class="uams-module ';
             $params[0]['before_widget'] = str_replace('class="', $class, $params[0]['before_widget']);
         }
