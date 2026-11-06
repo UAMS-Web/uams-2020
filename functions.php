@@ -1344,3 +1344,6 @@ add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context
 
     return array_values(array_diff($blocks, $removelist));
 }, 100, 2);
+
+// Safe Redirect Manager: let Editors manage redirects, which the plugin otherwise restricts to a higher capability.
+add_filter('srm_map_meta_caps', fn ($capability): string => 'edit_pages');
