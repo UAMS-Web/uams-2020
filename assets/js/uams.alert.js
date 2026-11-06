@@ -57,9 +57,14 @@ UAMS.getBaseUrl = function() {
     Backbone.history.location.origin = Backbone.history.location.protocol + "//" + Backbone.history.location.hostname + (Backbone.history.location.port ? ':' + Backbone.history.location.port: '');
   }
 
-  if (Backbone.history.location.origin.indexOf('www.uams.edu') != -1) {
-    url = Backbone.history.location.origin + ( site ? '/' + site : '' ) + '/';
-  } else if (Backbone.history.location.origin.indexOf('uamsweb.com') != -1) {
+  var hostname = ( Backbone.history.location.hostname || '' ).toLowerCase();
+  var siteHosts = [ 'www.uams.edu', 'uamsweb.com' ];
+  var isSiteHost = _.some( siteHosts, function( name ) {
+    // Exact match, or a subdomain of the name; never a host that merely contains it.
+    return hostname === name || hostname.slice( -( name.length + 1 ) ) === '.' + name;
+  });
+
+  if (isSiteHost) {
     url = Backbone.history.location.origin + ( site ? '/' + site : '' ) + '/';
   } else {
     url = Backbone.history.location.origin + '/';

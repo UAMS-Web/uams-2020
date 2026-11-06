@@ -102,13 +102,13 @@ test('a location with no origin builds one from protocol, hostname and port', ()
   );
 });
 
-test('a host that only contains www.uams.edu currently receives the site path', () => {
+test('a host that only contains www.uams.edu receives the origin alone', () => {
   assert.equal(
     baseUrl({
       origin: 'https://www.uams.edu.example.org',
       hostname: 'www.uams.edu.example.org',
       pathname: '/uamshealth/',
     }),
-    'https://www.uams.edu.example.org/uamshealth/',
+    'https://www.uams.edu.example.org/',
   );
 });
