@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  *
  * Include ACF Pro
- * 
+ *
  */
 
 // Define path and URL to the ACF plugin.
