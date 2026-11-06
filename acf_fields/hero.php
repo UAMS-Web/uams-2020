@@ -1,65 +1,68 @@
 <?php
+
+declare(strict_types=1);
+
 /*
  *
- * Hero Block Fields 
- * 
+ * Hero Block Fields
+ *
  */
-return array(
-    array(
-        'key' => 'field_hero_intro'. $suffix,
+return [
+    [
+        'key' => 'field_hero_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'message' => '<h2>UAMS Hero Block</h2>',
         'new_lines' => '',
         'esc_html' => 0,
-    ),
-    array(
-        'key' => 'field_hero_intro'. $suffix,
+    ],
+    [
+        'key' => 'field_hero_intro'.$suffix,
         'label' => '',
         'name' => '',
         'type' => 'message',
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'message' => '<h2>Hero</h2>',
         'new_lines' => 'wpautop',
         'esc_html' => 0,
-    ),
-    array(
-        'key' => 'field_hero_repeater'. $suffix,
+    ],
+    [
+        'key' => 'field_hero_repeater'.$suffix,
         'label' => 'Hero Slide(s)',
         'name' => 'hero',
         'type' => 'repeater',
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'acfe_permissions' => '',
-        'collapsed' => 'field_hero_heading'. $suffix,
+        'collapsed' => 'field_hero_heading'.$suffix,
         'min' => 1,
         'max' => 4,
         'layout' => 'block',
         'button_label' => 'Add Slide',
-        'sub_fields' => array(
-            array(
+        'sub_fields' => [
+            [
                 'key' => 'field_hero_slide_intro',
                 'label' => '',
                 'name' => '',
@@ -67,111 +70,111 @@ return array(
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'message' => '<h3>Slide Options</h3>',
                 'new_lines' => 'wpautop',
                 'esc_html' => 0,
-            ),
-            array(
-                'key' => 'field_hero_text_info'. $suffix,
+            ],
+            [
+                'key' => 'field_hero_text_info'.$suffix,
                 'label' => 'Text Information',
                 'name' => '',
                 'type' => 'accordion',
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'open' => 1,
                 'multi_expand' => 0,
                 'endpoint' => 0,
-            ),
-            array(
-                'key' => 'field_hero_heading'. $suffix,
+            ],
+            [
+                'key' => 'field_hero_heading'.$suffix,
                 'label' => 'Heading',
                 'name' => 'hero_heading',
                 'type' => 'text',
                 'instructions' => '49 character limit.',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => 49,
-            ),
-            array(
-                'key' => 'field_hero_body'. $suffix,
+            ],
+            [
+                'key' => 'field_hero_body'.$suffix,
                 'label' => 'Body',
                 'name' => 'hero_body',
                 'type' => 'textarea',
                 'instructions' => '177 character limit.',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'maxlength' => 177,
                 'rows' => 4,
                 'new_lines' => '',
-            ),
-            array(
-                'key' => 'field_hero_button_text'. $suffix,
+            ],
+            [
+                'key' => 'field_hero_button_text'.$suffix,
                 'label' => 'Button Text',
                 'name' => 'hero_button_text',
                 'type' => 'text',
                 'instructions' => '29 character limit.',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '29',
-            ),
-            array(
-                'key' => 'field_hero_button_url'. $suffix,
+            ],
+            [
+                'key' => 'field_hero_button_url'.$suffix,
                 'label' => 'Button Link',
                 'name' => 'hero_button_url',
                 'type' => 'link',
                 'instructions' => 'Include http:// or https://',
                 'required' => 1,
-                'conditional_logic' => array(
-                    array(
-                        array(
-                            'field' => 'field_hero_button_text'. $suffix,
+                'conditional_logic' => [
+                    [
+                        [
+                            'field' => 'field_hero_button_text'.$suffix,
                             'operator' => '!=empty',
-                        ),
-                    ),
-                ),
-                'wrapper' => array(
+                        ],
+                    ],
+                ],
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'return_format' => 'array',
-            ),
+            ],
             // array(
             //     'key' => 'field_hero_button_target'. $suffix,
             //     'label' => 'Open in New Window?',
@@ -198,99 +201,99 @@ return array(
             //     'ui_on_text' => '',
             //     'ui_off_text' => '',
             // ),
-            array(
-                'key' => 'field_hero_button_description'. $suffix,
+            [
+                'key' => 'field_hero_button_description'.$suffix,
                 'label' => 'Button Link Description',
                 'name' => 'hero_button_description',
                 'type' => 'text',
                 'instructions' => 'This is needed for accessibility. It helps differentiate between multiple links that use the same text like "Learn more". Describe the intent of the link, like "Learn more about the ABC Department".',
                 'required' => 1,
-                'conditional_logic' => array(
-                    array(
-                        array(
-                            'field' => 'field_hero_button_text'. $suffix,
+                'conditional_logic' => [
+                    [
+                        [
+                            'field' => 'field_hero_button_text'.$suffix,
                             'operator' => '!=empty',
-                        ),
-                    ),
-                ),
-                'wrapper' => array(
+                        ],
+                    ],
+                ],
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '',
-            ),
-            array(
-                'key' => 'field_hero_disable'. $suffix,
+            ],
+            [
+                'key' => 'field_hero_disable'.$suffix,
                 'label' => 'Disable this slide?',
                 'name' => 'hero_disable',
                 'type' => 'true_false',
                 'instructions' => 'This should be used to <strong>temporarily</strong> disable a slide. If it is not likely this slide will be reactivated relatively soon, then just delete the slide.<br />Make sure there will still be slides that are <strong>not</strong> disabled. If not, then choose a new header option while this/these slides are disabled.',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'acfe_permissions' => '',
                 'message' => '',
                 'default_value' => 0,
                 'ui' => 1,
                 'ui_on_text' => '',
                 'ui_off_text' => '',
-            ),
-            array(
-                'key' => 'field_hero_image_info'. $suffix,
+            ],
+            [
+                'key' => 'field_hero_image_info'.$suffix,
                 'label' => 'Image Information',
                 'name' => '',
                 'type' => 'accordion',
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'open' => 0,
                 'multi_expand' => 0,
                 'endpoint' => 0,
-            ),
-            array(
-                'key' => 'field_hero_image_intro'. $suffix,
+            ],
+            [
+                'key' => 'field_hero_image_intro'.$suffix,
                 'label' => '',
                 'name' => '',
                 'type' => 'message',
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'message' => '<p>If you do not provide images for Tablet and Mobile image, the image you provide for Desktop will be automatically cropped for the other two views. This has a possibility of yielding undesirable results.</p>',
                 'new_lines' => 'wpautop',
                 'esc_html' => 0,
-            ),
-            array(
-                'key' => 'field_hero_image_desktop'. $suffix,
+            ],
+            [
+                'key' => 'field_hero_image_desktop'.$suffix,
                 'label' => 'Image Desktop',
                 'name' => 'hero_image_desktop',
                 'type' => 'image',
                 'instructions' => 'Recommended dimensions: 2870x1536 or larger. Minimum dimensions: 1435x768. The image will be automatically cropped to a 1.8685:1 aspect ratio.',
                 'required' => 1,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'return_format' => 'id',
                 'preview_size' => 'thumbnail',
                 'library' => 'all',
@@ -301,20 +304,20 @@ return array(
                 'max_height' => '',
                 'max_size' => '',
                 'mime_types' => '',
-            ),
-            array(
-                'key' => 'field_hero_image_tablet'. $suffix,
+            ],
+            [
+                'key' => 'field_hero_image_tablet'.$suffix,
                 'label' => 'Image Tablet',
                 'name' => 'hero_image_tablet',
                 'type' => 'image',
                 'instructions' => 'Recommended dimensions: 1156x818 or larger. Minimum dimensions: 578x409. The image will be automatically cropped to a 1.4132:1 aspect ratio.',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'return_format' => 'id',
                 'preview_size' => 'thumbnail',
                 'library' => 'all',
@@ -325,20 +328,20 @@ return array(
                 'max_height' => '',
                 'max_size' => '',
                 'mime_types' => '',
-            ),
-            array(
-                'key' => 'field_hero_image_mobile'. $suffix,
+            ],
+            [
+                'key' => 'field_hero_image_mobile'.$suffix,
                 'label' => 'Image Mobile',
                 'name' => 'hero_image_mobile',
                 'type' => 'image',
                 'instructions' => 'Recommended dimensions: 1536x864 or larger. Minimum dimensions: 768x432. The image will be automatically cropped to a 16:9 aspect ratio.',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'return_format' => 'id',
                 'preview_size' => 'thumbnail',
                 'library' => 'all',
@@ -349,58 +352,58 @@ return array(
                 'max_height' => '',
                 'max_size' => '',
                 'mime_types' => '',
-            ),
-            array(
-                'key' => 'field_hero_image_alt_text'. $suffix,
+            ],
+            [
+                'key' => 'field_hero_image_alt_text'.$suffix,
                 'label' => 'Image Alt Text Override',
                 'name' => 'hero_image_alt_text',
                 'type' => 'text',
                 'instructions' => 'Alt text (alternative text) refers to invisible description of images which are read aloud to blind users on a screen reader. If you want to define alt text that is different from the alt text defined for this image in the media library, you can do so here.',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'default_value' => '',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => 125,
-            ),
-            array(
-                'key' => 'field_hero_color_info'. $suffix,
+            ],
+            [
+                'key' => 'field_hero_color_info'.$suffix,
                 'label' => 'Color Option',
                 'name' => '',
                 'type' => 'accordion',
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
+                ],
                 'acfe_permissions' => '',
                 'open' => 0,
                 'multi_expand' => 0,
                 'endpoint' => 0,
-            ),
-            array(
-                'key' => 'field_hero_background_color'. $suffix,
+            ],
+            [
+                'key' => 'field_hero_background_color'.$suffix,
                 'label' => 'Background Color',
                 'name' => 'hero_background_color',
                 'type' => 'select',
                 'instructions' => '',
                 'required' => 0,
                 'conditional_logic' => 0,
-                'wrapper' => array(
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
-                ),
-                'choices' => array(
+                ],
+                'choices' => [
                     'auto' => 'Auto',
                     'blue' => 'Blue',
                     'green' => 'Green',
@@ -408,123 +411,123 @@ return array(
                     'eggplant' => 'Eggplant',
                     'maroon' => 'Maroon',
                     'orange' => 'Orange',
-                ),
-                'default_value' => array(
+                ],
+                'default_value' => [
                     0 => 'auto',
-                ),
+                ],
                 'allow_null' => 0,
                 'multiple' => 0,
                 'ui' => 0,
                 'return_format' => 'value',
                 'ajax' => 0,
                 'placeholder' => '',
-            ),
-        ),
-    ),
-    array(
-        'key' => 'field_hero_geo_valid'. $suffix,
+            ],
+        ],
+    ],
+    [
+        'key' => 'field_hero_geo_valid'.$suffix,
         'label' => 'GeoTargetingWP Installed?',
         'name' => 'geo_valid',
         'type' => 'radio',
         'instructions' => '',
         'required' => 0,
         'conditional_logic' => 0,
-        'wrapper' => array(
+        'wrapper' => [
             'width' => '',
             'class' => 'hidden',
             'id' => '',
-        ),
+        ],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'false' => 'False',
             'true' => 'True',
-        ),
+        ],
         'allow_null' => 0,
         'other_choice' => 0,
         'default_value' => 'false',
         'layout' => 'horizontal',
         'return_format' => 'value',
-    ),
-    array(
-        'key' => 'field_hero_regions'. $suffix,
+    ],
+    [
+        'key' => 'field_hero_regions'.$suffix,
         'label' => '<i class="dashicons dashicons-location-alt"></i> Region Filter',
         'name' => '',
         'type' => 'accordion',
         'instructions' => '',
         'required' => 0,
-        'conditional_logic' => array(
-            array(
-                array(
-                    'field' => 'field_hero_geo_valid'. $suffix,
+        'conditional_logic' => [
+            [
+                [
+                    'field' => 'field_hero_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
-                ),
-            ),
-        ),
-        'wrapper' => array(
+                ],
+            ],
+        ],
+        'wrapper' => [
             'width' => '',
             'class' => '',
             'id' => '',
-        ),
+        ],
         'open' => 0,
         'multi_expand' => 0,
         'endpoint' => 0,
-    ),
-    array(
-		'key' => 'field_hero_geo'. $suffix,
-		'label' => 'Regions',
-		'name' => 'hero_geo',
-		'type' => 'radio',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => array(
-            array(
-                array(
-                    'field' => 'field_hero_geo_valid'. $suffix,
+    ],
+    [
+        'key' => 'field_hero_geo'.$suffix,
+        'label' => 'Regions',
+        'name' => 'hero_geo',
+        'type' => 'radio',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => [
+            [
+                [
+                    'field' => 'field_hero_geo_valid'.$suffix,
                     'operator' => '==',
                     'value' => 'true',
-                ),
-            ),
-        ),
-		'wrapper' => array(
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		),
+                ],
+            ],
+        ],
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'include' => 'Include',
             'exclude' => 'Exclude',
-        ),
+        ],
         'allow_null' => 0,
         'other_choice' => 0,
         'default_value' => '',
         'layout' => 'horizontal',
-        'return_format' => 'value'
-    ),
-    array(
-		'key' => 'field_hero_geo_region'. $suffix,
-		'label' => 'Regions',
-		'name' => 'hero_geo_region',
-		'type' => 'select',
-		'instructions' => '',
-		'required' => 0,
-		'conditional_logic' => 0,
-		'wrapper' => array(
-			'width' => '',
-			'class' => '',
-			'id' => '',
-		),
+        'return_format' => 'value',
+    ],
+    [
+        'key' => 'field_hero_geo_region'.$suffix,
+        'label' => 'Regions',
+        'name' => 'hero_geo_region',
+        'type' => 'select',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => [
+            'width' => '',
+            'class' => '',
+            'id' => '',
+        ],
         'acfe_permissions' => '',
-        'choices' => array(
+        'choices' => [
             'central' => 'Central',
             'northeast' => 'Northeast',
             'northwest' => 'Northwest',
             'southeast' => 'Southeast',
             'southwest' => 'Southwest',
-        ),
-        'default_value' => array(
-        ),
+        ],
+        'default_value' => [
+        ],
         'allow_null' => 0,
         'multiple' => 1,
         'ui' => 1,
@@ -533,5 +536,5 @@ return array(
         'allow_custom' => 0,
         'placeholder' => '',
         'search_placeholder' => '',
-    ),
-);
+    ],
+];
