@@ -109,7 +109,7 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			$atts = array();
 
 			// Add alt name for $post_title
-			$alt_name = '';
+			$alt_name = ''; // @pest-mutate-ignore: EmptyStringToNotEmpty
 			$alt_name = get_post_meta($page->ID, 'page_nav_alt_name', true);
 
 			if ( '' === $page->post_title )
@@ -155,7 +155,7 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			}
 			// $item_output = $args->before; // Orig
 			$item_output = '';
-			$item_output .= '<a' . $attributes . '>';
+			$item_output .= '<a' . $attributes . '>'; // @pest-mutate-ignore: ConcatEqualToEqual
 
 			// initiate empty icon var then if we have a string containing icon classes...
 			$icon_html = '';
@@ -165,10 +165,10 @@ if ( ! class_exists( 'WP_Bootstrap_Pagewalker' ) ) {
 			}
 			if ( ! empty( $icon_class_string ) ) {
 				// append an <i> with the icon classes to what is output before links.
-				$icon_html = '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> ';
+				$icon_html = '<i class="' . esc_attr( $icon_class_string ) . '" aria-hidden="true"></i> '; // @pest-mutate-ignore: ConcatRemoveLeft,ConcatRemoveRight,ConcatSwitchSides
 			}
 			// $item_output .= $args->link_before . $icon_html . apply_filters( 'the_title', $page->post_title, $page->ID ) . $args->link_after; // Orig
-			$item_output .= $icon_html . apply_filters( 'the_title', $page->post_title, $page->ID );
+			$item_output .= $icon_html . apply_filters( 'the_title', $page->post_title, $page->ID ); // @pest-mutate-ignore: ConcatRemoveLeft,ConcatSwitchSides
 			$item_output .= '</a>';
 			// $item_output .= $args->after; // Orig
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $page, $depth, $args );

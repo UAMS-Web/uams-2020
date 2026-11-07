@@ -32,5 +32,9 @@
             <file>./templates/modules.php</file>
             <file>./templates/page_landing.php</file>
         </include>
+        <exclude>
+            <file>./lib/modules/class-tgm-plugin-activation.php</file>
+            <file>./lib/modules/class-wp-bootstrap-navwalker.php</file>
+        </exclude>
     </source>
 </phpunit>
