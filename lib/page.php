@@ -432,3 +432,8 @@ function uamswp_list_child_pages()
 }
 
 add_action('genesis_after_entry', 'uamswp_list_child_pages');
+
+function uams_throwaway_probe(int $value): string
+{
+    return $value > 1 ? 'big' : 'small';
+}
