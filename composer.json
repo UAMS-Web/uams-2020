@@ -8,6 +8,7 @@
     },
     "require-dev": {
         "brain/monkey": "^2.7",
+        "cweagans/composer-patches": "^2.0",
         "laravel/pint": "^1.32",
         "pestphp/pest": "^5.3",
         "php-stubs/wordpress-stubs": "6.8",
@@ -23,7 +24,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "cweagans/composer-patches": true
         }
     },
     "scripts": {

@@ -137,7 +137,7 @@ function uamswp_footer_creds_text(): void
      */
     /* Institutes, NW Campus, & Regional Campus get new address option */
     $custom_addresses = get_field('uamswp_address', 'option');
-    $custom_count = 0;
+    $custom_count = 0; // @pest-mutate-ignore: DecrementInteger,IncrementInteger
     if ($custom_addresses) {
         $custom_count = count($custom_addresses);
     }

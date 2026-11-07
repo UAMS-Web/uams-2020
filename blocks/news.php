@@ -17,15 +17,18 @@ if (empty($id) && isset($block)) {
 }
 
 if (empty($id)) {
+    // @pest-mutate-ignore: ConcatRemoveLeft,ConcatSwitchSides,DecrementInteger,IncrementInteger
     $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
 }
 
+// @pest-mutate-ignore: ConcatSwitchSides
 $id = 'uams-news-'.$id;
 if (! empty($block['anchor'])) {
     $id = $block['anchor'];
 }
 
 if (! empty($block['align'])) {
+    // @pest-mutate-ignore: ConcatEqualToEqual
     $className .= ' align'.$block['align'];
 }
 

@@ -1,0 +1,870 @@
+{
+    "northwest Fayetteville": [
+        "northwest",
+        "Fayetteville"
+    ],
+    "northwest Lowell": [
+        "northwest",
+        "Lowell"
+    ],
+    "northwest Springdale": [
+        "northwest",
+        "Springdale"
+    ],
+    "northwest Rogers": [
+        "northwest",
+        "Rogers"
+    ],
+    "northwest Bentonville": [
+        "northwest",
+        "Bentonville"
+    ],
+    "northwest Alma": [
+        "northwest",
+        "Alma"
+    ],
+    "northwest Barling": [
+        "northwest",
+        "Barling"
+    ],
+    "northwest Bella Vista": [
+        "northwest",
+        "Bella Vista"
+    ],
+    "northwest Berryville": [
+        "northwest",
+        "Berryville"
+    ],
+    "northwest Booneville": [
+        "northwest",
+        "Booneville"
+    ],
+    "northwest Branch": [
+        "northwest",
+        "Branch"
+    ],
+    "northwest Center Ridge": [
+        "northwest",
+        "Center Ridge"
+    ],
+    "northwest Charleston": [
+        "northwest",
+        "Charleston"
+    ],
+    "northwest Clarksville": [
+        "northwest",
+        "Clarksville"
+    ],
+    "northwest Clinton": [
+        "northwest",
+        "Clinton"
+    ],
+    "northwest Compton": [
+        "northwest",
+        "Compton"
+    ],
+    "northwest Danville": [
+        "northwest",
+        "Danville"
+    ],
+    "northwest Dardanelle": [
+        "northwest",
+        "Dardanelle"
+    ],
+    "northwest Decatur": [
+        "northwest",
+        "Decatur"
+    ],
+    "northwest Elm Springs": [
+        "northwest",
+        "Elm Springs"
+    ],
+    "northwest Eureka Springs": [
+        "northwest",
+        "Eureka Springs"
+    ],
+    "northwest Fairfield Bay": [
+        "northwest",
+        "Fairfield Bay"
+    ],
+    "northwest Farmington": [
+        "northwest",
+        "Farmington"
+    ],
+    "northwest Flippin": [
+        "northwest",
+        "Flippin"
+    ],
+    "northwest Fort Smith": [
+        "northwest",
+        "Fort Smith"
+    ],
+    "northwest Gassville": [
+        "northwest",
+        "Gassville"
+    ],
+    "northwest Gentry": [
+        "northwest",
+        "Gentry"
+    ],
+    "northwest Aaron": [
+        "northwest",
+        "Aaron"
+    ],
+    "northwest Gravette": [
+        "northwest",
+        "Gravette"
+    ],
+    "northwest Greenwood": [
+        "northwest",
+        "Greenwood"
+    ],
+    "northwest Hackett": [
+        "northwest",
+        "Hackett"
+    ],
+    "northwest Harrison": [
+        "northwest",
+        "Harrison"
+    ],
+    "northwest Hartford": [
+        "northwest",
+        "Hartford"
+    ],
+    "northwest Hattieville": [
+        "northwest",
+        "Hattieville"
+    ],
+    "northwest Hector": [
+        "northwest",
+        "Hector"
+    ],
+    "northwest Huntsville": [
+        "northwest",
+        "Huntsville"
+    ],
+    "northwest Jasper": [
+        "northwest",
+        "Jasper"
+    ],
+    "northwest Lavaca": [
+        "northwest",
+        "Lavaca"
+    ],
+    "northwest Lead Hill": [
+        "northwest",
+        "Lead Hill"
+    ],
+    "northwest Leslie": [
+        "northwest",
+        "Leslie"
+    ],
+    "northwest London": [
+        "northwest",
+        "London"
+    ],
+    "northwest Mansfield": [
+        "northwest",
+        "Mansfield"
+    ],
+    "northwest Marshall": [
+        "northwest",
+        "Marshall"
+    ],
+    "northwest Morrilton": [
+        "northwest",
+        "Morrilton"
+    ],
+    "northwest Mountain Home": [
+        "northwest",
+        "Mountain Home"
+    ],
+    "northwest Mountainburg": [
+        "northwest",
+        "Mountainburg"
+    ],
+    "northwest Norfork": [
+        "northwest",
+        "Norfork"
+    ],
+    "northwest Ozark": [
+        "northwest",
+        "Ozark"
+    ],
+    "northwest Paris": [
+        "northwest",
+        "Paris"
+    ],
+    "northwest Pea Ridge": [
+        "northwest",
+        "Pea Ridge"
+    ],
+    "northwest Plainview": [
+        "northwest",
+        "Plainview"
+    ],
+    "northwest Plumerville": [
+        "northwest",
+        "Plumerville"
+    ],
+    "northwest Pottsville": [
+        "northwest",
+        "Pottsville"
+    ],
+    "northwest Prairie Grove": [
+        "northwest",
+        "Prairie Grove"
+    ],
+    "northwest Russellville": [
+        "northwest",
+        "Russellville"
+    ],
+    "northwest Aaronsburg": [
+        "northwest",
+        "Aaronsburg"
+    ],
+    "northwest Scotland": [
+        "northwest",
+        "Scotland"
+    ],
+    "northwest Siloam Springs": [
+        "northwest",
+        "Siloam Springs"
+    ],
+    "northwest Subiaco": [
+        "northwest",
+        "Subiaco"
+    ],
+    "northwest Tontitown": [
+        "northwest",
+        "Tontitown"
+    ],
+    "northwest Valley Springs": [
+        "northwest",
+        "Valley Springs"
+    ],
+    "northwest Van Buren": [
+        "northwest",
+        "Van Buren"
+    ],
+    "northwest Waldron": [
+        "northwest",
+        "Waldron"
+    ],
+    "northwest West Fork": [
+        "northwest",
+        "West Fork"
+    ],
+    "northwest Winslow": [
+        "northwest",
+        "Winslow"
+    ],
+    "northwest Yellville": [
+        "northwest",
+        "Yellville"
+    ],
+    "northwest Lincoln": [
+        "northwest",
+        "Lincoln"
+    ],
+    "northeast Jonesboro": [
+        "northeast",
+        "Jonesboro"
+    ],
+    "northeast Armorel": [
+        "northeast",
+        "Armorel"
+    ],
+    "northeast Ash Flat": [
+        "northeast",
+        "Ash Flat"
+    ],
+    "northeast Augusta": [
+        "northeast",
+        "Augusta"
+    ],
+    "northeast Bald Knob": [
+        "northeast",
+        "Bald Knob"
+    ],
+    "northeast Batesville": [
+        "northeast",
+        "Batesville"
+    ],
+    "northeast Bay": [
+        "northeast",
+        "Bay"
+    ],
+    "northeast Beebe": [
+        "northeast",
+        "Beebe"
+    ],
+    "northeast Blytheville": [
+        "northeast",
+        "Blytheville"
+    ],
+    "northeast Bradford": [
+        "northeast",
+        "Bradford"
+    ],
+    "northeast Brockwell": [
+        "northeast",
+        "Brockwell"
+    ],
+    "northeast Brookland": [
+        "northeast",
+        "Brookland"
+    ],
+    "northeast Burdette": [
+        "northeast",
+        "Burdette"
+    ],
+    "northeast Calico Rock": [
+        "northeast",
+        "Calico Rock"
+    ],
+    "northeast Cave City": [
+        "northeast",
+        "Cave City"
+    ],
+    "northeast Charlotte": [
+        "northeast",
+        "Charlotte"
+    ],
+    "northeast Cherokee Village": [
+        "northeast",
+        "Cherokee Village"
+    ],
+    "northeast Corning": [
+        "northeast",
+        "Corning"
+    ],
+    "northeast Dyess": [
+        "northeast",
+        "Dyess"
+    ],
+    "northeast Floral": [
+        "northeast",
+        "Floral"
+    ],
+    "northeast Guion": [
+        "northeast",
+        "Guion"
+    ],
+    "northeast Hardy": [
+        "northeast",
+        "Hardy"
+    ],
+    "northeast Harrisburg": [
+        "northeast",
+        "Harrisburg"
+    ],
+    "northeast Heber Springs": [
+        "northeast",
+        "Heber Springs"
+    ],
+    "northeast Higden": [
+        "northeast",
+        "Higden"
+    ],
+    "northeast Hoxie": [
+        "northeast",
+        "Hoxie"
+    ],
+    "northeast Imboden": [
+        "northeast",
+        "Imboden"
+    ],
+    "northeast Joiner": [
+        "northeast",
+        "Joiner"
+    ],
+    "northeast Keiser": [
+        "northeast",
+        "Keiser"
+    ],
+    "northeast Kensett": [
+        "northeast",
+        "Kensett"
+    ],
+    "northeast Lepanto": [
+        "northeast",
+        "Lepanto"
+    ],
+    "northeast Luxora": [
+        "northeast",
+        "Luxora"
+    ],
+    "northeast Lynn": [
+        "northeast",
+        "Lynn"
+    ],
+    "northeast Mammoth Spring": [
+        "northeast",
+        "Mammoth Spring"
+    ],
+    "northeast Marion": [
+        "northeast",
+        "Marion"
+    ],
+    "northeast Marked Tree": [
+        "northeast",
+        "Marked Tree"
+    ],
+    "northeast Marmaduke": [
+        "northeast",
+        "Marmaduke"
+    ],
+    "northeast Maynard": [
+        "northeast",
+        "Maynard"
+    ],
+    "northeast Mccrory": [
+        "northeast",
+        "Mccrory"
+    ],
+    "northeast Mcrae": [
+        "northeast",
+        "Mcrae"
+    ],
+    "northeast Melbourne": [
+        "northeast",
+        "Melbourne"
+    ],
+    "northeast Mount Pleasant": [
+        "northeast",
+        "Mount Pleasant"
+    ],
+    "northeast Mountain View": [
+        "northeast",
+        "Mountain View"
+    ],
+    "northeast Newark": [
+        "northeast",
+        "Newark"
+    ],
+    "northeast Newport": [
+        "northeast",
+        "Newport"
+    ],
+    "northeast Osceola": [
+        "northeast",
+        "Osceola"
+    ],
+    "northeast Paragould": [
+        "northeast",
+        "Paragould"
+    ],
+    "northeast Piggott": [
+        "northeast",
+        "Piggott"
+    ],
+    "northeast Pocahontas": [
+        "northeast",
+        "Pocahontas"
+    ],
+    "northeast Quitman": [
+        "northeast",
+        "Quitman"
+    ],
+    "northeast Rector": [
+        "northeast",
+        "Rector"
+    ],
+    "northeast Romance": [
+        "northeast",
+        "Romance"
+    ],
+    "northeast Salem": [
+        "northeast",
+        "Salem"
+    ],
+    "northeast Searcy": [
+        "northeast",
+        "Searcy"
+    ],
+    "northeast Sulphur Rock": [
+        "northeast",
+        "Sulphur Rock"
+    ],
+    "northeast Swifton": [
+        "northeast",
+        "Swifton"
+    ],
+    "northeast Timbo": [
+        "northeast",
+        "Timbo"
+    ],
+    "northeast Trumann": [
+        "northeast",
+        "Trumann"
+    ],
+    "northeast Walnut Ridge": [
+        "northeast",
+        "Walnut Ridge"
+    ],
+    "northeast Weiner": [
+        "northeast",
+        "Weiner"
+    ],
+    "northeast West Memphis": [
+        "northeast",
+        "West Memphis"
+    ],
+    "northeast Wiseman": [
+        "northeast",
+        "Wiseman"
+    ],
+    "northeast Wynne": [
+        "northeast",
+        "Wynne"
+    ],
+    "southwest Amity": [
+        "southwest",
+        "Amity"
+    ],
+    "southwest Arkadelphia": [
+        "southwest",
+        "Arkadelphia"
+    ],
+    "southwest Ashdown": [
+        "southwest",
+        "Ashdown"
+    ],
+    "southwest Camden": [
+        "southwest",
+        "Camden"
+    ],
+    "southwest Carthage": [
+        "southwest",
+        "Carthage"
+    ],
+    "southwest De Queen": [
+        "southwest",
+        "De Queen"
+    ],
+    "southwest Eldorado": [
+        "southwest",
+        "Eldorado"
+    ],
+    "southwest Fordyce": [
+        "southwest",
+        "Fordyce"
+    ],
+    "southwest Friendship": [
+        "southwest",
+        "Friendship"
+    ],
+    "southwest Gillham": [
+        "southwest",
+        "Gillham"
+    ],
+    "southwest Glenwood": [
+        "southwest",
+        "Glenwood"
+    ],
+    "southwest Hope": [
+        "southwest",
+        "Hope"
+    ],
+    "southwest Lockesburg": [
+        "southwest",
+        "Lockesburg"
+    ],
+    "southwest Magnolia": [
+        "southwest",
+        "Magnolia"
+    ],
+    "southwest Malvern": [
+        "southwest",
+        "Malvern"
+    ],
+    "southwest Mena": [
+        "southwest",
+        "Mena"
+    ],
+    "southwest Mount Holly": [
+        "southwest",
+        "Mount Holly"
+    ],
+    "southwest Mount Ida": [
+        "southwest",
+        "Mount Ida"
+    ],
+    "southwest Nashville": [
+        "southwest",
+        "Nashville"
+    ],
+    "southwest Norman": [
+        "southwest",
+        "Norman"
+    ],
+    "southwest Prescott": [
+        "southwest",
+        "Prescott"
+    ],
+    "southwest Rosston": [
+        "southwest",
+        "Rosston"
+    ],
+    "southwest Smackover": [
+        "southwest",
+        "Smackover"
+    ],
+    "southwest Stamps": [
+        "southwest",
+        "Stamps"
+    ],
+    "southwest Texarkana": [
+        "southwest",
+        "Texarkana"
+    ],
+    "southwest Waldo": [
+        "southwest",
+        "Waldo"
+    ],
+    "southwest Washington": [
+        "southwest",
+        "Washington"
+    ],
+    "southwest Hampton": [
+        "southwest",
+        "Hampton"
+    ],
+    "southwest Hatfield": [
+        "southwest",
+        "Hatfield"
+    ],
+    "southeast Altheimer": [
+        "southeast",
+        "Altheimer"
+    ],
+    "southeast Brinkley": [
+        "southeast",
+        "Brinkley"
+    ],
+    "southeast Clarendon": [
+        "southeast",
+        "Clarendon"
+    ],
+    "southeast Crossett": [
+        "southeast",
+        "Crossett"
+    ],
+    "southeast Dewitt": [
+        "southeast",
+        "Dewitt"
+    ],
+    "southeast Dermott": [
+        "southeast",
+        "Dermott"
+    ],
+    "southeast Des Arc": [
+        "southeast",
+        "Des Arc"
+    ],
+    "southeast Dumas": [
+        "southeast",
+        "Dumas"
+    ],
+    "southeast Forrest City": [
+        "southeast",
+        "Forrest City"
+    ],
+    "southeast Fountain Hill": [
+        "southeast",
+        "Fountain Hill"
+    ],
+    "southeast Gould": [
+        "southeast",
+        "Gould"
+    ],
+    "southeast Grady": [
+        "southeast",
+        "Grady"
+    ],
+    "southeast Hamburg": [
+        "southeast",
+        "Hamburg"
+    ],
+    "southeast Hazen": [
+        "southeast",
+        "Hazen"
+    ],
+    "southeast Humphrey": [
+        "southeast",
+        "Humphrey"
+    ],
+    "southeast Lake Village": [
+        "southeast",
+        "Lake Village"
+    ],
+    "southeast Marianna": [
+        "southeast",
+        "Marianna"
+    ],
+    "southeast Mcgehee": [
+        "southeast",
+        "Mcgehee"
+    ],
+    "southeast Monticello": [
+        "southeast",
+        "Monticello"
+    ],
+    "southeast Palestine": [
+        "southeast",
+        "Palestine"
+    ],
+    "southeast Pinebluff": [
+        "southeast",
+        "Pinebluff"
+    ],
+    "southeast Poplar Grove": [
+        "southeast",
+        "Poplar Grove"
+    ],
+    "southeast Rison": [
+        "southeast",
+        "Rison"
+    ],
+    "southeast Star City": [
+        "southeast",
+        "Star City"
+    ],
+    "southeast Stuttgart": [
+        "southeast",
+        "Stuttgart"
+    ],
+    "southeast Warren": [
+        "southeast",
+        "Warren"
+    ],
+    "southeast Whitehall": [
+        "southeast",
+        "Whitehall"
+    ],
+    "southeast Helena": [
+        "southeast",
+        "Helena"
+    ],
+    "southeast West Helena": [
+        "southeast",
+        "West Helena"
+    ],
+    "central Little Rock Air Force Base": [
+        "central",
+        "Little Rock Air Force Base"
+    ],
+    "central North Little Rock": [
+        "central",
+        "North Little Rock"
+    ],
+    "central Bryant": [
+        "central",
+        "Bryant"
+    ],
+    "central Benton": [
+        "central",
+        "Benton"
+    ],
+    "central Little Rock": [
+        "central",
+        "Little Rock"
+    ],
+    "central Adona": [
+        "central",
+        "Adona"
+    ],
+    "central Alexander": [
+        "central",
+        "Alexander"
+    ],
+    "central Bauxite": [
+        "central",
+        "Bauxite"
+    ],
+    "central Bigelow": [
+        "central",
+        "Bigelow"
+    ],
+    "central Cabot": [
+        "central",
+        "Cabot"
+    ],
+    "central Carlisle": [
+        "central",
+        "Carlisle"
+    ],
+    "central Conway": [
+        "central",
+        "Conway"
+    ],
+    "central England": [
+        "central",
+        "England"
+    ],
+    "central Enola": [
+        "central",
+        "Enola"
+    ],
+    "central Greenbrier": [
+        "central",
+        "Greenbrier"
+    ],
+    "central Hot Springs Village": [
+        "central",
+        "Hot Springs Village"
+    ],
+    "central Jacksonville": [
+        "central",
+        "Jacksonville"
+    ],
+    "central Jessieville": [
+        "central",
+        "Jessieville"
+    ],
+    "central Lonoke": [
+        "central",
+        "Lonoke"
+    ],
+    "central Maumelle": [
+        "central",
+        "Maumelle"
+    ],
+    "central Mount Vernon": [
+        "central",
+        "Mount Vernon"
+    ],
+    "central Pearcy": [
+        "central",
+        "Pearcy"
+    ],
+    "central Sheridan": [
+        "central",
+        "Sheridan"
+    ],
+    "central Sherwood": [
+        "central",
+        "Sherwood"
+    ],
+    "central Vilonia": [
+        "central",
+        "Vilonia"
+    ],
+    "central Ward": [
+        "central",
+        "Ward"
+    ],
+    "central Wrightsville": [
+        "central",
+        "Wrightsville"
+    ],
+    "central Hot Springs": [
+        "central",
+        "Hot Springs"
+    ],
+    "central Hot Springs National Park": [
+        "central",
+        "Hot Springs National Park"
+    ]
+}

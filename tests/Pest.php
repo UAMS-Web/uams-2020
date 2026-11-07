@@ -9,6 +9,10 @@
 
 declare(strict_types=1);
 
+use Uams2020\Tests\Support\LibraryLoader;
+use Uams2020\Tests\Support\PageBuilderLoader;
+use Uams2020\Tests\Support\ThemeBootstrap;
+
 use function Brain\Monkey\setUp;
 use function Brain\Monkey\tearDown;
 
@@ -26,6 +30,9 @@ use function Brain\Monkey\tearDown;
 uses()
     ->beforeEach(function (): void {
         setUp();
+        ThemeBootstrap::load();
+        PageBuilderLoader::load();
+        LibraryLoader::load();
     })
     ->afterEach(function (): void {
         $this->addToAssertionCount(Mockery::getContainer()->mockery_getExpectationCount());

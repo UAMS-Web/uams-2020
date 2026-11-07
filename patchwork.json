@@ -1,0 +1,18 @@
+{
+    "redefinable-internals": [
+        "time",
+        "class_exists",
+        "function_exists",
+        "strftime",
+        "glob",
+        "error_log",
+        "exit",
+        "random_int",
+        "mt_getrandmax",
+        "date",
+        "strtotime"
+    ],
+    "blacklist": [
+        "vendor/symfony/finder/"
+    ]
+}

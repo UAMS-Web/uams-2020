@@ -23,7 +23,20 @@
     <source>
         <include>
             <directory suffix=".php">./lib</directory>
+            <directory suffix=".php">./acf_fields</directory>
+            <directory suffix=".php">./blocks</directory>
             <file>./functions.php</file>
+            <file>./home.php</file>
+            <file>./page_archive.php</file>
+            <file>./page_blog.php</file>
+            <file>./search.php</file>
+            <file>./templates/marketing.php</file>
+            <file>./templates/modules.php</file>
+            <file>./templates/page_landing.php</file>
         </include>
+        <exclude>
+            <file>./lib/modules/class-tgm-plugin-activation.php</file>
+            <file>./lib/modules/class-wp-bootstrap-navwalker.php</file>
+        </exclude>
     </source>
 </phpunit>
