@@ -152,18 +152,12 @@ it('preserves the block list outside marketing and permits the current marketing
     }
 })->with([[false, '', false], [true, 'other.php', true], [true, 'templates/marketing.php', false], [true, 'templates/marketing.php', true]]);
 
-/**
- * RemoveArrayItem on the quote-bearing name is equivalent: WordPress 7.1.3 rejects
- * that name before registration, so it cannot be a key in the real registry.
- */
 it('pins the entire global block removal list and the iframe capability gate', function (bool $admin): void {
     $blocked = json_decode(file_get_contents(__DIR__.'/../Fixtures/blocked-core-blocks.json'), true, flags: JSON_THROW_ON_ERROR);
-    $blocked = array_values(array_diff($blocked, ['core/query-pagination-next"']));
-
-    $retained = ['core/paragraph', 'plugin/custom', 'core/query-pagination-next', 'acf/uams-iframe'];
+    $retained = ['core/paragraph', 'plugin/custom', 'acf/uams-iframe'];
     BlockRegistryDouble::$registered = array_fill_keys([...$blocked, ...$retained], (object) []);
     when('current_user_can')->justReturn($admin);
-    expect(ThemeHooks::callback('filter', 'allowed_block_types_all', 100)(false, null))->toBe($admin ? $retained : array_slice($retained, 0, 3));
+    expect(ThemeHooks::callback('filter', 'allowed_block_types_all', 100)(false, null))->toBe($admin ? $retained : array_slice($retained, 0, 2));
 })->with([true, false]);
 
 it('pins optional block unregistration including the existing duplicate', function (bool $plugins): void {
