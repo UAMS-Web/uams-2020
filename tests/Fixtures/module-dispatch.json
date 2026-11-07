@@ -1,0 +1,308 @@
+{
+    "modules_action_bar": {
+        "calls": [
+            {
+                "template": "action-bar.php",
+                "variables": {
+                    "action_bar_rows": "value:action_bar_section",
+                    "background_color": "value:action_bar_background_color",
+                    "geo": "value:action_bar_geo",
+                    "geo_region": "value:action_bar_geo_region",
+                    "heading": "value:action_bar_heading",
+                    "i": 7,
+                    "id": 7
+                }
+            }
+        ],
+        "html": "<!-- // Begin Module - modules_action_bar// -->[template:action-bar.php]<!-- // End Module - modules_action_bar// -->"
+    },
+    "modules_call_out": {
+        "calls": [
+            {
+                "template": "call-out.php",
+                "variables": {
+                    "background_color": "value:call_out_background_color",
+                    "body": "value:call_out_body",
+                    "geo": "value:call_out_geo",
+                    "geo_region": "value:call_out_geo_region",
+                    "heading": "value:call_out_heading",
+                    "i": 7,
+                    "id": 7,
+                    "image": "value:call_out_image",
+                    "use_image": "value:call_out_use_image"
+                }
+            }
+        ],
+        "html": "<!-- // Begin Module - modules_call_out// -->[template:call-out.php]<!-- // End Module - modules_call_out// -->"
+    },
+    "modules_cta": {
+        "calls": [
+            {
+                "template": "cta.php",
+                "variables": {
+                    "background_color": "value:cta_bar_background_color",
+                    "body": "value:cta_bar_body",
+                    "button_desc": "value:cta_bar_button_description",
+                    "button_target": "_blank",
+                    "button_text": "value:cta_bar_button_text",
+                    "button_url": {
+                        "url": "https://example.test/cta",
+                        "target": "_blank"
+                    },
+                    "geo": "value:cta_bar_geo",
+                    "geo_region": "value:cta_bar_geo_region",
+                    "heading": "value:cta_bar_heading",
+                    "i": 7,
+                    "id": 7,
+                    "image": "value:cta_bar_image",
+                    "layout": "value:cta_bar_layout",
+                    "size": "value:cta_bar_size",
+                    "use_image": "value:cta_bar_use_image"
+                }
+            }
+        ],
+        "html": "<!-- // Begin Module - modules_cta// -->[template:cta.php]<!-- // End Module - modules_cta// -->"
+    },
+    "modules_hero": {
+        "calls": [
+            {
+                "template": "hero.php",
+                "variables": {
+                    "geo": "value:hero_geo",
+                    "geo_region": "value:hero_geo_region",
+                    "hero_rows": "value:hero",
+                    "i": 7,
+                    "id": 7
+                }
+            }
+        ],
+        "html": "<!-- // Begin Module - modules_hero// -->[template:hero.php]<!-- // End Module - modules_hero// -->"
+    },
+    "modules_link_list": {
+        "calls": [
+            {
+                "template": "link-list.php",
+                "variables": {
+                    "background_color": "value:link_list_background_color",
+                    "description": "value:link_list_description",
+                    "geo": "value:link_list_geo",
+                    "geo_region": "value:link_list_geo_region",
+                    "heading": "value:link_list_heading",
+                    "i": 7,
+                    "id": 7,
+                    "link_list_rows": "value:link_list_section"
+                }
+            }
+        ],
+        "html": "<!-- // Begin Module - modules_link_list// -->[template:link-list.php]<!-- // End Module - modules_link_list// -->"
+    },
+    "modules_image_side": {
+        "calls": [
+            {
+                "template": "image-side-by-side.php",
+                "variables": {
+                    "background_color": "value:side_image_background_color",
+                    "body": "value:side_layout_link_text",
+                    "cta": "value:side_cta",
+                    "geo": "value:side_image_geo",
+                    "geo_region": "value:side_image_geo_region",
+                    "heading": "value:side_heading",
+                    "i": 7,
+                    "id": 7,
+                    "image_anchor": "top",
+                    "image_group": {
+                        "side_image_anchor": "top",
+                        "image": 51
+                    },
+                    "image_postion": "value:side_image_position",
+                    "layout": "value:side_text_layout",
+                    "link_list": "value:side_link_list",
+                    "list_more": "value:side_link_include_more",
+                    "quote_name": "value:side_quote_speaker_name",
+                    "quote_text": "",
+                    "quote_title": "value:side_quote_speaker_title"
+                }
+            }
+        ],
+        "html": "<!-- // Begin Module - modules_image_side// -->[template:image-side-by-side.php]<!-- // End Module - modules_image_side// -->"
+    },
+    "modules_text_overlay": {
+        "calls": [
+            {
+                "template": "overlay.php",
+                "variables": {
+                    "geo": "value:overlay_geo",
+                    "geo_region": "value:overlay_geo_region",
+                    "i": 7,
+                    "id": 7,
+                    "overlay_rows": "value:overlay_section"
+                }
+            }
+        ],
+        "html": "<!-- // Begin Module - modules_text_overlay// -->[template:overlay.php]<!-- // End Module - modules_text_overlay// -->"
+    },
+    "modules_post_tile": {
+        "calls": [
+            {
+                "template": "post-category-tile.php",
+                "variables": {
+                    "background_color": "value:post_tile_background_color",
+                    "cat_button_text": "value:post_tile_category_button_text",
+                    "category": {
+                        "name": "Research",
+                        "term_id": 3
+                    },
+                    "geo": "value:post_tile_geo",
+                    "geo_region": "value:post_tile_geo_region",
+                    "heading": "value:post_tile_heading",
+                    "hide_heading": "value:post_tile_hide_heading",
+                    "i": 7,
+                    "id": 7,
+                    "post_button_text": "value:post_tile_post_button_text"
+                }
+            }
+        ],
+        "html": "<!-- // Begin Module - modules_post_tile// -->[template:post-category-tile.php]<!-- // End Module - modules_post_tile// -->"
+    },
+    "modules_post_tiles": {
+        "calls": [
+            {
+                "template": "post-category-tiles.php",
+                "variables": {
+                    "background_color": "value:post_tiles_background_color",
+                    "geo": "value:post_tiles_geo",
+                    "geo_region": "value:post_tiles_geo_region",
+                    "heading": "value:post_tiles_heading",
+                    "hide_heading": "value:post_tiles_hide_heading",
+                    "i": 7,
+                    "id": 7,
+                    "post_tiles_rows": "value:post_tiles_section"
+                }
+            }
+        ],
+        "html": "<!-- // Begin Module - modules_post_tiles// -->[template:post-category-tiles.php]<!-- // End Module - modules_post_tiles// -->"
+    },
+    "modules_text_stacked": {
+        "calls": [
+            {
+                "template": "stacked.php",
+                "variables": {
+                    "background_color": "value:stacked_background_color",
+                    "description": "value:stacked_description",
+                    "geo": "value:stacked_geo",
+                    "geo_region": "value:stacked_geo_region",
+                    "heading": "value:stacked_heading",
+                    "hide_heading": "value:stacked_hide_heading",
+                    "i": 7,
+                    "id": 7,
+                    "more": "value:stacked_more",
+                    "more_button_description": "value:stacked_more_button_description",
+                    "more_button_text": "value:stacked_more_button_text",
+                    "more_button_url": "value:stacked_more_button_url",
+                    "more_text": "value:stacked_more_text",
+                    "stacked_rows": "value:stacked_section"
+                }
+            }
+        ],
+        "html": "<!-- // Begin Module - modules_text_stacked// -->[template:stacked.php]<!-- // End Module - modules_text_stacked// -->"
+    },
+    "modules_news_grid": {
+        "calls": [
+            {
+                "template": "news.php",
+                "variables": {
+                    "advancedCat": "value:news_advanced_cat",
+                    "articleID": "value:news_article_id",
+                    "background_color": "value:news_background_color",
+                    "category": "value:news_category",
+                    "className": "",
+                    "count": "value:news_count",
+                    "geo": "value:news_geo",
+                    "geo_region": "value:news_geo_region",
+                    "hide_author": "value:news_hide_author",
+                    "hide_date": "value:news_hide_date",
+                    "hide_img": "value:news_hide_img",
+                    "hide_title": "value:news_hide_title",
+                    "i": 7,
+                    "id": 7,
+                    "link": "value:news_include_link",
+                    "local": "value:news_local",
+                    "offset": "value:news_offset",
+                    "output": "value:news_format",
+                    "position": "value:news_position",
+                    "title": "value:news_title"
+                }
+            }
+        ],
+        "html": "<!-- // Begin Module - modules_news_grid// -->[template:news.php]<!-- // End Module - modules_news_grid// -->"
+    },
+    "modules_uams_gallery": {
+        "calls": [
+            {
+                "template": "gallery.php",
+                "variables": {
+                    "background_color": "value:gallery_background_color",
+                    "description": "value:gallery_description",
+                    "gallery_columns": "value:gallery_columns",
+                    "gallery_crop": [
+                        "square"
+                    ],
+                    "gallery_images": "value:gallery_images",
+                    "geo": "value:gallery_geo",
+                    "geo_region": "value:gallery_geo_region",
+                    "heading": "value:gallery_heading",
+                    "hide_heading": "value:gallery_hide_heading",
+                    "i": 7,
+                    "id": 7,
+                    "modal": "value:gallery_modal",
+                    "more": "value:gallery_more",
+                    "more_button_color": "white",
+                    "more_button_description": "value:gallery_more_button_description",
+                    "more_button_target": "_self",
+                    "more_button_text": "value:gallery_more_button_text",
+                    "more_button_url": {
+                        "url": "https://example.test/more",
+                        "target": "_self"
+                    },
+                    "more_text": "value:gallery_more_text"
+                }
+            }
+        ],
+        "html": "<!-- // Begin Module - modules_uams_gallery// -->[template:gallery.php]<!-- // End Module - modules_uams_gallery// -->"
+    },
+    "modules_uams_content": {
+        "calls": [
+            {
+                "template": "content.php",
+                "variables": {
+                    "background_color": "value:content_background_color",
+                    "content_block": "value:content_content",
+                    "geo": "value:content_geo",
+                    "geo_region": "value:content_geo_region",
+                    "heading": "value:content_heading",
+                    "hide_heading": "value:content_hide_heading",
+                    "i": 7,
+                    "id": 7
+                }
+            }
+        ],
+        "html": "<!-- // Begin Module - modules_uams_content// -->[template:content.php]<!-- // End Module - modules_uams_content// -->"
+    },
+    "modules_uams_livewhale": {
+        "calls": [
+            {
+                "template": "livewhale.php",
+                "variables": {
+                    "background_color": "value:livewhale_background_color",
+                    "geo": "value:livewhale_geo",
+                    "geo_region": "value:livewhale_geo_region",
+                    "heading": "value:livewhale_heading",
+                    "i": 7,
+                    "id": 7,
+                    "livewhale": "value:livewhale_id"
+                }
+            }
+        ],
+        "html": "<!-- // Begin Module - modules_uams_livewhale// -->[template:livewhale.php]<!-- // End Module - modules_uams_livewhale// -->"
+    }
+}
