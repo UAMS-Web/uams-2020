@@ -1,0 +1,17 @@
+{
+    "_hash": "32d788899485abbe9424693f2a2d4b5d886fa3a09217ad3acbaf7215851fa0fe",
+    "patches": {
+        "pestphp/pest-plugin-mutate": [
+            {
+                "package": "pestphp/pest-plugin-mutate",
+                "description": "Select tests for scalar function defaults (temporary; retire via UAMS-Web/uams-2020#673)",
+                "url": "patches/pest-mutate-function-defaults.patch",
+                "sha256": "92f3e87982d2b017d11f09cc48d4c160e4943883d22581339c8b61b92693a414",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:patches.json"
+                }
+            }
+        ]
+    }
+}

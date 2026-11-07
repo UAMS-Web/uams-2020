@@ -47,6 +47,12 @@ composer test:unit
 
 The supported PHP floor is 8.2. Development and tests run on PHP 8.4 (`config.platform.php` is `8.4.27`). The unit suite runs on Pest 5 with Brain Monkey. The integration suite runs on PHPUnit 9.6 from its own Composer setup in `tests/Integration/`: run `composer setup:integration`, create the `uams_2020_tests` database, then `composer test:integration`.
 
+## Mutation testing
+
+With Xdebug coverage mode or PCOV enabled, run `php tests/mutate.php` for the root templates, `functions.php` and `search.php`. Pass `--path=functions.php,search.php` to narrow a run. The launcher uses every unit test file and rejects an empty test list. Set the optional `UAMS_MUTATION_REPORT` environment variable to write per-mutation JSON results and replay paths. It disables cached results and requires every generated mutant to be caught; inspect any surviving or uncovered case before claiming full coverage.
+
+The launcher copies the PHPUnit settings to a temporary XML file with explicit unit-test and source-file entries. This avoids a directory-walking conflict between the mutation loader and Patchwork while allowing the parallel runner to read one configuration file. It selects parallel execution automatically. Do not add `--processes`: the locked mutation tool forwards that option to children without `--parallel`, which can make failed starts look like caught mutations. The launcher rejects process-count, parallel, and configuration overrides. A temporary root-only patch corrects scalar function-default test selection; its scope, guard, and retirement plan are in [`patches/README.md`](patches/README.md). The installed revisions checked for these workarounds are `pestphp/pest-plugin-mutate` v5.0.2 at `d0c87110416b699413cc073b8dcc92e440d81931` and Patchwork 2.2.4 at `d5d5c6032b7109477163b68e25ff531f7654ebf9`, as pinned in `composer.lock`.
+
 ## Continuous integration
 
 Pull requests are gated by the GitHub Actions workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs Pint, Rector (dry-run), PHPStan, and the Unit suite on every push and pull request. A red check fails the workflow.
@@ -71,3 +77,7 @@ composer test:unit
 ```
 
 The supported PHP floor is 8.2, and the `lint-floor` job in CI parses every shipped PHP file on it.
+
+The rate limiter keeps its `array_filter()` call on one line. Patchwork removes whitespace after the opening parenthesis when rewriting that internal call. A newline there shifts later coverage hits away from the original source lines and makes mutation test selection unreliable. This layout keeps the executed and original line maps aligned without a vendor patch.
+
+Isolated PHPUnit tests receive the Composer loader and, during mutation testing, the mutation stream wrapper before Patchwork loads. This keeps constant-sensitive tests on the mutated source rather than silently testing the original file.

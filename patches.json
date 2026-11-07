@@ -1,0 +1,11 @@
+{
+    "_comment": [
+        "Root-only development patch; temporary until a compatible upstream release fixes function-default test selection.",
+        "Local implementation: UAMS-Web/uams-2020#641. Retirement: UAMS-Web/uams-2020#673."
+    ],
+    "patches": {
+        "pestphp/pest-plugin-mutate": {
+            "Select tests for scalar function defaults (temporary; retire via UAMS-Web/uams-2020#673)": "patches/pest-mutate-function-defaults.patch"
+        }
+    }
+}
