@@ -27,7 +27,7 @@
     "core/post-navigation-link",
     "core/post-template",
     "core/query-pagination",
-    "core/query-pagination-next\"",
+    "core/query-pagination-next",
     "core/query-pagination-numbers",
     "core/query-pagination-previous",
     "core/query-no-results",
