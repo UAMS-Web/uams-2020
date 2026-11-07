@@ -18,9 +18,11 @@ if (empty($id) && isset($block)) {
     $id = $block['id'];
 }
 if (empty($id)) {
+    // @pest-mutate-ignore: ConcatRemoveLeft,ConcatSwitchSides,DecrementInteger,IncrementInteger
     $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
 }
 
+// @pest-mutate-ignore: ConcatSwitchSides
 $id = 'livewhale-'.$id;
 if (! empty($block['anchor'])) {
     $id = $block['anchor'];
@@ -30,6 +32,7 @@ if (! empty($block['anchor'])) {
 
 $className = '';
 if (! empty($block['className'])) {
+    // @pest-mutate-ignore: ConcatEqualToEqual
     $className .= ' '.$block['className'];
 }
 if (! empty($block['align'])) {

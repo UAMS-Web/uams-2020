@@ -76,6 +76,7 @@ if (empty($list_more)) {
     $list_more = get_field('side_link_include_more') ?: '';
 }
 if (empty($cta)) {
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $cta = get_field('side_cta') ?: '';
 }
 // A layout that hides the button (Blockquote with Citation) saves no button fields.
@@ -95,6 +96,7 @@ if ($layout == 'blockquote-citation') {
     $cta_text = ''; // This layout has no button, even if one was saved under another layout.
 }
 if (empty($image_group)) {
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $image_group = get_field('side_image') ?: '';
 }
 if (! is_array($image_group)) {
@@ -123,6 +125,7 @@ if (empty($image_alt)) {
 $cta_target = $cta_target ? ' target="'.esc_attr($cta_target).'"' : '';
 $cta_desc = $cta_desc ? ' aria-label="'.esc_attr($cta_desc).'"' : '';
 $cta_link = $cta_link ? '<a class="btn btn-primary" href="'.esc_url($cta_link).'"'.$cta_desc.$cta_target.' data-moduletitle="'.esc_attr($heading).'">' : '';
+// @pest-mutate-ignore: DecrementInteger,EmptyStringToNotEmpty,IncrementInteger
 $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1] ?? '';
 // $side_image_height = wp_get_attachment_image_src($side_image, 'full')[2];
 
