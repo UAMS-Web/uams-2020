@@ -29,6 +29,7 @@ if (! empty($block['anchor'])) {
 
 $className = '';
 if (! empty($block['className'])) {
+    // @pest-mutate-ignore: ConcatEqualToEqual
     $className .= ' '.$block['className'];
 }
 if (! empty($block['align'])) {
