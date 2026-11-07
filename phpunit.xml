@@ -24,6 +24,13 @@
         <include>
             <directory suffix=".php">./lib</directory>
             <file>./functions.php</file>
+            <file>./home.php</file>
+            <file>./page_archive.php</file>
+            <file>./page_blog.php</file>
+            <file>./search.php</file>
+            <file>./templates/marketing.php</file>
+            <file>./templates/modules.php</file>
+            <file>./templates/page_landing.php</file>
         </include>
     </source>
 </phpunit>

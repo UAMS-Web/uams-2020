@@ -1,0 +1,212 @@
+[
+    {
+        "type": "action",
+        "hook": "genesis_setup",
+        "callback": "uamswp_childtheme_setup",
+        "priority": 15,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "action",
+        "hook": "genesis_before_header",
+        "callback": "uamswp_skip_links",
+        "priority": 5,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "filter",
+        "hook": "genesis_attr_site-header",
+        "callback": "uamswp_add_aria",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "filter",
+        "hook": "genesis_home_crumb",
+        "callback": "uams_breadcrumb_home_icon",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "filter",
+        "hook": "genesis_page_crumb",
+        "callback": "uams_breadcrumb_home",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "filter",
+        "hook": "genesis_single_crumb",
+        "callback": "uams_breadcrumb_home",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "filter",
+        "hook": "seopress_pro_breadcrumbs_crumbs",
+        "callback": "sp_pro_breadcrumbs_crumbs",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "action",
+        "hook": "seopress_pro_breadcrumbs_css",
+        "callback": "sp_pro_breadcrumbs_css",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "filter",
+        "hook": "cron_schedules",
+        "callback": "Closure",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "action",
+        "hook": "process_image_sizer_queue",
+        "callback": "Closure",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "action",
+        "hook": "admin_init",
+        "callback": "Closure",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "action",
+        "hook": "admin_notices",
+        "callback": "Closure",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "action",
+        "hook": "switch_theme",
+        "callback": "Closure",
+        "priority": 10,
+        "acceptedArgs": 3
+    },
+    {
+        "type": "filter",
+        "hook": "dynamic_sidebar_params",
+        "callback": "footer_widgets",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "action",
+        "hook": "admin_enqueue_scripts",
+        "callback": "enqueue_admin_style_sheet",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "filter",
+        "hook": "genesis_edit_post_link",
+        "callback": "__return_false",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "action",
+        "hook": "rest_api_init",
+        "callback": "rest_api_filter_add_filters",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "filter",
+        "hook": "gform_init_scripts_footer",
+        "callback": "__return_true",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "filter",
+        "hook": "relevanssi_modify_wp_query",
+        "callback": "rlv_search_all_blogs",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "action",
+        "hook": "wp_head",
+        "callback": "uamswp_gtm_1",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "action",
+        "hook": "genesis_before",
+        "callback": "uamswp_gtm_2",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "filter",
+        "hook": "acf/validate_value/name=google_tag_manager_id",
+        "callback": "uamswp_validate_gtm_id",
+        "priority": 10,
+        "acceptedArgs": 2
+    },
+    {
+        "type": "filter",
+        "hook": "big_image_size_threshold",
+        "callback": "__return_false",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "filter",
+        "hook": "allowed_block_types_all",
+        "callback": "Closure",
+        "priority": 110,
+        "acceptedArgs": 2
+    },
+    {
+        "type": "filter",
+        "hook": "acf/prepare_field/name=geo_valid",
+        "callback": "uamswp_set_geo",
+        "priority": 10,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "filter",
+        "hook": "acf/update_value/name=geo_valid",
+        "callback": "uamswp_force_geo",
+        "priority": 10,
+        "acceptedArgs": 3
+    },
+    {
+        "type": "filter",
+        "hook": "retrieve_password_message",
+        "callback": "my_retrieve_password_message",
+        "priority": 10,
+        "acceptedArgs": 4
+    },
+    {
+        "type": "action",
+        "hook": "init",
+        "callback": "Closure",
+        "priority": 9223372036854775807,
+        "acceptedArgs": 1
+    },
+    {
+        "type": "filter",
+        "hook": "allowed_block_types_all",
+        "callback": "Closure",
+        "priority": 100,
+        "acceptedArgs": 2
+    },
+    {
+        "type": "filter",
+        "hook": "srm_map_meta_caps",
+        "callback": "Closure",
+        "priority": 10,
+        "acceptedArgs": 1
+    }
+]
