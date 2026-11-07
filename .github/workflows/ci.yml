@@ -140,6 +140,7 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           coverage: pcov
+          ini-values: pcov.directory=.
 
       # On a pull request or a push, mutate only the PHP files under the covered paths that it
       # adds, changes or renames, read from HEAD against its first parent. A run that changes none
