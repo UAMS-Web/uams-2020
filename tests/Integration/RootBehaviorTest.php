@@ -35,9 +35,11 @@ final class RootBehaviorTest extends IntegrationTestCase
         $this->assertSame(5, has_action('genesis_before_header', 'uamswp_skip_links'));
         $this->assertSame(10, has_filter('dynamic_sidebar_params', 'footer_widgets'));
         $this->assertSame(10, has_filter('retrieve_password_message', 'my_retrieve_password_message'));
+        // ReflectionFunction returns the platform's separators, so both paths are normalized before the comparison.
+        $functionsFile = wp_normalize_path(dirname(__DIR__, 2).'/functions.php');
         foreach ([['cron_schedules', 10, 1], ['process_image_sizer_queue', 10, 1], ['admin_init', 10, 1], ['admin_notices', 10, 1], ['switch_theme', 10, 3], ['init', PHP_INT_MAX, 1], ['allowed_block_types_all', 100, 2], ['allowed_block_types_all', 110, 2], ['srm_map_meta_caps', 10, 1]] as [$hook, $priority, $accepted]) {
             $entries = array_filter($GLOBALS['wp_filter'][$hook]->callbacks[$priority], static fn (array $entry): bool => $entry['function'] instanceof Closure
-                && (new ReflectionFunction($entry['function']))->getFileName() === dirname(__DIR__, 2).'/functions.php');
+                && wp_normalize_path((new ReflectionFunction($entry['function']))->getFileName()) === $functionsFile);
             $this->assertCount(1, $entries, $hook);
             $this->assertSame($accepted, array_values($entries)[0]['accepted_args'], $hook);
         }
