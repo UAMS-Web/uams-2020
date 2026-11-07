@@ -23,6 +23,7 @@
     <coverage>
         <include>
             <directory suffix=".php">../../lib</directory>
+            <directory suffix=".php">../../acf_fields</directory>
             <file>../../functions.php</file>
         </include>
         <exclude>
