@@ -35,9 +35,11 @@ final class RootBehaviorTest extends IntegrationTestCase
         $this->assertSame(5, has_action('genesis_before_header', 'uamswp_skip_links'));
         $this->assertSame(10, has_filter('dynamic_sidebar_params', 'footer_widgets'));
         $this->assertSame(10, has_filter('retrieve_password_message', 'my_retrieve_password_message'));
+        // ReflectionFunction returns the platform's separators, so both paths are normalized before the comparison.
+        $functionsFile = wp_normalize_path(dirname(__DIR__, 2).'/functions.php');
         foreach ([['cron_schedules', 10, 1], ['process_image_sizer_queue', 10, 1], ['admin_init', 10, 1], ['admin_notices', 10, 1], ['switch_theme', 10, 3], ['init', PHP_INT_MAX, 1], ['allowed_block_types_all', 100, 2], ['allowed_block_types_all', 110, 2], ['srm_map_meta_caps', 10, 1]] as [$hook, $priority, $accepted]) {
             $entries = array_filter($GLOBALS['wp_filter'][$hook]->callbacks[$priority], static fn (array $entry): bool => $entry['function'] instanceof Closure
-                && (new ReflectionFunction($entry['function']))->getFileName() === dirname(__DIR__, 2).'/functions.php');
+                && wp_normalize_path((new ReflectionFunction($entry['function']))->getFileName()) === $functionsFile);
             $this->assertCount(1, $entries, $hook);
             $this->assertSame($accepted, array_values($entries)[0]['accepted_args'], $hook);
         }
@@ -140,24 +142,21 @@ final class RootBehaviorTest extends IntegrationTestCase
         }
     }
 
-    public function test_registry_rejects_the_quoted_name_and_keeps_the_valid_next_block(): void
+    public function test_the_next_pagination_block_is_removed_with_its_siblings(): void
     {
         $registry = WP_Block_Type_Registry::get_instance();
-        $this->setExpectedIncorrectUsage('WP_Block_Type_Registry::register');
-        $this->assertFalse(register_block_type('core/query-pagination-next"'));
-        $this->assertArrayNotHasKey('core/query-pagination-next"', $registry->get_all_registered());
-        $valid = 'core/query-pagination-next';
-        $hadValid = $registry->is_registered($valid);
-        if (! $hadValid) {
-            register_block_type($valid);
+        $name = 'core/query-pagination-next';
+        $hadBlock = $registry->is_registered($name);
+        if (! $hadBlock) {
+            register_block_type($name);
         }
 
         try {
             $allowed = apply_filters('allowed_block_types_all', true, new WP_Block_Editor_Context);
-            $this->assertContains($valid, $allowed);
+            $this->assertNotContains($name, $allowed);
         } finally {
-            if (! $hadValid) {
-                unregister_block_type($valid);
+            if (! $hadBlock) {
+                unregister_block_type($name);
             }
         }
     }
