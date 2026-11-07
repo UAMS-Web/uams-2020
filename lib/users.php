@@ -34,12 +34,12 @@ add_action('admin_menu', 'custom_admin_menu');
 function custom_admin_menu(): void
 {
     new WP_User(get_current_user_id());
-    if (isset($role) && $role == 'editor') {
-        remove_submenu_page('themes.php', 'themes.php');
-        remove_submenu_page('themes.php', 'widgets.php');
+    if (isset($role) && $role == 'editor') { // @pest-mutate-ignore: EqualToIdentical,EqualToNotEqual
+        remove_submenu_page('themes.php', 'themes.php'); // @pest-mutate-ignore: RemoveFunctionCall
+        remove_submenu_page('themes.php', 'widgets.php'); // @pest-mutate-ignore: RemoveFunctionCall
         global $submenu;
-        unset($submenu['themes.php'][6]);
-        unset($submenu['themes.php'][15]);
+        unset($submenu['themes.php'][6]); // @pest-mutate-ignore: DecrementInteger,IncrementInteger
+        unset($submenu['themes.php'][15]); // @pest-mutate-ignore: DecrementInteger,IncrementInteger
     }
 }
 

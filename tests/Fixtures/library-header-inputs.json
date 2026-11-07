@@ -1,0 +1,714 @@
+{
+    "uamshealth/main/False/False": {
+        "site": {
+            "site": "uamshealth",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "uamshealth/main/False/True": {
+        "site": {
+            "site": "uamshealth",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "uamshealth/main/7/False": {
+        "site": {
+            "site": "uamshealth",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "uamshealth/main/7/True": {
+        "site": {
+            "site": "uamshealth",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "uamshealth/dept/False/False": {
+        "site": {
+            "site": "uamshealth",
+            "subsite": "dept",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "uamshealth/dept/False/True": {
+        "site": {
+            "site": "uamshealth",
+            "subsite": "dept",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "uamshealth/dept/7/False": {
+        "site": {
+            "site": "uamshealth",
+            "subsite": "dept",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "uamshealth/dept/7/True": {
+        "site": {
+            "site": "uamshealth",
+            "subsite": "dept",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "inside/main/False/False": {
+        "site": {
+            "site": "inside",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "inside/main/False/True": {
+        "site": {
+            "site": "inside",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "inside/main/7/False": {
+        "site": {
+            "site": "inside",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "inside/main/7/True": {
+        "site": {
+            "site": "inside",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "inside/other/False/False": {
+        "site": {
+            "site": "inside",
+            "subsite": "other",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "inside/other/False/True": {
+        "site": {
+            "site": "inside",
+            "subsite": "other",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "inside/other/7/False": {
+        "site": {
+            "site": "inside",
+            "subsite": "other",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "inside/other/7/True": {
+        "site": {
+            "site": "inside",
+            "subsite": "other",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "institute/eye/False/False": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "institute/eye/False/True": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "institute/eye/7/False": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "institute/eye/7/True": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "uams/main/False/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "uams/main/False/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "uams/main/7/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "uams/main/7/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "uams/health-prof/False/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "health-prof",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "uams/health-prof/False/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "health-prof",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "uams/health-prof/7/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "health-prof",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "uams/health-prof/7/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "health-prof",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "uams/medicine/False/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "medicine",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "uams/medicine/False/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "medicine",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "uams/medicine/7/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "medicine",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "uams/medicine/7/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "medicine",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "uams/nursing/False/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "nursing",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "uams/nursing/False/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "nursing",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "uams/nursing/7/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "nursing",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "uams/nursing/7/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "nursing",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "uams/pharmacy/False/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "pharmacy",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "uams/pharmacy/False/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "pharmacy",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "uams/pharmacy/7/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "pharmacy",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "uams/pharmacy/7/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "pharmacy",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "uams/public-health/False/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "public-health",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "uams/public-health/False/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "public-health",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "uams/public-health/7/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "public-health",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "uams/public-health/7/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "public-health",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "uams/grad-school/False/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "grad-school",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "uams/grad-school/False/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "grad-school",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "uams/grad-school/7/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "grad-school",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "uams/grad-school/7/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "grad-school",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "uams/regional-campus/False/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "regional-campus",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "uams/regional-campus/False/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "regional-campus",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "uams/regional-campus/7/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "regional-campus",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "uams/regional-campus/7/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "regional-campus",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "uams/other/False/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "other",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "uams/other/False/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "other",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "uams/other/7/False": {
+        "site": {
+            "site": "uams",
+            "subsite": "other",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "uams/other/7/True": {
+        "site": {
+            "site": "uams",
+            "subsite": "other",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "unknown/main/False/False": {
+        "site": {
+            "site": "unknown",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "unknown/main/False/True": {
+        "site": {
+            "site": "unknown",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "unknown/main/7/False": {
+        "site": {
+            "site": "unknown",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "unknown/main/7/True": {
+        "site": {
+            "site": "unknown",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "/main/False/False": {
+        "site": {
+            "site": "",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": false
+    },
+    "/main/False/True": {
+        "site": {
+            "site": "",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": false,
+        "marketing": true
+    },
+    "/main/7/False": {
+        "site": {
+            "site": "",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": false
+    },
+    "/main/7/True": {
+        "site": {
+            "site": "",
+            "subsite": "main",
+            "department": "main"
+        },
+        "subsection": 7,
+        "marketing": true
+    },
+    "split main/Current   Split/Root   Split": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "main"
+        },
+        "title": "Current   Split",
+        "root_title": "Root   Split"
+    },
+    "split main/Current Title/Root   Split": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "main"
+        },
+        "title": "Current Title",
+        "root_title": "Root   Split"
+    },
+    "split main/Current   Split/Root Title": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "main"
+        },
+        "title": "Current   Split",
+        "root_title": "Root Title"
+    },
+    "split none/Current   Split/Root   Split": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "none"
+        },
+        "title": "Current   Split",
+        "root_title": "Root   Split"
+    },
+    "split none/Current Title/Root   Split": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "none"
+        },
+        "title": "Current Title",
+        "root_title": "Root   Split"
+    },
+    "split none/Current   Split/Root Title": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "none"
+        },
+        "title": "Current   Split",
+        "root_title": "Root Title"
+    },
+    "split dept/Current   Split/Root   Split": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "dept"
+        },
+        "title": "Current   Split",
+        "root_title": "Root   Split"
+    },
+    "split dept/Current Title/Root   Split": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "dept"
+        },
+        "title": "Current Title",
+        "root_title": "Root   Split"
+    },
+    "split dept/Current   Split/Root Title": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "dept"
+        },
+        "title": "Current   Split",
+        "root_title": "Root Title"
+    },
+    "late subsection department": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "dept"
+        },
+        "subsection_sequence": [
+            false,
+            7,
+            7,
+            7
+        ]
+    },
+    "late subsection main": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "main"
+        },
+        "subsection_sequence": [
+            false,
+            7,
+            7,
+            7,
+            7
+        ]
+    },
+    "late subsection none": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "none"
+        },
+        "subsection_sequence": [
+            false,
+            7,
+            7,
+            7,
+            7
+        ]
+    },
+    "subsection changes after condition": {
+        "site": {
+            "site": "institute",
+            "subsite": "eye",
+            "department": "dept"
+        },
+        "subsection_sequence": [
+            false,
+            7,
+            7,
+            false,
+            7
+        ]
+    }
+}

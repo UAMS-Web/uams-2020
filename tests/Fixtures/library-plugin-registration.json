@@ -1,0 +1,113 @@
+[
+    [
+        {
+            "name": "T:uams-2020:Widget CSS Classes",
+            "slug": "widget-css-classes",
+            "required": false
+        },
+        {
+            "name": "T:uamswp-uams-2020:Better Image Sizes",
+            "slug": "better-image-sizes",
+            "required": true
+        },
+        {
+            "name": "T:uamswp-uams-2020:UAMSWP YouTube Lyte",
+            "slug": "uamswp-youtube-lyte",
+            "source": "/theme/plugins/uamswp-youtube-lyte.zip",
+            "version": "1.7.32",
+            "required": true
+        },
+        {
+            "name": "T:uamswp-uams-2020:Advanced Custom Fields PRO",
+            "slug": "advanced-custom-fields-pro",
+            "source": "/theme/plugins/advanced-custom-fields-pro.zip",
+            "required": true
+        },
+        {
+            "name": "T:uamswp-uams-2020:Advanced Custom Fields: Mask Field",
+            "slug": "acf-maskfield",
+            "source": "/theme/plugins/acf-maskfield.zip",
+            "required": true
+        }
+    ],
+    {
+        "id": "uamswp",
+        "default_path": "",
+        "menu": "tgmpa-install-plugins",
+        "has_notices": true,
+        "dismissable": true,
+        "dismiss_msg": "",
+        "is_automatic": false,
+        "message": "",
+        "strings": {
+            "page_title": "T:tgmpa:Install Required Plugins",
+            "menu_title": "T:tgmpa:Install Plugins",
+            "installing": "T:tgmpa:Installing Plugin: %s",
+            "oops": "T:tgmpa:Something went wrong with the plugin API.",
+            "notice_can_install_required": {
+                "plural": [
+                    "This theme requires the following plugin: %1$s.",
+                    "This theme requires the following plugins: %1$s."
+                ]
+            },
+            "notice_can_install_recommended": {
+                "plural": [
+                    "This theme recommends the following plugin: %1$s.",
+                    "This theme recommends the following plugins: %1$s."
+                ]
+            },
+            "notice_cannot_install": {
+                "plural": [
+                    "Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.",
+                    "Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed."
+                ]
+            },
+            "notice_can_activate_required": {
+                "plural": [
+                    "The following required plugin is currently inactive: %1$s.",
+                    "The following required plugins are currently inactive: %1$s."
+                ]
+            },
+            "notice_can_activate_recommended": {
+                "plural": [
+                    "The following recommended plugin is currently inactive: %1$s.",
+                    "The following recommended plugins are currently inactive: %1$s."
+                ]
+            },
+            "notice_cannot_activate": {
+                "plural": [
+                    "Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the administrator of this site for help on getting the plugin activated.",
+                    "Sorry, but you do not have the correct permissions to activate the %s plugins. Contact the administrator of this site for help on getting the plugins activated."
+                ]
+            },
+            "notice_ask_to_update": {
+                "plural": [
+                    "The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.",
+                    "The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s."
+                ]
+            },
+            "notice_cannot_update": {
+                "plural": [
+                    "Sorry, but you do not have the correct permissions to update the %s plugin. Contact the administrator of this site for help on getting the plugin updated.",
+                    "Sorry, but you do not have the correct permissions to update the %s plugins. Contact the administrator of this site for help on getting the plugins updated."
+                ]
+            },
+            "install_link": {
+                "plural": [
+                    "Begin installing plugin",
+                    "Begin installing plugins"
+                ]
+            },
+            "activate_link": {
+                "plural": [
+                    "Begin activating plugin",
+                    "Begin activating plugins"
+                ]
+            },
+            "return": "T:tgmpa:Return to Required Plugins Installer",
+            "plugin_activated": "T:tgmpa:Plugin activated successfully.",
+            "complete": "T:tgmpa:All plugins installed and activated successfully. %s",
+            "nag_type": "updated"
+        }
+    }
+]

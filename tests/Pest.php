@@ -9,6 +9,7 @@
 
 declare(strict_types=1);
 
+use Uams2020\Tests\Support\LibraryLoader;
 use Uams2020\Tests\Support\PageBuilderLoader;
 use Uams2020\Tests\Support\ThemeBootstrap;
 
@@ -31,6 +32,7 @@ uses()
         setUp();
         ThemeBootstrap::load();
         PageBuilderLoader::load();
+        LibraryLoader::load();
     })
     ->afterEach(function (): void {
         $this->addToAssertionCount(Mockery::getContainer()->mockery_getExpectationCount());

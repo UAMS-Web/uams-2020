@@ -6,7 +6,9 @@
         "strftime",
         "glob",
         "error_log",
-        "exit"
+        "exit",
+        "random_int",
+        "mt_getrandmax"
     ],
     "blacklist": [
         "vendor/symfony/finder/"
