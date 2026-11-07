@@ -4,6 +4,7 @@
  * Author: Sridhar Katakam
  * Link: https://sridharkatakam.com/
  */
+// Throwaway comment-only change.
 remove_action('genesis_loop', 'genesis_do_loop');
 add_action('genesis_loop', 'uamswp_do_search_loop');
 
