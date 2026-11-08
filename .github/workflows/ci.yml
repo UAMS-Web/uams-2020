@@ -125,8 +125,9 @@ jobs:
     # Ubuntu only: a Windows runner scored mutants the tests never detect as killed
     # (UAMS-Web/uams-ci-workflows#13), so the closing measurement is taken on Linux.
     runs-on: ubuntu-latest
-    # 45 minutes for the changed files a pull request or a push selects.
-    timeout-minutes: 45
+    # 90 minutes for the changed files a pull request or a push selects: functions.php alone took
+    # 53 minutes in a measured run (UAMS-Web/uams-2020#697).
+    timeout-minutes: 90
     # An explicit `bash` runs each step with `-eo pipefail`, so the run step's `| tee` reports
     # Pest's status and not tee's.
     defaults:
@@ -247,7 +248,9 @@ jobs:
   # (UAMS-Web/uams-2020#697). It is not in the `CI` job's `needs`, because it is skipped on a
   # pull request or a push; .github/aggregate-needs-allow.json records that.
   mutate-full:
-    name: Mutation score (${{ matrix.population }}, full)
+    # A fixed name, so the entry skipped on a pull request shows this text and not the raw
+    # matrix template; GitHub appends the matrix value to it on a manual run.
+    name: Mutation score, full run
     if: github.event_name == 'workflow_dispatch'
     needs: [rector, phpstan]
     runs-on: ubuntu-latest
@@ -258,17 +261,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - population: root templates and search.php
-            paths: home.php,page_archive.php,page_blog.php,search.php,templates
-          - population: functions.php
-            paths: functions.php
-          - population: lib
-            paths: lib
-          - population: acf_fields
-            paths: acf_fields
-          - population: blocks
-            paths: blocks
+        # lib and acf_fields are split by file into groups of similar line counts, because one
+        # job over either ran past 130 minutes (UAMS-Web/uams-2020#697). The case in the run
+        # step maps each id to its paths.
+        population:
+          - root-and-search
+          - functions
+          - lib-1
+          - lib-2
+          - lib-3
+          - acf-1
+          - acf-2
+          - acf-3
+          - blocks
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
@@ -279,8 +284,22 @@ jobs:
       # The launcher's default `--ignore` still keeps the two vendored libraries out.
       - name: Run mutation testing
         env:
-          PATHS: ${{ matrix.paths }}
-        run: composer mutate -- --min=100 --path="$PATHS" 2>&1 | tee mutate.log
+          POPULATION: ${{ matrix.population }}
+        run: |
+          case "$POPULATION" in
+            root-and-search) PATHS=home.php,page_archive.php,page_blog.php,search.php,templates ;;
+            functions) PATHS=functions.php ;;
+            lib-1) PATHS=lib/breadcrumb.php,lib/customizer.php,lib/favicon.php,lib/meta-box.php,lib/search.php,lib/users.php ;;
+            lib-2) PATHS=lib/a11y.php,lib/blocks.php,lib/bootstrap.php,lib/comment.php,lib/footer-widgets.php,lib/media-credit.php,lib/modules/class-wp-bootstrap-pagewalker.php,lib/nav.php,lib/quicklinks.php,lib/site-container-outer.php,lib/tgm.php ;;
+            lib-3) PATHS=lib/acf.php,lib/extras.php,lib/footer.php,lib/geo.php,lib/header.php,lib/misc.php,lib/modules.php,lib/page.php,lib/pagination.php,lib/scripts.php,lib/search-tray.php,lib/widget-areas.php,lib/widgets.php ;;
+            acf-1) PATHS=acf_fields/action-bar.php,acf_fields/content.php,acf_fields/gallery.php,acf_fields/image-side-by-side.php,acf_fields/post-category-tiles.php,acf_fields/section.php ;;
+            acf-2) PATHS=acf_fields/call-out.php,acf_fields/counter.php,acf_fields/hero.php,acf_fields/news.php,acf_fields/overlay.php ;;
+            acf-3) PATHS=acf_fields/cta.php,acf_fields/link-list.php,acf_fields/livewhale.php,acf_fields/modules.php,acf_fields/post-category-tile.php,acf_fields/stacked.php ;;
+            blocks) PATHS=blocks ;;
+            *) echo "::error::Unknown population: $POPULATION"; exit 1 ;;
+          esac
+          echo "Mutating: $PATHS"
+          composer mutate -- --min=100 --path="$PATHS" 2>&1 | tee mutate.log
 
       # Reads the log, not the exit status, as the changed-files job does, with no allowance for
       # zero mutants: every population here holds code a mutator changes. The mutant counts go to
