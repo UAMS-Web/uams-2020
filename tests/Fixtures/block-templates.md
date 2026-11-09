@@ -4,6 +4,8 @@
 
 Escaping was later added at the remaining output sinks of the second link list, both category tiles, overlay, gallery, stacked and CTA templates, and at the editor-preview region line of call-out, content, hero and news. The 277 cases those changes touch were re-pinned by re-rendering them through `BlockTemplateScenario`. Each re-pinned markup string equals its predecessor once the escaping markers are removed, the non-escaping boundary calls and query arguments are unchanged, and the other 469 cases are byte-for-byte as first captured.
 
+Of the 18 templates, 15 are registered as ACF blocks in `lib/blocks.php`; `page-builder-registrations.json` pins that payload. The three others are not: `link-list-2.php` is referenced nowhere in the theme, and `post-category-tile.php` and `post-category-tiles.php` render only through the page-builder layouts in `lib/modules.php`. The escaping sink test in `BlockTemplatesTest` names every one of the 18, and a coverage test derives the registered set from the registration fixture so a newly registered template without sink assertions fails.
+
 The fixture records current behavior rather than desired markup. For example, the gallery and stacked templates evaluate their more-link target expression without echoing it; their existing output has no target attribute. The legacy second link-list and stacked templates can retain the preceding row's link values when the next row has no URL. These outputs are pinned, not repaired here.
 
 ## Boundaries

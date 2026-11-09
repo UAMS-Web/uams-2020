@@ -248,12 +248,83 @@ it('keeps a blank more-link URL when the stored stacked link is false', function
     Assert::assertStringContainsString('href="URL()" class="btn btn-outline-primary"', $actual['html']);
 });
 
-it('escapes editor-controlled values at every block sink', function (string $name, string $label, array $needles) use ($blockCasesByLabel): void {
-    $actual = BlockTemplateScenario::render($blockCasesByLabel[$name][$label]);
-    foreach ($needles as $needle) {
-        Assert::assertStringContainsString($needle, $actual['html']);
-    }
-})->with([
+/**
+ * Every template in blocks/, keyed by its fixture name: the fifteen that lib/blocks.php
+ * registers through acf_register_block_type, and the three it does not (the second link
+ * list is referenced nowhere; both category tiles still render through lib/modules.php).
+ * The coverage test below checks this list against the pinned registration payload.
+ */
+$blockSinkCases = [
+    ['link-list', 'fields', [
+        'class="uams-module link-list link-list-layout-splitATTR( custom class alignwide) ATTR(bg-white)" id="ATTR(link-list-block-7)" aria-label="ATTR(link_list_heading <&")"',
+        '<span class="title">HTML(link_list_heading <&")</span>',
+        '<p class="note">HTML(link_list_description <&")</p>',
+        'href="URL(https://example.test/go?x="<&)" target="ATTR(_blank)" aria-label="ATTR(link_list_section_description <&")" data-moduletitle="ATTR(link_list_heading <&")">HTML(link_list_section_title <&")</a>',
+        '<p>HTML(link_list_section_body <&")</p>',
+    ]],
+    ['action-bar', 'fields', [
+        'class="uams-module action-barATTR( custom class alignwide) count-3 ATTR(bg-white)" id="ATTR(action-bar-block-7)" aria-label="ATTR(action_bar_heading <&")"',
+        '<h2 class="sr-only">HTML(action_bar_heading <&")</h2>',
+        '<h3 class="h5" data-moduletitle="ATTR(action_bar_heading <&")">HTML(action_bar_section_heading <&")</h3>',
+        '<p>HTML(action_bar_section_body <&")</p>',
+        'href="URL(https://example.test/go?x="<&)" aria-label="ATTR(action_bar_section_button_description <&")" target="ATTR(_blank)" data-moduletitle="ATTR(action_bar_heading <&")" data-itemtitle="ATTR(action_bar_section_heading <&")">HTML(action_bar_section_button_text <&")</a>',
+    ]],
+    ['call-out', 'fields', [
+        'class="uams-module extra-padding call-outATTR( custom class alignwide) ATTR(bg-white) bg-image" id="ATTR(call-out-block-7)" aria-label="ATTR(call_out_heading <&")"',
+        '<h2>HTML(call_out_heading <&")</h2>',
+        '<p>POST(call_out_body <&")</p>',
+    ]],
+    ['content', 'fields', [
+        'class="uams-module content-blockATTR( custom class alignwide) ATTR(bg-white)" id="ATTR(content-block-7)" aria-label="ATTR(content_heading <&")"',
+        '<span class="title">HTML(content_heading <&")</span>',
+        '<div class="module-body">POST(content_content <&")</div>',
+    ]],
+    ['counter', 'fields', [
+        'class="uams-module link-list counter-list link-list-layout-splitATTR( custom class alignwide) ATTR(bg-white)" id="ATTR(link-list-block-7)" aria-label="ATTR(counter_list_heading <&")"',
+        '<span class="title">HTML(counter_list_heading <&")</span>',
+        '<p class="note">POST(counter_list_description <&")</p>',
+        'data-unit-singular="ATTR(counter_list_section_unit <&")" data-unit-plural="ATTR(counter_list_section_units <&")" id="item-ATTR(link-list-block-7-row-1)"',
+        '<h3 class="h5">HTML(counter_list_section_title <&")</h3>',
+        '<span class="append">HTML(counter_list_section_units <&")</span>',
+    ]],
+    ['hero', 'fields', [
+        'class="hero carousel ATTR(uams-hero-block custom class alignwide) slide multiple-slides" id="carousel-ATTR(hero-block-7)"',
+        'alt="ATTR(hero_image_alt_text <&")"',
+        '<h2>HTML(hero_heading <&")</h2>',
+        '<p>POST(hero_body <&")</p>',
+        'href="URL(https://example.test/go?x="<&)" aria-label="ATTR(hero_button_description <&")" target="ATTR(_blank)" data-itemtitle="ATTR(hero_heading <&")">HTML(hero_button_text <&")</a>',
+    ]],
+    ['image-side-by-side', 'fields', [
+        'class="uams-module no-padding side-by-side ATTR(uams-side-by-side-block custom class alignwide) image-on-ATTR(right) image-background-ATTR(top) ATTR(bg-white)" id="side-by-side-ATTR(CLASS(image-side-block-7))" aria-label="ATTR(side_heading <&")"',
+        'aria-label="ATTR(Override <&)" role="img"',
+        '<h2 class="h3">HTML(side_heading <&")</h2>',
+        '<p>HTML(side_layout_link_text <&")</p>',
+        '<a href="URL(https://example.test/go?x="<&)" aria-label="ATTR(List description)" data-moduletitle="ATTR(side_heading <&")">',
+        '<a class="btn btn-primary" href="URL(https://example.test/go?x="<&)" aria-label="ATTR(CTA description)" target="ATTR(_blank)" data-moduletitle="ATTR(side_heading <&")">HTML(CTA <&)</a>',
+    ]],
+    ['livewhale', 'fields', [
+        'class="uams-module link-list link-list-layout-split livewhaleATTR( custom class alignwide) ATTR(bg-white)" id="0" aria-label="ATTR(livewhale_heading <&")"',
+        '<span class="title">HTML(livewhale_heading <&")</span>',
+        'data-options="id=0&format=html"',
+    ]],
+    ['news', 'fields', [
+        'news_title="ATTR(TEXT(news_title <&))"',
+        'category="ATTR(TEXT(news_category <&))"',
+        'advanced_cat="ATTR(TEXT(news_advanced_cat <&))"',
+        'style="ATTR(bg-white alignwide)"',
+        'news_position="ATTR(news_position <&")"',
+    ]],
+    ['section', 'fields', [
+        'class="ATTR(uams-module section-block block-section alignfull custom class) ATTR(bg-white)" id="ATTR(uams-section-block-7)" aria-label="ATTR(section_heading <&")"',
+        '<span class="title">HTML(section_heading <&")</span>',
+    ]],
+    ['iframe', 'fields', [
+        'class="ATTR(uams-module uams-iframe custom class alignwide)" id="ATTR(uams-iframe-block-7)"',
+        'src="URL(https://example.test/embed)"',
+        'title="ATTR(iframe_title <&")"',
+        'height:ATTR(410)px',
+        'sandbox="ATTR(allow-forms)"',
+    ]],
     ['link-list-2', 'fields', [
         'class="uams-module link-listATTR( custom class alignwide) ATTR(bg-white)" id="ATTR(link-list-block-7)" aria-label="ATTR(link_list_heading <&")"',
         '<span class="title">HTML(link_list_heading <&")</span>',
@@ -295,8 +366,31 @@ it('escapes editor-controlled values at every block sink', function (string $nam
     ]],
     ['cta', 'fields', [
         'class="uams-module cta-bar ATTR( custom class alignwide) ATTR(horizontal) ATTR(bg-white)',
+        '<h2>HTML(cta_bar_heading <&")</h2>',
+        'href="URL(https://example.test/go?x="<&)" aria-label="ATTR(cta_bar_button_description <&")" class=" btn btn-primary btn-lg" target="ATTR(_blank)" data-moduletitle="ATTR(cta_bar_heading <&")">HTML(cta_bar_button_text <&")</a>',
     ]],
-]);
+];
+
+it('escapes editor-controlled values at every block sink', function (string $name, string $label, array $needles) use ($blockCasesByLabel): void {
+    $actual = BlockTemplateScenario::render($blockCasesByLabel[$name][$label]);
+    foreach ($needles as $needle) {
+        Assert::assertStringContainsString($needle, $actual['html']);
+    }
+})->with(array_combine(array_map(static fn (array $case): string => $case[0].' / '.$case[1], $blockSinkCases), $blockSinkCases));
+
+it('asserts escaping sinks for every registered block template and the three unregistered ones', function () use ($blockSinkCases, $blockCasesByName): void {
+    $registrations = json_decode(file_get_contents(__DIR__.'/../Fixtures/page-builder-registrations.json'), true, flags: JSON_THROW_ON_ERROR);
+    $registered = array_map(static fn (array $block): string => basename($block['render_template'], '.php'), $registrations['blocks']);
+    sort($registered);
+    $covered = array_values(array_unique(array_column($blockSinkCases, 0)));
+    $unregistered = array_values(array_diff(array_keys($blockCasesByName), $registered));
+    sort($unregistered);
+
+    Assert::assertCount(15, $registered);
+    Assert::assertSame([], array_values(array_diff($registered, $covered)), 'A registered block render template has no escaping sink assertions.');
+    Assert::assertSame(['link-list-2', 'post-category-tile', 'post-category-tiles'], $unregistered);
+    Assert::assertSame([], array_values(array_diff($unregistered, $covered)), 'An unregistered block template has no escaping sink assertions.');
+});
 
 it('keeps empty nested link targets in the printed false arm', function (string $name, string $repeater, string $urlKey) use ($blockBaseCases): void {
     $case = $blockBaseCases[$name];
