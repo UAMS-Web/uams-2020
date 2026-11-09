@@ -136,11 +136,11 @@ if (! isset($geo) || empty($geo_region)) {
 }
 if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo esc_html(ucwords($geo)).' region(s): '.esc_html(implode(', ', $geo_region)).'<hr>';
 }
 if ($geo_display) {
     ?>
-<section class="uams-module cta-bar <?php echo esc_attr($className); ?> <?php echo $layout; ?> <?php echo $background_color; ?><?php echo $use_image ? ' bg-image' : ''; ?><?php echo $size == 'small' ? ' cta-bar-sm' : ''; ?><?php echo $size == 'large' ? ' extra-padding cta-bar-lg' : ''; ?><?php echo $action_type == 'none' ? ' no-link' : ''; ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
+<section class="uams-module cta-bar <?php echo esc_attr($className); ?> <?php echo esc_attr($layout); ?> <?php echo esc_attr($background_color); ?><?php echo $use_image ? ' bg-image' : ''; ?><?php echo $size == 'small' ? ' cta-bar-sm' : ''; ?><?php echo $size == 'large' ? ' extra-padding cta-bar-lg' : ''; ?><?php echo $action_type == 'none' ? ' no-link' : ''; ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
 <?php if ($use_image && function_exists('bis_get_attachment_image')) { ?>
     <style>
         #<?php echo sanitize_html_class($id); ?>:before {

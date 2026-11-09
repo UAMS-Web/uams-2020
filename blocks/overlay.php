@@ -63,7 +63,7 @@ if (! isset($geo) || empty($geo_region)) {
 }
 if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo esc_html(ucwords($geo)).' region(s): '.esc_html(implode(', ', $geo_region)).'<hr>';
 }
 if ($geo_display) {
 
@@ -71,7 +71,7 @@ if ($geo_display) {
         $row_count = count($overlay_rows);
 
         ?>
-<div class="uams-module no-padding text-image-overlay<?php echo $className; ?>" id="<?php echo $id; ?>">
+<div class="uams-module no-padding text-image-overlay<?php echo esc_attr($className); ?>" id="<?php echo esc_attr($id); ?>">
     <div class="container-fluid">
         <div class="row">
 <?php
@@ -92,7 +92,7 @@ if ($geo_display) {
             $image = $overlay_row['overlay_section_image'];
 
             ?>
-            <section class="col-12<?php echo $row_count > 1 ? ' col-sm-6' : ''; ?> item bg-image item-<?php echo $index; ?> <?php echo $background_color; ?>" aria-label="<?php echo esc_attr($heading); ?>">
+            <section class="col-12<?php echo $row_count > 1 ? ' col-sm-6' : ''; ?> item bg-image item-<?php echo $index; ?> <?php echo esc_attr($background_color); ?>" aria-label="<?php echo esc_attr($heading); ?>">
                 <?php if ($row_count > 1 && function_exists('bis_get_attachment_image')) { // Background styles for two tiles in one row with BIS plugin?>
                 <style>
                     #<?php echo $id; ?> .item-<?php echo $index; ?>:before {

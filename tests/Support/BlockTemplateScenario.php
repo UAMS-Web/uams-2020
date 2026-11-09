@@ -132,6 +132,7 @@ final class BlockTemplateScenario
         when('the_title')->alias(static function (): void {
             echo 'Post <title> &';
         });
+        when('get_the_title')->justReturn('Post <title> &');
         when('the_permalink')->alias(static function (): void {
             echo 'https://example.test/post';
         });

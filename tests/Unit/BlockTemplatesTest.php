@@ -198,8 +198,8 @@ it('uses the legacy link-list fallback icon when icons are enabled', function ()
     $case = $blockCasesByLabel['link-list-2']['toggle-link_list_icons'];
     $case['fields']['link_list_section'][1]['link_list_section_icon'] = false;
     $actual = BlockTemplateScenario::render($case);
-    Assert::assertSame(1, substr_count($actual['html'], 'class="fas fa-link fa-stack-1x fa-inverse"'));
-    Assert::assertStringContainsString($case['fields']['link_list_section'][0]['link_list_section_icon'].' fa-stack-1x fa-inverse', $actual['html']);
+    Assert::assertSame(1, substr_count($actual['html'], 'class="ATTR(fas fa-link) fa-stack-1x fa-inverse"'));
+    Assert::assertStringContainsString('ATTR('.$case['fields']['link_list_section'][0]['link_list_section_icon'].') fa-stack-1x fa-inverse', $actual['html']);
 });
 
 it('floors fractional counter values above the display threshold', function () use ($blockBaseCases): void {
@@ -245,8 +245,58 @@ it('keeps a blank more-link URL when the stored stacked link is false', function
     $case = $blockCasesByLabel['stacked']['more'];
     $case['fields']['stacked_more_button_url'] = false;
     $actual = BlockTemplateScenario::render($case);
-    Assert::assertStringContainsString('href="" class="btn btn-outline-primary"', $actual['html']);
+    Assert::assertStringContainsString('href="URL()" class="btn btn-outline-primary"', $actual['html']);
 });
+
+it('escapes editor-controlled values at every block sink', function (string $name, string $label, array $needles) use ($blockCasesByLabel): void {
+    $actual = BlockTemplateScenario::render($blockCasesByLabel[$name][$label]);
+    foreach ($needles as $needle) {
+        Assert::assertStringContainsString($needle, $actual['html']);
+    }
+})->with([
+    ['link-list-2', 'fields', [
+        'class="uams-module link-listATTR( custom class alignwide) ATTR(bg-white)" id="ATTR(link-list-block-7)" aria-label="ATTR(link_list_heading <&")"',
+        '<span class="title">HTML(link_list_heading <&")</span>',
+        '<p class="note">HTML(link_list_description <&")</p>',
+        'href="URL(https://example.test/go?x="<&)" target="ATTR(_blank)" aria-label="ATTR(link_list_section_description <&")">HTML(link_list_section_title <&")</a>',
+        '<p>HTML(link_list_section_body <&")</p>',
+    ]],
+    ['link-list-2', 'toggle-link_list_icons', [
+        'class="ATTR(link_list_section_icon <&") fa-stack-1x fa-inverse"',
+    ]],
+    ['post-category-tiles', 'fields', [
+        'class="uams-module stacked-image-text post-category-tilesATTR( custom class alignwide) ATTR(bg-white)" id="ATTR(stacked-image-text-block-7)" aria-label="ATTR(post_tiles_heading <&")"',
+        '<span class="title">HTML(post_tiles_heading <&")</span>',
+        'href="URL(category:71)" aria-label="Full list of ATTR(Category & <name>) stories" data-moduletitle="ATTR(post_tiles_heading <&")" data-categorytitle="ATTR(Category & <name>)">HTML(Category & <name>)</a>',
+        '<p class="card-text">HTML(STRIPPED(',
+        'aria-label="Read ATTR(Post <title> &)" data-moduletitle="ATTR(post_tiles_heading <&")" data-categorytitle="ATTR(Category & <name>)">HTML(post_tiles_section_post_button_text <&")</a>',
+        '>HTML(post_tiles_section_category_button_text <&")</a>',
+    ]],
+    ['post-category-tile', 'fields', [
+        'class="uams-module post-category-tileATTR( custom class alignwide) ATTR(bg-white)" id="ATTR(post-category-tile-block-7)"',
+        '<p>HTML(STRIPPED(',
+        'aria-label="Read ATTR(Post <title> &)"',
+        'href="URL(category:71)" class="btn btn-outline-primary"',
+    ]],
+    ['overlay', 'fields', [
+        'class="uams-module no-padding text-image-overlayATTR( custom class alignwide)" id="ATTR(CLASS(text-image-overlay-block-7))"',
+        'item bg-image item-1 ATTR(auto)"',
+    ]],
+    ['gallery', 'gallery-3-none', [
+        'class="uams-module gallery-blockATTR( custom class alignwide) ATTR(bg-white)" id="ATTR(uams-gallery-block-7)"',
+        'data-target="#modal_0_ATTR(uams-gallery-block-7)"',
+        'id="modal_0_ATTR(uams-gallery-block-7)"',
+        '<p class="lead">HTML(gallery_more_text <&")</p>',
+        '>HTML(gallery_more_button_text <&")</a>',
+    ]],
+    ['stacked', 'more', [
+        '<p class="lead">HTML(stacked_more_text <&")</p>',
+        'href="URL(https://example.test/go?x="<&)" class="btn btn-outline-primary" aria-label="ATTR(stacked_more_button_description <&")">HTML(stacked_more_button_text <&")</a>',
+    ]],
+    ['cta', 'fields', [
+        'class="uams-module cta-bar ATTR( custom class alignwide) ATTR(horizontal) ATTR(bg-white)',
+    ]],
+]);
 
 it('keeps empty nested link targets in the printed false arm', function (string $name, string $repeater, string $urlKey) use ($blockBaseCases): void {
     $case = $blockBaseCases[$name];
@@ -256,8 +306,7 @@ it('keeps empty nested link targets in the printed false arm', function (string 
 
     unset($row);
     $actual = BlockTemplateScenario::render($case);
-    $attribute = $name === 'link-list-2' ? ' target="_blank"' : ' target="ATTR(_blank)"';
-    $expected = str_replace($attribute, '', $case['expected']['html']);
+    $expected = str_replace(' target="ATTR(_blank)"', '', $case['expected']['html']);
     Assert::assertTrue($expected === $actual['html'], 'Empty nested target changed printed block markup.');
 })->with([
     ['hero', 'hero', 'hero_button_url'],

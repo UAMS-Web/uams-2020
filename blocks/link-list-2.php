@@ -73,15 +73,15 @@ if (! isset($geo) || empty($geo_region)) {
 }
 if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo esc_html(ucwords($geo)).' region(s): '.esc_html(implode(', ', $geo_region)).'<hr>';
 }
 if ($geo_display) {
     ?>
-<section class="uams-module link-list<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module link-list<?php echo esc_attr($className); ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
     <h2 class="module-title <?php echo $hide_heading ? ' sr-only' : ''; ?>">
-        <span class="title"><?php echo $heading; ?></span>
+        <span class="title"><?php echo esc_html($heading); ?></span>
     </h2>
-    <?php echo $description ? '<p class="note">'.$description.'</p>' : ''; ?>
+    <?php echo $description ? '<p class="note">'.esc_html($description).'</p>' : ''; ?>
     <div class="container-fluid">
         <div class="row">
         <?php
@@ -102,11 +102,11 @@ if ($geo_display) {
                     <?php if ($link_list_icons) { ?>
                         <span class="fa-stack fa-lg">
                             <span class="fas fa-circle fa-stack-2x"></span>
-                            <span class="<?php echo $link_icon ?: 'fas fa-link'; ?> fa-stack-1x fa-inverse"></span>
+                            <span class="<?php echo esc_attr($link_icon ?: 'fas fa-link'); ?> fa-stack-1x fa-inverse"></span>
                         </span>
                     <?php } // endif?>
-                    <h3 class="h5"><a class="stretched-link" href="<?php echo $link_url; ?>"<?php echo $link_target ? ' target="'.$link_target.'"' : ''; ?> aria-label="<?php echo $link_desc; ?>"><?php echo $link_title; ?></a></h3>
-                    <?php echo $body ? '<p>'.$body.'</p>' : ''; ?>
+                    <h3 class="h5"><a class="stretched-link" href="<?php echo esc_url($link_url); ?>"<?php echo $link_target ? ' target="'.esc_attr($link_target).'"' : ''; ?> aria-label="<?php echo esc_attr($link_desc); ?>"><?php echo esc_html($link_title); ?></a></h3>
+                    <?php echo $body ? '<p>'.esc_html($body).'</p>' : ''; ?>
                 </div>
             </div>
         <?php

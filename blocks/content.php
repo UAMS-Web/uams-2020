@@ -72,7 +72,7 @@ if (! isset($geo) || empty($geo_region)) {
 }
 if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo esc_html(ucwords($geo)).' region(s): '.esc_html(implode(', ', $geo_region)).'<hr>';
 }
 if ($geo_display) {
     ?>

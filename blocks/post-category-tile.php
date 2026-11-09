@@ -69,7 +69,7 @@ if (! isset($geo) || empty($geo_region)) {
 }
 if (is_admin() && ! empty($geo) && ! empty($geo_region)) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo esc_html(ucwords($geo)).' region(s): '.esc_html(implode(', ', $geo_region)).'<hr>';
 }
 if ($geo_display) {
 
@@ -106,7 +106,7 @@ if ($geo_display) {
 
             ?>
 
-<section class="uams-module post-category-tile<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo esc_attr($heading); ?>">
+<section class="uams-module post-category-tile<?php echo esc_attr($className); ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12<?php echo $hide_heading ? ' sr-only' : ''; ?>">
@@ -156,15 +156,15 @@ if ($geo_display) {
                                          // @pest-mutate-ignore: DecrementInteger,IncrementInteger
                                          $content = wp_trim_words(wp_strip_all_tags(get_the_content(), 50));
                                          $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
-                                         echo mb_strimwidth(preg_replace($regex, ' ', $content), 0, 176, ' ...');
+                                         echo esc_html(mb_strimwidth(preg_replace($regex, ' ', $content), 0, 176, ' ...'));
                                          // echo wp_trim_words((preg_replace($regex, ' ', $content)), 25, ' ...'); // Option for words, instead of characters
                                      } else {
-                                         echo mb_strimwidth(get_the_excerpt(), 0, 176, ' ...');
+                                         echo wp_kses_post(mb_strimwidth(get_the_excerpt(), 0, 176, ' ...'));
                                          // echo wp_trim_words(get_the_excerpt(), 25, ' ...');  // Words instead of character
                                      }?></p>
                         <div class="cta-container">
-                            <a href="<?php the_permalink(); ?>" class="btn btn-primary" aria-label="Read <?php the_title(); ?>" data-moduletitle="<?php echo esc_attr($heading); ?>" data-categorytitle="<?php echo esc_attr($category->name); ?>"><?php echo esc_html($post_button_text); ?></a>
-                            <a href="<?php echo get_category_link($category->term_id); ?>" class="btn btn-outline-primary" aria-label="Full list of <?php echo esc_attr($category->name); ?> stories" data-moduletitle="<?php echo esc_attr($heading); ?>"  data-categorytitle="<?php echo esc_attr($category->name); ?>"><?php echo esc_html($cat_button_text); ?></a>
+                            <a href="<?php the_permalink(); ?>" class="btn btn-primary" aria-label="Read <?php echo esc_attr(get_the_title()); ?>" data-moduletitle="<?php echo esc_attr($heading); ?>" data-categorytitle="<?php echo esc_attr($category->name); ?>"><?php echo esc_html($post_button_text); ?></a>
+                            <a href="<?php echo esc_url(get_category_link($category->term_id)); ?>" class="btn btn-outline-primary" aria-label="Full list of <?php echo esc_attr($category->name); ?> stories" data-moduletitle="<?php echo esc_attr($heading); ?>"  data-categorytitle="<?php echo esc_attr($category->name); ?>"><?php echo esc_html($cat_button_text); ?></a>
                         </div>
                     </div>
                 </div>

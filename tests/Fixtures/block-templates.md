@@ -2,6 +2,8 @@
 
 `block-templates.json` contains fixed inputs and expected complete markup, ordered field, region, attribute-escaping and metadata calls, and query arguments for the 18 PHP render templates in `blocks/`. The complete markup capture was made before editing any application file. The additional escaping and metadata receipts were captured against identical executable tokens and literal HTML; all 746 saved markup strings and earlier boundary calls remain unchanged. No fixture is regenerated during a test. The input matrix includes field lookups and caller-supplied values, IDs and anchors, both image-plugin states, empty and repeated rows, editor previews, region inclusion and exclusion, counter dates and thresholds, gallery columns and crops, quote layouts, and news formats.
 
+Escaping was later added at the remaining output sinks of the second link list, both category tiles, overlay, gallery, stacked and CTA templates, and at the editor-preview region line of call-out, content, hero and news. The 277 cases those changes touch were re-pinned by re-rendering them through `BlockTemplateScenario`. Each re-pinned markup string equals its predecessor once the escaping markers are removed, the non-escaping boundary calls and query arguments are unchanged, and the other 469 cases are byte-for-byte as first captured.
+
 The fixture records current behavior rather than desired markup. For example, the gallery and stacked templates evaluate their more-link target expression without echoing it; their existing output has no target attribute. The legacy second link-list and stacked templates can retain the preceding row's link values when the next row has no URL. These outputs are pinned, not repaired here.
 
 ## Boundaries

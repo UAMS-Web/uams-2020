@@ -141,11 +141,11 @@ if (! isset($geo) || empty($geo_region)) {
 }
 if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo esc_html(ucwords($geo)).' region(s): '.esc_html(implode(', ', $geo_region)).'<hr>';
 }
 if ($geo_display) {
     ?>
-<section class="uams-module gallery-block<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo esc_attr($heading); ?>">
+<section class="uams-module gallery-block<?php echo esc_attr($className); ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12<?php echo ($hide_heading && empty($description)) ? ' sr-only' : ''; ?>">
@@ -170,7 +170,7 @@ if ($geo_display) {
                                 ?>
                                 <div class="col-12 col-sm-<?php echo $sm ?> col-md-<?php echo $md ?> col-lg-<?php echo $lg; ?>">
                                         <?php if ($modal) { ?>
-                                            <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo $id; ?>" aria-label="Show larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': '.esc_attr($image_alt) : ''; ?>">
+                                            <a href="#" data-toggle="modal" data-target="#modal_<?php echo $i; ?>_<?php echo esc_attr($id); ?>" aria-label="Show larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': '.esc_attr($image_alt) : ''; ?>">
                                         <?php } // endif?>
                                         <picture>
                                             <?php if (function_exists('bis_get_attachment_image')) { ?>  
@@ -289,7 +289,7 @@ if ($geo_display) {
                                     <?php } // endif?>
                                 </div>
                                 <?php if ($modal) { ?>
-                                    <div class="modal fade" id="modal_<?php echo $i; ?>_<?php echo $id; ?>" tabindex="-1" role="dialog" aria-label="Larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': '.esc_attr($image_alt) : ''; ?>" aria-hidden="true">
+                                    <div class="modal fade" id="modal_<?php echo $i; ?>_<?php echo esc_attr($id); ?>" tabindex="-1" role="dialog" aria-label="Larger version of image <?php echo $i + 1; ?><?php echo $image_alt ? ': '.esc_attr($image_alt) : ''; ?>" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -329,9 +329,9 @@ if ($geo_display) {
             </div>
             <?php if ($more) { ?>
                 <div class="col-12 more">
-                    <p class="lead"><?php echo $more_text; ?></p>
+                    <p class="lead"><?php echo esc_html($more_text); ?></p>
                     <div class="cta-container">
-                        <a href="<?php echo esc_url($more_button_url['url']); ?>" class="btn btn-<?php echo $more_button_color; ?>" aria-label="<?php echo esc_attr($more_button_description); ?>"<?php $more_button_target ? ' target="'.$more_button_target.'"' : '' ?>><?php echo $more_button_text; ?></a>
+                        <a href="<?php echo esc_url($more_button_url['url']); ?>" class="btn btn-<?php echo $more_button_color; ?>" aria-label="<?php echo esc_attr($more_button_description); ?>"<?php $more_button_target ? ' target="'.$more_button_target.'"' : '' ?>><?php echo esc_html($more_button_text); ?></a>
                     </div>
                 </div>
             <?php } // endif?>

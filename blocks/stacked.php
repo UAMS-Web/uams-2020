@@ -104,7 +104,7 @@ if (! isset($geo) || empty($geo_region)) {
 }
 if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo esc_html(ucwords($geo)).' region(s): '.esc_html(implode(', ', $geo_region)).'<hr>';
 }
 if ($geo_display) {
 
@@ -171,9 +171,9 @@ if ($geo_display) {
             </div>
             <?php if ($more) { ?>
                 <div class="col-12 more">
-                    <p class="lead"><?php echo $more_text; ?></p>
+                    <p class="lead"><?php echo esc_html($more_text); ?></p>
                     <div class="cta-container">
-                        <a href="<?php echo $more_button_url['url'] ?? ''; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'.$more_button_target.'"' : '' ?>><?php echo $more_button_text; ?></a>
+                        <a href="<?php echo esc_url($more_button_url['url'] ?? ''); ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo esc_attr($more_button_description); ?>"<?php $more_button_target ? ' target="'.$more_button_target.'"' : '' ?>><?php echo esc_html($more_button_text); ?></a>
                     </div>
                 </div>
             <?php } // endif?>
