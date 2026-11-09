@@ -96,7 +96,9 @@ $arguments = [
     $root.'/vendor/bin/pest',
     '--configuration', $configurationPath,
     '--mutate', '--everything', '--parallel', '--no-cache', '--min=100',
-    '--path=functions.php,home.php,page_archive.php,page_blog.php,search.php,templates',
+    '--path=functions.php,home.php,page_archive.php,page_blog.php,search.php,templates,lib,acf_fields,blocks',
+    // The two vendored libraries are third-party code that phpunit.xml excludes from coverage.
+    '--ignore=lib/modules/class-tgm-plugin-activation.php,lib/modules/class-wp-bootstrap-navwalker.php',
     ...$options,
 ];
 $_SERVER['argv'] = $GLOBALS['argv'] = $arguments;
