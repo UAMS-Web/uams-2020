@@ -225,6 +225,7 @@ it('prints the escaped target on the more link only when the link has one', func
     Assert::assertSame(1, preg_match('/<a [^\n]*?class="btn btn-[a-z-]+"[^\n]*?>'.$name.'_more_button_text/', $actual['html'], $matches), 'The more link was not rendered.');
     Assert::assertSame($printed, str_contains($matches[0], ' target="ATTR('.$target.')"'));
     Assert::assertSame($printed, str_contains($matches[0], ' target='));
+    Assert::assertStringEndsWith(($printed ? ' target="ATTR('.$target.')"' : '"').'>'.$name.'_more_button_text', $matches[0]);
 })->with([
     ['gallery', '_blank', true],
     ['gallery', '', false],
@@ -239,6 +240,7 @@ it('keeps a blank more-link URL when the stored stacked link is false', function
     Assert::assertStringContainsString('href="" class="btn btn-outline-primary"', $actual['html']);
     Assert::assertSame(1, preg_match('/<a [^\n]*?class="btn btn-outline-[a-z]+"[^\n]*?>stacked_more_button_text/', $actual['html'], $matches), 'The more link was not rendered.');
     Assert::assertStringNotContainsString(' target=', $matches[0]);
+    Assert::assertStringEndsWith('">stacked_more_button_text', $matches[0]);
 });
 
 it('keeps empty nested link targets in the printed false arm', function (string $name, string $repeater, string $urlKey) use ($blockBaseCases): void {
