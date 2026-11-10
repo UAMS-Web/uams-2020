@@ -1261,9 +1261,14 @@ add_action('init', function (): void {
     // Formidable
     if ($registry->get_registered('formidable/simple-form')) {
         // unregister_block_type( 'formidable/simple-form' );
-        unregister_block_type('frm-charts/graph');
+        // The charts add-on registers its own block, so it can be absent while Formidable is present.
+        if ($registry->get_registered('frm-charts/graph')) {
+            unregister_block_type('frm-charts/graph');
+        }
         // unregister_block_type( 'formidable/simple-view' );
-        unregister_block_type('formidable/calculator');
+        if ($registry->get_registered('formidable/calculator')) {
+            unregister_block_type('formidable/calculator');
+        }
     }
     // Gravity Forms
     // if ( WP_Block_Type_Registry::get_instance()->is_registered( 'wpseopress/sitemap' ) ) {
