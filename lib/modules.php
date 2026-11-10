@@ -141,7 +141,7 @@ function uamswp_module($module = [], $i = false)
             $cta = $module['side_cta'] ?: '';
             $image_group = $module['side_image'] ?: '';
             $image_postion = $module['side_image_position'] ?: 'left';
-            $image_anchor = $module['side_image']['side_image_anchor'] ?: 'center';
+            $image_anchor = (is_array($image_group) ? $image_group['side_image_anchor'] ?? '' : '') ?: 'center';
             $background_color = $module['side_image_background_color'] ?: 'bg-white';
             $geo = $module['side_image_geo'];
             $geo_region = $module['side_image_geo_region'];
