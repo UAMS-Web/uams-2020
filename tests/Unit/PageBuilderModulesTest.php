@@ -84,19 +84,12 @@ it('passes empty image and absent quote values through the image-side fallbacks'
     expect(ModuleTemplateCapture::$calls[0]['variables']['quote_text'])->toBe('');
 });
 
-it('pins the false-image fallback and its existing anchor-offset warning', function (): void {
+it('reaches the empty-image fallback without a warning for a false or anchorless image group', function (mixed $image, mixed $expectedGroup): void {
     $module = pageBuilderModuleInput('modules_image_side');
-    $module['side_image'] = false;
-    $warnings = [];
-    $source = dirname(__DIR__, 2).'/lib/modules.php';
-    $message = 'Trying to access array offset on false';
-    $renderer = new ReflectionFunction('uamswp_module');
-    set_error_handler(static function (int $severity, string $text, string $file, int $line) use (&$warnings, $source, $message, $renderer): bool {
-        if ($severity !== E_WARNING || realpath($file) !== realpath($source) || $line < $renderer->getStartLine() || $line > $renderer->getEndLine() || $text !== $message) {
-            throw new ErrorException($text, 0, $severity, $file, $line);
-        }
-
-        $warnings[] = [$severity, $text];
+    $module['side_image'] = $image;
+    $errors = [];
+    set_error_handler(static function (int $severity, string $text) use (&$errors): bool {
+        $errors[] = [$severity, $text];
 
         return true;
     });
@@ -106,9 +99,22 @@ it('pins the false-image fallback and its existing anchor-offset warning', funct
         restore_error_handler();
     }
 
-    expect($warnings)->toBe([[E_WARNING, $message]])
-        ->and(ModuleTemplateCapture::$calls[0]['variables']['image_group'])->toBe('')
+    expect($errors)->toBe([])
+        ->and(ModuleTemplateCapture::$calls[0]['variables']['image_group'])->toBe($expectedGroup)
         ->and(ModuleTemplateCapture::$calls[0]['variables']['image_anchor'])->toBe('center');
+})->with([
+    'false' => [false, ''],
+    'null' => [null, ''],
+    'empty array' => [[], ''],
+    'group without an anchor' => [['side_image_image' => 'x'], ['side_image_image' => 'x']],
+    'empty anchor' => [['side_image_anchor' => ''], ['side_image_anchor' => '']],
+]);
+
+it('passes an explicit image anchor through unchanged', function (): void {
+    $module = pageBuilderModuleInput('modules_image_side');
+    $module['side_image'] = ['side_image_anchor' => 'top left'];
+    capturePageBuilderModule($module);
+    expect(ModuleTemplateCapture::$calls[0]['variables']['image_anchor'])->toBe('top left');
 });
 
 it('keeps CTA target absent without a button and applies post-tile text defaults', function (): void {
