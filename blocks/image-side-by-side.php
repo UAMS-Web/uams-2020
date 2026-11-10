@@ -1,4 +1,6 @@
 <?php
+
+/** @var int|false $i Module index, set by uamswp_module() when this template is included as a module; an ACF block always has $block and an id, so the index is not read. */
 /*
  *
  * UAMS Image Side-by-side Block
@@ -214,7 +216,7 @@ if ($geo_display) {
                 <?php } else { ?>
                 <style>
                     #side-by-side-<?php echo esc_attr($id); ?> .image-container {
-                        background-image: url("<?php echo wp_get_attachment_url($side_image, 'aspect-16-9'); ?>");
+                        background-image: url("<?php echo wp_get_attachment_url($side_image); ?>");
                     }
                 </style>
                 <?php } // endif?>

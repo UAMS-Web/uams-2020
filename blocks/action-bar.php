@@ -1,4 +1,6 @@
 <?php
+
+/** @var int|false $i Module index, set by uamswp_module() when this template is included as a module; an ACF block always has $block and an id, so the index is not read. */
 /*
  *
  * UAMS Action Bar Block
@@ -82,7 +84,7 @@ if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
 }
 if ($geo_display) {
     ?>
-<section class="uams-module action-bar<?php echo esc_attr($className); ?> count-<?php echo $row_count < 4 ? '3' : '4'; ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
+<section class="uams-module action-bar<?php /* @phpstan-ignore variable.undefined (template or branch variable, see #745) */ echo esc_attr($className); ?> count-<?php echo $row_count < 4 ? '3' : '4'; ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
     <h2 class="sr-only"><?php echo esc_html($heading); ?></h2>
     <div class="container-fluid">
         <div class="row">

@@ -1,4 +1,6 @@
 <?php
+
+/** @var int|false $i Module index, set by uamswp_module() when this template is included as a module; an ACF block always has $block and an id, so the index is not read. */
 /*
  *
  * UAMS Link List Block

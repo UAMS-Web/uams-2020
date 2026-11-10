@@ -1,4 +1,6 @@
 <?php
+
+/** @var int|false $i Module index, set by uamswp_module() when this template is included as a module; an ACF block always has $block and an id, so the index is not read. */
 /*
  *
  * UAMS Stacked Image & Text Block
@@ -160,7 +162,7 @@ if ($geo_display) {
                                     <h3 class="card-title h5"><?php echo esc_html($item_heading); ?></h3>
                                     <p class="card-text"><?php echo esc_html($body); ?></p>
                                     <?php if ($button_text) { ?>  
-                                        <a href="<?php echo esc_url($button_url); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo esc_attr($button_desc); ?>"<?php echo $button_target ? ' target="'.esc_attr($button_target).'"' : ''; ?> data-moduletitle="<?php echo esc_attr($heading); ?>" data-itemtitle="<?php echo esc_attr($item_heading); ?>"><?php echo esc_html($button_text); ?></a>
+                                        <a href="<?php /* @phpstan-ignore variable.undefined, variable.undefined (template or branch variable, see #745) */ echo esc_url($button_url); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo esc_attr($button_desc); ?>"<?php echo $button_target ? ' target="'.esc_attr($button_target).'"' : ''; ?> data-moduletitle="<?php echo esc_attr($heading); ?>" data-itemtitle="<?php echo esc_attr($item_heading); ?>"><?php echo esc_html($button_text); ?></a>
                                     <?php } // endif?>
                                 </div>
                             </div>
@@ -172,7 +174,7 @@ if ($geo_display) {
                 <div class="col-12 more">
                     <p class="lead"><?php echo $more_text; ?></p>
                     <div class="cta-container">
-                        <a href="<?php echo $more_button_url['url'] ?? ''; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php echo $more_button_target ? ' target="'.esc_attr($more_button_target).'"' : ''; ?>><?php echo $more_button_text; ?></a>
+                        <a href="<?php /* @phpstan-ignore variable.undefined, variable.undefined (template or branch variable, see #745) */ echo $more_button_url['url'] ?? ''; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php echo $more_button_target ? ' target="'.esc_attr($more_button_target).'"' : ''; ?>><?php echo $more_button_text; ?></a>
                     </div>
                 </div>
             <?php } // endif?>

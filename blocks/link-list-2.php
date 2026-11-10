@@ -1,4 +1,6 @@
 <?php
+
+/** @var int|false $i Module index, set by uamswp_module() when this template is included as a module; an ACF block always has $block and an id, so the index is not read. */
 /*
  *
  * UAMS Link List Block
@@ -105,7 +107,7 @@ if ($geo_display) {
                             <span class="<?php echo $link_icon ?: 'fas fa-link'; ?> fa-stack-1x fa-inverse"></span>
                         </span>
                     <?php } // endif?>
-                    <h3 class="h5"><a class="stretched-link" href="<?php echo $link_url; ?>"<?php echo $link_target ? ' target="'.$link_target.'"' : ''; ?> aria-label="<?php echo $link_desc; ?>"><?php echo $link_title; ?></a></h3>
+                    <h3 class="h5"><a class="stretched-link" href="<?php /* @phpstan-ignore variable.undefined, variable.undefined (template or branch variable, see #745) */ echo $link_url; ?>"<?php echo $link_target ? ' target="'.$link_target.'"' : ''; ?> aria-label="<?php echo $link_desc; ?>"><?php echo $link_title; ?></a></h3>
                     <?php echo $body ? '<p>'.$body.'</p>' : ''; ?>
                 </div>
             </div>

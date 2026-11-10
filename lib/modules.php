@@ -288,6 +288,7 @@ function uamswp_module($module = [], $i = false)
                 $more_button_url = $module['gallery_more_button_url'] ?? '';
                 $more_button_target = $more_button_url['target'] ?? '';
                 $more_button_description = $module['gallery_more_button_description'] ?? '';
+                // @phpstan-ignore empty.variable (variable is never assigned, see #745)
                 if (empty($more_button_color) && ($background_color == 'bg-white' || $background_color == 'bg-gray' || $background_color == 'bg-auto')) {
                     $more_button_color = 'primary';
                 } else {
