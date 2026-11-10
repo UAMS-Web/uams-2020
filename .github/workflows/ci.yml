@@ -6,8 +6,8 @@ name: CI
 # Dropped from the template, because the repository lacks what they need:
 # - mutate-ignore: the pest-testing skill's check-mutate-ignore.php, which this repository lacks.
 #   The `mutate` job is the template's, with its pest-testing log check replaced by the inline
-#   check in its last step. `mutate-full` is this repository's: manual runs only, so it is not in
-#   the `CI` job's `needs` and is named in .github/aggregate-needs-allow.json.
+#   check in its last step. `mutate-full` is this repository's: manual and weekly scheduled runs
+#   only, so it is not in the `CI` job's `needs` and is named in .github/aggregate-needs-allow.json.
 # - The pest job's three pest-testing checks (global test symbols, skip baseline, slowest class).
 # - The pest job runs `composer test:unit`, not `composer test`: the integration suite needs a
 #   WordPress core tree and a test database that the runner does not have.
@@ -20,6 +20,10 @@ on:
   # files on a pull request or a push; a manual run mutates every covered file instead, one
   # mutate-full job per population.
   workflow_dispatch:
+  # The same whole-repository pass every Monday at 08:00 UTC, so decay that no pull request
+  # touches is found. GitHub runs a schedule from the default branch only.
+  schedule:
+    - cron: '0 8 * * 1'
 
 # A new push to a pull request cancels that pull request's stale run.
 concurrency:
@@ -146,9 +150,9 @@ jobs:
 
       # On a pull request or a push, mutate only the PHP files under the covered paths that it
       # adds, changes or renames, read from HEAD against its first parent. A run that changes none
-      # passes with the reason printed. A manual run selects nothing here: the mutate-full jobs
-      # mutate everything. The two vendored libraries phpunit.xml excludes from coverage are
-      # excluded here too.
+      # passes with the reason printed. A manual or scheduled run selects nothing here: the
+      # mutate-full jobs mutate everything. The two vendored libraries phpunit.xml excludes from
+      # coverage are excluded here too.
       - name: Select the files to mutate
         id: select
         env:
@@ -243,15 +247,15 @@ jobs:
             exit 1
           fi
 
-  # Manual runs only: the whole-repository measurement, split so each population fits its own
-  # limit. One job over every covered file was cancelled at 180 minutes
+  # Manual and weekly scheduled runs only: the whole-repository measurement, split so each
+  # population fits its own limit. One job over every covered file was cancelled at 180 minutes
   # (UAMS-Web/uams-2020#697). It is not in the `CI` job's `needs`, because it is skipped on a
   # pull request or a push; .github/aggregate-needs-allow.json records that.
   mutate-full:
     # A fixed name, so the entry skipped on a pull request shows this text and not the raw
     # matrix template; GitHub appends the matrix value to it on a manual run.
     name: Mutation score, full run
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
     needs: [rector, phpstan]
     runs-on: ubuntu-latest
     timeout-minutes: 180
