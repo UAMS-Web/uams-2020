@@ -106,7 +106,7 @@ it('sets child state and delegates the original traversal arguments', function (
 
 it('allows the page-walker definition file to be included after the class already exists', function (): void {
     require dirname(__DIR__, 2).'/lib/modules/class-wp-bootstrap-pagewalker.php';
-    expect((new ReflectionClass(WP_Bootstrap_Pagewalker::class))->getFileName())->toBe(dirname(__DIR__, 2).'/lib/modules/class-wp-bootstrap-pagewalker.php');
+    expect(str_replace('\\', '/', (new ReflectionClass(WP_Bootstrap_Pagewalker::class))->getFileName()))->toBe(str_replace('\\', '/', dirname(__DIR__, 2)).'/lib/modules/class-wp-bootstrap-pagewalker.php');
 });
 
 it('rechecks metadata-backed page titles before choosing the title attribute', function (): void {
