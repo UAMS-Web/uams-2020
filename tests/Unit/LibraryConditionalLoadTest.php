@@ -33,7 +33,7 @@ final class LibraryConditionalLoadTest extends TestCase
             require dirname(__DIR__, 2).'/lib/quicklinks.php';
             self::assertSame($expected, function_exists('quicklinks_menu'));
             if ($expected) {
-                self::assertSame(dirname(__DIR__, 2).'/lib/quicklinks.php', (new \ReflectionFunction('quicklinks_menu'))->getFileName());
+                self::assertSame(str_replace('\\', '/', dirname(__DIR__, 2)).'/lib/quicklinks.php', str_replace('\\', '/', (new \ReflectionFunction('quicklinks_menu'))->getFileName()));
             }
         } finally {
             tearDown();

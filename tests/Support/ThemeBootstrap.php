@@ -83,7 +83,8 @@ final class ThemeBootstrap
         Assert::assertSame($expected, $actual);
         Assert::assertSame('0.0.0-test', CHILD_THEME_VERSION);
         foreach (['uams_get_site_info', 'uams_get_permalink', 'uams_site_title', 'uams_get_home_link', 'apStyleDate'] as $function) {
-            Assert::assertSame(dirname(__DIR__, 2).'/functions.php', (new \ReflectionFunction($function))->getFileName());
+            // getFileName() returns backslashes on Windows, so compare with forward slashes on both sides.
+            Assert::assertSame(str_replace('\\', '/', dirname(__DIR__, 2)).'/functions.php', str_replace('\\', '/', (new \ReflectionFunction($function))->getFileName()));
         }
 
         self::$loaded = true;
