@@ -160,7 +160,7 @@ it('pins the entire global block removal list and the iframe capability gate', f
     expect(ThemeHooks::callback('filter', 'allowed_block_types_all', 100)(false, null))->toBe($admin ? $retained : array_slice($retained, 0, 2));
 })->with([true, false]);
 
-it('pins optional block unregistration including the existing duplicate', function (bool $plugins): void {
+it('pins optional block unregistration, removing each block once', function (bool $plugins): void {
     $registered = ['wpseopress/sitemap', 'searchwp/search-form', 'minervakb/faq', 'ajax-search-pro/block-asp-main', 'formidable/simple-form'];
     BlockRegistryDouble::$registered = $plugins ? array_fill_keys($registered, (object) []) : [];
 
@@ -170,7 +170,7 @@ it('pins optional block unregistration including the existing duplicate', functi
     });
     ThemeHooks::callback('action', 'init', PHP_INT_MAX)();
     expect($removed)->toBe($plugins ? [
-        'wpseopress/sitemap', 'wpseopress/local-business-field', 'wpseopress/local-business', 'wpseopress/breadcrumbs', 'wpseopress/how-to-step', 'wpseopress/how-to', 'wpseopress/table-of-contents', 'wpseopress/how-to-step',
+        'wpseopress/sitemap', 'wpseopress/local-business-field', 'wpseopress/local-business', 'wpseopress/breadcrumbs', 'wpseopress/how-to-step', 'wpseopress/how-to', 'wpseopress/table-of-contents',
         'searchwp/search-form', 'minervakb/tip', 'minervakb/info', 'minervakb/warning', 'minervakb/related', 'minervakb/article-content', 'minervakb/guestpost', 'ajax-search-pro/block-asp-main', 'frm-charts/graph', 'formidable/calculator',
     ] : []);
 })->with([true, false]);

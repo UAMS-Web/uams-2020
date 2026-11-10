@@ -1236,7 +1236,6 @@ add_action('init', function (): void {
         unregister_block_type('wpseopress/how-to-step');
         unregister_block_type('wpseopress/how-to');
         unregister_block_type('wpseopress/table-of-contents');
-        unregister_block_type('wpseopress/how-to-step');
     }
     // SearchWP
     if ($registry->get_registered('searchwp/search-form')) {
