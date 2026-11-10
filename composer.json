@@ -41,6 +41,7 @@
         "refactor:sweep": "rector --clear-cache --config=rector-sweep.php",
         "test:refactor": "rector --dry-run",
         "test:refactor:sweep": "rector --dry-run --clear-cache --config=rector-sweep.php",
+        "mutate": "php tests/mutate.php",
         "pint": "pint",
         "test:pint": "pint --test"
     },
@@ -48,6 +49,7 @@
         "setup:integration": "Install the Integration suite's own Composer setup (PHPUnit 9.6, wp-phpunit, the polyfills).",
         "test": "Run both suites, each in its own process, so the Unit suite never sees WordPress.",
         "test:unit": "Run the Pest suite that needs no WordPress and no database.",
+        "mutate": "Run the mutation check over every covered file: the root templates, functions.php and search.php, lib, acf_fields and blocks. Needs PCOV or Xdebug; pass --path=<files> to narrow it.",
         "test:integration": "Run the PHPUnit 9.6 suite that boots WordPress through wp-phpunit against the test database."
     },
     "autoload-dev": {

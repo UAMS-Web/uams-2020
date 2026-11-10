@@ -1,0 +1,3 @@
+{
+  "mutate-full": "manual runs only (workflow_dispatch); skipped on a pull request or a push, so it cannot be a gate"
+}
