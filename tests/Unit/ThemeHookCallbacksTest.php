@@ -161,7 +161,7 @@ it('pins the entire global block removal list and the iframe capability gate', f
 })->with([true, false]);
 
 it('pins optional block unregistration, removing each block once', function (bool $plugins): void {
-    $registered = ['wpseopress/sitemap', 'searchwp/search-form', 'minervakb/faq', 'ajax-search-pro/block-asp-main', 'formidable/simple-form'];
+    $registered = ['wpseopress/sitemap', 'searchwp/search-form', 'minervakb/faq', 'ajax-search-pro/block-asp-main', 'formidable/simple-form', 'frm-charts/graph', 'formidable/calculator'];
     BlockRegistryDouble::$registered = $plugins ? array_fill_keys($registered, (object) []) : [];
 
     $removed = [];
@@ -174,6 +174,23 @@ it('pins optional block unregistration, removing each block once', function (boo
         'searchwp/search-form', 'minervakb/tip', 'minervakb/info', 'minervakb/warning', 'minervakb/related', 'minervakb/article-content', 'minervakb/guestpost', 'ajax-search-pro/block-asp-main', 'frm-charts/graph', 'formidable/calculator',
     ] : []);
 })->with([true, false]);
+
+it('unregisters each Formidable block only when the registry holds it', function (array $registered, array $expected): void {
+    BlockRegistryDouble::$registered = array_fill_keys($registered, (object) []);
+
+    $removed = [];
+    when('unregister_block_type')->alias(static function ($name) use (&$removed): void {
+        $removed[] = $name;
+    });
+    ThemeHooks::callback('action', 'init', PHP_INT_MAX)();
+    expect($removed)->toBe($expected);
+})->with([
+    'form block alone' => [['formidable/simple-form'], []],
+    'without the charts add-on' => [['formidable/simple-form', 'formidable/calculator'], ['formidable/calculator']],
+    'without the calculator' => [['formidable/simple-form', 'frm-charts/graph'], ['frm-charts/graph']],
+    'all three' => [['formidable/simple-form', 'frm-charts/graph', 'formidable/calculator'], ['frm-charts/graph', 'formidable/calculator']],
+    'add-on blocks without the form block' => [['frm-charts/graph', 'formidable/calculator'], []],
+]);
 
 it('dispatches an authorized queue request before redirecting to the media library', function (): void {
     $_GET['process_image_queue'] = '1';
