@@ -35,3 +35,6 @@
 
 # Build inputs under assets/ that the theme does not load
 /assets/scss export-ignore
+
+# Two branches that each append a decision collide at the end of the log; keep both sides.
+docs/DECISIONS.md merge=union
