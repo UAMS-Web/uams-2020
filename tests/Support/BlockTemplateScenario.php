@@ -113,8 +113,6 @@ final class BlockTemplateScenario
 
             return 'meta:'.$id.':'.$key.':'.(int) (bool) $single;
         });
-        when('format_phone_dash')->alias(static fn ($value): string => ! empty($case['native_phone']) ? relay() : 'dash:'.$value);
-        when('format_phone_us')->alias(static fn ($value): string => ! empty($case['native_phone']) ? relay() : 'us:'.$value);
         when('do_shortcode')->alias(static fn ($value): string => 'SHORTCODE('.$value.')');
         when('date')->alias(static fn ($format, $timestamp = null): string => relay([$format, $timestamp ?? 1710504000]));
         when('strtotime')->alias(static fn ($value, $base = null): int|false => relay([$value, $base ?? 1710504000]));
