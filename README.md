@@ -64,7 +64,7 @@ The launcher copies the PHPUnit settings to a temporary XML file with explicit u
 
 ## Continuous integration
 
-Pull requests are gated by the GitHub Actions workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs Pint, Rector (dry-run), PHPStan, the mutation check, and the Unit suite on every push and pull request. A red check fails the workflow. The mutation check runs `composer mutate` with PCOV on Ubuntu over the covered files a pull request or push changes, and over every covered file on a manual run. It fails on any untested, uncovered, pending or timed-out mutant, and on a run that creates none; a mutant that no test can catch carries `@pest-mutate-ignore` with its reason.
+Pull requests are gated by the GitHub Actions workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs Pint, Rector (dry-run), PHPStan, the mutation check, and the Unit suite on every push and pull request. A red check fails the workflow. The mutation check runs `composer mutate` with PCOV on Ubuntu over the covered files a pull request or push changes. A manual run mutates every covered file instead, in one `mutate-full` job for each of the root templates with `search.php`, `functions.php`, `lib`, `acf_fields` and `blocks`, because one job over all of them exceeds the 180-minute limit. It fails on any untested, uncovered, pending or timed-out mutant, and on a run that creates none; a mutant that no test can catch carries `@pest-mutate-ignore` with its reason.
 
 Without these projects, this theme wouldn't be where it is today.
 
