@@ -49,13 +49,22 @@ The supported PHP floor is 8.2. Development and tests run on PHP 8.4 (`config.pl
 
 ## Mutation testing
 
-With Xdebug coverage mode or PCOV enabled, run `php tests/mutate.php` for the root templates, `functions.php` and `search.php`. Pass `--path=functions.php,search.php` to narrow a run. The launcher uses every unit test file and rejects an empty test list. Set the optional `UAMS_MUTATION_REPORT` environment variable to write per-mutation JSON results and replay paths. It disables cached results and requires every generated mutant to be caught; inspect any surviving or uncovered case before claiming full coverage.
+With Xdebug coverage mode or PCOV enabled, run `composer mutate` (it runs `php tests/mutate.php`) for every covered file. Pass `--path=<files>` to narrow a run. The populations the coverage slices closed against, and the command for each:
+
+| Population | Command |
+| --- | --- |
+| Root templates, `functions.php` and `search.php` | `composer mutate -- --path=functions.php,home.php,page_archive.php,page_blog.php,search.php,templates` |
+| `lib/` | `composer mutate -- --path=lib` |
+| `acf_fields/` | `composer mutate -- --path=acf_fields` |
+| `blocks/` | `composer mutate -- --path=blocks` |
+
+The default run covers all four. The two vendored libraries that `phpunit.xml` excludes from coverage are excluded from it too. The launcher uses every unit test file and rejects an empty test list. Set the optional `UAMS_MUTATION_REPORT` environment variable to write per-mutation JSON results and replay paths. It disables cached results and requires every generated mutant to be caught; inspect any surviving or uncovered case before claiming full coverage.
 
 The launcher copies the PHPUnit settings to a temporary XML file with explicit unit-test and source-file entries. This avoids a directory-walking conflict between the mutation loader and Patchwork while allowing the parallel runner to read one configuration file. It selects parallel execution automatically. Do not add `--processes`: the locked mutation tool forwards that option to children without `--parallel`, which can make failed starts look like caught mutations. The launcher rejects process-count, parallel, and configuration overrides. A temporary root-only patch corrects scalar function-default test selection; its scope, guard, and retirement plan are in [`patches/README.md`](patches/README.md). The installed revisions checked for these workarounds are `pestphp/pest-plugin-mutate` v5.0.2 at `d0c87110416b699413cc073b8dcc92e440d81931` and Patchwork 2.2.4 at `d5d5c6032b7109477163b68e25ff531f7654ebf9`, as pinned in `composer.lock`.
 
 ## Continuous integration
 
-Pull requests are gated by the GitHub Actions workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs Pint, Rector (dry-run), PHPStan, and the Unit suite on every push and pull request. A red check fails the workflow.
+Pull requests are gated by the GitHub Actions workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs Pint, Rector (dry-run), PHPStan, the mutation check, and the Unit suite on every push and pull request. A red check fails the workflow. The mutation check runs `composer mutate` with PCOV on Ubuntu over the covered files a pull request or push changes. A manual run mutates every covered file instead, in one `mutate-full` job for each of the root templates with `search.php`, `functions.php`, `lib`, `acf_fields` and `blocks`, because one job over all of them exceeds the 180-minute limit. It fails on any untested, uncovered, pending or timed-out mutant, and on a run that creates none; a mutant that no test can catch carries `@pest-mutate-ignore` with its reason.
 
 Without these projects, this theme wouldn't be where it is today.
 

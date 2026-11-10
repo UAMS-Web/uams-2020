@@ -4,7 +4,10 @@ name: CI
 # This repository is public, so the jobs are not gated on RUN_REMOTE_CI.
 #
 # Dropped from the template, because the repository lacks what they need:
-# - mutate-ignore and mutate: the pest-testing skill's scripts and a `mutate` Composer script.
+# - mutate-ignore: the pest-testing skill's check-mutate-ignore.php, which this repository lacks.
+#   The `mutate` job is the template's, with its pest-testing log check replaced by the inline
+#   check in its last step. `mutate-full` is this repository's: manual runs only, so it is not in
+#   the `CI` job's `needs` and is named in .github/aggregate-needs-allow.json.
 # - The pest job's three pest-testing checks (global test symbols, skip baseline, slowest class).
 # - The pest job runs `composer test:unit`, not `composer test`: the integration suite needs a
 #   WordPress core tree and a test database that the runner does not have.
@@ -13,7 +16,9 @@ on:
   pull_request:
   push:
     branches: [master]
-  # Lets the workflow be run on demand against a branch.
+  # Lets the workflow be run on demand against a branch. The mutate job mutates the changed
+  # files on a pull request or a push; a manual run mutates every covered file instead, one
+  # mutate-full job per population.
   workflow_dispatch:
 
 # A new push to a pull request cancels that pull request's stale run.
@@ -114,6 +119,215 @@ jobs:
       - uses: ./.github/actions/setup
       - run: composer stan
 
+  mutate:
+    name: Mutation score (changed files, with PCOV)
+    needs: [rector, phpstan]
+    # Ubuntu only: a Windows runner scored mutants the tests never detect as killed
+    # (UAMS-Web/uams-ci-workflows#13), so the closing measurement is taken on Linux.
+    runs-on: ubuntu-latest
+    # 90 minutes for the changed files a pull request or a push selects: functions.php alone took
+    # 53 minutes in a measured run (UAMS-Web/uams-2020#697).
+    timeout-minutes: 90
+    # An explicit `bash` runs each step with `-eo pipefail`, so the run step's `| tee` reports
+    # Pest's status and not tee's.
+    defaults:
+      run:
+        shell: bash
+    steps:
+      # Depth 2: on a pull request the checkout is GitHub's merge commit, and its first parent is
+      # the base branch it was merged onto. On a push it is the pushed commit and its parent.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+      - uses: ./.github/actions/setup
+        with:
+          coverage: pcov
+          ini-values: pcov.directory=.
+
+      # On a pull request or a push, mutate only the PHP files under the covered paths that it
+      # adds, changes or renames, read from HEAD against its first parent. A run that changes none
+      # passes with the reason printed. A manual run selects nothing here: the mutate-full jobs
+      # mutate everything. The two vendored libraries phpunit.xml excludes from coverage are
+      # excluded here too.
+      - name: Select the files to mutate
+        id: select
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          paths=(functions.php home.php page_archive.php page_blog.php search.php templates lib acf_fields blocks)
+          excluded=(':!lib/modules/class-tgm-plugin-activation.php' ':!lib/modules/class-wp-bootstrap-navwalker.php')
+          case "$EVENT" in
+            pull_request)
+              what="pull request"
+              if ! git rev-parse --verify --quiet HEAD^2 > /dev/null; then
+                echo "::error::HEAD is not a merge commit, so the pull request's changes cannot be read."
+                exit 1
+              fi
+              ;;
+            push)
+              what="push"
+              if ! git rev-parse --verify --quiet HEAD^1 > /dev/null; then
+                echo "::error::The pushed commit has no parent, so its changes cannot be read. Run the workflow manually to mutate every covered file."
+                exit 1
+              fi
+              ;;
+            *)
+              echo "mode=none" >> "$GITHUB_OUTPUT"
+              echo "Not a pull request or a push ($EVENT): the mutate-full jobs mutate every covered file."
+              exit 0
+              ;;
+          esac
+          # NUL-separated, so a name git would quote (non-ASCII, a tab) is read as it is
+          list=$(mktemp)
+          git diff -z --name-only --diff-filter=AMR HEAD^1 HEAD -- "${paths[@]}" "${excluded[@]}" > "$list"
+          files=()
+          while IFS= read -r -d '' f; do
+            [[ "$f" == *.php ]] || continue
+            if [[ "$f" == *,* || "$f" == *$'\n'* ]]; then
+              echo "::error::A changed path holds a comma or a newline, which --path cannot carry: $f"
+              exit 1
+            fi
+            files+=("$f")
+          done < "$list"
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "mode=none" >> "$GITHUB_OUTPUT"
+            echo "No covered PHP file is added or changed by this $what, so there is nothing to mutate."
+            exit 0
+          fi
+          echo "Mutating ${#files[@]} changed file(s):"
+          printf '%s\n' "${files[@]}"
+          echo "mode=changed" >> "$GITHUB_OUTPUT"
+          echo "paths=$(IFS=,; echo "${files[*]}")" >> "$GITHUB_OUTPUT"
+
+      # `--min=100` makes Pest fail the step on any survivor. The run is kept in a log because a
+      # run that mutated nothing is a setup failure that Pest's exit status reports or not
+      # depending on its version. A later `--path` replaces the one the launcher passes. On
+      # changed files, zero mutants is left to the check step, so Pest is told not to fail it.
+      - name: Run mutation testing
+        if: steps.select.outputs.mode != 'none'
+        env:
+          PATHS: ${{ steps.select.outputs.paths }}
+        run: |
+          composer mutate -- --min=100 --ignore-min-score-on-zero-mutations --path="$PATHS" 2>&1 | tee mutate.log
+
+      # Reads the log, not the exit status: fails on zero mutants, and on any untested, uncovered,
+      # pending or timed-out mutant. Runs even when the step above failed, so the log's own
+      # account of the failure is printed; skipped only when nothing was selected. Changed files
+      # that exist and produce zero mutants hold no code a mutator changes, which is a pass.
+      - name: Check the mutation run
+        if: always() && steps.select.outputs.mode != 'none'
+        env:
+          MODE: ${{ steps.select.outputs.mode }}
+        run: |
+          if [ ! -s mutate.log ]; then echo "::error::The mutation run wrote no log"; exit 1; fi
+          clean=$(mktemp)
+          sed "s/$(printf '\033')\[[0-9;]*m//g" mutate.log > "$clean"
+          if grep -Eq '(^|[^0-9])0 Mutations for 0 Files created' "$clean"; then
+            if [ "$MODE" = "changed" ] && php -r 'exit(extension_loaded("pcov") && ini_get("pcov.enabled") ? 0 : 1);'; then
+              echo "The changed files produced no mutants: they hold no code a mutator changes, so there is nothing to test."
+              exit 0
+            fi
+            echo "::error::The run created no mutants, which is a setup failure"
+            exit 1
+          fi
+          if ! grep -Eq '[0-9]+ Mutations for [0-9]+ Files created' "$clean"; then
+            echo "::error::The log holds no mutation summary"
+            exit 1
+          fi
+          if grep -E '^[[:space:]]*Mutations:' "$clean" | grep -Eq '[0-9]+ (untested|uncovered|pending|timeout)'; then
+            echo "::error::A mutant was untested, uncovered, pending or timed out"
+            exit 1
+          fi
+          if ! grep -Eq '^[[:space:]]*Mutations:.*[0-9]+ tested' "$clean"; then
+            echo "::error::The log holds no tested mutants"
+            exit 1
+          fi
+
+  # Manual runs only: the whole-repository measurement, split so each population fits its own
+  # limit. One job over every covered file was cancelled at 180 minutes
+  # (UAMS-Web/uams-2020#697). It is not in the `CI` job's `needs`, because it is skipped on a
+  # pull request or a push; .github/aggregate-needs-allow.json records that.
+  mutate-full:
+    # A fixed name, so the entry skipped on a pull request shows this text and not the raw
+    # matrix template; GitHub appends the matrix value to it on a manual run.
+    name: Mutation score, full run
+    if: github.event_name == 'workflow_dispatch'
+    needs: [rector, phpstan]
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        # lib and acf_fields are split by file into groups of similar line counts, because one
+        # job over either ran past 130 minutes (UAMS-Web/uams-2020#697). The case in the run
+        # step maps each id to its paths.
+        population:
+          - root-and-search
+          - functions
+          - lib-1
+          - lib-2
+          - lib-3
+          - acf-1
+          - acf-2
+          - acf-3
+          - blocks
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+        with:
+          coverage: pcov
+          ini-values: pcov.directory=.
+
+      # The launcher's default `--ignore` still keeps the two vendored libraries out.
+      - name: Run mutation testing
+        env:
+          POPULATION: ${{ matrix.population }}
+        run: |
+          case "$POPULATION" in
+            root-and-search) PATHS=home.php,page_archive.php,page_blog.php,search.php,templates ;;
+            functions) PATHS=functions.php ;;
+            lib-1) PATHS=lib/breadcrumb.php,lib/customizer.php,lib/favicon.php,lib/meta-box.php,lib/search.php,lib/users.php ;;
+            lib-2) PATHS=lib/a11y.php,lib/blocks.php,lib/bootstrap.php,lib/comment.php,lib/footer-widgets.php,lib/media-credit.php,lib/modules/class-wp-bootstrap-pagewalker.php,lib/nav.php,lib/quicklinks.php,lib/site-container-outer.php,lib/tgm.php ;;
+            lib-3) PATHS=lib/acf.php,lib/extras.php,lib/footer.php,lib/geo.php,lib/header.php,lib/misc.php,lib/modules.php,lib/page.php,lib/pagination.php,lib/scripts.php,lib/search-tray.php,lib/widget-areas.php,lib/widgets.php ;;
+            acf-1) PATHS=acf_fields/action-bar.php,acf_fields/content.php,acf_fields/gallery.php,acf_fields/image-side-by-side.php,acf_fields/post-category-tiles.php,acf_fields/section.php ;;
+            acf-2) PATHS=acf_fields/call-out.php,acf_fields/counter.php,acf_fields/hero.php,acf_fields/news.php,acf_fields/overlay.php ;;
+            acf-3) PATHS=acf_fields/cta.php,acf_fields/link-list.php,acf_fields/livewhale.php,acf_fields/modules.php,acf_fields/post-category-tile.php,acf_fields/stacked.php ;;
+            blocks) PATHS=blocks ;;
+            *) echo "::error::Unknown population: $POPULATION"; exit 1 ;;
+          esac
+          echo "Mutating: $PATHS"
+          composer mutate -- --min=100 --path="$PATHS" 2>&1 | tee mutate.log
+
+      # Reads the log, not the exit status, as the changed-files job does, with no allowance for
+      # zero mutants: every population here holds code a mutator changes. The mutant counts go to
+      # the job summary beside the job's own duration.
+      - name: Check the mutation run
+        if: always()
+        run: |
+          if [ ! -s mutate.log ]; then echo "::error::The mutation run wrote no log"; exit 1; fi
+          clean=$(mktemp)
+          sed "s/$(printf '\033')\[[0-9;]*m//g" mutate.log > "$clean"
+          grep -E '[0-9]+ Mutations for [0-9]+ Files created|^[[:space:]]*Mutations:|^[[:space:]]*Duration:' "$clean" | sed 's/^[[:space:]]*//' | tee -a "$GITHUB_STEP_SUMMARY"
+          if grep -Eq '(^|[^0-9])0 Mutations for 0 Files created' "$clean"; then
+            echo "::error::The run created no mutants, which is a setup failure"
+            exit 1
+          fi
+          if ! grep -Eq '[0-9]+ Mutations for [0-9]+ Files created' "$clean"; then
+            echo "::error::The log holds no mutation summary"
+            exit 1
+          fi
+          if grep -E '^[[:space:]]*Mutations:' "$clean" | grep -Eq '[0-9]+ (untested|uncovered|pending|timeout)'; then
+            echo "::error::A mutant was untested, uncovered, pending or timed out"
+            exit 1
+          fi
+          if ! grep -Eq '^[[:space:]]*Mutations:.*[0-9]+ tested' "$clean"; then
+            echo "::error::The log holds no tested mutants"
+            exit 1
+          fi
+
   pest:
     name: Unit tests
     needs: [rector, phpstan]
@@ -142,7 +356,7 @@ jobs:
 
   ci:
     name: CI
-    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, pint, rector, phpstan, pest, lint-floor]
+    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, pint, rector, phpstan, mutate, pest, lint-floor]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5

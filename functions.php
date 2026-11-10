@@ -1321,8 +1321,7 @@ add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context
         'core/post-navigation-link',
         'core/post-template',
         'core/query-pagination',
-        // WordPress rejects quotes in registered block names, so this entry cannot match.
-        'core/query-pagination-next"', // @pest-mutate-ignore: RemoveArrayItem
+        'core/query-pagination-next',
         'core/query-pagination-numbers',
         'core/query-pagination-previous',
         'core/query-no-results',

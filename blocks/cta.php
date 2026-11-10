@@ -76,9 +76,6 @@ if (empty($phone_prepend)) {
 if (empty($phone)) {
     $phone = get_field('cta_bar_phone');
 }
-if (empty($phone_link)) {
-    $phone_link = '<a href="tel:'.format_phone_dash($phone).'">'.format_phone_us($phone).'</a>';
-}
 if (
     empty($action_type) || // If still empty (meaning page hasn't been updated since code changed)
     (
