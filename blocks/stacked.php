@@ -42,7 +42,6 @@ $more_text = '';
 $more_button_text = '';
 // @pest-mutate-ignore: EmptyStringToNotEmpty
 $more_button_url = '';
-// @pest-mutate-ignore: EmptyStringToNotEmpty
 $more_button_target = '';
 
 // Load values.
@@ -173,7 +172,7 @@ if ($geo_display) {
                 <div class="col-12 more">
                     <p class="lead"><?php echo $more_text; ?></p>
                     <div class="cta-container">
-                        <a href="<?php echo $more_button_url['url'] ?? ''; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php $more_button_target ? ' target="'.$more_button_target.'"' : '' ?>><?php echo $more_button_text; ?></a>
+                        <a href="<?php echo $more_button_url['url'] ?? ''; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php echo $more_button_target ? ' target="'.esc_attr($more_button_target).'"' : ''; ?>><?php echo $more_button_text; ?></a>
                     </div>
                 </div>
             <?php } // endif?>

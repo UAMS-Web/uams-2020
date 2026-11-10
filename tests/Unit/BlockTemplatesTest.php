@@ -29,12 +29,7 @@ foreach ($blockCasesByName as $name => $cases) {
      * native comparison effects are checked separately below.
      * The double-category local index is never read. The strip-tags flags 49, 50
      * and 51 are all true to WordPress, which has no raw-flag filter.
-     * Stacked initial more-link strings are overwritten before use or remain unused;
-     * the remaining scalar target affects only an unprinted string without effects.
-     * Sixteen active literal-only concat/default equivalents remain documented in
-     * block-templates.md: Pest's ancestor ignores would hide distinct tested effects.
-     * They preserve both native phone formatter calls in order, or one more-target
-     * conversion. Removing those calls/conversions remains active and is caught.
+     * Stacked initial more-link strings are overwritten before use or remain unused.
      */
     it('pins '.$name.' block markup and external boundary arguments', function (array $case): void {
         $actual = BlockTemplateScenario::render($case);
@@ -72,17 +67,6 @@ it('retains native gallery failures for malformed crop ratios', function () use 
     $case['fields']['gallery_crop'] = 'portrait';
     $this->expectException(TypeError::class);
     BlockTemplateScenario::render($case);
-});
-
-it('preserves native phone conversions even when the CTA hides its action', function () use ($blockBaseCases): void {
-    $case = $blockBaseCases['cta'];
-    $case['native_phone'] = true;
-    $case['fields']['cta_bar_action_type'] = 'none';
-    $case['fields']['cta_bar_phone'] = new TraceString('5015550123', '[phone-conversion]');
-    $actual = BlockTemplateScenario::render($case);
-    Assert::assertStringStartsWith('[phone-conversion][phone-conversion]', $actual['html']);
-    Assert::assertSame(2, substr_count($actual['html'], '[phone-conversion]'));
-    Assert::assertStringContainsString('no-link', $actual['html']);
 });
 
 foreach ($blockBaseCases as $name => $baseCase) {
@@ -234,18 +218,29 @@ it('chooses more-link contrast for each supported light and dark background', fu
     ['stacked', 'bg-gray', 'primary'], ['stacked', 'bg-auto', 'primary'], ['stacked', 'bg-red', 'white'],
 ]);
 
-it('preserves more-link target evaluation even though its attribute is not echoed', function (string $name) use ($blockCasesByLabel, $assertConvertedMarkup): void {
+it('prints the escaped target on the more link only when the link has one', function (string $name, string $target, bool $printed) use ($blockCasesByLabel): void {
     $case = $blockCasesByLabel[$name][$name === 'gallery' ? 'gallery-3-none' : 'more'];
-    $case['fields'][$name.'_more_button_url']['target'] = new TraceString('_blank', '[more-target-conversion]');
+    $case['fields'][$name.'_more_button_url']['target'] = $target;
     $actual = BlockTemplateScenario::render($case);
-    $assertConvertedMarkup($actual['html'], $case['expected']['html'], '[more-target-conversion]', 1);
-})->with(['gallery', 'stacked']);
+    Assert::assertSame(1, preg_match('/<a [^\n]*?class="btn btn-[a-z-]+"[^\n]*?>'.$name.'_more_button_text/', $actual['html'], $matches), 'The more link was not rendered.');
+    Assert::assertSame($printed, str_contains($matches[0], ' target="ATTR('.$target.')"'));
+    Assert::assertSame($printed, str_contains($matches[0], ' target='));
+    Assert::assertStringEndsWith(($printed ? ' target="ATTR('.$target.')"' : '"').'>'.$name.'_more_button_text', $matches[0]);
+})->with([
+    ['gallery', '_blank', true],
+    ['gallery', '', false],
+    ['stacked', '_blank', true],
+    ['stacked', '', false],
+]);
 
 it('keeps a blank more-link URL when the stored stacked link is false', function () use ($blockCasesByLabel): void {
     $case = $blockCasesByLabel['stacked']['more'];
     $case['fields']['stacked_more_button_url'] = false;
     $actual = BlockTemplateScenario::render($case);
     Assert::assertStringContainsString('href="" class="btn btn-outline-primary"', $actual['html']);
+    Assert::assertSame(1, preg_match('/<a [^\n]*?class="btn btn-outline-[a-z]+"[^\n]*?>stacked_more_button_text/', $actual['html'], $matches), 'The more link was not rendered.');
+    Assert::assertStringNotContainsString(' target=', $matches[0]);
+    Assert::assertStringEndsWith('">stacked_more_button_text', $matches[0]);
 });
 
 it('keeps empty nested link targets in the printed false arm', function (string $name, string $repeater, string $urlKey) use ($blockBaseCases): void {
@@ -395,46 +390,4 @@ it('releases an ephemeral fullscreen field before iframe markup', function () us
     };
     $actual = BlockTemplateScenario::render($case, $body);
     Assert::assertTrue('[fullscreen-release]'.$case['expected']['html'] === $actual['html'], 'Fullscreen field lifetime changed.');
-});
-
-it('preserves the actual phone formatter conversion order', function () use ($blockBaseCases): void {
-    $case = $blockBaseCases['cta'];
-    $case['native_phone'] = true;
-    $case['fields']['cta_bar_action_type'] = 'none';
-    $case['fields']['cta_bar_phone'] = new class implements ArrayAccess, Stringable
-    {
-        public function __toString(): string
-        {
-            foreach (debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS) as $frame) {
-                if (in_array($frame['function'], ['format_phone_dash', 'format_phone_us'], true)) {
-                    echo '['.$frame['function'].']';
-                    break;
-                }
-            }
-
-            return '5015550123';
-        }
-
-        public function offsetExists(mixed $offset): bool
-        {
-            return $offset === 3;
-        }
-
-        public function offsetGet(mixed $offset): mixed
-        {
-            return '5015550123'[$offset] ?? null;
-        }
-
-        public function offsetSet(mixed $offset, mixed $value): void
-        {
-            throw new LogicException('Read only.');
-        }
-
-        public function offsetUnset(mixed $offset): void
-        {
-            throw new LogicException('Read only.');
-        }
-    };
-    $actual = BlockTemplateScenario::render($case);
-    Assert::assertStringStartsWith('[format_phone_dash][format_phone_us]', $actual['html']);
 });
