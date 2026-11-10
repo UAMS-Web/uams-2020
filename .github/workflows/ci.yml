@@ -78,6 +78,21 @@ jobs:
       # Fails, naming the file, line and code point, when prose carries a banned glyph.
       - run: node .claude/skills/writing-comments/scripts/check-no-emoji.mjs
 
+  decision-log:
+    name: Decision log order
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Fails, naming the entries, when docs/DECISIONS.md is out of order or an entry heading
+      # is not preceded by a blank line.
+      - run: node .claude/skills/decision-log/scripts/check-decision-log-order.mjs
+
   aggregate-needs:
     name: Aggregate needs
     runs-on: ubuntu-latest
@@ -360,7 +375,7 @@ jobs:
 
   ci:
     name: CI
-    needs: [composer-validate, synced-files, no-emoji, aggregate-needs, pint, rector, phpstan, mutate, pest, lint-floor]
+    needs: [composer-validate, synced-files, no-emoji, decision-log, aggregate-needs, pint, rector, phpstan, mutate, pest, lint-floor]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
