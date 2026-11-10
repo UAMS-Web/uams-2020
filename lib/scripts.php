@@ -106,7 +106,49 @@ function add_allowed_origins($origins)
     $origins[] = 'https://uamshealth.com';
     $origins[] = 'https://news.uams.edu';
 
+    // Origins an install adds for itself: UAMSWP_EXTRA_ALLOWED_ORIGINS in wp-config.php. Unset adds none.
+    foreach (uamswp_framing_list('UAMSWP_EXTRA_ALLOWED_ORIGINS') as $origin) {
+        $origins[] = $origin;
+    }
+
     return $origins;
+}
+
+/**
+ * Reads a per-install list of origins from a constant defined in wp-config.php.
+ *
+ * An undefined or non-array constant yields an empty list, and so does every entry that is not a plain
+ * http or https origin (scheme, host and optional port), so a value cannot add a second header
+ * directive or a path.
+ *
+ * @return list<string>
+ */
+function uamswp_framing_list(string $constant): array
+{
+    $value = defined($constant) ? constant($constant) : [];
+    $origins = [];
+    foreach (is_array($value) ? $value : [] as $origin) {
+        if (is_string($origin) && preg_match('#^https?://[A-Za-z0-9.-]+(:[0-9]+)?$#', $origin) === 1) {
+            $origins[] = $origin;
+        }
+    }
+
+    return $origins;
+}
+
+// Framing policy for installs that are embedded by other UAMS sites. UAMSWP_FRAME_ANCESTORS in wp-config.php lists the
+// origins allowed to frame the site; unset, the theme sends no framing headers.
+add_action('send_headers', 'uamswp_send_frame_headers');
+function uamswp_send_frame_headers(): void
+{
+    $ancestors = uamswp_framing_list('UAMSWP_FRAME_ANCESTORS');
+    if ($ancestors === []) {
+        return;
+    }
+
+    // Fallback for browsers that do not read frame-ancestors.
+    header('X-Frame-Options: SAMEORIGIN');
+    header("Content-Security-Policy: frame-ancestors 'self' ".implode(' ', $ancestors).';');
 }
 
 // function defer_parsing_of_js( $url ) {

@@ -1,5 +1,6 @@
 {
     "redefinable-internals": [
+        "header",
         "time",
         "class_exists",
         "function_exists",
