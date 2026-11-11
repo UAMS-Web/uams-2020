@@ -1,4 +1,6 @@
 <?php
+
+/** @var int|false $i Module index, set by uamswp_module() when this template is included as a module; an ACF block always has $block and an id, so the index is not read. */
 /*
  *
  * UAMS CTA Bar Block
@@ -59,6 +61,7 @@ if (empty($button_text)) {
 if (empty($button_url)) {
     $button_url = get_field('cta_bar_button_url');
 }
+$button_target ??= '';
 if ($button_url && empty($button_target)) {
     if (get_field('cta_bar_button_url')) {
         $button_target = get_field('cta_bar_button_url')['target'];
@@ -189,7 +192,7 @@ if ($geo_display) {
     <?php } elseif ($use_image) { ?>
     <style>
         #<?php echo sanitize_html_class($id); ?>:before {
-            background-image: url("<?php echo wp_get_attachment_url($image, 'aspect-2-1'); ?>");
+            background-image: url("<?php echo wp_get_attachment_url($image); ?>");
         }
     </style>
     <?php } // endif?>
