@@ -153,6 +153,7 @@ function uamswp_footer_creds_text(): void
         $address .= '<span itemprop="name" class="sr-only">'.$footer_image_title.'</span>';
         foreach ($custom_addresses as $custom_address) {
             $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="https://schema.org/PostalAddress">';
+            // @phpstan-ignore variable.undefined (template or branch variable, see #745)
             $address .= '<strong'.(! empty($custom_address['address_title']) ? '>'.esc_html($custom_address['address_title']) : $address_sr.'>Mailing Address').':</strong> ';
             $address .= '<span itemprop="streetAddress">'.(! empty($custom_address['address_street_1']) ? esc_html($custom_address['address_street_1']) : '4301 West Markham Street').(! empty($custom_address['address_street_2']) ? ' '.esc_html($custom_address['address_street_2']) : '').'</span>, ';
             $address .= '<span itemprop="addressLocality">'.(! empty($custom_address['address_city']) ? esc_html($custom_address['address_city']) : 'Little Rock').'</span>, ';

@@ -382,6 +382,7 @@ function uamswp_do_search_loop(): void
                     restore_current_blog();
 
                 }
+                // @phpstan-ignore variable.undefined (template or branch variable, see #745)
                 if ($post_count > 5) {
                     // More results link.
                     printf('<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit(home_url()).'?s='.$s.'&type='.$post_type);
@@ -437,6 +438,7 @@ function uamswp_do_search_loop(): void
                 }
                 echo '</div></div>';
                 // More results link.
+                // @phpstan-ignore variable.undefined (template or branch variable, see #745)
                 if ($wp_query->found_posts > 6) {
                     printf('<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit(home_url()).'?s='.$s.'&type='.$post_type[0]);
                 }
@@ -530,6 +532,7 @@ function uamswp_do_search_loop(): void
                         $conditions_treatments .= $content ? '<p>'.wp_trim_words($content, 30).'<p>' : '';
 
                     }
+                    // @phpstan-ignore variable.undefined (template or branch variable, see #745)
                     if ($post_count > 5) {
                         // More results link.
                         $conditions_treatments .= sprintf('<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div></div>', trailingslashit(home_url()).'?s='.$s.'&type='.$post_type);
@@ -596,6 +599,7 @@ function uamswp_do_search_loop(): void
 
                 echo '</div></div>';
                 // More results link.
+                // @phpstan-ignore variable.undefined (template or branch variable, see #745)
                 if ($wp_query->found_posts > 4) {
                     printf('<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit(home_url()).'?s='.$s.'&type='.$post_type[0]);
                 }
@@ -648,6 +652,7 @@ function uamswp_do_search_loop(): void
 
                 echo '</div></div>';
                 // More results link.
+                // @phpstan-ignore variable.undefined (template or branch variable, see #745)
                 if ($wp_query->found_posts > 4) {
                     printf('<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit(home_url()).'?s='.$s.'&type='.$post_type[0]);
                 }

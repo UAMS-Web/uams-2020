@@ -54,7 +54,7 @@ function uamswp_childtheme_setup(): void
     remove_action('wp_head', 'wp_oembed_add_discovery_links', 10);
     // Disable REST API link in HTTP headers
     // WordPress remove_action() reads only its first three arguments.
-    remove_action(
+    remove_action( // @phpstan-ignore arguments.count (the fourth argument is ignored by WordPress and pinned by a mutation annotation)
         'template_redirect',
         'rest_output_link_header',
         11,
@@ -532,7 +532,7 @@ if (! function_exists('uams_get_home_link')) {
             $homelink = 'https://inside.uams.edu';
         }
 
-        return $homelink;
+        return $homelink; // @phpstan-ignore variable.undefined (unset for a site other than the four handled, see #745)
     }
 
 }
