@@ -1084,7 +1084,7 @@ jobs:
             *) echo "::error::installed PHP $installed is not the $MINOR the php-version job read; does .github/actions/setup take a php-version input?"; exit 1 ;;
           esac
 
-      # Runs php -l on every PHP file outside vendor, node_modules and dev-lint-exclude. No file found is a failure, never a pass over nothing, and so is a syntax error in any file.
+      # Runs php -l on every PHP file outside vendor, node_modules and dev-lint-exclude. No file found is a failure, never a pass over nothing, and so is a syntax error in any file, which is named in the log whatever the runner's log_errors setting (php -l runs with log_errors off and display_errors on, so its message is on stdout and is printed only for a file that fails).
       - name: php -l every PHP file
         env:
           EXCLUDE: ${{ inputs.dev-lint-exclude }}
@@ -1100,7 +1100,15 @@ jobs:
           count=$(tr -cd '\0' < php-files.list | wc -c | tr -d ' ')
           if [ "$count" -eq 0 ]; then echo "::error::No PHP files found to lint"; exit 1; fi
           echo "Linting $count PHP files under PHP $(php -r 'echo PHP_VERSION;')"
-          xargs -0 -n1 php -l < php-files.list > /dev/null
+          failed=0
+          while IFS= read -r -d '' file; do
+            if ! out=$(php -d log_errors=0 -d display_errors=1 -l "$file" 2>&1); then
+              echo "::error file=${file#./}::php -l failed on ${file#./}"
+              echo "$out"
+              failed=$((failed + 1))
+            fi
+          done < php-files.list
+          if [ "$failed" -ne 0 ]; then echo "::error::$failed PHP file(s) failed php -l"; exit 1; fi
 
   # The one job that reads every other job's result. Keep `needs:` listing every other job in the
   # file; scripts/check-templates.mjs in UAMS-Web/uams-claude-skills checks it.
