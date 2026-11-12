@@ -128,7 +128,7 @@ function uamswp_framing_list(string $constant): array
     $value = defined($constant) ? constant($constant) : [];
     $origins = [];
     foreach (is_array($value) ? $value : [] as $origin) {
-        if (is_string($origin) && preg_match('#^https?://[A-Za-z0-9.-]+(:[0-9]+)?$#', $origin) === 1) {
+        if (is_string($origin) && preg_match('#^https?://[A-Za-z0-9.-]+(:[0-9]+)?$#D', $origin) === 1) {
             $origins[] = $origin;
         }
     }

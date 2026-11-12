@@ -97,7 +97,7 @@ it('reads a per-install origin list from a constant and keeps only plain origins
 
     define('UAMSWP_TEST_ORIGINS', [
         'https://site.test', 'http://localhost:8080', 'https://a-b.example.org', 'https://site.test/path', 'https://site.test; script-src *',
-        'ftp://site.test', 'site.test', 'https://', "https://site.test\r\nX-Evil: 1", 7, null, ['https://nested.test'],
+        'ftp://site.test', 'site.test', 'https://', "https://site.test\r\nX-Evil: 1", "https://site.test\n", 7, null, ['https://nested.test'],
     ]);
     expect(uamswp_framing_list('UAMSWP_TEST_ORIGINS'))->toBe(['https://site.test', 'http://localhost:8080', 'https://a-b.example.org']);
 });
