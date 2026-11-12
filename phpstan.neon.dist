@@ -159,6 +159,12 @@ parameters:
         -
             identifier: return.void
             reportUnmatched: false
+        # WordPress remove_action() reads only its first three arguments; the fourth in
+        # functions.php is pinned by a mutation annotation, so it stays (see #745).
+        -
+            identifier: arguments.count
+            path: functions.php
+            count: 1
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
         # PHPStan analyzes at the `min` above, so
