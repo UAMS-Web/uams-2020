@@ -532,6 +532,7 @@ if (! function_exists('uams_get_home_link')) {
             $homelink = 'https://inside.uams.edu';
         }
 
+        /** @var string $homelink Unset for a site other than the four handled, see #745. */
         return $homelink;
     }
 
