@@ -165,6 +165,12 @@ parameters:
             identifier: arguments.count
             path: functions.php
             count: 1
+        # uams_get_home_link() returns $homelink, which is unset for a site other than the
+        # four it handles (see #745).
+        -
+            identifier: variable.undefined
+            path: functions.php
+            count: 1
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
         # PHPStan analyzes at the `min` above, so
