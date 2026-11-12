@@ -2,6 +2,25 @@
 
 declare(strict_types=1);
 
+/**
+ * Field arrays that lib/meta-box.php includes just before this file.
+ *
+ * @var array<int, array<string, mixed>> $content
+ * @var array<int, array<string, mixed>> $action_bar
+ * @var array<int, array<string, mixed>> $call_out
+ * @var array<int, array<string, mixed>> $cta
+ * @var array<int, array<string, mixed>> $hero
+ * @var array<int, array<string, mixed>> $link_list
+ * @var array<int, array<string, mixed>> $news
+ * @var array<int, array<string, mixed>> $overlay
+ * @var array<int, array<string, mixed>> $post_tile
+ * @var array<int, array<string, mixed>> $post_tiles
+ * @var array<int, array<string, mixed>> $side_by_side
+ * @var array<int, array<string, mixed>> $stacked
+ * @var array<int, array<string, mixed>> $livewhale
+ * @var array<int, array<string, mixed>> $gallery
+ */
+
 /*
  *
  * Module Layout Fields
