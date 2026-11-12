@@ -422,6 +422,13 @@
         ],
         [
             "action",
+            "send_headers",
+            "uamswp_send_frame_headers",
+            10,
+            1
+        ],
+        [
+            "action",
             "enqueue_block_editor_assets",
             "uamswp_gutenberg_scripts",
             10,

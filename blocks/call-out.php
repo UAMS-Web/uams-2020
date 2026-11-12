@@ -1,4 +1,6 @@
 <?php
+
+/** @var int|false $i Module index, set by uamswp_module() when this template is included as a module; an ACF block always has $block and an id, so the index is not read. */
 /*
  *
  * UAMS Call-Out Block
@@ -133,7 +135,7 @@ if ($geo_display) {
         <?php } elseif ($use_image) { ?>
         <style>
             #<?php echo esc_attr($id); ?>:before {
-                background-image: url("<?php echo wp_get_attachment_url($image, 'aspect-8-3'); ?>");
+                background-image: url("<?php echo wp_get_attachment_url($image); ?>");
             }
         </style>
         <?php } // endif?>

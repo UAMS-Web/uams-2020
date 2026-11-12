@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+/** @var string $suffix Field key suffix, set by the including function ('_b' in lib/blocks.php, '_o' in lib/meta-box.php). */
+
 /*
  *
  * Text & Image Overlay ACF Fields

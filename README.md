@@ -36,6 +36,15 @@
 
 ## Credits
 
+Developed and maintained by UAMS Web Services.
+
+Developers:
+
+- Rotsen Mark Acob
+- Josh Daugherty
+- Todd McKee
+- Brent Passmore
+
 Based on the [Bootstrap for Genesis](https://github.com/webdevsuperfast/bootstrap-for-genesis) theme by Rotsen Mark Acob
 
 ## Tests

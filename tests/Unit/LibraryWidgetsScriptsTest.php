@@ -84,6 +84,38 @@ it('pins the editor stylesheet and additional CORS origins', function (): void {
     expect(add_allowed_origins(['keep']))->toBe(['keep', 'https://www.uams.edu', 'https://public-api.wordpress.com', 'https://uamshealth.com', 'https://news.uams.edu']);
 });
 
+it('adds the origins an install lists for itself after the built-in ones', function (): void {
+    Functions\expect('uamswp_framing_list')->once()->with('UAMSWP_EXTRA_ALLOWED_ORIGINS')->andReturn(['https://site.test', 'https://other.test:8443']);
+    expect(add_allowed_origins(['keep']))->toBe(['keep', 'https://www.uams.edu', 'https://public-api.wordpress.com', 'https://uamshealth.com', 'https://news.uams.edu', 'https://site.test', 'https://other.test:8443']);
+});
+
+it('reads a per-install origin list from a constant and keeps only plain origins', function (): void {
+    expect(uamswp_framing_list('UAMSWP_TEST_UNDEFINED_ORIGINS'))->toBe([]);
+
+    define('UAMSWP_TEST_NOT_AN_ARRAY', 'https://site.test');
+    expect(uamswp_framing_list('UAMSWP_TEST_NOT_AN_ARRAY'))->toBe([]);
+
+    define('UAMSWP_TEST_ORIGINS', [
+        'https://site.test', 'http://localhost:8080', 'https://a-b.example.org', 'https://site.test/path', 'https://site.test; script-src *',
+        'ftp://site.test', 'site.test', 'https://', "https://site.test\r\nX-Evil: 1", "https://site.test\n", 7, null, ['https://nested.test'],
+    ]);
+    expect(uamswp_framing_list('UAMSWP_TEST_ORIGINS'))->toBe(['https://site.test', 'http://localhost:8080', 'https://a-b.example.org']);
+});
+
+it('sends the framing headers only when the install lists frame ancestors', function (array $ancestors, array $sent): void {
+    Functions\expect('uamswp_framing_list')->once()->with('UAMSWP_FRAME_ANCESTORS')->andReturn($ancestors);
+    $headers = [];
+    when('header')->alias(static function (string $header) use (&$headers): void {
+        $headers[] = $header;
+    });
+    uamswp_send_frame_headers();
+    expect($headers)->toBe($sent);
+})->with([
+    'unset' => [[], []],
+    'one origin' => [['https://www.uams.edu'], ['X-Frame-Options: SAMEORIGIN', "Content-Security-Policy: frame-ancestors 'self' https://www.uams.edu;"]],
+    'three origins' => [['https://www.uams.edu', 'https://sites.uams.edu', 'https://uamshealth.dev'], ['X-Frame-Options: SAMEORIGIN', "Content-Security-Policy: frame-ancestors 'self' https://www.uams.edu https://sites.uams.edu https://uamshealth.dev;"]],
+]);
+
 it('loads canvas fonts only in the editor', function (bool $admin): void {
     Functions\expect('is_admin')->once()->andReturn($admin);
     Functions\expect('wp_enqueue_style')->times($admin ? 1 : 0)->with('theme-fonts', 'https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
