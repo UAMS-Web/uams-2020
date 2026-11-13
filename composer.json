@@ -15,7 +15,8 @@
         "php-stubs/wp-cli-stubs": "^2.12",
         "phpstan/phpstan": "^2.2",
         "rector/rector": "^2.6",
-        "szepeviktor/phpstan-wordpress": "^2.0"
+        "szepeviktor/phpstan-wordpress": "^2.0",
+        "uams-web/patches-pest-plugin-mutate": "^1.2"
     },
     "config": {
         "platform": {
@@ -56,5 +57,10 @@
         "psr-4": {
             "Uams2020\\Tests\\": "tests/"
         }
-    }
+    },
+    "repositories": [{
+        "name": "patches-pest-plugin-mutate",
+        "type": "vcs",
+        "url": "https://github.com/UAMS-Web/patches-pest-plugin-mutate.git"
+    }]
 }
