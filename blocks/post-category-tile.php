@@ -89,7 +89,7 @@ if ($geo_display) {
             $arr_posts->the_post();
 
             // Load values.
-            $image = get_post_thumbnail_id($arr_posts->ID);
+            $image = get_post_thumbnail_id($arr_posts->ID); // @phpstan-ignore property.notFound (the_post() sets the global post; WP_Query has no ID, see #745)
             $alt_text = get_post_meta($image, '_wp_attachment_image_alt', true);
             if (empty($post_button_text)) {
                 $post_button_text = get_field('post_tile_post_button_text') ?: 'Read the Story';

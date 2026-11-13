@@ -14,9 +14,9 @@ add_filter('oembed_dataparse', 'filter_oembed_dataparse', 10, 3);
 /**
  * Filters the returned oEmbed HTML.
  *
- * @param   string - $return - The returned oEmbed HTML.
- * @param   object - $data - A data object result from an oEmbed provider.
- * @param   string - $url - The URL of the content to be embedded.
+ * @param  string  $return  The returned oEmbed HTML.
+ * @param  object  $data  A data object result from an oEmbed provider.
+ * @param  string  $url  The URL of the content to be embedded.
  * @return string - the HTML.
  */
 function filter_oembed_dataparse($return, $data, $url)

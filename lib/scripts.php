@@ -16,7 +16,7 @@ declare(strict_types=1);
 add_action('wp_enqueue_scripts', 'uamswp_theme_scripts');
 function uamswp_theme_scripts(): void
 {
-    $version = wp_get_theme()->Version;
+    $version = wp_get_theme()->Version; // @phpstan-ignore property.notFound (WP_Theme exposes Version through __get(), see #745)
     if (! is_admin()) {
         // Enqueue Bootstrap CSS
         wp_enqueue_style('app-css', UAMSWP_THEME_CSS.'app.css', [], CHILD_THEME_VERSION, 'all');
