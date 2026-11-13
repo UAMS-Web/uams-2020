@@ -46,6 +46,7 @@ function uamswp_nav_subsection()
     }
 
     if ($subsection) {
+        // @phpstan-ignore variable.undefined (template or branch variable, see #745)
         return $id;
     }
 

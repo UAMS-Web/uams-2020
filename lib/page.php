@@ -86,6 +86,7 @@ function uamswp_attributes_entry_header($attributes)
 
 function uamswp_attributes_entry_header_graphic_title($attributes)
 {
+    // @phpstan-ignore empty.variable (variable is never assigned, see #745)
     if (empty($page_cover_image)) {
         $page_cover_image = get_field('page_cover_image', get_the_id());
     }
@@ -106,6 +107,7 @@ function uamswp_graphic_title_wrap_open(): void
 
 function uamswp_graphic_title_inner_1(): void
 {
+    // @phpstan-ignore empty.variable (variable is never assigned, see #745)
     if (empty($page_cover_image)) {
         $page_cover_image = get_field('page_cover_image', get_the_id());
     }
@@ -161,7 +163,7 @@ function uamswp_graphic_title_inner_1(): void
     } elseif ($page_cover_image) {
         echo '<style>
             .entry-header:before {
-                background-image: url("'.wp_get_attachment_url($page_cover_image, 'aspect-8-3').'");
+                background-image: url("'.wp_get_attachment_url($page_cover_image).'");
             }
         </style>';
     }
@@ -177,6 +179,7 @@ function uamswp_graphic_title_inner_2(): void
 
 function uamswp_graphic_title_lead_paragraph(): void
 {
+    // @phpstan-ignore empty.variable (variable is never assigned, see #745)
     if (empty($page_description)) {
         $page_description = get_field('page_description', get_the_id());
     }
@@ -200,6 +203,7 @@ function uamswp_graphic_title_wrap_close(): void
 
 function uamswp_attributes_entry_header_landing_page_title($attributes)
 {
+    // @phpstan-ignore empty.variable (variable is never assigned, see #745)
     if (empty($page_landing_page_cover_image)) {
         $page_landing_page_cover_image = get_field('page_landing_page_cover_image', get_the_id());
     }
@@ -220,10 +224,12 @@ function uamswp_landing_page_title_wrap_open(): void
 
 function uamswp_landing_page_title_inner_1(): void
 {
+    // @phpstan-ignore empty.variable (variable is never assigned, see #745)
     if (empty($page_landing_page_cover_image)) {
         $page_landing_page_cover_image = get_field('page_landing_page_cover_image', get_the_id());
     }
 
+    // @phpstan-ignore empty.variable (variable is never assigned, see #745)
     if (empty($page_landing_page_cover_image_mobile)) {
         $page_landing_page_cover_image_mobile = get_field('page_landing_page_cover_image_mobile', get_the_id());
     }
@@ -283,7 +289,7 @@ function uamswp_landing_page_title_inner_1(): void
     } elseif ($page_landing_page_cover_image) {
         echo '<style>
             .entry-header:before {
-                background-image: url("'.wp_get_attachment_url($page_landing_page_cover_image, 'full').'");
+                background-image: url("'.wp_get_attachment_url($page_landing_page_cover_image).'");
             }
         </style>';
     }
@@ -312,6 +318,7 @@ function uamswp_landing_page_title_inner_2(): void
 
 function uamswp_landing_page_title_lead_paragraph(): void
 {
+    // @phpstan-ignore empty.variable (variable is never assigned, see #745)
     if (empty($page_landing_page_description)) {
         $page_landing_page_description = get_field('page_landing_page_description', get_the_ID());
     }

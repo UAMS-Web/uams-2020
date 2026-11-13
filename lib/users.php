@@ -34,6 +34,7 @@ add_action('admin_menu', 'custom_admin_menu');
 function custom_admin_menu(): void
 {
     new WP_User(get_current_user_id());
+    // @phpstan-ignore isset.variable (variable is never assigned, see #745)
     if (isset($role) && $role == 'editor') { // @pest-mutate-ignore: EqualToIdentical,EqualToNotEqual
         remove_submenu_page('themes.php', 'themes.php'); // @pest-mutate-ignore: RemoveFunctionCall
         remove_submenu_page('themes.php', 'widgets.php'); // @pest-mutate-ignore: RemoveFunctionCall
