@@ -1045,26 +1045,22 @@ parameters:
             identifier: function.notFound
             path: lib/tgm.php
             count: 1
-        # The result of a function declared void is used (see #745).
+        # `wp_list_pages()` is declared void by the WordPress stubs, though it returns the markup when `echo` is false. The stub is wrong and cannot be corrected here (see #745).
         -
             identifier: function.void
             path: lib/nav.php
             count: 2
-        -
-            identifier: function.void
-            path: lib/page.php
-            count: 1
-        # A function that can end without returning the value it is declared to return (see #745).
+        # The filter callback `uamswp_footer_creds_text()` echoes its output and returns nothing, so the filtered option becomes null. Returning a value would change the rendered footer (see #745).
         -
             identifier: return.missing
             path: lib/footer.php
             count: 1
-        # A variable that is not defined on every path (see #745).
+        # `$role` in `custom_admin_menu()` is never assigned, so the branch is dead. Deleting it removes code that a unit test pins (see #745).
         -
             identifier: variable.undefined
             path: lib/users.php
             count: 1
-        # Whitespace after the closing PHP tag at the end of the file (see #745).
+        # The template ends with whitespace after its closing PHP tag, and the block markup fixtures pin that output byte for byte. Removing it changes the rendered output (see #745).
         -
             identifier: whitespace.fileEnd
             path: blocks/counter.php
