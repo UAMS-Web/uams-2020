@@ -6,18 +6,20 @@
  * UAMS Section Block
  *
  */
+$blockData = isset($block) ? uamswp_field_array($block) : [];
+$moduleData = isset($module) ? uamswp_field_array($module) : [];
 if (empty($id)) {
     $id = '';
 }
 if (empty($id) && isset($block)) {
-    $id = $block['id'];
+    $id = $blockData['id'] ?? null;
 }
 if (empty($id)) {
-    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+    $id = ! empty($moduleData['anchor_id']) ? sanitize_title_with_dashes(uamswp_field_text($moduleData['anchor_id'])) : 'module-'.((int) $i + 1);
 }
-$id = 'uams-section-'.$id;
-if (! empty($block['anchor'])) {
-    $id = $block['anchor'];
+$id = 'uams-section-'.uamswp_field_text($id);
+if (! empty($blockData['anchor'])) {
+    $id = $blockData['anchor'];
 }
 
 if (empty($heading)) {
@@ -31,8 +33,8 @@ if (empty($background_color)) {
 }
 
 $className = ['uams-module', 'section-block', 'block-section', 'alignfull'];
-if (! empty($block['className'])) {
-    $className = array_merge($className, explode(' ', $block['className']));
+if (! empty($blockData['className'])) {
+    $className = array_merge($className, explode(' ', uamswp_field_text($blockData['className'])));
 }
 $className = array_filter(array_unique($className));
 
@@ -43,16 +45,16 @@ $allowed_blocks = uamswp_section_allowed_blocks();
 $template = [
 ];
 ?>  
-<section class="<?php echo esc_attr(implode(' ', $className)); ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
+<section class="<?php echo esc_attr(implode(' ', $className)); ?> <?php echo esc_attr(uamswp_field_text($background_color)); ?>" id="<?php echo esc_attr(uamswp_field_text($id)); ?>" aria-label="<?php echo esc_attr(uamswp_field_text($heading)); ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12<?php echo $hide_heading ? ' sr-only' : ''; ?>">
                 <h2 class="module-title<?php echo $hide_heading ? ' sr-only' : ''; ?>">
-                    <span class="title"><?php echo esc_html($heading); ?></span>
+                    <span class="title"><?php echo esc_html(uamswp_field_text($heading)); ?></span>
                 </h2>
             </div>
             <div class="module-body">
-                <?php echo '<InnerBlocks allowedBlocks="'.esc_attr(wp_json_encode($allowed_blocks)).'" template="'.esc_attr(wp_json_encode($template)).'" />'; ?>
+                <?php echo '<InnerBlocks allowedBlocks="'.esc_attr(uamswp_field_text(wp_json_encode($allowed_blocks))).'" template="'.esc_attr(uamswp_field_text(wp_json_encode($template))).'" />'; ?>
             </div>
         </div>
     </div>

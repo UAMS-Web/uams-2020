@@ -382,6 +382,36 @@ function sp_pro_breadcrumbs_html($html) {
 }
 */
 
+/**
+ * Narrows a value read from ACF or WordPress to a string.
+ *
+ * Strings, numbers, booleans and objects that convert to a string become a string
+ * (a boolean `false` becomes ''). Everything else, such as `null` or an array, becomes ''.
+ *
+ * @param  mixed  $value
+ */
+function uamswp_field_text($value): string
+{
+    if (is_scalar($value) || $value instanceof Stringable) {
+        return (string) $value;
+    }
+
+    return '';
+}
+
+/**
+ * Narrows a value read from ACF or WordPress to an array.
+ *
+ * A value that is not an array becomes an empty array.
+ *
+ * @param  mixed  $value
+ * @return array<mixed>
+ */
+function uamswp_field_array($value): array
+{
+    return is_array($value) ? $value : [];
+}
+
 /** Returns site & subsite info **/
 if (! function_exists('uams_get_site_info')) {
 

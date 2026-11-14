@@ -74554,7 +74554,7 @@
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ],
                 [
                     "esc_attr",
@@ -74702,7 +74702,7 @@
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ],
                 [
                     "esc_attr",
