@@ -1661,11 +1661,11 @@
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ],
                 [
                     "esc_attr",
@@ -1681,7 +1681,7 @@
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ],
                 [
                     "esc_attr",
@@ -1689,7 +1689,7 @@
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ],
                 [
                     "esc_attr",
@@ -1705,7 +1705,7 @@
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ],
                 [
                     "esc_attr",
@@ -1817,7 +1817,7 @@
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ],
                 [
                     "esc_attr",
@@ -68093,7 +68093,7 @@
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ],
                 [
                     "esc_attr",
@@ -68101,7 +68101,7 @@
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ],
                 [
                     "esc_attr",
@@ -68113,7 +68113,7 @@
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ],
                 [
                     "esc_attr",
@@ -70290,7 +70290,7 @@
                 ],
                 [
                     "get_post_meta",
-                    false,
+                    0,
                     "_wp_attachment_image_alt",
                     true
                 ],
@@ -81336,7 +81336,7 @@
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ]
             ],
             "queries": []
@@ -81972,7 +81972,7 @@
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ],
                 [
                     "esc_attr",

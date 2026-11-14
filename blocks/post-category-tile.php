@@ -7,29 +7,32 @@
  *
  */
 
+$blockData = isset($block) ? uamswp_field_array($block) : [];
+$moduleData = isset($module) ? uamswp_field_array($module) : [];
+
 // Create id attribute allowing for custom "anchor" value.
 if (empty($id)) {
     $id = '';
 }
 if (empty($id) && isset($block)) {
-    $id = $block['id'];
+    $id = $blockData['id'] ?? null;
 }
 if (empty($id)) {
-    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+    $id = ! empty($moduleData['anchor_id']) ? sanitize_title_with_dashes(uamswp_field_text($moduleData['anchor_id'])) : 'module-'.((int) $i + 1);
 }
 
-$id = 'post-category-tile-'.$id;
-if (! empty($block['anchor'])) {
-    $id = $block['anchor'];
+$id = 'post-category-tile-'.uamswp_field_text($id);
+if (! empty($blockData['anchor'])) {
+    $id = uamswp_field_text($blockData['anchor']);
 }
 
 $className = '';
-if (! empty($block['className'])) {
+if (! empty($blockData['className'])) {
     // @pest-mutate-ignore: ConcatEqualToEqual
-    $className .= ' '.$block['className'];
+    $className .= ' '.uamswp_field_text($blockData['className']);
 }
-if (! empty($block['align'])) {
-    $className .= ' align'.$block['align'];
+if (! empty($blockData['align'])) {
+    $className .= ' align'.uamswp_field_text($blockData['align']);
 }
 
 // Load values.
@@ -54,31 +57,40 @@ if (empty($category)) {
     $category = get_field('post_tile_category');
 }
 
+// The selected category is a term object; read its fields as typed values.
+$category_data = is_object($category) ? get_object_vars($category) : [];
+$category_slug = uamswp_field_text($category_data['slug'] ?? null);
+$category_name = uamswp_field_text($category_data['name'] ?? null);
+$category_id = (int) uamswp_field_text($category_data['term_id'] ?? null);
+$heading = uamswp_field_text($heading);
+$background_color = uamswp_field_text($background_color);
+
 // GEO Logic
 $geo_display = false;
-if (! isset($geo) || empty($geo_region)) {
+$geo_regions = uamswp_field_array($geo_region);
+if (! isset($geo) || $geo_regions === []) {
     $geo_display = true;
 } else {
-    if ($geo == 'include' && ! empty($geo_region)) {
-        if (is_in_region($geo_region)) {
+    if ($geo == 'include') {
+        if (is_in_region($geo_regions)) {
             $geo_display = true;
         }
-    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
-        if (is_not_in_region($geo_region)) {
+    } elseif ($geo == 'exclude') {
+        if (is_not_in_region($geo_regions)) {
             $geo_display = true;
         }
     }
 }
-if (is_admin() && ! empty($geo) && ! empty($geo_region)) {
+if (is_admin() && ! empty($geo) && $geo_regions !== []) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map(uamswp_field_text(...), $geo_regions)).'<hr>';
 }
 if ($geo_display) {
 
     $args = [
         'post_type' => 'post',
         'post_status' => 'publish',
-        'category_name' => $category->slug,
+        'category_name' => $category_slug,
         'posts_per_page' => 1,
     ];
 
@@ -90,12 +102,12 @@ if ($geo_display) {
 
             // Load values.
             $image = get_post_thumbnail_id();
-            $alt_text = get_post_meta($image, '_wp_attachment_image_alt', true);
+            $alt_text = uamswp_field_text(get_post_meta((int) $image, '_wp_attachment_image_alt', true));
             if (empty($post_button_text)) {
-                $post_button_text = get_field('post_tile_post_button_text') ?: 'Read the Story';
+                $post_button_text = uamswp_field_text(get_field('post_tile_post_button_text')) ?: 'Read the Story';
             }
             if (empty($cat_button_text)) {
-                $cat_button_text = get_field('post_tile_category_button_text') ?: 'View '.$category->name.' Archive';
+                $cat_button_text = uamswp_field_text(get_field('post_tile_category_button_text')) ?: 'View '.$category_name.' Archive';
             }
 
             // if ( ! has_excerpt() ) {
@@ -143,10 +155,10 @@ if ($geo_display) {
                                 media="(min-width: 1px)" 
                                 srcset="<?php echo image_sizer($image, 497, 497, 'center', 'center', 'aspect-1-1'); ?>">
                             <!-- Fallback -->
-                            <img src="<?php echo image_sizer($image, 496, 496, 'center', 'center', 'aspect-1-1'); ?>" alt="<?php echo esc_attr($alt_text ?: ''); ?>" />
+                            <img src="<?php echo image_sizer($image, 496, 496, 'center', 'center', 'aspect-1-1'); ?>" alt="<?php echo esc_attr($alt_text); ?>" />
                             <?php } else { ?>
                             <!-- Fallback -->
-                            <img src="<?php echo wp_get_attachment_image_url($image, 'aspect-16-9'); ?>" alt="<?php echo esc_attr($alt_text ?: ''); ?>" />
+                            <img src="<?php echo wp_get_attachment_image_url($image, 'aspect-16-9'); ?>" alt="<?php echo esc_attr($alt_text); ?>" />
                             <?php } // endif?>
                         </picture>
                     </div>
@@ -155,18 +167,17 @@ if ($geo_display) {
                         <h3><?php the_title(); ?></h3>
                         <p><?php
                                      if (! has_excerpt()) {
-                                         // @pest-mutate-ignore: DecrementInteger,IncrementInteger
-                                         $content = wp_trim_words(wp_strip_all_tags(get_the_content(), 50));
+                                         $content = wp_trim_words(wp_strip_all_tags(get_the_content(), true));
                                          $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
-                                         echo mb_strimwidth(preg_replace($regex, ' ', $content), 0, 176, ' ...');
+                                         echo mb_strimwidth((string) preg_replace($regex, ' ', $content), 0, 176, ' ...');
                                          // echo wp_trim_words((preg_replace($regex, ' ', $content)), 25, ' ...'); // Option for words, instead of characters
                                      } else {
                                          echo mb_strimwidth(get_the_excerpt(), 0, 176, ' ...');
                                          // echo wp_trim_words(get_the_excerpt(), 25, ' ...');  // Words instead of character
                                      }?></p>
                         <div class="cta-container">
-                            <a href="<?php the_permalink(); ?>" class="btn btn-primary" aria-label="Read <?php the_title(); ?>" data-moduletitle="<?php echo esc_attr($heading); ?>" data-categorytitle="<?php echo esc_attr($category->name); ?>"><?php echo esc_html($post_button_text); ?></a>
-                            <a href="<?php echo get_category_link($category->term_id); ?>" class="btn btn-outline-primary" aria-label="Full list of <?php echo esc_attr($category->name); ?> stories" data-moduletitle="<?php echo esc_attr($heading); ?>"  data-categorytitle="<?php echo esc_attr($category->name); ?>"><?php echo esc_html($cat_button_text); ?></a>
+                            <a href="<?php the_permalink(); ?>" class="btn btn-primary" aria-label="Read <?php the_title(); ?>" data-moduletitle="<?php echo esc_attr($heading); ?>" data-categorytitle="<?php echo esc_attr($category_name); ?>"><?php echo esc_html(uamswp_field_text($post_button_text)); ?></a>
+                            <a href="<?php echo get_category_link($category_id); ?>" class="btn btn-outline-primary" aria-label="Full list of <?php echo esc_attr($category_name); ?> stories" data-moduletitle="<?php echo esc_attr($heading); ?>"  data-categorytitle="<?php echo esc_attr($category_name); ?>"><?php echo esc_html(uamswp_field_text($cat_button_text)); ?></a>
                         </div>
                     </div>
                 </div>
