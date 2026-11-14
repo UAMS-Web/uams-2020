@@ -18,7 +18,7 @@
         "phpstan/phpstan": "^2.2",
         "rector/rector": "^2.6",
         "szepeviktor/phpstan-wordpress": "^2.0",
-        "uams-web/patches-pest-plugin-mutate": "^1.2"
+        "uams-web/patches-pest-plugin-mutate": "^1.4"
     },
     "config": {
         "platform": {
