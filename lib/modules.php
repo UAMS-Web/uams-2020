@@ -10,6 +10,9 @@
 **/
 /**
  * Display Modules
+ *
+ * @param  mixed  $post_id
+ * @return mixed
  */
 function uamswp_modules($post_id = false)
 {
@@ -27,6 +30,10 @@ function uamswp_modules($post_id = false)
 }
 /**
  * Display Module
+ *
+ * @param  mixed  $i
+ * @param  mixed  $module
+ * @return mixed
  */
 function uamswp_module($module = [], $i = false)
 {
@@ -379,6 +386,10 @@ function uamswp_module($module = [], $i = false)
 }
 /**
  * Module Open
+ *
+ * @param  mixed  $i
+ * @param  mixed  $module
+ * @return mixed
  */
 function uamswp_module_open($module, $i)
 {
@@ -402,6 +413,9 @@ function uamswp_module_open($module, $i)
 }
 /**
  * Module Header
+ *
+ * @param  mixed  $module
+ * @return mixed
  */
 function uamswp_module_header($module)
 {
@@ -411,6 +425,10 @@ function uamswp_module_header($module)
 }
 /**
  * Module Close
+ *
+ * @param  mixed  $i
+ * @param  mixed  $module
+ * @return mixed
  */
 function uamswp_module_close($module, $i)
 {
@@ -423,6 +441,9 @@ function uamswp_module_close($module, $i)
 }
 /**
  * Module Disable
+ *
+ * @param  mixed  $module
+ * @return mixed
  */
 function uamswp_module_disable($module)
 {
@@ -435,6 +456,10 @@ function uamswp_module_disable($module)
 }
 /**
  * Has Module
+ *
+ * @param  mixed  $module_to_find
+ * @param  mixed  $post_id
+ * @return mixed
  */
 function uamswp_has_module($module_to_find = '', $post_id = false)
 {
@@ -453,6 +478,16 @@ function uamswp_has_module($module_to_find = '', $post_id = false)
     return $has_module;
 }
 
+/**
+ * @param  mixed  $background_color
+ * @param  mixed  $body
+ * @param  mixed  $className
+ * @param  mixed  $heading
+ * @param  mixed  $id
+ * @param  mixed  $image
+ * @param  mixed  $use_image
+ * @return mixed
+ */
 function display_call_out($id, $className, $heading, $body, $use_image, $image, $background_color)
 {
     ?>

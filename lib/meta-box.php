@@ -10,6 +10,10 @@ declare(strict_types=1);
 // Remove ACF UI
 add_filter('acf/settings/show_admin', 'my_acf_show_admin');
 
+/**
+ * @param  mixed  $show
+ * @return mixed
+ */
 function my_acf_show_admin($show)
 {
 

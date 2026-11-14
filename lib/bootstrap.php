@@ -25,6 +25,11 @@ add_action('get_header', function (): void {
 }, 10, 1);
 
 // Function to add .row div inside .container div
+/**
+ * @param  mixed  $original_output
+ * @param  mixed  $output
+ * @return mixed
+ */
 function uamswp_filter_structural_wrap($output, $original_output)
 {
     if ($original_output == 'close') {
@@ -52,6 +57,11 @@ function uamswp_add_array_filters_genesis_attr(): void
 }
 
 // Clean classes output
+/**
+ * @param  mixed  $attr
+ * @param  mixed  $context
+ * @return mixed
+ */
 function uamswp_add_markup_sanitize_classes($attr, $context)
 {
     $classes = [];
@@ -75,6 +85,9 @@ function uamswp_add_markup_sanitize_classes($attr, $context)
 }
 
 // Default array of classes to add
+/**
+ * @return mixed
+ */
 function uamswp_merge_genesis_attr_classes()
 {
     global $wp_registered_sidebar;
@@ -158,6 +171,12 @@ function uamswp_merge_genesis_attr_classes()
 
 // Adds classes array to uamswp_add_markup_class() for cleaning
 add_filter('uamswp_clean_classes_output', 'uamswp_modify_classes_based_on_extras', 10, 3);
+/**
+ * @param  mixed  $attr
+ * @param  mixed  $classes
+ * @param  mixed  $context
+ * @return mixed
+ */
 function uamswp_modify_classes_based_on_extras($classes, $context, $attr)
 {
     return uamswp_merge_genesis_attr_classes();
@@ -168,6 +187,10 @@ function uamswp_modify_classes_based_on_extras($classes, $context, $attr)
 add_filter('uamswp_add_classes', 'uamswp_modify_classes_based_on_template', 10, 3);
 
 // Remove unused layouts
+/**
+ * @param  mixed  $classes_to_add
+ * @return mixed
+ */
 function uamswp_layout_options_modify_classes_to_add($classes_to_add)
 {
 
@@ -207,6 +230,10 @@ function uamswp_layout_options_modify_classes_to_add($classes_to_add)
     return $classes_to_add;
 }
 
+/**
+ * @param  mixed  $classes_to_add
+ * @return mixed
+ */
 function uamswp_modify_classes_based_on_template($classes_to_add)
 {
     return uamswp_layout_options_modify_classes_to_add($classes_to_add);

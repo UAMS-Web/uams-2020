@@ -8,6 +8,9 @@ remove_action('genesis_loop', 'genesis_do_loop');
 add_action('genesis_loop', 'uamswp_do_search_loop');
 
 // Remove search results page from google search results
+/**
+ * @param  mixed  $html
+ */
 function sp_titles_robots($html): string
 {
     $html = '<meta name="robots" content="noindex, noarchive, nosnippet"/>';
@@ -744,11 +747,17 @@ function uamswp_show_excerpts(): string
     return 'excerpts';
 }
 
+/**
+ * @param  mixed  $more
+ */
 function new_excerpt_more($more): string
 {
     return '... <a class="more-link" href="'.get_permalink().'">Continue Reading</a>';
 }
 
+/**
+ * @param  mixed  $length
+ */
 function uamswp_excerpt_length($length): int
 {
     return 20; // pull first 20 words
@@ -771,6 +780,10 @@ function uamswp_search_page_after_entry(): void
 }
 
 // * Prefix search breadcrumb trail with the text 'Search results for'
+/**
+ * @param  mixed  $args
+ * @return mixed
+ */
 function uamswp_prefix_search_breadcrumb($args)
 {
 
@@ -781,6 +794,9 @@ function uamswp_prefix_search_breadcrumb($args)
 }
 add_filter('genesis_breadcrumb_args', 'uamswp_prefix_search_breadcrumb');
 
+/**
+ * @param  mixed  $title
+ */
 function uamswp_search_title($title): string
 {
     global $post;
@@ -793,6 +809,9 @@ function uamswp_search_title($title): string
     return $title;
 }
 
+/**
+ * @param  mixed  $args
+ */
 function uamswp_custom_loop($args = []): void
 {
 
@@ -818,6 +837,9 @@ function uamswp_custom_loop($args = []): void
 
 }
 
+/**
+ * @param  mixed  $args
+ */
 function uamswp_custom_loop_base($args = []): void
 {
 
