@@ -12,29 +12,32 @@ if (uamswp_block_placeholder($block ?? null, $is_preview ?? false)) {
     return;
 }
 
+$blockData = isset($block) ? uamswp_field_array($block) : [];
+$moduleData = isset($module) ? uamswp_field_array($module) : [];
+
 // Create id attribute allowing for custom "anchor" value.
 if (empty($id)) {
     $id = '';
 }
 if (empty($id) && isset($block)) {
-    $id = $block['id'];
+    $id = $blockData['id'] ?? null;
 }
 if (empty($id)) {
-    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+    $id = ! empty($moduleData['anchor_id']) ? sanitize_title_with_dashes(uamswp_field_text($moduleData['anchor_id'])) : 'module-'.((int) $i + 1);
 }
 
-$id = 'uams-gallery-'.$id;
-if (! empty($block['anchor'])) {
-    $id = $block['anchor'];
+$id = 'uams-gallery-'.uamswp_field_text($id);
+if (! empty($blockData['anchor'])) {
+    $id = uamswp_field_text($blockData['anchor']);
 }
 
 $className = '';
-if (! empty($block['className'])) {
+if (! empty($blockData['className'])) {
     // @pest-mutate-ignore: ConcatEqualToEqual
-    $className .= ' '.$block['className'];
+    $className .= ' '.uamswp_field_text($blockData['className']);
 }
-if (! empty($block['align'])) {
-    $className .= ' align'.$block['align'];
+if (! empty($blockData['align'])) {
+    $className .= ' align'.uamswp_field_text($blockData['align']);
 }
 
 // Load values.
@@ -56,7 +59,7 @@ if (empty($gallery_images)) {
 if (empty($gallery_crop)) {
     $gallery_crop = get_field('gallery_crop');
 }
-if ($gallery_crop == 'none' || $gallery_crop[0] == 'none') {
+if ($gallery_crop == 'none' || (uamswp_field_array($gallery_crop)[0] ?? null) == 'none') {
     $gallery_crop = -1;
 }
 if (empty($background_color)) {
@@ -85,17 +88,26 @@ if ($more) {
         $more_button_url = get_field('gallery_more_button_url');
     }
     if (empty($more_button_target)) {
-        $more_button_target = $more_button_url['target'];
+        $more_button_target = uamswp_field_array($more_button_url)['target'] ?? null;
     }
     if (empty($more_button_description)) {
         $more_button_description = get_field('gallery_more_button_description');
     }
-    if (empty($more_button_color) && (in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto']))) {
+    if (empty($more_button_color) && (in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto'], true))) {
         $more_button_color = 'primary';
     } else {
         $more_button_color = 'white';
     }
 }
+
+$heading = uamswp_field_text($heading);
+$description = uamswp_field_text($description);
+$background_color = uamswp_field_text($background_color);
+$more_text = uamswp_field_text($more_text ?? null);
+$more_button_text = uamswp_field_text($more_button_text ?? null);
+$more_button_link = uamswp_field_array($more_button_url ?? null);
+$more_button_target = uamswp_field_text($more_button_target ?? null);
+$more_button_description = uamswp_field_text($more_button_description ?? null);
 
 if ($gallery_columns == '2') {
     $sm = 6;
@@ -128,22 +140,23 @@ if ($gallery_crop == '1.7778') {
 
 // GEO Logic
 $geo_display = false;
-if (! isset($geo) || empty($geo_region)) {
+$geo_regions = uamswp_field_array($geo_region);
+if (! isset($geo) || $geo_regions === []) {
     $geo_display = true;
 } else {
-    if ($geo == 'include' && ! empty($geo_region)) {
-        if (is_in_region($geo_region)) {
+    if ($geo == 'include') {
+        if (is_in_region($geo_regions)) {
             $geo_display = true;
         }
-    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
-        if (is_not_in_region($geo_region)) {
+    } elseif ($geo == 'exclude') {
+        if (is_not_in_region($geo_regions)) {
             $geo_display = true;
         }
     }
 }
-if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
+if (! empty($is_preview) && ! empty($geo) && $geo_regions !== []) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map(uamswp_field_text(...), $geo_regions)).'<hr>';
 }
 if ($geo_display) {
     ?>
@@ -161,13 +174,12 @@ if ($geo_display) {
                     <?php
                         if (is_array($gallery_images)) {
                             $i = 0;
-                            foreach ($gallery_images as $gallery_image) {
+                            foreach ($gallery_images as $gallery_image_value) {
+                                $gallery_image = uamswp_field_array($gallery_image_value);
                                 // Load values.
-                                $image_url = $gallery_image['url'];
-                                $image_alt = $gallery_image['alt'];
-                                $image_caption = $gallery_image['caption'];
-                                $image_md_url = $gallery_image['sizes']['aspect-16-9'];
-                                $image_id = $gallery_image['id'];
+                                $image_alt = uamswp_field_text($gallery_image['alt'] ?? null);
+                                $image_caption = uamswp_field_text($gallery_image['caption'] ?? null);
+                                $image_id = (int) uamswp_field_text($gallery_image['id'] ?? null);
                                 /* <img class="w-100" src="<?php echo esc_url($image_url); ?>" alt="<?php echo $image_alt; ?>"> */
                                 ?>
                                 <div class="col-12 col-sm-<?php echo $sm ?> col-md-<?php echo $md ?> col-lg-<?php echo $lg; ?>">
@@ -333,7 +345,7 @@ if ($geo_display) {
                 <div class="col-12 more">
                     <p class="lead"><?php echo $more_text; ?></p>
                     <div class="cta-container">
-                        <a href="<?php echo esc_url($more_button_url['url']); ?>" class="btn btn-<?php echo $more_button_color; ?>" aria-label="<?php echo esc_attr($more_button_description); ?>"<?php echo $more_button_target ? ' target="'.esc_attr($more_button_target).'"' : ''; ?>><?php echo $more_button_text; ?></a>
+                        <a href="<?php echo esc_url(uamswp_field_text($more_button_link['url'] ?? null)); ?>" class="btn btn-<?php echo $more_button_color; ?>" aria-label="<?php echo esc_attr($more_button_description); ?>"<?php echo $more_button_target ? ' target="'.esc_attr($more_button_target).'"' : ''; ?>><?php echo $more_button_text; ?></a>
                     </div>
                 </div>
             <?php } // endif?>
