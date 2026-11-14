@@ -25,6 +25,15 @@ it('renders the posts home with title and excerpt filters', function (): void {
 
     expect(uamswp_post_title_link('ignored'))->toBe('<h2 class="module-title" itemprop="headline"><span class="title">A title & more</span></h2>')
         ->and(uamswp_link_excerpt_more('<p>Excerpt'))->toBe('<p>Excerpt</p><p><a href="https://example.test/post/" class="btn btn-outline-primary" rel="bookmark" aria-label="A title &amp; more">Read More</a>');
+
+    // A filtered excerpt that is not text counts as empty; a number keeps its digits.
+    expect(uamswp_link_excerpt_more(null))->toStartWith('</p><p><a href="https://example.test/post/"')
+        ->and(uamswp_link_excerpt_more(['a']))->toStartWith('</p><p><a href=')
+        ->and(uamswp_link_excerpt_more(12))->toStartWith('12</p><p><a href=');
+
+    // A permalink that is false prints an empty link.
+    when('get_the_permalink')->justReturn(false);
+    expect(uamswp_link_excerpt_more('x'))->toContain('<a href="" class=');
 });
 
 it('renders the archive with both accessible sitemap headings', function (): void {
@@ -65,7 +74,10 @@ it('hides the landing title while preserving existing attributes', function (): 
     require dirname(__DIR__, 2).'/templates/page_landing.php';
 
     expect(uamswp_add_class(['class' => 'entry-title', 'id' => 'title']))->toBe(['class' => 'entry-title sr-only', 'id' => 'title'])
-        ->and(uamswp_add_class(['class' => '']))->toBe(['class' => ' sr-only']);
+        ->and(uamswp_add_class(['class' => '']))->toBe(['class' => ' sr-only'])
+        ->and(uamswp_add_class(['id' => 'title']))->toBe(['id' => 'title', 'class' => ' sr-only'])
+        ->and(uamswp_add_class(['class' => ['a']]))->toBe(['class' => ' sr-only'])
+        ->and(uamswp_add_class('text'))->toBe(['class' => ' sr-only']);
 });
 
 it('registers the marketing layout and selects each header mode', function (): void {

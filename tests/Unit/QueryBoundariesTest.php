@@ -59,6 +59,26 @@ it('filters custom query arguments, optionally runs Relevanssi and resets only t
         ->and($GLOBALS['more'])->toBe($singular ? 9 : 0);
 })->with([[true, true, true], [true, false, false], [false, true, false], [false, false, true]]);
 
+it('queries with no arguments when the custom query filter returns neither an array nor a string', function (bool $full, mixed $filtered, array $expected): void {
+    Functions\expect('wp_parse_args')->once()->andReturn(['s' => 'heart']);
+    expectApplied('genesis_custom_loop_args')->once()->andReturn($filtered);
+    when('is_singular')->justReturn(true);
+    when('function_exists')->alias(static fn ($function) => $function === 'relevanssi_do_query' ? false : relay());
+    Functions\expect('genesis_standard_loop')->times($full ? 1 : 0);
+    Functions\expect('wp_reset_query')->times($full ? 1 : 0);
+
+    if ($full) {
+        uamswp_custom_loop(['s' => 'heart']);
+    } else {
+        uamswp_custom_loop_base(['s' => 'heart']);
+    }
+
+    expect($GLOBALS['wp_query']->args)->toBe($expected);
+})->with([
+    [true, 7, []], [false, null, []], [true, new stdClass, []],
+    [false, ['p' => 3], ['p' => 3]],
+]);
+
 it('renders child-post queries and resets post data only when results exist', function ($type, $title, array $rows): void {
     QueryDouble::$nextRows = $rows;
     Functions\expect('get_the_id')->once()->andReturn(42);

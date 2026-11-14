@@ -277,10 +277,6 @@ parameters:
             identifier: instanceof.alwaysTrue
             path: lib/users.php
             count: 1
-        -
-            identifier: ternary.alwaysTrue
-            path: search.php
-            count: 1
         # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: argument.type
@@ -307,10 +303,6 @@ parameters:
             path: lib/users.php
             count: 4
         # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: argument.type
-            path: home.php
-            count: 1
         -
             identifier: argument.type
             path: lib/breadcrumb.php
@@ -367,11 +359,6 @@ parameters:
             identifier: property.nonObject
             path: lib/quicklinks.php
             count: 16
-        # A property that the declared type does not list. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: property.notFound
-            path: search.php
-            count: 1
         # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: argument.type
@@ -410,10 +397,6 @@ parameters:
             identifier: argument.type
             path: lib/bootstrap.php
             count: 2
-        -
-            identifier: argument.type
-            path: search.php
-            count: 21
         # Concatenation or arithmetic on a `mixed` value from `get_field()` or an option that PHPStan cannot prove is a string or number. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: binaryOp.invalid
@@ -505,10 +488,6 @@ parameters:
             identifier: assignOp.invalid
             path: lib/page.php
             count: 5
-        -
-            identifier: assignOp.invalid
-            path: templates/page_landing.php
-            count: 1
         # Arithmetic or concatenation on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: binaryOp.invalid
@@ -522,10 +501,6 @@ parameters:
             identifier: binaryOp.invalid
             path: blocks/overlay.php
             count: 3
-        -
-            identifier: binaryOp.invalid
-            path: home.php
-            count: 1
         -
             identifier: binaryOp.invalid
             path: lib/a11y.php
@@ -562,10 +537,6 @@ parameters:
             identifier: binaryOp.invalid
             path: lib/widgets.php
             count: 2
-        -
-            identifier: binaryOp.invalid
-            path: search.php
-            count: 5
         # A string cast of a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: cast.string
@@ -693,14 +664,6 @@ parameters:
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/users.php
             count: 1
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: search.php
-            count: 2
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: templates/page_landing.php
-            count: 1
         # Property access on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: property.nonObject
@@ -722,10 +685,6 @@ parameters:
             identifier: property.nonObject
             path: lib/users.php
             count: 1
-        -
-            identifier: property.nonObject
-            path: search.php
-            count: 22
         # The hook is registered with more accepted arguments than the callback declares, and a test pins every hook's accepted-argument count. Changing it alters the hook contract.
         -
             identifier: arguments.count

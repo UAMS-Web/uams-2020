@@ -36,10 +36,11 @@ add_action('genesis_after_loop', 'uamswp_search_page_after_entry', 10);
  */
 function uamswp_do_search_loop(): void
 {
+    /** @var WP_Query $wp_query */
     global $wp_query;
 
     // get the search term entered by user.
-    $s = isset($_GET['s']) ? esc_html($_GET['s']) : '';
+    $s = isset($_GET['s']) ? esc_html(uamswp_field_text($_GET['s'])) : '';
 
     // store the post type from the URL string.
     $search_allowed_types = ['provider', 'location', 'expertise', 'condition', 'treatment', 'page', 'post'];
@@ -205,9 +206,9 @@ function uamswp_do_search_loop(): void
                     $post_link = get_the_permalink();
                     $tax = get_term_by('name', $post_title, $post_type);
                     if (is_object($tax)) {
-                        $post_id = $tax->term_id;
+                        $post_id = uamswp_field_text(get_object_vars($tax)['term_id'] ?? null);
                         $title = '<h2 class="entry-title" itemprop="headline"><a href="'.$post_link.'">'.$post_title.'</a></h2>';
-                        $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
+                        $content = uamswp_field_text(get_field($post_type.'_content', $post_type.'_'.$post_id));
 
                         echo '<article class="'.$post_type.'-'.$post_id.' entry">';
                         echo '<header class="entry-header">';
@@ -262,9 +263,9 @@ function uamswp_do_search_loop(): void
                     $post_title = get_the_title();
                     $post_link = get_the_permalink();
                     $tax = get_term_by('name', $post_title, $post_type);
-                    $post_id = $tax->term_id ?? '';
+                    $post_id = uamswp_field_text((is_object($tax) ? get_object_vars($tax) : [])['term_id'] ?? null);
                     $title = '<h2 class="entry-title" itemprop="headline"><a href="'.$post_link.'">'.$post_title.'</a></h2>';
-                    $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
+                    $content = uamswp_field_text(get_field($post_type.'_content', $post_type.'_'.$post_id));
 
                     echo '<article class="'.$post_type.'-'.$post_id.' entry">';
                     echo '<header class="entry-header">';
@@ -336,7 +337,7 @@ function uamswp_do_search_loop(): void
 
         foreach ($post_types as $post_type) {
             // get the search term entered by user.
-            $s = isset($_GET['s']) ? esc_html($_GET['s']) : '';
+            $s = isset($_GET['s']) ? esc_html(uamswp_field_text($_GET['s'])) : '';
 
             // accepts any wp_query args.
             $args = ([
@@ -361,22 +362,22 @@ function uamswp_do_search_loop(): void
                 while (have_posts()) {
                     the_post();
 
-                    if (isset($wp_query->post->blog_id)) {
-                        switch_to_blog($wp_query->post->blog_id);
+                    $current_post = is_object($wp_query->post) ? get_object_vars($wp_query->post) : [];
+                    $current_id = (int) uamswp_field_text($current_post['ID'] ?? null);
+                    if (isset($current_post['blog_id'])) {
+                        switch_to_blog((int) uamswp_field_text($current_post['blog_id']));
                     }
 
                     $post_count = $wp_query->found_posts;
-                    $post_title = get_the_title($wp_query->post->ID);
-                    $post_link = get_the_permalink($wp_query->post->ID);
-                    $title = '<h3 class="h4" data-id="'.$wp_query->post->ID.'"><a href="'.$post_link.'">'.$post_title.'</a></h3>';
-                    if (has_excerpt($wp_query->post->ID)) {
-                        $content = get_the_excerpt($wp_query->post->ID);
+                    $post_title = get_the_title($current_id);
+                    $post_link = get_the_permalink($current_id);
+                    $title = '<h3 class="h4" data-id="'.$current_id.'"><a href="'.$post_link.'">'.$post_title.'</a></h3>';
+                    if (has_excerpt($current_id)) {
+                        $content = get_the_excerpt($current_id);
                     } else {
-                        $content = wp_trim_excerpt('', $wp_query->post->ID);
+                        $content = wp_trim_excerpt('', $current_id);
                     }
-                    // The title always includes nonempty h3 markup, even for empty text.
-                    // @pest-mutate-ignore: EmptyStringToNotEmpty
-                    echo $title ?: '';
+                    echo $title;
                     // echo $post_type.'_'.$post_id;
                     echo $content ? '<p>'.$content.'</p>' : '';
 
@@ -402,7 +403,7 @@ function uamswp_do_search_loop(): void
 
             // Begin Providers
 
-            $s = isset($_GET['s']) ? esc_html($_GET['s']) : '';
+            $s = isset($_GET['s']) ? esc_html(uamswp_field_text($_GET['s'])) : '';
 
             /* Providers */
             $post_type = ['provider'];
@@ -471,7 +472,7 @@ function uamswp_do_search_loop(): void
 
             foreach ($post_types as $post_type) {
                 // get the search term entered by user.
-                $s = isset($_GET['s']) ? esc_html($_GET['s']) : '';
+                $s = isset($_GET['s']) ? esc_html(uamswp_field_text($_GET['s'])) : '';
 
                 // accepts any wp_query args.
                 $args = ([
@@ -517,11 +518,11 @@ function uamswp_do_search_loop(): void
                         $post_title = get_the_title();
                         $post_link = get_the_permalink();
                         $tax = get_term_by('name', $post_title, $post_type);
-                        $post_id = $tax->term_id ?? '';
+                        $post_id = uamswp_field_text((is_object($tax) ? get_object_vars($tax) : [])['term_id'] ?? null);
                         $title = '<h3 class="h4" itemprop="headline"><a href="'.$post_link.'">'.$post_title.'</a></h3>';
-                        $content = get_field($post_type.'_content', $post_type.'_'.$post_id);
+                        $content = uamswp_field_text(get_field($post_type.'_content', $post_type.'_'.$post_id));
                         if ($post_type === 'treatment') {
-                            $content = get_field('treatment_procedure_content', $post_type.'_'.$post_id); // Fix for naming convention
+                            $content = uamswp_field_text(get_field('treatment_procedure_content', $post_type.'_'.$post_id)); // Fix for naming convention
                         }
 
                         $conditions_treatments .= $title;
@@ -757,7 +758,7 @@ function uamswp_search_page_before_entry(): void
 
 function uamswp_search_page_heading(): void
 {
-    $s = isset($_GET['s']) ? esc_html($_GET['s']) : '';
+    $s = isset($_GET['s']) ? esc_html(uamswp_field_text($_GET['s'])) : '';
     echo '<header class="entry-header"><h1 class="entry-title" itemprop="headline">Search results for: '.$s.'</h1></header>';
 }
 
@@ -769,12 +770,14 @@ function uamswp_search_page_after_entry(): void
 // * Prefix search breadcrumb trail with the text 'Search results for'
 /**
  * @param  mixed  $args
- * @return mixed
+ * @return array<mixed>
  */
-function uamswp_prefix_search_breadcrumb($args)
+function uamswp_prefix_search_breadcrumb($args): array
 {
-
-    $args['labels']['search'] = 'Search results for ';
+    $args = uamswp_field_array($args);
+    $labels = uamswp_field_array($args['labels'] ?? null);
+    $labels['search'] = 'Search results for ';
+    $args['labels'] = $labels;
 
     return $args;
 
@@ -787,9 +790,11 @@ add_filter('genesis_breadcrumb_args', 'uamswp_prefix_search_breadcrumb');
 function uamswp_search_title($title): string
 {
     global $post;
-    switch_to_blog($post->blog_id);
-    $post_title = get_the_title($post->ID);
-    $post_link = get_the_permalink($post->ID);
+    $post_data = is_object($post) ? get_object_vars($post) : [];
+    $post_id = (int) uamswp_field_text($post_data['ID'] ?? null);
+    switch_to_blog((int) uamswp_field_text($post_data['blog_id'] ?? null));
+    $post_title = get_the_title($post_id);
+    $post_link = get_the_permalink($post_id);
     $title = '<h2 class="entry-title" itemprop="headline"><a href="'.$post_link.'">'.$post_title.'</a></h2>';
     restore_current_blog();
 
@@ -797,17 +802,18 @@ function uamswp_search_title($title): string
 }
 
 /**
- * @param  mixed  $args
+ * @param  array<mixed>|string  $args
  */
 function uamswp_custom_loop($args = []): void
 {
 
+    /** @var WP_Query $wp_query */
     global $wp_query, $more;
 
     $defaults = []; // For forward compatibility.
     $args = apply_filters('genesis_custom_loop_args', wp_parse_args($args, $defaults), $args, $defaults);
 
-    $wp_query = new WP_Query($args); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Reset later.
+    $wp_query = new WP_Query(is_array($args) || is_string($args) ? $args : []); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Reset later.
 
     // added this based on http://www.relevanssi.com/knowledge-base/relevanssi_do_query/
     if (function_exists('relevanssi_do_query')) {
@@ -825,17 +831,18 @@ function uamswp_custom_loop($args = []): void
 }
 
 /**
- * @param  mixed  $args
+ * @param  array<mixed>|string  $args
  */
 function uamswp_custom_loop_base($args = []): void
 {
 
+    /** @var WP_Query $wp_query */
     global $wp_query, $more;
 
     $defaults = []; // For forward compatibility.
     $args = apply_filters('genesis_custom_loop_args', wp_parse_args($args, $defaults), $args, $defaults);
 
-    $wp_query = new WP_Query($args); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Reset later.
+    $wp_query = new WP_Query(is_array($args) || is_string($args) ? $args : []); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Reset later.
 
     // added this based on http://www.relevanssi.com/knowledge-base/relevanssi_do_query/
     if (function_exists('relevanssi_do_query')) {
