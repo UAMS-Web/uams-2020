@@ -284,10 +284,6 @@ parameters:
         # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: argument.type
-            path: blocks/post-category-tiles.php
-            count: 11
-        -
-            identifier: argument.type
             path: functions.php
             count: 40
         -
@@ -470,7 +466,7 @@ parameters:
         -
             identifier: argument.type
             path: blocks/cta.php
-            count: 32
+            count: 8
         -
             identifier: argument.type
             path: blocks/hero.php
@@ -523,20 +519,12 @@ parameters:
         # Arithmetic or concatenation on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: binaryOp.invalid
-            path: blocks/cta.php
-            count: 5
-        -
-            identifier: binaryOp.invalid
             path: blocks/gallery.php
             count: 3
         -
             identifier: binaryOp.invalid
             path: blocks/image-side-by-side.php
             count: 3
-        -
-            identifier: binaryOp.invalid
-            path: blocks/post-category-tiles.php
-            count: 4
         -
             identifier: binaryOp.invalid
             path: blocks/stacked.php
@@ -593,16 +581,8 @@ parameters:
         # Output of a value PHPStan types as mixed, such as the result of get_field(). Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: echo.nonString
-            path: blocks/cta.php
-            count: 2
-        -
-            identifier: echo.nonString
             path: blocks/gallery.php
             count: 6
-        -
-            identifier: echo.nonString
-            path: blocks/post-category-tiles.php
-            count: 15
         -
             identifier: echo.nonString
             path: blocks/stacked.php
@@ -635,10 +615,6 @@ parameters:
             count: 1
         -
             identifier: foreach.nonIterable
-            path: blocks/post-category-tiles.php
-            count: 1
-        -
-            identifier: foreach.nonIterable
             path: blocks/stacked.php
             count: 1
         -
@@ -668,14 +644,6 @@ parameters:
             path: functions.php
             count: 5
         # Array access on a value PHPStan types as mixed, such as the result of get_field(). Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/cta.php
-            count: 6
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/post-category-tiles.php
-            count: 8
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/stacked.php
@@ -737,10 +705,6 @@ parameters:
             path: templates/page_landing.php
             count: 1
         # Property access on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: property.nonObject
-            path: blocks/post-category-tiles.php
-            count: 10
         -
             identifier: property.nonObject
             path: lib/geo.php
@@ -831,10 +795,6 @@ parameters:
         # `$geo_region` is always set and truthy to the analysis once `get_field()` is typed by the ACF stubs, so the `empty()` guard reads as redundant. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: empty.variable
-            path: blocks/cta.php
-            count: 2
-        -
-            identifier: empty.variable
             path: blocks/gallery.php
             count: 2
         -
@@ -843,17 +803,8 @@ parameters:
             count: 2
         -
             identifier: empty.variable
-            path: blocks/post-category-tiles.php
-            count: 2
-        -
-            identifier: empty.variable
             path: blocks/stacked.php
             count: 2
-        # A negation the analysis reads as always false once `get_field()` is typed by the ACF stubs. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: booleanNot.alwaysFalse
-            path: blocks/cta.php
-            count: 1
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
         # PHPStan analyzes at the `min` above, so

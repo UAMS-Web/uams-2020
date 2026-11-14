@@ -16397,11 +16397,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -16572,11 +16567,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -16733,11 +16723,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -16978,11 +16963,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -17132,11 +17112,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -17312,11 +17287,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -17464,11 +17434,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -17640,11 +17605,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -17948,11 +17908,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -18011,7 +17966,7 @@
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ],
                 [
                     "esc_attr",
@@ -18023,7 +17978,7 @@
                 ],
                 [
                     "esc_attr",
-                    false
+                    ""
                 ]
             ],
             "queries": []
@@ -18109,11 +18064,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -18298,11 +18248,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -18459,11 +18404,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -18636,11 +18576,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -18785,11 +18720,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -18974,11 +18904,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -19135,11 +19060,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -19324,11 +19244,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -19485,11 +19400,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -19674,11 +19584,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -19835,11 +19740,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -20027,11 +19927,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -20174,11 +20069,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -20373,11 +20263,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -20544,11 +20429,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -20743,11 +20623,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -20914,11 +20789,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -21113,11 +20983,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -21260,11 +21125,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -21459,11 +21319,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -21599,11 +21454,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -21791,11 +21641,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -21931,11 +21776,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -22120,11 +21960,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -22281,11 +22116,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -22470,11 +22300,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -22623,11 +22448,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -22804,11 +22624,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -22957,11 +22772,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -23134,11 +22944,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -23297,11 +23102,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -23446,11 +23246,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -23635,11 +23430,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -23796,11 +23586,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -23985,11 +23770,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -24148,11 +23928,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -24297,11 +24072,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -73660,7 +73430,7 @@
                 ],
                 [
                     "get_post_meta",
-                    false,
+                    0,
                     "_wp_attachment_image_alt",
                     true
                 ],
@@ -73670,7 +73440,7 @@
                 ],
                 [
                     "get_post_meta",
-                    false,
+                    0,
                     "_wp_attachment_image_alt",
                     true
                 ]
@@ -86059,11 +85829,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -86220,11 +85985,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -86409,11 +86169,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -86570,11 +86325,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -86759,11 +86509,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -86920,11 +86665,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [
@@ -87111,11 +86851,6 @@
                 ],
                 [
                     "get_field",
-                    "cta_bar_button_url",
-                    []
-                ],
-                [
-                    "get_field",
                     "cta_bar_button_description",
                     []
                 ],
@@ -87274,11 +87009,6 @@
                 [
                     "get_field",
                     "cta_bar_button_text",
-                    []
-                ],
-                [
-                    "get_field",
-                    "cta_bar_button_url",
                     []
                 ],
                 [

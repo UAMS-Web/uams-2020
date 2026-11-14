@@ -136,7 +136,7 @@ final class BlockTemplateScenario
         when('get_category_link')->alias(static fn ($id): string => 'category:'.$id);
         when('has_excerpt')->justReturn($case['excerpt']);
         when('get_the_excerpt')->justReturn(str_repeat('Excerpt & long words ', 20));
-        when('get_the_content')->justReturn('<p>'.str_repeat('Body text https://example.test/a?q=b next ', 15).'</p>');
+        when('get_the_content')->justReturn($case['content'] ?? '<p>'.str_repeat('Body text https://example.test/a?q=b next ', 15).'</p>');
         when('wp_strip_all_tags')->alias(static fn ($value, $removeBreaks = false): string => 'STRIPPED('.strip_tags($value).')'.(int) (bool) $removeBreaks);
         when('wp_trim_words')->alias(static fn ($value, $number = 55): string => implode(' ', array_slice(explode(' ', $value), 0, $number)));
 
