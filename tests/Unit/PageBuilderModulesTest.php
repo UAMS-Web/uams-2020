@@ -331,6 +331,7 @@ it('renders section module boundaries and each supported row', function ($index,
 })->with([
     [7, '', false, [], false, '7', ''],
     [0, '', true, [['acf_fc_layout' => 'uams_section_wysiwyg', 'section_wysiwyg_html' => '<p>Raw content</p>']], false, 'module-1', '<div class="module-body"><p>Raw content</p></div>'],
+    [false, '', true, [['acf_fc_layout' => 'uams_section_wysiwyg', 'section_wysiwyg_html' => '<p>Raw content</p>']], false, 'module-1', '<div class="module-body"><p>Raw content</p></div>'],
     [false, 'Custom Anchor', false, [['acf_fc_layout' => 'modules_uams_section_youtube', 'section_youtube_url' => 'https://youtube.test/watch', 'section_youtube_width' => 'wide']], true, 'custom-anchor', '<div class="module-body"><div class="wide">[lyte]</div></div>'],
     [0, '', false, [['acf_fc_layout' => 'modules_uams_section_youtube', 'section_youtube_url' => 'https://youtube.test/watch', 'section_youtube_width' => 'wide']], false, 'module-1', '<div class="module-body"><div class="wide wp-block-embed is-type-video embed-responsive wp-has-aspect-ratio embed-responsive-16by9">[embed:https://youtube.test/watch]</div></div>'],
     [2, '', false, [['acf_fc_layout' => 'modules_uams_section_youtube', 'section_youtube_url' => 'https://other.test/watch', 'section_youtube_width' => 'narrow'], ['acf_fc_layout' => 'unknown']], true, '2', '<div class="module-body"><div class="narrow wp-block-embed is-type-video embed-responsive wp-has-aspect-ratio embed-responsive-16by9">[embed:https://other.test/watch]</div></div>'],

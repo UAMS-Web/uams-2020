@@ -694,7 +694,7 @@ parameters:
         -
             identifier: binaryOp.invalid
             path: lib/modules.php
-            count: 7
+            count: 6
         -
             identifier: binaryOp.invalid
             path: lib/nav.php
