@@ -59,7 +59,7 @@ parameters:
     # from 0 upward (see the code-quality skill), then raise it by one per
     # change as findings are fixed, until `max`. Lowering it is a deliberate,
     # argued change, not a quiet edit to get a red run green.
-    level: 3
+    level: 4
 
     excludePaths:
         analyseAndScan:
@@ -187,6 +187,152 @@ parameters:
             identifier: return.type
             path: lib/page.php
             count: 2
+        # A value assigned and overwritten before it is read (see #745).
+        -
+            identifier: assign.overwritten
+            path: functions.php
+            count: 1
+        -
+            identifier: assign.overwritten
+            path: lib/misc.php
+            count: 1
+        -
+            identifier: assign.overwritten
+            path: lib/nav.php
+            count: 1
+        # A reassignment that does not change the value (see #745).
+        -
+            identifier: assign.redundant
+            path: search.php
+            count: 2
+        # A variable assigned and never read (see #745).
+        -
+            identifier: assign.unused
+            path: lib/nav.php
+            count: 4
+        # A condition PHPStan resolves as constant from the declared types (see #745).
+        -
+            identifier: booleanAnd.alwaysFalse
+            path: lib/header.php
+            count: 1
+        -
+            identifier: booleanAnd.alwaysFalse
+            path: lib/users.php
+            count: 1
+        # A condition PHPStan resolves as constant from the declared types (see #745).
+        -
+            identifier: booleanAnd.leftAlwaysFalse
+            path: lib/header.php
+            count: 1
+        # A condition PHPStan resolves as constant from the declared types (see #745).
+        -
+            identifier: booleanAnd.rightAlwaysTrue
+            path: lib/media-credit.php
+            count: 1
+        # A condition PHPStan resolves as constant from the declared types (see #745).
+        -
+            identifier: elseif.alwaysFalse
+            path: lib/header.php
+            count: 1
+        # A type check PHPStan resolves as constant from the declared types (see #745).
+        -
+            identifier: function.impossibleType
+            path: lib/misc.php
+            count: 1
+        # Parameters the function body does not read; many are fixed by the WordPress or ACF callback signature, and the rest are dead (see #745).
+        -
+            identifier: function.unusedParameter
+            path: functions.php
+            count: 6
+        -
+            identifier: function.unusedParameter
+            path: home.php
+            count: 1
+        -
+            identifier: function.unusedParameter
+            path: lib/bootstrap.php
+            count: 3
+        -
+            identifier: function.unusedParameter
+            path: lib/comment.php
+            count: 1
+        -
+            identifier: function.unusedParameter
+            path: lib/extras.php
+            count: 1
+        -
+            identifier: function.unusedParameter
+            path: lib/footer-widgets.php
+            count: 2
+        -
+            identifier: function.unusedParameter
+            path: lib/media-credit.php
+            count: 1
+        -
+            identifier: function.unusedParameter
+            path: lib/meta-box.php
+            count: 1
+        -
+            identifier: function.unusedParameter
+            path: lib/misc.php
+            count: 2
+        -
+            identifier: function.unusedParameter
+            path: lib/modules.php
+            count: 9
+        -
+            identifier: function.unusedParameter
+            path: lib/nav.php
+            count: 2
+        -
+            identifier: function.unusedParameter
+            path: lib/page.php
+            count: 2
+        -
+            identifier: function.unusedParameter
+            path: lib/quicklinks.php
+            count: 1
+        -
+            identifier: function.unusedParameter
+            path: lib/search.php
+            count: 1
+        -
+            identifier: function.unusedParameter
+            path: lib/users.php
+            count: 1
+        -
+            identifier: function.unusedParameter
+            path: search.php
+            count: 4
+        # A check PHPStan resolves as constant from the declared types (see #745).
+        -
+            identifier: instanceof.alwaysTrue
+            path: lib/users.php
+            count: 1
+        # A comparison PHPStan resolves as constant from the declared types (see #745).
+        -
+            identifier: notIdentical.alwaysFalse
+            path: lib/nav.php
+            count: 1
+        # A null coalesce on an expression PHPStan resolves as never null (see #745).
+        -
+            identifier: nullCoalesce.expr
+            path: lib/widgets.php
+            count: 1
+        # A condition PHPStan resolves as constant from the declared types (see #745).
+        -
+            identifier: ternary.alwaysFalse
+            path: blocks/image-side-by-side.php
+            count: 1
+        # A condition PHPStan resolves as constant from the declared types (see #745).
+        -
+            identifier: ternary.alwaysTrue
+            path: blocks/image-side-by-side.php
+            count: 1
+        -
+            identifier: ternary.alwaysTrue
+            path: search.php
+            count: 1
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
         # PHPStan analyzes at the `min` above, so
