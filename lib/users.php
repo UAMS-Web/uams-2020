@@ -94,7 +94,7 @@ function uamswp_restrict_editor_theme_screens(): void
     }
 }
 
-/*
+/**
  * Close the Customizer Widgets panel for editors (see #785).
  *
  * Editors hold edit_theme_options, which gates the Widgets panel, its sidebar
