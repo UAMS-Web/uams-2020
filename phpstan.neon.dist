@@ -160,20 +160,20 @@ parameters:
         -
             identifier: return.void
             reportUnmatched: false
-        # WordPress remove_action() reads only its first three arguments; the fourth in
-        # functions.php is pinned by a mutation annotation, so it stays (see #745).
+        # WordPress `remove_action()` reads only its first three arguments; the fourth in
+        # functions.php is pinned by a mutation annotation, and removing it changes the call a test asserts.
         -
             identifier: arguments.count
             path: functions.php
             count: 1
         # image_sizer() returns nothing when the input is invalid, though it is
-        # declared to return a string (see #745).
+        # declared to return a string. Returning an empty string instead changes what its callers receive.
         -
             identifier: return.empty
             path: functions.php
             count: 1
         # uamswp_nav_subsection() and uamswp_hide_breadcrumbs() return false when
-        # nothing applies, though both are declared to return a string (see #745).
+        # nothing applies, though both are declared to return a string. Changing the declared type changes the contract for their callers.
         -
             identifier: return.type
             path: lib/nav.php
@@ -182,32 +182,27 @@ parameters:
             identifier: return.type
             path: lib/page.php
             count: 2
-        # A value assigned and overwritten before it is read (see #745).
-        -
-            identifier: assign.overwritten
-            path: lib/nav.php
-            count: 1
-        # A condition PHPStan resolves as constant from the declared types (see #745).
+        # The condition follows from `uamswp_nav_subsection()` being declared to return a string while it returns `int|false` (see the `return.type` entry for `lib/nav.php`), so it is evaluated at runtime on the real value.
         -
             identifier: booleanAnd.alwaysFalse
             path: lib/header.php
             count: 1
-        # A condition PHPStan resolves as constant from the declared types (see #745).
+        # The condition follows from `uamswp_nav_subsection()` being declared to return a string while it returns `int|false` (see the `return.type` entry for `lib/nav.php`), so it is evaluated at runtime on the real value.
         -
             identifier: booleanAnd.leftAlwaysFalse
             path: lib/header.php
             count: 1
-        # A condition PHPStan resolves as constant from the declared types (see #745).
+        # `is_array()` on the `image_meta` entry is a runtime guard on stored attachment metadata that the WordPress stubs type as an array. Dropping it changes behavior on malformed metadata.
         -
             identifier: booleanAnd.rightAlwaysTrue
             path: lib/media-credit.php
             count: 1
-        # A condition PHPStan resolves as constant from the declared types (see #745).
+        # The condition follows from `uamswp_nav_subsection()` being declared to return a string while it returns `int|false` (see the `return.type` entry for `lib/nav.php`), so it is evaluated at runtime on the real value.
         -
             identifier: elseif.alwaysFalse
             path: lib/header.php
             count: 1
-        # A type check PHPStan resolves as constant from the declared types (see #745).
+        # `$excluded_ids` in `uamswp_disable_editor()` is an empty list kept as the place to name excluded page IDs (the commented `page_on_front` line shows the intent), so the `in_array()` check against it is always false until an ID is added.
         -
             identifier: function.impossibleType
             path: lib/misc.php
@@ -277,25 +272,10 @@ parameters:
             identifier: function.unusedParameter
             path: search.php
             count: 4
-        # A check PHPStan resolves as constant from the declared types (see #745).
+        # The `instanceof WP_User` check guards a `wp_get_current_user()` result that the stubs always type as `WP_User`, and a unit test supplies a non-user to pin the guard. Removing it changes that behavior.
         -
             identifier: instanceof.alwaysTrue
             path: lib/users.php
-            count: 1
-        # A comparison PHPStan resolves as constant from the declared types (see #745).
-        -
-            identifier: notIdentical.alwaysFalse
-            path: lib/nav.php
-            count: 1
-        # A condition PHPStan resolves as constant from the declared types (see #745).
-        -
-            identifier: ternary.alwaysFalse
-            path: blocks/image-side-by-side.php
-            count: 1
-        # A condition PHPStan resolves as constant from the declared types (see #745).
-        -
-            identifier: ternary.alwaysTrue
-            path: blocks/image-side-by-side.php
             count: 1
         -
             identifier: ternary.alwaysTrue
@@ -342,7 +322,7 @@ parameters:
             identifier: argument.type
             path: lib/users.php
             count: 4
-        # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call (see #745).
+        # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: argument.type
             path: blocks/section.php
@@ -412,7 +392,7 @@ parameters:
             identifier: property.notFound
             path: search.php
             count: 1
-        # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call (see #745).
+        # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: argument.type
             path: lib/a11y.php
@@ -422,7 +402,7 @@ parameters:
             identifier: method.nonObject
             path: lib/users.php
             count: 12
-        # Property access on a value that WordPress may return as false or null (see #745).
+        # Property access on a `$post` value that WordPress may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: property.nonObject
             path: lib/misc.php
@@ -457,7 +437,7 @@ parameters:
             identifier: argument.type
             path: search.php
             count: 21
-        # Arithmetic on a value PHPStan cannot prove is a number (see #745).
+        # Concatenation or arithmetic on a `mixed` value from `get_field()` or an option that PHPStan cannot prove is a string or number. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: binaryOp.invalid
             path: functions.php
@@ -471,12 +451,12 @@ parameters:
             identifier: cast.int
             path: functions.php
             count: 2
-        # A foreach over a value that WordPress or ACF may return as false (see #745).
+        # A foreach over decoded JSON of unknown shape. Narrowing it needs a runtime check that changes behavior on unexpected data.
         -
             identifier: foreach.nonIterable
             path: lib/quicklinks.php
             count: 1
-        # Array access on a value that WordPress or ACF may return as false or null (see #745).
+        # Array access on a `mixed` block field from ACF. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/gallery.php
@@ -493,7 +473,7 @@ parameters:
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/nav.php
             count: 7
-        # A return value whose type does not match the declared return type (see #745).
+        # image_sizer() returns a value PHPStan types as `mixed` from a WordPress or plugin call. Proving it a string needs a runtime check that changes behavior.
         -
             identifier: return.type
             path: functions.php
@@ -969,7 +949,7 @@ parameters:
             identifier: property.nonObject
             path: search.php
             count: 22
-        # A call passing more arguments than the callee declares (see #745).
+        # The hook is registered with more accepted arguments than the callback declares, and a test pins every hook's accepted-argument count. Changing it alters the hook contract.
         -
             identifier: arguments.count
             path: lib/bootstrap.php
@@ -982,47 +962,52 @@ parameters:
             identifier: arguments.count
             path: lib/extras.php
             count: 3
-        # A function declared inside another function (see #745).
+        # `has_nav_menu()` is declared to return a bool, so `!== true` after the negation cannot differ. A unit test returns a truthy non-bool to pin the second operand, and removing it changes that behavior.
+        -
+            identifier: notIdentical.alwaysFalse
+            path: lib/nav.php
+            count: 1
+        # Named functions declared inside the body of `custom_nav_menu()`. They exist only after it runs, and hoisting them changes when they are defined.
         -
             identifier: function.inner
             path: lib/nav.php
             count: 2
-        # A class defined by a plugin or theme library that has no stubs: the Bootstrap nav walkers. No stub package may be added (scope ruling on #773), so it cannot be typed..
+        # A class defined by a plugin or theme library that has no stubs: the Bootstrap nav walkers. No stub package may be added (scope ruling on #773), so it cannot be typed.
         -
             identifier: class.notFound
             path: lib/nav.php
             count: 3
-        # A function defined by a plugin that has no stubs: `bis_get_attachment_image_src`. No stub package may be added (scope ruling on #773), so it cannot be typed..
+        # A function defined by a plugin that has no stubs: `bis_get_attachment_image_src`. No stub package may be added (scope ruling on #773), so it cannot be typed.
         -
             identifier: function.notFound
             path: functions.php
             count: 1
-        # A function defined by a plugin that has no stubs: `lyte_parse`. No stub package may be added (scope ruling on #773), so it cannot be typed..
+        # A function defined by a plugin that has no stubs: `lyte_parse`. No stub package may be added (scope ruling on #773), so it cannot be typed.
         -
             identifier: function.notFound
             path: lib/modules.php
             count: 1
-        # Functions the theme calls but does not define in an analyzed file: `uamswp_wp_list_pages` and `uamswp_wp_list_child_pages`. No stub package may be added (scope ruling on #773), so it cannot be typed..
+        # Functions the theme calls but does not define in an analyzed file: `uamswp_wp_list_pages` and `uamswp_wp_list_child_pages`. No stub package may be added (scope ruling on #773), so it cannot be typed.
         -
             identifier: function.notFound
             path: lib/nav.php
             count: 2
-        # A function defined by the TGM Plugin Activation library, which has no stubs: `tgmpa`. No stub package may be added (scope ruling on #773), so it cannot be typed..
+        # A function defined by the TGM Plugin Activation library, which has no stubs: `tgmpa`. No stub package may be added (scope ruling on #773), so it cannot be typed.
         -
             identifier: function.notFound
             path: lib/tgm.php
             count: 1
-        # `wp_list_pages()` is declared void by the WordPress stubs, though it returns the markup when `echo` is false. The stub is wrong and cannot be corrected here (see #745).
+        # `wp_list_pages()` is declared void by the WordPress stubs, though it returns the markup when `echo` is false. The stub is wrong and cannot be corrected here.
         -
             identifier: function.void
             path: lib/nav.php
             count: 2
-        # The filter callback `uamswp_footer_creds_text()` echoes its output and returns nothing, so the filtered option becomes null. Returning a value would change the rendered footer (see #745).
+        # The filter callback `uamswp_footer_creds_text()` echoes its output and returns nothing, so the filtered option becomes null. Returning a value would change the rendered footer.
         -
             identifier: return.missing
             path: lib/footer.php
             count: 1
-        # The template ends with whitespace after its closing PHP tag, and the block markup fixtures pin that output byte for byte. Removing it changes the rendered output (see #745).
+        # The template ends with whitespace after its closing PHP tag, and the block markup fixtures pin that output byte for byte. Removing it changes the rendered output.
         -
             identifier: whitespace.fileEnd
             path: blocks/counter.php
