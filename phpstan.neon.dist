@@ -59,7 +59,7 @@ parameters:
     # from 0 upward (see the code-quality skill), then raise it by one per
     # change as findings are fixed, until `max`. Lowering it is a deliberate,
     # argued change, not a quiet edit to get a red run green.
-    level: 4
+    level: 5
 
     excludePaths:
         analyseAndScan:
@@ -332,6 +332,55 @@ parameters:
         -
             identifier: ternary.alwaysTrue
             path: search.php
+            count: 1
+        # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call (see #745).
+        -
+            identifier: argument.type
+            path: blocks/iframe.php
+            count: 1
+        -
+            identifier: argument.type
+            path: blocks/news.php
+            count: 3
+        -
+            identifier: argument.type
+            path: blocks/post-category-tile.php
+            count: 1
+        -
+            identifier: argument.type
+            path: blocks/post-category-tiles.php
+            count: 1
+        -
+            identifier: argument.type
+            path: functions.php
+            count: 3
+        -
+            identifier: argument.type
+            path: lib/header.php
+            count: 6
+        -
+            identifier: argument.type
+            path: lib/misc.php
+            count: 2
+        -
+            identifier: argument.type
+            path: lib/nav.php
+            count: 4
+        -
+            identifier: argument.type
+            path: lib/page.php
+            count: 10
+        -
+            identifier: argument.type
+            path: lib/users.php
+            count: 2
+        -
+            identifier: argument.type
+            path: templates/marketing.php
+            count: 5
+        -
+            identifier: argument.type
+            path: templates/modules.php
             count: 1
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
