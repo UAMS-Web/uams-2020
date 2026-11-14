@@ -314,3 +314,19 @@ it('accepts stringable gallery breakpoints and numeric string ratios', function 
     expect(gallery_image_dimension(new OptionString($breakpoint), 2))->toBe($expected)
         ->and(gallery_image_dimension($breakpoint, 2, 2, '-1'))->toBe(-1);
 })->with([['xxs', 337], ['xs', 337], ['sm', 433], ['md', 537], ['lg', 687], ['xl', 897.5]]);
+
+it('narrows an ACF or WordPress value to text', function ($value, string $expected): void {
+    expect(uamswp_field_text($value))->toBe($expected);
+})->with([
+    'string' => ['text', 'text'], 'empty string' => ['', ''], 'false' => [false, ''], 'true' => [true, '1'],
+    'null' => [null, ''], 'int' => [7, '7'], 'zero' => [0, '0'], 'float' => [1.5, '1.5'],
+    'array' => [['a'], ''], 'empty array' => [[], ''], 'plain object' => [new stdClass, ''],
+    'stringable' => [new OptionString('from object'), 'from object'],
+]);
+
+it('narrows an ACF or WordPress value to an array', function ($value, array $expected): void {
+    expect(uamswp_field_array($value))->toBe($expected);
+})->with([
+    'array' => [['a' => 1, 2], ['a' => 1, 2]], 'empty array' => [[], []], 'false' => [false, []], 'null' => [null, []],
+    'string' => ['a', []], 'int' => [3, []], 'object' => [new stdClass, []],
+]);
