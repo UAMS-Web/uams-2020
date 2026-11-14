@@ -177,10 +177,8 @@ if ($geo_display) {
                             foreach ($gallery_images as $gallery_image_value) {
                                 $gallery_image = uamswp_field_array($gallery_image_value);
                                 // Load values.
-                                $image_url = uamswp_field_text($gallery_image['url'] ?? null);
                                 $image_alt = uamswp_field_text($gallery_image['alt'] ?? null);
                                 $image_caption = uamswp_field_text($gallery_image['caption'] ?? null);
-                                $image_md_url = uamswp_field_text(uamswp_field_array($gallery_image['sizes'] ?? null)['aspect-16-9'] ?? null);
                                 $image_id = (int) uamswp_field_text($gallery_image['id'] ?? null);
                                 /* <img class="w-100" src="<?php echo esc_url($image_url); ?>" alt="<?php echo $image_alt; ?>"> */
                                 ?>
