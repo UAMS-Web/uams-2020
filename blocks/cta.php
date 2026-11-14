@@ -12,17 +12,19 @@ if (uamswp_block_placeholder($block ?? null, $is_preview ?? false)) {
     return;
 }
 
+$blockData = isset($block) ? uamswp_field_array($block) : [];
+
 // Create id attribute allowing for custom "anchor" value.
 if (empty($id)) {
     $id = '';
 }
-$id = $id ? ($id + 1) : '';
+$id = $id ? ((int) uamswp_field_text($id) + 1) : '';
 $i = 0;
 if (empty($id) && isset($block)) {
-    $id = $block['id'];
+    $id = $blockData['id'] ?? null;
 }
 if (! empty($id)) {
-    $id = 'module-'.$id;
+    $id = 'module-'.uamswp_field_text($id);
 } else {
     $id = $i + 1;
 }
@@ -30,18 +32,18 @@ if (! empty($id)) {
 //     $id = !empty( $module['anchor_id'] ) ? sanitize_title_with_dashes( $module['anchor_id'] ) : 'module-' . ( $i + 1 );
 // }
 
-$id = 'cta-bar-'.$id;
-if (! empty($block['anchor'])) {
-    $id = $block['anchor'];
+$id = 'cta-bar-'.uamswp_field_text($id);
+if (! empty($blockData['anchor'])) {
+    $id = uamswp_field_text($blockData['anchor']);
 }
 
 $className = '';
-if (! empty($block['className'])) {
+if (! empty($blockData['className'])) {
     // @pest-mutate-ignore: ConcatEqualToEqual
-    $className .= ' '.$block['className'];
+    $className .= ' '.uamswp_field_text($blockData['className']);
 }
-if (! empty($block['align'])) {
-    $className .= ' align'.$block['align'];
+if (! empty($blockData['align'])) {
+    $className .= ' align'.uamswp_field_text($blockData['align']);
 }
 
 // Load values and assessing defaults.
@@ -63,8 +65,9 @@ if (empty($button_url)) {
 }
 $button_target ??= '';
 if ($button_url && empty($button_target)) {
-    if (get_field('cta_bar_button_url')) {
-        $button_target = get_field('cta_bar_button_url')['target'];
+    $button_field = uamswp_field_array(get_field('cta_bar_button_url'));
+    if ($button_field !== []) {
+        $button_target = uamswp_field_text($button_field['target'] ?? null);
     }
 }
 if (empty($button_desc)) {
@@ -74,7 +77,7 @@ if (empty($action_type) && $button_text) { // If still empty (meaning page hasn'
     $action_type = 'url';
 }
 if (empty($phone_prepend)) {
-    $phone_prepend = get_field('cta_bar_phone_prepend') ?: 'Call';
+    $phone_prepend = uamswp_field_text(get_field('cta_bar_phone_prepend')) ?: 'Call';
 }
 if (empty($phone)) {
     $phone = get_field('cta_bar_phone');
@@ -107,7 +110,17 @@ if (empty($image)) {
 if (empty($background_color)) {
     $background_color = get_field('cta_bar_background_color');
 }
-if (in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto'])) {
+$heading = uamswp_field_text($heading);
+$body = uamswp_field_text($body);
+$button_text = uamswp_field_text($button_text);
+$button_desc = uamswp_field_text($button_desc);
+$phone_prepend = uamswp_field_text($phone_prepend);
+$phone = uamswp_field_text($phone);
+$button_target = uamswp_field_text($button_target);
+$layout = uamswp_field_text($layout);
+$background_color = uamswp_field_text($background_color);
+$button_link = uamswp_field_array($button_url);
+if (in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto'], true)) {
     $btn_color = 'primary';
 } else {
     $btn_color = 'white';
@@ -121,22 +134,23 @@ if (empty($geo_region)) {
 
 // GEO Logic
 $geo_display = false;
-if (! isset($geo) || empty($geo_region)) {
+$geo_regions = uamswp_field_array($geo_region);
+if (! isset($geo) || $geo_regions === []) {
     $geo_display = true;
 } else {
-    if ($geo == 'include' && ! empty($geo_region)) {
-        if (is_in_region($geo_region)) {
+    if ($geo == 'include') {
+        if (is_in_region($geo_regions)) {
             $geo_display = true;
         }
-    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
-        if (is_not_in_region($geo_region)) {
+    } elseif ($geo == 'exclude') {
+        if (is_not_in_region($geo_regions)) {
             $geo_display = true;
         }
     }
 }
-if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
+if (! empty($is_preview) && ! empty($geo) && $geo_regions !== []) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map(uamswp_field_text(...), $geo_regions)).'<hr>';
 }
 if ($geo_display) {
     ?>
@@ -209,7 +223,7 @@ if ($geo_display) {
                         </div>
                         <?php echo $action_type == 'url' ?
                             '<div class="btn-container">
-                            <a href="'.esc_url($button_url['url']).'" aria-label="'.esc_attr($button_desc).'" class=" btn btn-'.$btn_color.($size == 'large' ? ' btn-lg' : '').'"'.($button_target ? ' target="'.esc_attr($button_target).'"' : '').' data-moduletitle="'.esc_attr($heading).'">'.esc_html($button_text).'</a>
+                            <a href="'.esc_url(uamswp_field_text($button_link['url'] ?? null)).'" aria-label="'.esc_attr($button_desc).'" class=" btn btn-'.$btn_color.($size == 'large' ? ' btn-lg' : '').'"'.($button_target ? ' target="'.esc_attr($button_target).'"' : '').' data-moduletitle="'.esc_attr($heading).'">'.esc_html($button_text).'</a>
                         </div>'
                             : ''; ?>
                         <?php echo $action_type == 'phone' ?
