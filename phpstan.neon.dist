@@ -478,10 +478,6 @@ parameters:
             count: 10
         -
             identifier: argument.type
-            path: lib/modules.php
-            count: 10
-        -
-            identifier: argument.type
             path: lib/quicklinks.php
             count: 4
         -
@@ -540,10 +536,6 @@ parameters:
             count: 3
         -
             identifier: binaryOp.invalid
-            path: lib/modules.php
-            count: 6
-        -
-            identifier: binaryOp.invalid
             path: lib/nav.php
             count: 2
         -
@@ -570,10 +562,6 @@ parameters:
             count: 1
         -
             identifier: echo.nonString
-            path: lib/modules.php
-            count: 2
-        -
-            identifier: echo.nonString
             path: lib/page.php
             count: 3
         -
@@ -598,10 +586,6 @@ parameters:
             identifier: foreach.nonIterable
             path: lib/footer.php
             count: 1
-        -
-            identifier: foreach.nonIterable
-            path: lib/modules.php
-            count: 3
         # A method call on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: method.nonObject
@@ -643,10 +627,6 @@ parameters:
             count: 2
         -
             identifier: offsetAccess.nonOffsetAccessible
-            path: lib/modules.php
-            count: 143
-        -
-            identifier: offsetAccess.nonOffsetAccessible
             path: lib/page.php
             count: 6
         -
@@ -682,10 +662,6 @@ parameters:
             identifier: property.nonObject
             path: lib/media-credit.php
             count: 5
-        -
-            identifier: property.nonObject
-            path: lib/modules.php
-            count: 1
         -
             identifier: property.nonObject
             path: lib/nav.php
