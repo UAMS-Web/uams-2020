@@ -41,6 +41,8 @@ parameters:
         - vendor/php-stubs/wp-cli-stubs/wp-cli-commands-stubs.php
         - vendor/php-stubs/wp-cli-stubs/wp-cli-i18n-stubs.php
         - vendor/php-stubs/wp-cli-stubs/wp-cli-tools-stubs.php
+        - vendor/php-stubs/acf-pro-stubs/acf-pro-stubs.php
+        - vendor/php-stubs/genesis-stubs/genesis-stubs.php
     # Filled: the PHP versions the code must parse and run on. `min` is the
     # LOWEST version the plugin supports (composer.json's `php` constraint and
     # the plugin header's `Requires PHP`); `max` is the developer's PHP, which
@@ -352,7 +354,7 @@ parameters:
         -
             identifier: argument.type
             path: functions.php
-            count: 42
+            count: 40
         -
             identifier: argument.type
             path: lib/header.php
@@ -360,27 +362,19 @@ parameters:
         -
             identifier: argument.type
             path: lib/misc.php
-            count: 6
+            count: 5
         -
             identifier: argument.type
             path: lib/nav.php
-            count: 11
+            count: 10
         -
             identifier: argument.type
             path: lib/page.php
-            count: 31
+            count: 22
         -
             identifier: argument.type
             path: lib/users.php
             count: 4
-        -
-            identifier: argument.type
-            path: templates/marketing.php
-            count: 5
-        -
-            identifier: argument.type
-            path: templates/modules.php
-            count: 1
         # A generic class used without type arguments (see #745).
         -
             identifier: missingType.generics
@@ -601,7 +595,7 @@ parameters:
         -
             identifier: argument.type
             path: lib/breadcrumb.php
-            count: 3
+            count: 2
         -
             identifier: argument.type
             path: lib/extras.php
@@ -817,10 +811,6 @@ parameters:
             count: 1
         -
             identifier: assignOp.invalid
-            path: lib/footer-widgets.php
-            count: 3
-        -
-            identifier: assignOp.invalid
             path: lib/nav.php
             count: 2
         -
@@ -961,7 +951,7 @@ parameters:
         -
             identifier: echo.nonString
             path: blocks/gallery.php
-            count: 7
+            count: 6
         -
             identifier: echo.nonString
             path: blocks/link-list-2.php
@@ -981,7 +971,7 @@ parameters:
         -
             identifier: echo.nonString
             path: blocks/stacked.php
-            count: 5
+            count: 4
         -
             identifier: echo.nonString
             path: functions.php
@@ -1233,168 +1223,35 @@ parameters:
             identifier: arguments.count
             path: lib/extras.php
             count: 3
-        # A class defined by a plugin that the analysis has no stubs for (see #745).
-        -
-            identifier: class.notFound
-            path: lib/nav.php
-            count: 3
         # A function declared inside another function (see #745).
         -
             identifier: function.inner
             path: lib/nav.php
             count: 2
-        # A function defined by WordPress, Genesis, ACF or another plugin that the analysis has no stubs for (see #745).
+        # A class defined by a plugin or theme library that has no stubs: the Bootstrap nav walkers (see #745).
         -
-            identifier: function.notFound
-            path: blocks/action-bar.php
-            count: 5
-        -
-            identifier: function.notFound
-            path: blocks/call-out.php
-            count: 7
-        -
-            identifier: function.notFound
-            path: blocks/content.php
-            count: 6
-        -
-            identifier: function.notFound
-            path: blocks/counter.php
-            count: 7
-        -
-            identifier: function.notFound
-            path: blocks/cta.php
-            count: 17
-        -
-            identifier: function.notFound
-            path: blocks/gallery.php
-            count: 15
-        -
-            identifier: function.notFound
-            path: blocks/hero.php
+            identifier: class.notFound
+            path: lib/nav.php
             count: 3
-        -
-            identifier: function.notFound
-            path: blocks/iframe.php
-            count: 4
-        -
-            identifier: function.notFound
-            path: blocks/image-side-by-side.php
-            count: 15
-        -
-            identifier: function.notFound
-            path: blocks/link-list-2.php
-            count: 8
-        -
-            identifier: function.notFound
-            path: blocks/link-list.php
-            count: 6
-        -
-            identifier: function.notFound
-            path: blocks/livewhale.php
-            count: 5
-        -
-            identifier: function.notFound
-            path: blocks/news.php
-            count: 17
-        -
-            identifier: function.notFound
-            path: blocks/overlay.php
-            count: 3
-        -
-            identifier: function.notFound
-            path: blocks/post-category-tile.php
-            count: 8
-        -
-            identifier: function.notFound
-            path: blocks/post-category-tiles.php
-            count: 6
-        -
-            identifier: function.notFound
-            path: blocks/section.php
-            count: 3
-        -
-            identifier: function.notFound
-            path: blocks/stacked.php
-            count: 12
+        # A function defined by a plugin that has no stubs: `bis_get_attachment_image_src` (see #745).
         -
             identifier: function.notFound
             path: functions.php
-            count: 6
-        -
-            identifier: function.notFound
-            path: home.php
             count: 1
-        -
-            identifier: function.notFound
-            path: lib/bootstrap.php
-            count: 1
-        -
-            identifier: function.notFound
-            path: lib/breadcrumb.php
-            count: 1
-        -
-            identifier: function.notFound
-            path: lib/extras.php
-            count: 2
-        -
-            identifier: function.notFound
-            path: lib/footer-widgets.php
-            count: 3
-        -
-            identifier: function.notFound
-            path: lib/footer.php
-            count: 8
-        -
-            identifier: function.notFound
-            path: lib/misc.php
-            count: 5
+        # A function defined by a plugin that has no stubs: `lyte_parse` (see #745).
         -
             identifier: function.notFound
             path: lib/modules.php
             count: 1
+        # Functions the theme calls but does not define in an analyzed file: `uamswp_wp_list_pages` and `uamswp_wp_list_child_pages` (see #745).
         -
             identifier: function.notFound
             path: lib/nav.php
-            count: 4
-        -
-            identifier: function.notFound
-            path: lib/page.php
-            count: 12
-        -
-            identifier: function.notFound
-            path: lib/pagination.php
             count: 2
+        # A function defined by the TGM Plugin Activation library, which has no stubs: `tgmpa` (see #745).
         -
             identifier: function.notFound
             path: lib/tgm.php
-            count: 1
-        -
-            identifier: function.notFound
-            path: lib/widgets.php
-            count: 15
-        -
-            identifier: function.notFound
-            path: page_archive.php
-            count: 3
-        -
-            identifier: function.notFound
-            path: page_blog.php
-            count: 1
-        -
-            identifier: function.notFound
-            path: search.php
-            count: 11
-        -
-            identifier: function.notFound
-            path: templates/marketing.php
-            count: 3
-        -
-            identifier: function.notFound
-            path: templates/modules.php
-            count: 1
-        -
-            identifier: function.notFound
-            path: templates/page_landing.php
             count: 1
         # The result of a function declared void is used (see #745).
         -
@@ -1419,6 +1276,72 @@ parameters:
         -
             identifier: whitespace.fileEnd
             path: blocks/counter.php
+            count: 1
+        # `$geo_region` is always set and truthy to the analysis once `get_field()` is typed by the ACF stubs, so the `empty()` guard reads as redundant (see #745).
+        -
+            identifier: empty.variable
+            path: blocks/action-bar.php
+            count: 2
+        -
+            identifier: empty.variable
+            path: blocks/call-out.php
+            count: 2
+        -
+            identifier: empty.variable
+            path: blocks/content.php
+            count: 2
+        -
+            identifier: empty.variable
+            path: blocks/cta.php
+            count: 2
+        -
+            identifier: empty.variable
+            path: blocks/gallery.php
+            count: 2
+        -
+            identifier: empty.variable
+            path: blocks/hero.php
+            count: 2
+        -
+            identifier: empty.variable
+            path: blocks/image-side-by-side.php
+            count: 2
+        -
+            identifier: empty.variable
+            path: blocks/link-list-2.php
+            count: 2
+        -
+            identifier: empty.variable
+            path: blocks/link-list.php
+            count: 2
+        -
+            identifier: empty.variable
+            path: blocks/livewhale.php
+            count: 2
+        -
+            identifier: empty.variable
+            path: blocks/news.php
+            count: 2
+        -
+            identifier: empty.variable
+            path: blocks/overlay.php
+            count: 2
+        -
+            identifier: empty.variable
+            path: blocks/post-category-tile.php
+            count: 2
+        -
+            identifier: empty.variable
+            path: blocks/post-category-tiles.php
+            count: 2
+        -
+            identifier: empty.variable
+            path: blocks/stacked.php
+            count: 2
+        # A negation the analysis reads as always false once `get_field()` is typed by the ACF stubs (see #745).
+        -
+            identifier: booleanNot.alwaysFalse
+            path: blocks/cta.php
             count: 1
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
