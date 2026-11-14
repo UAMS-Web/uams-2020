@@ -195,10 +195,6 @@ parameters:
             count: 1
         -
             identifier: assign.overwritten
-            path: lib/misc.php
-            count: 1
-        -
-            identifier: assign.overwritten
             path: lib/nav.php
             count: 1
         # A reassignment that does not change the value (see #745).
@@ -310,11 +306,6 @@ parameters:
         -
             identifier: notIdentical.alwaysFalse
             path: lib/nav.php
-            count: 1
-        # A null coalesce on an expression PHPStan resolves as never null (see #745).
-        -
-            identifier: nullCoalesce.expr
-            path: lib/widgets.php
             count: 1
         # A condition PHPStan resolves as constant from the declared types (see #745).
         -
