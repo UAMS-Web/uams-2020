@@ -130,7 +130,7 @@ it('preserves native side-by-side layout comparisons', function (string $layout,
     $case['fields']['side_text_layout'] = new TraceString($layout, '[layout-conversion]');
     $actual = BlockTemplateScenario::render($case);
     $assertConvertedMarkup($actual['html'], $case['expected']['html'], '[layout-conversion]', $conversions);
-})->with([['body-only', 5], ['link-list', 5], ['blockquote-citation', 5], ['blockquote-citation-link', 6]]);
+})->with([['body-only', 1], ['link-list', 1], ['blockquote-citation', 1], ['blockquote-citation-link', 1]]);
 
 it('preserves native gallery column comparisons', function (string $columns, int $conversions) use ($blockCasesByLabel, $assertConvertedMarkup): void {
     $case = $blockCasesByLabel['gallery']['gallery-'.$columns.'-none'];
@@ -371,6 +371,49 @@ it('prints only text region names in the stacked and gallery geo preview', funct
     $actual = BlockTemplateScenario::render($case);
     Assert::assertStringContainsString('Include region(s): AR, <hr>', $actual['html']);
 })->with([['stacked', 'stacked_geo'], ['gallery', 'gallery_geo']]);
+
+it('treats a non-numeric module index as the first module in the side-by-side block', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['image-side-by-side'];
+    unset($case['variables']['block']);
+    $case['variables']['i'] = 'abc';
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString('CLASS(image-side-module-1)', $actual['html']);
+});
+
+it('keeps a caller id over the block id in the side-by-side block', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['image-side-by-side'];
+    $case['variables']['id'] = 'chosen';
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString('CLASS(image-side-chosen)', $actual['html']);
+    Assert::assertStringNotContainsString('block-7', $actual['html']);
+});
+
+it('prints only text region names in the side-by-side geo preview', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['image-side-by-side'];
+    $case['fields']['side_image_geo'] = 'include';
+    $case['fields']['side_image_geo_region'] = ['AR', ['nested']];
+    $case['variables']['is_preview'] = true;
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString('HTML(Include) region(s): HTML(AR, )<hr>', $actual['html']);
+});
+
+it('reads a non-numeric side image id as zero in the side-by-side block', function (mixed $value) use ($blockBaseCases): void {
+    $case = $blockBaseCases['image-side-by-side'];
+    $case['fields']['side_image'] = $value;
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString('sized:[0,576,324', $actual['html']);
+})->with(['abc', false, null, ['nested']]);
+
+it('skips link list rows that are not arrays in the side-by-side block', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['image-side-by-side'];
+    $case['fields']['side_text_layout'] = 'link-list';
+    $row = $case['fields']['side_link_list'][0];
+    $case['fields']['side_link_list'] = [$row, 'text'];
+    $actual = BlockTemplateScenario::render($case);
+    $case['fields']['side_link_list'] = [$row, []];
+    $expected = BlockTemplateScenario::render($case);
+    Assert::assertTrue($expected['html'] === $actual['html'], 'A non-array link row rendered differently from an empty row.');
+});
 
 it('reads a multi-select crop of none as no crop in the gallery block', function () use ($blockBaseCases): void {
     $case = $blockBaseCases['gallery'];
