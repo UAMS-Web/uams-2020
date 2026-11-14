@@ -94,6 +94,8 @@ function uamswp_restrict_editor_theme_screens(): void
     }
 }
 
+add_filter('customize_loaded_components', 'uamswp_close_customizer_widgets_for_editors');
+
 /**
  * Close the Customizer Widgets panel for editors (see #785).
  *
@@ -105,7 +107,6 @@ function uamswp_restrict_editor_theme_screens(): void
  * @param  array<int, string>  $components
  * @return array<int, string>
  */
-add_filter('customize_loaded_components', 'uamswp_close_customizer_widgets_for_editors');
 function uamswp_close_customizer_widgets_for_editors(array $components): array
 {
     if (! uamswp_is_restricted_editor()) {
