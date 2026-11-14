@@ -276,6 +276,25 @@ it('does not carry the previous row link into a row without one', function (stri
     ['stacked', 'stacked_section', 'stacked_section_button_url'],
 ]);
 
+it('renders an action bar with no rows without reading an undefined row count', function (mixed $rows) use ($blockBaseCases): void {
+    $case = $blockBaseCases['action-bar'];
+    $case['fields']['action_bar_section'] = $rows;
+    $warnings = [];
+    set_error_handler(static function (int $level, string $message) use (&$warnings): bool {
+        $warnings[] = $message;
+
+        return true;
+    });
+    try {
+        $actual = BlockTemplateScenario::render($case);
+    } finally {
+        restore_error_handler();
+    }
+
+    Assert::assertSame([], $warnings);
+    Assert::assertStringContainsString(' count-3 ', $actual['html']);
+})->with([[[]], [false]]);
+
 it('keeps an empty CTA link target without adding text to the anchor', function () use ($blockBaseCases): void {
     $case = $blockBaseCases['cta'];
     $case['fields']['cta_bar_button_url']['target'] = '';
