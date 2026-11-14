@@ -327,11 +327,11 @@ parameters:
         -
             identifier: argument.type
             path: blocks/post-category-tile.php
-            count: 21
+            count: 20
         -
             identifier: argument.type
             path: blocks/post-category-tiles.php
-            count: 12
+            count: 11
         -
             identifier: argument.type
             path: functions.php
@@ -380,7 +380,7 @@ parameters:
         -
             identifier: argument.type
             path: lib/scripts.php
-            count: 6
+            count: 4
         # Arithmetic on a value PHPStan cannot prove is a number. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: binaryOp.invalid
