@@ -398,7 +398,7 @@ it('renders the module with an empty-array index as the first module', function 
     Assert::assertStringContainsString($name === 'news' ? 'id="ATTR(53)"])' : 'HTML(livewhale_heading <&")</span>', $actual['html']);
 })->with(['news', 'livewhale']);
 
-it('treats a non-array block and region as empty in the content, livewhale and news blocks', function (string $name, mixed $unexpected) use ($blockBaseCases): void {
+it('treats a non-array block and region as empty in the content, livewhale, news, overlay and hero blocks', function (string $name, mixed $unexpected) use ($blockBaseCases): void {
     $case = $blockBaseCases[$name];
     $case['variables']['geo'] = 'include';
     $empty = $case;
@@ -409,7 +409,7 @@ it('treats a non-array block and region as empty in the content, livewhale and n
 
     Assert::assertSame(BlockTemplateScenario::render($empty)['html'], BlockTemplateScenario::render($case)['html'], 'A non-array value must render like an empty one: '.$name);
 })->with(function () {
-    foreach (['content', 'livewhale', 'news'] as $name) {
+    foreach (['content', 'livewhale', 'news', 'overlay', 'hero'] as $name) {
         foreach (['false' => false, 'empty string' => '', 'null' => null, 'string' => 'text', 'number' => 7] as $label => $unexpected) {
             yield $name.' with '.$label => [$name, $unexpected];
         }

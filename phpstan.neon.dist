@@ -471,7 +471,7 @@ parameters:
             identifier: argument.type
             path: blocks/action-bar.php
             count: 19
-        # `image_sizer()` and `wp_get_attachment_url()` take the ACF image value, an attachment ID or an array depending on the field's return format (this field sets none, so ACF's default applies). Casting it would change what those functions receive, tracked in #780.
+        # `image_sizer()`, `wp_get_attachment_url()`, `wp_get_attachment_image_url()` and `get_post_meta()` take the ACF image value, an attachment ID or an array depending on the field's return format (this field sets none, so ACF's default applies). Casting it would change what those functions receive, tracked in #780.
         -
             identifier: argument.type
             path: blocks/call-out.php
@@ -483,11 +483,11 @@ parameters:
         -
             identifier: argument.type
             path: blocks/hero.php
-            count: 29
+            count: 10
         -
             identifier: argument.type
             path: blocks/overlay.php
-            count: 30
+            count: 15
         -
             identifier: argument.type
             path: lib/footer.php
@@ -544,15 +544,7 @@ parameters:
             count: 3
         -
             identifier: binaryOp.invalid
-            path: blocks/hero.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
             path: blocks/image-side-by-side.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
-            path: blocks/overlay.php
             count: 3
         -
             identifier: binaryOp.invalid
@@ -626,10 +618,6 @@ parameters:
             count: 6
         -
             identifier: echo.nonString
-            path: blocks/overlay.php
-            count: 1
-        -
-            identifier: echo.nonString
             path: blocks/post-category-tile.php
             count: 2
         -
@@ -668,15 +656,7 @@ parameters:
             count: 1
         -
             identifier: foreach.nonIterable
-            path: blocks/hero.php
-            count: 2
-        -
-            identifier: foreach.nonIterable
             path: blocks/image-side-by-side.php
-            count: 1
-        -
-            identifier: foreach.nonIterable
-            path: blocks/overlay.php
             count: 1
         -
             identifier: foreach.nonIterable
@@ -721,14 +701,6 @@ parameters:
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/cta.php
             count: 6
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/hero.php
-            count: 19
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/overlay.php
-            count: 14
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/post-category-tile.php
@@ -908,15 +880,7 @@ parameters:
             count: 2
         -
             identifier: empty.variable
-            path: blocks/hero.php
-            count: 2
-        -
-            identifier: empty.variable
             path: blocks/image-side-by-side.php
-            count: 2
-        -
-            identifier: empty.variable
-            path: blocks/overlay.php
             count: 2
         -
             identifier: empty.variable
