@@ -7,29 +7,32 @@
  *
  */
 
+$blockData = isset($block) ? uamswp_field_array($block) : [];
+$moduleData = isset($module) ? uamswp_field_array($module) : [];
+
 // Create id attribute allowing for custom "anchor" value.
 if (empty($id)) {
     $id = '';
 }
 if (empty($id) && isset($block)) {
-    $id = $block['id'];
+    $id = $blockData['id'] ?? null;
 }
 if (empty($id)) {
-    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+    $id = ! empty($moduleData['anchor_id']) ? sanitize_title_with_dashes(uamswp_field_text($moduleData['anchor_id'])) : 'module-'.((int) $i + 1);
 }
 
-$id = 'stacked-image-text-'.$id;
-if (! empty($block['anchor'])) {
-    $id = $block['anchor'];
+$id = 'stacked-image-text-'.uamswp_field_text($id);
+if (! empty($blockData['anchor'])) {
+    $id = uamswp_field_text($blockData['anchor']);
 }
 
 $className = '';
-if (! empty($block['className'])) {
+if (! empty($blockData['className'])) {
     // @pest-mutate-ignore: ConcatEqualToEqual
-    $className .= ' '.$block['className'];
+    $className .= ' '.uamswp_field_text($blockData['className']);
 }
-if (! empty($block['align'])) {
-    $className .= ' align'.$block['align'];
+if (! empty($blockData['align'])) {
+    $className .= ' align'.uamswp_field_text($blockData['align']);
 }
 
 // Load values.
@@ -53,28 +56,33 @@ if (empty($post_tiles_rows)) {
     $post_tiles_rows = get_field('post_tiles_section');
 }
 
+$post_tiles_rows = uamswp_field_array($post_tiles_rows);
+$heading = uamswp_field_text($heading);
+$background_color = uamswp_field_text($background_color);
+
 // GEO Logic
 $geo_display = false;
-if (! isset($geo) || empty($geo_region)) {
+$geo_regions = uamswp_field_array($geo_region);
+if (! isset($geo) || $geo_regions === []) {
     $geo_display = true;
 } else {
-    if ($geo == 'include' && ! empty($geo_region)) {
-        if (is_in_region($geo_region)) {
+    if ($geo == 'include') {
+        if (is_in_region($geo_regions)) {
             $geo_display = true;
         }
-    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
-        if (is_not_in_region($geo_region)) {
+    } elseif ($geo == 'exclude') {
+        if (is_not_in_region($geo_regions)) {
             $geo_display = true;
         }
     }
 }
-if (is_admin() && ! empty($geo) && ! empty($geo_region)) {
+if (is_admin() && ! empty($geo) && $geo_regions !== []) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map(uamswp_field_text(...), $geo_regions)).'<hr>';
 }
 if ($geo_display) {
 
-    if ($post_tiles_rows) {
+    if ($post_tiles_rows !== []) {
         $row_count = count($post_tiles_rows);
 
         ?>
@@ -87,18 +95,23 @@ if ($geo_display) {
             <?php
                         // @pest-mutate-ignore: DecrementInteger,IncrementInteger
                         $index = 1;
-        foreach ($post_tiles_rows as $post_tiles_row) {
+        foreach ($post_tiles_rows as $post_tiles_row_value) {
+            $post_tiles_row = uamswp_field_array($post_tiles_row_value);
 
-            // The item's selected category.
-            $category = $post_tiles_row['post_tiles_section_category'];
+            // The item's selected category, read as typed term fields.
+            $category = $post_tiles_row['post_tiles_section_category'] ?? null;
+            $category_data = is_object($category) ? get_object_vars($category) : [];
+            $category_slug = uamswp_field_text($category_data['slug'] ?? null);
+            $category_name = uamswp_field_text($category_data['name'] ?? null);
+            $category_id = (int) uamswp_field_text($category_data['term_id'] ?? null);
 
-            $post_button_text = $post_tiles_row['post_tiles_section_post_button_text'] ?: 'Read the Story';
-            $cat_button_text = $post_tiles_row['post_tiles_section_category_button_text'] ?: 'View '.$category->name.' Archive';
+            $post_button_text = uamswp_field_text($post_tiles_row['post_tiles_section_post_button_text'] ?? null) ?: 'Read the Story';
+            $cat_button_text = uamswp_field_text($post_tiles_row['post_tiles_section_category_button_text'] ?? null) ?: 'View '.$category_name.' Archive';
 
             $args = [
                 'post_type' => 'post',
                 'post_status' => 'publish',
-                'category_name' => $category->slug,
+                'category_name' => $category_slug,
                 'posts_per_page' => 1,
             ];
 
@@ -112,7 +125,7 @@ if ($geo_display) {
 
                         // Load values.
                         $image = get_post_thumbnail_id();
-                        $alt_text = get_post_meta($image, '_wp_attachment_image_alt', true);
+                        $alt_text = get_post_meta((int) $image, '_wp_attachment_image_alt', true);
                         ?>
             <div class="col-12 col-sm-6 item">
                 <div class="card">
@@ -151,15 +164,16 @@ if ($geo_display) {
                     <div class="card-body">
                         
                         <h3 class="card-title h5">
-                            <span class="supertitle"><a href="<?php echo get_category_link($category->term_id); ?>" aria-label="Full list of <?php echo $category->name; ?> stories" data-moduletitle="<?php echo $heading; ?>" data-categorytitle="<?php echo $category->name; ?>"><?php echo $category->name; ?></a>:</span>
+                            <span class="supertitle"><a href="<?php echo get_category_link($category_id); ?>" aria-label="Full list of <?php echo $category_name; ?> stories" data-moduletitle="<?php echo $heading; ?>" data-categorytitle="<?php echo $category_name; ?>"><?php echo $category_name; ?></a>:</span>
                             <?php the_title(); ?>
                         </h3>
                         <p class="card-text"><?php
                                     if (! has_excerpt()) {
-                                        // @pest-mutate-ignore: DecrementInteger,IncrementInteger
-                                        $content = wp_trim_words(wp_strip_all_tags(get_the_content(), 50));
+                                        $content = wp_trim_words(wp_strip_all_tags(get_the_content(), true));
                                         $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
-                                        echo mb_strimwidth(preg_replace($regex, ' ', $content), 0, 176, ' ...');
+                                        // preg_replace() returns null only when PCRE itself fails, which this pattern cannot do on stripped text, so dropping the cast changes no output.
+                                        // @pest-mutate-ignore: RemoveStringCast
+                                        echo mb_strimwidth((string) preg_replace($regex, ' ', $content), 0, 176, ' ...');
                                         // echo wp_trim_words((preg_replace($regex, ' ', $content)), 25, ' ...'); // Option for words, instead of characters
                                     } else {
                                         echo mb_strimwidth(get_the_excerpt(), 0, 176, ' ...');
@@ -167,8 +181,8 @@ if ($geo_display) {
                                     }
                         ?></p>
                         <div class="cta-container">
-                            <a class="btn btn-primary" href="<?php the_permalink(); ?>" aria-label="Read <?php the_title(); ?>" data-moduletitle="<?php echo $heading; ?>" data-categorytitle="<?php echo $category->name; ?>"><?php echo $post_button_text; ?></a>
-                            <a class="btn btn-outline-primary" href="<?php echo get_category_link($category->term_id); ?>" aria-label="Full list of <?php echo $category->name; ?> stories" data-moduletitle="<?php echo $heading; ?>" data-categorytitle="<?php echo $category->name; ?>"><?php echo $cat_button_text; ?></a>
+                            <a class="btn btn-primary" href="<?php the_permalink(); ?>" aria-label="Read <?php the_title(); ?>" data-moduletitle="<?php echo $heading; ?>" data-categorytitle="<?php echo $category_name; ?>"><?php echo $post_button_text; ?></a>
+                            <a class="btn btn-outline-primary" href="<?php echo get_category_link($category_id); ?>" aria-label="Full list of <?php echo $category_name; ?> stories" data-moduletitle="<?php echo $heading; ?>" data-categorytitle="<?php echo $category_name; ?>"><?php echo $cat_button_text; ?></a>
                         </div>
                         
                     </div>

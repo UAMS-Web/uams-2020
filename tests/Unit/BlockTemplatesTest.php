@@ -295,6 +295,58 @@ it('renders an action bar with no rows without reading an undefined row count', 
     Assert::assertStringContainsString(' count-3 ', $actual['html']);
 })->with([[[]], [false]]);
 
+it('treats a non-numeric caller id as the first module in the CTA block', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['cta'];
+    unset($case['variables']['block']);
+    $case['variables']['id'] = 'abc';
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString('cta-bar-module-1', $actual['html']);
+});
+
+it('treats a non-numeric module index as the first module in the tiles block', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['post-category-tiles'];
+    unset($case['variables']['block']);
+    $case['variables']['i'] = 'abc';
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString('stacked-image-text-module-1', $actual['html']);
+});
+
+it('keeps a caller id over the block id in the tiles block', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['post-category-tiles'];
+    $case['variables']['id'] = 'chosen';
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString('stacked-image-text-chosen', $actual['html']);
+    Assert::assertStringNotContainsString('block-7', $actual['html']);
+});
+
+it('reads a non-numeric category term id as zero in the tiles block', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['post-category-tiles'];
+    $case['fields']['post_tiles_section'][0]['post_tiles_section_category']['term_id'] = 'abc';
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString('category:0', $actual['html']);
+    Assert::assertStringNotContainsString('category:abc', $actual['html']);
+});
+
+it('passes the strip-tags break flag as true in the tiles block', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['post-category-tiles'];
+    $case['content'] = 'Short';
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString('STRIPPED(Short)1', $actual['html']);
+});
+
+it('prints only text region names in the CTA and tiles geo preview', function (string $name, string $geoKey, array $variables, bool $admin) use ($blockBaseCases): void {
+    $case = $blockBaseCases[$name];
+    $case['fields'][$geoKey] = 'include';
+    $case['fields'][$geoKey.'_region'] = ['AR', ['nested']];
+    $case['variables'] = array_merge($case['variables'], $variables);
+    $case['admin'] = $admin;
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString('Include region(s): AR, <hr>', $actual['html']);
+})->with([
+    ['cta', 'cta_bar_geo', ['is_preview' => true], false],
+    ['post-category-tiles', 'post_tiles_geo', ['is_preview' => false], true],
+]);
+
 it('keeps an empty CTA link target without adding text to the anchor', function () use ($blockBaseCases): void {
     $case = $blockBaseCases['cta'];
     $case['fields']['cta_bar_button_url']['target'] = '';
