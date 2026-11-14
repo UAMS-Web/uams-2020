@@ -98,6 +98,56 @@ final class LibraryBehaviorTest extends IntegrationTestCase
         }
     }
 
+    /**
+     * Core's menu.php declares a function, so it can be loaded once per process: this is the only
+     * test that builds the admin menu. A snapshot taken on admin_menu at a priority before this
+     * theme's callback records what core offered the editor, and the final menu shows what is left.
+     */
+    public function test_editor_loses_the_real_themes_and_widgets_entries_and_keeps_the_rest(): void
+    {
+        global $menu, $submenu, $_wp_submenu_nopriv, $_wp_menu_nopriv, $admin_page_hooks, $_registered_pages, $_parent_pages;
+
+        // The theme grants editors edit_theme_options when it is activated; the test database has not run that hook.
+        uamswp_editor_users();
+        $editor = self::factory()->user->create(['role' => 'editor']);
+
+        $slugs = static fn (array $items): array => array_values(array_map(static fn (array $item): string => (string) strtok((string) $item[2], '?'), $items));
+        $offered = [];
+        $snapshot = static function () use (&$offered, $slugs): void {
+            global $submenu;
+            $offered = $slugs($submenu['themes.php'] ?? []);
+        };
+        $priority = has_action('admin_menu', 'custom_admin_menu');
+        $this->assertNotFalse($priority);
+        add_action('admin_menu', $snapshot, $priority - 1);
+
+        $saved = [$menu ?? null, $submenu ?? null, $_wp_submenu_nopriv ?? null, $_wp_menu_nopriv ?? null, $admin_page_hooks ?? null, $_registered_pages ?? null, $_parent_pages ?? null];
+        wp_set_current_user($editor);
+        add_theme_support('widgets');
+        $menu = $submenu = $_wp_submenu_nopriv = $_wp_menu_nopriv = $admin_page_hooks = $_registered_pages = $_parent_pages = [];
+
+        try {
+            require_once ABSPATH.'wp-admin/includes/admin.php';
+            wp_widgets_add_menu();
+            require ABSPATH.'wp-admin/menu.php';
+            $remaining = $slugs($submenu['themes.php'] ?? []);
+        } finally {
+            remove_action('admin_menu', $snapshot, $priority - 1);
+            [$menu, $submenu, $_wp_submenu_nopriv, $_wp_menu_nopriv, $admin_page_hooks, $_registered_pages, $_parent_pages] = $saved;
+            remove_theme_support('widgets');
+        }
+
+        $this->assertContains('themes.php', $offered);
+        $this->assertContains('widgets.php', $offered);
+        $this->assertContains('nav-menus.php', $offered);
+        $this->assertContains('customize.php', $offered);
+        $this->assertNotContains('themes.php', $remaining);
+        $this->assertNotContains('widgets.php', $remaining);
+        $this->assertSame(['themes.php', 'widgets.php'], array_values(array_diff($offered, $remaining)));
+        $this->assertContains('nav-menus.php', $remaining);
+        $this->assertContains('customize.php', $remaining);
+    }
+
     public function test_subsection_navigation_uses_real_page_ancestry_and_metadata(): void
     {
         $root = self::factory()->post->create(['post_type' => 'page', 'post_title' => 'Root']);
