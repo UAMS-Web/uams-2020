@@ -494,14 +494,6 @@ parameters:
             count: 29
         -
             identifier: argument.type
-            path: blocks/link-list-2.php
-            count: 5
-        -
-            identifier: argument.type
-            path: blocks/link-list.php
-            count: 16
-        -
-            identifier: argument.type
             path: blocks/livewhale.php
             count: 11
         -
@@ -573,14 +565,6 @@ parameters:
         -
             identifier: binaryOp.invalid
             path: blocks/image-side-by-side.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
-            path: blocks/link-list-2.php
-            count: 6
-        -
-            identifier: binaryOp.invalid
-            path: blocks/link-list.php
             count: 3
         -
             identifier: binaryOp.invalid
@@ -666,10 +650,6 @@ parameters:
             count: 6
         -
             identifier: echo.nonString
-            path: blocks/link-list-2.php
-            count: 8
-        -
-            identifier: echo.nonString
             path: blocks/overlay.php
             count: 1
         -
@@ -717,14 +697,6 @@ parameters:
         -
             identifier: foreach.nonIterable
             path: blocks/image-side-by-side.php
-            count: 1
-        -
-            identifier: foreach.nonIterable
-            path: blocks/link-list-2.php
-            count: 1
-        -
-            identifier: foreach.nonIterable
-            path: blocks/link-list.php
             count: 1
         -
             identifier: foreach.nonIterable
@@ -781,14 +753,6 @@ parameters:
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/hero.php
             count: 19
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/link-list-2.php
-            count: 12
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/link-list.php
-            count: 11
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/livewhale.php
@@ -989,14 +953,6 @@ parameters:
         -
             identifier: empty.variable
             path: blocks/image-side-by-side.php
-            count: 2
-        -
-            identifier: empty.variable
-            path: blocks/link-list-2.php
-            count: 2
-        -
-            identifier: empty.variable
-            path: blocks/link-list.php
             count: 2
         -
             identifier: empty.variable
