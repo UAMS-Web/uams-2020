@@ -19,7 +19,6 @@ declare(strict_types=1);
 function uamswp_post_image()
 {
     global $post;
-    $image = ''; // @pest-mutate-ignore: EmptyStringToNotEmpty
     $image_id = get_post_thumbnail_id($post->ID);
     $image = wp_get_attachment_image_src($image_id, 'full');
     $image = $image[0];
