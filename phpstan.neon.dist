@@ -59,7 +59,7 @@ parameters:
     # from 0 upward (see the code-quality skill), then raise it by one per
     # change as findings are fixed, until `max`. Lowering it is a deliberate,
     # argued change, not a quiet edit to get a red run green.
-    level: 6
+    level: 7
 
     excludePaths:
         analyseAndScan:
@@ -345,31 +345,31 @@ parameters:
         -
             identifier: argument.type
             path: blocks/post-category-tile.php
-            count: 1
-        -
-            identifier: argument.type
-            path: blocks/post-category-tiles.php
-            count: 1
-        -
-            identifier: argument.type
-            path: functions.php
-            count: 3
-        -
-            identifier: argument.type
-            path: lib/header.php
-            count: 6
-        -
-            identifier: argument.type
-            path: lib/misc.php
             count: 2
         -
             identifier: argument.type
+            path: blocks/post-category-tiles.php
+            count: 2
+        -
+            identifier: argument.type
+            path: functions.php
+            count: 7
+        -
+            identifier: argument.type
+            path: lib/header.php
+            count: 7
+        -
+            identifier: argument.type
+            path: lib/misc.php
+            count: 3
+        -
+            identifier: argument.type
             path: lib/nav.php
-            count: 4
+            count: 6
         -
             identifier: argument.type
             path: lib/page.php
-            count: 10
+            count: 15
         -
             identifier: argument.type
             path: lib/users.php
@@ -589,6 +589,76 @@ parameters:
         -
             identifier: missingType.return
             path: templates/page_landing.php
+            count: 1
+        # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call (see #745).
+        -
+            identifier: argument.type
+            path: blocks/section.php
+            count: 2
+        -
+            identifier: argument.type
+            path: home.php
+            count: 1
+        -
+            identifier: argument.type
+            path: lib/breadcrumb.php
+            count: 1
+        -
+            identifier: argument.type
+            path: lib/extras.php
+            count: 3
+        -
+            identifier: argument.type
+            path: lib/media-credit.php
+            count: 1
+        -
+            identifier: argument.type
+            path: lib/scripts.php
+            count: 2
+        # Arithmetic on a value PHPStan cannot prove is a number (see #745).
+        -
+            identifier: binaryOp.invalid
+            path: lib/breadcrumb.php
+            count: 1
+        # A foreach over a value that WordPress or ACF may return as false (see #745).
+        -
+            identifier: foreach.nonIterable
+            path: functions.php
+            count: 1
+        -
+            identifier: foreach.nonIterable
+            path: lib/nav.php
+            count: 2
+        # Array access on a value that WordPress or ACF may return as false or null (see #745).
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: functions.php
+            count: 3
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/media-credit.php
+            count: 2
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/misc.php
+            count: 1
+        # Property access on a value that WordPress may return as false or null (see #745).
+        -
+            identifier: property.nonObject
+            path: functions.php
+            count: 7
+        -
+            identifier: property.nonObject
+            path: lib/extras.php
+            count: 1
+        -
+            identifier: property.nonObject
+            path: lib/quicklinks.php
+            count: 1
+        # A property that the declared type does not list (see #745).
+        -
+            identifier: property.notFound
+            path: search.php
             count: 1
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
