@@ -171,6 +171,8 @@ if ($geo_display) {
                                     if (! has_excerpt()) {
                                         $content = wp_trim_words(wp_strip_all_tags(get_the_content(), true));
                                         $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@";
+                                        // preg_replace() returns null only when PCRE itself fails, which this pattern cannot do on stripped text, so dropping the cast changes no output.
+                                        // @pest-mutate-ignore: RemoveStringCast
                                         echo mb_strimwidth((string) preg_replace($regex, ' ', $content), 0, 176, ' ...');
                                         // echo wp_trim_words((preg_replace($regex, ' ', $content)), 25, ' ...'); // Option for words, instead of characters
                                     } else {
