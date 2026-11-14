@@ -333,7 +333,7 @@ function uamswp_module($module = [], $i = false)
             $module_rows = $module['modules_uams_section_flexible_layout'];
 
             if (empty($id)) {
-                $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+                $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1); // @phpstan-ignore binaryOp.invalid (the $i parameter defaults to false, see #745)
             }
             $id = 'uams-section-'.$id;
             ?>
