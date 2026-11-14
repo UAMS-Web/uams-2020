@@ -59,7 +59,7 @@ parameters:
     # from 0 upward (see the code-quality skill), then raise it by one per
     # change as findings are fixed, until `max`. Lowering it is a deliberate,
     # argued change, not a quiet edit to get a red run green.
-    level: 7
+    level: 8
 
     excludePaths:
         analyseAndScan:
@@ -345,11 +345,11 @@ parameters:
         -
             identifier: argument.type
             path: blocks/post-category-tile.php
-            count: 2
+            count: 3
         -
             identifier: argument.type
             path: blocks/post-category-tiles.php
-            count: 2
+            count: 3
         -
             identifier: argument.type
             path: functions.php
@@ -646,7 +646,7 @@ parameters:
         -
             identifier: property.nonObject
             path: functions.php
-            count: 7
+            count: 9
         -
             identifier: property.nonObject
             path: lib/extras.php
@@ -659,6 +659,26 @@ parameters:
         -
             identifier: property.notFound
             path: search.php
+            count: 1
+        # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call (see #745).
+        -
+            identifier: argument.type
+            path: lib/a11y.php
+            count: 1
+        # A method call on a value that WordPress may return as false or null (see #745).
+        -
+            identifier: method.nonObject
+            path: lib/users.php
+            count: 12
+        # Property access on a value that WordPress may return as false or null (see #745).
+        -
+            identifier: property.nonObject
+            path: lib/misc.php
+            count: 1
+        # A return value whose type does not match the declared return type (see #745).
+        -
+            identifier: return.type
+            path: lib/a11y.php
             count: 1
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
