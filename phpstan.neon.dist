@@ -400,10 +400,6 @@ parameters:
             count: 7
         -
             identifier: argument.type
-            path: blocks/image-side-by-side.php
-            count: 50
-        -
-            identifier: argument.type
             path: lib/blocks.php
             count: 3
         -
@@ -434,10 +430,6 @@ parameters:
             path: lib/quicklinks.php
             count: 1
         # Array access on a `mixed` block field from ACF. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/image-side-by-side.php
-            count: 11
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/footer-widgets.php
@@ -508,10 +500,6 @@ parameters:
         # Arithmetic or concatenation on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: binaryOp.invalid
-            path: blocks/image-side-by-side.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
             path: home.php
             count: 1
         -
@@ -574,10 +562,6 @@ parameters:
             path: functions.php
             count: 3
         # A foreach over a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: foreach.nonIterable
-            path: blocks/image-side-by-side.php
-            count: 1
         -
             identifier: foreach.nonIterable
             path: lib/breadcrumb.php
@@ -738,10 +722,6 @@ parameters:
             path: blocks/counter.php
             count: 1
         # `$geo_region` is always set and truthy to the analysis once `get_field()` is typed by the ACF stubs, so the `empty()` guard reads as redundant. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: empty.variable
-            path: blocks/image-side-by-side.php
-            count: 2
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
         # PHPStan analyzes at the `min` above, so
