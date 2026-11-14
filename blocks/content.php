@@ -62,7 +62,7 @@ if (empty($geo_region)) {
 // GEO Logic
 $geo_region = uamswp_field_array($geo_region);
 $geo_display = false;
-if (! isset($geo) || empty($geo_region)) {
+if (! isset($geo) || $geo_region === []) {
     $geo_display = true;
 } else {
     if ($geo == 'include') {
@@ -75,7 +75,7 @@ if (! isset($geo) || empty($geo_region)) {
         }
     }
 }
-if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
+if (! empty($is_preview) && ! empty($geo) && $geo_region !== []) {
     $geo_display = true;
     echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map(uamswp_field_text(...), $geo_region)).'<hr>';
 }
