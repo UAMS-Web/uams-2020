@@ -12,33 +12,36 @@ if (uamswp_block_placeholder($block ?? null, $is_preview ?? false)) {
     return;
 }
 // Create id attribute allowing for custom "anchor" value.
+$blockData = isset($block) ? uamswp_field_array($block) : [];
+$moduleData = isset($module) ? uamswp_field_array($module) : [];
 if (empty($id)) {
     $id = '';
 }
 if (empty($id) && isset($block)) {
-    $id = $block['id'];
+    $id = $blockData['id'] ?? null;
 }
 if (empty($id)) {
-    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+    $id = ! empty($moduleData['anchor_id']) ? sanitize_title_with_dashes(uamswp_field_text($moduleData['anchor_id'])) : 'module-'.((int) $i + 1);
 }
 
-$id = 'hero-'.$id;
-if (! empty($block['anchor'])) {
-    $id = $block['anchor'];
+$id = 'hero-'.uamswp_field_text($id);
+if (! empty($blockData['anchor'])) {
+    $id = $blockData['anchor'];
 }
 
 // Create class attribute allowing for custom "className" and "align" values.
 $className = 'uams-hero-block';
-if (! empty($block['className'])) {
-    $className .= ' '.$block['className'];
+if (! empty($blockData['className'])) {
+    $className .= ' '.uamswp_field_text($blockData['className']);
 }
-if (! empty($block['align'])) {
-    $className .= ' align'.$block['align'];
+if (! empty($blockData['align'])) {
+    $className .= ' align'.uamswp_field_text($blockData['align']);
 }
 
 if (empty($hero_rows)) {
     $hero_rows = get_field('hero');
 }
+$hero_rows = uamswp_field_array($hero_rows);
 
 if (empty($geo)) {
     $geo = get_field('hero_geo');
@@ -48,30 +51,31 @@ if (empty($geo_region)) {
 }
 
 // GEO Logic
+$geo_region = uamswp_field_array($geo_region);
 $geo_display = false;
-if (! isset($geo) || empty($geo_region)) {
+if (! isset($geo) || $geo_region === []) {
     $geo_display = true;
 } else {
-    if ($geo == 'include' && ! empty($geo_region)) {
+    if ($geo == 'include') {
         if (is_in_region($geo_region)) {
             $geo_display = true;
         }
-    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
+    } elseif ($geo == 'exclude') {
         if (is_not_in_region($geo_region)) {
             $geo_display = true;
         }
     }
 }
-if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
+if (! empty($is_preview) && ! empty($geo) && $geo_region !== []) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map(uamswp_field_text(...), $geo_region)).'<hr>';
 }
 if ($geo_display) {
 
-    if ($hero_rows) {
+    if ($hero_rows !== []) {
         $row_count = 0;
         foreach ($hero_rows as $hero_row) {
-            if (! $hero_row['hero_disable']) {
+            if (! (uamswp_field_array($hero_row)['hero_disable'] ?? false)) {
                 $row_count++;
             }
         }
@@ -88,7 +92,7 @@ if ($geo_display) {
         $slide_time = round(($read_time + 2) * 1000, 0); // 1 second to find place + time to read + 1 second to interact (in milliseconds)
 
         ?>
-    <section class="hero carousel <?php echo esc_attr($className); ?> slide<?php echo $row_count > 1 ? ' multiple-slides' : ''; ?>" id="carousel-<?php echo esc_attr($id); ?>" aria-label="Hero banner"<?php echo $row_count > 1 ? ' data-ride="carousel" data-interval="'.$slide_time.'" data-keyboard="true"' : ''; ?>>
+    <section class="hero carousel <?php echo esc_attr($className); ?> slide<?php echo $row_count > 1 ? ' multiple-slides' : ''; ?>" id="carousel-<?php echo esc_attr(uamswp_field_text($id)); ?>" aria-label="Hero banner"<?php echo $row_count > 1 ? ' data-ride="carousel" data-interval="'.$slide_time.'" data-keyboard="true"' : ''; ?>>
 <?php
                 // $page_template = get_page_template_slug( $post_id );
                 // echo $page_template;
@@ -100,7 +104,7 @@ if ($geo_display) {
                 if ($row_count > 1) { ?>
             <ol class="carousel-indicators">
                 <?php for ($i = 0; $i < $row_count; $i++) { ?>
-                <li data-target="#carousel-<?php echo esc_attr($id) ?>" data-slide-to="<?php echo $i; ?>" <?php echo $i === 0 ? 'class="active"' : ''; ?>></li>
+                <li data-target="#carousel-<?php echo esc_attr(uamswp_field_text($id)) ?>" data-slide-to="<?php echo $i; ?>" <?php echo $i === 0 ? 'class="active"' : ''; ?>></li>
                 <?php } ?>
             </ol>
 <?php }  ?>
@@ -108,35 +112,37 @@ if ($geo_display) {
 <?php
             $index = 1;
         foreach ($hero_rows as $hero_row) {
+            $hero_row = uamswp_field_array($hero_row);
             // Load values and adding defaults.
             // if ( empty($disable) )
-            $disable = $hero_row['hero_disable'] ?: false;
+            $disable = $hero_row['hero_disable'] ?? false;
             // if ( empty($heading) )
-            $heading = $hero_row['hero_heading'] ?: 'Heading goes here...'; // Required
+            $heading = ($hero_row['hero_heading'] ?? null) ?: 'Heading goes here...'; // Required
             // if ( empty($body) )
-            $body = $hero_row['hero_body'] ?: 'This is where the description goes'; // Required
+            $body = ($hero_row['hero_body'] ?? null) ?: 'This is where the description goes'; // Required
             // if ( empty($button_text) )
-            $button_text = $hero_row['hero_button_text'] ?: '';
+            $button_text = ($hero_row['hero_button_text'] ?? null) ?: '';
             $button_url = '';
             $button_target = '';
-            if ($hero_row['hero_button_url']) {
+            $button_link = uamswp_field_array($hero_row['hero_button_url'] ?? null);
+            if ($button_link !== []) {
                 // if ( empty($button_url) )
-                $button_url = $hero_row['hero_button_url']['url'] ?: '';
+                $button_url = ($button_link['url'] ?? null) ?: '';
                 // if ( empty($button_target) )
-                $button_target = $hero_row['hero_button_url']['target'] ?: '';
+                $button_target = ($button_link['target'] ?? null) ?: '';
             }
             // if ( empty($button_desc) )
-            $button_desc = $hero_row['hero_button_description'] ?: '';
+            $button_desc = ($hero_row['hero_button_description'] ?? null) ?: '';
             // if ( empty($image_desktop) )
-            $image_desktop = $hero_row['hero_image_desktop'] ?: ''; // Required
+            $image_desktop = ($hero_row['hero_image_desktop'] ?? null) ?: ''; // Required
             // if ( empty($image_tablet) )
-            $image_tablet = $hero_row['hero_image_tablet'] ?: '';
+            $image_tablet = ($hero_row['hero_image_tablet'] ?? null) ?: '';
             // if ( empty($image_mobile) )
-            $image_mobile = $hero_row['hero_image_mobile'] ?: '';
+            $image_mobile = ($hero_row['hero_image_mobile'] ?? null) ?: '';
             // if ( empty($image_alt) )
-            $image_alt = $hero_row['hero_image_alt_text'] ?: '';
+            $image_alt = ($hero_row['hero_image_alt_text'] ?? null) ?: '';
             // if ( empty($background_color) )
-            $background_color = $hero_row['hero_background_color'] ?: 'auto';
+            $background_color = ($hero_row['hero_background_color'] ?? null) ?: 'auto';
 
             // Load values for if bg auto
             $background_color_1 = 'red';
@@ -168,7 +174,7 @@ if ($geo_display) {
                                 echo $background_color_4;
                             }
                         } else {
-                            echo esc_attr($background_color);
+                            echo esc_attr(uamswp_field_text($background_color));
                         }
                 ?><?php echo $index - 1 === 0 ? ' active' : ''; ?>" id="carousel-item-<?php echo $index - 1; ?>">
             <div class="image-container">
@@ -185,19 +191,19 @@ if ($geo_display) {
                     <source srcset="<?php echo image_sizer($image_mobile, 768, 432, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 576px)">
                     <source srcset="<?php echo image_sizer($image_mobile, 576, 324, 'center', 'center', 'aspect-16-9-small'); ?>" media="(min-width: 1px)">
                     <!-- Fallback -->
-                    <img src="<?php echo image_sizer($image_tablet, 455, 256, 'center', 'center', 'hero-tablet'); ?>" alt="<?php echo esc_attr($image_alt); ?>" />
+                    <img src="<?php echo image_sizer($image_tablet, 455, 256, 'center', 'center', 'hero-tablet'); ?>" alt="<?php echo esc_attr(uamswp_field_text($image_alt)); ?>" />
                     <?php } else { ?>
                     <!-- Fallback -->
-                    <img src="<?php echo wp_get_attachment_image_url($image_tablet, 'hero-tablet'); ?>" alt="<?php echo esc_attr($image_alt); ?>" />
+                    <img src="<?php echo wp_get_attachment_image_url($image_tablet, 'hero-tablet'); ?>" alt="<?php echo esc_attr(uamswp_field_text($image_alt)); ?>" />
                     <?php } // endif?>
                 </picture>
             </div>
             <div class="text-container">
                 <div class="inner-container">
-                    <h2><?php echo esc_html($heading); ?></h2>
-                    <p><?php echo wp_kses_post($body); ?></p>
+                    <h2><?php echo esc_html(uamswp_field_text($heading)); ?></h2>
+                    <p><?php echo wp_kses_post(uamswp_field_text($body)); ?></p>
                     <?php if ($button_text) { ?>
-                        <a class="btn btn-white" href="<?php echo esc_url($button_url); ?>" aria-label="<?php echo esc_attr($button_desc); ?>"<?php echo $button_target ? ' target="'.esc_attr($button_target).'"' : ''; ?> data-itemtitle="<?php echo esc_attr($heading); ?>"><?php echo esc_html($button_text); ?></a>
+                        <a class="btn btn-white" href="<?php echo esc_url(uamswp_field_text($button_url)); ?>" aria-label="<?php echo esc_attr(uamswp_field_text($button_desc)); ?>"<?php echo $button_target ? ' target="'.esc_attr(uamswp_field_text($button_target)).'"' : ''; ?> data-itemtitle="<?php echo esc_attr(uamswp_field_text($heading)); ?>"><?php echo esc_html(uamswp_field_text($button_text)); ?></a>
                     <?php } // endif?>
                 </div>
             </div>
@@ -209,11 +215,11 @@ if ($geo_display) {
             </div><!-- .carousel-inner -->
 <?php
                 if ($row_count > 1) { ?>
-            <a class="carousel-control-prev" href="#carousel-<?php echo esc_attr($id); ?>" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#carousel-<?php echo esc_attr(uamswp_field_text($id)); ?>" role="button" data-slide="prev">
                 <span class="fas fa-angle-left"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#carousel-<?php echo esc_attr($id); ?>" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#carousel-<?php echo esc_attr(uamswp_field_text($id)); ?>" role="button" data-slide="next">
                 <span class="fas fa-angle-right"></span>
                 <span class="sr-only">Next</span>
             </a>

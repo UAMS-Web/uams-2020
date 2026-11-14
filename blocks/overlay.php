@@ -13,29 +13,31 @@ if (uamswp_block_placeholder($block ?? null, $is_preview ?? false)) {
 }
 
 // Create id attribute allowing for custom "anchor" value.
+$blockData = isset($block) ? uamswp_field_array($block) : [];
+$moduleData = isset($module) ? uamswp_field_array($module) : [];
 if (empty($id)) {
     $id = '';
 }
 if (empty($id) && isset($block)) {
-    $id = $block['id'];
+    $id = $blockData['id'] ?? null;
 }
 if (empty($id)) {
-    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+    $id = ! empty($moduleData['anchor_id']) ? sanitize_title_with_dashes(uamswp_field_text($moduleData['anchor_id'])) : 'module-'.((int) $i + 1);
 }
 
-$id = 'text-image-overlay-'.$id;
-if (! empty($block['anchor'])) {
-    $id = $block['anchor'];
+$id = 'text-image-overlay-'.uamswp_field_text($id);
+if (! empty($blockData['anchor'])) {
+    $id = $blockData['anchor'];
 }
-$id = sanitize_html_class($id);
+$id = sanitize_html_class(uamswp_field_text($id));
 
 $className = '';
-if (! empty($block['className'])) {
+if (! empty($blockData['className'])) {
     // @pest-mutate-ignore: ConcatEqualToEqual
-    $className .= ' '.$block['className'];
+    $className .= ' '.uamswp_field_text($blockData['className']);
 }
-if (! empty($block['align'])) {
-    $className .= ' align'.$block['align'];
+if (! empty($blockData['align'])) {
+    $className .= ' align'.uamswp_field_text($blockData['align']);
 }
 if (empty($geo)) {
     $geo = get_field('overlay_geo');
@@ -47,29 +49,31 @@ if (empty($geo_region)) {
 if (empty($overlay_rows)) {
     $overlay_rows = get_field('overlay_section');
 }
+$overlay_rows = uamswp_field_array($overlay_rows);
 
 // GEO Logic
+$geo_region = uamswp_field_array($geo_region);
 $geo_display = false;
-if (! isset($geo) || empty($geo_region)) {
+if (! isset($geo) || $geo_region === []) {
     $geo_display = true;
 } else {
-    if ($geo == 'include' && ! empty($geo_region)) {
+    if ($geo == 'include') {
         if (is_in_region($geo_region)) {
             $geo_display = true;
         }
-    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
+    } elseif ($geo == 'exclude') {
         if (is_not_in_region($geo_region)) {
             $geo_display = true;
         }
     }
 }
-if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
+if (! empty($is_preview) && ! empty($geo) && $geo_region !== []) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map(uamswp_field_text(...), $geo_region)).'<hr>';
 }
 if ($geo_display) {
 
-    if ($overlay_rows) {
+    if ($overlay_rows !== []) {
         $row_count = count($overlay_rows);
 
         ?>
@@ -79,22 +83,24 @@ if ($geo_display) {
 <?php
             $index = 1;
         foreach ($overlay_rows as $overlay_row) {
+            $overlay_row = uamswp_field_array($overlay_row);
             // Load values and adding defaults.
-            $heading = $overlay_row['overlay_section_heading'];
-            $body = $overlay_row['overlay_section_body'];
-            $button_text = $overlay_row['overlay_section_button_text'];
+            $heading = $overlay_row['overlay_section_heading'] ?? null;
+            $body = $overlay_row['overlay_section_body'] ?? null;
+            $button_text = $overlay_row['overlay_section_button_text'] ?? null;
             $button_url = ''; // Define variable
             $button_target = ''; // Define variable
-            if ($overlay_row['overlay_section_button_url']) {
-                $button_url = $overlay_row['overlay_section_button_url']['url'];
-                $button_target = $overlay_row['overlay_section_button_url']['target'];
+            $button_link = uamswp_field_array($overlay_row['overlay_section_button_url'] ?? null);
+            if ($button_link !== []) {
+                $button_url = $button_link['url'] ?? null;
+                $button_target = $button_link['target'] ?? null;
             }
-            $button_desc = $overlay_row['overlay_section_button_description'];
-            $background_color = $overlay_row['overlay_section_background_color'];
-            $image = $overlay_row['overlay_section_image'];
+            $button_desc = $overlay_row['overlay_section_button_description'] ?? null;
+            $background_color = $overlay_row['overlay_section_background_color'] ?? null;
+            $image = $overlay_row['overlay_section_image'] ?? null;
 
             ?>
-            <section class="col-12<?php echo $row_count > 1 ? ' col-sm-6' : ''; ?> item bg-image item-<?php echo $index; ?> <?php echo $background_color; ?>" aria-label="<?php echo esc_attr($heading); ?>">
+            <section class="col-12<?php echo $row_count > 1 ? ' col-sm-6' : ''; ?> item bg-image item-<?php echo $index; ?> <?php echo uamswp_field_text($background_color); ?>" aria-label="<?php echo esc_attr(uamswp_field_text($heading)); ?>">
                 <?php if ($row_count > 1 && function_exists('bis_get_attachment_image')) { // Background styles for two tiles in one row with BIS plugin?>
                 <style>
                     #<?php echo $id; ?> .item-<?php echo $index; ?>:before {
@@ -199,9 +205,9 @@ if ($geo_display) {
                 </style>
                 <?php } // endif?>
                 <div class="text-container">
-                    <h2><?php echo esc_html($heading); ?></h2>
-                    <p><?php echo wp_kses_post($body); ?></p>
-                    <a href="<?php echo esc_url($button_url); ?>" aria-label="<?php echo esc_attr($button_desc); ?>" class="btn btn-white"<?php echo $button_target ? ' target="'.esc_attr($button_target).'"' : ''; ?> data-itemtitle="<?php echo esc_attr($heading); ?>"><?php echo esc_html($button_text); ?></a>
+                    <h2><?php echo esc_html(uamswp_field_text($heading)); ?></h2>
+                    <p><?php echo wp_kses_post(uamswp_field_text($body)); ?></p>
+                    <a href="<?php echo esc_url(uamswp_field_text($button_url)); ?>" aria-label="<?php echo esc_attr(uamswp_field_text($button_desc)); ?>" class="btn btn-white"<?php echo $button_target ? ' target="'.esc_attr(uamswp_field_text($button_target)).'"' : ''; ?> data-itemtitle="<?php echo esc_attr(uamswp_field_text($heading)); ?>"><?php echo esc_html(uamswp_field_text($button_text)); ?></a>
                 </div>
             </section>
 <?php
