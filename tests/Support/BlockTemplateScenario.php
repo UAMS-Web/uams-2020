@@ -122,7 +122,7 @@ final class BlockTemplateScenario
 
         QueryDouble::$nextRows = $case['rows'];
         QueryDouble::$history = [];
-        when('get_post_thumbnail_id')->alias(static function ($id) use ($case, &$calls) {
+        when('get_post_thumbnail_id')->alias(static function ($id = null) use ($case, &$calls) {
             $calls[] = ['get_post_thumbnail_id', $id];
 
             return $case['thumbnail'];

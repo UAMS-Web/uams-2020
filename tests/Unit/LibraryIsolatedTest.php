@@ -48,7 +48,13 @@ final class LibraryIsolatedTest extends TestCase
     #[DataProvider('adminStates')]
     public function test_exact_front_end_asset_queue(bool $admin): void
     {
-        expect('wp_get_theme')->once()->andReturn((object) ['Version' => '9.7-test']);
+        expect('wp_get_theme')->once()->andReturn(new class
+        {
+            public function get(string $key): string
+            {
+                return $key === 'Version' ? '9.7-test' : '';
+            }
+        });
         expect('is_admin')->once()->andReturn($admin);
         $calls = [];
         foreach (['wp_enqueue_style', 'wp_deregister_script', 'wp_register_script', 'wp_enqueue_script', 'wp_deregister_style'] as $function) {
