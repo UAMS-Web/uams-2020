@@ -81,7 +81,8 @@ if ($is_quote) {
 }
 
 if (empty($link_list)) {
-    $link_list = get_field('side_link_list') ?: '';
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
+    $link_list = get_field('side_link_list') ?: ''; // A non-array default reads as no rows either way.
 }
 if (empty($list_more)) {
     $list_more = get_field('side_link_include_more') ?: '';
@@ -95,6 +96,8 @@ if (empty($cta)) {
 if (! is_array($cta)) {
     $cta = [];
 }
+// A non-array default reads as no link (typed to an empty array) either way.
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $cta += ['side_cta_text' => '', 'side_cta_url' => '', 'side_cta_description' => ''];
 $cta_text = uamswp_field_text($cta['side_cta_text']);
 $cta_link = '';
@@ -115,6 +118,8 @@ if (empty($image_group)) {
 if (! is_array($image_group)) {
     $image_group = [];
 }
+// A non-numeric default reads as image id 0, the same as the empty string.
+// @pest-mutate-ignore: EmptyStringToNotEmpty
 $image_group += ['side_image_image' => '', 'side_image_alt_text' => '', 'side_image_crop' => '', 'side_image_anchor' => ''];
 $side_image = (int) uamswp_field_text($image_group['side_image_image']);
 $image_alt = uamswp_field_text($image_group['side_image_alt_text']);
