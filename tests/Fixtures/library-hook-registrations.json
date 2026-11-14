@@ -491,6 +491,13 @@
             1
         ],
         [
+            "filter",
+            "customize_loaded_components",
+            "uamswp_close_customizer_widgets_for_editors",
+            10,
+            1
+        ],
+        [
             "action",
             "wp_login",
             "uamswp_user_last_login",

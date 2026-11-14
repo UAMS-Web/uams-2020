@@ -71,6 +71,24 @@ it('guards editor-only theme screens while allowing administrators and other scr
     [false, ['editor'], 'customize.php', false], [false, ['editor'], 'THEMES.php', false],
 ]);
 
+it('removes only the widgets Customizer component for restricted editors', function (bool $admin, $roles, array $expected): void {
+    Functions\expect('current_user_can')->once()->with('manage_options')->andReturn($admin);
+    $user = $roles === null ? new stdClass : new WP_User;
+    if ($user instanceof WP_User) {
+        $user->roles = $roles;
+    }
+
+    Functions\expect('wp_get_current_user')->times($admin ? 0 : 1)->andReturn($user);
+
+    expect(uamswp_close_customizer_widgets_for_editors(['widgets', 'nav_menus', 'selective_refresh']))->toBe($expected);
+})->with([
+    'editor' => [false, ['editor'], ['nav_menus', 'selective_refresh']],
+    'editor with another role' => [false, ['author', 'editor'], ['nav_menus', 'selective_refresh']],
+    'administrator' => [true, ['editor'], ['widgets', 'nav_menus', 'selective_refresh']],
+    'author' => [false, ['author'], ['widgets', 'nav_menus', 'selective_refresh']],
+    'no user object' => [false, null, ['widgets', 'nav_menus', 'selective_refresh']],
+]);
+
 it('stores the login timestamp under the authenticated user ID', function (): void {
     Functions\expect('time')->once()->withNoArgs()->andReturn(1700000123);
     Functions\expect('update_user_meta')->once()->with(37, 'last_login', 1700000123);
