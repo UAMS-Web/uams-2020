@@ -54,6 +54,7 @@ if (empty($geo_region)) {
     $geo_region = get_field('action_bar_geo_region');
 }
 
+$row_count = 0;
 if ($action_bar_rows) {
     // $rows = get_field('action_bar_section');
     $row_count = count($action_bar_rows);
@@ -84,12 +85,12 @@ if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
 }
 if ($geo_display) {
     ?>
-<section class="uams-module action-bar<?php /* @phpstan-ignore variable.undefined (template or branch variable, see #745) */ echo esc_attr($className); ?> count-<?php echo $row_count < 4 ? '3' : '4'; ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
+<section class="uams-module action-bar<?php echo esc_attr($className); ?> count-<?php echo $row_count < 4 ? '3' : '4'; ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
     <h2 class="sr-only"><?php echo esc_html($heading); ?></h2>
     <div class="container-fluid">
         <div class="row">
 <?php
-        foreach ($action_bar_rows as $action_bar_row) {
+        foreach ($action_bar_rows ?: [] as $action_bar_row) {
             // Load values.
             $section_heading = $action_bar_row['action_bar_section_heading'];
             $body = $action_bar_row['action_bar_section_body'];
