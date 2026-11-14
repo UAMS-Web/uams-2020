@@ -4,6 +4,9 @@
  *
 */
 
+/**
+ * @return mixed
+ */
 function uamswp_add_favicon() { ?>
     <?php // generics ?>
     <link rel="icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/favicon/favicon-32x32.png?v=1" sizes="32x32">

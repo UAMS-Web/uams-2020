@@ -99,6 +99,10 @@ function uamswp_custom_editor_css(): void
 // CORS header fix
 add_filter('allowed_http_origins', 'add_allowed_origins');
 
+/**
+ * @param  mixed  $origins
+ * @return mixed
+ */
 function add_allowed_origins($origins)
 {
     $origins[] = 'https://www.uams.edu';

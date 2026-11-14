@@ -169,6 +169,10 @@ function uamswp_do_plugins_register(): void
 }
 
 // Disable Plugin Nags
+/**
+ * @param  mixed  $value
+ * @return mixed
+ */
 function disable_plugin_updates($value)
 {
 

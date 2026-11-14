@@ -15,6 +15,10 @@ declare(strict_types=1);
 // Comment Form
 // @link http://www.codecheese.com/2013/11/wordpress-comment-form-with-twitter-bootstrap-3-supports/
 add_filter('comment_form_defaults', 'uamswp_comment_form_args');
+/**
+ * @param  mixed  $args
+ * @return mixed
+ */
 function uamswp_comment_form_args($args)
 {
     $args['comment_field'] = '<div class="form-group comment-form-comment">
@@ -28,6 +32,10 @@ function uamswp_comment_form_args($args)
 
 // @link http://www.codecheese.com/2013/11/wordpress-comment-form-with-twitter-bootstrap-3-supports/
 add_filter('comment_form_default_fields', 'uamswp_comment_form_fields');
+/**
+ * @param  mixed  $fields
+ * @return array<mixed>
+ */
 function uamswp_comment_form_fields($fields): array
 {
     $commenter = wp_get_current_commenter();

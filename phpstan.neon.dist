@@ -391,22 +391,6 @@ parameters:
             count: 5
         -
             identifier: missingType.iterableValue
-            path: lib/blocks.php
-            count: 1
-        -
-            identifier: missingType.iterableValue
-            path: lib/comment.php
-            count: 1
-        -
-            identifier: missingType.iterableValue
-            path: lib/extras.php
-            count: 3
-        -
-            identifier: missingType.iterableValue
-            path: lib/geo.php
-            count: 2
-        -
-            identifier: missingType.iterableValue
             path: lib/misc.php
             count: 1
         -
@@ -420,32 +404,8 @@ parameters:
             count: 30
         -
             identifier: missingType.parameter
-            path: home.php
-            count: 2
-        -
-            identifier: missingType.parameter
-            path: lib/blocks.php
-            count: 3
-        -
-            identifier: missingType.parameter
             path: lib/bootstrap.php
             count: 9
-        -
-            identifier: missingType.parameter
-            path: lib/breadcrumb.php
-            count: 2
-        -
-            identifier: missingType.parameter
-            path: lib/comment.php
-            count: 2
-        -
-            identifier: missingType.parameter
-            path: lib/extras.php
-            count: 7
-        -
-            identifier: missingType.parameter
-            path: lib/footer-widgets.php
-            count: 2
         -
             identifier: missingType.parameter
             path: lib/media-credit.php
@@ -476,32 +436,12 @@ parameters:
             count: 3
         -
             identifier: missingType.parameter
-            path: lib/quicklinks.php
-            count: 1
-        -
-            identifier: missingType.parameter
-            path: lib/scripts.php
-            count: 1
-        -
-            identifier: missingType.parameter
-            path: lib/search.php
-            count: 1
-        -
-            identifier: missingType.parameter
-            path: lib/tgm.php
-            count: 1
-        -
-            identifier: missingType.parameter
             path: lib/users.php
             count: 6
         -
             identifier: missingType.parameter
             path: search.php
             count: 7
-        -
-            identifier: missingType.parameter
-            path: templates/page_landing.php
-            count: 1
         # Functions declared without a return type; adding one changes the contract with WordPress and ACF callers, so it is left to a later change (see #745).
         -
             identifier: missingType.return
@@ -509,28 +449,8 @@ parameters:
             count: 12
         -
             identifier: missingType.return
-            path: lib/blocks.php
-            count: 1
-        -
-            identifier: missingType.return
             path: lib/bootstrap.php
             count: 6
-        -
-            identifier: missingType.return
-            path: lib/breadcrumb.php
-            count: 2
-        -
-            identifier: missingType.return
-            path: lib/comment.php
-            count: 1
-        -
-            identifier: missingType.return
-            path: lib/extras.php
-            count: 3
-        -
-            identifier: missingType.return
-            path: lib/favicon.php
-            count: 1
         -
             identifier: missingType.return
             path: lib/media-credit.php
@@ -561,27 +481,11 @@ parameters:
             count: 3
         -
             identifier: missingType.return
-            path: lib/quicklinks.php
-            count: 1
-        -
-            identifier: missingType.return
-            path: lib/scripts.php
-            count: 1
-        -
-            identifier: missingType.return
-            path: lib/tgm.php
-            count: 1
-        -
-            identifier: missingType.return
             path: lib/users.php
             count: 3
         -
             identifier: missingType.return
             path: search.php
-            count: 1
-        -
-            identifier: missingType.return
-            path: templates/page_landing.php
             count: 1
         # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call (see #745).
         -

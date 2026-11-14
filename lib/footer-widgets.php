@@ -15,6 +15,10 @@ declare(strict_types=1);
 // Custom footer widget area
 add_filter('genesis_footer_widget_areas', 'uamswp_footer_widget_areas', 10, 2);
 
+/**
+ * @param  mixed  $footer_widgets
+ * @param  mixed  $output
+ */
 function uamswp_footer_widget_areas($output, $footer_widgets): ?string
 {
 
