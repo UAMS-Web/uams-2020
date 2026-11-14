@@ -59,7 +59,7 @@ parameters:
     # from 0 upward (see the code-quality skill), then raise it by one per
     # change as findings are fixed, until `max`. Lowering it is a deliberate,
     # argued change, not a quiet edit to get a red run green.
-    level: 9
+    level: 10
 
     excludePaths:
         analyseAndScan:
@@ -337,43 +337,43 @@ parameters:
         -
             identifier: argument.type
             path: blocks/iframe.php
-            count: 1
+            count: 6
         -
             identifier: argument.type
             path: blocks/news.php
-            count: 3
+            count: 22
         -
             identifier: argument.type
             path: blocks/post-category-tile.php
-            count: 5
+            count: 21
         -
             identifier: argument.type
             path: blocks/post-category-tiles.php
-            count: 3
-        -
-            identifier: argument.type
-            path: functions.php
             count: 12
         -
             identifier: argument.type
+            path: functions.php
+            count: 42
+        -
+            identifier: argument.type
             path: lib/header.php
-            count: 7
+            count: 12
         -
             identifier: argument.type
             path: lib/misc.php
-            count: 3
+            count: 6
         -
             identifier: argument.type
             path: lib/nav.php
-            count: 9
+            count: 11
         -
             identifier: argument.type
             path: lib/page.php
-            count: 15
+            count: 31
         -
             identifier: argument.type
             path: lib/users.php
-            count: 2
+            count: 4
         -
             identifier: argument.type
             path: templates/marketing.php
@@ -594,7 +594,7 @@ parameters:
         -
             identifier: argument.type
             path: blocks/section.php
-            count: 2
+            count: 8
         -
             identifier: argument.type
             path: home.php
@@ -602,24 +602,24 @@ parameters:
         -
             identifier: argument.type
             path: lib/breadcrumb.php
-            count: 1
-        -
-            identifier: argument.type
-            path: lib/extras.php
             count: 3
         -
             identifier: argument.type
+            path: lib/extras.php
+            count: 9
+        -
+            identifier: argument.type
             path: lib/media-credit.php
-            count: 4
+            count: 19
         -
             identifier: argument.type
             path: lib/scripts.php
-            count: 2
+            count: 6
         # Arithmetic on a value PHPStan cannot prove is a number (see #745).
         -
             identifier: binaryOp.invalid
             path: lib/breadcrumb.php
-            count: 1
+            count: 2
         # A foreach over a value that WordPress or ACF may return as false (see #745).
         -
             identifier: foreach.nonIterable
@@ -633,28 +633,28 @@ parameters:
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: functions.php
-            count: 15
+            count: 28
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/media-credit.php
-            count: 2
+            count: 10
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/misc.php
-            count: 1
+            count: 4
         # Property access on a value that WordPress may return as false or null (see #745).
         -
             identifier: property.nonObject
             path: functions.php
-            count: 9
+            count: 10
         -
             identifier: property.nonObject
             path: lib/extras.php
-            count: 1
+            count: 2
         -
             identifier: property.nonObject
             path: lib/quicklinks.php
-            count: 5
+            count: 16
         # A property that the declared type does not list (see #745).
         -
             identifier: property.notFound
@@ -664,7 +664,7 @@ parameters:
         -
             identifier: argument.type
             path: lib/a11y.php
-            count: 1
+            count: 3
         # A method call on a value that WordPress may return as false or null (see #745).
         -
             identifier: method.nonObject
@@ -674,7 +674,7 @@ parameters:
         -
             identifier: property.nonObject
             path: lib/misc.php
-            count: 1
+            count: 3
         # A return value whose type does not match the declared return type (see #745).
         -
             identifier: return.type
@@ -684,36 +684,36 @@ parameters:
         -
             identifier: argument.type
             path: blocks/gallery.php
-            count: 21
+            count: 39
         -
             identifier: argument.type
             path: blocks/image-side-by-side.php
-            count: 30
+            count: 50
         -
             identifier: argument.type
             path: blocks/stacked.php
-            count: 1
+            count: 30
         -
             identifier: argument.type
             path: lib/blocks.php
-            count: 1
+            count: 3
         -
             identifier: argument.type
             path: lib/bootstrap.php
-            count: 1
+            count: 2
         -
             identifier: argument.type
             path: search.php
-            count: 5
+            count: 21
         # Arithmetic on a value PHPStan cannot prove is a number (see #745).
         -
             identifier: binaryOp.invalid
             path: functions.php
-            count: 2
+            count: 9
         -
             identifier: binaryOp.invalid
             path: lib/extras.php
-            count: 16
+            count: 22
         # An integer cast of a value PHPStan cannot prove is numeric, such as mixed from get_field() (see #745).
         -
             identifier: cast.int
@@ -728,11 +728,11 @@ parameters:
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/gallery.php
-            count: 6
+            count: 14
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/image-side-by-side.php
-            count: 2
+            count: 11
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/footer-widgets.php
@@ -740,12 +740,487 @@ parameters:
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/nav.php
-            count: 2
+            count: 7
         # A return value whose type does not match the declared return type (see #745).
         -
             identifier: return.type
             path: functions.php
             count: 1
+        # An argument that PHPStan types as mixed, usually from get_field() or another WordPress or ACF call (see #745).
+        -
+            identifier: argument.type
+            path: blocks/action-bar.php
+            count: 19
+        -
+            identifier: argument.type
+            path: blocks/call-out.php
+            count: 26
+        -
+            identifier: argument.type
+            path: blocks/content.php
+            count: 10
+        -
+            identifier: argument.type
+            path: blocks/counter.php
+            count: 13
+        -
+            identifier: argument.type
+            path: blocks/cta.php
+            count: 32
+        -
+            identifier: argument.type
+            path: blocks/hero.php
+            count: 29
+        -
+            identifier: argument.type
+            path: blocks/link-list-2.php
+            count: 5
+        -
+            identifier: argument.type
+            path: blocks/link-list.php
+            count: 16
+        -
+            identifier: argument.type
+            path: blocks/livewhale.php
+            count: 11
+        -
+            identifier: argument.type
+            path: blocks/overlay.php
+            count: 30
+        -
+            identifier: argument.type
+            path: lib/footer.php
+            count: 11
+        -
+            identifier: argument.type
+            path: lib/geo.php
+            count: 10
+        -
+            identifier: argument.type
+            path: lib/modules.php
+            count: 10
+        -
+            identifier: argument.type
+            path: lib/quicklinks.php
+            count: 4
+        -
+            identifier: argument.type
+            path: lib/widgets.php
+            count: 4
+        # A compound assignment on a value PHPStan types as mixed (see #745).
+        -
+            identifier: assignOp.invalid
+            path: functions.php
+            count: 1
+        -
+            identifier: assignOp.invalid
+            path: lib/bootstrap.php
+            count: 1
+        -
+            identifier: assignOp.invalid
+            path: lib/footer-widgets.php
+            count: 3
+        -
+            identifier: assignOp.invalid
+            path: lib/nav.php
+            count: 2
+        -
+            identifier: assignOp.invalid
+            path: lib/page.php
+            count: 5
+        -
+            identifier: assignOp.invalid
+            path: templates/page_landing.php
+            count: 1
+        # Arithmetic or concatenation on a value PHPStan types as mixed (see #745).
+        -
+            identifier: binaryOp.invalid
+            path: blocks/action-bar.php
+            count: 3
+        -
+            identifier: binaryOp.invalid
+            path: blocks/call-out.php
+            count: 3
+        -
+            identifier: binaryOp.invalid
+            path: blocks/content.php
+            count: 3
+        -
+            identifier: binaryOp.invalid
+            path: blocks/counter.php
+            count: 6
+        -
+            identifier: binaryOp.invalid
+            path: blocks/cta.php
+            count: 5
+        -
+            identifier: binaryOp.invalid
+            path: blocks/gallery.php
+            count: 3
+        -
+            identifier: binaryOp.invalid
+            path: blocks/hero.php
+            count: 3
+        -
+            identifier: binaryOp.invalid
+            path: blocks/iframe.php
+            count: 3
+        -
+            identifier: binaryOp.invalid
+            path: blocks/image-side-by-side.php
+            count: 3
+        -
+            identifier: binaryOp.invalid
+            path: blocks/link-list-2.php
+            count: 6
+        -
+            identifier: binaryOp.invalid
+            path: blocks/link-list.php
+            count: 3
+        -
+            identifier: binaryOp.invalid
+            path: blocks/livewhale.php
+            count: 3
+        -
+            identifier: binaryOp.invalid
+            path: blocks/news.php
+            count: 3
+        -
+            identifier: binaryOp.invalid
+            path: blocks/overlay.php
+            count: 3
+        -
+            identifier: binaryOp.invalid
+            path: blocks/post-category-tile.php
+            count: 4
+        -
+            identifier: binaryOp.invalid
+            path: blocks/post-category-tiles.php
+            count: 4
+        -
+            identifier: binaryOp.invalid
+            path: blocks/section.php
+            count: 1
+        -
+            identifier: binaryOp.invalid
+            path: blocks/stacked.php
+            count: 3
+        -
+            identifier: binaryOp.invalid
+            path: home.php
+            count: 1
+        -
+            identifier: binaryOp.invalid
+            path: lib/a11y.php
+            count: 1
+        -
+            identifier: binaryOp.invalid
+            path: lib/bootstrap.php
+            count: 2
+        -
+            identifier: binaryOp.invalid
+            path: lib/footer.php
+            count: 5
+        -
+            identifier: binaryOp.invalid
+            path: lib/header.php
+            count: 5
+        -
+            identifier: binaryOp.invalid
+            path: lib/misc.php
+            count: 3
+        -
+            identifier: binaryOp.invalid
+            path: lib/modules.php
+            count: 7
+        -
+            identifier: binaryOp.invalid
+            path: lib/nav.php
+            count: 2
+        -
+            identifier: binaryOp.invalid
+            path: lib/quicklinks.php
+            count: 4
+        -
+            identifier: binaryOp.invalid
+            path: lib/widgets.php
+            count: 2
+        -
+            identifier: binaryOp.invalid
+            path: search.php
+            count: 5
+        # A string cast of a value PHPStan types as mixed (see #745).
+        -
+            identifier: cast.string
+            path: lib/bootstrap.php
+            count: 1
+        # Output of a value PHPStan types as mixed, such as the result of get_field() (see #745).
+        -
+            identifier: echo.nonString
+            path: blocks/cta.php
+            count: 2
+        -
+            identifier: echo.nonString
+            path: blocks/gallery.php
+            count: 7
+        -
+            identifier: echo.nonString
+            path: blocks/link-list-2.php
+            count: 8
+        -
+            identifier: echo.nonString
+            path: blocks/overlay.php
+            count: 1
+        -
+            identifier: echo.nonString
+            path: blocks/post-category-tile.php
+            count: 2
+        -
+            identifier: echo.nonString
+            path: blocks/post-category-tiles.php
+            count: 15
+        -
+            identifier: echo.nonString
+            path: blocks/stacked.php
+            count: 5
+        -
+            identifier: echo.nonString
+            path: functions.php
+            count: 1
+        -
+            identifier: echo.nonString
+            path: lib/modules.php
+            count: 2
+        -
+            identifier: echo.nonString
+            path: lib/page.php
+            count: 3
+        -
+            identifier: echo.nonString
+            path: lib/widgets.php
+            count: 4
+        # A mixed value interpolated into a string (see #745).
+        -
+            identifier: encapsedStringPart.nonString
+            path: functions.php
+            count: 3
+        # A foreach over a value PHPStan types as mixed (see #745).
+        -
+            identifier: foreach.nonIterable
+            path: blocks/action-bar.php
+            count: 1
+        -
+            identifier: foreach.nonIterable
+            path: blocks/counter.php
+            count: 1
+        -
+            identifier: foreach.nonIterable
+            path: blocks/hero.php
+            count: 2
+        -
+            identifier: foreach.nonIterable
+            path: blocks/image-side-by-side.php
+            count: 1
+        -
+            identifier: foreach.nonIterable
+            path: blocks/link-list-2.php
+            count: 1
+        -
+            identifier: foreach.nonIterable
+            path: blocks/link-list.php
+            count: 1
+        -
+            identifier: foreach.nonIterable
+            path: blocks/overlay.php
+            count: 1
+        -
+            identifier: foreach.nonIterable
+            path: blocks/post-category-tiles.php
+            count: 1
+        -
+            identifier: foreach.nonIterable
+            path: blocks/stacked.php
+            count: 1
+        -
+            identifier: foreach.nonIterable
+            path: lib/breadcrumb.php
+            count: 1
+        -
+            identifier: foreach.nonIterable
+            path: lib/footer.php
+            count: 1
+        -
+            identifier: foreach.nonIterable
+            path: lib/modules.php
+            count: 3
+        # A method call on a value PHPStan types as mixed (see #745).
+        -
+            identifier: method.nonObject
+            path: functions.php
+            count: 2
+        -
+            identifier: method.nonObject
+            path: lib/customizer.php
+            count: 2
+        # An array offset PHPStan types as mixed (see #745).
+        -
+            identifier: offsetAccess.invalidOffset
+            path: functions.php
+            count: 5
+        # Array access on a value PHPStan types as mixed, such as the result of get_field() (see #745).
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/action-bar.php
+            count: 12
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/call-out.php
+            count: 5
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/content.php
+            count: 5
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/counter.php
+            count: 12
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/cta.php
+            count: 6
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/hero.php
+            count: 19
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/iframe.php
+            count: 4
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/link-list-2.php
+            count: 12
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/link-list.php
+            count: 11
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/livewhale.php
+            count: 5
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/news.php
+            count: 4
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/overlay.php
+            count: 14
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/post-category-tile.php
+            count: 5
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/post-category-tiles.php
+            count: 8
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/section.php
+            count: 4
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: blocks/stacked.php
+            count: 15
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/bootstrap.php
+            count: 14
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/breadcrumb.php
+            count: 13
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/comment.php
+            count: 2
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/extras.php
+            count: 7
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/footer.php
+            count: 7
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/geo.php
+            count: 2
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/modules.php
+            count: 143
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/page.php
+            count: 6
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/pagination.php
+            count: 4
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/scripts.php
+            count: 5
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/tgm.php
+            count: 1
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/users.php
+            count: 5
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: search.php
+            count: 2
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: templates/page_landing.php
+            count: 1
+        # Property access on a value PHPStan types as mixed (see #745).
+        -
+            identifier: property.nonObject
+            path: blocks/post-category-tile.php
+            count: 6
+        -
+            identifier: property.nonObject
+            path: blocks/post-category-tiles.php
+            count: 10
+        -
+            identifier: property.nonObject
+            path: lib/geo.php
+            count: 8
+        -
+            identifier: property.nonObject
+            path: lib/media-credit.php
+            count: 5
+        -
+            identifier: property.nonObject
+            path: lib/modules.php
+            count: 1
+        -
+            identifier: property.nonObject
+            path: lib/nav.php
+            count: 2
+        -
+            identifier: property.nonObject
+            path: lib/users.php
+            count: 1
+        -
+            identifier: property.nonObject
+            path: search.php
+            count: 22
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
         # PHPStan analyzes at the `min` above, so
