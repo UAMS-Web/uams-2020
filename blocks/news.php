@@ -10,28 +10,30 @@ declare(strict_types=1);
  */
 $className = '';
 // Create id attribute allowing for custom "anchor" value.
+$blockData = isset($block) ? uamswp_field_array($block) : [];
+$moduleData = isset($module) ? uamswp_field_array($module) : [];
 if (empty($id)) {
     $id = '';
 }
 
 if (empty($id) && isset($block)) {
-    $id = $block['id'];
+    $id = $blockData['id'] ?? null;
 }
 
 if (empty($id)) {
     // @pest-mutate-ignore: ConcatRemoveLeft,ConcatSwitchSides,DecrementInteger,IncrementInteger
-    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+    $id = ! empty($moduleData['anchor_id']) ? sanitize_title_with_dashes(uamswp_field_text($moduleData['anchor_id'])) : 'module-'.((int) $i + 1);
 }
 
 // @pest-mutate-ignore: ConcatSwitchSides
-$id = 'uams-news-'.$id;
-if (! empty($block['anchor'])) {
-    $id = $block['anchor'];
+$id = 'uams-news-'.uamswp_field_text($id);
+if (! empty($blockData['anchor'])) {
+    $id = $blockData['anchor'];
 }
 
-if (! empty($block['align'])) {
+if (! empty($blockData['align'])) {
     // @pest-mutate-ignore: ConcatEqualToEqual
-    $className .= ' align'.$block['align'];
+    $className .= ' align'.uamswp_field_text($blockData['align']);
 }
 
 // Load values.
@@ -114,33 +116,34 @@ if ($output == 'grid') {
 // echo '<!--[uamswp_news output="'. $output .'"  news_title="'. $title .'"  hide_title="'. $hide_title .'" category="'. $category .'" count="'. $count .'" offset="'. $offset .'" advanced_cat="'. $advancedCat .'" local="'. $local .'" style="'. $background_color . $className .'" hide_img="'. $hide_img .'" hide_author="'. $hide_author.'" hide_date="'. $hide_date .'" include_link="'. $link .'" news_position="'. $position .'" id="'. $articleID .'"]-->';
 // echo '<!-- '; print_r($geo); echo ' -->';
 // GEO Logic
+$geo_region = uamswp_field_array($geo_region);
 $geo_display = false;
-if (! isset($geo) || empty($geo_region)) {
+if (! isset($geo) || $geo_region === []) {
     $geo_display = true;
 } else {
-    if ($geo == 'include' && ! empty($geo_region)) {
+    if ($geo == 'include') {
         if (is_in_region($geo_region)) {
             $geo_display = true;
         }
-    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
+    } elseif ($geo == 'exclude') {
         if (is_not_in_region($geo_region)) {
             $geo_display = true;
         }
     }
 }
 
-if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
+if (! empty($is_preview) && ! empty($geo) && $geo_region !== []) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map(uamswp_field_text(...), $geo_region)).'<hr>';
 }
 
 // Sanitize editor-controlled values before they are concatenated into the shortcode string.
-$articleID = absint($articleID);
-$count = absint($count);
-$offset = absint($offset);
-$category = str_replace(['[', ']', '"'], '', sanitize_text_field($category));
-$advancedCat = str_replace(['[', ']', '"'], '', sanitize_text_field($advancedCat));
-$title = str_replace(['[', ']', '"'], '', sanitize_text_field($title));
+$articleID = absint(uamswp_field_text($articleID));
+$count = absint(uamswp_field_text($count));
+$offset = absint(uamswp_field_text($offset));
+$category = str_replace(['[', ']', '"'], '', sanitize_text_field(uamswp_field_text($category)));
+$advancedCat = str_replace(['[', ']', '"'], '', sanitize_text_field(uamswp_field_text($advancedCat)));
+$title = str_replace(['[', ']', '"'], '', sanitize_text_field(uamswp_field_text($title)));
 if ($geo_display) {
-    echo do_shortcode('[uamswp_news output="'.esc_attr($output).'"  news_title="'.esc_attr($title).'"  hide_title="'.esc_attr($hide_title).'" category="'.esc_attr($category).'" count="'.esc_attr($count).'" offset="'.esc_attr($offset).'" advanced_cat="'.esc_attr($advancedCat).'" local="'.esc_attr($local).'" style="'.esc_attr($background_color.$className).'" hide_img="'.esc_attr($hide_img).'" hide_author="'.esc_attr($hide_author).'" hide_date="'.esc_attr($hide_date).'" include_link="'.esc_attr($link).'" news_position="'.esc_attr($position).'" id="'.esc_attr($articleID).'"]');
+    echo do_shortcode('[uamswp_news output="'.esc_attr(uamswp_field_text($output)).'"  news_title="'.esc_attr($title).'"  hide_title="'.esc_attr(uamswp_field_text($hide_title)).'" category="'.esc_attr($category).'" count="'.esc_attr((string) $count).'" offset="'.esc_attr((string) $offset).'" advanced_cat="'.esc_attr($advancedCat).'" local="'.esc_attr(uamswp_field_text($local)).'" style="'.esc_attr(uamswp_field_text($background_color).$className).'" hide_img="'.esc_attr(uamswp_field_text($hide_img)).'" hide_author="'.esc_attr(uamswp_field_text($hide_author)).'" hide_date="'.esc_attr(uamswp_field_text($hide_date)).'" include_link="'.esc_attr(uamswp_field_text($link)).'" news_position="'.esc_attr(uamswp_field_text($position)).'" id="'.esc_attr((string) $articleID).'"]');
 }

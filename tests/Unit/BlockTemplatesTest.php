@@ -388,15 +388,33 @@ it('preserves news module caller index and anchor conversions', function (string
     Assert::assertStringContainsString(($source === 'index' ? '[news-index-conversion]' : '[news-anchor-conversion]').'SHORTCODE(', $actual['html']);
 })->with(['index', 'anchor']);
 
-it('retains the public module failure for an empty-array numeric index', function (string $name) use ($blockBaseCases): void {
+it('renders the module with an empty-array index as the first module', function (string $name) use ($blockBaseCases): void {
     $case = $blockBaseCases[$name];
     $module = ['acf_fc_layout' => $name === 'news' ? 'modules_news_grid' : 'modules_uams_livewhale'] + $case['fields'];
     when('class_exists')->alias(static fn ($class) => $class === 'UAMS_Syndicate_News_Base' ? true : relay());
     when('get_stylesheet_directory')->justReturn(dirname(__DIR__, 2));
-    $this->expectException(TypeError::class);
-    $this->expectExceptionMessage('Unsupported operand types: array + int');
-    BlockTemplateScenario::render($case, static fn () => uamswp_module($module, []));
+    $actual = BlockTemplateScenario::render($case, static fn () => uamswp_module($module, []));
+    Assert::assertStringContainsString('Begin Module', $actual['html']);
+    Assert::assertStringContainsString($name === 'news' ? 'id="ATTR(53)"])' : 'HTML(livewhale_heading <&")</span>', $actual['html']);
 })->with(['news', 'livewhale']);
+
+it('treats a non-array block and region as empty in the content, livewhale and news blocks', function (string $name, mixed $unexpected) use ($blockBaseCases): void {
+    $case = $blockBaseCases[$name];
+    $case['variables']['geo'] = 'include';
+    $empty = $case;
+    $empty['variables']['block'] = [];
+    $empty['variables']['geo_region'] = [];
+    $case['variables']['block'] = $unexpected;
+    $case['variables']['geo_region'] = $unexpected;
+
+    Assert::assertSame(BlockTemplateScenario::render($empty)['html'], BlockTemplateScenario::render($case)['html'], 'A non-array value must render like an empty one: '.$name);
+})->with(function () {
+    foreach (['content', 'livewhale', 'news'] as $name) {
+        foreach (['false' => false, 'empty string' => '', 'null' => null, 'string' => 'text', 'number' => 7] as $label => $unexpected) {
+            yield $name.' with '.$label => [$name, $unexpected];
+        }
+    }
+});
 
 it('releases an ephemeral fullscreen field before iframe markup', function () use ($blockBaseCases): void {
     $case = $blockBaseCases['iframe'];
