@@ -94,10 +94,7 @@ function uamswp_attributes_entry_header($attributes)
  */
 function uamswp_attributes_entry_header_graphic_title($attributes)
 {
-    // @phpstan-ignore empty.variable (variable is never assigned, see #745)
-    if (empty($page_cover_image)) {
-        $page_cover_image = get_field('page_cover_image', get_the_id());
-    }
+    $page_cover_image = get_field('page_cover_image', get_the_id());
 
     if ($page_cover_image) {
         $attributes['class'] .= ' uams-module extra-padding graphic-title bg-image bg-red';
@@ -115,10 +112,7 @@ function uamswp_graphic_title_wrap_open(): void
 
 function uamswp_graphic_title_inner_1(): void
 {
-    // @phpstan-ignore empty.variable (variable is never assigned, see #745)
-    if (empty($page_cover_image)) {
-        $page_cover_image = get_field('page_cover_image', get_the_id());
-    }
+    $page_cover_image = get_field('page_cover_image', get_the_id());
 
     if ($page_cover_image && function_exists('bis_get_attachment_image')) {
         echo '<style>
@@ -187,10 +181,7 @@ function uamswp_graphic_title_inner_2(): void
 
 function uamswp_graphic_title_lead_paragraph(): void
 {
-    // @phpstan-ignore empty.variable (variable is never assigned, see #745)
-    if (empty($page_description)) {
-        $page_description = get_field('page_description', get_the_id());
-    }
+    $page_description = get_field('page_description', get_the_id());
 
     if ($page_description) {
         echo '<div class="graphic-title-body"><p>';
@@ -215,10 +206,7 @@ function uamswp_graphic_title_wrap_close(): void
  */
 function uamswp_attributes_entry_header_landing_page_title($attributes)
 {
-    // @phpstan-ignore empty.variable (variable is never assigned, see #745)
-    if (empty($page_landing_page_cover_image)) {
-        $page_landing_page_cover_image = get_field('page_landing_page_cover_image', get_the_id());
-    }
+    $page_landing_page_cover_image = get_field('page_landing_page_cover_image', get_the_id());
 
     if ($page_landing_page_cover_image) {
         $attributes['class'] .= ' uams-module extra-padding landing-page-title bg-image';
@@ -236,15 +224,9 @@ function uamswp_landing_page_title_wrap_open(): void
 
 function uamswp_landing_page_title_inner_1(): void
 {
-    // @phpstan-ignore empty.variable (variable is never assigned, see #745)
-    if (empty($page_landing_page_cover_image)) {
-        $page_landing_page_cover_image = get_field('page_landing_page_cover_image', get_the_id());
-    }
+    $page_landing_page_cover_image = get_field('page_landing_page_cover_image', get_the_id());
 
-    // @phpstan-ignore empty.variable (variable is never assigned, see #745)
-    if (empty($page_landing_page_cover_image_mobile)) {
-        $page_landing_page_cover_image_mobile = get_field('page_landing_page_cover_image_mobile', get_the_id());
-    }
+    $page_landing_page_cover_image_mobile = get_field('page_landing_page_cover_image_mobile', get_the_id());
 
     if (empty($page_landing_page_cover_image_mobile)) {
         $page_landing_page_cover_image_mobile = $page_landing_page_cover_image;
@@ -330,10 +312,7 @@ function uamswp_landing_page_title_inner_2(): void
 
 function uamswp_landing_page_title_lead_paragraph(): void
 {
-    // @phpstan-ignore empty.variable (variable is never assigned, see #745)
-    if (empty($page_landing_page_description)) {
-        $page_landing_page_description = get_field('page_landing_page_description', get_the_ID());
-    }
+    $page_landing_page_description = get_field('page_landing_page_description', get_the_ID());
 
     if ($page_landing_page_description) {
         echo '<div class="landing-page-title-body"><p>';
