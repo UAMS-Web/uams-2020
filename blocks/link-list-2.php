@@ -7,29 +7,32 @@
  *
  */
 
+$blockData = isset($block) ? uamswp_field_array($block) : [];
+$moduleData = isset($module) ? uamswp_field_array($module) : [];
+
 // Create id attribute allowing for custom "anchor" value.
 if (empty($id)) {
     $id = '';
 }
 if (empty($id) && isset($block)) {
-    $id = $block['id'];
+    $id = $blockData['id'] ?? null;
 }
 if (empty($id)) {
-    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+    $id = ! empty($moduleData['anchor_id']) ? sanitize_title_with_dashes(uamswp_field_text($moduleData['anchor_id'])) : 'module-'.((int) $i + 1);
 }
 
-$id = 'link-list-'.$id;
-if (! empty($block['anchor'])) {
-    $id = $block['anchor'];
+$id = 'link-list-'.uamswp_field_text($id);
+if (! empty($blockData['anchor'])) {
+    $id = uamswp_field_text($blockData['anchor']);
 }
 
 $className = '';
-if (! empty($block['className'])) {
+if (! empty($blockData['className'])) {
     // @pest-mutate-ignore: ConcatEqualToEqual
-    $className .= ' '.$block['className'];
+    $className .= ' '.uamswp_field_text($blockData['className']);
 }
-if (! empty($block['align'])) {
-    $className .= ' align'.$block['align'];
+if (! empty($blockData['align'])) {
+    $className .= ' align'.uamswp_field_text($blockData['align']);
 }
 
 // Load values.
@@ -60,45 +63,48 @@ if (empty($geo_region)) {
 
 // GEO Logic
 $geo_display = false;
-if (! isset($geo) || empty($geo_region)) {
+$geo_regions = uamswp_field_array($geo_region);
+if (! isset($geo) || $geo_regions === []) {
     $geo_display = true;
 } else {
-    if ($geo == 'include' && ! empty($geo_region)) {
-        if (is_in_region($geo_region)) {
+    if ($geo == 'include') {
+        if (is_in_region($geo_regions)) {
             $geo_display = true;
         }
-    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
-        if (is_not_in_region($geo_region)) {
+    } elseif ($geo == 'exclude') {
+        if (is_not_in_region($geo_regions)) {
             $geo_display = true;
         }
     }
 }
-if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
+if (! empty($is_preview) && ! empty($geo) && $geo_regions !== []) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map(uamswp_field_text(...), $geo_regions)).'<hr>';
 }
 if ($geo_display) {
     ?>
-<section class="uams-module link-list<?php echo $className; ?> <?php echo $background_color; ?>" id="<?php echo $id; ?>" aria-label="<?php echo $heading; ?>">
+<section class="uams-module link-list<?php echo $className; ?> <?php echo uamswp_field_text($background_color); ?>" id="<?php echo $id; ?>" aria-label="<?php echo uamswp_field_text($heading); ?>">
     <h2 class="module-title <?php echo $hide_heading ? ' sr-only' : ''; ?>">
-        <span class="title"><?php echo $heading; ?></span>
+        <span class="title"><?php echo uamswp_field_text($heading); ?></span>
     </h2>
-    <?php echo $description ? '<p class="note">'.$description.'</p>' : ''; ?>
+    <?php echo $description ? '<p class="note">'.uamswp_field_text($description).'</p>' : ''; ?>
     <div class="container-fluid">
         <div class="row">
         <?php
-                foreach ($link_list_rows as $link_list_row) {
+                foreach (uamswp_field_array($link_list_rows) as $link_list_row_value) {
                     // Load values.
-                    $link_title = $link_list_row['link_list_section_title'];
-                    $body = $link_list_row['link_list_section_body'];
+                    $link_list_row = uamswp_field_array($link_list_row_value);
+                    $link_title = uamswp_field_text($link_list_row['link_list_section_title'] ?? null);
+                    $body = uamswp_field_text($link_list_row['link_list_section_body'] ?? null);
                     $link_url = '';
                     $link_target = '';
-                    if ($link_list_row['link_list_section_url']) {
-                        $link_url = $link_list_row['link_list_section_url']['url'];
-                        $link_target = $link_list_row['link_list_section_url']['target'];
+                    $link_field = uamswp_field_array($link_list_row['link_list_section_url'] ?? null);
+                    if ($link_field !== []) {
+                        $link_url = uamswp_field_text($link_field['url'] ?? null);
+                        $link_target = uamswp_field_text($link_field['target'] ?? null);
                     }
-                    $link_desc = $link_list_row['link_list_section_description'];
-                    $link_icon = $link_list_row['link_list_section_icon'];
+                    $link_desc = uamswp_field_text($link_list_row['link_list_section_description'] ?? null);
+                    $link_icon = uamswp_field_text($link_list_row['link_list_section_icon'] ?? null);
 
                     ?>
             <div class="col item">
