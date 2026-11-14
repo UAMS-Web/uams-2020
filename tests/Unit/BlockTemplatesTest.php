@@ -260,6 +260,22 @@ it('keeps empty nested link targets in the printed false arm', function (string 
     ['stacked', 'stacked_section', 'stacked_section_button_url'],
 ]);
 
+it('does not carry the previous row link into a row without one', function (string $name, string $repeater, string $urlKey) use ($blockBaseCases): void {
+    $case = $blockBaseCases[$name];
+    $first = $case['fields'][$repeater][0];
+    $second = $first;
+    $second[$urlKey] = false;
+    $case['fields'][$repeater] = [$first, $second];
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertSame(2, preg_match_all('/<a [^>]*stretched-link[^>]*>/', $actual['html'], $matches), 'Expected one anchor per row.');
+    Assert::assertStringContainsString(' target=', $matches[0][0]);
+    Assert::assertStringNotContainsString(' target=', $matches[0][1]);
+    Assert::assertSame(1, preg_match('/href="(URL\(\))?"/', $matches[0][1]), 'The second row reused the first row link.');
+})->with([
+    ['link-list-2', 'link_list_section', 'link_list_section_url'],
+    ['stacked', 'stacked_section', 'stacked_section_button_url'],
+]);
+
 it('keeps an empty CTA link target without adding text to the anchor', function () use ($blockBaseCases): void {
     $case = $blockBaseCases['cta'];
     $case['fields']['cta_bar_button_url']['target'] = '';
