@@ -57,7 +57,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Uams2020\\Tests\\": "tests/"
+            "Uams2020\\Tests\\": "tests/",
+            "Uams2020\\PhpStan\\": "phpstan/"
         }
     },
     "repositories": [{

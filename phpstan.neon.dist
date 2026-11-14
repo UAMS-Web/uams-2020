@@ -35,6 +35,14 @@ includes:
     # properties. Uncomment together with the Pest entries under ignoreErrors.
     # - vendor/pestphp/pest/extension.neon
 
+services:
+    -
+        class: Uams2020\PhpStan\AcfGetFieldReturnTypeExtension
+        arguments:
+            types: Uams2020\PhpStan\AcfFieldTypes::load('%currentWorkingDirectory%/acf_fields')
+        tags:
+            - phpstan.broker.dynamicFunctionReturnTypeExtension
+
 parameters:
     scanFiles:
         - vendor/php-stubs/wp-cli-stubs/wp-cli-stubs.php
@@ -710,7 +718,7 @@ parameters:
         -
             identifier: echo.nonString
             path: blocks/stacked.php
-            count: 4
+            count: 2
         -
             identifier: echo.nonString
             path: functions.php
@@ -780,7 +788,7 @@ parameters:
         -
             identifier: foreach.nonIterable
             path: lib/modules.php
-            count: 3
+            count: 2
         # A method call on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: method.nonObject
@@ -815,7 +823,7 @@ parameters:
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/cta.php
-            count: 6
+            count: 5
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/hero.php
@@ -859,7 +867,7 @@ parameters:
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/stacked.php
-            count: 15
+            count: 14
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/bootstrap.php
@@ -1073,11 +1081,6 @@ parameters:
             identifier: empty.variable
             path: blocks/stacked.php
             count: 2
-        # A negation the analysis reads as always false once `get_field()` is typed by the ACF stubs. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: booleanNot.alwaysFalse
-            path: blocks/cta.php
-            count: 1
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
         # PHPStan analyzes at the `min` above, so
