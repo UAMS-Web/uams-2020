@@ -77,7 +77,7 @@ if (! isset($geo) || empty($geo_region)) {
 }
 if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
     $geo_display = true;
-    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map('uamswp_field_text', $geo_region)).'<hr>';
+    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map(uamswp_field_text(...), $geo_region)).'<hr>';
 }
 if ($geo_display) {
     ?>
