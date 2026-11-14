@@ -59,7 +59,7 @@ parameters:
     # from 0 upward (see the code-quality skill), then raise it by one per
     # change as findings are fixed, until `max`. Lowering it is a deliberate,
     # argued change, not a quiet edit to get a red run green.
-    level: 5
+    level: 6
 
     excludePaths:
         analyseAndScan:
@@ -381,6 +381,214 @@ parameters:
         -
             identifier: argument.type
             path: templates/modules.php
+            count: 1
+        # A generic class used without type arguments (see #745).
+        -
+            identifier: missingType.generics
+            path: functions.php
+            count: 1
+        -
+            identifier: missingType.generics
+            path: lib/widgets.php
+            count: 2
+        # Array parameters or returns without a value type, see #745.
+        -
+            identifier: missingType.iterableValue
+            path: functions.php
+            count: 5
+        -
+            identifier: missingType.iterableValue
+            path: lib/blocks.php
+            count: 1
+        -
+            identifier: missingType.iterableValue
+            path: lib/comment.php
+            count: 1
+        -
+            identifier: missingType.iterableValue
+            path: lib/extras.php
+            count: 3
+        -
+            identifier: missingType.iterableValue
+            path: lib/geo.php
+            count: 2
+        -
+            identifier: missingType.iterableValue
+            path: lib/misc.php
+            count: 1
+        -
+            identifier: missingType.iterableValue
+            path: lib/widgets.php
+            count: 12
+        # Parameters declared without a type; adding one changes the contract with WordPress and ACF callers, so it is left to a later change (see #745).
+        -
+            identifier: missingType.parameter
+            path: functions.php
+            count: 30
+        -
+            identifier: missingType.parameter
+            path: home.php
+            count: 2
+        -
+            identifier: missingType.parameter
+            path: lib/blocks.php
+            count: 3
+        -
+            identifier: missingType.parameter
+            path: lib/bootstrap.php
+            count: 9
+        -
+            identifier: missingType.parameter
+            path: lib/breadcrumb.php
+            count: 2
+        -
+            identifier: missingType.parameter
+            path: lib/comment.php
+            count: 2
+        -
+            identifier: missingType.parameter
+            path: lib/extras.php
+            count: 7
+        -
+            identifier: missingType.parameter
+            path: lib/footer-widgets.php
+            count: 2
+        -
+            identifier: missingType.parameter
+            path: lib/media-credit.php
+            count: 7
+        -
+            identifier: missingType.parameter
+            path: lib/meta-box.php
+            count: 1
+        -
+            identifier: missingType.parameter
+            path: lib/misc.php
+            count: 6
+        -
+            identifier: missingType.parameter
+            path: lib/modules.php
+            count: 18
+        -
+            identifier: missingType.parameter
+            path: lib/nav.php
+            count: 7
+        -
+            identifier: missingType.parameter
+            path: lib/page.php
+            count: 5
+        -
+            identifier: missingType.parameter
+            path: lib/pagination.php
+            count: 3
+        -
+            identifier: missingType.parameter
+            path: lib/quicklinks.php
+            count: 1
+        -
+            identifier: missingType.parameter
+            path: lib/scripts.php
+            count: 1
+        -
+            identifier: missingType.parameter
+            path: lib/search.php
+            count: 1
+        -
+            identifier: missingType.parameter
+            path: lib/tgm.php
+            count: 1
+        -
+            identifier: missingType.parameter
+            path: lib/users.php
+            count: 6
+        -
+            identifier: missingType.parameter
+            path: search.php
+            count: 7
+        -
+            identifier: missingType.parameter
+            path: templates/page_landing.php
+            count: 1
+        # Functions declared without a return type; adding one changes the contract with WordPress and ACF callers, so it is left to a later change (see #745).
+        -
+            identifier: missingType.return
+            path: functions.php
+            count: 12
+        -
+            identifier: missingType.return
+            path: lib/blocks.php
+            count: 1
+        -
+            identifier: missingType.return
+            path: lib/bootstrap.php
+            count: 6
+        -
+            identifier: missingType.return
+            path: lib/breadcrumb.php
+            count: 2
+        -
+            identifier: missingType.return
+            path: lib/comment.php
+            count: 1
+        -
+            identifier: missingType.return
+            path: lib/extras.php
+            count: 3
+        -
+            identifier: missingType.return
+            path: lib/favicon.php
+            count: 1
+        -
+            identifier: missingType.return
+            path: lib/media-credit.php
+            count: 3
+        -
+            identifier: missingType.return
+            path: lib/meta-box.php
+            count: 1
+        -
+            identifier: missingType.return
+            path: lib/misc.php
+            count: 4
+        -
+            identifier: missingType.return
+            path: lib/modules.php
+            count: 8
+        -
+            identifier: missingType.return
+            path: lib/nav.php
+            count: 4
+        -
+            identifier: missingType.return
+            path: lib/page.php
+            count: 4
+        -
+            identifier: missingType.return
+            path: lib/pagination.php
+            count: 3
+        -
+            identifier: missingType.return
+            path: lib/quicklinks.php
+            count: 1
+        -
+            identifier: missingType.return
+            path: lib/scripts.php
+            count: 1
+        -
+            identifier: missingType.return
+            path: lib/tgm.php
+            count: 1
+        -
+            identifier: missingType.return
+            path: lib/users.php
+            count: 3
+        -
+            identifier: missingType.return
+            path: search.php
+            count: 1
+        -
+            identifier: missingType.return
+            path: templates/page_landing.php
             count: 1
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
