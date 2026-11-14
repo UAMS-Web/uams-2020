@@ -284,10 +284,6 @@ parameters:
         # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: argument.type
-            path: blocks/iframe.php
-            count: 6
-        -
-            identifier: argument.type
             path: blocks/post-category-tile.php
             count: 20
         -
@@ -475,14 +471,11 @@ parameters:
             identifier: argument.type
             path: blocks/action-bar.php
             count: 19
+        # `image_sizer()` and `wp_get_attachment_url()` take the ACF image value, an attachment ID or an array depending on the field's return format (this field sets none, so ACF's default applies). Casting it would change what those functions receive, tracked in #780.
         -
             identifier: argument.type
             path: blocks/call-out.php
-            count: 26
-        -
-            identifier: argument.type
-            path: blocks/counter.php
-            count: 13
+            count: 8
         -
             identifier: argument.type
             path: blocks/cta.php
@@ -491,14 +484,6 @@ parameters:
             identifier: argument.type
             path: blocks/hero.php
             count: 29
-        -
-            identifier: argument.type
-            path: blocks/link-list-2.php
-            count: 5
-        -
-            identifier: argument.type
-            path: blocks/link-list.php
-            count: 16
         -
             identifier: argument.type
             path: blocks/overlay.php
@@ -551,14 +536,6 @@ parameters:
             count: 3
         -
             identifier: binaryOp.invalid
-            path: blocks/call-out.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
-            path: blocks/counter.php
-            count: 6
-        -
-            identifier: binaryOp.invalid
             path: blocks/cta.php
             count: 5
         -
@@ -571,19 +548,7 @@ parameters:
             count: 3
         -
             identifier: binaryOp.invalid
-            path: blocks/iframe.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
             path: blocks/image-side-by-side.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
-            path: blocks/link-list-2.php
-            count: 6
-        -
-            identifier: binaryOp.invalid
-            path: blocks/link-list.php
             count: 3
         -
             identifier: binaryOp.invalid
@@ -661,10 +626,6 @@ parameters:
             count: 6
         -
             identifier: echo.nonString
-            path: blocks/link-list-2.php
-            count: 8
-        -
-            identifier: echo.nonString
             path: blocks/overlay.php
             count: 1
         -
@@ -707,23 +668,11 @@ parameters:
             count: 1
         -
             identifier: foreach.nonIterable
-            path: blocks/counter.php
-            count: 1
-        -
-            identifier: foreach.nonIterable
             path: blocks/hero.php
             count: 2
         -
             identifier: foreach.nonIterable
             path: blocks/image-side-by-side.php
-            count: 1
-        -
-            identifier: foreach.nonIterable
-            path: blocks/link-list-2.php
-            count: 1
-        -
-            identifier: foreach.nonIterable
-            path: blocks/link-list.php
             count: 1
         -
             identifier: foreach.nonIterable
@@ -770,32 +719,12 @@ parameters:
             count: 12
         -
             identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/call-out.php
-            count: 5
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/counter.php
-            count: 12
-        -
-            identifier: offsetAccess.nonOffsetAccessible
             path: blocks/cta.php
             count: 6
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/hero.php
             count: 19
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/iframe.php
-            count: 4
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/link-list-2.php
-            count: 12
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/link-list.php
-            count: 11
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/overlay.php
@@ -971,10 +900,6 @@ parameters:
             count: 2
         -
             identifier: empty.variable
-            path: blocks/call-out.php
-            count: 2
-        -
-            identifier: empty.variable
             path: blocks/cta.php
             count: 2
         -
@@ -988,14 +913,6 @@ parameters:
         -
             identifier: empty.variable
             path: blocks/image-side-by-side.php
-            count: 2
-        -
-            identifier: empty.variable
-            path: blocks/link-list-2.php
-            count: 2
-        -
-            identifier: empty.variable
-            path: blocks/link-list.php
             count: 2
         -
             identifier: empty.variable

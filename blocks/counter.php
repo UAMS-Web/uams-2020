@@ -13,29 +13,32 @@ if (uamswp_block_placeholder($block ?? null, $is_preview ?? false)) {
     return;
 }
 
+$blockData = isset($block) ? uamswp_field_array($block) : [];
+$moduleData = isset($module) ? uamswp_field_array($module) : [];
+
 // Create id attribute allowing for custom "anchor" value.
 if (empty($id)) {
     $id = '';
 }
 if (empty($id) && isset($block)) {
-    $id = $block['id'];
+    $id = $blockData['id'] ?? null;
 }
 if (empty($id)) {
-    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+    $id = ! empty($moduleData['anchor_id']) ? sanitize_title_with_dashes(uamswp_field_text($moduleData['anchor_id'])) : 'module-'.((int) $i + 1);
 }
 
-$id = 'link-list-'.$id;
-if (! empty($block['anchor'])) {
-    $id = $block['anchor'];
+$id = 'link-list-'.uamswp_field_text($id);
+if (! empty($blockData['anchor'])) {
+    $id = uamswp_field_text($blockData['anchor']);
 }
 
 $className = '';
-if (! empty($block['className'])) {
+if (! empty($blockData['className'])) {
     // @pest-mutate-ignore: ConcatEqualToEqual
-    $className .= ' '.$block['className'];
+    $className .= ' '.uamswp_field_text($blockData['className']);
 }
-if (! empty($block['align'])) {
-    $className .= ' align'.$block['align'];
+if (! empty($blockData['align'])) {
+    $className .= ' align'.uamswp_field_text($blockData['align']);
 }
 
 // Load values.
@@ -63,27 +66,28 @@ if (empty($counter_list_rows)) {
 
 $row = 0;
 ?>
-<section class="uams-module link-list counter-list link-list-layout-split<?php echo esc_attr($className); ?> <?php echo esc_attr($background_color); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
+<section class="uams-module link-list counter-list link-list-layout-split<?php echo esc_attr($className); ?> <?php echo esc_attr(uamswp_field_text($background_color)); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr(uamswp_field_text($heading)); ?>">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 col-md-6 heading">
                 <div class="text-container">
                     <h2 class="module-title <?php echo $hide_heading ? ' sr-only' : ''; ?>">
-                        <span class="title"><?php echo esc_html($heading); ?></span>
+                        <span class="title"><?php echo esc_html(uamswp_field_text($heading)); ?></span>
                     </h2>
-                    <?php echo $description ? '<p class="note">'.wp_kses_post($description).'</p>' : ''; ?>
+                    <?php echo $description ? '<p class="note">'.wp_kses_post(uamswp_field_text($description)).'</p>' : ''; ?>
                 </div>
             </div>
             <div class="col-12 col-md-6 list">
                     <ul>
                     <?php
-                        foreach ($counter_list_rows as $counter_list_row) {
+                        foreach (uamswp_field_array($counter_list_rows) as $counter_list_row_value) {
                             // Load values.
                             $row++;
-                            $counter_item_title = $counter_list_row['counter_list_section_title'];
-                            $counter_item_unit = $counter_list_row['counter_list_section_unit']; // Singular
-                            $counter_item_units = $counter_list_row['counter_list_section_units']; // Plural
-                            $counter_item_rate = $counter_list_row['counter_list_section_rate'];
+                            $counter_list_row = uamswp_field_array($counter_list_row_value);
+                            $counter_item_title = uamswp_field_text($counter_list_row['counter_list_section_title'] ?? null);
+                            $counter_item_unit = uamswp_field_text($counter_list_row['counter_list_section_unit'] ?? null); // Singular
+                            $counter_item_units = uamswp_field_text($counter_list_row['counter_list_section_units'] ?? null); // Plural
+                            $counter_item_rate = uamswp_field_text($counter_list_row['counter_list_section_rate'] ?? null);
                             $counter_item_start_inherit = $counter_list_row['counter_list_section_start_inherit'];
                             $counter_item_start_override = $counter_list_row['counter_list_section_start_override'];
                             $counter_item_start_custom = $counter_list_row['counter_list_section_start_custom'];
@@ -105,10 +109,10 @@ $row = 0;
                             // $date_user = date('Y-m-d H:i:s'); // Replace with user input date picker value
 
                             $date_now = strtotime('now');
-                            $date_string = ${'date_'.$counter_item_start};
+                            $date_string = uamswp_field_text(${'date_'.uamswp_field_text($counter_item_start)});
                             $date = strtotime($date_string); // set the date value based on editor's selection
                             $date_diff = $date_now - $date;
-                            $count_value = $counter_item_rate * $date_diff;
+                            $count_value = (float) $counter_item_rate * $date_diff;
                             if ($date_diff <= 1) {
                                 $append = $counter_item_unit;
                             } else {
