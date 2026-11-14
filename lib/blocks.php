@@ -11,6 +11,8 @@ declare(strict_types=1);
 /**
  * Child blocks allowed inside the uams-section InnerBlocks.
  * Shared by blocks/section.php and the Marketing Landing Page allowlist in functions.php.
+ *
+ * @return mixed
  */
 function uamswp_section_allowed_blocks()
 {
@@ -31,6 +33,9 @@ function uamswp_section_allowed_blocks()
  *
  * Safe outside block context (flexible content modules, widgets): $block and
  * $is_preview are not set there, so this returns false.
+ *
+ * @param  mixed  $block
+ * @param  mixed  $is_preview
  */
 function uamswp_block_placeholder($block = null, $is_preview = false): bool
 {
@@ -778,6 +783,8 @@ function uamswp_iframe_block_fields(): void
 /**
  * Hosts the UAMS iFrame block may embed. Empty array = any https host.
  * Filter to lock this down, e.g. return array( 'calendar.uams.edu', 'www.google.com' );
+ *
+ * @return array<mixed>
  */
 function uamswp_iframe_allowed_hosts(): array
 {
@@ -786,6 +793,8 @@ function uamswp_iframe_allowed_hosts(): array
 
 /**
  * Validate an iframe URL: https only, and on the host allowlist when one is set.
+ *
+ * @param  mixed  $url
  */
 function uamswp_iframe_url_is_allowed($url): bool
 {

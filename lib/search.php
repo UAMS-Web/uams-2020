@@ -12,6 +12,9 @@ declare(strict_types=1);
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 add_filter('get_search_form', 'uamswp_search_form');
+/**
+ * @param  mixed  $form
+ */
 function uamswp_search_form($form): string
 {
     return '<form class="uams-search" role="search" method="get" id="searchform" action="'.home_url('/').'" >

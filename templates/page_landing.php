@@ -46,6 +46,10 @@ declare(strict_types=1);
 // add_filter( 'wp_nav_menu', '__return_false' );
 
 // Add extra class to content
+/**
+ * @param  mixed  $attributes
+ * @return mixed
+ */
 function uamswp_add_class($attributes)
 {
     $attributes['class'] .= ' sr-only';

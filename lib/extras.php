@@ -14,6 +14,10 @@ declare(strict_types=1);
 // Add class to images
 // @link http://stackoverflow.com/a/22078964
 add_filter('the_content', 'uamswp_image_responsive_class');
+/**
+ * @param  mixed  $content
+ * @return string|array<mixed>|null
+ */
 function uamswp_image_responsive_class($content): string|array|null
 {
     global $post;
@@ -25,6 +29,10 @@ function uamswp_image_responsive_class($content): string|array|null
 }
 
 add_filter('body_class', 'page_blog_class');
+/**
+ * @param  mixed  $classes
+ * @return mixed
+ */
 function page_blog_class($classes)
 {
     if (is_page_template('page_blog.php')) {
@@ -38,6 +46,10 @@ function page_blog_class($classes)
 // @link http://wordpress.stackexchange.com/questions/88545/how-to-remove-the-parentheses-from-the-category-widget
 add_filter('wp_list_categories', 'uamswp_categories_postcount_filter', 10, 2);
 add_filter('get_archives_link', 'uamswp_categories_postcount_filter', 10, 2);
+/**
+ * @param  mixed  $variable
+ * @return string|array<mixed>
+ */
 function uamswp_categories_postcount_filter($variable): string|array
 {
     $variable = str_replace('(', '<span class="badge badge-pill badge-primary tag-default post-count">', $variable);
@@ -113,6 +125,10 @@ add_filter('genesis_pre_get_option_footer_text', function ($creds) {
 
 // Remove P tags wrapping on images
 add_filter('the_content', 'uamswp_filter_ptags_on_images');
+/**
+ * @param  mixed  $content
+ * @return string|array<mixed>|null
+ */
 function uamswp_filter_ptags_on_images($content): string|array|null
 {
     return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
@@ -120,6 +136,10 @@ function uamswp_filter_ptags_on_images($content): string|array|null
 
 // Add aria-label for download button
 add_filter('the_content', 'uamswp_filter_download_button');
+/**
+ * @param  mixed  $content
+ * @return mixed
+ */
 function uamswp_filter_download_button($content)
 {
     $preg_match = '/<div class="wp-block-file"><a .*>([^<]*)<\/a><a(.*)/iU';
@@ -131,6 +151,9 @@ function uamswp_filter_download_button($content)
     return $content;
 }
 
+/**
+ * @param  mixed  $matches
+ */
 function add_download_title($matches): string
 {
     // matches[0] = <div class="wp-block-file"><a href="">File Name</a><a
@@ -142,6 +165,10 @@ function add_download_title($matches): string
 // Replace custom logo class to bootstrap
 add_filter('get_custom_logo', fn ($html): string|array => str_replace('custom-logo-link', 'navbar-brand', $html), 10);
 
+/**
+ * @param  mixed  $html
+ * @return mixed
+ */
 function uamswp_title($html)
 {
     // Get site information

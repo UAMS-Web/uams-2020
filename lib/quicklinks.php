@@ -211,6 +211,10 @@ if (site_custom_quicklinks()) {
 
     // Callback function to generate quick links for REST API
 
+    /**
+     * @param  mixed  $data
+     * @return mixed
+     */
     function quicklinks_menu($data)
     {
 

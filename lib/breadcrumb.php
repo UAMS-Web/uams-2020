@@ -15,6 +15,10 @@ declare(strict_types=1);
 // Changing breadcrumbs to Bootstrap's format
 // @link http://jhtechservices.com/2015/05/integrate-bootstraps-breadcrumbs-into-genesis-theme/
 add_filter('genesis_breadcrumb_args', 'uamswp_breadcrumb_args');
+/**
+ * @param  mixed  $args
+ * @return mixed
+ */
 function uamswp_breadcrumb_args($args)
 {
     $args['sep'] = '     ';
@@ -34,6 +38,10 @@ function uamswp_breadcrumb_args($args)
 }
 
 add_filter('genesis_build_crumbs', 'uamswp_build_crumbs', 10, 2);
+/**
+ * @param  mixed  $crumbs
+ * @return mixed
+ */
 function uamswp_build_crumbs($crumbs)
 {
 

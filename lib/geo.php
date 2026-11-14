@@ -23,6 +23,9 @@ $region_central = [
     'Little Rock Air Force Base', 'North Little Rock', 'Bryant', 'Benton', 'Little Rock', 'Adona', 'Alexander', 'Bauxite', 'Bigelow', 'Cabot', 'Carlisle', 'Conway', 'England', 'Enola', 'Greenbrier', 'Hot Springs Village', 'Jacksonville', 'Jessieville', 'Lonoke', 'Maumelle', 'Mount Vernon', 'Pearcy', 'Sheridan', 'Sherwood', 'Vilonia', 'Ward', 'Wrightsville', 'Hot Springs', 'Hot Springs National Park',
 ];
 // Function include
+/**
+ * @param  array<mixed>  $regions
+ */
 function is_in_region(array $regions): ?bool
 {
     // Check if geoip is installed / activated
@@ -70,6 +73,9 @@ function is_in_region(array $regions): ?bool
 }
 
 // Function exclude
+/**
+ * @param  array<mixed>  $regions
+ */
 function is_not_in_region(array $regions): ?bool
 {
     // Check if geoip is installed / activated
