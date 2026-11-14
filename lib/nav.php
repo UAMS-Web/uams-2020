@@ -30,7 +30,6 @@ function uamswp_nav_subsection()
         $subsection = true;
     } else {
         $parents = get_post_ancestors(get_the_id());
-        $parentsection = ''; // @pest-mutate-ignore: EmptyStringToNotEmpty
         foreach ($parents as $parent) {
             $parentsection = get_post_meta($parent, 'page_subsection', true);
             if (! empty($parentsection)) {

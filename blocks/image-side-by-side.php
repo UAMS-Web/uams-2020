@@ -122,7 +122,7 @@ if (empty($geo_region)) {
     $geo_region = get_field('side_image_geo_region');
 }
 if (empty($image_alt)) {
-    $image_alt = $image_alt ?: get_post_meta($side_image, '_wp_attachment_image_alt', true);
+    $image_alt = get_post_meta($side_image, '_wp_attachment_image_alt', true);
 }
 $cta_target = $cta_target ? ' target="'.esc_attr($cta_target).'"' : '';
 $cta_desc = $cta_desc ? ' aria-label="'.esc_attr($cta_desc).'"' : '';
@@ -263,7 +263,7 @@ if ($geo_display) {
                     <?php }
                     if ($cta_text) {
                         echo $cta_link;
-                        echo $cta_text ? esc_html($cta_text) : 'Learn More';
+                        echo esc_html($cta_text);
                         echo '</a>';
                     } ?>
                 </div>
