@@ -45,3 +45,13 @@ Every entry heading is `## YYYY-MM-DD`, a space, and a short title. Leave exactl
 **Rejected.** Deleting the dead hook and keeping the guard: editors keep links that lead to a 403. Deleting the hook and the guard: widens editor access with no known need. Capability-based hiding: editors hold `edit_theme_options`, the capability that gates every Appearance entry, so a capability test cannot separate them from administrators. A custom role without `switch_themes`: a larger change that touches every site's users and was not measured.
 
 **Companion.** [UAMS-Web/uams-2020#783](https://github.com/UAMS-Web/uams-2020/issues/783); the build is [UAMS-Web/uams-2020#688](https://github.com/UAMS-Web/uams-2020/issues/688).
+
+## 2026-11-14 Close the Customizer Widgets panel for editors by removing the component (#785)
+
+**Decision.** The `widgets` Customizer component is removed through `customize_loaded_components` for `uamswp_is_restricted_editor()` users, so the Widgets panel, its sidebar sections and its widget settings never register and a forged Customizer save has nothing to write to. Menus (`nav_menus`) and every other component stay available. The build is #794.
+
+**Why.** Editors hold `edit_theme_options`, which gates the whole Widgets panel, its sections and its settings in WordPress 7.0.8 (read in core, not run as an editor). #783 and #688 already refuse the `widgets.php` screen for editors, and the Customizer was a second route to the same widgets. The theme has live widget areas (Genesis `footer-1` and `sidebar`, and the two classes in `lib/widgets.php`), so the panel is active.
+
+**Rejected.** Keeping the panel open to editors: leaves a second route to the screen that #783 refuses. `WP_Customize_Manager::remove_panel('widgets')`: hides the panel and leaves the widget settings registered, so a forged save would still write. Reading the live editor list first: the list does not change what the panel exposes, so it moved to #794 as sizing.
+
+**Companion.** [UAMS-Web/uams-2020#785](https://github.com/UAMS-Web/uams-2020/issues/785); the build is [UAMS-Web/uams-2020#794](https://github.com/UAMS-Web/uams-2020/issues/794).

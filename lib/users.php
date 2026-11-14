@@ -94,6 +94,28 @@ function uamswp_restrict_editor_theme_screens(): void
     }
 }
 
+add_filter('customize_loaded_components', 'uamswp_close_customizer_widgets_for_editors');
+
+/**
+ * Close the Customizer Widgets panel for editors (see #785).
+ *
+ * Editors hold edit_theme_options, which gates the Widgets panel, its sidebar
+ * sections and its widget settings. Removing the widgets component keeps all
+ * three from registering, so a forged Customizer save has no setting to write to.
+ * Menus (nav_menus) and every other component stay available.
+ *
+ * @param  array<int, string>  $components
+ * @return array<int, string>
+ */
+function uamswp_close_customizer_widgets_for_editors(array $components): array
+{
+    if (! uamswp_is_restricted_editor()) {
+        return $components;
+    }
+
+    return array_values(array_diff($components, ['widgets']));
+}
+
 /*
  * Capture user login and add it as timestamp in user meta data
  *
