@@ -475,18 +475,15 @@ parameters:
             identifier: argument.type
             path: blocks/action-bar.php
             count: 19
+        # `image_sizer()` and `wp_get_attachment_url()` take the ACF image value, an attachment ID or an array depending on the field's return format (this field sets none, so ACF's default applies). Casting it would change what those functions receive, tracked in #780.
         -
             identifier: argument.type
             path: blocks/call-out.php
-            count: 26
+            count: 8
         -
             identifier: argument.type
             path: blocks/content.php
             count: 10
-        -
-            identifier: argument.type
-            path: blocks/counter.php
-            count: 13
         -
             identifier: argument.type
             path: blocks/cta.php
@@ -559,16 +556,8 @@ parameters:
             count: 3
         -
             identifier: binaryOp.invalid
-            path: blocks/call-out.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
             path: blocks/content.php
             count: 3
-        -
-            identifier: binaryOp.invalid
-            path: blocks/counter.php
-            count: 6
         -
             identifier: binaryOp.invalid
             path: blocks/cta.php
@@ -723,10 +712,6 @@ parameters:
             count: 1
         -
             identifier: foreach.nonIterable
-            path: blocks/counter.php
-            count: 1
-        -
-            identifier: foreach.nonIterable
             path: blocks/hero.php
             count: 2
         -
@@ -786,16 +771,8 @@ parameters:
             count: 12
         -
             identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/call-out.php
-            count: 5
-        -
-            identifier: offsetAccess.nonOffsetAccessible
             path: blocks/content.php
             count: 5
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/counter.php
-            count: 12
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/cta.php
@@ -992,10 +969,6 @@ parameters:
         -
             identifier: empty.variable
             path: blocks/action-bar.php
-            count: 2
-        -
-            identifier: empty.variable
-            path: blocks/call-out.php
             count: 2
         -
             identifier: empty.variable

@@ -12,29 +12,32 @@ if (uamswp_block_placeholder($block ?? null, $is_preview ?? false)) {
     return;
 }
 
+$blockData = isset($block) ? uamswp_field_array($block) : [];
+$moduleData = isset($module) ? uamswp_field_array($module) : [];
+
 // Create id attribute allowing for custom "anchor" value.
 if (empty($id)) {
     $id = '';
 }
 if (empty($id) && isset($block)) {
-    $id = $block['id'];
+    $id = $blockData['id'] ?? null;
 }
 if (empty($id)) {
-    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+    $id = ! empty($moduleData['anchor_id']) ? sanitize_title_with_dashes(uamswp_field_text($moduleData['anchor_id'])) : 'module-'.((int) $i + 1);
 }
 
-$id = 'call-out-'.$id;
-if (! empty($block['anchor'])) {
-    $id = $block['anchor'];
+$id = 'call-out-'.uamswp_field_text($id);
+if (! empty($blockData['anchor'])) {
+    $id = uamswp_field_text($blockData['anchor']);
 }
 
 $className = '';
-if (! empty($block['className'])) {
+if (! empty($blockData['className'])) {
     // @pest-mutate-ignore: ConcatEqualToEqual
-    $className .= ' '.$block['className'];
+    $className .= ' '.uamswp_field_text($blockData['className']);
 }
-if (! empty($block['align'])) {
-    $className .= ' align'.$block['align'];
+if (! empty($blockData['align'])) {
+    $className .= ' align'.uamswp_field_text($blockData['align']);
 }
 
 // Load values.
@@ -64,26 +67,27 @@ if (empty($geo_region)) {
 // echo '<!-- ' . do_shortcode( '[geot_debug]' ) . ' -->';
 // GEO Logic
 $geo_display = false;
-if (! isset($geo) || empty($geo_region)) {
+$geo_regions = uamswp_field_array($geo_region);
+if (! isset($geo) || empty($geo_regions)) {
     $geo_display = true;
 } else {
-    if ($geo == 'include' && ! empty($geo_region)) {
-        if (is_in_region($geo_region)) {
+    if ($geo == 'include') {
+        if (is_in_region($geo_regions)) {
             $geo_display = true;
         }
-    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
-        if (is_not_in_region($geo_region)) {
+    } elseif ($geo == 'exclude') {
+        if (is_not_in_region($geo_regions)) {
             $geo_display = true;
         }
     }
 }
-if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
+if (! empty($is_preview) && ! empty($geo) && ! empty($geo_regions)) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map('uamswp_field_text', $geo_regions)).'<hr>';
 }
 if ($geo_display) {
     ?>
-    <section class="uams-module extra-padding call-out<?php echo esc_attr($className); ?> <?php echo esc_attr($background_color); ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr($heading); ?>">
+    <section class="uams-module extra-padding call-out<?php echo esc_attr($className); ?> <?php echo esc_attr(uamswp_field_text($background_color)); ?><?php echo $use_image ? ' bg-image' : ''; ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr(uamswp_field_text($heading)); ?>">
         <?php if ($use_image && function_exists('bis_get_attachment_image')) { ?>
         <style>
             #<?php echo esc_attr($id); ?>:before {
@@ -144,10 +148,10 @@ if ($geo_display) {
                 <div class="col-12">
                     <div class="text-container">
                         <div class="call-out-heading">
-                            <h2><?php echo esc_html($heading); ?></h2>
+                            <h2><?php echo esc_html(uamswp_field_text($heading)); ?></h2>
                         </div>
                         <div class="call-out-body">
-                            <p><?php echo wp_kses_post($body); ?></p>
+                            <p><?php echo wp_kses_post(uamswp_field_text($body)); ?></p>
                         </div>
                     </div>
                 </div>
