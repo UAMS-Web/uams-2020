@@ -288,10 +288,6 @@ parameters:
             count: 6
         -
             identifier: argument.type
-            path: blocks/news.php
-            count: 22
-        -
-            identifier: argument.type
             path: blocks/post-category-tile.php
             count: 20
         -
@@ -485,10 +481,6 @@ parameters:
             count: 26
         -
             identifier: argument.type
-            path: blocks/content.php
-            count: 10
-        -
-            identifier: argument.type
             path: blocks/counter.php
             count: 13
         -
@@ -507,10 +499,6 @@ parameters:
             identifier: argument.type
             path: blocks/link-list.php
             count: 16
-        -
-            identifier: argument.type
-            path: blocks/livewhale.php
-            count: 11
         -
             identifier: argument.type
             path: blocks/overlay.php
@@ -567,10 +555,6 @@ parameters:
             count: 3
         -
             identifier: binaryOp.invalid
-            path: blocks/content.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
             path: blocks/counter.php
             count: 6
         -
@@ -600,14 +584,6 @@ parameters:
         -
             identifier: binaryOp.invalid
             path: blocks/link-list.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
-            path: blocks/livewhale.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
-            path: blocks/news.php
             count: 3
         -
             identifier: binaryOp.invalid
@@ -798,10 +774,6 @@ parameters:
             count: 5
         -
             identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/content.php
-            count: 5
-        -
-            identifier: offsetAccess.nonOffsetAccessible
             path: blocks/counter.php
             count: 12
         -
@@ -824,14 +796,6 @@ parameters:
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/link-list.php
             count: 11
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/livewhale.php
-            count: 5
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/news.php
-            count: 4
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/overlay.php
@@ -1011,10 +975,6 @@ parameters:
             count: 2
         -
             identifier: empty.variable
-            path: blocks/content.php
-            count: 2
-        -
-            identifier: empty.variable
             path: blocks/cta.php
             count: 2
         -
@@ -1036,14 +996,6 @@ parameters:
         -
             identifier: empty.variable
             path: blocks/link-list.php
-            count: 2
-        -
-            identifier: empty.variable
-            path: blocks/livewhale.php
-            count: 2
-        -
-            identifier: empty.variable
-            path: blocks/news.php
             count: 2
         -
             identifier: empty.variable
