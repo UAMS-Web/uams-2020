@@ -390,13 +390,15 @@ it('preserves news module caller index and anchor conversions', function (string
 
 it('renders the module with an empty-array index as the first module', function (string $name) use ($blockBaseCases): void {
     $case = $blockBaseCases[$name];
-    $module = ['acf_fc_layout' => $name === 'news' ? 'modules_news_grid' : 'modules_uams_livewhale'] + $case['fields'];
+    $layouts = ['news' => 'modules_news_grid', 'livewhale' => 'modules_uams_livewhale', 'overlay' => 'modules_text_overlay', 'hero' => 'modules_hero'];
+    $module = ['acf_fc_layout' => $layouts[$name]] + $case['fields'];
     when('class_exists')->alias(static fn ($class) => $class === 'UAMS_Syndicate_News_Base' ? true : relay());
     when('get_stylesheet_directory')->justReturn(dirname(__DIR__, 2));
     $actual = BlockTemplateScenario::render($case, static fn () => uamswp_module($module, []));
     Assert::assertStringContainsString('Begin Module', $actual['html']);
-    Assert::assertStringContainsString($name === 'news' ? 'id="ATTR(53)"])' : 'HTML(livewhale_heading <&")</span>', $actual['html']);
-})->with(['news', 'livewhale']);
+    $markers = ['news' => 'id="ATTR(53)"])', 'livewhale' => 'HTML(livewhale_heading <&")</span>', 'overlay' => 'text-image-overlay', 'hero' => 'class="hero carousel'];
+    Assert::assertStringContainsString($markers[$name], $actual['html']);
+})->with(['news', 'livewhale', 'overlay', 'hero']);
 
 it('treats a non-array block and region as empty in the content, livewhale, news, overlay and hero blocks', function (string $name, mixed $unexpected) use ($blockBaseCases): void {
     $case = $blockBaseCases[$name];
@@ -415,6 +417,33 @@ it('treats a non-array block and region as empty in the content, livewhale, news
         }
     }
 });
+
+it('keeps the caller id over the block id and treats a missing slide disable flag as enabled', function (string $name, string $expectedId) use ($blockBaseCases): void {
+    $case = $blockBaseCases[$name];
+    $case['variables']['id'] = 8;
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString($expectedId, $actual['html']);
+    Assert::assertStringNotContainsString('block-7', $actual['html']);
+})->with([['overlay', 'text-image-overlay-8'], ['hero', 'carousel-ATTR(hero-8)']]);
+
+it('renders hero slides whose disable flag is missing', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['hero'];
+    $withFlag = BlockTemplateScenario::render($case);
+    foreach ($case['fields']['hero'] as $index => $row) {
+        unset($case['fields']['hero'][$index]['hero_disable']);
+    }
+
+    Assert::assertSame($withFlag['html'], BlockTemplateScenario::render($case)['html']);
+});
+
+it('prints only the text of each region in the editor preview of every region block', function (string $name) use ($blockBaseCases): void {
+    $case = $blockBaseCases[$name];
+    $case['variables']['is_preview'] = true;
+    $case['variables']['geo'] = 'include';
+    $case['variables']['geo_region'] = [['nested']];
+
+    Assert::assertStringContainsString('region(s): ', BlockTemplateScenario::render($case)['html']);
+})->with(['content', 'livewhale', 'news', 'overlay', 'hero']);
 
 it('releases an ephemeral fullscreen field before iframe markup', function () use ($blockBaseCases): void {
     $case = $blockBaseCases['iframe'];
