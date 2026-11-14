@@ -36,6 +36,8 @@ add_action('genesis_after_loop', 'uamswp_search_page_after_entry', 10);
  */
 function uamswp_do_search_loop(): void
 {
+    global $wp_query;
+
     // get the search term entered by user.
     $s = isset($_GET['s']) ? esc_html($_GET['s']) : '';
 
@@ -348,6 +350,7 @@ function uamswp_do_search_loop(): void
             ]);
 
             uamswp_custom_loop_base($args);
+            $post_count = 0;
 
             $post_type_text = ucfirst($post_type);
             // Page and Post neither start nor end with lowercase s.
@@ -361,7 +364,6 @@ function uamswp_do_search_loop(): void
 
                 while (have_posts()) {
                     the_post();
-                    global $wp_query;
 
                     if (isset($wp_query->post->blog_id)) {
                         switch_to_blog($wp_query->post->blog_id);
@@ -385,7 +387,6 @@ function uamswp_do_search_loop(): void
                     restore_current_blog();
 
                 }
-                // @phpstan-ignore variable.undefined (template or branch variable, see #745)
                 if ($post_count > 5) {
                     // More results link.
                     printf('<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit(home_url()).'?s='.$s.'&type='.$post_type);
@@ -433,15 +434,12 @@ function uamswp_do_search_loop(): void
                 while (have_posts()) {
                     the_post();
 
-                    global $wp_query;
-
                     $id = get_the_ID();
                     include WP_PLUGIN_DIR.'/UAMSWP-Find-a-Doc/templates/loops/physician-card.php';
 
                 }
                 echo '</div></div>';
                 // More results link.
-                // @phpstan-ignore variable.undefined (template or branch variable, see #745)
                 if ($wp_query->found_posts > 6) {
                     printf('<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit(home_url()).'?s='.$s.'&type='.$post_type[0]);
                 }
@@ -510,6 +508,7 @@ function uamswp_do_search_loop(): void
                 // echo '</div></div>';
 
                 uamswp_custom_loop_base($args);
+                $post_count = 0;
 
                 if (have_posts()) {
                     $show_conditions_treatments = true;
@@ -517,7 +516,6 @@ function uamswp_do_search_loop(): void
 
                     while (have_posts()) {
                         the_post();
-                        global $wp_query;
 
                         $post_count = $wp_query->found_posts;
                         $post_title = get_the_title();
@@ -535,7 +533,6 @@ function uamswp_do_search_loop(): void
                         $conditions_treatments .= $content ? '<p>'.wp_trim_words($content, 30).'<p>' : '';
 
                     }
-                    // @phpstan-ignore variable.undefined (template or branch variable, see #745)
                     if ($post_count > 5) {
                         // More results link.
                         $conditions_treatments .= sprintf('<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div></div>', trailingslashit(home_url()).'?s='.$s.'&type='.$post_type);
@@ -593,8 +590,6 @@ function uamswp_do_search_loop(): void
                 while (have_posts()) {
                     the_post();
 
-                    global $wp_query;
-
                     $id = get_the_ID();
                     include WP_PLUGIN_DIR.'/UAMSWP-Find-a-Doc/templates/loops/location-card.php';
 
@@ -602,7 +597,6 @@ function uamswp_do_search_loop(): void
 
                 echo '</div></div>';
                 // More results link.
-                // @phpstan-ignore variable.undefined (template or branch variable, see #745)
                 if ($wp_query->found_posts > 4) {
                     printf('<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit(home_url()).'?s='.$s.'&type='.$post_type[0]);
                 }
@@ -646,8 +640,6 @@ function uamswp_do_search_loop(): void
                 while (have_posts()) {
                     the_post();
 
-                    global $wp_query;
-
                     $id = get_the_ID();
                     include WP_PLUGIN_DIR.'/UAMSWP-Find-a-Doc/templates/loops/expertise-card.php';
 
@@ -655,7 +647,6 @@ function uamswp_do_search_loop(): void
 
                 echo '</div></div>';
                 // More results link.
-                // @phpstan-ignore variable.undefined (template or branch variable, see #745)
                 if ($wp_query->found_posts > 4) {
                     printf('<div class="more"><a href="%s" class="btn btn-outline-primary">More results</a></div>', trailingslashit(home_url()).'?s='.$s.'&type='.$post_type[0]);
                 }

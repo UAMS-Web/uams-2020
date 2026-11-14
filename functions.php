@@ -553,9 +553,9 @@ if (! function_exists('uams_get_home_link')) {
 
     function uams_get_home_link(): string
     {
-        if ((uams_get_site_info()['site'] == 'uams') || (uams_get_site_info()['site'] == 'institute')) {
-            $homelink = 'https://www.uams.edu';
-        } elseif (uams_get_site_info()['site'] == 'uamshealth') {
+        // Any other site identity falls back to the main UAMS site, as the default site identity does.
+        $homelink = 'https://www.uams.edu';
+        if (uams_get_site_info()['site'] == 'uamshealth') {
             $homelink = 'https://uamshealth.com';
         } elseif (uams_get_site_info()['site'] == 'inside') {
             $homelink = 'https://inside.uams.edu';

@@ -24,6 +24,7 @@ declare(strict_types=1);
 function uamswp_nav_subsection()
 {
     $subsection = false;
+    $id = false;
     if (get_post_meta(get_the_id(), 'page_subsection', true)) {
         $id = get_the_id();
         $subsection = true;
@@ -46,7 +47,6 @@ function uamswp_nav_subsection()
     }
 
     if ($subsection) {
-        // @phpstan-ignore variable.undefined (template or branch variable, see #745)
         return $id;
     }
 
