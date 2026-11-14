@@ -12,29 +12,32 @@ if (uamswp_block_placeholder($block ?? null, $is_preview ?? false)) {
     return;
 }
 
+$blockData = isset($block) ? uamswp_field_array($block) : [];
+$moduleData = isset($module) ? uamswp_field_array($module) : [];
+
 // Create id attribute allowing for custom "anchor" value.
 if (empty($id)) {
     $id = '';
 }
 if (empty($id) && isset($block)) {
-    $id = $block['id'];
+    $id = $blockData['id'] ?? null;
 }
 if (empty($id)) {
-    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+    $id = ! empty($moduleData['anchor_id']) ? sanitize_title_with_dashes(uamswp_field_text($moduleData['anchor_id'])) : 'module-'.((int) $i + 1);
 }
 
-$id = 'stacked-image-text-'.$id;
-if (! empty($block['anchor'])) {
-    $id = $block['anchor'];
+$id = 'stacked-image-text-'.uamswp_field_text($id);
+if (! empty($blockData['anchor'])) {
+    $id = uamswp_field_text($blockData['anchor']);
 }
 
 $className = '';
-if (! empty($block['className'])) {
+if (! empty($blockData['className'])) {
     // @pest-mutate-ignore: ConcatEqualToEqual
-    $className .= ' '.$block['className'];
+    $className .= ' '.uamswp_field_text($blockData['className']);
 }
-if (! empty($block['align'])) {
-    $className .= ' align'.$block['align'];
+if (! empty($blockData['align'])) {
+    $className .= ' align'.uamswp_field_text($blockData['align']);
 }
 
 // PHP variables
@@ -67,12 +70,12 @@ if ($more) {
     $more_button_text = get_field('stacked_more_button_text');
     $more_button_url = get_field('stacked_more_button_url');
     if (is_array($more_button_url)) {
-        $more_button_target = $more_button_url['target'];
+        $more_button_target = uamswp_field_text($more_button_url['target'] ?? null);
     }
     if (empty($more_button_description)) {
         $more_button_description = get_field('stacked_more_button_description');
     }
-    if (empty($more_button_color) && (in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto']))) {
+    if (empty($more_button_color) && (in_array($background_color, ['bg-white', 'bg-gray', 'bg-auto'], true))) {
         $more_button_color = 'primary';
     } else {
         $more_button_color = 'white';
@@ -88,28 +91,39 @@ if (empty($stacked_rows)) {
     $stacked_rows = get_field('stacked_section');
 }
 
+$heading = uamswp_field_text($heading);
+$description = uamswp_field_text($description);
+$background_color = uamswp_field_text($background_color);
+$more_text = uamswp_field_text($more_text);
+$more_button_text = uamswp_field_text($more_button_text);
+$more_button_link = uamswp_field_array($more_button_url);
+$more_button_target = uamswp_field_text($more_button_target);
+$more_button_description = uamswp_field_text($more_button_description ?? null);
+$stacked_rows = uamswp_field_array($stacked_rows);
+
 // GEO Logic
 $geo_display = false;
-if (! isset($geo) || empty($geo_region)) {
+$geo_regions = uamswp_field_array($geo_region);
+if (! isset($geo) || $geo_regions === []) {
     $geo_display = true;
 } else {
-    if ($geo == 'include' && ! empty($geo_region)) {
-        if (is_in_region($geo_region)) {
+    if ($geo == 'include') {
+        if (is_in_region($geo_regions)) {
             $geo_display = true;
         }
-    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
-        if (is_not_in_region($geo_region)) {
+    } elseif ($geo == 'exclude') {
+        if (is_not_in_region($geo_regions)) {
             $geo_display = true;
         }
     }
 }
-if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
+if (! empty($is_preview) && ! empty($geo) && $geo_regions !== []) {
     $geo_display = true;
-    echo ucwords($geo).' region(s): '.implode(', ', $geo_region).'<hr>';
+    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map(uamswp_field_text(...), $geo_regions)).'<hr>';
 }
 if ($geo_display) {
 
-    if ($stacked_rows) {
+    if ($stacked_rows !== []) {
         $row_count = count($stacked_rows); // Not user, but just in case
 
         ?>
@@ -125,21 +139,23 @@ if ($geo_display) {
             <div class="col-12">
                 <div class="card-list card-list-left">
                     <?php
-                                foreach ($stacked_rows as $stacked_row) {
+                                foreach ($stacked_rows as $stacked_row_value) {
+                                    $stacked_row = uamswp_field_array($stacked_row_value);
                                     // Load values.
-                                    $image = $stacked_row['stacked_section_image'];
-                                    $image_alt_native = get_post_meta($image, '_wp_attachment_image_alt', true);
-                                    $image_alt_override = $stacked_row['stacked_section_alt_override'];
-                                    $item_heading = $stacked_row['stacked_section_heading'];
-                                    $body = $stacked_row['stacked_section_body'];
-                                    $button_text = $stacked_row['stacked_section_button_text'];
+                                    $image = (int) uamswp_field_text($stacked_row['stacked_section_image'] ?? null);
+                                    $image_alt_native = uamswp_field_text(get_post_meta($image, '_wp_attachment_image_alt', true));
+                                    $image_alt_override = uamswp_field_text($stacked_row['stacked_section_alt_override'] ?? null);
+                                    $item_heading = uamswp_field_text($stacked_row['stacked_section_heading'] ?? null);
+                                    $body = uamswp_field_text($stacked_row['stacked_section_body'] ?? null);
+                                    $button_text = uamswp_field_text($stacked_row['stacked_section_button_text'] ?? null);
                                     $button_url = '';
                                     $button_target = '';
-                                    if ($stacked_row['stacked_section_button_url']) {
-                                        $button_url = $stacked_row['stacked_section_button_url']['url'];
-                                        $button_target = $stacked_row['stacked_section_button_url']['target'];
+                                    $button_link = uamswp_field_array($stacked_row['stacked_section_button_url'] ?? null);
+                                    if ($button_link !== []) {
+                                        $button_url = uamswp_field_text($button_link['url'] ?? null);
+                                        $button_target = uamswp_field_text($button_link['target'] ?? null);
                                     }
-                                    $button_desc = $stacked_row['stacked_section_button_description'];
+                                    $button_desc = uamswp_field_text($stacked_row['stacked_section_button_description'] ?? null);
 
                                     ?>
                         <div class="item">
@@ -176,7 +192,7 @@ if ($geo_display) {
                 <div class="col-12 more">
                     <p class="lead"><?php echo $more_text; ?></p>
                     <div class="cta-container">
-                        <a href="<?php echo $more_button_url['url'] ?? ''; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php echo $more_button_target ? ' target="'.esc_attr($more_button_target).'"' : ''; ?>><?php echo $more_button_text; ?></a>
+                        <a href="<?php echo uamswp_field_text($more_button_link['url'] ?? null); ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php echo $more_button_target ? ' target="'.esc_attr($more_button_target).'"' : ''; ?>><?php echo $more_button_text; ?></a>
                     </div>
                 </div>
             <?php } // endif?>
