@@ -393,7 +393,6 @@ if (! function_exists('uams_get_site_info')) {
         $site = '';
         $subsite = '';
         $department = ''; // Settings page
-        $siteinfo = [];
         if (! class_exists('acf')) {
             // Set base defaults if no ACF
             $siteinfo = ['site' => 'uams', 'subsite' => 'uams', 'department' => 'uams'];

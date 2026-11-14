@@ -96,7 +96,7 @@ function custom_nav_menu(): void
             'echo' => 0,
         ];
 
-        $nav = wp_nav_menu($args);
+        wp_nav_menu($args);
 
         // * Do nothing if there is nothing to show
         // if ( ! $nav )
@@ -161,7 +161,7 @@ function custom_nav_menu(): void
         // Wrap the list items in an unordered list and navbar
         $pagenav = $wrapper_open.$pagenav.$wrapper_close;
 
-        $pagenav_markup_open = genesis_markup([
+        genesis_markup([
             'html5' => '<nav %s>',
             'xhtml' => '<div id="pagenav">',
             'context' => 'genesis-nav-primary',
@@ -182,7 +182,7 @@ function custom_nav_menu(): void
             'echo' => false,
         ];
 
-        $nav = wp_nav_menu($args);
+        wp_nav_menu($args);
 
         // * Do nothing if there is nothing to show
         // if ( ! $nav )
@@ -231,7 +231,7 @@ function custom_nav_menu(): void
         // Wrap the list items in an unordered list and navbar
         $pagenav = $wrapper_open.$pagenav.$wrapper_close;
 
-        $pagenav_markup_open = genesis_markup([
+        genesis_markup([
             'html5' => '<nav %s>',
             'xhtml' => '<div id="pagenav">',
             'context' => 'genesis-nav-primary',

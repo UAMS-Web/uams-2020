@@ -179,8 +179,6 @@ function uamswp_do_search_loop(): void
         } elseif ($post_type === 'condition') {
 
             $paged = get_query_var('paged') ?: 1;
-            $post_type = 'condition';
-
             // accepts any wp_query args.
             $args = ([
                 's' => $s,
@@ -239,8 +237,6 @@ function uamswp_do_search_loop(): void
         } elseif ($post_type === 'treatment') {
 
             $paged = get_query_var('paged') ?: 1;
-            $post_type = 'treatment';
-
             // accepts any wp_query args.
             $args = ([
                 's' => $s,

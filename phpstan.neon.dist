@@ -185,22 +185,8 @@ parameters:
         # A value assigned and overwritten before it is read (see #745).
         -
             identifier: assign.overwritten
-            path: functions.php
-            count: 1
-        -
-            identifier: assign.overwritten
             path: lib/nav.php
             count: 1
-        # A reassignment that does not change the value (see #745).
-        -
-            identifier: assign.redundant
-            path: search.php
-            count: 2
-        # A variable assigned and never read (see #745).
-        -
-            identifier: assign.unused
-            path: lib/nav.php
-            count: 4
         # A condition PHPStan resolves as constant from the declared types (see #745).
         -
             identifier: booleanAnd.alwaysFalse
