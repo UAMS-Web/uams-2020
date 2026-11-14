@@ -99,6 +99,11 @@ it('adds translated image size labels without losing existing sizes', function (
     ]);
 });
 
+it('falls back to the main UAMS home URL for an unrecognized site identity', function (string $site): void {
+    when('uams_get_site_info')->justReturn(['site' => $site, 'subsite' => '', 'department' => '']);
+    expect(uams_get_home_link())->toBe('https://www.uams.edu');
+})->with(['', 'unknown']);
+
 it('chooses the site title and home URL from site identity', function ($site, $subsite, $title, $home): void {
     when('uams_get_site_info')->justReturn(['site' => $site, 'subsite' => $subsite, 'department' => '']);
     when('get_bloginfo')->justReturn('Department title');

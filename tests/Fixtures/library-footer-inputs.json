@@ -452,8 +452,7 @@
                     "address_title": "Second"
                 }
             ]
-        },
-        "warning": "Undefined variable $address_sr"
+        }
     },
     "one address with secondary phone": {
         "site": {

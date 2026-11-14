@@ -166,12 +166,6 @@ parameters:
             identifier: arguments.count
             path: functions.php
             count: 1
-        # uams_get_home_link() returns $homelink, which is unset for a site other than the
-        # four it handles (see #745).
-        -
-            identifier: variable.undefined
-            path: functions.php
-            count: 1
         # image_sizer() returns nothing when the input is invalid, though it is
         # declared to return a string (see #745).
         -
