@@ -11,30 +11,33 @@
 if (uamswp_block_placeholder($block ?? null, $is_preview ?? false)) {
     return;
 }
+$blockData = isset($block) ? uamswp_field_array($block) : [];
+$moduleData = isset($module) ? uamswp_field_array($module) : [];
+
 // Create id attribute allowing for custom "anchor" value.
 if (empty($id)) {
     $id = '';
 }
 if (empty($id) && isset($block)) {
-    $id = $block['id'];
+    $id = $blockData['id'] ?? null;
 }
 if (empty($id)) {
-    $id = ! empty($module['anchor_id']) ? sanitize_title_with_dashes($module['anchor_id']) : 'module-'.($i + 1);
+    $id = ! empty($moduleData['anchor_id']) ? sanitize_title_with_dashes(uamswp_field_text($moduleData['anchor_id'])) : 'module-'.((int) $i + 1);
 }
 
-$id = 'image-side-'.$id;
-if (! empty($block['anchor'])) {
-    $id = $block['anchor'];
+$id = 'image-side-'.uamswp_field_text($id);
+if (! empty($blockData['anchor'])) {
+    $id = uamswp_field_text($blockData['anchor']);
 }
 $id = sanitize_html_class($id);
 
 // Create class attribute allowing for custom "className" and "align" values.
 $className = 'uams-side-by-side-block';
-if (! empty($block['className'])) {
-    $className .= ' '.$block['className'];
+if (! empty($blockData['className'])) {
+    $className .= ' '.uamswp_field_text($blockData['className']);
 }
-if (! empty($block['align'])) {
-    $className .= ' align'.$block['align'];
+if (! empty($blockData['align'])) {
+    $className .= ' align'.uamswp_field_text($blockData['align']);
 }
 
 // Load values and setting defaults.
@@ -45,10 +48,12 @@ if (empty($layout)) {
 if (empty($heading)) {
     $heading = get_field('side_heading') ?: 'Heading goes here...';
 }
-$is_quote = ($layout == 'blockquote-citation' || $layout == 'blockquote-citation-link');
+$layout = uamswp_field_text($layout);
+$heading = uamswp_field_text($heading);
+$is_quote = ($layout === 'blockquote-citation' || $layout === 'blockquote-citation-link');
 
 if (empty($body)) {
-    if ($layout == 'body-only') {
+    if ($layout === 'body-only') {
         $body = get_field('side_layout_body_text') ?: 'This is where the body-only description goes';
     } elseif ($is_quote) {
         $body = ''; // The quote layouts show a quote and citation instead of a body.
@@ -57,18 +62,22 @@ if (empty($body)) {
     }
 }
 
+$body = uamswp_field_text($body);
+
 if ($is_quote) {
     if (empty($quote_text)) {
-        $quote_text = get_field($layout == 'blockquote-citation-link' ? 'side_quote_text_link' : 'side_quote_text') ?: 'This is where the quote goes';
+        $quote_text = get_field($layout === 'blockquote-citation-link' ? 'side_quote_text_link' : 'side_quote_text') ?: 'This is where the quote goes';
     }
     // Strip quotation marks typed at the start or end. Curly quotes are added on output.
-    $quote_text = preg_replace('/^[\s"\'“”‘’]+|[\s"\'“”‘’]+$/u', '', $quote_text) ?? $quote_text;
+    $quote_text = preg_replace('/^[\s"\'“”‘’]+|[\s"\'“”‘’]+$/u', '', uamswp_field_text($quote_text)) ?? uamswp_field_text($quote_text);
     if (empty($quote_name)) {
         $quote_name = get_field('side_quote_speaker_name') ?: 'Speaker name';
     }
     if (empty($quote_title)) {
         $quote_title = get_field('side_quote_speaker_title') ?: '';
     }
+    $quote_name = uamswp_field_text($quote_name);
+    $quote_title = uamswp_field_text($quote_title);
 }
 
 if (empty($link_list)) {
@@ -77,6 +86,7 @@ if (empty($link_list)) {
 if (empty($list_more)) {
     $list_more = get_field('side_link_include_more') ?: '';
 }
+$link_rows = uamswp_field_array($link_list);
 if (empty($cta)) {
     // @pest-mutate-ignore: EmptyStringToNotEmpty
     $cta = get_field('side_cta') ?: '';
@@ -86,15 +96,16 @@ if (! is_array($cta)) {
     $cta = [];
 }
 $cta += ['side_cta_text' => '', 'side_cta_url' => '', 'side_cta_description' => ''];
-$cta_text = $cta['side_cta_text'] ?: '';
+$cta_text = uamswp_field_text($cta['side_cta_text']);
 $cta_link = '';
 $cta_target = '';
-if ($cta['side_cta_url']) {
-    $cta_link = $cta['side_cta_url']['url'] ?: '';
-    $cta_target = $cta['side_cta_url']['target'] ?: '';
+$cta_url = uamswp_field_array($cta['side_cta_url']);
+if ($cta_url !== []) {
+    $cta_link = uamswp_field_text($cta_url['url'] ?? null);
+    $cta_target = uamswp_field_text($cta_url['target'] ?? null);
 }
-$cta_desc = $cta['side_cta_description'] ?: '';
-if ($layout == 'blockquote-citation') {
+$cta_desc = uamswp_field_text($cta['side_cta_description']);
+if ($layout === 'blockquote-citation') {
     $cta_text = ''; // This layout has no button, even if one was saved under another layout.
 }
 if (empty($image_group)) {
@@ -105,10 +116,10 @@ if (! is_array($image_group)) {
     $image_group = [];
 }
 $image_group += ['side_image_image' => '', 'side_image_alt_text' => '', 'side_image_crop' => '', 'side_image_anchor' => ''];
-$side_image = $image_group['side_image_image'] ?: '';
-$image_alt = $image_group['side_image_alt_text'] ?: '';
-$image_crop = $image_group['side_image_crop'] ?: '';
-$image_anchor = $image_group['side_image_anchor'] ?: 'center';
+$side_image = (int) uamswp_field_text($image_group['side_image_image']);
+$image_alt = uamswp_field_text($image_group['side_image_alt_text']);
+$image_crop = uamswp_field_text($image_group['side_image_crop']);
+$image_anchor = uamswp_field_text($image_group['side_image_anchor']) ?: 'center';
 if (empty($image_postion)) {
     $image_postion = get_field('side_image_position') ?: 'left';
 }
@@ -122,8 +133,10 @@ if (empty($geo_region)) {
     $geo_region = get_field('side_image_geo_region');
 }
 if (empty($image_alt)) {
-    $image_alt = get_post_meta($side_image, '_wp_attachment_image_alt', true);
+    $image_alt = uamswp_field_text(get_post_meta($side_image, '_wp_attachment_image_alt', true));
 }
+$image_postion = uamswp_field_text($image_postion);
+$background_color = uamswp_field_text($background_color);
 $cta_target = $cta_target ? ' target="'.esc_attr($cta_target).'"' : '';
 $cta_desc = $cta_desc ? ' aria-label="'.esc_attr($cta_desc).'"' : '';
 $cta_link = $cta_link ? '<a class="btn btn-primary" href="'.esc_url($cta_link).'"'.$cta_desc.$cta_target.' data-moduletitle="'.esc_attr($heading).'">' : '';
@@ -141,22 +154,23 @@ $side_image_width = wp_get_attachment_image_src($side_image, 'full')[1] ?? '';
 
 // GEO Logic
 $geo_display = false;
-if (! isset($geo) || empty($geo_region)) {
+$geo_regions = uamswp_field_array($geo_region);
+if (! isset($geo) || $geo_regions === []) {
     $geo_display = true;
 } else {
-    if ($geo == 'include' && ! empty($geo_region)) {
-        if (is_in_region($geo_region)) {
+    if ($geo == 'include') {
+        if (is_in_region($geo_regions)) {
             $geo_display = true;
         }
-    } elseif ($geo == 'exclude' && ! empty($geo_region)) {
-        if (is_not_in_region($geo_region)) {
+    } elseif ($geo == 'exclude') {
+        if (is_not_in_region($geo_regions)) {
             $geo_display = true;
         }
     }
 }
-if (! empty($is_preview) && ! empty($geo) && ! empty($geo_region)) {
+if (! empty($is_preview) && ! empty($geo) && $geo_regions !== []) {
     $geo_display = true;
-    echo esc_html(ucwords($geo)).' region(s): '.esc_html(implode(', ', $geo_region)).'<hr>';
+    echo esc_html(ucwords(uamswp_field_text($geo))).' region(s): '.esc_html(implode(', ', array_map(uamswp_field_text(...), $geo_regions))).'<hr>';
 }
 if ($geo_display) {
     ?>
@@ -239,12 +253,13 @@ if ($geo_display) {
                         </figcaption>
                     </figure>
                     <?php } ?>
-                    <?php if ($layout == 'link-list' && $link_list) { ?>
+                    <?php if ($layout === 'link-list' && $link_rows !== []) { ?>
                     <ul>
-                        <?php foreach ($link_list as $link) {
-                            $list_text = $link['side_link_list_text'];
-                            $list_url = $link['side_link_list_url']['url'] ?? null;
-                            $list_desc = $link['side_link_list_description'];
+                        <?php foreach ($link_rows as $link_value) {
+                            $link = uamswp_field_array($link_value);
+                            $list_text = uamswp_field_text($link['side_link_list_text'] ?? null);
+                            $list_url = uamswp_field_text(uamswp_field_array($link['side_link_list_url'] ?? null)['url'] ?? null);
+                            $list_desc = uamswp_field_text($link['side_link_list_description'] ?? null);
                             ?>
                         <li>
                             <?php if ($list_url) { ?>

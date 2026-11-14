@@ -400,10 +400,6 @@ parameters:
             count: 7
         -
             identifier: argument.type
-            path: blocks/image-side-by-side.php
-            count: 50
-        -
-            identifier: argument.type
             path: lib/blocks.php
             count: 3
         -
@@ -434,10 +430,6 @@ parameters:
             path: lib/quicklinks.php
             count: 1
         # Array access on a `mixed` block field from ACF. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/image-side-by-side.php
-            count: 11
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/footer-widgets.php
@@ -513,10 +505,6 @@ parameters:
         -
             identifier: binaryOp.invalid
             path: blocks/hero.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
-            path: blocks/image-side-by-side.php
             count: 3
         -
             identifier: binaryOp.invalid
@@ -602,10 +590,6 @@ parameters:
             identifier: foreach.nonIterable
             path: blocks/hero.php
             count: 2
-        -
-            identifier: foreach.nonIterable
-            path: blocks/image-side-by-side.php
-            count: 1
         -
             identifier: foreach.nonIterable
             path: blocks/overlay.php
@@ -793,10 +777,6 @@ parameters:
         -
             identifier: empty.variable
             path: blocks/hero.php
-            count: 2
-        -
-            identifier: empty.variable
-            path: blocks/image-side-by-side.php
             count: 2
         -
             identifier: empty.variable
