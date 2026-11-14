@@ -956,7 +956,7 @@ parameters:
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/users.php
-            count: 3
+            count: 1
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: search.php
