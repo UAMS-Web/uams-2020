@@ -216,10 +216,6 @@ parameters:
             identifier: booleanAnd.alwaysFalse
             path: lib/header.php
             count: 1
-        -
-            identifier: booleanAnd.alwaysFalse
-            path: lib/users.php
-            count: 1
         # A condition PHPStan resolves as constant from the declared types (see #745).
         -
             identifier: booleanAnd.leftAlwaysFalse
@@ -960,7 +956,7 @@ parameters:
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/users.php
-            count: 5
+            count: 3
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: search.php
@@ -1054,11 +1050,6 @@ parameters:
         -
             identifier: return.missing
             path: lib/footer.php
-            count: 1
-        # `$role` in `custom_admin_menu()` is never assigned, so the branch is dead. Deleting it removes code that a unit test pins (see #745).
-        -
-            identifier: variable.undefined
-            path: lib/users.php
             count: 1
         # The template ends with whitespace after its closing PHP tag, and the block markup fixtures pin that output byte for byte. Removing it changes the rendered output (see #745).
         -

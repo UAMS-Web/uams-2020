@@ -30,18 +30,40 @@ function uamswp_editor_users(): void
     $role->add_cap('gravityforms_edit_entry_notes');
 }
 
+/*
+ * Whether the current user is an editor who is not also an administrator.
+ *
+ * Both the Appearance menu hiding and the screen guard below use this test, so the
+ * entries that are hidden are exactly the screens that are refused (see #783).
+ */
+function uamswp_is_restricted_editor(): bool
+{
+    // Administrators (and super admins) always pass.
+    if (current_user_can('manage_options')) {
+        return false;
+    }
+
+    // Only users who actually hold the editor role are restricted.
+    $user = wp_get_current_user();
+
+    return $user instanceof WP_User && in_array('editor', (array) $user->roles, true);
+}
+
+/*
+ * Hide the Themes and Widgets entries from the Appearance menu for editors.
+ *
+ * The entries are removed by slug, so a WordPress release that renumbers the
+ * submenu cannot hide the wrong item. Menus and the Customizer stay available.
+ */
 add_action('admin_menu', 'custom_admin_menu');
 function custom_admin_menu(): void
 {
-    new WP_User(get_current_user_id());
-    // @phpstan-ignore isset.variable (variable is never assigned, see #745)
-    if (isset($role) && $role == 'editor') { // @pest-mutate-ignore: EqualToIdentical,EqualToNotEqual
-        remove_submenu_page('themes.php', 'themes.php'); // @pest-mutate-ignore: RemoveFunctionCall
-        remove_submenu_page('themes.php', 'widgets.php'); // @pest-mutate-ignore: RemoveFunctionCall
-        global $submenu;
-        unset($submenu['themes.php'][6]); // @pest-mutate-ignore: DecrementInteger,IncrementInteger
-        unset($submenu['themes.php'][15]); // @pest-mutate-ignore: DecrementInteger,IncrementInteger
+    if (! uamswp_is_restricted_editor()) {
+        return;
     }
+
+    remove_submenu_page('themes.php', 'themes.php');
+    remove_submenu_page('themes.php', 'widgets.php');
 }
 
 /*
@@ -57,14 +79,7 @@ function custom_admin_menu(): void
 add_action('admin_init', 'uamswp_restrict_editor_theme_screens');
 function uamswp_restrict_editor_theme_screens(): void
 {
-    // Administrators (and super admins) always pass.
-    if (current_user_can('manage_options')) {
-        return;
-    }
-
-    // Only enforce against users who actually hold the editor role.
-    $user = wp_get_current_user();
-    if (! ($user instanceof WP_User) || ! in_array('editor', (array) $user->roles, true)) {
+    if (! uamswp_is_restricted_editor()) {
         return;
     }
 

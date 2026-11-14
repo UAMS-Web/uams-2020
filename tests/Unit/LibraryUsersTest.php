@@ -14,27 +14,37 @@ it('grants only the current editor capability set', function (): void {
     uamswp_editor_users();
 });
 
-/**
- * lib/users.php: role is neither a parameter, imported global nor assigned local. Its isset guard
- * is always false. The two role-comparison mutations, two submenu-call removals and four
- * unset-index integer changes are therefore unreachable. The isset/boolean guard mutations remain
- * active, including the change that exposes an undefined-role warning.
- */
-it('pins the current admin-menu callback with its unset local role', function (): void {
-    $old = WP_User::$constructed;
-    WP_User::$constructed = [];
-    Functions\expect('get_current_user_id')->once()->andReturn(37);
-    Functions\expect('remove_submenu_page')->never();
+it('hides the Themes and Widgets entries from editors by slug', function (bool $admin, $roles, bool $hidden): void {
+    Functions\expect('current_user_can')->once()->with('manage_options')->andReturn($admin);
+    $user = $roles === null ? new stdClass : new WP_User;
+    if ($user instanceof WP_User) {
+        $user->roles = $roles;
+    }
+
+    Functions\expect('wp_get_current_user')->times($admin ? 0 : 1)->andReturn($user);
+    if ($hidden) {
+        Functions\expect('remove_submenu_page')->once()->with('themes.php', 'themes.php');
+        Functions\expect('remove_submenu_page')->once()->with('themes.php', 'widgets.php');
+    } else {
+        Functions\expect('remove_submenu_page')->never();
+    }
+
     $oldSubmenu = $GLOBALS['submenu'] ?? null;
-    $GLOBALS['submenu'] = ['themes.php' => [6 => 'themes', 15 => 'widgets']];
+    $GLOBALS['submenu'] = ['themes.php' => [6 => 'design', 15 => 'header']];
     try {
         custom_admin_menu();
-        expect(WP_User::$constructed)->toBe([37])->and($GLOBALS['submenu'])->toBe(['themes.php' => [6 => 'themes', 15 => 'widgets']]);
+        expect($GLOBALS['submenu'])->toBe(['themes.php' => [6 => 'design', 15 => 'header']]);
     } finally {
-        WP_User::$constructed = $old;
         $GLOBALS['submenu'] = $oldSubmenu;
     }
-});
+})->with([
+    'editor' => [false, ['editor'], true],
+    'editor with another role' => [false, ['author', 'editor'], true],
+    'administrator' => [true, ['editor'], false],
+    'author' => [false, ['author'], false],
+    'role compared case-sensitively' => [false, ['Editor'], false],
+    'no user object' => [false, null, false],
+]);
 
 it('guards editor-only theme screens while allowing administrators and other screens', function (bool $admin, $roles, string $screen, bool $denied): void {
     $oldPage = $GLOBALS['pagenow'] ?? null;

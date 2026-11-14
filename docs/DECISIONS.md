@@ -35,3 +35,13 @@ Every entry heading is `## YYYY-MM-DD`, a space, and a short title. Leave exactl
 **Rejected.** A must-use plugin: needs its own repository to be versioned and tested, and stays the fallback if sites.uams.edu already manages one. Host configuration: carries the two headers but not the origin, and sits outside every repository.
 
 **Companion.** [UAMS-Web/uams-2020#742](https://github.com/UAMS-Web/uams-2020/issues/742); the build is [UAMS-Web/uams-2020#649](https://github.com/UAMS-Web/uams-2020/issues/649).
+
+## 2026-11-14 Hide the Themes and Widgets menu entries from editors by slug (#783)
+
+**Decision.** Editors do not see the Themes and Widgets entries under Appearance. They are removed by slug with `remove_submenu_page()`, using the same editor-role test the `admin_init` guard uses, and the guard stays as the enforcement. The two `unset` calls on submenu indexes 6 and 15 are dropped. Editors keep Menus and the Customizer.
+
+**Why.** The guard already refuses editors on both screens, so the menu showed links to an error page. Removing by slug hides exactly the two entries nobody wants editors to reach and survives WordPress renumbering the submenu, which is what made the index-based `unset` calls hit the wrong entries (Design, Editor or Patterns, and Header).
+
+**Rejected.** Deleting the dead hook and keeping the guard: editors keep links that lead to a 403. Deleting the hook and the guard: widens editor access with no known need. Capability-based hiding: editors hold `edit_theme_options`, the capability that gates every Appearance entry, so a capability test cannot separate them from administrators. A custom role without `switch_themes`: a larger change that touches every site's users and was not measured.
+
+**Companion.** [UAMS-Web/uams-2020#783](https://github.com/UAMS-Web/uams-2020/issues/783); the build is [UAMS-Web/uams-2020#688](https://github.com/UAMS-Web/uams-2020/issues/688).
