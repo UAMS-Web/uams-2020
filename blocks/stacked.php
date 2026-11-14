@@ -133,6 +133,8 @@ if ($geo_display) {
                                     $item_heading = $stacked_row['stacked_section_heading'];
                                     $body = $stacked_row['stacked_section_body'];
                                     $button_text = $stacked_row['stacked_section_button_text'];
+                                    $button_url = '';
+                                    $button_target = '';
                                     if ($stacked_row['stacked_section_button_url']) {
                                         $button_url = $stacked_row['stacked_section_button_url']['url'];
                                         $button_target = $stacked_row['stacked_section_button_url']['target'];
@@ -162,7 +164,7 @@ if ($geo_display) {
                                     <h3 class="card-title h5"><?php echo esc_html($item_heading); ?></h3>
                                     <p class="card-text"><?php echo esc_html($body); ?></p>
                                     <?php if ($button_text) { ?>  
-                                        <a href="<?php /* @phpstan-ignore variable.undefined, variable.undefined (template or branch variable, see #745) */ echo esc_url($button_url); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo esc_attr($button_desc); ?>"<?php echo $button_target ? ' target="'.esc_attr($button_target).'"' : ''; ?> data-moduletitle="<?php echo esc_attr($heading); ?>" data-itemtitle="<?php echo esc_attr($item_heading); ?>"><?php echo esc_html($button_text); ?></a>
+                                        <a href="<?php echo esc_url($button_url); ?>" class="btn btn-primary stretched-link" aria-label="<?php echo esc_attr($button_desc); ?>"<?php echo $button_target ? ' target="'.esc_attr($button_target).'"' : ''; ?> data-moduletitle="<?php echo esc_attr($heading); ?>" data-itemtitle="<?php echo esc_attr($item_heading); ?>"><?php echo esc_html($button_text); ?></a>
                                     <?php } // endif?>
                                 </div>
                             </div>
