@@ -59,7 +59,7 @@ parameters:
     # from 0 upward (see the code-quality skill), then raise it by one per
     # change as findings are fixed, until `max`. Lowering it is a deliberate,
     # argued change, not a quiet edit to get a red run green.
-    level: 2
+    level: 3
 
     excludePaths:
         analyseAndScan:
@@ -171,6 +171,22 @@ parameters:
             identifier: variable.undefined
             path: functions.php
             count: 1
+        # image_sizer() returns nothing when the input is invalid, though it is
+        # declared to return a string (see #745).
+        -
+            identifier: return.empty
+            path: functions.php
+            count: 1
+        # uamswp_nav_subsection() and uamswp_hide_breadcrumbs() return false when
+        # nothing applies, though both are declared to return a string (see #745).
+        -
+            identifier: return.type
+            path: lib/nav.php
+            count: 2
+        -
+            identifier: return.type
+            path: lib/page.php
+            count: 2
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
         # PHPStan analyzes at the `min` above, so
