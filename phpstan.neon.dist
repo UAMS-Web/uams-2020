@@ -284,10 +284,6 @@ parameters:
         # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: argument.type
-            path: blocks/news.php
-            count: 22
-        -
-            identifier: argument.type
             path: blocks/post-category-tile.php
             count: 20
         -
@@ -482,20 +478,12 @@ parameters:
             count: 8
         -
             identifier: argument.type
-            path: blocks/content.php
-            count: 10
-        -
-            identifier: argument.type
             path: blocks/cta.php
             count: 32
         -
             identifier: argument.type
             path: blocks/hero.php
             count: 29
-        -
-            identifier: argument.type
-            path: blocks/livewhale.php
-            count: 11
         -
             identifier: argument.type
             path: blocks/overlay.php
@@ -548,10 +536,6 @@ parameters:
             count: 3
         -
             identifier: binaryOp.invalid
-            path: blocks/content.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
             path: blocks/cta.php
             count: 5
         -
@@ -565,14 +549,6 @@ parameters:
         -
             identifier: binaryOp.invalid
             path: blocks/image-side-by-side.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
-            path: blocks/livewhale.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
-            path: blocks/news.php
             count: 3
         -
             identifier: binaryOp.invalid
@@ -743,24 +719,12 @@ parameters:
             count: 12
         -
             identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/content.php
-            count: 5
-        -
-            identifier: offsetAccess.nonOffsetAccessible
             path: blocks/cta.php
             count: 6
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/hero.php
             count: 19
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/livewhale.php
-            count: 5
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/news.php
-            count: 4
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/overlay.php
@@ -936,10 +900,6 @@ parameters:
             count: 2
         -
             identifier: empty.variable
-            path: blocks/content.php
-            count: 2
-        -
-            identifier: empty.variable
             path: blocks/cta.php
             count: 2
         -
@@ -953,14 +913,6 @@ parameters:
         -
             identifier: empty.variable
             path: blocks/image-side-by-side.php
-            count: 2
-        -
-            identifier: empty.variable
-            path: blocks/livewhale.php
-            count: 2
-        -
-            identifier: empty.variable
-            path: blocks/news.php
             count: 2
         -
             identifier: empty.variable
