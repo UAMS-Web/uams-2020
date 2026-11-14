@@ -68,7 +68,7 @@ if (empty($geo_region)) {
 // GEO Logic
 $geo_display = false;
 $geo_regions = uamswp_field_array($geo_region);
-if (! isset($geo) || empty($geo_regions)) {
+if (! isset($geo) || $geo_regions === []) {
     $geo_display = true;
 } else {
     if ($geo == 'include') {
@@ -81,9 +81,9 @@ if (! isset($geo) || empty($geo_regions)) {
         }
     }
 }
-if (! empty($is_preview) && ! empty($geo) && ! empty($geo_regions)) {
+if (! empty($is_preview) && ! empty($geo) && $geo_regions !== []) {
     $geo_display = true;
-    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map('uamswp_field_text', $geo_regions)).'<hr>';
+    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map(uamswp_field_text(...), $geo_regions)).'<hr>';
 }
 if ($geo_display) {
     ?>
