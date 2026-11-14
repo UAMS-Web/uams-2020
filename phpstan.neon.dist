@@ -240,7 +240,7 @@ parameters:
             identifier: function.impossibleType
             path: lib/misc.php
             count: 1
-        # Parameters the function body does not read; many are fixed by the WordPress or ACF callback signature, and the rest are dead (see #745).
+        # Parameters the function body does not read; many are fixed by the WordPress or ACF callback signature, and the rest are dead. Parameters fixed by a hook signature cannot be removed, and removing a dead one changes the callback arity, tracked in #780.
         -
             identifier: function.unusedParameter
             path: functions.php
@@ -334,7 +334,7 @@ parameters:
             identifier: ternary.alwaysTrue
             path: search.php
             count: 1
-        # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call (see #745).
+        # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: argument.type
             path: blocks/iframe.php
@@ -400,12 +400,12 @@ parameters:
             identifier: argument.type
             path: lib/scripts.php
             count: 6
-        # Arithmetic on a value PHPStan cannot prove is a number (see #745).
+        # Arithmetic on a value PHPStan cannot prove is a number. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: binaryOp.invalid
             path: lib/breadcrumb.php
             count: 2
-        # A foreach over a value that WordPress or ACF may return as false (see #745).
+        # A foreach over a value that WordPress or ACF may return as false. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: foreach.nonIterable
             path: functions.php
@@ -414,7 +414,7 @@ parameters:
             identifier: foreach.nonIterable
             path: lib/nav.php
             count: 2
-        # Array access on a value that WordPress or ACF may return as false or null (see #745).
+        # Array access on a value that WordPress or ACF may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: functions.php
@@ -427,7 +427,7 @@ parameters:
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/misc.php
             count: 4
-        # Property access on a value that WordPress may return as false or null (see #745).
+        # Property access on a value that WordPress may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: property.nonObject
             path: functions.php
@@ -440,7 +440,7 @@ parameters:
             identifier: property.nonObject
             path: lib/quicklinks.php
             count: 16
-        # A property that the declared type does not list (see #745).
+        # A property that the declared type does not list. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: property.notFound
             path: search.php
@@ -450,7 +450,7 @@ parameters:
             identifier: argument.type
             path: lib/a11y.php
             count: 3
-        # A method call on a value that WordPress may return as false or null (see #745).
+        # A method call on a value that WordPress may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: method.nonObject
             path: lib/users.php
@@ -460,12 +460,12 @@ parameters:
             identifier: property.nonObject
             path: lib/misc.php
             count: 3
-        # A return value whose type does not match the declared return type (see #745).
+        # A return value whose type does not match the declared return type. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: return.type
             path: lib/a11y.php
             count: 1
-        # An argument whose declared type does not match the parameter, usually mixed, false or null from a WordPress or ACF call (see #745).
+        # An argument whose declared type does not match the parameter, usually mixed, false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: argument.type
             path: blocks/gallery.php
@@ -499,7 +499,7 @@ parameters:
             identifier: binaryOp.invalid
             path: lib/extras.php
             count: 22
-        # An integer cast of a value PHPStan cannot prove is numeric, such as mixed from get_field() (see #745).
+        # An integer cast of a value PHPStan cannot prove is numeric, such as mixed from get_field(). Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: cast.int
             path: functions.php
@@ -531,7 +531,7 @@ parameters:
             identifier: return.type
             path: functions.php
             count: 1
-        # An argument that PHPStan types as mixed, usually from get_field() or another WordPress or ACF call (see #745).
+        # An argument that PHPStan types as mixed, usually from get_field() or another WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: argument.type
             path: blocks/action-bar.php
@@ -592,7 +592,7 @@ parameters:
             identifier: argument.type
             path: lib/widgets.php
             count: 4
-        # A compound assignment on a value PHPStan types as mixed (see #745).
+        # A compound assignment on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: assignOp.invalid
             path: functions.php
@@ -613,7 +613,7 @@ parameters:
             identifier: assignOp.invalid
             path: templates/page_landing.php
             count: 1
-        # Arithmetic or concatenation on a value PHPStan types as mixed (see #745).
+        # Arithmetic or concatenation on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: binaryOp.invalid
             path: blocks/action-bar.php
@@ -730,12 +730,12 @@ parameters:
             identifier: binaryOp.invalid
             path: search.php
             count: 5
-        # A string cast of a value PHPStan types as mixed (see #745).
+        # A string cast of a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: cast.string
             path: lib/bootstrap.php
             count: 1
-        # Output of a value PHPStan types as mixed, such as the result of get_field() (see #745).
+        # Output of a value PHPStan types as mixed, such as the result of get_field(). Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: echo.nonString
             path: blocks/cta.php
@@ -780,12 +780,12 @@ parameters:
             identifier: echo.nonString
             path: lib/widgets.php
             count: 4
-        # A mixed value interpolated into a string (see #745).
+        # A mixed value interpolated into a string. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: encapsedStringPart.nonString
             path: functions.php
             count: 3
-        # A foreach over a value PHPStan types as mixed (see #745).
+        # A foreach over a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: foreach.nonIterable
             path: blocks/action-bar.php
@@ -834,7 +834,7 @@ parameters:
             identifier: foreach.nonIterable
             path: lib/modules.php
             count: 3
-        # A method call on a value PHPStan types as mixed (see #745).
+        # A method call on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: method.nonObject
             path: functions.php
@@ -843,12 +843,12 @@ parameters:
             identifier: method.nonObject
             path: lib/customizer.php
             count: 2
-        # An array offset PHPStan types as mixed (see #745).
+        # An array offset PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: offsetAccess.invalidOffset
             path: functions.php
             count: 5
-        # Array access on a value PHPStan types as mixed, such as the result of get_field() (see #745).
+        # Array access on a value PHPStan types as mixed, such as the result of get_field(). Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/action-bar.php
@@ -969,7 +969,7 @@ parameters:
             identifier: offsetAccess.nonOffsetAccessible
             path: templates/page_landing.php
             count: 1
-        # Property access on a value PHPStan types as mixed (see #745).
+        # Property access on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: property.nonObject
             path: blocks/post-category-tile.php
@@ -1020,27 +1020,27 @@ parameters:
             identifier: function.inner
             path: lib/nav.php
             count: 2
-        # A class defined by a plugin or theme library that has no stubs: the Bootstrap nav walkers (see #745).
+        # A class defined by a plugin or theme library that has no stubs: the Bootstrap nav walkers. No stub package may be added (scope ruling on #773), so it cannot be typed..
         -
             identifier: class.notFound
             path: lib/nav.php
             count: 3
-        # A function defined by a plugin that has no stubs: `bis_get_attachment_image_src` (see #745).
+        # A function defined by a plugin that has no stubs: `bis_get_attachment_image_src`. No stub package may be added (scope ruling on #773), so it cannot be typed..
         -
             identifier: function.notFound
             path: functions.php
             count: 1
-        # A function defined by a plugin that has no stubs: `lyte_parse` (see #745).
+        # A function defined by a plugin that has no stubs: `lyte_parse`. No stub package may be added (scope ruling on #773), so it cannot be typed..
         -
             identifier: function.notFound
             path: lib/modules.php
             count: 1
-        # Functions the theme calls but does not define in an analyzed file: `uamswp_wp_list_pages` and `uamswp_wp_list_child_pages` (see #745).
+        # Functions the theme calls but does not define in an analyzed file: `uamswp_wp_list_pages` and `uamswp_wp_list_child_pages`. No stub package may be added (scope ruling on #773), so it cannot be typed..
         -
             identifier: function.notFound
             path: lib/nav.php
             count: 2
-        # A function defined by the TGM Plugin Activation library, which has no stubs: `tgmpa` (see #745).
+        # A function defined by the TGM Plugin Activation library, which has no stubs: `tgmpa`. No stub package may be added (scope ruling on #773), so it cannot be typed..
         -
             identifier: function.notFound
             path: lib/tgm.php
@@ -1069,7 +1069,7 @@ parameters:
             identifier: whitespace.fileEnd
             path: blocks/counter.php
             count: 1
-        # `$geo_region` is always set and truthy to the analysis once `get_field()` is typed by the ACF stubs, so the `empty()` guard reads as redundant (see #745).
+        # `$geo_region` is always set and truthy to the analysis once `get_field()` is typed by the ACF stubs, so the `empty()` guard reads as redundant. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: empty.variable
             path: blocks/action-bar.php
@@ -1130,7 +1130,7 @@ parameters:
             identifier: empty.variable
             path: blocks/stacked.php
             count: 2
-        # A negation the analysis reads as always false once `get_field()` is typed by the ACF stubs (see #745).
+        # A negation the analysis reads as always false once `get_field()` is typed by the ACF stubs. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: booleanNot.alwaysFalse
             path: blocks/cta.php
