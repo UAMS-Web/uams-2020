@@ -330,6 +330,8 @@ it('renders section module boundaries and each supported row', function ($index,
     expect($html)->toBe($expected);
 })->with([
     [7, '', false, [], false, '7', ''],
+    ['', '', false, [], false, 'module-1', ''],
+    [null, '', false, [], false, 'module-1', ''],
     [0, '', true, [['acf_fc_layout' => 'uams_section_wysiwyg', 'section_wysiwyg_html' => '<p>Raw content</p>']], false, 'module-1', '<div class="module-body"><p>Raw content</p></div>'],
     [false, '', true, [['acf_fc_layout' => 'uams_section_wysiwyg', 'section_wysiwyg_html' => '<p>Raw content</p>']], false, 'module-1', '<div class="module-body"><p>Raw content</p></div>'],
     [false, 'Custom Anchor', false, [['acf_fc_layout' => 'modules_uams_section_youtube', 'section_youtube_url' => 'https://youtube.test/watch', 'section_youtube_width' => 'wide']], true, 'custom-anchor', '<div class="module-body"><div class="wide">[lyte]</div></div>'],
