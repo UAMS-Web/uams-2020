@@ -14,6 +14,10 @@ if (! defined('CHILD_THEME_VERSION')) {
 }
 
 add_action('genesis_setup', 'uamswp_childtheme_setup', 15);
+/**
+ * @param  mixed  $sizes
+ * @return array<mixed>
+ */
 function uams_custom_add_image_size_names($sizes): array
 {
     return array_merge($sizes, [
@@ -230,6 +234,10 @@ function uamswp_skip_links(): void
 }
 
 add_filter('genesis_attr_site-header', 'uamswp_add_aria');
+/**
+ * @param  mixed  $attributes
+ * @return mixed
+ */
 function uamswp_add_aria($attributes)
 {
     if (isset($attributes['aria-label'])) {
@@ -242,6 +250,9 @@ function uamswp_add_aria($attributes)
 }
 
 add_filter('genesis_home_crumb', 'uams_breadcrumb_home_icon');
+/**
+ * @param  mixed  $crumb
+ */
 function uams_breadcrumb_home_icon($crumb): string
 {
     if ((uams_get_site_info()['site'] == 'uamshealth' && uams_get_site_info()['subsite'] == 'main') || (uams_get_site_info()['site'] == 'uamshealth' && is_front_page())) {
@@ -265,6 +276,10 @@ function uams_breadcrumb_home_icon($crumb): string
 // Add Site Title as the Breadcrumb Title for front page
 add_filter('genesis_page_crumb', 'uams_breadcrumb_home');
 add_filter('genesis_single_crumb', 'uams_breadcrumb_home');
+/**
+ * @param  mixed  $crumb
+ * @return mixed
+ */
 function uams_breadcrumb_home($crumb)
 {
     if (is_front_page()) {
@@ -276,6 +291,10 @@ function uams_breadcrumb_home($crumb)
 }
 
 add_filter('seopress_pro_breadcrumbs_crumbs', 'sp_pro_breadcrumbs_crumbs');
+/**
+ * @param  mixed  $crumbs
+ * @return mixed
+ */
 function sp_pro_breadcrumbs_crumbs($crumbs)
 {
     // $crumbs is a multidimensional array.
@@ -366,6 +385,9 @@ function sp_pro_breadcrumbs_html($html) {
 /** Returns site & subsite info **/
 if (! function_exists('uams_get_site_info')) {
 
+    /**
+     * @return array<mixed>
+     */
     function uams_get_site_info(): array
     {
         $site = '';
@@ -485,6 +507,10 @@ if (! function_exists('uams_get_site_info')) {
 
 if (! function_exists('uams_get_permalink')) {
 
+    /**
+     * @param  mixed  $post
+     * @return mixed
+     */
     function uams_get_permalink($post = null)
     {
         if (empty($post)) {
@@ -508,6 +534,9 @@ if (! function_exists('uams_get_permalink')) {
 /* Retrieve site site */
 if (! function_exists('uams_site_title')) {
 
+    /**
+     * @return mixed
+     */
     function uams_site_title()
     {
         if (uams_get_site_info()['site'] == 'uamshealth' && uams_get_site_info()['subsite'] == 'main') {
@@ -537,7 +566,12 @@ if (! function_exists('uams_get_home_link')) {
 
 }
 
-/* Helper Functions */
+/**
+ * Helper Functions
+ *
+ * @param  mixed  $haystack
+ * @param  mixed  $needle
+ */
 function startsWith($haystack, $needle): bool
 {
     $length = strlen($needle);
@@ -545,6 +579,11 @@ function startsWith($haystack, $needle): bool
     return substr($haystack, 0, $length) === $needle;
 }
 
+/**
+ * @param  mixed  $country
+ * @param  mixed  $phone
+ * @return mixed
+ */
 function format_phone($country, $phone)
 {
     $function = 'format_phone_'.$country;
@@ -559,6 +598,10 @@ function format_phone($country, $phone)
 // $phone = format_phone('us', $phone);
 // echo $phone;
 
+/**
+ * @param  mixed  $phone
+ * @return mixed
+ */
 function format_phone_us($phone)
 {
     // note: making sure we have something
@@ -584,6 +627,10 @@ function format_phone_us($phone)
     }
 }
 
+/**
+ * @param  mixed  $phone
+ * @return mixed
+ */
 function format_phone_dash($phone)
 {
     // note: making sure we have something
@@ -610,6 +657,9 @@ function format_phone_dash($phone)
 }
 
 if (! function_exists('apStyleDate')) {
+    /**
+     * @param  mixed  $date
+     */
     function apStyleDate($date): string
     {
 
@@ -624,14 +674,22 @@ if (! function_exists('apStyleDate')) {
 
 class SlidingWindowRateLimiter
 {
+    /** @var array<mixed> */
     private array $storage;
 
+    /**
+     * @param  mixed  $limit
+     * @param  mixed  $timeWindow
+     */
     public function __construct(private $limit, private $timeWindow)
     {
         // In seconds
         $this->storage = [];
     }
 
+    /**
+     * @param  mixed  $clientId
+     */
     public function isRequestAllowed($clientId): bool
     {
         $currentTime = time();
@@ -943,7 +1001,12 @@ function gallery_image_dimension(
 /* Add dynamic_sidebar_params filter */
 add_filter('dynamic_sidebar_params', 'footer_widgets');
 
-/* Register our callback function */
+/**
+ * Register our callback function
+ *
+ * @param  mixed  $params
+ * @return mixed
+ */
 function footer_widgets($params)
 {
 
@@ -987,9 +1050,9 @@ function rest_api_filter_add_filters(): void
 /**
  * Add the filter parameter
  *
- * @param  array  $args  The query arguments.
- * @param  WP_REST_Request  $request  Full details about the request.
- * @return array $args.
+ * @param  array<mixed>  $args  The query arguments.
+ * @param  WP_REST_Request<array<string, mixed>>  $request  Full details about the request.
+ * @return array<mixed> The query arguments.
  **/
 function rest_api_filter_add_filter_param($args, $request)
 {
@@ -1017,6 +1080,10 @@ function rest_api_filter_add_filter_param($args, $request)
 add_filter('gform_init_scripts_footer', '__return_true');
 
 add_filter('relevanssi_modify_wp_query', 'rlv_search_all_blogs');
+/**
+ * @param  mixed  $query
+ * @return mixed
+ */
 function rlv_search_all_blogs($query)
 {
     $raw_blog_list = get_sites(['number' => 2000]);
@@ -1069,6 +1136,11 @@ function uamswp_gtm_2(): void
 // Reject anything that is not a GTM container ID before it is stored, so the value
 // echoed into the inline GTM script and the noscript iframe can only be safe characters.
 add_filter('acf/validate_value/name=google_tag_manager_id', 'uamswp_validate_gtm_id', 10, 2);
+/**
+ * @param  mixed  $valid
+ * @param  mixed  $value
+ * @return mixed
+ */
 function uamswp_validate_gtm_id($valid, $value)
 {
     if ($valid !== true) {
@@ -1083,6 +1155,10 @@ function uamswp_validate_gtm_id($valid, $value)
 
 add_filter('big_image_size_threshold', '__return_false');
 
+/**
+ * @param  mixed  $posttitle
+ * @param  mixed  $posttype
+ */
 function uamswp_list_child_posts($posttype, $posttitle): void
 {
     if (! isset($posttype)) {
@@ -1174,6 +1250,11 @@ add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context
 add_filter('acf/prepare_field/name=geo_valid', 'uamswp_set_geo');
 add_filter('acf/update_value/name=geo_valid', 'uamswp_force_geo', 10, 3);
 
+/**
+ * @param  mixed  $field
+ * @param  mixed  $post_id
+ * @param  mixed  $value
+ */
 function uamswp_force_geo($value, $post_id, $field): string
 {
     if (function_exists('geoip_detect2_get_external_ip_adress')) {
@@ -1182,6 +1263,10 @@ function uamswp_force_geo($value, $post_id, $field): string
 
     return 'false';
 }
+/**
+ * @param  mixed  $field
+ * @return mixed
+ */
 function uamswp_set_geo($field)
 {
     if (function_exists('geoip_detect2_get_external_ip_adress')) {
@@ -1198,6 +1283,12 @@ function uamswp_set_geo($field)
 
 // Password reset to include /uams-login/
 add_filter('retrieve_password_message', 'my_retrieve_password_message', 10, 4);
+/**
+ * @param  mixed  $key
+ * @param  mixed  $message
+ * @param  mixed  $user_data
+ * @param  mixed  $user_login
+ */
 function my_retrieve_password_message($message, $key, $user_login, $user_data): string
 {
     // Start with the default content.
