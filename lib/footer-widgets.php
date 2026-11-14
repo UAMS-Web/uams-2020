@@ -84,11 +84,11 @@ function uamswp_footer_widget_areas($output, $footer_widgets): ?string
             'context' => 'footer-widgets',
         ]);
 
-        $output .= genesis_structural_wrap('footer-widgets', 'open', 0);
+        $output .= genesis_structural_wrap('footer-widgets', 'open', false);
 
         $output .= $inside;
 
-        $output .= genesis_structural_wrap('footer-widgets', 'close', 0);
+        $output .= genesis_structural_wrap('footer-widgets', 'close', false);
 
         $output .= '</div>';
 

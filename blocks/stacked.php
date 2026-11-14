@@ -174,7 +174,7 @@ if ($geo_display) {
                 <div class="col-12 more">
                     <p class="lead"><?php echo $more_text; ?></p>
                     <div class="cta-container">
-                        <a href="<?php /* @phpstan-ignore variable.undefined, variable.undefined (template or branch variable, see #745) */ echo $more_button_url['url'] ?? ''; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php echo $more_button_target ? ' target="'.esc_attr($more_button_target).'"' : ''; ?>><?php echo $more_button_text; ?></a>
+                        <a href="<?php echo $more_button_url['url'] ?? ''; ?>" class="btn btn-outline-<?php echo $more_button_color; ?>" aria-label="<?php echo $more_button_description; ?>"<?php echo $more_button_target ? ' target="'.esc_attr($more_button_target).'"' : ''; ?>><?php echo $more_button_text; ?></a>
                     </div>
                 </div>
             <?php } // endif?>
