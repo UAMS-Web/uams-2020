@@ -347,6 +347,40 @@ it('prints only text region names in the CTA and tiles geo preview', function (s
     ['post-category-tiles', 'post_tiles_geo', ['is_preview' => false], true],
 ]);
 
+it('treats a non-numeric module index as the first module in the stacked and gallery blocks', function (string $name, string $prefix) use ($blockBaseCases): void {
+    $case = $blockBaseCases[$name];
+    unset($case['variables']['block']);
+    $case['variables']['i'] = 'abc';
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString($prefix.'module-1', $actual['html']);
+})->with([['stacked', 'stacked-image-text-'], ['gallery', 'uams-gallery-']]);
+
+it('keeps a caller id over the block id in the stacked and gallery blocks', function (string $name, string $prefix) use ($blockBaseCases): void {
+    $case = $blockBaseCases[$name];
+    $case['variables']['id'] = 'chosen';
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString($prefix.'chosen', $actual['html']);
+    Assert::assertStringNotContainsString('block-7', $actual['html']);
+})->with([['stacked', 'stacked-image-text-'], ['gallery', 'uams-gallery-']]);
+
+it('prints only text region names in the stacked and gallery geo preview', function (string $name, string $geoKey) use ($blockBaseCases): void {
+    $case = $blockBaseCases[$name];
+    $case['fields'][$geoKey] = 'include';
+    $case['fields'][$geoKey.'_region'] = ['AR', ['nested']];
+    $case['variables']['is_preview'] = true;
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString('Include region(s): AR, <hr>', $actual['html']);
+})->with([['stacked', 'stacked_geo'], ['gallery', 'gallery_geo']]);
+
+it('reads a multi-select crop of none as no crop in the gallery block', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['gallery'];
+    $case['fields']['gallery_crop'] = 'none';
+    $expected = BlockTemplateScenario::render($case);
+    $case['fields']['gallery_crop'] = ['none'];
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertTrue($expected['html'] === $actual['html'], 'A crop list of none rendered differently from the none string.');
+});
+
 it('keeps an empty CTA link target without adding text to the anchor', function () use ($blockBaseCases): void {
     $case = $blockBaseCases['cta'];
     $case['fields']['cta_bar_button_url']['target'] = '';

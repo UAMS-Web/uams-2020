@@ -393,18 +393,15 @@ parameters:
             path: lib/a11y.php
             count: 1
         # An argument whose declared type does not match the parameter, usually mixed, false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
+        # `gallery_image_dimension()` documents `$ratio` as `int`, and the crop select passes a decimal string such as '1.7778' or -1, so the seven calls read as mismatched. Correcting the docblock belongs to `functions.php`, outside this slice, tracked in #780.
         -
             identifier: argument.type
             path: blocks/gallery.php
-            count: 39
+            count: 7
         -
             identifier: argument.type
             path: blocks/image-side-by-side.php
             count: 50
-        -
-            identifier: argument.type
-            path: blocks/stacked.php
-            count: 30
         -
             identifier: argument.type
             path: lib/blocks.php
@@ -437,10 +434,6 @@ parameters:
             path: lib/quicklinks.php
             count: 1
         # Array access on a `mixed` block field from ACF. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/gallery.php
-            count: 14
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: blocks/image-side-by-side.php
@@ -519,15 +512,7 @@ parameters:
         # Arithmetic or concatenation on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: binaryOp.invalid
-            path: blocks/gallery.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
             path: blocks/image-side-by-side.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
-            path: blocks/stacked.php
             count: 3
         -
             identifier: binaryOp.invalid
@@ -581,14 +566,6 @@ parameters:
         # Output of a value PHPStan types as mixed, such as the result of get_field(). Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: echo.nonString
-            path: blocks/gallery.php
-            count: 6
-        -
-            identifier: echo.nonString
-            path: blocks/stacked.php
-            count: 4
-        -
-            identifier: echo.nonString
             path: functions.php
             count: 1
         -
@@ -612,10 +589,6 @@ parameters:
         -
             identifier: foreach.nonIterable
             path: blocks/image-side-by-side.php
-            count: 1
-        -
-            identifier: foreach.nonIterable
-            path: blocks/stacked.php
             count: 1
         -
             identifier: foreach.nonIterable
@@ -644,10 +617,6 @@ parameters:
             path: functions.php
             count: 5
         # Array access on a value PHPStan types as mixed, such as the result of get_field(). Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: blocks/stacked.php
-            count: 15
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/bootstrap.php
@@ -795,15 +764,7 @@ parameters:
         # `$geo_region` is always set and truthy to the analysis once `get_field()` is typed by the ACF stubs, so the `empty()` guard reads as redundant. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: empty.variable
-            path: blocks/gallery.php
-            count: 2
-        -
-            identifier: empty.variable
             path: blocks/image-side-by-side.php
-            count: 2
-        -
-            identifier: empty.variable
-            path: blocks/stacked.php
             count: 2
         # The entry most plugins need once the level reaches 4, from
         # uamswp-migration-api: the PHP version guard in the plugin header.
