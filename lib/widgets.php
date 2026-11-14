@@ -12,6 +12,8 @@
 
 /**
  * Custom ACF widgets.
+ *
+ * @extends WP_Widget<array<string, mixed>>
  */
 class UAMSWP_Call_Out_Widget extends WP_Widget
 {
@@ -32,8 +34,8 @@ class UAMSWP_Call_Out_Widget extends WP_Widget
      *
      * @see WP_Widget::widget()
      *
-     * @param  array  $args  Widget arguments.
-     * @param  array  $instance  Saved values from database.
+     * @param  array<string, mixed>  $args  Widget arguments.
+     * @param  array<string, mixed>  $instance  Saved values from database.
      */
     public function widget($args, $instance): void
     {
@@ -61,7 +63,7 @@ class UAMSWP_Call_Out_Widget extends WP_Widget
      *
      * @see WP_Widget::form()
      *
-     * @param  array  $instance  Previously saved values from database.
+     * @param  array<string, mixed>  $instance  Previously saved values from database.
      */
     public function form($instance): void
     {
@@ -82,9 +84,9 @@ class UAMSWP_Call_Out_Widget extends WP_Widget
      *
      * @see WP_Widget::update()
      *
-     * @param  array  $new_instance  Values just sent to be saved.
-     * @param  array  $old_instance  Previously saved values from database.
-     * @return array Updated safe values to be saved.
+     * @param  array<string, mixed>  $new_instance  Values just sent to be saved.
+     * @param  array<string, mixed>  $old_instance  Previously saved values from database.
+     * @return array<string, mixed> Updated safe values to be saved.
      */
     public function update($new_instance, $old_instance)
     {
@@ -92,6 +94,9 @@ class UAMSWP_Call_Out_Widget extends WP_Widget
     }
 } // class UAMSWP_Call_Out_Widget
 
+/**
+ * @extends WP_Widget<array<string, mixed>>
+ */
 class UAMSWP_CTA_Widget extends WP_Widget
 {
     /**
@@ -111,8 +116,8 @@ class UAMSWP_CTA_Widget extends WP_Widget
      *
      * @see WP_Widget::widget()
      *
-     * @param  array  $args  Widget arguments.
-     * @param  array  $instance  Saved values from database.
+     * @param  array<string, mixed>  $args  Widget arguments.
+     * @param  array<string, mixed>  $instance  Saved values from database.
      */
     public function widget($args, $instance): void
     {
@@ -145,7 +150,7 @@ class UAMSWP_CTA_Widget extends WP_Widget
      *
      * @see WP_Widget::form()
      *
-     * @param  array  $instance  Previously saved values from database.
+     * @param  array<string, mixed>  $instance  Previously saved values from database.
      */
     public function form($instance): void
     {
@@ -166,9 +171,9 @@ class UAMSWP_CTA_Widget extends WP_Widget
      *
      * @see WP_Widget::update()
      *
-     * @param  array  $new_instance  Values just sent to be saved.
-     * @param  array  $old_instance  Previously saved values from database.
-     * @return array Updated safe values to be saved.
+     * @param  array<string, mixed>  $new_instance  Values just sent to be saved.
+     * @param  array<string, mixed>  $old_instance  Previously saved values from database.
+     * @return array<string, mixed> Updated safe values to be saved.
      */
     public function update($new_instance, $old_instance)
     {

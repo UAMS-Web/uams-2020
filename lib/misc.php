@@ -13,6 +13,9 @@ declare(strict_types=1);
  */
 
 // Custom Image Function
+/**
+ * @return mixed
+ */
 function uamswp_post_image()
 {
     global $post;
@@ -74,6 +77,10 @@ function uamswp_do_meta(): void
 // }
 
 // Body Class
+/**
+ * @param  mixed  $args
+ * @return mixed
+ */
 function uamswp_body_class($args)
 {
     if (is_page_template('page_blog.php')) {
@@ -85,6 +92,10 @@ function uamswp_body_class($args)
 
 /* Add site & subsite to body class - used for site customizations (ex. different background image in footer) */
 add_filter('genesis_attr_body', 'uamswp_site_add_css_attr');
+/**
+ * @param  mixed  $attributes
+ * @return mixed
+ */
 function uamswp_site_add_css_attr($attributes)
 {
     // Add the site & subsite to  class ex. uams medicine, institute cancer
@@ -122,6 +133,10 @@ add_filter('genesis_pre_get_option_site_layout', '__genesis_return_full_width_co
 // Remove gutenberg blocks
 // add_filter( 'allowed_block_types', 'uamswp_allowed_block_types' );
 
+/**
+ * @param  mixed  $allowed_blocks
+ * @return array<mixed>
+ */
 function uamswp_allowed_block_types($allowed_blocks): array
 {
 
@@ -209,6 +224,8 @@ function uamswp_allowed_block_types($allowed_blocks): array
 
 /**
  * Templates and Page IDs without editor
+ *
+ * @param  mixed  $id
  */
 function uamswp_disable_editor($id = false): bool
 {
@@ -234,6 +251,10 @@ function uamswp_disable_editor($id = false): bool
 
 /**
  * Disable Gutenberg by template
+ *
+ * @param  mixed  $can_edit
+ * @param  mixed  $post_type
+ * @return mixed
  */
 function uamswp_disable_gutenberg($can_edit, $post_type)
 {

@@ -77,6 +77,10 @@ function page_options(): void
     }
 }
 
+/**
+ * @param  mixed  $attributes
+ * @return mixed
+ */
 function uamswp_attributes_entry_header($attributes)
 {
     $attributes['class'] .= ' sr-only';
@@ -84,6 +88,10 @@ function uamswp_attributes_entry_header($attributes)
     return $attributes;
 }
 
+/**
+ * @param  mixed  $attributes
+ * @return mixed
+ */
 function uamswp_attributes_entry_header_graphic_title($attributes)
 {
     // @phpstan-ignore empty.variable (variable is never assigned, see #745)
@@ -201,6 +209,10 @@ function uamswp_graphic_title_wrap_close(): void
     echo '</div>';
 }
 
+/**
+ * @param  mixed  $attributes
+ * @return mixed
+ */
 function uamswp_attributes_entry_header_landing_page_title($attributes)
 {
     // @phpstan-ignore empty.variable (variable is never assigned, see #745)
@@ -392,6 +404,8 @@ function remove_breadcrumbs(): void
 
 /**
  * Use h1 for all entry titles, linking if on archive page
+ *
+ * @param  mixed  $title
  */
 function uamswp_entry_title_h1($title): string
 {
@@ -408,6 +422,9 @@ add_filter('genesis_post_title_output', 'uamswp_entry_title_h1');
 
 // Customize the entry meta in the entry header (requires HTML5 theme support)
 add_filter('genesis_post_info', 'uamswp_post_info_filter');
+/**
+ * @param  mixed  $post_info
+ */
 function uamswp_post_info_filter($post_info): ?string
 {
     if (is_single() && get_post_type() == 'post') {
@@ -426,6 +443,9 @@ function uamswp_post_info_filter($post_info): ?string
 remove_action('genesis_entry_header', 'genesis_post_info', 12);
 add_action('genesis_entry_footer', 'genesis_post_info', 9);
 
+/**
+ * @return mixed
+ */
 function uamswp_list_child_pages()
 {
     $hidechildmenu = false;

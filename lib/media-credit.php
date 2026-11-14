@@ -9,6 +9,11 @@ declare(strict_types=1);
 
 add_filter('attachment_fields_to_edit', 'uamswp_attachment_fields_to_edit_source', 10, 2);
 
+/**
+ * @param  mixed  $form_fields
+ * @param  mixed  $post
+ * @return mixed
+ */
 function uamswp_attachment_fields_to_edit_source($form_fields, $post)
 {
 
@@ -42,6 +47,11 @@ function uamswp_attachment_fields_to_edit_source($form_fields, $post)
 
 add_filter('attachment_fields_to_save', 'uamswp_attachment_fields_to_save_source_url_name', 10, 2);
 
+/**
+ * @param  mixed  $attachment
+ * @param  mixed  $post
+ * @return mixed
+ */
 function uamswp_attachment_fields_to_save_source_url_name($post, $attachment)
 {
 
@@ -329,6 +339,12 @@ function ac_add_sources_non_captioned( $content ) {
 
 /* Replaces incorrect register block call */
 
+/**
+ * @param  mixed  $block
+ * @param  mixed  $block_content
+ * @param  mixed  $instance
+ * @return mixed
+ */
 function uamswp_core_image_add_credits($block_content, $block, $instance)
 {
 

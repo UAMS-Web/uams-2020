@@ -16,6 +16,10 @@ declare(strict_types=1);
 add_filter('genesis_prev_link_text', 'uamswp_genesis_prev_link_text_numeric');
 add_filter('genesis_next_link_text', 'uamswp_genesis_next_link_text_numeric');
 
+/**
+ * @param  mixed  $text
+ * @return mixed
+ */
 function uamswp_genesis_prev_link_text_numeric($text)
 {
     if (genesis_get_option('posts_nav') === 'numeric') {
@@ -26,6 +30,10 @@ function uamswp_genesis_prev_link_text_numeric($text)
     return $text;
 }
 
+/**
+ * @param  mixed  $text
+ * @return mixed
+ */
 function uamswp_genesis_next_link_text_numeric($text)
 {
     if (genesis_get_option('posts_nav') === 'numeric') {
@@ -37,6 +45,10 @@ function uamswp_genesis_next_link_text_numeric($text)
 }
 
 // Pagination fix for /%category%/%postname%/
+/**
+ * @param  mixed  $query_string
+ * @return mixed
+ */
 function remove_page_from_query_string($query_string)
 {
     if (isset($query_string['name'])) {

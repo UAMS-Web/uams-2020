@@ -102,6 +102,10 @@ function custom_nav_menu(): void
         // if ( ! $nav )
         //     return;
 
+        /**
+         * @param  mixed  $id
+         * @return mixed
+         */
         function uamswp_wp_list_child_pages($id)
         {
             $excluded_pages = [];
@@ -183,6 +187,9 @@ function custom_nav_menu(): void
         // * Do nothing if there is nothing to show
         // if ( ! $nav )
         //     return;
+        /**
+         * @return mixed
+         */
         function uamswp_wp_list_pages()
         {
             $excluded_pages = [];
@@ -237,6 +244,10 @@ function custom_nav_menu(): void
 
 // filter menu args for bootstrap walker and other settings
 add_filter('wp_nav_menu_args', 'uamswp_nav_menu_args_filter');
+/**
+ * @param  mixed  $args
+ * @return mixed
+ */
 function uamswp_nav_menu_args_filter($args)
 {
 
@@ -267,6 +278,11 @@ function uamswp_nav_menu_args_filter($args)
 
 // add bootstrap markup around the nav
 add_filter('wp_nav_menu', 'uamswp_nav_menu_markup_filter', 10, 2);
+/**
+ * @param  mixed  $args
+ * @param  mixed  $html
+ * @return mixed
+ */
 function uamswp_nav_menu_markup_filter($html, $args)
 {
     // only add additional Bootstrap markup to
@@ -334,6 +350,11 @@ function uamswp_navbar_content_markup(): string
 // * Filter primary navigation output to match Bootstrap markup
 // @link http://wordpress.stackexchange.com/questions/58377/using-a-filter-to-modify-genesis-wp-nav-menu/58394#58394
 add_filter('genesis_do_nav', 'uamswp_override_do_nav', 10, 3);
+/**
+ * @param  mixed  $args
+ * @param  mixed  $nav
+ * @param  mixed  $nav_output
+ */
 function uamswp_override_do_nav($nav_output, $nav, $args): string
 {
     // return the modified result

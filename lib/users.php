@@ -84,6 +84,10 @@ function uamswp_restrict_editor_theme_screens(): void
  *
  */
 
+/**
+ * @param  mixed  $user
+ * @param  mixed  $user_login
+ */
 function uamswp_user_last_login($user_login, $user): void
 {
     update_user_meta($user->ID, 'last_login', time());
@@ -96,6 +100,9 @@ add_action('wp_login', 'uamswp_user_last_login', 10, 2);
  *
  */
 
+/**
+ * @return mixed
+ */
 function uamswp_lastlogin()
 {
     // Do not disclose author login activity to public visitors.
@@ -120,6 +127,10 @@ add_shortcode('lastlogin', 'uamswp_lastlogin');
  *
  */
 
+/**
+ * @param  mixed  $column
+ * @return mixed
+ */
 function uamswp_modify_user_table($column)
 {
     $column['last_login'] = 'Last Login';
@@ -129,6 +140,12 @@ function uamswp_modify_user_table($column)
 
 add_filter('manage_users_columns', 'uamswp_modify_user_table');
 
+/**
+ * @param  mixed  $column_name
+ * @param  mixed  $user_id
+ * @param  mixed  $val
+ * @return mixed
+ */
 function uamswp_modify_user_table_row($val, $column_name, $user_id)
 {
     switch ($column_name) {
