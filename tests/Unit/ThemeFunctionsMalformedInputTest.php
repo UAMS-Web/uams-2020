@@ -9,6 +9,10 @@ use Uams2020\Tests\Support\ThemeHooks;
 use function Brain\Monkey\Functions\when;
 use function Patchwork\relay;
 
+if (! class_exists('WP_Post')) {
+    class WP_Post {}
+}
+
 beforeEach(function (): void {
     $this->savedMalformedGet = $_GET;
     $_GET = [];
@@ -85,9 +89,9 @@ it('names the site as the first crumb even when that crumb is not an array', fun
 
 it('looks up the permalink of a missing current post', function (): void {
     Functions\expect('get_the_id')->once()->andReturn(false);
-    Functions\expect('get_post_meta')->once()->with(0, 'post_custom_link', true)->andReturn('');
-    Functions\expect('get_post_format')->once()->with(0)->andReturn(false);
-    Functions\expect('get_permalink')->once()->with(0)->andReturn('https://example.test/current');
+    Functions\expect('get_post_meta')->once()->withArgs(static fn ($id, $key, $single): bool => $id === 0 && $key === 'post_custom_link' && $single === true)->andReturn('');
+    Functions\expect('get_post_format')->once()->withArgs(static fn ($id): bool => $id === 0)->andReturn(false);
+    Functions\expect('get_permalink')->once()->withArgs(static fn ($id): bool => $id === 0)->andReturn('https://example.test/current');
     expect(uams_get_permalink())->toBe('https://example.test/current');
 });
 
@@ -152,6 +156,24 @@ it('ignores an editor context that is not an object and section blocks that are 
         ->and($callback(['existing'], (object) ['post' => 5]))->not->toContain('', 7, '7');
     when('uamswp_section_allowed_blocks')->justReturn('text');
     expect($callback(['existing'], (object) ['post' => 5]))->not->toContain('text');
+});
+
+it('passes only an integer or a post object from the editor context to the template lookup', function (mixed $post, mixed $expected): void {
+    when('current_user_can')->justReturn(false);
+    when('uamswp_section_allowed_blocks')->justReturn([]);
+    Functions\expect('get_page_template_slug')->once()->withArgs(static fn ($received): bool => $received === $expected)->andReturn('templates/marketing.php');
+    $callback = ThemeHooks::callback('filter', 'allowed_block_types_all', 110);
+
+    expect($callback(['existing'], (object) ['post' => $post]))->not->toBe(['existing']);
+})->with(function (): array {
+    $post = new WP_Post;
+
+    return [
+        'integer id' => [5, 5],
+        'post object' => [$post, $post],
+        'text id' => ['5', null],
+        'other object' => [(object) ['ID' => 5], null],
+    ];
 });
 
 it('treats a geo field that is not an array as empty', function (mixed $field): void {

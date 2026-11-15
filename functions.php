@@ -407,6 +407,8 @@ function sp_pro_breadcrumbs_html($html) {
 function uamswp_field_text($value): string
 {
     if (is_scalar($value) || $value instanceof Stringable) {
+        // The `string` return type converts the same scalars and Stringable objects without the cast.
+        // @pest-mutate-ignore: RemoveStringCast
         return (string) $value;
     }
 
@@ -703,6 +705,8 @@ if (! function_exists('apStyleDate')) {
     function apStyleDate($date): string
     {
 
+        // A failed `strtotime()` returns false, which the integer parameter converts to 0 without the cast.
+        // @pest-mutate-ignore: RemoveIntegerCast
         $date = strftime('%l:%M %P', (int) strtotime(uamswp_field_text($date)));
 
         $date = str_replace(':00', '', uamswp_field_text($date));
