@@ -28,15 +28,16 @@ add_action('get_header', function (): void {
 /**
  * @param  mixed  $original_output
  * @param  mixed  $output
- * @return mixed
  */
-function uamswp_filter_structural_wrap($output, $original_output)
+function uamswp_filter_structural_wrap($output, $original_output): string
 {
-    if ($original_output == 'close') {
+    $output = uamswp_field_text($output);
+    $original_output = uamswp_field_text($original_output);
+    if ($original_output === 'close') {
         $output = '</div>'.$output;
     }
 
-    if ($original_output == 'open') {
+    if ($original_output === 'open') {
         return $output.'<div class="row">';
     }
 
@@ -60,35 +61,36 @@ function uamswp_add_array_filters_genesis_attr(): void
 /**
  * @param  mixed  $attr
  * @param  mixed  $context
- * @return mixed
+ * @return array<mixed>
  */
-function uamswp_add_markup_sanitize_classes($attr, $context)
+function uamswp_add_markup_sanitize_classes($attr, $context): array
 {
+    $attr = uamswp_field_array($attr);
     $classes = [];
 
     if (has_filter('uamswp_clean_classes_output')) {
-        $classes = apply_filters('uamswp_clean_classes_output', $classes, $context, $attr);
+        $classes = uamswp_field_array(apply_filters('uamswp_clean_classes_output', $classes, $context, $attr));
     }
 
-    $value = $classes[$context] ?? [];
+    $value = $classes[uamswp_field_text($context)] ?? [];
 
     if (is_array($value)) {
         $classes_array = $value;
     } else {
-        $classes_array = explode(' ', (string) $value);
+        $classes_array = explode(' ', uamswp_field_text($value));
     }
 
-    $classes_array = array_map(sanitize_html_class(...), $classes_array);
-    $attr['class'] .= ' '.implode(' ', $classes_array);
+    $classes_array = array_map(static fn ($class): string => sanitize_html_class(uamswp_field_text($class)), $classes_array);
+    $attr['class'] = uamswp_field_text($attr['class'] ?? null).' '.implode(' ', $classes_array);
 
     return $attr;
 }
 
 // Default array of classes to add
 /**
- * @return mixed
+ * @return array<mixed>
  */
-function uamswp_merge_genesis_attr_classes()
+function uamswp_merge_genesis_attr_classes(): array
 {
     global $wp_registered_sidebar;
     $classes = [
@@ -163,7 +165,7 @@ function uamswp_merge_genesis_attr_classes()
     // $classes['site-footer'] = esc_attr( implode( ' ', $footerclasses ) );
 
     if (has_filter('uamswp_add_classes')) {
-        return apply_filters('uamswp_add_classes', $classes);
+        return uamswp_field_array(apply_filters('uamswp_add_classes', $classes));
     }
 
     return $classes;
@@ -175,9 +177,9 @@ add_filter('uamswp_clean_classes_output', 'uamswp_modify_classes_based_on_extras
  * @param  mixed  $attr
  * @param  mixed  $classes
  * @param  mixed  $context
- * @return mixed
+ * @return array<mixed>
  */
-function uamswp_modify_classes_based_on_extras($classes, $context, $attr)
+function uamswp_modify_classes_based_on_extras($classes, $context, $attr): array
 {
     return uamswp_merge_genesis_attr_classes();
 }
@@ -189,11 +191,11 @@ add_filter('uamswp_add_classes', 'uamswp_modify_classes_based_on_template', 10, 
 // Remove unused layouts
 /**
  * @param  mixed  $classes_to_add
- * @return mixed
+ * @return array<mixed>
  */
-function uamswp_layout_options_modify_classes_to_add($classes_to_add)
+function uamswp_layout_options_modify_classes_to_add($classes_to_add): array
 {
-
+    $classes_to_add = uamswp_field_array($classes_to_add);
     $layout = genesis_site_layout();
 
     if ($layout === 'full-width-content') {
@@ -232,9 +234,9 @@ function uamswp_layout_options_modify_classes_to_add($classes_to_add)
 
 /**
  * @param  mixed  $classes_to_add
- * @return mixed
+ * @return array<mixed>
  */
-function uamswp_modify_classes_based_on_template($classes_to_add)
+function uamswp_modify_classes_based_on_template($classes_to_add): array
 {
     return uamswp_layout_options_modify_classes_to_add($classes_to_add);
 }

@@ -109,6 +109,43 @@ final class LibraryIsolatedTest extends TestCase
         self::assertSame($input + ['container' => false, 'menu_class' => 'SAFE:nav navbar-nav align-self-end '.($extra !== '' ? 'mr-auto' : 'ml-auto'), 'fallback_cb' => 'WP_Bootstrap_Navwalker::fallback'], $actual);
     }
 
+    public static function menuArgumentOddities(): array
+    {
+        return [[null, []], ['text', []], [['other' => 'keep'], ['other' => 'keep']], [['theme_location' => ['primary']], ['theme_location' => ['primary']]]];
+    }
+
+    #[DataProvider('menuArgumentOddities')]
+    public function test_menu_arguments_that_are_not_a_primary_menu(mixed $input, array $expected): void
+    {
+        expect('get_theme_mod')->once()->andReturn('');
+        self::assertSame($expected, uamswp_nav_menu_args_filter($input));
+    }
+
+    public static function failedLookupCases(): array
+    {
+        return [[false, ''], [['x'], ''], [11, '11'], ['', '']];
+    }
+
+    #[DataProvider('failedLookupCases')]
+    public function test_failed_page_lookups_list_nothing(mixed $front, string $excluded): void
+    {
+        when('get_registered_nav_menus')->justReturn(['primary' => 'Primary']);
+        when('uamswp_nav_subsection')->justReturn(7);
+        when('has_nav_menu')->justReturn(true);
+        expect('is_page')->once()->andReturn(true);
+        expect('wp_nav_menu')->once()->andReturn('UNUSED NAV');
+        expect('get_pages')->once()->with(['child_of' => 7])->andReturn(false);
+        expect('get_option')->once()->with('page_on_front')->andReturn($front);
+        expect('wp_list_pages')->once()->with(\Mockery::on(static function ($args) use ($excluded): bool {
+            self::assertSame($excluded, $args['exclude_tree']);
+
+            return true;
+        }))->andReturn('');
+        ob_start();
+        custom_nav_menu();
+        self::assertSame('', ob_get_clean());
+    }
+
     public static function pageNavigationCases(): array
     {
         return [
@@ -142,7 +179,7 @@ final class LibraryIsolatedTest extends TestCase
 
         expect('is_page')->times($subsection ? 1 : 0)->andReturn($page);
         $list = (! $subsection || $page) && ($subsection || (is_array($primary) ? true : ! $primary));
-        expect('wp_nav_menu')->times($list ? 1 : 0)->with(['theme_location' => 'primary', 'container' => '', 'menu' => $subsection ? 'subsection-navigation' : 'page-navigation', 'echo' => $subsection ? 0 : false])->andReturn('UNUSED NAV');
+        expect('wp_nav_menu')->times($list ? 1 : 0)->with(['theme_location' => 'primary', 'container' => '', 'menu' => $subsection ? 'subsection-navigation' : 'page-navigation', 'echo' => false])->andReturn('UNUSED NAV');
         $getPages = expect('get_pages')->times($list ? 1 : 0);
         if ($subsection) {
             $getPages->with(['child_of' => 7]);

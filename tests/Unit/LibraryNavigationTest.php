@@ -34,6 +34,14 @@ it('finds the nearest marked subsection unless this is a search request', functi
     [false, [9, 7], [], false, false],
 ]);
 
+it('looks up the subsection of an unknown current post as post zero', function (): void {
+    when('get_the_id')->justReturn(false);
+    Functions\expect('get_post_meta')->once()->with(0, 'page_subsection', true)->andReturn('');
+    Functions\expect('get_post_ancestors')->once()->with(0)->andReturn([]);
+    when('is_search')->justReturn(false);
+    expect(uamswp_nav_subsection())->toBeFalse();
+});
+
 it('removes primary navigation only for a subsection or missing primary menu', function ($subsection, bool $menu): void {
     Functions\expect('uamswp_nav_subsection')->once()->andReturn($subsection);
     Functions\expect('has_nav_menu')->times($subsection ? 0 : 1)->with('primary')->andReturn($menu);
@@ -64,6 +72,35 @@ it('wraps only primary menus and inserts filtered extra content when enabled', f
  * lib/nav.php: the three ConcatEqualToEqual mutations on the first append in each switch arm are
  * equivalent. Each arm starts with the same empty local output and terminates with break.
  */
+it('returns an empty string for menu markup that is not text and passes other menus through', function ($html, $args, string $expected): void {
+    Functions\expect('sanitize_html_class')->times($args === 'primary-object' ? 1 : 0)->andReturn('-SAFE');
+    Functions\expect('get_theme_mod')->times($args === 'primary-object' ? 1 : 0)->andReturn(false);
+    if ($args === 'primary-object') {
+        $args = (object) ['theme_location' => 'primary'];
+    }
+
+    expect(uamswp_nav_menu_markup_filter($html, $args))->toBe($expected);
+})->with([
+    [null, null, ''], [['x'], false, ''], ['MENU', null, 'MENU'], ['MENU', ['theme_location' => 'primary'], 'MENU'], ['MENU', (object) [], 'MENU'],
+    [['x'], 'primary-object', '<nav class="site-nav navbar navbar-expand-sm" aria-label="Primary Navigation"><div class="collapse navbar-collapse inner-container" id="genesis-nav-SAFE"></div></nav>'],
+]);
+
+it('keeps extra navbar content that is not text out of the markup', function (): void {
+    Functions\expect('sanitize_html_class')->once()->andReturn('-SAFE');
+    Functions\expect('get_theme_mod')->once()->with('navextra', false)->andReturn(true);
+    Functions\expect('uamswp_navbar_content_markup')->once()->andReturn('EXTRA');
+    expectApplied('uamswp_navbar_content')->once()->with('EXTRA')->andReturn(['not text']);
+    expect(uamswp_nav_menu_markup_filter('MENU', (object) ['theme_location' => 'primary']))->toContain('id="genesis-nav-SAFE">MENU</div>');
+});
+
+it('uses an empty date format when the option is not text', function ($format): void {
+    Functions\expect('get_home_url')->once()->andReturn('https://home.test/');
+    Functions\expect('get_theme_mod')->once()->with('navextra', 'search')->andReturn('date');
+    Functions\expect('get_option')->once()->with('date_format')->andReturn($format);
+    Functions\expect('date_i18n')->once()->with('')->andReturn('DATE');
+    expect(uamswp_navbar_content_markup())->toBe('<p class="navbar-text navbar-right mb-0">DATE</p>');
+})->with([[false], [null], [['Y']]]);
+
 it('pins search, date, empty and unknown navigation-extra choices', function ($choice, string $expected): void {
     Functions\expect('get_home_url')->once()->withNoArgs()->andReturn('https://home.test/');
     Functions\expect('get_theme_mod')->once()->with('navextra', 'search')->andReturn($choice);
@@ -79,6 +116,10 @@ it('pins search, date, empty and unknown navigation-extra choices', function ($c
 it('returns only the supplied navigation body', function (): void {
     expect(uamswp_override_do_nav('ignored', '<ul>MENU</ul>', ['ignored']))->toBe('<ul>MENU</ul>');
 });
+
+it('returns an empty navigation body when the generated menu is not text', function ($nav): void {
+    expect(uamswp_override_do_nav('ignored', $nav, ['ignored']))->toBe('');
+})->with([[null], [false], [['x']]]);
 
 it('uses SEO breadcrumbs when available and registers Genesis otherwise', function (bool $available): void {
     if ($available) {

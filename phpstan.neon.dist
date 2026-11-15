@@ -292,10 +292,6 @@ parameters:
             count: 5
         -
             identifier: argument.type
-            path: lib/nav.php
-            count: 10
-        -
-            identifier: argument.type
             path: lib/page.php
             count: 22
         -
@@ -329,10 +325,6 @@ parameters:
             identifier: foreach.nonIterable
             path: functions.php
             count: 3
-        -
-            identifier: foreach.nonIterable
-            path: lib/nav.php
-            count: 2
         # Array access on a value that WordPress or ACF may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: offsetAccess.nonOffsetAccessible
@@ -389,10 +381,6 @@ parameters:
             identifier: argument.type
             path: lib/blocks.php
             count: 3
-        -
-            identifier: argument.type
-            path: lib/bootstrap.php
-            count: 2
         # Concatenation or arithmetic on a `mixed` value from `get_field()` or an option that PHPStan cannot prove is a string or number. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: binaryOp.invalid
@@ -417,10 +405,6 @@ parameters:
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/footer-widgets.php
             count: 1
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/nav.php
-            count: 7
         # image_sizer() returns a value PHPStan types as `mixed` from a WordPress or plugin call. Proving it a string needs a runtime check that changes behavior.
         -
             identifier: return.type
@@ -466,14 +450,6 @@ parameters:
             count: 1
         -
             identifier: assignOp.invalid
-            path: lib/bootstrap.php
-            count: 1
-        -
-            identifier: assignOp.invalid
-            path: lib/nav.php
-            count: 2
-        -
-            identifier: assignOp.invalid
             path: lib/page.php
             count: 5
         # Arithmetic or concatenation on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
@@ -481,10 +457,6 @@ parameters:
             identifier: binaryOp.invalid
             path: lib/a11y.php
             count: 1
-        -
-            identifier: binaryOp.invalid
-            path: lib/bootstrap.php
-            count: 2
         -
             identifier: binaryOp.invalid
             path: lib/footer.php
@@ -499,21 +471,12 @@ parameters:
             count: 3
         -
             identifier: binaryOp.invalid
-            path: lib/nav.php
-            count: 2
-        -
-            identifier: binaryOp.invalid
             path: lib/quicklinks.php
             count: 4
         -
             identifier: binaryOp.invalid
             path: lib/widgets.php
             count: 2
-        # A string cast of a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: cast.string
-            path: lib/bootstrap.php
-            count: 1
         # Output of a value PHPStan types as mixed, such as the result of get_field(). Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: echo.nonString
@@ -555,11 +518,6 @@ parameters:
             identifier: offsetAccess.invalidOffset
             path: functions.php
             count: 5
-        # Array access on a value PHPStan types as mixed, such as the result of get_field(). Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/bootstrap.php
-            count: 14
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/breadcrumb.php
@@ -609,10 +567,6 @@ parameters:
             identifier: property.nonObject
             path: lib/media-credit.php
             count: 5
-        -
-            identifier: property.nonObject
-            path: lib/nav.php
-            count: 2
         -
             identifier: property.nonObject
             path: lib/users.php
@@ -668,6 +622,11 @@ parameters:
         # `wp_list_pages()` is declared void by the WordPress stubs, though it returns the markup when `echo` is false. The stub is wrong and cannot be corrected here.
         -
             identifier: function.void
+            path: lib/nav.php
+            count: 2
+        # `wp_list_pages()` takes a `walker` argument that PHPStan can prove is a `Walker`, and `WP_Bootstrap_Pagewalker` has no stubs, so the argument shape is rejected. No stub package may be added (scope ruling on #773), so it cannot be typed.
+        -
+            identifier: argument.type
             path: lib/nav.php
             count: 2
         # The filter callback `uamswp_footer_creds_text()` echoes its output and returns nothing, so the filtered option becomes null. Returning a value would change the rendered footer.

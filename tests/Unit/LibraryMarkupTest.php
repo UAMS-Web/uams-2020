@@ -31,6 +31,12 @@ it('preserves structural wrapper content at every boundary', function ($original
     expect(uamswp_filter_structural_wrap('BASE', $original))->toBe($expected);
 })->with([['open', 'BASE<div class="row">'], ['close', '</div>BASE'], ['other', 'BASE'], ['', 'BASE']]);
 
+it('reads wrapper content and markers that are not text as empty', function ($output, $original, string $expected): void {
+    expect(uamswp_filter_structural_wrap($output, $original))->toBe($expected);
+})->with([
+    [null, 'open', '<div class="row">'], [['x'], 'close', '</div>'], ['BASE', ['open'], 'BASE'], ['BASE', null, 'BASE'], [false, true, ''],
+]);
+
 it('registers the footer row wrapper on the header hook', function (): void {
     expectAdded('genesis_structural_wrap-footer-widgets')->once()->with('uamswp_filter_structural_wrap', 10, 2);
     LibraryLoader::callback('get_header')();
@@ -76,7 +82,31 @@ it('sanitizes each extra class while preserving other attributes', function ($va
     [['entry' => 7], '[7]', true],
     [['other' => ['red']], '', true],
     [[], '', false],
+    ['text', '', true],
+    [null, '', true],
 ]);
+
+it('sanitizes classes when the attributes, existing class or context are not what Genesis supplies', function ($attr, $context, array $expected): void {
+    when('sanitize_html_class')->alias(static fn ($class): string => '['.$class.']');
+    expect(uamswp_add_markup_sanitize_classes($attr, $context))->toBe($expected);
+})->with([
+    [null, 'entry', ['class' => ' ']], [false, 'entry', ['class' => ' ']],
+    [['class' => ['x'], 'id' => 'keep'], 'entry', ['class' => ' ', 'id' => 'keep']],
+    [['class' => 'base'], null, ['class' => 'base ']], [['class' => 'base'], ['entry'], ['class' => 'base ']],
+]);
+
+it('builds layout classes from a class list that is not an array', function ($classes): void {
+    Functions\expect('genesis_site_layout')->twice()->andReturn('full-width-content');
+    expect(uamswp_layout_options_modify_classes_to_add($classes))->toBe(['content' => 'col-sm-12'])
+        ->and(uamswp_modify_classes_based_on_template($classes))->toBe(['content' => 'col-sm-12']);
+})->with([[null], [false], ['text']]);
+
+it('ignores a class-map filter that does not return an array', function (): void {
+    when('esc_attr')->alias(static fn ($value): string => '['.$value.']');
+    add_filter('uamswp_add_classes', 'strval');
+    expectApplied('uamswp_add_classes')->once()->andReturn('not an array');
+    expect(uamswp_merge_genesis_attr_classes())->toBe([]);
+});
 
 it('pins every supported layout and preserves unrelated classes', function (string $layout, array $overrides): void {
     Functions\expect('genesis_site_layout')->twice()->andReturn($layout);
