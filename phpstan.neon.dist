@@ -157,9 +157,11 @@ parameters:
     # an entry needs. With every entry commented out the key is empty, which
     # PHPStan reads as no entries.
     ignoreErrors:
+        # `sp_pro_breadcrumbs_css()` is registered with `add_action()` on `seopress_pro_breadcrumbs_css`, which SEOPress applies as a filter, so the callback has to return `false`. PHPStan reads an action callback as one that must return nothing. Switching to `add_filter()` changes the registration that `theme-hook-registrations.json` pins.
         -
             identifier: return.void
-            reportUnmatched: false
+            path: functions.php
+            count: 1
         # WordPress `remove_action()` reads only its first three arguments; the fourth in
         # functions.php is pinned by a mutation annotation, and removing it changes the call a test asserts.
         -
@@ -277,18 +279,11 @@ parameters:
             identifier: argument.type
             path: lib/scripts.php
             count: 2
-        # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        # A foreach over a value that WordPress or ACF may return as false. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        # Array access on a value that WordPress or ACF may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        # Property access on a value that WordPress may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        # An argument whose declared type does not match the parameter, usually mixed, false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         # `gallery_image_dimension()` documents `$ratio` as `int`, and the crop select passes a decimal string such as '1.7778' or -1, so the seven calls read as mismatched. Correcting the docblock belongs to `functions.php`, outside this slice, tracked in #780.
         -
             identifier: argument.type
             path: blocks/gallery.php
             count: 7
-        # Concatenation or arithmetic on a `mixed` value from `get_field()` or an option that PHPStan cannot prove is a string or number. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        # Array access on a `mixed` block field from ACF. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         # `image_sizer()`, `wp_get_attachment_url()`, `wp_get_attachment_image_url()` and `get_post_meta()` take the ACF image value, an attachment ID or an array depending on the field's return format (this field sets none, so ACF's default applies). Casting it would change what those functions receive, tracked in #780.
         -
             identifier: argument.type
@@ -306,9 +301,6 @@ parameters:
             identifier: argument.type
             path: blocks/overlay.php
             count: 15
-        # A compound assignment on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        # Arithmetic or concatenation on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        # Output of a value PHPStan types as mixed, such as the result of get_field(). Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         # A method call on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: method.nonObject
@@ -318,7 +310,6 @@ parameters:
             identifier: method.nonObject
             path: lib/customizer.php
             count: 2
-        # Property access on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         # The hook is registered with more accepted arguments than the callback declares, and a test pins every hook's accepted-argument count. Changing it alters the hook contract.
         -
             identifier: arguments.count
