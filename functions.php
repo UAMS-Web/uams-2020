@@ -236,9 +236,9 @@ function uamswp_skip_links(): void
 add_filter('genesis_attr_site-header', 'uamswp_add_aria');
 /**
  * @param  mixed  $attributes
- * @return mixed
+ * @return mixed[]
  */
-function uamswp_add_aria($attributes)
+function uamswp_add_aria($attributes): array
 {
     $attributes = uamswp_field_array($attributes);
     if (isset($attributes['aria-label'])) {
@@ -304,9 +304,9 @@ function uams_breadcrumb_home($crumb)
 add_filter('seopress_pro_breadcrumbs_crumbs', 'sp_pro_breadcrumbs_crumbs');
 /**
  * @param  mixed  $crumbs
- * @return mixed
+ * @return mixed[]
  */
-function sp_pro_breadcrumbs_crumbs($crumbs)
+function sp_pro_breadcrumbs_crumbs($crumbs): array
 {
     $crumbs = uamswp_field_array($crumbs);
     // $crumbs is a multidimensional array.
@@ -640,12 +640,10 @@ function format_phone($country, $phone)
 // usage
 // $phone = format_phone('us', $phone);
 // echo $phone;
-
 /**
  * @param  mixed  $phone
- * @return mixed
  */
-function format_phone_us($phone)
+function format_phone_us($phone): ?string
 {
     // note: making sure we have something
     if (! is_string($phone) || ! isset($phone[3])) {
@@ -672,9 +670,8 @@ function format_phone_us($phone)
 
 /**
  * @param  mixed  $phone
- * @return mixed
  */
-function format_phone_dash($phone)
+function format_phone_dash($phone): ?string
 {
     // note: making sure we have something
     if (! is_string($phone) || ! isset($phone[3])) {
@@ -741,7 +738,7 @@ class SlidingWindowRateLimiter
         $this->storage[$clientId] ??= [];
 
         // Remove outdated timestamps
-        $this->storage[$clientId] = array_filter($this->storage[$clientId], fn ($timestamp): bool => $timestamp > $windowStart);
+        $this->storage[$clientId] = array_filter($this->storage[$clientId], fn (int $timestamp): bool => $timestamp > $windowStart);
 
         if (count($this->storage[$clientId]) < $this->limit) {
             $this->storage[$clientId][] = $currentTime;
@@ -768,7 +765,7 @@ class SlidingWindowRateLimiter
  * @param  string  $fallback_size  WordPress image size name to use as fallback (default: 'full')
  * @return string|null Image URL (cached, fallback, or original), or null when the input is invalid
  */
-function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center', $fallback_size = 'full')
+function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center', $fallback_size = 'full'): ?string
 {
     if (! function_exists('bis_get_attachment_image') || empty($id) || empty(wp_get_attachment_image_src($id))) {
         return null; // Validate input
@@ -856,7 +853,7 @@ function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = '
  * @param  string  $fallback_size  WordPress image size name
  * @return string Image URL
  */
-function image_sizer_get_fallback($id, $fallback_size)
+function image_sizer_get_fallback($id, $fallback_size): string
 {
     // Allow overriding default fallback size via filter
     $default_fallback = uamswp_field_text(apply_filters('image_sizer_default_fallback', 'full'));
@@ -883,7 +880,7 @@ function image_sizer_get_fallback($id, $fallback_size)
 /**
  * Register custom cron schedule
  */
-add_filter('cron_schedules', function ($schedules) {
+add_filter('cron_schedules', function ($schedules): array {
     $schedules = uamswp_field_array($schedules);
     $schedules['ten_seconds'] = [
         'interval' => 10, // 10 seconds
@@ -898,7 +895,7 @@ add_filter('cron_schedules', function ($schedules) {
  */
 add_action('process_image_sizer_queue', function (): void {
     $queue = uamswp_field_array(get_option('image_sizer_queue', []));
-    if (empty($queue)) {
+    if ($queue === []) {
         return;
     }
 
@@ -939,7 +936,7 @@ add_action('process_image_sizer_queue', function (): void {
     }
 
     // Update queue
-    if (empty($queue)) {
+    if ($queue === []) {
         delete_option('image_sizer_queue');
         // Clear cron if queue is empty
         wp_clear_scheduled_hook('process_image_sizer_queue');
@@ -969,7 +966,7 @@ add_action('admin_notices', function (): void {
         return;
     }
     $queue = uamswp_field_array(get_option('image_sizer_queue', []));
-    if (! empty($queue)) {
+    if ($queue !== []) {
         $url = wp_nonce_url(admin_url('upload.php?process_image_queue=1'), 'process_image_queue_nonce');
         echo '<div class="notice notice-info"><p>';
         echo 'Image resizing queue has '.count($queue).' pending jobs. ';
@@ -1059,9 +1056,9 @@ add_filter('dynamic_sidebar_params', 'footer_widgets');
  * Register our callback function
  *
  * @param  mixed  $params
- * @return mixed
+ * @return mixed[]
  */
-function footer_widgets($params)
+function footer_widgets($params): array
 {
     $params = uamswp_field_array($params);
     $sidebar = uamswp_field_array($params[0] ?? null);
@@ -1324,9 +1321,9 @@ function uamswp_force_geo($value, $post_id, $field): string
 }
 /**
  * @param  mixed  $field
- * @return mixed
+ * @return mixed[]
  */
-function uamswp_set_geo($field)
+function uamswp_set_geo($field): array
 {
     $field = uamswp_field_array($field);
     if (function_exists('geoip_detect2_get_external_ip_adress')) {
