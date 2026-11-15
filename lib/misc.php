@@ -35,7 +35,7 @@ function uamswp_get_first_image(): string
     global $post, $posts;
     ob_start();
     ob_end_clean();
-    $content = is_object($post) ? uamswp_field_text($post->post_content ?? null) : '';
+    $content = uamswp_field_text(is_object($post) ? ($post->post_content ?? null) : null);
     preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches);
 
     return $matches[1][0] ?? '';
