@@ -124,7 +124,7 @@ function uamswp_footer_creds_text(): void
         $footer_image_site = 'main';
     }
 
-    $footer_image = '<img src="'.get_stylesheet_directory_uri().'/assets/svg/uams-logo_'.$footer_image_site.'_horizontal_white.svg" alt="'.$footer_image_title.' Logo" itemprop="image" />';
+    $footer_image = '<img src="'.get_stylesheet_directory_uri().'/assets/svg/uams-logo_'.uamswp_field_text($footer_image_site).'_horizontal_white.svg" alt="'.$footer_image_title.' Logo" itemprop="image" />';
 
     // printf( '<a href="%s" class="logo">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title );
 
@@ -136,11 +136,8 @@ function uamswp_footer_creds_text(): void
      * Start Address
      */
     /* Institutes, NW Campus, & Regional Campus get new address option */
-    $custom_addresses = get_field('uamswp_address', 'option');
-    $custom_count = 0; // @pest-mutate-ignore: DecrementInteger,IncrementInteger
-    if ($custom_addresses) {
-        $custom_count = count($custom_addresses);
-    }
+    $custom_addresses = uamswp_field_array(get_field('uamswp_address', 'option'));
+    $custom_count = count($custom_addresses);
 
     $address_sr = '';
     if ($custom_count < 2) {
@@ -148,17 +145,24 @@ function uamswp_footer_creds_text(): void
     }
 
     // Overrides, if available
-    if (! empty($custom_addresses) && (($site == 'institute') || ($subsite == 'nw-campus') || ($subsite == 'advancement') || (startsWith($subsite, 'regional-')))) {
+    if ($custom_addresses !== [] && (($site == 'institute') || ($subsite == 'nw-campus') || ($subsite == 'advancement') || (startsWith($subsite, 'regional-')))) {
         $address = '<div itemscope="" itemtype="https://schema.org/LocalBusiness" class="schema">';
         $address .= sprintf('<a href="%s" class="logo" itemprop="url">%s<span class="sr-only">%s</span></a>', $footer_image_url, $footer_image, $footer_image_title);
         $address .= '<span itemprop="name" class="sr-only">'.$footer_image_title.'</span>';
         foreach ($custom_addresses as $custom_address) {
+            $custom_address = uamswp_field_array($custom_address);
+            $address_title = uamswp_field_text($custom_address['address_title'] ?? null);
+            $address_street_1 = uamswp_field_text($custom_address['address_street_1'] ?? null);
+            $address_street_2 = uamswp_field_text($custom_address['address_street_2'] ?? null);
+            $address_city = uamswp_field_text($custom_address['address_city'] ?? null);
+            $address_state = uamswp_field_text($custom_address['address_state'] ?? null);
+            $address_zip = uamswp_field_text($custom_address['address_zip'] ?? null);
             $address .= '<div class="schema-address" itemprop="address" itemscope="" itemtype="https://schema.org/PostalAddress">';
-            $address .= '<strong'.(! empty($custom_address['address_title']) ? '>'.esc_html($custom_address['address_title']) : $address_sr.'>Mailing Address').':</strong> ';
-            $address .= '<span itemprop="streetAddress">'.(! empty($custom_address['address_street_1']) ? esc_html($custom_address['address_street_1']) : '4301 West Markham Street').(! empty($custom_address['address_street_2']) ? ' '.esc_html($custom_address['address_street_2']) : '').'</span>, ';
-            $address .= '<span itemprop="addressLocality">'.(! empty($custom_address['address_city']) ? esc_html($custom_address['address_city']) : 'Little Rock').'</span>, ';
-            $address .= '<span itemprop="addressRegion">'.(! empty($custom_address['address_state']) ? esc_html($custom_address['address_state']) : 'AR').'</span> ';
-            $address .= '<span itemprop="postalCode">'.(! empty($custom_address['address_zip']) ? esc_html($custom_address['address_zip']) : '72205').'</span>';
+            $address .= '<strong'.(! empty($address_title) ? '>'.esc_html($address_title) : $address_sr.'>Mailing Address').':</strong> ';
+            $address .= '<span itemprop="streetAddress">'.(! empty($address_street_1) ? esc_html($address_street_1) : '4301 West Markham Street').(! empty($address_street_2) ? ' '.esc_html($address_street_2) : '').'</span>, ';
+            $address .= '<span itemprop="addressLocality">'.(! empty($address_city) ? esc_html($address_city) : 'Little Rock').'</span>, ';
+            $address .= '<span itemprop="addressRegion">'.(! empty($address_state) ? esc_html($address_state) : 'AR').'</span> ';
+            $address .= '<span itemprop="postalCode">'.(! empty($address_zip) ? esc_html($address_zip) : '72205').'</span>';
             $address .= '</div>';
         }
 
@@ -184,13 +188,13 @@ function uamswp_footer_creds_text(): void
     /**
      * Start Phone
      */
-    $primary_phone_text = get_field('uamswp_primary_phone_text', 'option') ?: 'Phone';
-    $primary_phone_number = get_field('uamswp_primary_phone_number', 'option') ?: '501-686-7000';
-    $secondary_type = get_field('uamswp_secondary_number_type', 'option');
-    $secondary_link_text = get_field('uamswp_secondary_link_text', 'option') ?: 'Additional Phone Numbers';
-    $secondary_link_url = get_field('uamswp_secondary_link_url', 'option');
-    $secondary_phone_text = get_field('uamswp_secondary_phone_text', 'option') ?: 'Additional Phone';
-    $secondary_phone_number = get_field('uamswp_secondary_phone_number', 'option');
+    $primary_phone_text = uamswp_field_text(get_field('uamswp_primary_phone_text', 'option')) ?: 'Phone';
+    $primary_phone_number = uamswp_field_text(get_field('uamswp_primary_phone_number', 'option')) ?: '501-686-7000';
+    $secondary_type = uamswp_field_text(get_field('uamswp_secondary_number_type', 'option'));
+    $secondary_link_text = uamswp_field_text(get_field('uamswp_secondary_link_text', 'option')) ?: 'Additional Phone Numbers';
+    $secondary_link_url = uamswp_field_array(get_field('uamswp_secondary_link_url', 'option'));
+    $secondary_phone_text = uamswp_field_text(get_field('uamswp_secondary_phone_text', 'option')) ?: 'Additional Phone';
+    $secondary_phone_number = uamswp_field_text(get_field('uamswp_secondary_phone_number', 'option'));
 
     // Render this by default
     echo '<div class="schema-phone">';
@@ -211,14 +215,14 @@ function uamswp_footer_creds_text(): void
     // Replace both telephone values (text and href) if the custom telephone field has a value.
     // Format user input as "+1-XXX-XXX-XXXX" format in href="tel:" value
     // Format user input as "XXX-XXX-XXXX" format in text value.
-    echo '<span itemprop="telephone"><a href="tel:'.format_phone('dash', $primary_phone_number).'" aria-labelledby="footer-phone-label">'.format_phone('us', $primary_phone_number).'</a></span>';
+    echo '<span itemprop="telephone"><a href="tel:'.uamswp_field_text(format_phone('dash', $primary_phone_number)).'" aria-labelledby="footer-phone-label">'.uamswp_field_text(format_phone('us', $primary_phone_number)).'</a></span>';
 
-    if ($secondary_type == 'link') {
+    if ($secondary_type === 'link') {
         // Render link.
-        echo $secondary_link_url ? '<br /><a class="more-phone" href="'.esc_url($secondary_link_url['url']).'">'.esc_html($secondary_link_text).'</a>' : '';
-    } elseif ($secondary_type == 'phone') {
+        echo $secondary_link_url !== [] ? '<br /><a class="more-phone" href="'.esc_url(uamswp_field_text($secondary_link_url['url'] ?? null)).'">'.esc_html($secondary_link_text).'</a>' : '';
+    } elseif ($secondary_type === 'phone') {
         // Render phone.
-        echo $secondary_phone_number ? '</div><div class="schema-phone"><'.($custom_count < 2 ? 'span' : 'strong').' id="footer-phone-label-2">'.esc_html($secondary_phone_text).':</'.($custom_count < 2 ? 'span' : 'strong').'> <span itemprop="telephone"><a href="tel:'.format_phone('dash', $secondary_phone_number).'" aria-labelledby="footer-phone-label-2">'.format_phone('us', $secondary_phone_number).'</a></span>' : '';
+        echo $secondary_phone_number ? '</div><div class="schema-phone"><'.($custom_count < 2 ? 'span' : 'strong').' id="footer-phone-label-2">'.esc_html($secondary_phone_text).':</'.($custom_count < 2 ? 'span' : 'strong').'> <span itemprop="telephone"><a href="tel:'.uamswp_field_text(format_phone('dash', $secondary_phone_number)).'" aria-labelledby="footer-phone-label-2">'.uamswp_field_text(format_phone('us', $secondary_phone_number)).'</a></span>' : '';
     } else { // None
         // Do nothing
     }

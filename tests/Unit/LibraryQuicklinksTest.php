@@ -90,8 +90,7 @@ it('pins the complete tray for remote, local and unassigned quick-link menus', f
     ]);
     when('esc_url')->alias(static fn ($value): string => 'SAFE:'.$value);
     $render = static fn (): string => LibraryBrandingScenario::render('uamswp_quicklinks');
-    $actual = $case === 'custom empty' ? LibraryWarnings::capture('uamswp_quicklinks', array_map(static fn (string $property): string => 'Attempt to read property "'.$property.'" on false', ['title', 'url', 'classes', 'target']), $render) : $render();
-    expect($actual)->toBe($expected);
+    expect($render())->toBe($expected);
 })->with(array_map(static fn ($case, $expected): array => [$case, $expected], array_keys(json_decode(file_get_contents(__DIR__.'/../Fixtures/library-quicklinks-output.json'), true, flags: JSON_THROW_ON_ERROR)), array_values(json_decode(file_get_contents(__DIR__.'/../Fixtures/library-quicklinks-output.json'), true, flags: JSON_THROW_ON_ERROR))));
 
 it('pins the missing-primary-location warning alongside the no-menu error', function (): void {
@@ -119,3 +118,50 @@ it('selects remote endpoints for stringable site identities', function (string $
     ['uamshealth', 'https://uamshealth.com/wp-json/menus/v2/quicklinks/'],
     ['inside', 'https://inside.uams.edu/wp-json/menus/v2/quicklinks/'],
 ]);
+
+it('reads the menu id as zero unless the menu is an object with a term id', function ($menu, int $expected): void {
+    expect(uamswp_quicklink_menu_id($menu))->toBe($expected);
+})->with([[false, 0], [null, 0], [['term_id' => 29], 0], [(object) [], 0], [(object) ['term_id' => '29'], 29], [(object) ['term_id' => 29], 29], [(object) ['term_id' => ['x']], 0]]);
+
+it('reads every quick-link field as an empty value when it is missing or not text', function ($item, array $expected): void {
+    expect(uamswp_quicklink_item($item))->toBe($expected);
+})->with([
+    [false, ['id' => 0, 'parent' => 0, 'title' => '', 'url' => '', 'classes' => [], 'target' => '', 'attr_title' => '']],
+    [['title' => 'array item'], ['id' => 0, 'parent' => 0, 'title' => '', 'url' => '', 'classes' => [], 'target' => '', 'attr_title' => '']],
+    [(object) [], ['id' => 0, 'parent' => 0, 'title' => '', 'url' => '', 'classes' => [], 'target' => '', 'attr_title' => '']],
+    [(object) ['ID' => '7', 'menu_item_parent' => '3', 'title' => 'T', 'url' => '/u', 'classes' => ['a', 5, null], 'target' => '_blank', 'attr_title' => 'At'], ['id' => 7, 'parent' => 3, 'title' => 'T', 'url' => '/u', 'classes' => ['a', '5', ''], 'target' => '_blank', 'attr_title' => 'At']],
+    [(object) ['title' => ['x'], 'url' => null, 'classes' => 'fas', 'target' => false, 'attr_title' => ['y']], ['id' => 0, 'parent' => 0, 'title' => '', 'url' => '', 'classes' => [], 'target' => '', 'attr_title' => '']],
+]);
+
+it('renders no remote links when the response is not a list of menu items', function ($body): void {
+    when('uams_get_site_info')->justReturn(['site' => 'uams']);
+    Functions\expect('wp_remote_get')->once()->andReturn(['response' => 'ok']);
+    when('is_wp_error')->justReturn(false);
+    Functions\expect('wp_remote_retrieve_body')->once()->andReturn($body);
+    ob_start();
+    $result = uamswp_request_quicklinks();
+    expect(ob_get_clean())->toBe('')->and($result)->toBeNull();
+})->with([[null], [false], ['"text"'], ['{"a":{"title":"x"}}'], ['5']]);
+
+it('renders remote links whose fields are missing or not text as empty values', function (): void {
+    when('uams_get_site_info')->justReturn(['site' => 'uams']);
+    Functions\expect('wp_remote_get')->once()->andReturn(['response' => 'ok']);
+    when('is_wp_error')->justReturn(false);
+    Functions\expect('wp_remote_retrieve_body')->once()->andReturn('[{"title":["x"],"url":null,"classes":"fas","target":false},"text"]');
+    when('esc_url')->alias(static fn ($url): string => 'SAFE:'.$url);
+    ob_start();
+    uamswp_request_quicklinks();
+    expect(ob_get_clean())->toBe('<ul class="list-unstyled links links-large"><li><a href="SAFE:"></a></li><li><a href="SAFE:"></a></li></ul>');
+});
+
+it('returns only top-level quick-link items whose parent is zero or not a number', function (): void {
+    Functions\expect('get_nav_menu_locations')->once()->andReturn(['quick-links' => 19]);
+    Functions\expect('wp_get_nav_menu_object')->once()->with(19)->andReturn((object) ['term_id' => 29]);
+    Functions\expect('wp_get_nav_menu_items')->once()->with(29)->andReturn([
+        (object) ['ID' => 3, 'menu_item_parent' => 'x', 'title' => 'Odd'], (object) ['ID' => 4, 'menu_item_parent' => '2'], 'not an object',
+    ]);
+    expect(quicklinks_menu(null))->toBe([
+        ['id' => 3, 'title' => 'Odd', 'url' => '', 'classes' => [], 'target' => '', 'link_title' => ''],
+        ['id' => 0, 'title' => '', 'url' => '', 'classes' => [], 'target' => '', 'link_title' => ''],
+    ]);
+});

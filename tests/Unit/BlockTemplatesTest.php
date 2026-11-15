@@ -182,8 +182,8 @@ it('uses the legacy link-list fallback icon when icons are enabled', function ()
     $case = $blockCasesByLabel['link-list-2']['toggle-link_list_icons'];
     $case['fields']['link_list_section'][1]['link_list_section_icon'] = false;
     $actual = BlockTemplateScenario::render($case);
-    Assert::assertSame(1, substr_count($actual['html'], 'class="fas fa-link fa-stack-1x fa-inverse"'));
-    Assert::assertStringContainsString($case['fields']['link_list_section'][0]['link_list_section_icon'].' fa-stack-1x fa-inverse', $actual['html']);
+    Assert::assertSame(1, substr_count($actual['html'], 'class="ATTR(fas fa-link) fa-stack-1x fa-inverse"'));
+    Assert::assertStringContainsString($case['fields']['link_list_section'][0]['link_list_section_icon'].') fa-stack-1x fa-inverse', $actual['html']);
 });
 
 it('floors fractional counter values above the display threshold', function () use ($blockBaseCases): void {
@@ -251,7 +251,7 @@ it('keeps empty nested link targets in the printed false arm', function (string 
 
     unset($row);
     $actual = BlockTemplateScenario::render($case);
-    $attribute = $name === 'link-list-2' ? ' target="_blank"' : ' target="ATTR(_blank)"';
+    $attribute = ' target="ATTR(_blank)"';
     $expected = str_replace($attribute, '', $case['expected']['html']);
     Assert::assertTrue($expected === $actual['html'], 'Empty nested target changed printed block markup.');
 })->with([
@@ -601,4 +601,47 @@ it('releases an ephemeral fullscreen field before iframe markup', function () us
     };
     $actual = BlockTemplateScenario::render($case, $body);
     Assert::assertTrue('[fullscreen-release]'.$case['expected']['html'] === $actual['html'], 'Fullscreen field lifetime changed.');
+});
+
+it('escapes the same sinks in link-list-2 as in link-list for the same input', function (string $label) use ($blockTemplateCases): void {
+    $sinks = static function (string $name) use ($blockTemplateCases, $label): array {
+        $case = array_values(array_filter($blockTemplateCases, static fn (array $case): bool => $case['name'] === $name && $case['label'] === $label))[0];
+        preg_match_all('/(?:ATTR|HTML|URL)\([^)]*\)/', BlockTemplateScenario::render($case)['html'], $matches);
+
+        return array_values(array_unique($matches[0]));
+    };
+    $sinksLinkList2 = $sinks('link-list-2');
+    expect($sinksLinkList2)->not->toBeEmpty();
+    $sinksLinkList = $sinks('link-list');
+    sort($sinksLinkList2);
+    sort($sinksLinkList);
+    expect($sinksLinkList2)->toBe($sinksLinkList);
+})->with(['fields', 'preview', 'custom-anchor']);
+
+it('escapes the icon class in link-list-2', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['link-list-2'];
+    $case['fields']['link_list_icons'] = true;
+    $html = BlockTemplateScenario::render($case)['html'];
+    expect($html)->toContain('<span class="ATTR(link_list_section_icon <&") fa-stack-1x fa-inverse"></span>');
+    $case['fields']['link_list_section'][0]['link_list_section_icon'] = '';
+    expect(BlockTemplateScenario::render($case)['html'])->toContain('<span class="ATTR(fas fa-link) fa-stack-1x fa-inverse"></span>');
+});
+
+it('keeps a caller-supplied link-list-2 id when a block is also set', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['link-list-2'];
+    $case['variables']['id'] = 'caller-id';
+    expect(BlockTemplateScenario::render($case)['html'])->toContain('id="ATTR(link-list-caller-id)"');
+});
+
+it('counts a link-list-2 module index that is not an integer as its integer part', function () use ($blockCasesByLabel): void {
+    $case = $blockCasesByLabel['link-list-2']['no-block'];
+    $case['variables']['i'] = 4.5;
+    expect(BlockTemplateScenario::render($case)['html'])->toContain('id="ATTR(link-list-module-5)"');
+});
+
+it('prints non-text preview regions of link-list-2 as empty text', function () use ($blockCasesByLabel): void {
+    $case = $blockCasesByLabel['link-list-2']['preview'];
+    $case['fields']['link_list_geo'] = 'include';
+    $case['fields']['link_list_geo_region'] = ['AR', ['x'], 7];
+    expect(BlockTemplateScenario::render($case)['html'])->toStartWith('HTML(Include) region(s): HTML(AR, , 7)<hr>');
 });
