@@ -23,13 +23,17 @@ declare(strict_types=1);
  */
 function uamswp_nav_subsection()
 {
+    // Both start values are overwritten when a subsection is found, and an unfound subsection returns false either way.
+    // @pest-mutate-ignore: FalseToTrue
     $subsection = false;
+    // @pest-mutate-ignore: FalseToTrue
     $id = false;
-    if (get_post_meta(get_the_id(), 'page_subsection', true)) {
-        $id = get_the_id();
+    $current_id = get_the_id() ?: 0;
+    if (get_post_meta($current_id, 'page_subsection', true)) {
+        $id = $current_id;
         $subsection = true;
     } else {
-        $parents = get_post_ancestors(get_the_id());
+        $parents = get_post_ancestors($current_id);
         foreach ($parents as $parent) {
             $parentsection = get_post_meta($parent, 'page_subsection', true);
             if (! empty($parentsection)) {
@@ -92,7 +96,7 @@ function custom_nav_menu(): void
             'container' => '',
             'menu' => 'subsection-navigation', // !important! you need to give the name/slug of your menu
             // 'menu_class'     => $class,
-            'echo' => 0,
+            'echo' => false,
         ];
 
         wp_nav_menu($args);
@@ -102,21 +106,21 @@ function custom_nav_menu(): void
         //     return;
 
         /**
-         * @param  mixed  $id
          * @return mixed
          */
-        function uamswp_wp_list_child_pages($id)
+        function uamswp_wp_list_child_pages(int $id)
         {
             $excluded_pages = [];
             $all_pages = get_pages(['child_of' => $id]);
+            $all_pages = is_array($all_pages) ? $all_pages : [];
             foreach ($all_pages as $the_page) {
-                $hide = get_post_meta($the_page->ID, 'page_hide_from_menu');
+                $hide = uamswp_field_array(get_post_meta($the_page->ID, 'page_hide_from_menu'));
                 if (isset($hide[0]) && $hide[0] == '1') {
                     $excluded_pages[] = $the_page->ID;
                 }
             }
 
-            $excluded_pages[] = get_option('page_on_front');
+            $excluded_pages[] = uamswp_field_text(get_option('page_on_front'));
             // Build a menu listing top level parent's children
             $args = [
                 'child_of' => $id,
@@ -130,7 +134,7 @@ function custom_nav_menu(): void
             return wp_list_pages($args);
         }
 
-        $pagenav = uamswp_wp_list_child_pages(uamswp_nav_subsection()); // wp_list_pages( $args );
+        $pagenav = uamswp_wp_list_child_pages((int) uamswp_field_text(uamswp_nav_subsection())); // wp_list_pages( $args );
 
         // Build a menu listing top level parent's children
         /*
@@ -158,7 +162,7 @@ function custom_nav_menu(): void
         $wrapper_close .= '</nav>'; // navbar
 
         // Wrap the list items in an unordered list and navbar
-        $pagenav = $wrapper_open.$pagenav.$wrapper_close;
+        $pagenav = $wrapper_open.uamswp_field_text($pagenav).$wrapper_close;
 
         genesis_markup([
             'html5' => '<nav %s>',
@@ -193,14 +197,15 @@ function custom_nav_menu(): void
         {
             $excluded_pages = [];
             $all_pages = get_pages();
+            $all_pages = is_array($all_pages) ? $all_pages : [];
             foreach ($all_pages as $the_page) {
-                $hide = get_post_meta($the_page->ID, 'page_hide_from_menu');
+                $hide = uamswp_field_array(get_post_meta($the_page->ID, 'page_hide_from_menu'));
                 if (isset($hide[0]) && $hide[0] == '1') {
                     $excluded_pages[] = $the_page->ID;
                 }
             }
 
-            $excluded_pages[] = get_option('page_on_front');
+            $excluded_pages[] = uamswp_field_text(get_option('page_on_front'));
             // Build a menu listing top level parent's children
             $args = [
                 'title_li' => '',
@@ -228,7 +233,7 @@ function custom_nav_menu(): void
         $wrapper_close .= '</nav>'; // navbar
 
         // Wrap the list items in an unordered list and navbar
-        $pagenav = $wrapper_open.$pagenav.$wrapper_close;
+        $pagenav = $wrapper_open.uamswp_field_text($pagenav).$wrapper_close;
 
         genesis_markup([
             'html5' => '<nav %s>',
@@ -245,10 +250,11 @@ function custom_nav_menu(): void
 add_filter('wp_nav_menu_args', 'uamswp_nav_menu_args_filter');
 /**
  * @param  mixed  $args
- * @return mixed
+ * @return array<mixed>
  */
-function uamswp_nav_menu_args_filter($args)
+function uamswp_nav_menu_args_filter($args): array
 {
+    $args = uamswp_field_array($args);
 
     require_once UAMSWP_THEME_MODULES.'class-wp-bootstrap-navwalker.php';
 
@@ -265,7 +271,7 @@ function uamswp_nav_menu_args_filter($args)
         $menu_classes[] = 'ml-auto';
     }
 
-    if ($args['theme_location'] === 'primary') {
+    if (($args['theme_location'] ?? null) === 'primary') {
         $args['container'] = false;
         $args['menu_class'] = esc_attr(implode(' ', $menu_classes));
         $args['fallback_cb'] = 'WP_Bootstrap_Navwalker::fallback';
@@ -280,17 +286,21 @@ add_filter('wp_nav_menu', 'uamswp_nav_menu_markup_filter', 10, 2);
 /**
  * @param  mixed  $args
  * @param  mixed  $html
- * @return mixed
  */
-function uamswp_nav_menu_markup_filter($html, $args)
+function uamswp_nav_menu_markup_filter($html, $args): string
 {
+    $html = uamswp_field_text($html);
+    // A non-object `$args` is not the primary location whatever placeholder stands in for its name.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
+    $theme_location = is_object($args) ? uamswp_field_text(get_object_vars($args)['theme_location'] ?? null) : '';
+
     // only add additional Bootstrap markup to
     // primary and secondary nav locations
-    if ($args->theme_location !== 'primary') {
+    if ($theme_location !== 'primary') {
         return $html;
     }
 
-    $data_target = 'genesis-nav'.sanitize_html_class('-'.$args->theme_location);
+    $data_target = 'genesis-nav'.sanitize_html_class('-'.$theme_location);
 
     $output = '';
 
@@ -302,7 +312,7 @@ function uamswp_nav_menu_markup_filter($html, $args)
     $navextra = get_theme_mod('navextra', false);
 
     if ($navextra == true) {
-        $output .= apply_filters('uamswp_navbar_content', uamswp_navbar_content_markup());
+        $output .= uamswp_field_text(apply_filters('uamswp_navbar_content', uamswp_navbar_content_markup()));
     }
 
     $output .= $html;
@@ -334,7 +344,7 @@ function uamswp_navbar_content_markup(): string
         case 'date':
             // @pest-mutate-ignore: ConcatEqualToEqual
             $output .= '<p class="navbar-text navbar-right mb-0">';
-            $output .= date_i18n(get_option('date_format'));
+            $output .= date_i18n(uamswp_field_text(get_option('date_format')));
             $output .= '</p>';
             break;
         case '':
@@ -357,7 +367,7 @@ add_filter('genesis_do_nav', 'uamswp_override_do_nav', 10, 3);
 function uamswp_override_do_nav($nav_output, $nav, $args): string
 {
     // return the modified result
-    return sprintf('%1$s', $nav);
+    return sprintf('%1$s', uamswp_field_text($nav));
 
 }
 

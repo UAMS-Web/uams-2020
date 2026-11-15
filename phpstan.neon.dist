@@ -277,16 +277,8 @@ parameters:
             identifier: argument.type
             path: lib/scripts.php
             count: 2
-        -
-            identifier: argument.type
-            path: lib/nav.php
-            count: 10
         # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         # A foreach over a value that WordPress or ACF may return as false. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: foreach.nonIterable
-            path: lib/nav.php
-            count: 2
         # Array access on a value that WordPress or ACF may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         # Property access on a value that WordPress may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         # An argument whose declared type does not match the parameter, usually mixed, false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
@@ -295,16 +287,8 @@ parameters:
             identifier: argument.type
             path: blocks/gallery.php
             count: 7
-        -
-            identifier: argument.type
-            path: lib/bootstrap.php
-            count: 2
         # Concatenation or arithmetic on a `mixed` value from `get_field()` or an option that PHPStan cannot prove is a string or number. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         # Array access on a `mixed` block field from ACF. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/nav.php
-            count: 7
         # `image_sizer()`, `wp_get_attachment_url()`, `wp_get_attachment_image_url()` and `get_post_meta()` take the ACF image value, an attachment ID or an array depending on the field's return format (this field sets none, so ACF's default applies). Casting it would change what those functions receive, tracked in #780.
         -
             identifier: argument.type
@@ -323,28 +307,7 @@ parameters:
             path: blocks/overlay.php
             count: 15
         # A compound assignment on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: assignOp.invalid
-            path: lib/bootstrap.php
-            count: 1
-        -
-            identifier: assignOp.invalid
-            path: lib/nav.php
-            count: 2
         # Arithmetic or concatenation on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: binaryOp.invalid
-            path: lib/bootstrap.php
-            count: 2
-        -
-            identifier: binaryOp.invalid
-            path: lib/nav.php
-            count: 2
-        # A string cast of a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: cast.string
-            path: lib/bootstrap.php
-            count: 1
         # Output of a value PHPStan types as mixed, such as the result of get_field(). Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         # A method call on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
@@ -355,16 +318,7 @@ parameters:
             identifier: method.nonObject
             path: lib/customizer.php
             count: 2
-        # Array access on a value PHPStan types as mixed, such as the result of get_field(). Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/bootstrap.php
-            count: 14
         # Property access on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: property.nonObject
-            path: lib/nav.php
-            count: 2
         # The hook is registered with more accepted arguments than the callback declares, and a test pins every hook's accepted-argument count. Changing it alters the hook contract.
         -
             identifier: arguments.count
@@ -416,6 +370,11 @@ parameters:
         # `wp_list_pages()` is declared void by the WordPress stubs, though it returns the markup when `echo` is false. The stub is wrong and cannot be corrected here.
         -
             identifier: function.void
+            path: lib/nav.php
+            count: 2
+        # `wp_list_pages()` takes a `walker` argument that PHPStan can prove is a `Walker`, and `WP_Bootstrap_Pagewalker` has no stubs, so the argument shape is rejected. No stub package may be added (scope ruling on #773), so it cannot be typed.
+        -
+            identifier: argument.type
             path: lib/nav.php
             count: 2
         # The GeoIP record is a plugin class without stubs and exposes `city` and `subdivisions` through magic properties. No stub package may be added (scope ruling on #773), and reading them any other way changes how a visitor's region is looked up.
