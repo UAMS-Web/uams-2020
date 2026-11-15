@@ -284,7 +284,7 @@ if (site_custom_quicklinks()) {
                     foreach ($menu_items as $menu_item) {
 
                         $menu_item = uamswp_quicklink_item($menu_item);
-                        if ($menu_item['parent'] == 0) {
+                        if ($menu_item['parent'] === 0) {
 
                             $menuItems[] = [
                                 'id' => $menu_item['id'],
