@@ -22,9 +22,9 @@ add_filter('genesis_footer_widget_areas', 'uamswp_footer_widget_areas', 10, 2);
 function uamswp_footer_widget_areas($output, $footer_widgets): ?string
 {
 
-    $footer_widgets = get_theme_support('genesis-footer-widgets');
+    $footer_widgets = uamswp_field_array(get_theme_support('genesis-footer-widgets'));
 
-    if (! $footer_widgets || ! isset($footer_widgets[0]) || ! is_numeric($footer_widgets[0])) {
+    if (! isset($footer_widgets[0]) || ! is_numeric($footer_widgets[0])) {
         return null;
     }
 
