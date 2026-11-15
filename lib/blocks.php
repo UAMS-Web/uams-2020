@@ -55,7 +55,7 @@ function uamswp_block_placeholder($block = null, $is_preview = false): bool
         }
     }
 
-    $title = ! empty($block['title']) ? $block['title'] : __('UAMS block');
+    $title = ! empty($block['title']) ? uamswp_field_text($block['title']) : __('UAMS block');
     printf(
         '<div class="uams-block-placeholder" style="padding:1.5rem;border:1px dashed currentColor;text-align:center;"><strong>%s</strong><br>%s</div>',
         esc_html($title),
@@ -798,14 +798,14 @@ function uamswp_iframe_allowed_hosts(): array
  */
 function uamswp_iframe_url_is_allowed($url): bool
 {
-    $parts = wp_parse_url($url);
+    $parts = wp_parse_url(uamswp_field_text($url));
     if (empty($parts['scheme']) || strtolower($parts['scheme']) !== 'https' || empty($parts['host'])) {
         return false;
     }
 
     $hosts = uamswp_iframe_allowed_hosts();
 
-    return $hosts === [] || in_array(strtolower($parts['host']), array_map(strtolower(...), $hosts), true);
+    return $hosts === [] || in_array(strtolower($parts['host']), array_map(static fn ($host): string => strtolower(uamswp_field_text($host)), $hosts), true);
 }
 
 add_filter('acf/validate_value/key=field_iframe_url_b', function ($valid, $value) {

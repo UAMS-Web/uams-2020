@@ -21,6 +21,90 @@ it('pins entry-header attributes with both cover-image states', function (bool $
     expect(uamswp_attributes_entry_header_landing_page_title($base))->toBe(['class' => 'original uams-module extra-padding landing-page-title'.($image ? ' bg-image' : ''), 'id' => 'keep']);
 })->with([true, false]);
 
+it('adds entry-header classes to attributes that are missing or malformed', function ($attributes, array $expected): void {
+    expect(uamswp_attributes_entry_header($attributes))->toBe($expected);
+})->with([[null, ['class' => ' sr-only']], [false, ['class' => ' sr-only']], [['id' => 'x'], ['id' => 'x', 'class' => ' sr-only']], [['class' => ['a']], ['class' => ' sr-only']]]);
+
+it('treats unexpected cover-image values as no image', function ($image): void {
+    when('get_the_id')->justReturn(41);
+    when('get_field')->justReturn($image);
+    expect(uamswp_attributes_entry_header_graphic_title(['class' => 'a']))->toBe(['class' => 'a uams-module extra-padding graphic-title bg-red'])
+        ->and(uamswp_attributes_entry_header_landing_page_title(['class' => 'a']))->toBe(['class' => 'a uams-module extra-padding landing-page-title']);
+})->with([[false], [''], [null], [0], ['0'], [['id' => 5]]]);
+
+it('treats cover-image ids given as numeric strings as images', function (): void {
+    when('get_the_id')->justReturn(41);
+    when('get_field')->justReturn('77');
+    expect(uamswp_attributes_entry_header_graphic_title(['class' => 'a']))->toBe(['class' => 'a uams-module extra-padding graphic-title bg-image bg-red']);
+});
+
+it('prints nothing for lead paragraphs and headings that are not text', function (string $function, $value, string $expected): void {
+    when('get_the_id')->justReturn(41);
+    when('get_the_ID')->justReturn(41);
+    when('get_the_title')->justReturn('Fallback Title');
+    when('get_field')->justReturn($value);
+    ob_start();
+    $function();
+    expect(ob_get_clean())->toBe($expected);
+})->with([
+    ['uamswp_graphic_title_lead_paragraph', ['x'], ''],
+    ['uamswp_landing_page_title_lead_paragraph', null, ''],
+    ['uamswp_landing_page_title_do_post_title', ['x'], '<h1 class="entry-title" itemprop="headline">Fallback Title</h1>'],
+]);
+
+it('passes no hero rows when the hero field is not an array', function ($field): void {
+    ModuleTemplateCapture::$calls = [];
+    when('get_the_id')->justReturn(41);
+    when('get_field')->justReturn($field);
+    Functions\expect('get_stylesheet_directory')->once()->andReturn(__DIR__.'/../Fixtures/library-theme');
+    ob_start();
+    uamswp_page_hero();
+    ob_end_clean();
+    expect(ModuleTemplateCapture::$calls[0]['variables'])->toBe(['hero_rows' => null, 'i' => 0]);
+})->with([[false], [null], ['text']]);
+
+it('treats a failed page lookup as having no child pages', function (): void {
+    when('get_the_id')->justReturn(41);
+    Functions\expect('get_post_meta')->once()->andReturn(false);
+    Functions\expect('get_pages')->once()->with(['child_of' => 41])->andReturn(false);
+    Functions\expect('uamswp_list_child_posts')->never();
+    uamswp_list_child_pages();
+});
+
+it('falls back to post id zero when the current post is unknown', function (): void {
+    when('get_the_id')->justReturn(false);
+    when('get_the_ID')->justReturn(false);
+    Functions\expect('get_post_meta')->once()->with(0, 'page_hide_breadcrumbs', true)->andReturn('');
+    Functions\expect('get_post_meta')->once()->with(0, 'page_hide_child_menu', true)->andReturn(true);
+    expect(uamswp_hide_breadcrumbs())->toBeFalse();
+    uamswp_list_child_pages();
+    Functions\expect('get_the_title')->once()->with(0)->andReturn('T');
+    Functions\expect('get_the_permalink')->once()->with(0)->andReturn('/p');
+    Functions\expect('is_archive')->once()->andReturn(false);
+    expect(uamswp_entry_title_h1('ignored'))->toBe('<h1 class="entry-title" itemprop="headline">T</h1>');
+});
+
+it('passes cover-image ids to the resizer and the attachment lookup as integers', function (string $function, array $fields): void {
+    LibraryPageScenario::configure($fields, true);
+    $types = [];
+    when('image_sizer')->alias(static function ($id) use (&$types): string {
+        $types[] = get_debug_type($id);
+
+        return 'sized';
+    });
+    when('wp_get_attachment_url')->alias(static function ($id) use (&$types): string {
+        $types[] = get_debug_type($id);
+
+        return 'url';
+    });
+    LibraryBrandingScenario::render($function);
+    expect($types)->not->toBeEmpty()->and(array_unique($types))->toBe(['int']);
+})->with([
+    ['uamswp_graphic_title_inner_1', ['page_cover_image' => '70']],
+    ['uamswp_landing_page_title_inner_1', ['page_landing_page_cover_image' => '70', 'page_landing_page_cover_image_mobile' => '71']],
+    ['uamswp_landing_page_title_inner_1', ['page_landing_page_cover_image' => '70', 'page_landing_page_cover_image_mobile' => '']],
+]);
+
 it('pins the exact wrappers around graphic and landing-page headings', function (string $function, string $expected): void {
     ob_start();
     $function();
@@ -96,7 +180,7 @@ it('pins post bylines only on single posts', function (bool $single, string $typ
 it('lists child pages only when visible, present and outside search', function (bool $hidden, array $pages, bool $search, bool $display): void {
     when('get_the_id')->justReturn(41);
     Functions\expect('get_post_meta')->once()->with(41, 'page_hide_child_menu', true)->andReturn($hidden);
-    Functions\expect('get_pages')->times($hidden ? 0 : 1)->with('child_of=41')->andReturn($pages);
+    Functions\expect('get_pages')->times($hidden ? 0 : 1)->with(['child_of' => 41])->andReturn($pages);
     Functions\expect('is_search')->times(! $hidden && count($pages) > 0 ? 1 : 0)->andReturn($search);
     Functions\expect('uamswp_list_child_posts')->times($display ? 1 : 0)->with('page', 'Subpages')->andReturnUsing(static function (): void {
         echo 'CHILDREN';

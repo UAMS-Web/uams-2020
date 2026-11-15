@@ -19,9 +19,9 @@ declare(strict_types=1);
 function uamswp_post_image()
 {
     global $post;
-    $image_id = get_post_thumbnail_id($post->ID);
-    $image = wp_get_attachment_image_src($image_id, 'full');
-    $image = $image[0];
+    $post_id = is_object($post) ? (int) uamswp_field_text($post->ID ?? null) : 0;
+    $image_id = (int) get_post_thumbnail_id($post_id);
+    $image = uamswp_field_array(wp_get_attachment_image_src($image_id, 'full'))[0] ?? null;
     if ($image) {
         return $image;
     }
@@ -35,7 +35,8 @@ function uamswp_get_first_image(): string
     global $post, $posts;
     ob_start();
     ob_end_clean();
-    preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+    $content = uamswp_field_text(is_object($post) ? ($post->post_content ?? null) : null);
+    preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $content, $matches);
 
     return $matches[1][0] ?? '';
 }
@@ -59,29 +60,25 @@ function uamswp_do_meta(): void
 // 		'open' => '<div %s>',
 // 		'context' => 'home-featured'
 // 	) );
-
 // 	genesis_structural_wrap( 'home-featured' );
-
 // 	genesis_widget_area( 'home-featured', array(
 // 		'before' => '',
 // 		'after' => ''
 // 	) );
-
 // 	genesis_structural_wrap( 'home-featured', 'close' );
-
 // 	genesis_markup( array(
 // 		'close' => '</div>',
 // 		'context' => 'home-featured'
 // 	) );
 // }
-
 // Body Class
 /**
  * @param  mixed  $args
- * @return mixed
+ * @return mixed[]
  */
-function uamswp_body_class($args)
+function uamswp_body_class($args): array
 {
+    $args = uamswp_field_array($args);
     if (is_page_template('page_blog.php')) {
         $args[] = 'blog';
     }
@@ -93,12 +90,13 @@ function uamswp_body_class($args)
 add_filter('genesis_attr_body', 'uamswp_site_add_css_attr');
 /**
  * @param  mixed  $attributes
- * @return mixed
+ * @return mixed[]
  */
-function uamswp_site_add_css_attr($attributes)
+function uamswp_site_add_css_attr($attributes): array
 {
     // Add the site & subsite to  class ex. uams medicine, institute cancer
-    $attributes['class'] = $attributes['class'].' '.uams_get_site_info()['site'].' '.uams_get_site_info()['subsite'];
+    $attributes = uamswp_field_array($attributes);
+    $attributes['class'] = uamswp_field_text($attributes['class'] ?? null).' '.uamswp_field_text(uams_get_site_info()['site'] ?? null).' '.uamswp_field_text(uams_get_site_info()['subsite'] ?? null);
 
     return $attributes;
 }
@@ -242,7 +240,7 @@ function uamswp_disable_editor($id = false): bool
         return false;
     }
 
-    $id = intval($id);
+    $id = intval(uamswp_field_text($id));
     $template = get_page_template_slug($id);
 
     return in_array($id, $excluded_ids, true) || in_array($template, $excluded_templates);
@@ -280,7 +278,7 @@ function uamswp_disable_classic_editor(): void
 {
 
     $screen = get_current_screen();
-    if ($screen->id !== 'page' || ! isset($_GET['post'])) {
+    if (! is_object($screen) || $screen->id !== 'page' || ! isset($_GET['post'])) {
         return;
     }
 

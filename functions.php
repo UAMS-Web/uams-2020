@@ -20,7 +20,7 @@ add_action('genesis_setup', 'uamswp_childtheme_setup', 15);
  */
 function uams_custom_add_image_size_names($sizes): array
 {
-    return array_merge($sizes, [
+    return array_merge(uamswp_field_array($sizes), [
         'content-image-side' => __('Content image aligned left/right'),
         'content-image-center' => __('Content image aligned center'),
         'content-image-wide' => __('Content image aligned wide'),
@@ -152,7 +152,7 @@ function uamswp_childtheme_setup(): void
 
     // Include php files from lib folder
     // @link https://gist.github.com/theandystratton/5924570
-    foreach (glob(__DIR__.'/lib/*.php') as $file) {
+    foreach (glob(__DIR__.'/lib/*.php') ?: [] as $file) {
         include $file;
     }
 
@@ -198,7 +198,7 @@ function uamswp_skip_links(): void
     }
 
     if (current_theme_supports('genesis-footer-widgets')) {
-        $footer_widgets = get_theme_support('genesis-footer-widgets');
+        $footer_widgets = uamswp_field_array(get_theme_support('genesis-footer-widgets'));
         if (isset($footer_widgets[0]) && is_numeric($footer_widgets[0]) && is_active_sidebar('footer-1')) {
             $links['genesis-footer-widgets'] = esc_html__('Skip to footer', 'genesis');
         }
@@ -223,7 +223,7 @@ function uamswp_skip_links(): void
 
     // Add markup for each skiplink.
     foreach ($links as $key => $value) {
-        $skiplinks .= '<li><a href="'.esc_url('#'.$key).'" class="screen-reader-shortcut"> '.$value.'</a></li>';
+        $skiplinks .= '<li><a href="'.esc_url('#'.$key).'" class="screen-reader-shortcut"> '.uamswp_field_text($value).'</a></li>';
     }
 
     $skiplinks .= '</ul></nav>';
@@ -236,17 +236,28 @@ function uamswp_skip_links(): void
 add_filter('genesis_attr_site-header', 'uamswp_add_aria');
 /**
  * @param  mixed  $attributes
- * @return mixed
+ * @return mixed[]
  */
-function uamswp_add_aria($attributes)
+function uamswp_add_aria($attributes): array
 {
+    $attributes = uamswp_field_array($attributes);
     if (isset($attributes['aria-label'])) {
-        $attributes['aria-label'] .= 'Site Header';
+        $attributes['aria-label'] = uamswp_field_text($attributes['aria-label']).'Site Header';
     } else {
         $attributes['aria-label'] = 'Site Header';
     }
 
     return $attributes;
+}
+
+/**
+ * Name of the main site of the network, or an empty string when the site cannot be read.
+ */
+function uams_main_site_name(): string
+{
+    $site = get_blog_details(1);
+
+    return is_object($site) ? uamswp_field_text($site->blogname ?? null) : '';
 }
 
 add_filter('genesis_home_crumb', 'uams_breadcrumb_home_icon');
@@ -261,13 +272,13 @@ function uams_breadcrumb_home_icon($crumb): string
         $crumb = '<a href="'.uams_get_home_link().'" title="Inside UAMS"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1">';
     } else {
         if (is_front_page() && uams_get_site_info()['department'] != 'main' && uams_get_site_info()['department'] != 'none') {
-            $crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="'.network_home_url().'" title="'.get_blog_details(1)->blogname.'"><span itemprop="name">'.get_blog_details(1)->blogname.'</span></a><meta itemprop="position" content="2">';
+            $crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="'.network_home_url().'" title="'.uams_main_site_name().'"><span itemprop="name">'.uams_main_site_name().'</span></a><meta itemprop="position" content="2">';
         } elseif (uams_get_site_info()['department'] != 'main' && uams_get_site_info()['department'] != 'none') {
-            $crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="'.network_home_url().'" title="'.get_blog_details(1)->blogname.'"><span itemprop="name">'.get_blog_details(1)->blogname.'</span></a><meta itemprop="position" content="2"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="'.home_url().'/" title="'.uams_site_title().'"><span itemprop="name">'.uams_site_title().'</span></a><meta itemprop="position" content="3">';
+            $crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="'.network_home_url().'" title="'.uams_main_site_name().'"><span itemprop="name">'.uams_main_site_name().'</span></a><meta itemprop="position" content="2"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="'.home_url().'/" title="'.uamswp_field_text(uams_site_title()).'"><span itemprop="name">'.uamswp_field_text(uams_site_title()).'</span></a><meta itemprop="position" content="3">';
         } elseif (is_front_page()) {
             $crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1">';
         } else {
-            $crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="'.home_url().'/" title="'.uams_site_title().'"><span itemprop="name">'.uams_site_title().'</span></a><meta itemprop="position" content="2">';
+            $crumb = '<a href="'.uams_get_home_link().'" title="University of Arkansas for Medical Sciences"><span class="fas fa-home"></span><span itemprop="name" class="sr-only">University of Arkansas for Medical Sciences</span></a><meta itemprop="position" content="1"></li><li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="'.home_url().'/" title="'.uamswp_field_text(uams_site_title()).'"><span itemprop="name">'.uamswp_field_text(uams_site_title()).'</span></a><meta itemprop="position" content="2">';
         }
     }
 
@@ -293,15 +304,18 @@ function uams_breadcrumb_home($crumb)
 add_filter('seopress_pro_breadcrumbs_crumbs', 'sp_pro_breadcrumbs_crumbs');
 /**
  * @param  mixed  $crumbs
- * @return mixed
+ * @return mixed[]
  */
-function sp_pro_breadcrumbs_crumbs($crumbs)
+function sp_pro_breadcrumbs_crumbs($crumbs): array
 {
+    $crumbs = uamswp_field_array($crumbs);
     // $crumbs is a multidimensional array.
     // First array: key=position, second array: 0=>page title, 1=>URL
     // do your stuff
     // Change "Home" to site title
-    $crumbs[0][0] = uams_site_title();
+    $home_crumb = uamswp_field_array($crumbs[0] ?? null);
+    $home_crumb[0] = uams_site_title();
+    $crumbs[0] = $home_crumb;
     if (uams_get_site_info()['site'] == 'uamshealth') {
         if ((uams_get_site_info()['subsite'] == 'main')) {
             $crumbs[0] = ['<span class="fas fa-home"></span><span class="sr-only">UAMS Health</span>', uams_get_home_link().'/'];
@@ -323,7 +337,7 @@ function sp_pro_breadcrumbs_crumbs($crumbs)
             // $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
         } else {
             // if ('dept' == uams_get_site_info()['department']) {
-            $sitehome = [get_blog_details(1)->blogname, network_home_url()];
+            $sitehome = [uams_main_site_name(), network_home_url()];
             array_unshift($crumbs, $sitehome);
             // }
             $home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
@@ -338,7 +352,7 @@ function sp_pro_breadcrumbs_crumbs($crumbs)
                 // $crumbs[0] = array('<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/');
             } else {
                 // if ('dept' == uams_get_site_info()['department']) {
-                $sitehome = [get_blog_details(1)->blogname, network_home_url()];
+                $sitehome = [uams_main_site_name(), network_home_url()];
                 array_unshift($crumbs, $sitehome);
                 // }
                 $home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
@@ -350,7 +364,7 @@ function sp_pro_breadcrumbs_crumbs($crumbs)
 
         } elseif (uams_get_site_info()['subsite'] != 'main' && uams_get_site_info()['department'] != 'main' && uams_get_site_info()['department'] != '' && uams_get_site_info()['department'] != 'uams') {
             // Multisite Home
-            $sitehome = [get_blog_details(1)->blogname, network_home_url()];
+            $sitehome = [uams_main_site_name(), network_home_url()];
             array_unshift($crumbs, $sitehome);
             // UAMS Home
             $home = ['<span class="fas fa-home"></span><span class="sr-only">University of Arkansas for Medical Sciences</span>', 'https://www.uams.edu/'];
@@ -393,6 +407,8 @@ function sp_pro_breadcrumbs_html($html) {
 function uamswp_field_text($value): string
 {
     if (is_scalar($value) || $value instanceof Stringable) {
+        // The `string` return type converts the same scalars and Stringable objects without the cast.
+        // @pest-mutate-ignore: RemoveStringCast
         return (string) $value;
     }
 
@@ -543,10 +559,10 @@ if (! function_exists('uams_get_permalink')) {
     function uams_get_permalink($post = null)
     {
         if (empty($post)) {
-            $postID = get_the_ID();
+            $postID = (int) get_the_ID();
         } else {
             $post = get_post($post);
-            $postID = $post->ID;
+            $postID = is_object($post) ? $post->ID : 0;
         }
         $external_url = get_post_meta($postID, 'post_custom_link', true);
         $post_format = get_post_format($postID);
@@ -603,9 +619,9 @@ if (! function_exists('uams_get_home_link')) {
  */
 function startsWith($haystack, $needle): bool
 {
-    $length = strlen($needle);
+    $length = strlen(uamswp_field_text($needle));
 
-    return substr($haystack, 0, $length) === $needle;
+    return substr(uamswp_field_text($haystack), 0, $length) === $needle;
 }
 
 /**
@@ -615,7 +631,7 @@ function startsWith($haystack, $needle): bool
  */
 function format_phone($country, $phone)
 {
-    $function = 'format_phone_'.$country;
+    $function = 'format_phone_'.uamswp_field_text($country);
     if (function_exists($function)) {
         return $function($phone);
     }
@@ -626,19 +642,17 @@ function format_phone($country, $phone)
 // usage
 // $phone = format_phone('us', $phone);
 // echo $phone;
-
 /**
  * @param  mixed  $phone
- * @return mixed
  */
-function format_phone_us($phone)
+function format_phone_us($phone): ?string
 {
     // note: making sure we have something
-    if (! isset($phone[3])) {
+    if (! is_string($phone) || ! isset($phone[3])) {
         return '';
     }
     // note: strip out everything but numbers
-    $phone = preg_replace('/[^0-9]/', '', $phone);
+    $phone = uamswp_field_text(preg_replace('/[^0-9]/', '', $phone));
     $length = strlen($phone);
     switch ($length) {
         case 7:
@@ -658,16 +672,15 @@ function format_phone_us($phone)
 
 /**
  * @param  mixed  $phone
- * @return mixed
  */
-function format_phone_dash($phone)
+function format_phone_dash($phone): ?string
 {
     // note: making sure we have something
-    if (! isset($phone[3])) {
+    if (! is_string($phone) || ! isset($phone[3])) {
         return '';
     }
     // note: strip out everything but numbers
-    $phone = preg_replace('/[^0-9]/', '', $phone);
+    $phone = uamswp_field_text(preg_replace('/[^0-9]/', '', $phone));
     $length = strlen($phone);
     switch ($length) {
         case 7:
@@ -692,9 +705,11 @@ if (! function_exists('apStyleDate')) {
     function apStyleDate($date): string
     {
 
-        $date = strftime('%l:%M %P', strtotime($date));
+        // A failed `strtotime()` returns false, which the integer parameter converts to 0 without the cast.
+        // @pest-mutate-ignore: RemoveIntegerCast
+        $date = strftime('%l:%M %P', (int) strtotime(uamswp_field_text($date)));
 
-        $date = str_replace(':00', '', $date);
+        $date = str_replace(':00', '', uamswp_field_text($date));
 
         return str_replace('m', '.m.', $date);
 
@@ -703,12 +718,12 @@ if (! function_exists('apStyleDate')) {
 
 class SlidingWindowRateLimiter
 {
-    /** @var array<mixed> */
+    /** @var array<int|string, array<int>> */
     private array $storage;
 
     /**
-     * @param  mixed  $limit
-     * @param  mixed  $timeWindow
+     * @param  int  $limit  Requests allowed per window
+     * @param  int  $timeWindow  Window length in seconds
      */
     public function __construct(private $limit, private $timeWindow)
     {
@@ -717,7 +732,7 @@ class SlidingWindowRateLimiter
     }
 
     /**
-     * @param  mixed  $clientId
+     * @param  int|string  $clientId
      */
     public function isRequestAllowed($clientId): bool
     {
@@ -727,7 +742,7 @@ class SlidingWindowRateLimiter
         $this->storage[$clientId] ??= [];
 
         // Remove outdated timestamps
-        $this->storage[$clientId] = array_filter($this->storage[$clientId], fn ($timestamp): bool => $timestamp > $windowStart);
+        $this->storage[$clientId] = array_filter($this->storage[$clientId], fn (int $timestamp): bool => $timestamp > $windowStart);
 
         if (count($this->storage[$clientId]) < $this->limit) {
             $this->storage[$clientId][] = $currentTime;
@@ -752,24 +767,24 @@ class SlidingWindowRateLimiter
  * @param  string  $hcrop  Horizontal crop position (default: 'center')
  * @param  string  $vcrop  Vertical crop position (default: 'center')
  * @param  string  $fallback_size  WordPress image size name to use as fallback (default: 'full')
- * @return string Image URL (cached, fallback, or original)
+ * @return string|null Image URL (cached, fallback, or original), or null when the input is invalid
  */
-function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center', $fallback_size = 'full')
+function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = 'center', $fallback_size = 'full'): ?string
 {
     if (! function_exists('bis_get_attachment_image') || empty($id) || empty(wp_get_attachment_image_src($id))) {
-        return; // Validate input
+        return null; // Validate input
     }
 
     // Check if resized image already exists in queue cache
     $transient_key = 'image_sizer_'.md5($id.$prefwidth.$prefheight.$hcrop.$vcrop);
     $cached_image = get_transient($transient_key);
     if ($cached_image !== false) {
-        return $cached_image; // Return cached URL if available
+        return is_string($cached_image) ? $cached_image : null; // Return cached URL if available
     }
 
     // Get original image dimensions
-    $image_width = wp_get_attachment_image_src($id, 'full')[1];
-    $image_height = wp_get_attachment_image_src($id, 'full')[2];
+    $image_width = (int) uamswp_field_text(uamswp_field_array(wp_get_attachment_image_src($id, 'full'))[1] ?? null);
+    $image_height = (int) uamswp_field_text(uamswp_field_array(wp_get_attachment_image_src($id, 'full'))[2] ?? null);
     $image_ratio = $image_width / $image_height;
 
     // Calculate preferred dimensions
@@ -809,10 +824,11 @@ function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = '
     }
 
     // Check for duplicate jobs in queue
-    $queue = get_option('image_sizer_queue', []);
+    $queue = uamswp_field_array(get_option('image_sizer_queue', []));
     $job_key = md5($id.serialize($params));
     foreach ($queue as $job) {
-        if (md5($job['id'].serialize($job['params'])) === $job_key) {
+        $job = uamswp_field_array($job);
+        if (md5(uamswp_field_text($job['id'] ?? null).serialize($job['params'] ?? null)) === $job_key) {
             return image_sizer_get_fallback($id, $fallback_size); // Duplicate found, return fallback
         }
     }
@@ -841,16 +857,17 @@ function image_sizer($id, $prefwidth, $prefheight, $hcrop = 'center', $vcrop = '
  * @param  string  $fallback_size  WordPress image size name
  * @return string Image URL
  */
-function image_sizer_get_fallback($id, $fallback_size)
+function image_sizer_get_fallback($id, $fallback_size): string
 {
     // Allow overriding default fallback size via filter
-    $default_fallback = apply_filters('image_sizer_default_fallback', 'full');
-    $fallback_size = $fallback_size ?: $default_fallback;
+    $default_fallback = uamswp_field_text(apply_filters('image_sizer_default_fallback', 'full'));
+    $fallback_size = uamswp_field_text($fallback_size) ?: $default_fallback;
 
     // Check if the fallback size exists for the attachment
     $image_src = wp_get_attachment_image_src($id, $fallback_size);
+    $image_src = uamswp_field_array($image_src);
     if ($image_src && ! empty($image_src[0])) {
-        return $image_src[0]; // Return the specified size URL
+        return uamswp_field_text($image_src[0]); // Return the specified size URL
     }
 
     // Debug: Log when fallback size is not found (only if WP_DEBUG is enabled)
@@ -861,13 +878,14 @@ function image_sizer_get_fallback($id, $fallback_size)
     // Fall back to default size if specified size doesn't exist
     $image_src = wp_get_attachment_image_src($id, $default_fallback);
 
-    return $image_src[0] ?: '';
+    return uamswp_field_text((uamswp_field_array($image_src)[0] ?? null) ?: '');
 }
 
 /**
  * Register custom cron schedule
  */
-add_filter('cron_schedules', function ($schedules) {
+add_filter('cron_schedules', function ($schedules): array {
+    $schedules = uamswp_field_array($schedules);
     $schedules['ten_seconds'] = [
         'interval' => 10, // 10 seconds
         'display' => __('Every Ten Seconds'),
@@ -880,8 +898,8 @@ add_filter('cron_schedules', function ($schedules) {
  * Process the image resizing queue
  */
 add_action('process_image_sizer_queue', function (): void {
-    $queue = get_option('image_sizer_queue', []);
-    if (empty($queue)) {
+    $queue = uamswp_field_array(get_option('image_sizer_queue', []));
+    if ($queue === []) {
         return;
     }
 
@@ -895,16 +913,23 @@ add_action('process_image_sizer_queue', function (): void {
             break; // @pest-mutate-ignore: BreakToContinue
         }
 
-        $id = $job['id'];
-        $params = $job['params'];
-        $transient_key = $job['transient_key'];
+        // A queued job that is not an array cannot be processed, so it leaves the queue.
+        if (! is_array($job)) {
+            unset($queue[$index]);
+
+            continue;
+        }
+
+        $id = $job['id'] ?? null;
+        $params = uamswp_field_array($job['params'] ?? null);
+        $transient_key = uamswp_field_text($job['transient_key'] ?? null);
 
         // Generate resized image
-        $image_url = bis_get_attachment_image_src(
+        $image_url = uamswp_field_array(bis_get_attachment_image_src(
             $id,
-            [$params['width'], $params['height']],
-            [$params['hcrop'], $params['vcrop']]
-        )['src'];
+            [$params['width'] ?? null, $params['height'] ?? null],
+            [$params['hcrop'] ?? null, $params['vcrop'] ?? null]
+        ))['src'] ?? null;
 
         // Cache result for 30 days
         set_transient($transient_key, $image_url, 5 * DAY_IN_SECONDS);
@@ -915,7 +940,7 @@ add_action('process_image_sizer_queue', function (): void {
     }
 
     // Update queue
-    if (empty($queue)) {
+    if ($queue === []) {
         delete_option('image_sizer_queue');
         // Clear cron if queue is empty
         wp_clear_scheduled_hook('process_image_sizer_queue');
@@ -940,11 +965,12 @@ add_action('admin_init', function (): void {
  * Add manual trigger link to media library
  */
 add_action('admin_notices', function (): void {
-    if (get_current_screen()->id !== 'upload' || ! current_user_can('manage_options')) {
+    $screen = get_current_screen();
+    if (! is_object($screen) || $screen->id !== 'upload' || ! current_user_can('manage_options')) {
         return;
     }
-    $queue = get_option('image_sizer_queue', []);
-    if (! empty($queue)) {
+    $queue = uamswp_field_array(get_option('image_sizer_queue', []));
+    if ($queue !== []) {
         $url = wp_nonce_url(admin_url('upload.php?process_image_queue=1'), 'process_image_queue_nonce');
         echo '<div class="notice notice-info"><p>';
         echo 'Image resizing queue has '.count($queue).' pending jobs. ';
@@ -1034,18 +1060,22 @@ add_filter('dynamic_sidebar_params', 'footer_widgets');
  * Register our callback function
  *
  * @param  mixed  $params
- * @return mixed
+ * @return mixed[]
  */
-function footer_widgets($params)
+function footer_widgets($params): array
 {
+    $params = uamswp_field_array($params);
+    $sidebar = uamswp_field_array($params[0] ?? null);
 
     // Check if we are displaying "Footer Sidebar"
-    if (isset($params[0]['id']) && $params[0]['id'] == 'footer-1') {
+    if (isset($sidebar['id']) && $sidebar['id'] == 'footer-1') {
+        $before_widget = uamswp_field_text($sidebar['before_widget'] ?? null);
 
         // If widget is not uams widget, add class
-        if (! str_contains($params[0]['before_widget'], 'uamswp')) {
+        if (! str_contains($before_widget, 'uamswp')) {
             $class = 'class="uams-module ';
-            $params[0]['before_widget'] = str_replace('class="', $class, $params[0]['before_widget']);
+            $sidebar['before_widget'] = str_replace('class="', $class, $before_widget);
+            $params[0] = $sidebar;
         }
 
     }
@@ -1090,7 +1120,7 @@ function rest_api_filter_add_filter_param($args, $request)
         return $args;
     }
     $filter = $request['filter'];
-    if (isset($filter['posts_per_page']) && ((int) $filter['posts_per_page'] >= 1 && (int) $filter['posts_per_page'] <= 100)) {
+    if (isset($filter['posts_per_page']) && ((int) uamswp_field_text($filter['posts_per_page']) >= 1 && (int) uamswp_field_text($filter['posts_per_page']) <= 100)) {
         $args['posts_per_page'] = $filter['posts_per_page'];
     }
     // Copy only a fixed, safe set of query vars from the request. meta_query, meta_key,
@@ -1140,7 +1170,7 @@ function uamswp_gtm_1(): void
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','<?php echo esc_js($gtmvalue); ?>');</script>
+	})(window,document,'script','dataLayer','<?php echo esc_js(uamswp_field_text($gtmvalue)); ?>');</script>
 	<!-- End Google Tag Manager -->
 <?php } else {
     echo '<!-- Google Tag Manager is disabled -->';
@@ -1156,7 +1186,7 @@ function uamswp_gtm_2(): void
     if ($gtm_disable !== '1') {
         ?>
 	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe title="Google Tag Manager" src="<?php echo esc_url('https://www.googletagmanager.com/ns.html?id='.$gtmvalue); ?>"
+	<noscript><iframe title="Google Tag Manager" src="<?php echo esc_url('https://www.googletagmanager.com/ns.html?id='.uamswp_field_text($gtmvalue)); ?>"
 	height="0" width="0" aria-hidden="true" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
 <?php }
@@ -1175,7 +1205,7 @@ function uamswp_validate_gtm_id($valid, $value)
     if ($valid !== true) {
         return $valid;
     }
-    if ($value !== '' && ! preg_match('/^GTM-[A-Z0-9]+$/', $value)) {
+    if ($value !== '' && ! preg_match('/^GTM-[A-Z0-9]+$/', uamswp_field_text($value))) {
         return 'Enter a valid Google Tag Manager container ID (GTM-XXXXXXX).';
     }
 
@@ -1219,7 +1249,7 @@ function uamswp_list_child_posts($posttype, $posttitle): void
 				<div class="row">
 					<div class="col-12 col-md-6 heading">
 						<div class="text-container">
-							<h2 class="module-title"><span class="title"><?php echo $posttitle; ?></span></h2>
+							<h2 class="module-title"><span class="title"><?php echo uamswp_field_text($posttitle); ?></span></h2>
 						</div>
             		</div>
             		<div class="col-12 col-md-6 list">
@@ -1243,7 +1273,8 @@ function uamswp_list_child_posts($posttype, $posttitle): void
 // Whitelist specific blocks for the Marketing Landing Page template.
 // Runs at priority 110 so it applies after the global removelist filter (priority 100) below.
 add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context) {
-    if (empty($editor_context->post) || get_page_template_slug($editor_context->post) !== 'templates/marketing.php') {
+    $editor_post = is_object($editor_context) ? ($editor_context->post ?? null) : null;
+    if (empty($editor_post) || get_page_template_slug(is_int($editor_post) || $editor_post instanceof WP_Post ? $editor_post : null) !== 'templates/marketing.php') {
         return $allowed_blocks;
     }
     $allowed_marketing = [
@@ -1270,7 +1301,7 @@ add_filter('allowed_block_types_all', function ($allowed_blocks, $editor_context
         $allowed_marketing[] = 'acf/uams-iframe';
     }
     // uams-section InnerBlocks need their child blocks allowed too.
-    $allowed_marketing = array_merge($allowed_marketing, uamswp_section_allowed_blocks());
+    $allowed_marketing = array_merge($allowed_marketing, array_filter(uamswp_field_array(uamswp_section_allowed_blocks()), is_string(...)));
 
     return array_values(array_unique($allowed_marketing));
 }, 110, 2);
@@ -1294,10 +1325,11 @@ function uamswp_force_geo($value, $post_id, $field): string
 }
 /**
  * @param  mixed  $field
- * @return mixed
+ * @return mixed[]
  */
-function uamswp_set_geo($field)
+function uamswp_set_geo($field): array
 {
+    $field = uamswp_field_array($field);
     if (function_exists('geoip_detect2_get_external_ip_adress')) {
         $value = 'true';
     } else {
@@ -1321,15 +1353,15 @@ add_filter('retrieve_password_message', 'my_retrieve_password_message', 10, 4);
 function my_retrieve_password_message($message, $key, $user_login, $user_data): string
 {
     // Start with the default content.
-    $site_name = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+    $site_name = wp_specialchars_decode(uamswp_field_text(get_option('blogname')), ENT_QUOTES);
     $message = __('Someone has requested a password reset for the following account:')."\r\n\r\n";
     /* translators: %s: site name */
     $message .= sprintf(__('Site Name: %s'), $site_name)."\r\n\r\n";
     /* translators: %s: user login */
-    $message .= sprintf(__('Username: %s'), $user_login)."\r\n\r\n";
+    $message .= sprintf(__('Username: %s'), uamswp_field_text($user_login))."\r\n\r\n";
     $message .= __('If this was a mistake, just ignore this email and nothing will happen.')."\r\n\r\n";
     $message .= __('To reset your password, visit the following address:')."\r\n\r\n";
-    $message .= '<'.network_site_url("/uams-login/?action=rp&key=$key&login=".rawurlencode($user_login), 'login').">\r\n";
+    $message .= '<'.network_site_url('/uams-login/?action=rp&key='.uamswp_field_text($key).'&login='.rawurlencode(uamswp_field_text($user_login)), 'login').">\r\n";
 
     /*
      * If the problem persists with this filter, remove

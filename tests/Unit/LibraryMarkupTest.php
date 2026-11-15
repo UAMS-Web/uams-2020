@@ -231,3 +231,30 @@ it('preserves stringable structural-wrap markers at the public filter boundary',
 it('rewrites stringable page markers in request-filter input', function (): void {
     expect(remove_page_from_query_string(['name' => new OptionString('page'), 'page' => 3, 'keep' => 'v']))->toBe(['page' => 3, 'keep' => 'v', 'paged' => 3]);
 });
+
+it('builds breadcrumb arguments from a value that is not an array', function ($args): void {
+    Functions\expect('genesis_attr')->once()->with('breadcrumb')->andReturn('class="crumbs"');
+    expect(uamswp_breadcrumb_args($args))->toBe([
+        'sep' => '     ', 'prefix' => '<ol class="crumbs">', 'suffix' => '</ol>',
+        'labels' => array_fill_keys(['prefix', 'author', 'category', 'tag', 'date', 'search', 'tax', 'post_type', '404'], ''),
+    ]);
+})->with([[null], [false], ['args']]);
+
+it('replaces breadcrumb labels that are not an array', function ($labels): void {
+    Functions\expect('genesis_attr')->once()->with('breadcrumb')->andReturn('class="crumbs"');
+    expect(uamswp_breadcrumb_args(['labels' => $labels, 'extra' => 'keep'])['labels'])->toBe(array_fill_keys(['prefix', 'author', 'category', 'tag', 'date', 'search', 'tax', 'post_type', '404'], ''));
+})->with([[null], [false], ['labels']]);
+
+it('builds no breadcrumb items from a value that is not an array', function ($crumbs): void {
+    expect(uamswp_build_crumbs($crumbs))->toBe([]);
+})->with([[null], [false], ['crumb']]);
+
+it('reads a breadcrumb that is not text as an empty active item', function ($crumb): void {
+    $schema = ' itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+    expect(uamswp_build_crumbs(['a' => $crumb]))->toBe(['a' => '<li class="breadcrumb-item active"'.$schema.'</li>']);
+})->with([[null], [false], [['<a>x</a>']]]);
+
+it('keeps a numeric breadcrumb as text', function (): void {
+    $schema = ' itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+    expect(uamswp_build_crumbs(['a' => 42]))->toBe(['a' => '<li class="breadcrumb-item active"'.$schema.'42</li>']);
+});

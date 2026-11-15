@@ -13,6 +13,11 @@ add_action('after_switch_theme', 'uamswp_editor_users');
 function uamswp_editor_users(): void
 {
     $role = get_role('editor');
+    // Without an editor role there is nothing to grant.
+    if ($role === null) {
+        return;
+    }
+
     $role->add_cap('edit_theme_options');
     // ------------------------------------------------------//
     // -----------------Give Editors Gravity Forms Access - TM
@@ -127,7 +132,8 @@ function uamswp_close_customizer_widgets_for_editors(array $components): array
  */
 function uamswp_user_last_login($user_login, $user): void
 {
-    update_user_meta($user->ID, 'last_login', time());
+    $user_id = is_object($user) ? (int) uamswp_field_text(get_object_vars($user)['ID'] ?? null) : 0;
+    update_user_meta($user_id, 'last_login', time());
 }
 
 add_action('wp_login', 'uamswp_user_last_login', 10, 2);
@@ -147,7 +153,12 @@ function uamswp_lastlogin()
         return '';
     }
 
-    $last_login = get_the_author_meta('last_login');
+    $last_login = (int) uamswp_field_text(get_the_author_meta('last_login'));
+
+    // An author who has never logged in has no timestamp to compare.
+    if ($last_login === 0) {
+        return '';
+    }
 
     return human_time_diff($last_login);
 }
@@ -166,10 +177,11 @@ add_shortcode('lastlogin', 'uamswp_lastlogin');
 
 /**
  * @param  mixed  $column
- * @return mixed
+ * @return array<mixed>
  */
-function uamswp_modify_user_table($column)
+function uamswp_modify_user_table($column): array
 {
+    $column = uamswp_field_array($column);
     $column['last_login'] = 'Last Login';
 
     return $column;
@@ -188,7 +200,7 @@ function uamswp_modify_user_table_row($val, $column_name, $user_id)
     switch ($column_name) {
         case 'last_login' :
             $the_login_date = __('Never', 'uamswp');
-            $last_login = get_the_author_meta('last_login', $user_id);
+            $last_login = (int) uamswp_field_text(get_the_author_meta('last_login', (int) uamswp_field_text($user_id)));
             if ($last_login) {
                 return human_time_diff($last_login);
             }

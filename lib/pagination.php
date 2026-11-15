@@ -47,10 +47,11 @@ function uamswp_genesis_next_link_text_numeric($text)
 // Pagination fix for /%category%/%postname%/
 /**
  * @param  mixed  $query_string
- * @return mixed
+ * @return mixed[]
  */
-function remove_page_from_query_string($query_string)
+function remove_page_from_query_string($query_string): array
 {
+    $query_string = uamswp_field_array($query_string);
     if (isset($query_string['name'])) {
         if ($query_string['name'] == 'page' && isset($query_string['page'])) {
             unset($query_string['name']);

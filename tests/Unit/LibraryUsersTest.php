@@ -113,3 +113,45 @@ it('renders login-column timestamps and preserves unrelated cells', function (st
     Functions\expect('human_time_diff')->times($loginColumn && $timestamp ? 1 : 0)->with($timestamp)->andReturn('one hour');
     expect(uamswp_modify_user_table_row('ORIGINAL', $column, 37))->toBe($expected);
 })->with([['other', 123, 'ORIGINAL'], ['last_login', 123, 'one hour'], ['last_login', '', 'Never translated'], ['last_login', '0', 'Never translated']]);
+
+it('grants nothing when the editor role does not exist', function (): void {
+    Functions\expect('get_role')->once()->with('editor')->andReturn(null);
+    uamswp_editor_users();
+});
+
+it('stores the login timestamp against user zero when the user is not an object or has no usable ID', function ($user, int $expected): void {
+    Functions\expect('time')->once()->withNoArgs()->andReturn(1700000123);
+    Functions\expect('update_user_meta')->once()->withArgs(static fn ($id, $key, $value): bool => $id === $expected && $key === 'last_login' && $value === 1700000123);
+    uamswp_user_last_login('ignored login', $user);
+})->with([[null, 0], [false, 0], [['ID' => 37], 0], [(object) [], 0], [(object) ['ID' => ['37']], 0], [(object) ['ID' => '37'], 37], [(object) ['ID' => 37], 37]]);
+
+it('shows no last login for an author without a usable timestamp', function ($stored): void {
+    Functions\expect('is_user_logged_in')->once()->andReturn(true);
+    Functions\expect('get_the_author_meta')->once()->with('last_login')->andReturn($stored);
+    Functions\expect('human_time_diff')->never();
+    expect(uamswp_lastlogin())->toBe('');
+})->with([[''], [false], [null], [['1700000123']], ['never'], ['0']]);
+
+it('passes a stored string timestamp to the time difference as an integer', function (): void {
+    Functions\expect('is_user_logged_in')->once()->andReturn(true);
+    Functions\expect('get_the_author_meta')->once()->with('last_login')->andReturn('1700000123');
+    Functions\expect('human_time_diff')->once()->withArgs(static fn ($from): bool => $from === 1700000123)->andReturn('one hour');
+    expect(uamswp_lastlogin())->toBe('one hour');
+});
+
+it('adds the login column to a column list that is not an array', function ($columns): void {
+    expect(uamswp_modify_user_table($columns))->toBe(['last_login' => 'Last Login']);
+})->with([[null], [false], ['name']]);
+
+it('reads the login-column user ID and timestamp as integers', function ($userId, $stored, string $expected): void {
+    Functions\expect('__')->zeroOrMoreTimes()->with('Never', 'uamswp')->andReturn('Never translated');
+    Functions\expect('get_the_author_meta')->once()->withArgs(static fn ($key, $id): bool => $key === 'last_login' && $id === 37)->andReturn($stored);
+    Functions\expect('human_time_diff')->zeroOrMoreTimes()->withArgs(static fn ($from): bool => $from === 1700000123)->andReturn('one hour');
+    expect(uamswp_modify_user_table_row('ORIGINAL', 'last_login', $userId))->toBe($expected);
+})->with([['37', '1700000123', 'one hour'], [37, 1700000123, 'one hour'], [37, ['x'], 'Never translated'], [37, 'never', 'Never translated'], [37, null, 'Never translated']]);
+
+it('reads a login-column user ID that is not text as the current author', function ($userId): void {
+    Functions\expect('__')->once()->with('Never', 'uamswp')->andReturn('Never translated');
+    Functions\expect('get_the_author_meta')->once()->withArgs(static fn ($key, $id): bool => $key === 'last_login' && $id === 0)->andReturn('');
+    expect(uamswp_modify_user_table_row('ORIGINAL', 'last_login', $userId))->toBe('Never translated');
+})->with([[null], [false], [['37']]]);
