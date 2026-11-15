@@ -17,10 +17,11 @@ declare(strict_types=1);
 add_filter('comment_form_defaults', 'uamswp_comment_form_args');
 /**
  * @param  mixed  $args
- * @return mixed
+ * @return mixed[]
  */
-function uamswp_comment_form_args($args)
+function uamswp_comment_form_args($args): array
 {
+    $args = uamswp_field_array($args);
     $args['comment_field'] = '<div class="form-group comment-form-comment">
 	        <label for="comment">'._x('Comment', 'noun').'</label> 
 	        <textarea class="form-control" id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
