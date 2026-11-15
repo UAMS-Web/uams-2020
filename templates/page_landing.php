@@ -48,11 +48,12 @@ declare(strict_types=1);
 // Add extra class to content
 /**
  * @param  mixed  $attributes
- * @return mixed
+ * @return array<mixed>
  */
-function uamswp_add_class($attributes)
+function uamswp_add_class($attributes): array
 {
-    $attributes['class'] .= ' sr-only';
+    $attributes = uamswp_field_array($attributes);
+    $attributes['class'] = uamswp_field_text($attributes['class'] ?? null).' sr-only';
 
     return $attributes;
 }

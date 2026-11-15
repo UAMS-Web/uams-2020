@@ -157,6 +157,21 @@ it('renders general page and post results with excerpts and cross-blog restorati
     }
 })->with([5, 6]);
 
+it('passes the general result id on as an integer', function (): void {
+    $state = $this->searchState;
+    $state->rowsByType = ['page' => [['ID' => '12abc']], 'post' => []];
+    $types = [];
+    when('get_the_title')->alias(static function ($id) use (&$types): string {
+        $types[] = get_debug_type($id).':'.$id;
+
+        return 'Title';
+    });
+    ob_start();
+    uamswp_do_search_loop();
+    ob_end_clean();
+    expect($types)->toBe(['int:12']);
+});
+
 /**
  * Condition/Treatment make StrEndsWithToStrStartsWith equivalent. The first buffered
  * append's ConcatEqualToEqual is equivalent because the buffer is reset to '' directly

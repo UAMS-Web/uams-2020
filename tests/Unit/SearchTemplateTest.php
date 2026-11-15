@@ -131,3 +131,32 @@ it('restores the current blog after building a multisite result title', function
         $GLOBALS['post'] = $originalPost;
     }
 });
+
+it('prints an empty search heading when the query is not text', function (mixed $query): void {
+    $_GET['s'] = $query;
+    when('esc_html')->returnArg();
+    ob_start();
+    uamswp_search_page_heading();
+    expect(ob_get_clean())->toBe('<header class="entry-header"><h1 class="entry-title" itemprop="headline">Search results for: </h1></header>');
+})->with([[['a']], [null]]);
+
+it('adds the search label when the breadcrumb args or labels are not arrays', function (mixed $args, array $expected): void {
+    expect(uamswp_prefix_search_breadcrumb($args))->toBe($expected);
+})->with([
+    ['text', ['labels' => ['search' => 'Search results for ']]],
+    [['labels' => 'text', 'sep' => '/'], ['labels' => ['search' => 'Search results for '], 'sep' => '/']],
+]);
+
+it('builds a multisite result title from a post that is not an object', function (): void {
+    $originalPost = $GLOBALS['post'] ?? null;
+    $GLOBALS['post'] = null;
+    Functions\expect('switch_to_blog')->once()->with(0)->ordered();
+    Functions\expect('get_the_title')->once()->with(0)->ordered()->andReturn('Result');
+    Functions\expect('get_the_permalink')->once()->with(0)->ordered()->andReturn('https://example.test/result/');
+    Functions\expect('restore_current_blog')->once()->ordered();
+    try {
+        expect(uamswp_search_title('ignored'))->toBe('<h2 class="entry-title" itemprop="headline"><a href="https://example.test/result/">Result</a></h2>');
+    } finally {
+        $GLOBALS['post'] = $originalPost;
+    }
+});
