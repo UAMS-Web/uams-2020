@@ -166,15 +166,11 @@ parameters:
             identifier: arguments.count
             path: functions.php
             count: 1
-        # uamswp_nav_subsection() and uamswp_hide_breadcrumbs() return false when
-        # nothing applies, though both are declared to return a string. Changing the declared type changes the contract for their callers.
+        # uamswp_nav_subsection() returns false when nothing applies, though it is
+        # declared to return a string. Changing the declared type changes the contract for its callers.
         -
             identifier: return.type
             path: lib/nav.php
-            count: 2
-        -
-            identifier: return.type
-            path: lib/page.php
             count: 2
         # The condition repeats a subsection lookup that an earlier branch of the same chain already tested, so the analysis treats it as known false. Each call is still evaluated at runtime, and the branding fixtures drive these branches with a changing sequence of subsection IDs and pin the output, so removing them changes pinned markup.
         -
@@ -285,15 +281,7 @@ parameters:
             identifier: argument.type
             path: lib/nav.php
             count: 10
-        -
-            identifier: argument.type
-            path: lib/page.php
-            count: 22
         # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: argument.type
-            path: lib/extras.php
-            count: 9
         # A foreach over a value that WordPress or ACF may return as false. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: foreach.nonIterable
@@ -301,10 +289,6 @@ parameters:
             count: 2
         # Array access on a value that WordPress or ACF may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         # Property access on a value that WordPress may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: property.nonObject
-            path: lib/extras.php
-            count: 2
         # An argument whose declared type does not match the parameter, usually mixed, false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         # `gallery_image_dimension()` documents `$ratio` as `int`, and the crop select passes a decimal string such as '1.7778' or -1, so the seven calls read as mismatched. Correcting the docblock belongs to `functions.php`, outside this slice, tracked in #780.
         -
@@ -316,10 +300,6 @@ parameters:
             path: lib/bootstrap.php
             count: 2
         # Concatenation or arithmetic on a `mixed` value from `get_field()` or an option that PHPStan cannot prove is a string or number. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: binaryOp.invalid
-            path: lib/extras.php
-            count: 22
         # Array access on a `mixed` block field from ACF. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: offsetAccess.nonOffsetAccessible
@@ -351,10 +331,6 @@ parameters:
             identifier: assignOp.invalid
             path: lib/nav.php
             count: 2
-        -
-            identifier: assignOp.invalid
-            path: lib/page.php
-            count: 5
         # Arithmetic or concatenation on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: binaryOp.invalid
@@ -370,10 +346,6 @@ parameters:
             path: lib/bootstrap.php
             count: 1
         # Output of a value PHPStan types as mixed, such as the result of get_field(). Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: echo.nonString
-            path: lib/page.php
-            count: 3
         # A method call on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: method.nonObject
@@ -388,14 +360,6 @@ parameters:
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/bootstrap.php
             count: 14
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/extras.php
-            count: 7
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/page.php
-            count: 6
         # Property access on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: property.nonObject
