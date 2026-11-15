@@ -23,7 +23,10 @@ declare(strict_types=1);
  */
 function uamswp_nav_subsection()
 {
+    // Both start values are overwritten when a subsection is found, and an unfound subsection returns false either way.
+    // @pest-mutate-ignore: FalseToTrue
     $subsection = false;
+    // @pest-mutate-ignore: FalseToTrue
     $id = false;
     $current_id = get_the_id() ?: 0;
     if (get_post_meta($current_id, 'page_subsection', true)) {
@@ -287,6 +290,8 @@ add_filter('wp_nav_menu', 'uamswp_nav_menu_markup_filter', 10, 2);
 function uamswp_nav_menu_markup_filter($html, $args): string
 {
     $html = uamswp_field_text($html);
+    // A non-object `$args` is not the primary location whatever placeholder stands in for its name.
+    // @pest-mutate-ignore: EmptyStringToNotEmpty
     $theme_location = is_object($args) ? uamswp_field_text(get_object_vars($args)['theme_location'] ?? null) : '';
 
     // only add additional Bootstrap markup to
