@@ -90,7 +90,10 @@ function uamswp_site_image(): void
             $split_str = '   ';
             if (str_contains($root_title_text, $split_str)) {
                 $root_title_split = true;
-                $split_str_pos = (int) strpos($site_title, $split_str); // A site title without the three spaces counts from the start.
+                // A site title without the three spaces counts from the start. This file is not strict-typed, so
+                // `false` and 0 give the same `substr()` and addition results: RemoveIntegerCast is equivalent.
+                // @pest-mutate-ignore: RemoveIntegerCast
+                $split_str_pos = (int) strpos($site_title, $split_str);
                 $split_a_end = $split_str_pos;
                 $split_b_begin = $split_str_pos + 3;
                 $root_title_split_descr = substr($site_title, 0, $split_a_end);
