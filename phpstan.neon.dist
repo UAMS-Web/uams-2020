@@ -186,11 +186,6 @@ parameters:
             identifier: booleanAnd.leftAlwaysFalse
             path: lib/header.php
             count: 1
-        # `is_array()` on the `image_meta` entry is a runtime guard on stored attachment metadata that the WordPress stubs type as an array. Dropping it changes behavior on malformed metadata.
-        -
-            identifier: booleanAnd.rightAlwaysTrue
-            path: lib/media-credit.php
-            count: 1
         # The condition repeats a subsection lookup that an earlier branch of the same chain already tested, so the analysis treats it as known false. Each call is still evaluated at runtime, and the branding fixtures drive these branches with a changing sequence of subsection IDs and pin the output, so removing them changes pinned markup.
         -
             identifier: elseif.alwaysFalse
@@ -299,29 +294,17 @@ parameters:
             identifier: argument.type
             path: lib/extras.php
             count: 9
-        -
-            identifier: argument.type
-            path: lib/media-credit.php
-            count: 19
         # A foreach over a value that WordPress or ACF may return as false. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: foreach.nonIterable
             path: lib/nav.php
             count: 2
         # Array access on a value that WordPress or ACF may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/media-credit.php
-            count: 10
         # Property access on a value that WordPress may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: property.nonObject
             path: lib/extras.php
             count: 2
-        -
-            identifier: property.nonObject
-            path: lib/quicklinks.php
-            count: 16
         # An argument whose declared type does not match the parameter, usually mixed, false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         # `gallery_image_dimension()` documents `$ratio` as `int`, and the crop select passes a decimal string such as '1.7778' or -1, so the seven calls read as mismatched. Correcting the docblock belongs to `functions.php`, outside this slice, tracked in #780.
         -
@@ -337,11 +320,6 @@ parameters:
             identifier: binaryOp.invalid
             path: lib/extras.php
             count: 22
-        # A foreach over decoded JSON of unknown shape. Narrowing it needs a runtime check that changes behavior on unexpected data.
-        -
-            identifier: foreach.nonIterable
-            path: lib/quicklinks.php
-            count: 1
         # Array access on a `mixed` block field from ACF. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: offsetAccess.nonOffsetAccessible
@@ -364,14 +342,6 @@ parameters:
             identifier: argument.type
             path: blocks/overlay.php
             count: 15
-        -
-            identifier: argument.type
-            path: lib/geo.php
-            count: 10
-        -
-            identifier: argument.type
-            path: lib/quicklinks.php
-            count: 4
         # A compound assignment on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: assignOp.invalid
@@ -394,10 +364,6 @@ parameters:
             identifier: binaryOp.invalid
             path: lib/nav.php
             count: 2
-        -
-            identifier: binaryOp.invalid
-            path: lib/quicklinks.php
-            count: 4
         # A string cast of a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: cast.string
@@ -428,21 +394,9 @@ parameters:
             count: 7
         -
             identifier: offsetAccess.nonOffsetAccessible
-            path: lib/geo.php
-            count: 2
-        -
-            identifier: offsetAccess.nonOffsetAccessible
             path: lib/page.php
             count: 6
         # Property access on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: property.nonObject
-            path: lib/geo.php
-            count: 8
-        -
-            identifier: property.nonObject
-            path: lib/media-credit.php
-            count: 5
         -
             identifier: property.nonObject
             path: lib/nav.php
@@ -500,6 +454,15 @@ parameters:
             identifier: function.void
             path: lib/nav.php
             count: 2
+        # The GeoIP record is a plugin class without stubs and exposes `city` and `subdivisions` through magic properties. No stub package may be added (scope ruling on #773), and reading them any other way changes how a visitor's region is looked up.
+        -
+            identifier: property.nonObject
+            path: lib/geo.php
+            count: 4
+        -
+            identifier: offsetAccess.nonOffsetAccessible
+            path: lib/geo.php
+            count: 1
         # The filter callback `uamswp_footer_creds_text()` echoes its output and returns nothing, so the filtered option becomes null. Returning a value would change the rendered footer.
         -
             identifier: return.missing

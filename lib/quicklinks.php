@@ -10,6 +10,37 @@
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 
+/**
+ * Reads the term ID from a navigation menu object, or 0 when there is no menu object.
+ *
+ * @param  mixed  $menu
+ */
+function uamswp_quicklink_menu_id($menu): int
+{
+    return is_object($menu) ? (int) uamswp_field_text(get_object_vars($menu)['term_id'] ?? null) : 0;
+}
+
+/**
+ * Reads the fields a quick link needs from a menu item object, with empty values for anything missing.
+ *
+ * @param  mixed  $item
+ * @return array{id: int, parent: int, title: string, url: string, classes: array<string>, target: string, attr_title: string}
+ */
+function uamswp_quicklink_item($item): array
+{
+    $fields = is_object($item) ? get_object_vars($item) : [];
+
+    return [
+        'id' => (int) uamswp_field_text($fields['ID'] ?? null),
+        'parent' => (int) uamswp_field_text($fields['menu_item_parent'] ?? null),
+        'title' => uamswp_field_text($fields['title'] ?? null),
+        'url' => uamswp_field_text($fields['url'] ?? null),
+        'classes' => array_map(uamswp_field_text(...), uamswp_field_array($fields['classes'] ?? null)),
+        'target' => uamswp_field_text($fields['target'] ?? null),
+        'attr_title' => uamswp_field_text($fields['attr_title'] ?? null),
+    ];
+}
+
 /* Removing Quick Links action via comments in case we decide to bring it back. */
 // add_action( 'genesis_after', 'uamswp_quicklinks', 4 );
 
@@ -37,16 +68,17 @@ function uamswp_quicklinks(): void
 
                 $menu = wp_get_nav_menu_object($locations['quick-links']);
 
-                $menu_items = wp_get_nav_menu_items($menu->term_id);
+                $menu_items = wp_get_nav_menu_items(uamswp_quicklink_menu_id($menu));
 
                 $menu_list = '<ul class="list-unstyled links links-large" id="menu-quick-links">';
 
                 foreach ((array) $menu_items as $menu_item) {
 
-                    $title = $menu_item->title;
-                    $url = $menu_item->url;
-                    $classes = $menu_item->classes;
-                    $target = $menu_item->target;
+                    $menu_item = uamswp_quicklink_item($menu_item);
+                    $title = $menu_item['title'];
+                    $url = $menu_item['url'];
+                    $classes = $menu_item['classes'];
+                    $target = $menu_item['target'];
                     $target = ! empty($target) ? ' target="'.$target.'"' : '';
                     // $link_title = $menu_item->attr_title;
                     $menu_list .= '<li><a href="'.esc_url($url).'"'.$target.'>';
@@ -117,16 +149,17 @@ function uamswp_request_quicklinks(): ?bool
     }
 
     $body = wp_remote_retrieve_body($request);
-    $data = json_decode($body);
+    $data = uamswp_field_array(json_decode(uamswp_field_text($body)));
 
-    if (! empty($data)) {
+    if ($data !== []) {
 
         echo '<ul class="list-unstyled links links-large">';
 
         foreach ($data as $menu_item) {
 
+            $menu_item = uamswp_quicklink_item($menu_item);
             echo '<li>';
-            echo '<a href="'.esc_url($menu_item->url).'"'.(! empty($menu_item->target) ? ' target="'.$menu_item->target.'"' : '').'>'.(! empty($menu_item->classes) ? '<span class="'.implode(' ', $menu_item->classes).' fa-fw"></span>' : '').$menu_item->title.'</a>';
+            echo '<a href="'.esc_url($menu_item['url']).'"'.(! empty($menu_item['target']) ? ' target="'.$menu_item['target'].'"' : '').'>'.(! empty($menu_item['classes']) ? '<span class="'.implode(' ', $menu_item['classes']).' fa-fw"></span>' : '').$menu_item['title'].'</a>';
             echo '</li>';
 
         }
@@ -213,7 +246,7 @@ if (site_custom_quicklinks()) {
 
     /**
      * @param  mixed  $data
-     * @return mixed
+     * @return array<mixed>|WP_Error
      */
     function quicklinks_menu($data)
     {
@@ -240,7 +273,7 @@ if (site_custom_quicklinks()) {
 
                 // Assign array of navigation items to $menu_items variable
 
-                $menu_items = wp_get_nav_menu_items($menu->term_id);
+                $menu_items = wp_get_nav_menu_items(uamswp_quicklink_menu_id($menu));
 
                 // If $menu_items isn't empty...
 
@@ -250,15 +283,16 @@ if (site_custom_quicklinks()) {
 
                     foreach ($menu_items as $menu_item) {
 
-                        if ($menu_item->menu_item_parent == 0) {
+                        $menu_item = uamswp_quicklink_item($menu_item);
+                        if ($menu_item['parent'] === 0) {
 
                             $menuItems[] = [
-                                'id' => $menu_item->ID,
-                                'title' => $menu_item->title,
-                                'url' => $menu_item->url,
-                                'classes' => $menu_item->classes,
-                                'target' => $menu_item->target,
-                                'link_title' => $menu_item->attr_title,
+                                'id' => $menu_item['id'],
+                                'title' => $menu_item['title'],
+                                'url' => $menu_item['url'],
+                                'classes' => $menu_item['classes'],
+                                'target' => $menu_item['target'],
+                                'link_title' => $menu_item['attr_title'],
                             ];
 
                         }

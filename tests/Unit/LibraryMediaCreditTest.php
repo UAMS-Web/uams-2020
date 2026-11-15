@@ -63,3 +63,83 @@ it('preserves loose block-name comparison for filter-supplied boolean names', fu
     $actual = uamswp_core_image_add_credits('<figure><img/></figure>', ['blockName' => true, 'attrs' => ['id' => 41]], null);
     expect($actual)->toContain('Photographer')->toContain('photo-credit');
 });
+
+it('reads the edit fields of an unknown attachment and malformed metadata as empty', function ($form, $post, $file, $media, $saved, $metadata, array $expected): void {
+    Functions\expect('get_attached_file')->once()->with(0)->andReturn($file);
+    Functions\expect('wp_read_image_metadata')->once()->with('')->andReturn($media);
+    Functions\expect('get_post_meta')->once()->with(0, '_media_credit', true)->andReturn($saved);
+    when('wp_get_attachment_metadata')->justReturn($metadata);
+    when('esc_attr')->alias(static fn ($text): string => 'ATTR:'.$text);
+    when('esc_html')->alias(static fn ($text): string => 'HTML:'.$text);
+
+    expect(uamswp_attachment_fields_to_edit_source($form, $post))->toBe($expected);
+})->with([
+    [null, null, false, false, '', false, ['media_credit' => ['label' => 'ATTR:Image Credit', 'input' => 'text', 'value' => 'ATTR:', 'helps' => 'Original Credit: HTML:']]],
+    ['text', ['ID' => 41], false, ['credit' => ['x']], ['x'], ['image_meta' => ['credit' => ['y']]], ['media_credit' => ['label' => 'ATTR:Image Credit', 'input' => 'text', 'value' => 'ATTR:', 'helps' => 'Original Credit: HTML:']]],
+    [[], (object) ['ID' => ['41']], false, ['credit' => 'E'], null, false, ['media_credit' => ['label' => 'ATTR:Image Credit', 'input' => 'text', 'value' => 'ATTR:E', 'helps' => 'Original Credit: HTML:E']]],
+]);
+
+it('passes the post id to the attachment lookups as an integer', function (): void {
+    $types = [];
+    Functions\expect('get_attached_file')->once()->andReturnUsing(static function ($id) use (&$types): string {
+        $types[] = get_debug_type($id);
+
+        return '/f.jpg';
+    });
+    Functions\expect('get_post_meta')->once()->andReturnUsing(static function ($id) use (&$types): string {
+        $types[] = get_debug_type($id);
+
+        return 'Saved';
+    });
+    when('wp_read_image_metadata')->justReturn(false);
+    when('wp_get_attachment_metadata')->alias(static function ($id) use (&$types): bool {
+        $types[] = get_debug_type($id);
+
+        return false;
+    });
+    when('esc_attr')->returnArg();
+    when('esc_html')->returnArg();
+    uamswp_attachment_fields_to_edit_source([], (object) ['ID' => '41']);
+    expect($types)->toBe(['int', 'int', 'int']);
+});
+
+it('ignores media-credit saves whose attachment fields are not an array', function ($post, $attachment): void {
+    Functions\expect('get_post_meta')->never();
+    Functions\expect('update_post_meta')->never();
+    Functions\expect('delete_post_meta')->never();
+    expect(uamswp_attachment_fields_to_save_source_url_name($post, $attachment))->toBe($post);
+})->with([[['ID' => 41], null], [['ID' => 41], 'text'], [['ID' => 41], false]]);
+
+it('saves a media credit against post zero when the post id is missing or not text', function ($post): void {
+    Functions\expect('get_post_meta')->once()->with(0, '_media_credit', true)->andReturn('old');
+    Functions\expect('update_post_meta')->once()->with(0, '_media_credit', 'new');
+    uamswp_attachment_fields_to_save_source_url_name($post, ['media_credit' => 'new']);
+})->with([[[]], [['ID' => ['41']]], [['ID' => null]]]);
+
+it('returns an empty string for image blocks whose content or block data is not what WordPress supplies', function ($content, $block): void {
+    Functions\expect('get_post_meta')->never();
+    expect(uamswp_core_image_add_credits($content, $block, null))->toBe('');
+})->with([[null, ['blockName' => 'core/paragraph']], [['x'], null], [false, 'text'], [null, ['blockName' => 'core/image', 'attrs' => 'text']]]);
+
+it('looks up image-block credits with an integer id and reads non-text credits as empty', function ($id, $saved, $metadata, string $expected): void {
+    $types = [];
+    Functions\expect('get_post_meta')->once()->andReturnUsing(static function ($post_id) use (&$types, $saved) {
+        $types[] = get_debug_type($post_id);
+
+        return $saved;
+    });
+    when('wp_get_attachment_metadata')->alias(static function ($post_id) use (&$types, $metadata) {
+        $types[] = get_debug_type($post_id);
+
+        return $metadata;
+    });
+    when('esc_html__')->alias(static fn ($text): string => 'T:'.$text);
+    when('esc_html')->alias(static fn ($text): string => 'H:'.$text);
+    $actual = uamswp_core_image_add_credits('<figure></figure>', ['blockName' => 'core/image', 'attrs' => ['id' => $id]], null);
+    expect($actual)->toBe($expected)->and(array_unique($types))->toBe(['int']);
+})->with([
+    ['41', ['Array credit'], false, '<figure><figcaption><span class="photo-credit">(T:Image credit: H:)</span></figcaption></figure>'],
+    ['41', null, ['image_meta' => ['credit' => 'Fallback']], '<figure><figcaption><span class="photo-credit">(T:Image credit: H:Fallback)</span></figcaption></figure>'],
+    ['41', null, ['image_meta' => 'not an array'], '<figure></figure>'],
+    ['41', null, ['image_meta' => ['credit' => ['x']]], '<figure><figcaption><span class="photo-credit">(T:Image credit: H:)</span></figcaption></figure>'],
+]);
