@@ -626,3 +626,22 @@ it('escapes the icon class in link-list-2', function () use ($blockBaseCases): v
     $case['fields']['link_list_section'][0]['link_list_section_icon'] = '';
     expect(BlockTemplateScenario::render($case)['html'])->toContain('<span class="ATTR(fas fa-link) fa-stack-1x fa-inverse"></span>');
 });
+
+it('keeps a caller-supplied link-list-2 id when a block is also set', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['link-list-2'];
+    $case['variables']['id'] = 'caller-id';
+    expect(BlockTemplateScenario::render($case)['html'])->toContain('id="ATTR(link-list-caller-id)"');
+});
+
+it('counts a link-list-2 module index that is not an integer as its integer part', function () use ($blockCasesByLabel): void {
+    $case = $blockCasesByLabel['link-list-2']['no-block'];
+    $case['variables']['i'] = 4.5;
+    expect(BlockTemplateScenario::render($case)['html'])->toContain('id="ATTR(link-list-module-5)"');
+});
+
+it('prints non-text preview regions of link-list-2 as empty text', function () use ($blockCasesByLabel): void {
+    $case = $blockCasesByLabel['link-list-2']['preview'];
+    $case['fields']['link_list_geo'] = 'include';
+    $case['fields']['link_list_geo_region'] = ['AR', ['x'], 7];
+    expect(BlockTemplateScenario::render($case)['html'])->toStartWith('HTML(Include) region(s): HTML(AR, , 7)<hr>');
+});
