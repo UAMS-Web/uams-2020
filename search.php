@@ -347,6 +347,9 @@ function uamswp_do_search_loop(): void
             ]);
 
             uamswp_custom_loop_base($args);
+            // The count is read only after the loop assigns it from found_posts, so its starting value never shows.
+            // @pest-mutate-ignore: DecrementInteger
+            // @pest-mutate-ignore: IncrementInteger
             $post_count = 0;
 
             $post_type_text = ucfirst($post_type);
@@ -505,6 +508,9 @@ function uamswp_do_search_loop(): void
                 // echo '</div></div>';
 
                 uamswp_custom_loop_base($args);
+                // The count is read only after the loop assigns it from found_posts, so its starting value never shows.
+                // @pest-mutate-ignore: DecrementInteger
+                // @pest-mutate-ignore: IncrementInteger
                 $post_count = 0;
 
                 if (have_posts()) {
