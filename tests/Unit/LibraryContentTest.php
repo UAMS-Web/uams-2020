@@ -15,6 +15,19 @@ it('returns an empty string for image content that is not text', function ($cont
     expect(uamswp_image_responsive_class($content))->toBe('');
 })->with([[['<img class="a">', 'plain']], [null], [false], [new stdClass]]);
 
+it('returns an empty string when the pattern engine fails', function (): void {
+    $limit = ini_get('pcre.backtrack_limit');
+    ini_set('pcre.backtrack_limit', '1');
+
+    try {
+        $subject = '<p>'.str_repeat('a ', 200).'<img src="x" /></p>';
+        expect(uamswp_image_responsive_class('<img'.str_repeat(' a', 200).' class="x">'))->toBe('')
+            ->and(uamswp_filter_ptags_on_images($subject))->toBe('');
+    } finally {
+        ini_set('pcre.backtrack_limit', (string) $limit);
+    }
+});
+
 it('keeps numeric and boolean image content as text', function ($content, string $expected): void {
     expect(uamswp_image_responsive_class($content))->toBe($expected);
 })->with([[42, '42'], [true, '1']]);

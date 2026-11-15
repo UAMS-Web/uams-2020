@@ -75,12 +75,35 @@ it('falls back to post id zero when the current post is unknown', function (): v
     when('get_the_id')->justReturn(false);
     when('get_the_ID')->justReturn(false);
     Functions\expect('get_post_meta')->once()->with(0, 'page_hide_breadcrumbs', true)->andReturn('');
+    Functions\expect('get_post_meta')->once()->with(0, 'page_hide_child_menu', true)->andReturn(true);
     expect(uamswp_hide_breadcrumbs())->toBeFalse();
+    uamswp_list_child_pages();
     Functions\expect('get_the_title')->once()->with(0)->andReturn('T');
     Functions\expect('get_the_permalink')->once()->with(0)->andReturn('/p');
     Functions\expect('is_archive')->once()->andReturn(false);
     expect(uamswp_entry_title_h1('ignored'))->toBe('<h1 class="entry-title" itemprop="headline">T</h1>');
 });
+
+it('passes cover-image ids to the resizer and the attachment lookup as integers', function (string $function, array $fields): void {
+    LibraryPageScenario::configure($fields, true);
+    $types = [];
+    when('image_sizer')->alias(static function ($id) use (&$types): string {
+        $types[] = get_debug_type($id);
+
+        return 'sized';
+    });
+    when('wp_get_attachment_url')->alias(static function ($id) use (&$types): string {
+        $types[] = get_debug_type($id);
+
+        return 'url';
+    });
+    LibraryBrandingScenario::render($function);
+    expect($types)->not->toBeEmpty()->and(array_unique($types))->toBe(['int']);
+})->with([
+    ['uamswp_graphic_title_inner_1', ['page_cover_image' => '70']],
+    ['uamswp_landing_page_title_inner_1', ['page_landing_page_cover_image' => '70', 'page_landing_page_cover_image_mobile' => '71']],
+    ['uamswp_landing_page_title_inner_1', ['page_landing_page_cover_image' => '70', 'page_landing_page_cover_image_mobile' => '']],
+]);
 
 it('pins the exact wrappers around graphic and landing-page headings', function (string $function, string $expected): void {
     ob_start();

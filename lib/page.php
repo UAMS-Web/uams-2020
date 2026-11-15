@@ -106,7 +106,7 @@ function uamswp_attributes_entry_header($attributes): array
  */
 function uamswp_attributes_entry_header_graphic_title($attributes): array
 {
-    $page_cover_image = (int) uamswp_field_text(get_field('page_cover_image', get_the_id()));
+    $page_cover_image = uamswp_field_text(get_field('page_cover_image', get_the_id()));
 
     if ($page_cover_image) {
         return uamswp_append_attribute_class($attributes, ' uams-module extra-padding graphic-title bg-image bg-red');
@@ -216,7 +216,7 @@ function uamswp_graphic_title_wrap_close(): void
  */
 function uamswp_attributes_entry_header_landing_page_title($attributes): array
 {
-    $page_landing_page_cover_image = (int) uamswp_field_text(get_field('page_landing_page_cover_image', get_the_id()));
+    $page_landing_page_cover_image = uamswp_field_text(get_field('page_landing_page_cover_image', get_the_id()));
 
     if ($page_landing_page_cover_image) {
         return uamswp_append_attribute_class($attributes, ' uams-module extra-padding landing-page-title bg-image');

@@ -143,6 +143,8 @@ function uamswp_filter_download_button($content): string
     $preg_match = '/<div class="wp-block-file"><a .*>([^<]*)<\/a><a(.*)/iU';
     $has_download_button = preg_match($preg_match, $content, $matches);
     if ($has_download_button && ! empty($matches[1])) {
+        // The same pattern matched just above, so the replacement cannot fail and never returns null.
+        // @pest-mutate-ignore: RemoveStringCast
         return (string) preg_replace_callback($preg_match, add_download_title(...), $content);
     }
 
@@ -207,11 +209,11 @@ function uamswp_title($html)
     $uams_sitehome = $sitehome;
 
     // Prepend UAMS to sitename & sitehome as uams_ versions. Used for Institutes and potential others
-    if (! str_contains('UAMS', (string) $sitename) && ! str_contains('University of Arkansas for Medical Sciences', (string) $sitename)) {
+    if (! str_contains('UAMS', $sitename) && ! str_contains('University of Arkansas for Medical Sciences', $sitename)) {
         $uams_sitename = 'UAMS '.$sitename;
     }
 
-    if (! str_contains('UAMS', (string) $sitehome) && ! str_contains('University of Arkansas for Medical Sciences', (string) $sitehome)) {
+    if (! str_contains('UAMS', $sitehome) && ! str_contains('University of Arkansas for Medical Sciences', $sitehome)) {
         $uams_sitehome = 'UAMS '.$sitehome;
     }
 

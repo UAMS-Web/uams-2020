@@ -120,6 +120,33 @@ it('preserves pluggable site-helper effects before selecting the title branch', 
     expect(uamswp_title('ignored'))->toBe('Page Title | UAMS Health');
 });
 
+function libraryTitleBare(array $site, array $flags, int|false $id, mixed $details): void
+{
+    when('uams_get_site_info')->justReturn($site);
+    when('get_the_title')->justReturn('Page Title');
+    when('get_the_id')->justReturn($id);
+    foreach (['is_search', 'is_archive', 'is_category', 'is_tag', 'is_tax', 'is_home', 'is_front_page', 'is_404'] as $function) {
+        when($function)->justReturn($flags[$function] ?? false);
+    }
+
+    when('get_bloginfo')->justReturn('Local');
+    when('get_blog_details')->justReturn($details);
+}
+
+it('uses post id zero for archive and SEO lookups when the current post is unknown', function (): void {
+    libraryTitleBare(['site' => 'uams', 'subsite' => 'main', 'department' => 'main'], ['is_archive' => true], false, (object) ['blogname' => 'Root']);
+    Functions\expect('get_post_type')->once()->with(0)->andReturn('page');
+    Functions\expect('get_post_type_object')->once()->with('page')->andReturn((object) ['label' => 'Pages']);
+    Functions\expect('get_post_meta')->once()->with(0, '_seopress_titles_title', true)->andReturn('');
+    expect(uamswp_title('ignored'))->toBe('Pages | UAMS');
+});
+
+it('uses an empty network name when the main site details are unavailable', function (): void {
+    libraryTitleBare(['site' => 'institute', 'subsite' => 'eye', 'department' => 'other'], [], 41, false);
+    Functions\expect('get_post_meta')->once()->with(41, '_seopress_titles_title', true)->andReturn('');
+    expect(uamswp_title('ignored'))->toBe('Page Title | ');
+});
+
 it('treats array blog names supplied by mixed WordPress option filters as empty', function ($name, $root, string $department): void {
     libraryTitleContext(['site' => 'institute', 'subsite' => 'eye', 'department' => $department], [], $name, $root);
     expect(uamswp_title('ignored'))->toBe('Page Title | ');
