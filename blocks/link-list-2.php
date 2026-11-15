@@ -79,15 +79,15 @@ if (! isset($geo) || $geo_regions === []) {
 }
 if (! empty($is_preview) && ! empty($geo) && $geo_regions !== []) {
     $geo_display = true;
-    echo ucwords(uamswp_field_text($geo)).' region(s): '.implode(', ', array_map(uamswp_field_text(...), $geo_regions)).'<hr>';
+    echo esc_html(ucwords(uamswp_field_text($geo))).' region(s): '.esc_html(implode(', ', array_map(uamswp_field_text(...), $geo_regions))).'<hr>';
 }
 if ($geo_display) {
     ?>
-<section class="uams-module link-list<?php echo $className; ?> <?php echo uamswp_field_text($background_color); ?>" id="<?php echo $id; ?>" aria-label="<?php echo uamswp_field_text($heading); ?>">
+<section class="uams-module link-list<?php echo esc_attr($className); ?> <?php echo esc_attr(uamswp_field_text($background_color)); ?>" id="<?php echo esc_attr($id); ?>" aria-label="<?php echo esc_attr(uamswp_field_text($heading)); ?>">
     <h2 class="module-title <?php echo $hide_heading ? ' sr-only' : ''; ?>">
-        <span class="title"><?php echo uamswp_field_text($heading); ?></span>
+        <span class="title"><?php echo esc_html(uamswp_field_text($heading)); ?></span>
     </h2>
-    <?php echo $description ? '<p class="note">'.uamswp_field_text($description).'</p>' : ''; ?>
+    <?php echo $description ? '<p class="note">'.esc_html(uamswp_field_text($description)).'</p>' : ''; ?>
     <div class="container-fluid">
         <div class="row">
         <?php
@@ -112,11 +112,11 @@ if ($geo_display) {
                     <?php if ($link_list_icons) { ?>
                         <span class="fa-stack fa-lg">
                             <span class="fas fa-circle fa-stack-2x"></span>
-                            <span class="<?php echo $link_icon ?: 'fas fa-link'; ?> fa-stack-1x fa-inverse"></span>
+                            <span class="<?php echo esc_attr($link_icon ?: 'fas fa-link'); ?> fa-stack-1x fa-inverse"></span>
                         </span>
                     <?php } // endif?>
-                    <h3 class="h5"><a class="stretched-link" href="<?php echo $link_url; ?>"<?php echo $link_target ? ' target="'.$link_target.'"' : ''; ?> aria-label="<?php echo $link_desc; ?>"><?php echo $link_title; ?></a></h3>
-                    <?php echo $body ? '<p>'.$body.'</p>' : ''; ?>
+                    <h3 class="h5"><a class="stretched-link" href="<?php echo esc_url($link_url); ?>"<?php echo $link_target ? ' target="'.esc_attr($link_target).'"' : ''; ?> aria-label="<?php echo esc_attr($link_desc); ?>"><?php echo esc_html($link_title); ?></a></h3>
+                    <?php echo $body ? '<p>'.esc_html($body).'</p>' : ''; ?>
                 </div>
             </div>
         <?php

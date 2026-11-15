@@ -47293,7 +47293,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -47334,6 +47334,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -47400,7 +47432,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -47441,6 +47473,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -47507,7 +47571,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -47548,6 +47612,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -47608,7 +47704,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list bg-white\" id=\"link-list-module-5\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR() ATTR(bg-white)\" id=\"ATTR(link-list-module-5)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -47649,6 +47745,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    ""
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-module-5"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -47712,7 +47840,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list bg-white\" id=\"link-list-SLUG(Module & Anchor)\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR() ATTR(bg-white)\" id=\"ATTR(link-list-SLUG(Module & Anchor))\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -47753,6 +47881,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    ""
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-SLUG(Module & Anchor)"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -47814,7 +47974,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list bg-white\" id=\"link-list-8\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR() ATTR(bg-white)\" id=\"ATTR(link-list-8)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -47855,6 +48015,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    ""
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-8"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -47916,7 +48108,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list bg-white\" id=\"link-list-module-1\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR() ATTR(bg-white)\" id=\"ATTR(link-list-module-1)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -47957,6 +48149,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    ""
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-module-1"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -48023,7 +48247,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list x alignfull bg-white\" id=\"Chosen & Anchor\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( x alignfull) ATTR(bg-white)\" id=\"ATTR(Chosen & Anchor)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -48064,6 +48288,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " x alignfull"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "Chosen & Anchor"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -48157,7 +48413,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -48178,6 +48434,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -48244,7 +48532,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\"></span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR()\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML()</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -48285,6 +48573,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    ""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -48351,7 +48671,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -48392,6 +48712,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -48458,7 +48810,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n        <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n        <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -48499,6 +48851,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -48565,7 +48949,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide \" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR()\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -48606,6 +48990,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    ""
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -48672,7 +49088,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -48713,6 +49129,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -48756,7 +49204,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -48797,6 +49245,22 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
                 ]
             ],
             "queries": []
@@ -48983,7 +49447,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "Include region(s): AR, Region <&<hr><section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "HTML(Include) region(s): HTML(AR, Region <&)<hr><section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -49031,6 +49495,38 @@
                         "AR",
                         "Region <&"
                     ]
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -49100,7 +49596,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -49148,6 +49644,38 @@
                         "AR",
                         "Region <&"
                     ]
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -49217,7 +49745,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "Include region(s): AR, Region <&<hr><section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "HTML(Include) region(s): HTML(AR, Region <&)<hr><section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -49265,6 +49793,38 @@
                         "AR",
                         "Region <&"
                     ]
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -49334,7 +49894,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -49382,6 +49942,38 @@
                         "AR",
                         "Region <&"
                     ]
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -49451,7 +50043,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "Exclude region(s): AR, Region <&<hr><section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "HTML(Exclude) region(s): HTML(AR, Region <&)<hr><section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -49499,6 +50091,38 @@
                         "AR",
                         "Region <&"
                     ]
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -49685,7 +50309,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "Exclude region(s): AR, Region <&<hr><section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "HTML(Exclude) region(s): HTML(AR, Region <&)<hr><section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -49733,6 +50357,38 @@
                         "AR",
                         "Region <&"
                     ]
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -49912,7 +50568,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "Other region(s): AR, Region <&<hr><section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "HTML(Other) region(s): HTML(AR, Region <&)<hr><section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -49953,6 +50609,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -50132,7 +50820,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "Other region(s): AR, Region <&<hr><section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "HTML(Other) region(s): HTML(AR, Region <&)<hr><section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -50173,6 +50861,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -94573,7 +95293,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title  sr-only\">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title  sr-only\">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -94614,6 +95334,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -94680,7 +95432,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-gray\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-gray)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -94721,6 +95473,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-gray"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -94787,7 +95571,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-auto\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-auto)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -94828,6 +95612,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-auto"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -94894,7 +95710,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-red\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-red)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -94935,6 +95751,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-red"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -95001,7 +95849,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                            <span class=\"fa-stack fa-lg\">\n                            <span class=\"fas fa-circle fa-stack-2x\"></span>\n                            <span class=\"link_list_section_icon <&\" fa-stack-1x fa-inverse\"></span>\n                        </span>\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                            <span class=\"fa-stack fa-lg\">\n                            <span class=\"fas fa-circle fa-stack-2x\"></span>\n                            <span class=\"link_list_section_icon <&\" fa-stack-1x fa-inverse\"></span>\n                        </span>\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                            <span class=\"fa-stack fa-lg\">\n                            <span class=\"fas fa-circle fa-stack-2x\"></span>\n                            <span class=\"ATTR(link_list_section_icon <&\") fa-stack-1x fa-inverse\"></span>\n                        </span>\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                            <span class=\"fa-stack fa-lg\">\n                            <span class=\"fas fa-circle fa-stack-2x\"></span>\n                            <span class=\"ATTR(link_list_section_icon <&\") fa-stack-1x fa-inverse\"></span>\n                        </span>\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -95042,6 +95890,46 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_icon <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_icon <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -95108,7 +95996,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\"></a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML()</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -95149,6 +96037,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -95215,7 +96135,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                                    </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                                    </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -95256,6 +96176,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -95318,7 +96270,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL()\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -95359,6 +96311,34 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -95425,7 +96405,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR()\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -95466,6 +96446,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    ""
                 ]
             ],
             "queries": []
@@ -95532,7 +96544,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -95573,6 +96585,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -95639,7 +96683,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -95680,6 +96724,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -95746,7 +96822,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -95787,6 +96863,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -95853,7 +96961,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -95894,6 +97002,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
@@ -95962,7 +97102,7 @@
         "thumbnail": 47,
         "excerpt": false,
         "expected": {
-            "html": "<section class=\"uams-module link-list custom class alignwide bg-white\" id=\"link-list-block-7\" aria-label=\"link_list_heading <&\"\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">link_list_heading <&\"</span>\n    </h2>\n    <p class=\"note\">link_list_description <&\"</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"https://example.test/go?x=\"<&\" target=\"_blank\" aria-label=\"link_list_section_description <&\"\">link_list_section_title <&\"</a></h3>\n                    <p>link_list_section_body <&\"</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
+            "html": "<section class=\"uams-module link-listATTR( custom class alignwide) ATTR(bg-white)\" id=\"ATTR(link-list-block-7)\" aria-label=\"ATTR(link_list_heading <&\")\">\n    <h2 class=\"module-title \">\n        <span class=\"title\">HTML(link_list_heading <&\")</span>\n    </h2>\n    <p class=\"note\">HTML(link_list_description <&\")</p>    <div class=\"container-fluid\">\n        <div class=\"row\">\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                    <div class=\"col item\">\n                <div class=\"inner-container\">\n                                        <h3 class=\"h5\"><a class=\"stretched-link\" href=\"URL(https://example.test/go?x=\"<&)\" target=\"ATTR(_blank)\" aria-label=\"ATTR(link_list_section_description <&\")\">HTML(link_list_section_title <&\")</a></h3>\n                    <p>HTML(link_list_section_body <&\")</p>                </div>\n            </div>\n                </div>\n    </div>\n</section>\n",
             "calls": [
                 [
                     "get_field",
@@ -96003,6 +97143,38 @@
                     "get_field",
                     "link_list_geo_region",
                     []
+                ],
+                [
+                    "esc_attr",
+                    " custom class alignwide"
+                ],
+                [
+                    "esc_attr",
+                    "bg-white"
+                ],
+                [
+                    "esc_attr",
+                    "link-list-block-7"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_heading <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
+                ],
+                [
+                    "esc_attr",
+                    "_blank"
+                ],
+                [
+                    "esc_attr",
+                    "link_list_section_description <&\""
                 ]
             ],
             "queries": []
