@@ -18,6 +18,14 @@ remove_action('genesis_header', 'genesis_do_header');
 // Here goes the logo in Header -- need to update this with SVG magic?
 add_action('genesis_header', 'uamswp_site_image', 5);
 
+/**
+ * The ID of the subsection page the current page belongs to, or 0 when it is not in a subsection.
+ */
+function uamswp_header_subsection_id(): int
+{
+    return (int) uamswp_field_text(uamswp_nav_subsection());
+}
+
 function uamswp_site_image(): void
 {
     if (uams_get_site_info()['site'] == 'uamshealth') {
@@ -41,17 +49,17 @@ function uamswp_site_image(): void
 	<div class="global-title">
 
 	<?php
-    if (uams_get_site_info()['site'] == 'uamshealth' && uams_get_site_info()['subsite'] == 'main' && ! uamswp_nav_subsection()) { // If it's the main UAMS Health site and not a subsection
+    if (uams_get_site_info()['site'] == 'uamshealth' && uams_get_site_info()['subsite'] == 'main' && ! uamswp_header_subsection_id()) { // If it's the main UAMS Health site and not a subsection
         printf('<a href="'.$header_image_link.'" class="navbar-brand no-subbrand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text);
     } else {
         printf('<a href="'.$header_image_link.'" class="navbar-brand">%s<span class="sr-only">%s</span></a>', $header_image, $header_image_text);
         echo '<div class="navbar-subbrand">';
 
-        if (uams_get_site_info()['site'] == 'uamshealth' && uams_get_site_info()['subsite'] == 'main' && uamswp_nav_subsection()) { // If it's a subsection on the main UAMS Health site
-            echo '<a class="title" href="'.get_the_permalink(uamswp_nav_subsection()).'">'.get_the_title(uamswp_nav_subsection()).'</a>';
-        } elseif (uamswp_nav_subsection()) { // If it's a subsection on any other site
-            echo '<a class="parent" title="'.esc_attr(get_bloginfo('description')).'" href="'.esc_url(home_url('/')).'">'.uams_site_title().'</a><span class="sr-only">: </span>';
-            echo '<a class="title" href="'.get_the_permalink(uamswp_nav_subsection()).'">'.get_the_title(uamswp_nav_subsection()).'</a>';
+        if (uams_get_site_info()['site'] == 'uamshealth' && uams_get_site_info()['subsite'] == 'main' && uamswp_header_subsection_id()) { // If it's a subsection on the main UAMS Health site
+            echo '<a class="title" href="'.get_the_permalink(uamswp_header_subsection_id()).'">'.get_the_title(uamswp_header_subsection_id()).'</a>';
+        } elseif (uamswp_header_subsection_id()) { // If it's a subsection on any other site
+            echo '<a class="parent" title="'.esc_attr(get_bloginfo('description')).'" href="'.esc_url(home_url('/')).'">'.uamswp_field_text(uams_site_title()).'</a><span class="sr-only">: </span>';
+            echo '<a class="title" href="'.get_the_permalink(uamswp_header_subsection_id()).'">'.get_the_title(uamswp_header_subsection_id()).'</a>';
         } elseif (uams_get_site_info()['site'] == 'inside' && uams_get_site_info()['subsite'] !== 'main') {
             switch_to_blog(1);
             $site_title = get_bloginfo('name');
@@ -74,15 +82,15 @@ function uamswp_site_image(): void
             restore_current_blog();
             $root_title_split = false;
             $root_title_link = esc_url(network_site_url());
-            $site_title = uams_site_title();
+            $site_title = uamswp_field_text(uams_site_title());
             $site_title_link = esc_url(home_url('/'));
-            $subsection_title = get_the_title(uamswp_nav_subsection());
-            $subsection_title_link = get_the_permalink(uamswp_nav_subsection());
+            $subsection_title = get_the_title(uamswp_header_subsection_id());
+            $subsection_title_link = get_the_permalink(uamswp_header_subsection_id());
             // Test if Root site title contains three spaces. Split title into vars if so.
             $split_str = '   ';
             if (str_contains($root_title_text, $split_str)) {
                 $root_title_split = true;
-                $split_str_pos = strpos($site_title, $split_str);
+                $split_str_pos = (int) strpos($site_title, $split_str); // A site title without the three spaces counts from the start.
                 $split_a_end = $split_str_pos;
                 $split_b_begin = $split_str_pos + 3;
                 $root_title_split_descr = substr($site_title, 0, $split_a_end);
@@ -94,11 +102,11 @@ function uamswp_site_image(): void
                 $site_title = str_replace($split_str, ' ', $site_title);
             }
             // Begin structure
-            if (uamswp_nav_subsection() && uams_get_site_info()['department'] != 'main' && uams_get_site_info()['department'] != 'none') {
+            if (uamswp_header_subsection_id() && uams_get_site_info()['department'] != 'main' && uams_get_site_info()['department'] != 'none') {
                 // Subsection of site that is department/organization
                 echo '<a class="parent" href="'.$site_title_link.'">'.$site_title.'</a><span class="sr-only">: </span>';
                 echo '<a class="title" href="'.$subsection_title_link.'">'.$subsection_title.'</a>';
-            } elseif (uamswp_nav_subsection()) {
+            } elseif (uamswp_header_subsection_id()) {
                 // Subsection of site that is not department/organization (includes Main)
                 echo '<a class="parent" href="'.$root_title_link.'">'.$root_title_text.'</a><span class="sr-only">: </span>';
                 echo '<a class="title" href="'.$subsection_title_link.'">'.$subsection_title.'</a>';
@@ -115,7 +123,7 @@ function uamswp_site_image(): void
             }
         } else {
             // If it's a regular old homepage
-            echo '<a class="title" title="'.esc_attr(get_bloginfo('description')).'" href="'.esc_url(home_url('/')).'">'.uams_site_title().'</a>';
+            echo '<a class="title" title="'.esc_attr(get_bloginfo('description')).'" href="'.esc_url(home_url('/')).'">'.uamswp_field_text(uams_site_title()).'</a>';
         }
 
         echo '</div>';
