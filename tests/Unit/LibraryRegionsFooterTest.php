@@ -99,3 +99,25 @@ it('converts mixed Genesis wrapper values before reading the next structural wra
 
     expect(uamswp_footer_widget_areas('', 0))->toBe('<OUTER><WRAP><div class="footer-widgets-1 col-sm-12 widget-area">WIDGET</div></WRAP></div>');
 });
+
+it('treats city and state names that are not text as empty', function ($name): void {
+    Functions\expect('geoip_detect2_get_info_from_current_ip')->twice()->andReturn((object) ['city' => (object) ['name' => $name], 'subdivisions' => [(object) ['name' => $name]]]);
+    expect(is_in_region(['central']))->toBeFalse()->and(is_not_in_region(['central']))->toBeTrue();
+})->with([[null], [false], [['Arkansas']]]);
+
+it('reads a region list that is not an array as empty', function ($list): void {
+    global $region_central;
+    $saved = $region_central;
+    $region_central = $list;
+    Functions\expect('geoip_detect2_get_info_from_current_ip')->twice()->andReturn((object) ['city' => (object) ['name' => 'Little Rock'], 'subdivisions' => [(object) ['name' => 'Arkansas']]]);
+
+    try {
+        expect(is_in_region(['central']))->toBeNull()->and(is_not_in_region(['central']))->toBeTrue();
+    } finally {
+        $region_central = $saved;
+    }
+})->with([[null], [false], ['Little Rock']]);
+
+it('keeps a numeric city name as text', function (): void {
+    expect(uamswp_geo_city_and_state((object) ['city' => (object) ['name' => 7], 'subdivisions' => [(object) ['name' => true]]]))->toBe(['city' => '7', 'state' => '1']);
+});

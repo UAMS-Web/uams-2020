@@ -22,6 +22,23 @@ $region_southeast = [
 $region_central = [
     'Little Rock Air Force Base', 'North Little Rock', 'Bryant', 'Benton', 'Little Rock', 'Adona', 'Alexander', 'Bauxite', 'Bigelow', 'Cabot', 'Carlisle', 'Conway', 'England', 'Enola', 'Greenbrier', 'Hot Springs Village', 'Jacksonville', 'Jessieville', 'Lonoke', 'Maumelle', 'Mount Vernon', 'Pearcy', 'Sheridan', 'Sherwood', 'Vilonia', 'Ward', 'Wrightsville', 'Hot Springs', 'Hot Springs National Park',
 ];
+/**
+ * Reads the city and state names from a GeoIP record.
+ *
+ * The record is a plugin class without stubs and exposes `city` and `subdivisions` through magic properties, so
+ * the reads stay direct and only the results are narrowed.
+ *
+ * @param  mixed  $geo
+ * @return array{city: string, state: string}
+ */
+function uamswp_geo_city_and_state($geo): array
+{
+    return [
+        'city' => uamswp_field_text($geo->city->name),
+        'state' => uamswp_field_text($geo->subdivisions[0]->name),
+    ];
+}
+
 // Function include
 /**
  * @param  array<mixed>  $regions
@@ -34,9 +51,9 @@ function is_in_region(array $regions): ?bool
     }
 
     global $region_northwest, $region_northeast, $region_southwest, $region_southeast, $region_central;
-    $geo = geoip_detect2_get_info_from_current_ip();
-    $city = $geo->city->name;
-    $state = $geo->subdivisions[0]->name;
+    $geo_names = uamswp_geo_city_and_state(geoip_detect2_get_info_from_current_ip());
+    $city = $geo_names['city'];
+    $state = $geo_names['state'];
 
     if ($state !== 'Arkansas') {
         return false;
@@ -44,23 +61,23 @@ function is_in_region(array $regions): ?bool
 
     foreach ($regions as $region) {
         if ($region == 'northwest') {
-            if (in_array($city, $region_northwest)) {
+            if (in_array($city, uamswp_field_array($region_northwest))) {
                 return true;
             }
         } elseif ($region == 'northeast') {
-            if (in_array($city, $region_northeast)) {
+            if (in_array($city, uamswp_field_array($region_northeast))) {
                 return true;
             }
         } elseif ($region == 'southwest') {
-            if (in_array($city, $region_southwest)) {
+            if (in_array($city, uamswp_field_array($region_southwest))) {
                 return true;
             }
         } elseif ($region == 'southeast') {
-            if (in_array($city, $region_southeast)) {
+            if (in_array($city, uamswp_field_array($region_southeast))) {
                 return true;
             }
         } elseif ($region == 'central') {
-            if (in_array($city, $region_central)) {
+            if (in_array($city, uamswp_field_array($region_central))) {
                 return true;
             }
         } else {
@@ -85,9 +102,9 @@ function is_not_in_region(array $regions): ?bool
 
     global $region_northwest, $region_northeast, $region_southwest, $region_southeast, $region_central;
 
-    $geo = geoip_detect2_get_info_from_current_ip();
-    $city = $geo->city->name;
-    $state = $geo->subdivisions[0]->name;
+    $geo_names = uamswp_geo_city_and_state(geoip_detect2_get_info_from_current_ip());
+    $city = $geo_names['city'];
+    $state = $geo_names['state'];
 
     if ($state !== 'Arkansas') {
         return true;
@@ -96,27 +113,27 @@ function is_not_in_region(array $regions): ?bool
     $display_region = true;
     foreach ($regions as $region) {
         if ($region == 'northwest') {
-            if (in_array($city, $region_northwest)) {
+            if (in_array($city, uamswp_field_array($region_northwest))) {
                 $display_region = false;
                 // return false;
             }
         } elseif ($region == 'northeast') {
-            if (in_array($city, $region_northeast)) {
+            if (in_array($city, uamswp_field_array($region_northeast))) {
                 $display_region = false;
                 // return false;
             }
         } elseif ($region == 'southwest') {
-            if (in_array($city, $region_southwest)) {
+            if (in_array($city, uamswp_field_array($region_southwest))) {
                 $display_region = false;
                 // return false;
             }
         } elseif ($region == 'southeast') {
-            if (in_array($city, $region_southeast)) {
+            if (in_array($city, uamswp_field_array($region_southeast))) {
                 $display_region = false;
                 // return false;
             }
         } elseif ($region == 'central') {
-            if (in_array($city, $region_central)) {
+            if (in_array($city, uamswp_field_array($region_central))) {
                 $display_region = false;
                 // return false;
             }

@@ -12,31 +12,31 @@ add_filter('attachment_fields_to_edit', 'uamswp_attachment_fields_to_edit_source
 /**
  * @param  mixed  $form_fields
  * @param  mixed  $post
- * @return mixed
+ * @return array<mixed>
  */
-function uamswp_attachment_fields_to_edit_source($form_fields, $post)
+function uamswp_attachment_fields_to_edit_source($form_fields, $post): array
 {
 
     // Media Credit
 
-    $file = get_attached_file($post->ID);
-    $media_meta = wp_read_image_metadata($file);
-    $media_credit = get_post_meta($post->ID, '_media_credit', true);
+    $form_fields = uamswp_field_array($form_fields);
+    $post_id = is_object($post) ? (int) uamswp_field_text(get_object_vars($post)['ID'] ?? null) : 0;
 
-    $media_credit ??= $media_meta['credit'];
+    $file = get_attached_file($post_id);
+    $media_meta = uamswp_field_array(wp_read_image_metadata(uamswp_field_text($file)));
+    $media_credit = get_post_meta($post_id, '_media_credit', true);
 
-    $image_credit = '';
-    if (isset(wp_get_attachment_metadata($post->ID)['image_meta']) && is_array(wp_get_attachment_metadata($post->ID)['image_meta'])) {
+    $media_credit ??= $media_meta['credit'] ?? null;
 
-        $image_credit = wp_get_attachment_metadata($post->ID)['image_meta']['credit'];
-
-    }
+    $image_meta = uamswp_field_array(uamswp_field_array(wp_get_attachment_metadata($post_id))['image_meta'] ?? null);
+    $image_credit = uamswp_field_text($image_meta['credit'] ?? null);
+    $embedded_credit = uamswp_field_text($media_meta['credit'] ?? null);
 
     $form_fields['media_credit'] = [
         'label' => esc_attr('Image Credit'),
         'input' => 'text',
-        'value' => esc_attr($media_credit),
-        'helps' => 'Original Credit: '.($media_meta['credit'] ? esc_html($media_meta['credit']) : esc_html($image_credit)),
+        'value' => esc_attr(uamswp_field_text($media_credit)),
+        'helps' => 'Original Credit: '.($embedded_credit ? esc_html($embedded_credit) : esc_html($image_credit)),
     ];
 
     return $form_fields;
@@ -50,10 +50,14 @@ add_filter('attachment_fields_to_save', 'uamswp_attachment_fields_to_save_source
 /**
  * @param  mixed  $attachment
  * @param  mixed  $post
- * @return mixed
+ * @return array<mixed>
  */
-function uamswp_attachment_fields_to_save_source_url_name($post, $attachment)
+function uamswp_attachment_fields_to_save_source_url_name($post, $attachment): array
 {
+
+    $post = uamswp_field_array($post);
+    $attachment = uamswp_field_array($attachment);
+    $post_id = (int) uamswp_field_text($post['ID'] ?? null);
 
     // Source Name
 
@@ -61,7 +65,7 @@ function uamswp_attachment_fields_to_save_source_url_name($post, $attachment)
 
         // Get previous value
 
-        $media_credit = get_post_meta($post['ID'], '_media_credit', true);
+        $media_credit = get_post_meta($post_id, '_media_credit', true);
 
         // If there is a change
 
@@ -71,7 +75,7 @@ function uamswp_attachment_fields_to_save_source_url_name($post, $attachment)
 
             if (empty($attachment['media_credit'])) {
 
-                delete_post_meta($post['ID'], '_media_credit');
+                delete_post_meta($post_id, '_media_credit');
 
             }
 
@@ -79,7 +83,7 @@ function uamswp_attachment_fields_to_save_source_url_name($post, $attachment)
 
             else {
 
-                update_post_meta($post['ID'], '_media_credit', $attachment['media_credit']);
+                update_post_meta($post_id, '_media_credit', $attachment['media_credit']);
 
             }
 
@@ -343,18 +347,20 @@ function ac_add_sources_non_captioned( $content ) {
  * @param  mixed  $block
  * @param  mixed  $block_content
  * @param  mixed  $instance
- * @return mixed
  */
-function uamswp_core_image_add_credits($block_content, $block, $instance)
+function uamswp_core_image_add_credits($block_content, $block, $instance): string
 {
+    $block_content = uamswp_field_text($block_content);
+    $block = uamswp_field_array($block);
+    $attrs = uamswp_field_array($block['attrs'] ?? null);
 
-    if ($block['blockName'] == 'core/image') {
+    if (($block['blockName'] ?? null) == 'core/image') {
 
         $photo_credit = '';
         // Get the media credit meta key value from the asset in the media library
-        if (isset($block['attrs']['id'])) {
+        if (isset($attrs['id'])) {
             $photo_credit = get_post_meta(
-                $block['attrs']['id'], // int // required // Post ID
+                (int) uamswp_field_text($attrs['id']), // int // required // Post ID
                 '_media_credit', // string // optional // The meta key to retrieve. By default, returns data for all keys. (Default: '')
                 true // bool // optional // Whether to return a single value. This parameter has no effect if the meta key is not specified. (Default: false)
             );
@@ -362,13 +368,9 @@ function uamswp_core_image_add_credits($block_content, $block, $instance)
 
         // Fallback: Retrieve the credit value from the asset file's image metadata
 
-        if (! isset($photo_credit) && is_array($block['attrs']) && isset($block['attrs']['id'])) {
-
-            $photo_credit = wp_get_attachment_metadata(
-                $block['attrs']['id'] // int // required // Attachment post ID. Defaults to global $post.
-            )['image_meta']['credit'] ?? null;
-
-        }
+        $photo_credit ??= uamswp_field_array(uamswp_field_array(wp_get_attachment_metadata(
+            (int) uamswp_field_text($attrs['id']) // int // required // Attachment post ID. Defaults to global $post.
+        ))['image_meta'] ?? null)['credit'] ?? null;
 
         // Add the photo credit to the HTML
 
@@ -380,7 +382,7 @@ function uamswp_core_image_add_credits($block_content, $block, $instance)
 
                 $block_content = str_replace(
                     '</figcaption>',
-                    ' <span class="photo-credit">('.esc_html__('Image credit:').' '.esc_html($photo_credit).')</span></figcaption>',
+                    ' <span class="photo-credit">('.esc_html__('Image credit:').' '.esc_html(uamswp_field_text($photo_credit)).')</span></figcaption>',
                     $block_content
                 );
 
@@ -392,7 +394,7 @@ function uamswp_core_image_add_credits($block_content, $block, $instance)
 
                 $block_content = str_replace(
                     '</figure>',
-                    '<figcaption><span class="photo-credit">('.esc_html__('Image credit:').' '.esc_html($photo_credit).')</span></figcaption></figure>',
+                    '<figcaption><span class="photo-credit">('.esc_html__('Image credit:').' '.esc_html(uamswp_field_text($photo_credit)).')</span></figcaption></figure>',
                     $block_content
                 );
 
