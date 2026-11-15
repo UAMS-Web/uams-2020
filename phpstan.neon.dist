@@ -280,10 +280,16 @@ parameters:
             identifier: argument.type
             path: lib/header.php
             count: 12
+        # `uamswp_do_meta()` registers `uamswp_do_home_featured` on `genesis_after_header`, but only a commented-out copy of that function exists, so PHPStan cannot read the string as a callable. Defining it or removing the registration changes the registered hooks, which `LibraryMiscTest` pins, tracked in #780.
         -
             identifier: argument.type
             path: lib/misc.php
-            count: 5
+            count: 1
+        # `filemtime()` returns `int|false` and `wp_enqueue_script()` takes `string|bool|null` for the version. A cast would change the argument type that the cache-busting version is passed as, tracked in #780.
+        -
+            identifier: argument.type
+            path: lib/scripts.php
+            count: 2
         -
             identifier: argument.type
             path: lib/nav.php
@@ -309,10 +315,6 @@ parameters:
             identifier: argument.type
             path: lib/media-credit.php
             count: 19
-        -
-            identifier: argument.type
-            path: lib/scripts.php
-            count: 4
         # Arithmetic on a value PHPStan cannot prove is a number. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: binaryOp.invalid
@@ -328,10 +330,6 @@ parameters:
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/media-credit.php
             count: 10
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/misc.php
-            count: 4
         # Property access on a value that WordPress may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: property.nonObject
@@ -341,36 +339,17 @@ parameters:
             identifier: property.nonObject
             path: lib/quicklinks.php
             count: 16
-        # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: argument.type
-            path: lib/a11y.php
-            count: 3
         # A method call on a value that WordPress may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: method.nonObject
             path: lib/users.php
             count: 12
-        # Property access on a `$post` value that WordPress may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: property.nonObject
-            path: lib/misc.php
-            count: 3
-        # A return value whose type does not match the declared return type. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: return.type
-            path: lib/a11y.php
-            count: 1
         # An argument whose declared type does not match the parameter, usually mixed, false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         # `gallery_image_dimension()` documents `$ratio` as `int`, and the crop select passes a decimal string such as '1.7778' or -1, so the seven calls read as mismatched. Correcting the docblock belongs to `functions.php`, outside this slice, tracked in #780.
         -
             identifier: argument.type
             path: blocks/gallery.php
             count: 7
-        -
-            identifier: argument.type
-            path: lib/blocks.php
-            count: 3
         -
             identifier: argument.type
             path: lib/bootstrap.php
@@ -386,10 +365,6 @@ parameters:
             path: lib/quicklinks.php
             count: 1
         # Array access on a `mixed` block field from ACF. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/footer-widgets.php
-            count: 1
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/nav.php
@@ -423,10 +398,6 @@ parameters:
             identifier: argument.type
             path: lib/quicklinks.php
             count: 4
-        -
-            identifier: argument.type
-            path: lib/widgets.php
-            count: 4
         # A compound assignment on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: assignOp.invalid
@@ -443,10 +414,6 @@ parameters:
         # Arithmetic or concatenation on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: binaryOp.invalid
-            path: lib/a11y.php
-            count: 1
-        -
-            identifier: binaryOp.invalid
             path: lib/bootstrap.php
             count: 2
         -
@@ -459,20 +426,12 @@ parameters:
             count: 5
         -
             identifier: binaryOp.invalid
-            path: lib/misc.php
-            count: 3
-        -
-            identifier: binaryOp.invalid
             path: lib/nav.php
             count: 2
         -
             identifier: binaryOp.invalid
             path: lib/quicklinks.php
             count: 4
-        -
-            identifier: binaryOp.invalid
-            path: lib/widgets.php
-            count: 2
         # A string cast of a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: cast.string
@@ -483,10 +442,6 @@ parameters:
             identifier: echo.nonString
             path: lib/page.php
             count: 3
-        -
-            identifier: echo.nonString
-            path: lib/widgets.php
-            count: 4
         # A foreach over a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: foreach.nonIterable
@@ -516,10 +471,6 @@ parameters:
             count: 13
         -
             identifier: offsetAccess.nonOffsetAccessible
-            path: lib/comment.php
-            count: 2
-        -
-            identifier: offsetAccess.nonOffsetAccessible
             path: lib/extras.php
             count: 7
         -
@@ -534,18 +485,6 @@ parameters:
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/page.php
             count: 6
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/pagination.php
-            count: 4
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/scripts.php
-            count: 5
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/tgm.php
-            count: 1
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/users.php

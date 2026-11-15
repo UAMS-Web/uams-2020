@@ -183,7 +183,7 @@ function disable_plugin_updates($value)
 
     if (isset($value) && is_object($value)) { // @pest-mutate-ignore: BooleanAndToBooleanOr
         foreach ($pluginsToDisable as $plugin) {
-            if (isset($value->response[$plugin])) {
+            if (isset($value->response) && is_array($value->response) && isset($value->response[$plugin])) {
                 unset($value->response[$plugin]);
             }
         }
