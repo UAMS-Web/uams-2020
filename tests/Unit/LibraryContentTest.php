@@ -4,20 +4,29 @@ declare(strict_types=1);
 
 use Brain\Monkey\Functions;
 use Uams2020\Tests\Support\LibraryLoader;
-use Uams2020\Tests\Support\LibraryWarnings;
 
 use function Brain\Monkey\Functions\when;
 
 it('adds responsive classes only to images with a double-quoted class', function (): void {
     expect(uamswp_image_responsive_class('<img src="x" class="a" alt="b"><IMG class="" src="y"><img src="z"><img class=\'single\'>'))->toBe('<img src="x" class="a img-fluid" alt="b"><img class=" img-fluid" src="y"><img src="z"><img class=\'single\'>');
-    expect(uamswp_image_responsive_class(['<img class="a">', 'plain']))->toBe(['<img class="a img-fluid">', 'plain']);
 });
+
+it('returns an empty string for image content that is not text', function ($content): void {
+    expect(uamswp_image_responsive_class($content))->toBe('');
+})->with([[['<img class="a">', 'plain']], [null], [false], [new stdClass]]);
+
+it('keeps numeric and boolean image content as text', function ($content, string $expected): void {
+    expect(uamswp_image_responsive_class($content))->toBe($expected);
+})->with([[42, '42'], [true, '1']]);
 
 it('pins the category count replacement for strings and arrays', function (): void {
     $open = '<span class="badge badge-pill badge-primary tag-default post-count">';
     expect(uamswp_categories_postcount_filter('Name (2) (3)'))->toBe('Name '.$open.'2</span> '.$open.'3</span>');
-    expect(uamswp_categories_postcount_filter(['(0)', 'plain']))->toBe([$open.'0</span>', 'plain']);
 });
+
+it('returns an empty string for category markup that is not text', function ($variable): void {
+    expect(uamswp_categories_postcount_filter($variable))->toBe('');
+})->with([[['(0)', 'plain']], [null], [false]]);
 
 it('adds the blog body class only on the blog page template', function (bool $blog): void {
     Functions\expect('is_page_template')->once()->with('page_blog.php')->andReturn($blog);
@@ -97,11 +106,54 @@ it('pins the download label regex including its attribute spacing', function (st
     ['plain', 'plain'],
 ]);
 
-it('pins the existing one-digit current-page warning and active markup', function (): void {
-    $callback = LibraryLoader::callback('wp_link_pages_link');
-    $output = LibraryWarnings::capture($callback, 'Uninitialized string offset 1', static fn () => $callback('1'));
-    expect($output)->toBe('<li class="page-item active"><a href="#">1</a></li>');
+it('pins the one-digit current-page markup without an offset warning', function (): void {
+    expect(LibraryLoader::callback('wp_link_pages_link')('1'))->toBe('<li class="page-item active"><a href="#">1</a></li>');
 });
+
+it('treats a page link that is not text as an empty item', function ($link): void {
+    expect(LibraryLoader::callback('wp_link_pages_link')($link))->toBe('<li class="page-item"></li>');
+})->with([[null], [false], [['2']]]);
+
+it('keeps the page-link options only when they are an array', function ($params, array $expected): void {
+    expect(LibraryLoader::callback('wp_link_pages_args')($params))->toBe($expected);
+})->with([
+    [null, ['before' => '<ul class="post-pagination">', 'after' => '</ul>']],
+    ['text', ['before' => '<ul class="post-pagination">', 'after' => '</ul>']],
+]);
+
+it('adds the blog body class to a body-class list that is not an array', function ($classes): void {
+    Functions\expect('is_page_template')->once()->with('page_blog.php')->andReturn(true);
+    expect(page_blog_class($classes))->toBe(['blog']);
+})->with([[null], [false], ['base']]);
+
+it('leaves the paragraph-image and download content filters empty for non-text content', function ($content): void {
+    expect(uamswp_filter_ptags_on_images($content))->toBe('')->and(uamswp_filter_download_button($content))->toBe('');
+})->with([[null], [false], [['<p></p>']]]);
+
+it('builds the download label from missing capture groups without warnings', function (): void {
+    expect(add_download_title(null))->toBe(' aria-label="Download for "')->and(add_download_title(['<a']))->toBe('<a aria-label="Download for "');
+});
+
+it('replaces the custom logo class only in text markup', function ($html): void {
+    expect(LibraryLoader::callback('get_custom_logo')($html))->toBe('');
+})->with([[null], [false], [['custom-logo-link']]]);
+
+it('uses a random password-form label when the post is missing or not an object', function ($post): void {
+    $old = $GLOBALS['post'] ?? null;
+    $GLOBALS['post'] = $post;
+    when('__')->alias(static fn ($text): string => 'T:'.$text);
+    Functions\expect('site_url')->once()->andReturn('u');
+    Functions\expect('esc_url')->once()->andReturn('URL');
+    Functions\expect('esc_attr__')->once()->andReturn('Send');
+    Functions\expect('mt_getrandmax')->once()->andReturn(991);
+    Functions\expect('random_int')->once()->with(0, 991)->andReturn(73);
+
+    try {
+        expect(LibraryLoader::callback('the_password_form')())->toContain('for="pwbox-73"')->toContain('id="pwbox-73"');
+    } finally {
+        $GLOBALS['post'] = $old;
+    }
+})->with([[null], [false], ['91']]);
 
 it('preserves the complete capture-array contract of the download-title callback', function (): void {
     expect(add_download_title(['<a', 'Guide', ' href="/file">Download</a>']))->toBe('<a aria-label="Download for Guide" href="/file">Download</a>');

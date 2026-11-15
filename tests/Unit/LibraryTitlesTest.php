@@ -120,8 +120,7 @@ it('preserves pluggable site-helper effects before selecting the title branch', 
     expect(uamswp_title('ignored'))->toBe('Page Title | UAMS Health');
 });
 
-it('pins array blog names supplied by mixed WordPress option filters', function ($name, $root, string $department): void {
+it('treats array blog names supplied by mixed WordPress option filters as empty', function ($name, $root, string $department): void {
     libraryTitleContext(['site' => 'institute', 'subsite' => 'eye', 'department' => $department], [], $name, $root);
-    $actual = LibraryWarnings::capture('uamswp_title', array_fill(0, 3, 'Array to string conversion'), static fn () => uamswp_title('ignored'));
-    expect($actual)->toBe('Page Title | UAMS Array');
+    expect(uamswp_title('ignored'))->toBe('Page Title | ');
 })->with([[['Local'], 'Root', 'main'], ['Local', ['Root'], 'other']]);

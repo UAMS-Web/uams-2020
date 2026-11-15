@@ -16,25 +16,23 @@ declare(strict_types=1);
 add_filter('the_content', 'uamswp_image_responsive_class');
 /**
  * @param  mixed  $content
- * @return string|array<mixed>|null
  */
-function uamswp_image_responsive_class($content): string|array|null
+function uamswp_image_responsive_class($content): string
 {
-    global $post;
-
     $pattern = '/<img(.*?)class="(.*?)"(.*?)>/i';
     $replacement = '<img$1class="$2 img-fluid"$3>';
 
-    return preg_replace($pattern, $replacement, $content);
+    return (string) preg_replace($pattern, $replacement, uamswp_field_text($content));
 }
 
 add_filter('body_class', 'page_blog_class');
 /**
  * @param  mixed  $classes
- * @return mixed
+ * @return array<mixed>
  */
-function page_blog_class($classes)
+function page_blog_class($classes): array
 {
+    $classes = uamswp_field_array($classes);
     if (is_page_template('page_blog.php')) {
         $classes[] = 'blog';
     }
@@ -48,11 +46,10 @@ add_filter('wp_list_categories', 'uamswp_categories_postcount_filter', 10, 2);
 add_filter('get_archives_link', 'uamswp_categories_postcount_filter', 10, 2);
 /**
  * @param  mixed  $variable
- * @return string|array<mixed>
  */
-function uamswp_categories_postcount_filter($variable): string|array
+function uamswp_categories_postcount_filter($variable): string
 {
-    $variable = str_replace('(', '<span class="badge badge-pill badge-primary tag-default post-count">', $variable);
+    $variable = str_replace('(', '<span class="badge badge-pill badge-primary tag-default post-count">', uamswp_field_text($variable));
 
     return str_replace(')', '</span>', $variable);
 }
@@ -60,7 +57,8 @@ function uamswp_categories_postcount_filter($variable): string|array
 add_filter('the_password_form', function (): string {
     global $post;
 
-    $label = 'pwbox-'.(empty($post->ID) ? random_int(0, mt_getrandmax()) : $post->ID);
+    $post_id = uamswp_field_text(is_object($post) ? (get_object_vars($post)['ID'] ?? null) : null);
+    $label = 'pwbox-'.(empty($post_id) ? random_int(0, mt_getrandmax()) : $post_id);
 
     return '<p>'.__('To view this protected post, enter the password below:').'</p><form class="form-inline" action="'.esc_url(site_url('wp-login.php?action=postpass', 'login_post')).'" method="post"><label for="'.$label.'" class="sr-only">'.__('Password:').' </label><input class="form-control mr-2"name="post_password" id="'.$label.'" type="password" size="20" maxlength="20" /><input type="submit" class="btn btn-primary" name="Submit" value="'.esc_attr__('Submit').'" />
     </form>
@@ -99,7 +97,8 @@ add_filter('genesis_register_widget_area_defaults', function ($defaults): array 
     return $defaults;
 });
 
-add_filter('wp_link_pages_args', function ($params) {
+add_filter('wp_link_pages_args', function ($params): array {
+    $params = uamswp_field_array($params);
     $params['before'] = '<ul class="post-pagination">';
     $params['after'] = '</ul>';
 
@@ -107,8 +106,8 @@ add_filter('wp_link_pages_args', function ($params) {
 });
 
 add_filter('wp_link_pages_link', function ($link): string {
-    // var_dump( $link[1] );
-    if ($link && $link[1] !== 'a') {
+    $link = uamswp_field_text($link);
+    if ($link !== '' && ($link[1] ?? null) !== 'a') {
         return '<li class="page-item active"><a href="#">'.$link.'</a></li>';
     }
 
@@ -127,25 +126,24 @@ add_filter('genesis_pre_get_option_footer_text', function ($creds) {
 add_filter('the_content', 'uamswp_filter_ptags_on_images');
 /**
  * @param  mixed  $content
- * @return string|array<mixed>|null
  */
-function uamswp_filter_ptags_on_images($content): string|array|null
+function uamswp_filter_ptags_on_images($content): string
 {
-    return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
+    return (string) preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(\/a>)?\s*<\/p>/iU', '\1\2\3', uamswp_field_text($content));
 }
 
 // Add aria-label for download button
 add_filter('the_content', 'uamswp_filter_download_button');
 /**
  * @param  mixed  $content
- * @return mixed
  */
-function uamswp_filter_download_button($content)
+function uamswp_filter_download_button($content): string
 {
+    $content = uamswp_field_text($content);
     $preg_match = '/<div class="wp-block-file"><a .*>([^<]*)<\/a><a(.*)/iU';
     $has_download_button = preg_match($preg_match, $content, $matches);
     if ($has_download_button && ! empty($matches[1])) {
-        return preg_replace_callback($preg_match, add_download_title(...), $content);
+        return (string) preg_replace_callback($preg_match, add_download_title(...), $content);
     }
 
     return $content;
@@ -159,11 +157,13 @@ function add_download_title($matches): string
     // matches[0] = <div class="wp-block-file"><a href="">File Name</a><a
     // matches[1] = File Name
     // matches[2] = href="" class="wp-block-file__button" download>Download</a></div>
-    return $matches[0].' aria-label="Download for '.$matches[1].'"'.$matches[2];
+    $matches = uamswp_field_array($matches);
+
+    return uamswp_field_text($matches[0] ?? null).' aria-label="Download for '.uamswp_field_text($matches[1] ?? null).'"'.uamswp_field_text($matches[2] ?? null);
 }
 
 // Replace custom logo class to bootstrap
-add_filter('get_custom_logo', fn ($html): string|array => str_replace('custom-logo-link', 'navbar-brand', $html), 10);
+add_filter('get_custom_logo', fn ($html): string => str_replace('custom-logo-link', 'navbar-brand', uamswp_field_text($html)), 10);
 
 /**
  * @param  mixed  $html
@@ -175,14 +175,15 @@ function uamswp_title($html)
     uams_get_site_info();
     uams_get_site_info();
 
+    $current_id = get_the_id() ?: 0;
     $pagetitle = get_the_title();
     if (is_search()) {
         $pagetitle = 'Search Results';
     }
 
     if (is_archive()) {
-        $post_type = get_post_type(get_the_id());
-        $post_type_object = get_post_type_object($post_type);
+        $post_type = get_post_type($current_id);
+        $post_type_object = get_post_type_object(uamswp_field_text($post_type));
         $pagetitle = $post_type_object->label ?? '';
     }
 
@@ -191,15 +192,16 @@ function uamswp_title($html)
     }
 
     // Check if seopress title is set and use it for page title
-    $seopress_title = get_post_meta(get_the_id(), '_seopress_titles_title', true) ?: '';
+    $seopress_title = uamswp_field_text(get_post_meta($current_id, '_seopress_titles_title', true));
     if (! empty($seopress_title)) {
         $pagetitle = $seopress_title;
     }
 
     // Replace three spaces in sitename with one
-    $sitename = str_replace('   ', ' ', get_bloginfo('name'));
+    $sitename = str_replace('   ', ' ', uamswp_field_text(get_bloginfo('name')));
     // Multisite - get the base multisite name
-    $sitehome = str_replace('   ', ' ', get_blog_details(1)->blogname);
+    $main_site = get_blog_details(1);
+    $sitehome = str_replace('   ', ' ', is_object($main_site) ? uamswp_field_text(get_object_vars($main_site)['blogname'] ?? null) : '');
     // Set uams_ versions as the same for default
     $uams_sitename = $sitename;
     $uams_sitehome = $sitehome;

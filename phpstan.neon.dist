@@ -172,15 +172,11 @@ parameters:
             identifier: return.empty
             path: functions.php
             count: 1
-        # uamswp_nav_subsection() and uamswp_hide_breadcrumbs() return false when
-        # nothing applies, though both are declared to return a string. Changing the declared type changes the contract for their callers.
+        # uamswp_nav_subsection() returns false when nothing applies, though it is
+        # declared to return a string. Changing the declared type changes the contract for its callers.
         -
             identifier: return.type
             path: lib/nav.php
-            count: 2
-        -
-            identifier: return.type
-            path: lib/page.php
             count: 2
         # The condition follows from `uamswp_nav_subsection()` being declared to return a string while it returns `int|false` (see the `return.type` entry for `lib/nav.php`), so it is evaluated at runtime on the real value.
         -
@@ -296,10 +292,6 @@ parameters:
             count: 10
         -
             identifier: argument.type
-            path: lib/page.php
-            count: 22
-        -
-            identifier: argument.type
             path: lib/users.php
             count: 4
         # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
@@ -307,10 +299,6 @@ parameters:
             identifier: argument.type
             path: lib/breadcrumb.php
             count: 2
-        -
-            identifier: argument.type
-            path: lib/extras.php
-            count: 9
         -
             identifier: argument.type
             path: lib/media-credit.php
@@ -351,10 +339,6 @@ parameters:
             identifier: property.nonObject
             path: functions.php
             count: 10
-        -
-            identifier: property.nonObject
-            path: lib/extras.php
-            count: 2
         -
             identifier: property.nonObject
             path: lib/quicklinks.php
@@ -398,10 +382,6 @@ parameters:
             identifier: binaryOp.invalid
             path: functions.php
             count: 9
-        -
-            identifier: binaryOp.invalid
-            path: lib/extras.php
-            count: 22
         # An integer cast of a value PHPStan cannot prove is numeric, such as mixed from get_field(). Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: cast.int
@@ -472,10 +452,6 @@ parameters:
             identifier: assignOp.invalid
             path: lib/nav.php
             count: 2
-        -
-            identifier: assignOp.invalid
-            path: lib/page.php
-            count: 5
         # Arithmetic or concatenation on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: binaryOp.invalid
@@ -519,10 +495,6 @@ parameters:
             identifier: echo.nonString
             path: functions.php
             count: 1
-        -
-            identifier: echo.nonString
-            path: lib/page.php
-            count: 3
         -
             identifier: echo.nonString
             path: lib/widgets.php
@@ -570,20 +542,12 @@ parameters:
             count: 2
         -
             identifier: offsetAccess.nonOffsetAccessible
-            path: lib/extras.php
-            count: 7
-        -
-            identifier: offsetAccess.nonOffsetAccessible
             path: lib/footer.php
             count: 7
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/geo.php
             count: 2
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/page.php
-            count: 6
         -
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/pagination.php
