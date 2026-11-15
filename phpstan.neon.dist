@@ -176,12 +176,12 @@ parameters:
             identifier: return.type
             path: lib/page.php
             count: 2
-        # The condition follows from `uamswp_nav_subsection()` being declared to return a string while it returns `int|false` (see the `return.type` entry for `lib/nav.php`), so it is evaluated at runtime on the real value.
+        # The condition repeats a subsection lookup that an earlier branch of the same chain already tested, so the analysis treats it as known false. Each call is still evaluated at runtime, and the branding fixtures drive these branches with a changing sequence of subsection IDs and pin the output, so removing them changes pinned markup.
         -
             identifier: booleanAnd.alwaysFalse
             path: lib/header.php
             count: 1
-        # The condition follows from `uamswp_nav_subsection()` being declared to return a string while it returns `int|false` (see the `return.type` entry for `lib/nav.php`), so it is evaluated at runtime on the real value.
+        # The condition repeats a subsection lookup that an earlier branch of the same chain already tested, so the analysis treats it as known false. Each call is still evaluated at runtime, and the branding fixtures drive these branches with a changing sequence of subsection IDs and pin the output, so removing them changes pinned markup.
         -
             identifier: booleanAnd.leftAlwaysFalse
             path: lib/header.php
@@ -191,7 +191,7 @@ parameters:
             identifier: booleanAnd.rightAlwaysTrue
             path: lib/media-credit.php
             count: 1
-        # The condition follows from `uamswp_nav_subsection()` being declared to return a string while it returns `int|false` (see the `return.type` entry for `lib/nav.php`), so it is evaluated at runtime on the real value.
+        # The condition repeats a subsection lookup that an earlier branch of the same chain already tested, so the analysis treats it as known false. Each call is still evaluated at runtime, and the branding fixtures drive these branches with a changing sequence of subsection IDs and pin the output, so removing them changes pinned markup.
         -
             identifier: elseif.alwaysFalse
             path: lib/header.php
@@ -276,10 +276,6 @@ parameters:
             identifier: argument.type
             path: functions.php
             count: 2
-        -
-            identifier: argument.type
-            path: lib/header.php
-            count: 12
         # `uamswp_do_meta()` registers `uamswp_do_home_featured` on `genesis_after_header`, but only a commented-out copy of that function exists, so PHPStan cannot read the string as a callable. Defining it or removing the registration changes the registered hooks, which `LibraryMiscTest` pins, tracked in #780.
         -
             identifier: argument.type
@@ -298,15 +294,7 @@ parameters:
             identifier: argument.type
             path: lib/page.php
             count: 22
-        -
-            identifier: argument.type
-            path: lib/users.php
-            count: 4
         # An argument whose declared type does not match the parameter, often a value that can be false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: argument.type
-            path: lib/breadcrumb.php
-            count: 2
         -
             identifier: argument.type
             path: lib/extras.php
@@ -315,11 +303,6 @@ parameters:
             identifier: argument.type
             path: lib/media-credit.php
             count: 19
-        # Arithmetic on a value PHPStan cannot prove is a number. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: binaryOp.invalid
-            path: lib/breadcrumb.php
-            count: 2
         # A foreach over a value that WordPress or ACF may return as false. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: foreach.nonIterable
@@ -339,11 +322,6 @@ parameters:
             identifier: property.nonObject
             path: lib/quicklinks.php
             count: 16
-        # A method call on a value that WordPress may return as false or null. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: method.nonObject
-            path: lib/users.php
-            count: 12
         # An argument whose declared type does not match the parameter, usually mixed, false or null from a WordPress or ACF call. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         # `gallery_image_dimension()` documents `$ratio` as `int`, and the crop select passes a decimal string such as '1.7778' or -1, so the seven calls read as mismatched. Correcting the docblock belongs to `functions.php`, outside this slice, tracked in #780.
         -
@@ -388,10 +366,6 @@ parameters:
             count: 15
         -
             identifier: argument.type
-            path: lib/footer.php
-            count: 11
-        -
-            identifier: argument.type
             path: lib/geo.php
             count: 10
         -
@@ -418,14 +392,6 @@ parameters:
             count: 2
         -
             identifier: binaryOp.invalid
-            path: lib/footer.php
-            count: 5
-        -
-            identifier: binaryOp.invalid
-            path: lib/header.php
-            count: 5
-        -
-            identifier: binaryOp.invalid
             path: lib/nav.php
             count: 2
         -
@@ -442,15 +408,6 @@ parameters:
             identifier: echo.nonString
             path: lib/page.php
             count: 3
-        # A foreach over a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
-        -
-            identifier: foreach.nonIterable
-            path: lib/breadcrumb.php
-            count: 1
-        -
-            identifier: foreach.nonIterable
-            path: lib/footer.php
-            count: 1
         # A method call on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: method.nonObject
@@ -467,15 +424,7 @@ parameters:
             count: 14
         -
             identifier: offsetAccess.nonOffsetAccessible
-            path: lib/breadcrumb.php
-            count: 13
-        -
-            identifier: offsetAccess.nonOffsetAccessible
             path: lib/extras.php
-            count: 7
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/footer.php
             count: 7
         -
             identifier: offsetAccess.nonOffsetAccessible
@@ -485,10 +434,6 @@ parameters:
             identifier: offsetAccess.nonOffsetAccessible
             path: lib/page.php
             count: 6
-        -
-            identifier: offsetAccess.nonOffsetAccessible
-            path: lib/users.php
-            count: 1
         # Property access on a value PHPStan types as mixed. Narrowing it needs a runtime check that changes behavior on unexpected data, tracked in #780.
         -
             identifier: property.nonObject
@@ -502,10 +447,6 @@ parameters:
             identifier: property.nonObject
             path: lib/nav.php
             count: 2
-        -
-            identifier: property.nonObject
-            path: lib/users.php
-            count: 1
         # The hook is registered with more accepted arguments than the callback declares, and a test pins every hook's accepted-argument count. Changing it alters the hook contract.
         -
             identifier: arguments.count
