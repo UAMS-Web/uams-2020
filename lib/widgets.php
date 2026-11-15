@@ -39,13 +39,13 @@ class UAMSWP_Call_Out_Widget extends WP_Widget
      */
     public function widget($args, $instance): void
     {
-        echo $args['before_widget'];
+        echo uamswp_field_text($args['before_widget'] ?? null);
         // if ( !empty($instance['title']) ) {
         //     echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
         // }
 
         // widget ID with prefix for use in ACF API functions
-        $widget_id = 'widget_'.$args['widget_id'];
+        $widget_id = 'widget_'.uamswp_field_text($args['widget_id'] ?? null);
 
         $heading = get_field('call_out_heading', $widget_id);
         $body = get_field('call_out_body', $widget_id);
@@ -55,7 +55,7 @@ class UAMSWP_Call_Out_Widget extends WP_Widget
 
         include get_stylesheet_directory().'/blocks/call-out.php';
 
-        echo $args['after_widget'];
+        echo uamswp_field_text($args['after_widget'] ?? null);
     }
 
     /**
@@ -69,7 +69,7 @@ class UAMSWP_Call_Out_Widget extends WP_Widget
     {
         $title = '';
         if (isset($instance['title'])) {
-            $title = $instance['title'];
+            $title = uamswp_field_text($instance['title']);
         }
         ?>
     <p>
@@ -90,7 +90,7 @@ class UAMSWP_Call_Out_Widget extends WP_Widget
      */
     public function update($new_instance, $old_instance)
     {
-        return ['title' => (! empty($new_instance['title'])) ? strip_tags($new_instance['title']) : ''];
+        return ['title' => (! empty($new_instance['title'])) ? strip_tags(uamswp_field_text($new_instance['title'])) : ''];
     }
 } // class UAMSWP_Call_Out_Widget
 
@@ -121,13 +121,13 @@ class UAMSWP_CTA_Widget extends WP_Widget
      */
     public function widget($args, $instance): void
     {
-        echo $args['before_widget'];
+        echo uamswp_field_text($args['before_widget'] ?? null);
         // if ( !empty($instance['title']) ) {
         //     echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
         // }
 
         // widget ID with prefix for use in ACF API functions
-        $widget_id = 'widget_'.$args['widget_id'];
+        $widget_id = 'widget_'.uamswp_field_text($args['widget_id'] ?? null);
 
         $heading = get_field('cta_bar_heading', $widget_id);
         $body = get_field('cta_bar_body', $widget_id);
@@ -142,7 +142,7 @@ class UAMSWP_CTA_Widget extends WP_Widget
 
         include get_stylesheet_directory().'/blocks/cta.php';
 
-        echo $args['after_widget'];
+        echo uamswp_field_text($args['after_widget'] ?? null);
     }
 
     /**
@@ -156,7 +156,7 @@ class UAMSWP_CTA_Widget extends WP_Widget
     {
         $title = '';
         if (isset($instance['title'])) {
-            $title = $instance['title'];
+            $title = uamswp_field_text($instance['title']);
         }
         ?>
     <p>
@@ -177,7 +177,7 @@ class UAMSWP_CTA_Widget extends WP_Widget
      */
     public function update($new_instance, $old_instance)
     {
-        return ['title' => (! empty($new_instance['title'])) ? strip_tags($new_instance['title']) : ''];
+        return ['title' => (! empty($new_instance['title'])) ? strip_tags(uamswp_field_text($new_instance['title'])) : ''];
     }
 } // class UAMSWP_CTA_Widget
 

@@ -19,10 +19,10 @@ function uamswp_theme_scripts(): void
     $version = wp_get_theme()->get('Version');
     if (! is_admin()) {
         // Enqueue Bootstrap CSS
-        wp_enqueue_style('app-css', UAMSWP_THEME_CSS.'app.css', [], CHILD_THEME_VERSION, 'all');
+        wp_enqueue_style('app-css', UAMSWP_THEME_CSS.'app.css', [], uamswp_field_text(CHILD_THEME_VERSION), 'all');
 
         // Enqueue Google Fonts
-        wp_enqueue_style('google-fonts', '//fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i&display=swap', [], CHILD_THEME_VERSION);
+        wp_enqueue_style('google-fonts', '//fonts.googleapis.com/css?family=Fira+Sans:300,300i,500,500i,600,600i,800,800i&display=swap', [], uamswp_field_text(CHILD_THEME_VERSION));
 
         // Disable the superfish script
         wp_deregister_script('superfish');
@@ -101,10 +101,11 @@ add_filter('allowed_http_origins', 'add_allowed_origins');
 
 /**
  * @param  mixed  $origins
- * @return mixed
+ * @return mixed[]
  */
-function add_allowed_origins($origins)
+function add_allowed_origins($origins): array
 {
+    $origins = uamswp_field_array($origins);
     $origins[] = 'https://www.uams.edu';
     $origins[] = 'https://public-api.wordpress.com';
     $origins[] = 'https://uamshealth.com';
