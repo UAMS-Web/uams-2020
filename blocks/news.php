@@ -1,4 +1,5 @@
 <?php
+// probe for the full-run survivors
 
 declare(strict_types=1);
 
