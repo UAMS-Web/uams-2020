@@ -173,8 +173,11 @@ it('treats a missing or malformed request object as not a search', function (mix
     'query variables not an array' => [(object) ['query_vars' => 'x']],
 ]);
 
-it('does not enforce the policy while the constant is undefined', function (): void {
-    expect(uamswp_csp_enforced())->toBeFalse();
+// A constant cannot be undefined or redefined inside one process, so this is the only test that reads the real constant; every
+// other test replaces `uamswp_csp_enforced()`. Only a boolean `true` enforces, which the other values in the docblock never reach here.
+it('enforces the policy when the install sets the constant to boolean true', function (): void {
+    define('UAMSWP_CSP_ENFORCE', true);
+    expect(uamswp_csp_enforced())->toBeTrue();
 });
 
 it('loads canvas fonts only in the editor', function (bool $admin): void {
