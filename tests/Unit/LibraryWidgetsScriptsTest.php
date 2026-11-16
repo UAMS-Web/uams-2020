@@ -116,6 +116,76 @@ it('sends the framing headers only when the install lists frame ancestors', func
     'three origins' => [['https://www.uams.edu', 'https://sites.uams.edu', 'https://uamshealth.dev'], ['X-Frame-Options: SAMEORIGIN', "Content-Security-Policy: frame-ancestors 'self' https://www.uams.edu https://sites.uams.edu https://uamshealth.dev;"]],
 ]);
 
+it('pins the Content Security Policy directives and the hosts the Google search block needs', function (): void {
+    Functions\expect('uamswp_framing_list')->once()->with('UAMSWP_CSP_EXTRA_SOURCES')->andReturn([]);
+    expect(uamswp_csp_policy())->toBe(
+        "default-src 'self'; "
+        ."script-src 'self' 'unsafe-inline' https://cse.google.com https://www.google.com https://www.googletagmanager.com https://www.uams.edu; "
+        ."style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.google.com; "
+        ."font-src 'self' data: https://fonts.gstatic.com; "
+        ."img-src 'self' data: https://www.google.com https://*.gstatic.com https://clients1.google.com https://secure.gravatar.com; "
+        ."connect-src 'self' https://cse.google.com https://clients1.google.com https://www.uams.edu; "
+        ."frame-src 'self' https://www.googletagmanager.com; "
+        ."object-src 'none'; "
+        ."base-uri 'self'"
+    );
+});
+
+it('allows eval for scripts only on a search request', function (): void {
+    Functions\expect('uamswp_framing_list')->twice()->with('UAMSWP_CSP_EXTRA_SOURCES')->andReturn([]);
+    expect(uamswp_csp_policy(true))->toContain("script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cse.google.com")
+        ->and(uamswp_csp_policy(false))->not->toContain('unsafe-eval');
+});
+
+it('adds an install\'s extra sources to every directive that takes hosts', function (): void {
+    Functions\expect('uamswp_framing_list')->once()->with('UAMSWP_CSP_EXTRA_SOURCES')->andReturn(['https://extra.test', 'https://other.test:8443']);
+    $directives = explode('; ', uamswp_csp_policy());
+    $withExtras = array_values(array_filter($directives, static fn (string $directive): bool => str_ends_with($directive, ' https://extra.test https://other.test:8443')));
+    expect($withExtras)->toHaveCount(6)
+        ->and(array_map(static fn (string $directive): string => explode(' ', $directive)[0], $withExtras))->toBe(['script-src', 'style-src', 'font-src', 'img-src', 'connect-src', 'frame-src']);
+});
+
+it('sends the policy as report-only unless the install enforces it', function (bool $enforced, bool $isSearch, string $header): void {
+    Functions\expect('uamswp_csp_enforced')->once()->with('UAMSWP_CSP_ENFORCE')->andReturn($enforced);
+    Functions\expect('uamswp_csp_policy')->once()->with($isSearch)->andReturn('POLICY');
+    $headers = [];
+    when('header')->alias(static function (string $sent) use (&$headers): void {
+        $headers[] = $sent;
+    });
+    uamswp_send_csp_header($isSearch ? (object) ['query_vars' => ['s' => 'cardiology']] : (object) ['query_vars' => []]);
+    expect($headers)->toBe([$header.': POLICY;']);
+})->with([
+    'report-only, page' => [false, false, 'Content-Security-Policy-Report-Only'],
+    'report-only, search' => [false, true, 'Content-Security-Policy-Report-Only'],
+    'enforced, page' => [true, false, 'Content-Security-Policy'],
+    'enforced, search' => [true, true, 'Content-Security-Policy'],
+]);
+
+it('treats a missing or malformed request object as not a search', function (mixed $wp): void {
+    Functions\expect('uamswp_csp_enforced')->once()->with('UAMSWP_CSP_ENFORCE')->andReturn(false);
+    Functions\expect('uamswp_csp_policy')->once()->with(false)->andReturn('POLICY');
+    when('header')->justReturn(null);
+    uamswp_send_csp_header($wp);
+})->with([
+    'null' => [null],
+    'a string' => ['s'],
+    'no query variables' => [new stdClass],
+    'query variables not an array' => [(object) ['query_vars' => 'x']],
+]);
+
+it('enforces the policy only for a constant set to boolean true', function (string $name, bool $defined, mixed $value, bool $expected): void {
+    if ($defined) {
+        define($name, $value);
+    }
+    expect(uamswp_csp_enforced($name))->toBe($expected);
+})->with([
+    'undefined' => ['UAMSWP_TEST_CSP_UNDEFINED', false, null, false],
+    'true' => ['UAMSWP_TEST_CSP_TRUE', true, true, true],
+    'false' => ['UAMSWP_TEST_CSP_FALSE', true, false, false],
+    'the string true' => ['UAMSWP_TEST_CSP_STRING', true, 'true', false],
+    'the number one' => ['UAMSWP_TEST_CSP_ONE', true, 1, false],
+]);
+
 it('loads canvas fonts only in the editor', function (bool $admin): void {
     Functions\expect('is_admin')->once()->andReturn($admin);
     Functions\expect('wp_enqueue_style')->times($admin ? 1 : 0)->with('theme-fonts', 'https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
