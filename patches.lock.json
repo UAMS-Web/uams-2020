@@ -1,5 +1,5 @@
 {
-    "_hash": "a9ea219a303f7ca61c690c7e71fabbf1c217d416c13c0b7ec955d31ff91aa6f7",
+    "_hash": "26dfff7d188f27f37a54d7bc951912bd00b52c682f1e45566c14602f8cf8115b",
     "patches": {
         "pestphp/pest-plugin-mutate": [
             {
@@ -127,16 +127,6 @@
                 "description": "Keep Patchwork in front of the mutation stream wrapper after a pass-through read, so a function a test mocks is still redefined in a mutant child that logs to junit (temporary; see UAMS-Web/patches-pest-plugin-mutate#31)",
                 "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-stream-wrapper-patchwork.patch",
                 "sha256": "c4e064cf26f7f9daaa21f06b0f71c68993faa178813672188562cc54b7bf6827",
-                "depth": 1,
-                "extra": {
-                    "provenance": "patches-file:patches.json"
-                }
-            },
-            {
-                "package": "pestphp/pest-plugin-mutate",
-                "description": "Run a mutant child again when it times out once, and score a timeout only when the second attempt times out too, so a transient slowdown of the machine cannot keep --min=100 out of reach (temporary; see UAMS-Web/patches-pest-plugin-mutate#30)",
-                "url": "vendor/uams-web/patches-pest-plugin-mutate/patches/pest-plugin-mutate-mutant-timeout-retry.patch",
-                "sha256": "2516b97553a04990fbdfd51a2651b7dc24e372f885d9ebd2f247742f2fa94f19",
                 "depth": 1,
                 "extra": {
                     "provenance": "patches-file:patches.json"
