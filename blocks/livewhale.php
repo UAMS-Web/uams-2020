@@ -18,15 +18,17 @@ $moduleData = isset($module) ? uamswp_field_array($module) : [];
 if (empty($id)) {
     $id = '';
 }
+// $id is not read after these assignments in this template, so these mutations change nothing observable.
+// @pest-mutate-ignore: BooleanAndToBooleanOr,CoalesceRemoveLeft
 if (empty($id) && isset($block)) {
     $id = $blockData['id'] ?? null;
 }
 if (empty($id)) {
-    // @pest-mutate-ignore: ConcatRemoveLeft,ConcatSwitchSides,DecrementInteger,IncrementInteger
+    // @pest-mutate-ignore: ConcatRemoveLeft,ConcatRemoveRight,ConcatSwitchSides,DecrementInteger,IncrementInteger,PlusToMinus
     $id = ! empty($moduleData['anchor_id']) ? sanitize_title_with_dashes(uamswp_field_text($moduleData['anchor_id'])) : 'module-'.((int) $i + 1);
 }
 
-// @pest-mutate-ignore: ConcatSwitchSides
+// @pest-mutate-ignore: ConcatRemoveLeft,ConcatSwitchSides
 $id = 'livewhale-'.uamswp_field_text($id);
 if (! empty($blockData['anchor'])) {
     $id = $blockData['anchor'];

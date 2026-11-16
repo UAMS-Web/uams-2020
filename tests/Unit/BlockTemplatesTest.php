@@ -645,3 +645,67 @@ it('prints non-text preview regions of link-list-2 as empty text', function () u
     $case['fields']['link_list_geo_region'] = ['AR', ['x'], 7];
     expect(BlockTemplateScenario::render($case)['html'])->toStartWith('HTML(Include) region(s): HTML(AR, , 7)<hr>');
 });
+
+it('keeps a caller-supplied id when a block is also set', function (string $name) use ($blockBaseCases): void {
+    $case = $blockBaseCases[$name];
+    $case['variables']['id'] = 'caller-id';
+    expect(BlockTemplateScenario::render($case)['html'])->toContain('caller-id');
+})->with(['action-bar', 'call-out', 'content', 'counter', 'link-list', 'post-category-tile', 'section']);
+
+it('counts a module index that is not an integer as its integer part', function (string $name) use ($blockCasesByLabel): void {
+    $case = $blockCasesByLabel[$name]['no-block'];
+    $case['variables']['i'] = 4.5;
+    expect(BlockTemplateScenario::render($case)['html'])->toMatch('/module-5(?![.\d])/');
+})->with(['action-bar', 'call-out', 'content', 'counter', 'link-list', 'post-category-tile', 'section']);
+
+it('prints non-text preview regions as empty text', function (string $name, string $prefix) use ($blockCasesByLabel): void {
+    $case = $blockCasesByLabel[$name]['preview'];
+    $case['admin'] = true;
+    $case['fields'][$prefix.'_geo'] = 'include';
+    $case['fields'][$prefix.'_geo_region'] = ['AR', ['x'], 7];
+    expect(BlockTemplateScenario::render($case)['html'])->toContain('region(s): ')->toContain('AR, , 7');
+})->with([
+    ['action-bar', 'action_bar'],
+    ['call-out', 'call_out'],
+    ['link-list', 'link_list'],
+    ['post-category-tile', 'post_tile'],
+]);
+
+it('reads a non-numeric category term id as zero in the tile block', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['post-category-tile'];
+    $case['fields']['post_tile_category']['term_id'] = '71abc';
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString('href="category:71"', $actual['html']);
+    Assert::assertStringNotContainsString('category:71abc', $actual['html']);
+});
+
+it('passes the strip-tags break flag as true in the tile block', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['post-category-tile'];
+    $case['content'] = 'Short';
+    $actual = BlockTemplateScenario::render($case);
+    Assert::assertStringContainsString('STRIPPED(Short)1', $actual['html']);
+});
+
+it('prints nothing for the tile excerpt when the link pattern cannot run', function () use ($blockBaseCases): void {
+    $case = $blockBaseCases['post-category-tile'];
+    $case['content'] = 'see https://example.test/'.str_repeat('a', 400);
+    $actual = BlockTemplateScenario::render($case, static function () use ($case): void {
+        $limit = ini_get('pcre.backtrack_limit');
+        ini_set('pcre.backtrack_limit', '1');
+        set_error_handler(static function (int $severity, string $message): never {
+            throw new ErrorException($message, 0, $severity);
+        });
+        try {
+            extract($case['variables'], EXTR_SKIP);
+            require __DIR__.'/../../blocks/post-category-tile.php';
+        } catch (ErrorException|TypeError) {
+            echo '[type-error]';
+        } finally {
+            restore_error_handler();
+            ini_set('pcre.backtrack_limit', (string) $limit);
+        }
+    });
+
+    Assert::assertStringNotContainsString('[type-error]', $actual['html']);
+    Assert::assertStringNotContainsString('STRIPPED(', $actual['html']);
+});
