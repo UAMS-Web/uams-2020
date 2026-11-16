@@ -191,12 +191,12 @@ function uamswp_csp_policy(bool $search = false): string
 }
 
 /**
- * Whether the install enforces the policy: only a boolean `true` in UAMSWP_CSP_ENFORCE does, so a string or a number
- * set by mistake leaves it report-only.
+ * Whether the named constant, UAMSWP_CSP_ENFORCE in wp-config.php, enforces the policy: only a boolean `true` does, so a
+ * string or a number set by mistake leaves it report-only.
  */
-function uamswp_csp_enforced(): bool
+function uamswp_csp_enforced(string $constant): bool
 {
-    return defined('UAMSWP_CSP_ENFORCE') && constant('UAMSWP_CSP_ENFORCE') === true;
+    return defined($constant) && constant($constant) === true;
 }
 
 // The policy is sent as report-only unless the install sets UAMSWP_CSP_ENFORCE to true in wp-config.php, so a page that
@@ -208,7 +208,7 @@ add_action('send_headers', 'uamswp_send_csp_header');
 function uamswp_send_csp_header($wp = null): void
 {
     $search = is_object($wp) && isset($wp->query_vars) && is_array($wp->query_vars) && isset($wp->query_vars['s']);
-    $name = uamswp_csp_enforced() ? 'Content-Security-Policy' : 'Content-Security-Policy-Report-Only';
+    $name = uamswp_csp_enforced('UAMSWP_CSP_ENFORCE') ? 'Content-Security-Policy' : 'Content-Security-Policy-Report-Only';
     header($name.': '.uamswp_csp_policy($search).';');
 }
 

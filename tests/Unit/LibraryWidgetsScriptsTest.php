@@ -146,7 +146,7 @@ it('adds an install\'s extra sources to every directive that takes hosts', funct
 });
 
 it('sends the policy as report-only unless the install enforces it', function (bool $enforced, bool $isSearch, string $header): void {
-    Functions\expect('uamswp_csp_enforced')->once()->andReturn($enforced);
+    Functions\expect('uamswp_csp_enforced')->once()->with('UAMSWP_CSP_ENFORCE')->andReturn($enforced);
     Functions\expect('uamswp_csp_policy')->once()->with($isSearch)->andReturn('POLICY');
     $headers = [];
     when('header')->alias(static function (string $sent) use (&$headers): void {
@@ -162,7 +162,7 @@ it('sends the policy as report-only unless the install enforces it', function (b
 ]);
 
 it('treats a missing or malformed request object as not a search', function (mixed $wp): void {
-    Functions\expect('uamswp_csp_enforced')->once()->andReturn(false);
+    Functions\expect('uamswp_csp_enforced')->once()->with('UAMSWP_CSP_ENFORCE')->andReturn(false);
     Functions\expect('uamswp_csp_policy')->once()->with(false)->andReturn('POLICY');
     when('header')->justReturn(null);
     uamswp_send_csp_header($wp);
@@ -173,12 +173,18 @@ it('treats a missing or malformed request object as not a search', function (mix
     'query variables not an array' => [(object) ['query_vars' => 'x']],
 ]);
 
-// A constant cannot be undefined or redefined inside one process, so this is the only test that reads the real constant; every
-// other test replaces `uamswp_csp_enforced()`. Only a boolean `true` enforces, which the other values in the docblock never reach here.
-it('enforces the policy when the install sets the constant to boolean true', function (): void {
-    define('UAMSWP_CSP_ENFORCE', true);
-    expect(uamswp_csp_enforced())->toBeTrue();
-});
+it('enforces the policy only for a constant set to boolean true', function (string $name, bool $defined, mixed $value, bool $expected): void {
+    if ($defined) {
+        define($name, $value);
+    }
+    expect(uamswp_csp_enforced($name))->toBe($expected);
+})->with([
+    'undefined' => ['UAMSWP_TEST_CSP_UNDEFINED', false, null, false],
+    'true' => ['UAMSWP_TEST_CSP_TRUE', true, true, true],
+    'false' => ['UAMSWP_TEST_CSP_FALSE', true, false, false],
+    'the string true' => ['UAMSWP_TEST_CSP_STRING', true, 'true', false],
+    'the number one' => ['UAMSWP_TEST_CSP_ONE', true, 1, false],
+]);
 
 it('loads canvas fonts only in the editor', function (bool $admin): void {
     Functions\expect('is_admin')->once()->andReturn($admin);
