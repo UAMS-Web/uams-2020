@@ -156,6 +156,62 @@ function uamswp_send_frame_headers(): void
     header("Content-Security-Policy: frame-ancestors 'self' ".implode(' ', $ancestors).';');
 }
 
+/**
+ * Builds the Content Security Policy the theme sends on every front-end page.
+ *
+ * The listed hosts were measured from a page load of the UAMS Search plugin's results with its Google Custom Search block
+ * on (UAMS-Web/uams-2020#845): `cse.js` is served from `cse.google.com`, loads `cse_element__en.js` and the result
+ * styles from `www.google.com`, calls `cse.google.com/cse/element/v1` and `clients1.google.com`, and shows result
+ * thumbnails from `*.gstatic.com`. The rest are what the theme itself loads: Google Fonts, Tag Manager, the UAMS alert
+ * from `www.uams.edu`, and Gravatar in the admin bar.
+ *
+ * `script-src` and `style-src` allow `'unsafe-inline'` because the theme and its plugins print inline scripts, style
+ * elements and style attributes; the policy limits where scripts load from, not what a page prints inline.
+ * `cse_element__en.js` calls `eval`, so a search request also gets `'unsafe-eval'` in `script-src`; no other request does,
+ * because the Google block renders only on search results.
+ * `UAMSWP_CSP_EXTRA_SOURCES` in wp-config.php lists further origins an install needs, and each is added to every
+ * source directive that takes hosts.
+ */
+function uamswp_csp_policy(bool $search = false): string
+{
+    $extra = implode(' ', uamswp_framing_list('UAMSWP_CSP_EXTRA_SOURCES'));
+    $sources = static fn (string $hosts): string => trim($hosts.' '.$extra);
+
+    return implode('; ', [
+        "default-src 'self'",
+        'script-src '.$sources("'self' 'unsafe-inline'".($search ? " 'unsafe-eval'" : '').' https://cse.google.com https://www.google.com https://www.googletagmanager.com https://www.uams.edu'),
+        'style-src '.$sources("'self' 'unsafe-inline' https://fonts.googleapis.com https://www.google.com"),
+        'font-src '.$sources("'self' data: https://fonts.gstatic.com"),
+        'img-src '.$sources("'self' data: https://www.google.com https://*.gstatic.com https://clients1.google.com https://secure.gravatar.com"),
+        'connect-src '.$sources("'self' https://cse.google.com https://clients1.google.com https://www.uams.edu"),
+        'frame-src '.$sources("'self' https://www.googletagmanager.com"),
+        "object-src 'none'",
+        "base-uri 'self'",
+    ]);
+}
+
+/**
+ * Whether the install enforces the policy: only a boolean `true` in UAMSWP_CSP_ENFORCE does, so a string or a number
+ * set by mistake leaves it report-only.
+ */
+function uamswp_csp_enforced(): bool
+{
+    return defined('UAMSWP_CSP_ENFORCE') && constant('UAMSWP_CSP_ENFORCE') === true;
+}
+
+// The policy is sent as report-only unless the install sets UAMSWP_CSP_ENFORCE to true in wp-config.php, so a page that
+// loads something the policy omits still works and the browser console names the omission.
+add_action('send_headers', 'uamswp_send_csp_header');
+/**
+ * @param  mixed  $wp  The `WP` object, whose parsed query variables say whether this is a search request.
+ */
+function uamswp_send_csp_header($wp = null): void
+{
+    $search = is_object($wp) && isset($wp->query_vars) && is_array($wp->query_vars) && isset($wp->query_vars['s']);
+    $name = uamswp_csp_enforced() ? 'Content-Security-Policy' : 'Content-Security-Policy-Report-Only';
+    header($name.': '.uamswp_csp_policy($search).';');
+}
+
 // function defer_parsing_of_js( $url ) {
 //     if ( is_user_logged_in() ) return $url; //don't break WP Admin
 //     if ( FALSE === strpos( $url, '.js' ) ) return $url;
