@@ -153,7 +153,56 @@ function uamswp_send_frame_headers(): void
 
     // Fallback for browsers that do not read frame-ancestors.
     header('X-Frame-Options: SAMEORIGIN');
-    header("Content-Security-Policy: frame-ancestors 'self' ".implode(' ', $ancestors).';');
+    header("Content-Security-Policy: frame-ancestors 'self' ".implode(' ', $ancestors).';', false);
+}
+
+/**
+ * The script policy: where a page may load scripts from.
+ *
+ * The hosts are the ones a measured page load of the search plugin's Google block needs (`cse.google.com` serves
+ * `cse.js`, `www.google.com` serves the element script) plus the two other script hosts the same page loaded
+ * (`www.googletagmanager.com` for the tag manager snippet in `functions.php`, `www.uams.edu` for the alert feed).
+ * Inline scripts stay allowed because the theme prints the tag manager snippet inline. An install adds hosts for
+ * itself through UAMSWP_SCRIPT_SRC_EXTRA in wp-config.php, for example the hosts its tag manager container loads.
+ *
+ * @return string The policy, as one header value.
+ */
+function uamswp_script_policy(): string
+{
+    $hosts = [
+        'https://cse.google.com',
+        'https://www.google.com',
+        'https://www.googletagmanager.com',
+        'https://www.uams.edu',
+    ];
+    foreach (uamswp_framing_list('UAMSWP_SCRIPT_SRC_EXTRA') as $origin) {
+        if (! in_array($origin, $hosts, true)) {
+            $hosts[] = $origin;
+        }
+    }
+
+    return "script-src 'self' 'unsafe-inline' ".implode(' ', $hosts).';';
+}
+
+// The Google Custom Search script cannot carry Subresource Integrity, so a script policy is the control that limits
+// where scripts load from. It is sent as `Content-Security-Policy-Report-Only` until an install sets
+// UAMSWP_CSP_ENFORCE to true in wp-config.php, so a host the policy misses is reported in the console and never blocks
+// a page. Both headers are added beside the framing policy rather than replacing it.
+add_action('send_headers', 'uamswp_send_script_policy');
+function uamswp_send_script_policy(): void
+{
+    $name = uamswp_script_policy_enforced() ? 'Content-Security-Policy' : 'Content-Security-Policy-Report-Only';
+    header($name.': '.uamswp_script_policy(), false);
+}
+
+/**
+ * Whether this install enforces the script policy rather than only reporting against it.
+ *
+ * @return bool True only when UAMSWP_CSP_ENFORCE is defined as the boolean true.
+ */
+function uamswp_script_policy_enforced(): bool
+{
+    return defined('UAMSWP_CSP_ENFORCE') && UAMSWP_CSP_ENFORCE === true;
 }
 
 // function defer_parsing_of_js( $url ) {

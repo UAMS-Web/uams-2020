@@ -105,16 +105,49 @@ it('reads a per-install origin list from a constant and keeps only plain origins
 it('sends the framing headers only when the install lists frame ancestors', function (array $ancestors, array $sent): void {
     Functions\expect('uamswp_framing_list')->once()->with('UAMSWP_FRAME_ANCESTORS')->andReturn($ancestors);
     $headers = [];
-    when('header')->alias(static function (string $header) use (&$headers): void {
+    $replaces = [];
+    when('header')->alias(static function (string $header, bool $replace = true) use (&$headers, &$replaces): void {
         $headers[] = $header;
+        $replaces[] = $replace;
     });
     uamswp_send_frame_headers();
     expect($headers)->toBe($sent);
+    // The policy header is added beside any other Content-Security-Policy, never replacing one.
+    expect($replaces)->toBe($sent === [] ? [] : [true, false]);
 })->with([
     'unset' => [[], []],
     'one origin' => [['https://www.uams.edu'], ['X-Frame-Options: SAMEORIGIN', "Content-Security-Policy: frame-ancestors 'self' https://www.uams.edu;"]],
     'three origins' => [['https://www.uams.edu', 'https://sites.uams.edu', 'https://uamshealth.dev'], ['X-Frame-Options: SAMEORIGIN', "Content-Security-Policy: frame-ancestors 'self' https://www.uams.edu https://sites.uams.edu https://uamshealth.dev;"]],
 ]);
+
+it('builds the script policy from the measured Google hosts and the extras an install lists', function (array $extra, string $policy): void {
+    Functions\expect('uamswp_framing_list')->once()->with('UAMSWP_SCRIPT_SRC_EXTRA')->andReturn($extra);
+    expect(uamswp_script_policy())->toBe($policy);
+})->with([
+    'no extras' => [[], "script-src 'self' 'unsafe-inline' https://cse.google.com https://www.google.com https://www.googletagmanager.com https://www.uams.edu;"],
+    'an extra host' => [['https://www.google-analytics.com'], "script-src 'self' 'unsafe-inline' https://cse.google.com https://www.google.com https://www.googletagmanager.com https://www.uams.edu https://www.google-analytics.com;"],
+    'a repeated host is listed once' => [['https://cse.google.com', 'https://a.test'], "script-src 'self' 'unsafe-inline' https://cse.google.com https://www.google.com https://www.googletagmanager.com https://www.uams.edu https://a.test;"],
+]);
+
+it('sends the script policy as report-only until an install enforces it, and adds it beside the framing policy', function (bool $enforced, string $name): void {
+    Functions\expect('uamswp_script_policy_enforced')->once()->andReturn($enforced);
+    Functions\expect('uamswp_script_policy')->once()->andReturn('script-src \'self\';');
+    $calls = [];
+    when('header')->alias(static function (string $header, bool $replace = true) use (&$calls): void {
+        $calls[] = [$header, $replace];
+    });
+    uamswp_send_script_policy();
+    expect($calls)->toBe([[$name.": script-src 'self';", false]]);
+})->with([
+    'report only' => [false, 'Content-Security-Policy-Report-Only'],
+    'enforced' => [true, 'Content-Security-Policy'],
+]);
+
+it('enforces the script policy only for a boolean true constant', function (): void {
+    expect(uamswp_script_policy_enforced())->toBeFalse();
+    define('UAMSWP_CSP_ENFORCE', 'yes');
+    expect(uamswp_script_policy_enforced())->toBeFalse();
+});
 
 it('loads canvas fonts only in the editor', function (bool $admin): void {
     Functions\expect('is_admin')->once()->andReturn($admin);
