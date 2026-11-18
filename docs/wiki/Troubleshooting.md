@@ -1,6 +1,6 @@
 # Troubleshooting
 
-<!-- cspell:ignore UAMS -->
+<!-- cspell:ignore Lyte UAMS UAMSWP -->
 
 Written against v1.10.2.
 
