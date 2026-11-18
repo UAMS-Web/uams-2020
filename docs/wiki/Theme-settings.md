@@ -21,27 +21,29 @@ The theme adds one settings page to the dashboard, **UAMS Settings**, for everyt
 
 | Choice | Value | Further fields |
 | --- | --- | --- |
-| Main Campus | `uams` | **Organization**, then the department list for the college or unit chosen; **Custom Addresses** |
-| Northwest Campus | `nw-campus` | None |
-| Regional Campus | `regional-campus` | **Regional Campus** |
-| Institutional Advancement | `advancement` | None |
+| Main Campus | `uams` | **Organization**, then the department list for the college or unit chosen |
+| Northwest Campus | `nw-campus` | **Custom Addresses** |
+| Regional Campus | `regional-campus` | **Regional Campus**, **Custom Addresses** |
+| Institutional Advancement | `advancement` | **Custom Addresses** |
 
-The department lists cover the colleges (Health Professions, Medicine, Nursing, Pharmacy, Public Health, the Graduate School) and the institutes (Aging, Eye, Spine and Neurosciences, Digital Health and Innovation, Psychiatric Research, Translational Research, Cancer, Community Health Innovation). **Other (Multisite)** is offered for a site that fits none of them.
+The department lists come in two sets:
+
+- **Under Organization (Main Campus):** one list per college: Health Professions, Medicine, Nursing, Pharmacy, Public Health and the Graduate School. **Other Site (Multisite)** is offered for a site that fits none of them, and shows an **Other (Multisite)** list.
+- **Under UAMS Institute (Institute):** one list per institute: Aging, Eye, Spine and Neurosciences, Digital Health and Innovation, Psychiatric Research, Translational Research, Cancer, and Community Health Innovation.
 
 **Custom Addresses** turns on a **Custom Address** list. Each entry has **Address Name**, **Address**, **Address (2)**, **City**, **State** and **Zip**.
 
 ## Phone
 
-These fields override the default phone number the theme shows for the chosen brand and location.
+These fields override the phone label and number in the site footer. Left blank, the footer shows the theme's default label and number, which are the same on every site.
 
 | Field | Effect |
 | --- | --- |
 | Phone Text | The label shown with the primary number |
 | Phone Number | The primary number |
-| Secondary Number Type | Adds a second number or link |
+| Secondary Number Type | **None**, **Phone** or **Link**: adds a second number or a link |
 | Secondary Link Text, Additional Link | The text and address of a secondary link |
 | Secondary Phone Text, Secondary Phone Number | The label and number of a secondary phone |
-| Phone End | Text shown after the numbers |
 
 ## Tag Manager
 
