@@ -1,5 +1,7 @@
 # UAMS 2020 Theme
 
+The [wiki](https://github.com/UAMS-Web/uams-2020/wiki) documents the theme's requirements, settings, page templates, page and post options, and blocks, with a guide to building a page and a troubleshooting page.
+
 ## Installation Instructions
 
 1. Upload the Bootstrap for Genesis theme folder via FTP to your wp-content/themes/ directory. (The Genesis parent theme needs to be in the wp-content/themes/ directory as well.)
